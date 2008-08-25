@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="GameWdl">
+
+	<typeAlias alias="GameWdl" type="com.xwin.domain.sports.GameWdl" />
+	
+	<resultMap id="GameWdlResultMap" class="GameWdl">
+		<result property="id" column="ID"/>
+		<result property="homeTeamName" column="HOME_TEAM_NAME"/>
+		<result property="awayTeamName" column="AWAY_TEAM_NAME"/>
+		<result property="winRate" column="WIN_RATE"/>
+		<result property="drawRate" column="DRAW_RATE"/>
+		<result property="loseRate" column="LOSE_RATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectGameWdlList" resultMap="GameWdlResultMap"
+		parameterClass="map">
+		SELECT * FROM GAME_WDL
+	</select>
+	
+	<insert id="insertGameWdl" parameterClass="GameWdl">
+		INSERT INTO GAME_WDL(HOME_TEAM_ID, AWAY_TEAM_ID, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, DATE)
+			VALUES(#homeTeam.id#, #awayTeam.id#, #winRate#, #drawRate#, #loseRate#, #status#, #date#)
+	</insert>
+	
+</sqlMap>

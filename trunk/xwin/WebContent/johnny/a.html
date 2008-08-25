@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<script>
+			function onimage(tobj, eobj)
+			{
+				var debug = document.getElementById("debug");
+				var x = eobj.clientX - tobj.offsetLeft;
+				var y = eobj.clientY - tobj.offsetTop;
+				
+				if (x < (tobj.width * 0.33)) {
+					viewArrow('l');
+					//debug.innerHTML += '哭率 ';
+				} else if ( x > (tobj.width * 0.66)) {
+					viewArrow('r');
+					//debug.innerHTML += '啊款单 ';
+				} else {
+					viewArrow('u');
+					//debug.innerHTML += '坷弗率 ';
+				}
+			}
+			
+			function viewArrow(val)
+			{
+				var left = document.getElementById("left");
+				var right = document.getElementById("right");
+				var up = document.getElementById("up");
+				if (val == 'l') {
+					left.style.visibility = 'visible';
+					right.style.visibility = 'hidden';
+					up.style.visibility = 'hidden';
+				} else if (val == 'r') {
+					left.style.visibility = 'hidden';
+					right.style.visibility = 'visible';
+					up.style.visibility = 'hidden';
+				} else if (val == 'u') {
+					left.style.visibility = 'hidden';
+					right.style.visibility = 'hidden';
+					up.style.visibility = 'visible';
+				}			
+			}
+		</script>
+	</head>
+	<body>
+		<div align='center'>
+			<div id="up" style='visibility:hidden;vertical-align:middle'><font size="20">UP</font></div>
+			<div id="left" style='display:inline;visibility:hidden'><font size="20">LEFT</font></div>
+			<img border='1' src='./a.jpg' onmousemove='onimage(this, event)'>
+			<div id="right" style='display:inline;visibility:hidden;vertical-align:middle'><font size="20">RIGHT</font></div>
+		</div>
+		<div id="debug">
+		</div>
+	</body>
+</html>

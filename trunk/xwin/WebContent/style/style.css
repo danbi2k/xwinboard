@@ -1,0 +1,172 @@
+body
+{
+background-color:black;
+color:#171717;  FONT-FAMILY: µ¸¿ò; FONT-SIZE: 12px;
+margin: 0 0 0 10 ;
+}
+
+td, div, form, center, pre, blockquote
+{ 
+	FONT-FAMILY: µ¸¿ò; FONT-SIZE: 12px;
+	line-height: 18px;
+	color:bebebe; 
+}
+
+form
+{
+	margin:0px;
+}
+
+textarea, select, option, input 
+{ 
+    FONT-FAMILY: µ¸¿ò;
+	FONT-SIZE: 12px;
+	background-color:#000000;
+	color:ffffff; 
+}
+
+.button 
+{ 
+    FONT-FAMILY: µ¸¿ò;
+    FONT-SIZE: 12px;
+	color:333333; 
+	background-color:#E6E5E2; 
+	border:1px solid ; 
+	border-color:#929292; 
+	height:20px 
+}
+
+.tahoma-bold
+{ 
+	font-family:µ¸¿ò; 
+	FONT-SIZE: 12px;
+	font-weight:bold; 
+	color:5C5C5C; 
+}
+
+.tahoma
+{ 
+	font-family:µ¸¿ò; 
+	FONT-SIZE: 12px;
+	color:5C5C5C; 
+}
+
+.subject
+{ 
+	FONT-FAMILY: µ¸¿ò;
+	font-weight:bold;
+	FONT-SIZE: 12px;
+	color:5C5C5C; 
+}
+
+.location {FONT-SIZE: 11px; font-family:µ¸¿ò; TEXT-DECORATION: none;color:#666666}
+.ch_game {FONT-SIZE: 11px; font-family:µ¸¿ò; TEXT-DECORATION: none;color:#ffffff}
+.sch_sel05 {width:660px;font-size:12px;font-family:µ¸¿ò;color:#333333}
+.sch_sel06 {width:300px;font-size:12px;font-family:µ¸¿ò;color:#333333}
+.sch_sel07 {width:80px;font-size:12px;font-family:µ¸¿ò;color:#333333}
+.sch_sel08 {width:130px;font-size:12px;font-family:Verdana;color:#333333}
+
+a:link    { FONT-FAMILY: µ¸¿ò; font-size:12px; color:ffffff; text-decoration:none;      }
+a:visited { FONT-FAMILY: µ¸¿ò; font-size:12px; color:ffffff; text-decoration:none;      }
+a:active  { FONT-FAMILY: µ¸¿ò; font-size:12px; color:ffffff; text-decoration:none;      }
+a:hover   { FONT-FAMILY: µ¸¿ò; font-size:12px; color:#C63800; text-decoration:none ; }
+
+A.gamelist:link {
+	FONT-SIZE: 12px; COLOR: #bebebe; TEXT-DECORATION: none
+}
+A.gamelist:visited {
+	FONT-SIZE: 12px; COLOR: #bebebe; TEXT-DECORATION: none
+}
+A.gamelist:active {
+	FONT-SIZE: 12px; COLOR: #bebebe; TEXT-DECORATION: none
+}
+A.gamelist:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #b83319; TEXT-DECORATION: none
+}
+
+A.gamelisttu:link {
+	FONT-SIZE: 12px; COLOR: #FFFFFF; TEXT-DECORATION: none
+}
+A.gamelisttu:visited {
+	FONT-SIZE: 12px; COLOR: #FFFFFF; TEXT-DECORATION: none
+}
+A.gamelisttu:active {
+	FONT-SIZE: 12px; COLOR: #FFFFFF; TEXT-DECORATION: none
+}
+A.gamelisttu:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #8EEFDC; TEXT-DECORATION: none
+}
+
+.table_pannel{
+border-top:2px #515151 solid;border-bottom:1px  #515151 solid;text-align:center;color:#515151;height:32px;background-color:#a7a7a7;
+}
+
+.table_text{ 
+border-bottom:1px  #515151 solid;height:28px;
+}
+
+/*border css*/
+.green_border {border-left:2px solid #D4EFD8; border-right:2px solid #D4EFD8;}
+.gray_border {border-left:1px solid #E3E3E3; border-right:1px solid #E3E3E3;}
+.border_right {border-right:1px solid #AAC8DA;}
+
+
+
+
+/*color css*/
+.text_green {color:#515151;}
+.border_color{border-color:#CAE8EF; border-collapse:collapse;}
+.bg_green{background-color:#515151}
+.bg_green2{background-color:#a7a7a7}
+
+.input_style { FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #000000;}
+
+.input_date
+{
+	behavior:url('/style/input_date.htc');
+}
+
+.link_a
+{
+	behavior:url('/style/link_a.htc');	
+	font-weight:bold;
+	color:#dfdfdf;
+	cursor:pointer;
+	
+}
+
+.tab_a
+{
+	behavior:url('/style/tab_a.htc');	
+	font-weight:bold;
+	color:#dfdfdf;
+	cursor:pointer;
+	background-image:url('/images/tab.gif');
+	width:90px;
+	height:27px;
+	padding-top:5px;
+	padding-left:20px;
+}
+
+.tab_b
+{
+	behavior:url('/style/tab_b.htc');	
+	font-weight:bold;
+	color:#dfdfdf;
+	cursor:pointer;
+	background-image:url('/images/tab_o.gif');
+	width:90px;
+	height:27px;
+	padding-top:5px;
+	padding-left:20px;
+}
+
+.yellow
+{
+	color:#FFC300
+}
+
+.gray
+{
+	color:#BDBEBD
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="League">
+
+	<typeAlias alias="League" type="com.xwin.domain.sports.League" />
+	
+	<resultMap id="leagueResultMap" class="League">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	
+	<select id="selectLeagueList" resultMap="leagueResultMap"
+		parameterClass="map">
+		select * from League
+		order by ID desc
+	</select>
+	
+	<select id="selectLeagueById" resultMap="leagueResultMap"
+		parameterClass="java.lang.String">
+		select * from LEAGUE WHERE ID = #value#
+	</select>
+	
+	<insert id="insertLeague" parameterClass="League">
+		INSERT INTO LEAGUE(NAME, TYPE) VALUES(#name#, #type#)
+	</insert>
+	
+</sqlMap>

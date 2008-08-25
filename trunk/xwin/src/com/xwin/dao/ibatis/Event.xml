@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Event">
+
+	<typeAlias alias="Event" type="com.xwin.domain.sports.Event" />
+	
+	<resultMap id="EventResultMap" class="Event">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+	</resultMap>
+	
+	<select id="selectEventList" resultMap="eventResultMap"
+		parameterClass="map">
+		SELECT * FROM EVENT
+	</select>
+	
+	<insert id="insertEvent" parameterClass="Event">
+		INSERT INTO EVENT(NAME) VALUES(#name#)
+	</insert>
+	
+</sqlMap>

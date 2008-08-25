@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="home/home"/>
+	
+	<bean id="adminController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="admin/admin"/>
+			  
+	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController">
+		<property name="ktfSmsConnector">
+			<ref bean="ktfSmsConnector"/>
+		</property>
+	</bean>
+	
+	<bean id="eventController" class="com.xwin.web.controller.sports.EventController"
+		p:leagueService-ref="eventService"/>
+		
+	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"
+		p:leagueService-ref="leagueService"/>
+	
+	<bean id="createLeagueController" class="com.xwin.web.controller.sports.LeagueController"
+		p:leagueService-ref="leagueService"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="getLeagueController" class="com.xwin.web.controller.sports.LeagueController"
+		p:leagueService-ref="leagueService"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="createUserController" class="com.xwin.web.controller.user.CreateUserController"
+		p:userService-ref="userService"
+		p:commandClass="com.xwin.web.command.UserInfoCommand"/>	
+	
+	<bean id="manageGameWdlController" class="com.xwin.web.controller.admin.ManageGameWdlController"
+		p:gameWdlService-ref="gameWdlService"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="controllerNameResolver"
+		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
+		p:paramName="mode"/>
+</beans>
