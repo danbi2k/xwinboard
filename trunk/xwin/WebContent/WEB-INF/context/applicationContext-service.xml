@@ -7,24 +7,18 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 		    
-	<bean id="ktfSmsConnector" class="com.xwin.infra.sms.KtfSmsConnector">
-		<property name="ktfSmsDao">
-			<ref bean="ktfSmsDao" />
-		</property>
-	</bean>	
+	<bean id="ktfSmsConnector" class="com.xwin.infra.sms.KtfSmsConnector"
+		p:ktfSmsDao-ref="ktfSmsDao" />
 	
-	<bean id="leagueService" class="com.xwin.service.sports.LeagueService">
-		<property name="leagueDao">
-			<ref bean="leagueDao" />
-		</property>
-	</bean>
-	
-	<bean id="gameWdlService" class="com.xwin.service.sports.GameWdlService">
-		<property name="gameWdlDao">
-			<ref bean="gameWdlDao" />
-		</property>
-	</bean>
+	<bean id="leagueService" class="com.xwin.service.sports.LeagueService"
+		p:leagueDao-ref="leagueDao" />
+			
+	<bean id="gameWdlService" class="com.xwin.service.sports.GameWdlService"
+		p:gameWdlDao-ref="gameWdlDao" />
 	
 	<bean id="userService" class="com.xwin.service.user.UserService"
 		p:userInfoDao-ref="userInfoDao"/>
+		
+	<bean id="eventService" class="com.xwin.service.sports.EventService"
+		p:eventDao-ref="eventDao"/>
 </beans>

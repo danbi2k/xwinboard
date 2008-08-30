@@ -36,6 +36,10 @@
 	<bean id="teamDao"
 		class="com.xwin.dao.TeamDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="eventDao"
+		class="com.xwin.dao.EventDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
 	<bean id="userInfoDao"
 		class="com.xwin.dao.UserInfoDao"

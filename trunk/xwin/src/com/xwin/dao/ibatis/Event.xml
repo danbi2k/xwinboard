@@ -8,7 +8,7 @@
 
 	<typeAlias alias="Event" type="com.xwin.domain.sports.Event" />
 	
-	<resultMap id="EventResultMap" class="Event">
+	<resultMap id="eventResultMap" class="Event">
 		<result property="id" column="ID"/>
 		<result property="name" column="NAME"/>
 	</resultMap>
