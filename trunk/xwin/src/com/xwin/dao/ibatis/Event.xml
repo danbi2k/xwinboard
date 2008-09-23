@@ -15,11 +15,14 @@
 	
 	<select id="selectEventList" resultMap="eventResultMap"
 		parameterClass="map">
-		SELECT * FROM EVENT
+		SELECT * FROM EVENT 
 	</select>
 	
 	<insert id="insertEvent" parameterClass="Event">
 		INSERT INTO EVENT(NAME) VALUES(#name#)
 	</insert>
 	
+	<delete id="deleteEvent" parameterClass="java.lang.String">
+		DELETE FROM EVENT WHERE ID = #value#
+	</delete>
 </sqlMap>

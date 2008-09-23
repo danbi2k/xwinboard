@@ -38,9 +38,8 @@
 		p:gameWdlService-ref="gameWdlService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
-	<bean id="manageEventController" class="com.xwin.web.controller.admin.ManageEventController"
-		p:eventService-ref="eventService"
-		p:methodNameResolver-ref="controllerNameResolver"/>
+	<bean id="manageEventController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="admin/manageEvent"/>
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

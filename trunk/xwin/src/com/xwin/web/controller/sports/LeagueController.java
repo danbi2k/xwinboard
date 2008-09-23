@@ -40,7 +40,7 @@ public class LeagueController extends MultiActionController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		
-		mv.addObject("resultXML", XmlUtil.toXML(league));
+		mv.addObject("resultXml", XmlUtil.toXML(league));
 		
 		return mv;
 	}
@@ -50,7 +50,7 @@ public class LeagueController extends MultiActionController
 		List<League> leagueList = leagueService.getLeagueList();
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		
-		mv.addObject("resultXML", XmlUtil.toXML(leagueList));
+		mv.addObject("resultXml", XmlUtil.toXML(leagueList));
 		
 		return mv;
 	}

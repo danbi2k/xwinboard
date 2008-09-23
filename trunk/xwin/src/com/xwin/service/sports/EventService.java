@@ -18,6 +18,11 @@ public class EventService
 	{
 		return eventDao.selectEventList();
 	}
+	
+	public void removeEvent(String eventId)
+	{
+		eventDao.deleteEvent(eventId);
+	}
 
 	public void setEventDao(EventDao eventDao) {
 		this.eventDao = eventDao;

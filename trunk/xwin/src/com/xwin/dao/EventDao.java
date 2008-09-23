@@ -18,6 +18,11 @@ public class EventDao
 		return sqlMapClientTemplate.queryForList("selectEventList");
 	}
 
+	public void deleteEvent(String eventId) {
+		sqlMapClientTemplate.delete("deleteEvent", eventId);
+		
+	}
+
 	private SqlMapClientTemplate sqlMapClientTemplate;
 	
 	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
