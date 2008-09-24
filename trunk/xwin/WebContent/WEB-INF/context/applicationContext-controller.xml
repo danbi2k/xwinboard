@@ -25,9 +25,6 @@
 		
 	<bean id="leagueController" class="com.xwin.web.controller.sports.LeagueController"
 		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="createUserController" class="com.xwin.web.controller.user.CreateUserController"
-		p:commandClass="com.xwin.web.command.UserInfoCommand"/>	
 	
 	<bean id="manageGameWdlController" class="com.xwin.web.controller.admin.ManageGameWdlController"
 		p:methodNameResolver-ref="controllerNameResolver"/>
@@ -39,6 +36,11 @@
 		class="com.xwin.web.controller.user.JoinMemberController"
 		p:methodNameResolver-ref="controllerNameResolver"
 		p:memberDao-ref="memberDao"/>
+		
+	<bean id="loginController"
+		class="com.xwin.web.controller.user.LoginController"
+		p:methodNameResolver-ref="controllerNameResolver"
+		p:memberDao-ref="memberDao"/>	
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

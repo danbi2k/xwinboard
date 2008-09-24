@@ -26,7 +26,7 @@ public class JoinMemberController extends MultiActionController
 		
 		ModelAndView mv = new ModelAndView("user/checkIdDup");
 		if (userId == null || userId.length() == 0) {
-			mv.addObject("status", "noId");
+			mv.addObject("status", "empty");
 		}
 		
 		else {
@@ -45,11 +45,11 @@ public class JoinMemberController extends MultiActionController
 	public ModelAndView checkExistNickName(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception
 	{
-		String nickName = request.getParameter("id");
+		String nickName = request.getParameter("nick");
 		
 		ModelAndView mv = new ModelAndView("user/checkNickDup");
 		if (nickName == null || nickName.length() == 0) {
-			mv.addObject("status", "noId");
+			mv.addObject("status", "empty");
 		}
 		
 		else {

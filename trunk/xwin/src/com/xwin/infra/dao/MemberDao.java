@@ -13,9 +13,14 @@ public class MemberDao
 		sqlMapClientTemplate.insert("insertMember", member);
 	}
 	
-	public void deleteMember(String id)
+	public void deleteMember(String userId)
 	{
-		sqlMapClientTemplate.delete("deleteMember", id);
+		sqlMapClientTemplate.delete("deleteMember", userId);
+	}
+	
+	public Member selectMember(String userId)
+	{
+		return (Member) sqlMapClientTemplate.queryForObject("selctMember", userId);
 	}
 	
 	public List<Member> selectMemberList()

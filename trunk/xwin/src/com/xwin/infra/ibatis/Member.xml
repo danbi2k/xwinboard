@@ -26,6 +26,11 @@
 		DELETE FROM tbl_member WHERE ID = #value#
 	</delete>
 	
+	<select id="selectMember" resultMap="memberResultMap"
+		parameterClass="java.lang.String">
+		SELECT * FROM tbl_member WHERE USERID = #value#
+	</select>
+	
 	<select id="selectMemberList" resultMap="memberResultMap"
 		parameterClass="map">
 		SELECT * FROM tbl_member

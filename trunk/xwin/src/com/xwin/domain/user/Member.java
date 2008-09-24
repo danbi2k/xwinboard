@@ -5,6 +5,7 @@ public class Member
 	private String id;
 	private String userId;
 	private String nickName;
+	private String password;
 	private String mobile;
 	private String email;
 	private String pin;
@@ -26,6 +27,12 @@ public class Member
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getMobile() {
 		return mobile;

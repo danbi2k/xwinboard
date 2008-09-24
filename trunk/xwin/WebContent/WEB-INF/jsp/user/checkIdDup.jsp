@@ -29,7 +29,7 @@
 	<tr><td align="center" style="line-height:20px;">
 
 
-<%if (status.equals("noId")) { %>
+<%if (status.equals("empty")) { %>
 	<form action="joinMember.aspx" name="checkid" method="get" onsubmit="checkid_form(checkid);return false;">
 	<input type="hidden" name="mode" value="checkExistUserId"/>			
 	

@@ -85,7 +85,7 @@ function check_nick(frm){
 	var h = 200;
 	var window_left = (screen.width-w)/2;
 	var window_top  = (screen.height-h)/2;
-	window.open("check_nick.asp?nick="+ frm.nick_input.value,"checkNICKwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+	window.open("joinMember.aspx?mode=checkExistNickName&nick="+ frm.nick_input.value,"checkNICKwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
 }
 function checkid_form(frm){
 	if(frm.id.value.length<2){ alert("아이디를 2자 이상 입력해주세요!"); frm.id.focus(); return false; }
