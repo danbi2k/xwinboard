@@ -17,8 +17,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.xwin.dao.KtfSmsMessageDao;
 import com.xwin.domain.comm.KtfSmsMessage;
+import com.xwin.infra.dao.KtfSmsMessageDao;
 
 
 public class KtfSmsConnector

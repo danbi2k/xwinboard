@@ -2,8 +2,8 @@ package com.xwin.service.sports;
 
 import java.util.List;
 
-import com.xwin.dao.GameWdlDao;
 import com.xwin.domain.sports.GameWdl;
+import com.xwin.infra.dao.GameWdlDao;
 
 public class GameWdlService
 {

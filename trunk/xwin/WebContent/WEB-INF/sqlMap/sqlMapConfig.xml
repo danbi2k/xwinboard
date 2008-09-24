@@ -5,10 +5,10 @@
 	"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 	
 <sqlMapConfig>
-	<sqlMap resource="com/xwin/dao/ibatis/KtfSmsMessage.xml" />
-	<sqlMap resource="com/xwin/dao/ibatis/League.xml" />
-	<sqlMap resource="com/xwin/dao/ibatis/Team.xml" />
-	<!--sqlMap resource="com/xwin/dao/ibatis/GameWdl.xml" / -->
-	<sqlMap resource="com/xwin/dao/ibatis/UserInfo.xml" />
-	<sqlMap resource="com/xwin/dao/ibatis/Event.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/KtfSmsMessage.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Team.xml" />
+	<!--sqlMap resource="com/xwin/infra/ibatis/GameWdl.xml" / -->
+	<sqlMap resource="com/xwin/infra/ibatis/Member.xml"/>
+	<!--sqlMap resource="com/xwin/infra/dao/ibatis/Event.xml" /-->
 </sqlMapConfig>

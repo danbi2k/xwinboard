@@ -1,13 +1,14 @@
 package com.xwin.domain.user;
 
-public class User
+public class Member
 {
 	private String id;
 	private String userId;
 	private String nickName;
+	private String mobile;
 	private String email;
-	private Integer balance;
-
+	private String pin;
+	
 	public String getId() {
 		return id;
 	}
@@ -26,16 +27,22 @@ public class User
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getBalance() {
-		return balance;
+	public String getPin() {
+		return pin;
 	}
-	public void setBalance(Integer balance) {
-		this.balance = balance;
+	public void setPin(String pin) {
+		this.pin = pin;
 	}
 }

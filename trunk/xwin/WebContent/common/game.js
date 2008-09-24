@@ -11,8 +11,8 @@ function FnGameSelDel(frm){
 	for(var i=0;i<frm.GameDel.length;i++){
 		if(frm.GameDel[i].checked){ sel_cnt++; break; }
 	}
-	if(sel_cnt==0){ alert("»èÁ¦ÇÒ Ç×¸ñÀ» ¼±ÅÃÇÏ¼¼¿ä!"); return false; }
-	if(!confirm("»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")){ return false; }
+	if(sel_cnt==0){ alert("ì‚­ì œí•  í•­ëª©ì„ ì„ íƒí•˜ì„¸ìš”!"); return false; }
+	if(!confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){ return false; }
 	frm.action = "game_cart.asp";
 	frm.submit();
 }

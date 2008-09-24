@@ -1,4 +1,4 @@
-package com.xwin.dao;
+package com.xwin.infra.dao;
 
 import java.util.HashMap;
 import java.util.List;

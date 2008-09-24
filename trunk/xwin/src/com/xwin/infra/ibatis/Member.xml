@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Member">
+
+	<typeAlias alias="Member" type="com.xwin.domain.user.Member" />
+	
+	<resultMap id="memberResultMap" class="Member">
+		<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="pin" column="PIN"/>
+	</resultMap>
+	
+	<insert id="insertMember" parameterClass="Member">
+		INSERT INTO tbl_member(USERID, NICKNAME, MOBILE, EMAIL, PIN)
+			VALUES(#userId#, #nickName#, #mobile#, #email#, #pin#)
+	</insert>
+	
+	<delete id="deleteMember" parameterClass="java.lang.String">
+		DELETE FROM tbl_member WHERE ID = #value#
+	</delete>
+	
+	<select id="selectMemberList" resultMap="memberResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_member
+	</select>
+	
+	<select id="countMemberByUserId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM tbl_member WHERE USERID = #value#
+	</select>
+	
+	<select id="countMemberByNickName" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM tbl_member WHERE NICKNAME = #value#
+	</select>
+</sqlMap>

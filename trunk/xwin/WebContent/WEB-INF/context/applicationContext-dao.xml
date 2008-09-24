@@ -18,30 +18,30 @@
 		p:sqlMapClient-ref="sqlMapClient" />
 	
 	<bean id="ktfSmsDao"
-		class="com.xwin.dao.KtfSmsMessageDao"
+		class="com.xwin.infra.dao.KtfSmsMessageDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 	
 	<bean id="EventDao"
-		class="com.xwin.dao.EventDao"
+		class="com.xwin.infra.dao.EventDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
 	<bean id="leagueDao"
-		class="com.xwin.dao.LeagueDao"
+		class="com.xwin.infra.dao.LeagueDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
 	<bean id="gameWdlDao"
-		class="com.xwin.dao.GameWdlDao"
+		class="com.xwin.infra.dao.GameWdlDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
 	<bean id="teamDao"
-		class="com.xwin.dao.TeamDao"
+		class="com.xwin.infra.dao.TeamDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 	
 	<bean id="eventDao"
-		class="com.xwin.dao.EventDao"
+		class="com.xwin.infra.dao.EventDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
-	<bean id="userInfoDao"
-		class="com.xwin.dao.UserInfoDao"
+	<bean id="memberDao"
+		class="com.xwin.infra.dao.MemberDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 </beans>

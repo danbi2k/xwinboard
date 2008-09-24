@@ -2,8 +2,8 @@ package com.xwin.service.sports;
 
 import java.util.List;
 
-import com.xwin.dao.LeagueDao;
 import com.xwin.domain.sports.League;
+import com.xwin.infra.dao.LeagueDao;
 
 public class LeagueService
 {

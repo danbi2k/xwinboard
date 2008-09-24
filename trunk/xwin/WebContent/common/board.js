@@ -1,5 +1,5 @@
-//¿¡·¯±İÁö
-function blockError(){ window.status = "¢º½ºÅ©¸³Æ® ¿À·ù°¡ ÀÖ½À´Ï´Ù¢¸ Á¤»óÀûÀÎ ÀÛµ¿ÀÌ ¾ÈµÉ½Ã¿¡´Â F5¸¦ ´­·¯ ÆäÀÌÁö »õ·Î°íÄ§À» ÇÏ½Ã±â ¹Ù¶ø´Ï´Ù."; return true; }
+//ì—ëŸ¬ê¸ˆì§€
+function blockError(){ window.status = "â–¶ìŠ¤í¬ë¦½íŠ¸ ì˜¤ë¥˜ê°€ ìˆìŠµë‹ˆë‹¤â—€ ì •ìƒì ì¸ ì‘ë™ì´ ì•ˆë ì‹œì—ëŠ” F5ë¥¼ ëˆŒëŸ¬ í˜ì´ì§€ ìƒˆë¡œê³ ì¹¨ì„ í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤."; return true; }
 //window.onerror = blockError;
 
 function img_resize(obj,frame_w,frame_h){
@@ -10,7 +10,7 @@ function img_resize(obj,frame_w,frame_h){
 	img_w = obj.width;
 	img_h = obj.height;
 	
-	//ºñÀ²
+	//ë¹„ìœ¨
 	if(frame_w>=frame_h){	
 		w = frame_w;
 		h = frame_w * img_h / img_w;		
@@ -20,7 +20,7 @@ function img_resize(obj,frame_w,frame_h){
 	}
 
 
-	//ºñÀ² ±³Á¤½Ã »ó´ëÀûÀ¸·Î ÀÛ¾ÆÁ³À»°æ¿ì
+	//ë¹„ìœ¨ êµì •ì‹œ ìƒëŒ€ì ìœ¼ë¡œ ì‘ì•„ì¡Œì„ê²½ìš°
 	if(w<frame_w){ 
 		w = frame_w;
 		h = frame_w * img_h / img_w;			
@@ -33,7 +33,7 @@ function img_resize(obj,frame_w,frame_h){
 	h = Math.round(h);
 	w = Math.round(w);
 
-	//À§Ä¡
+	//ìœ„ì¹˜
 	x = (w - frame_w)/2 
 	y = (h - frame_h)/2
 

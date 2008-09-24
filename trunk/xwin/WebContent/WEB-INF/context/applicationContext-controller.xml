@@ -16,30 +16,29 @@
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
 	
-	<bean id="eventController" class="com.xwin.web.controller.sports.EventController"
-		p:eventService-ref="eventService"/>
+	<bean id="eventController" class="com.xwin.web.controller.sports.EventController"/>
 		
-	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"
-		p:gameWdlService-ref="gameWdlService"/>
+	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"/>
 	
 	<bean id="createLeagueController" class="com.xwin.web.controller.sports.LeagueController"
-		p:leagueService-ref="leagueService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="leagueController" class="com.xwin.web.controller.sports.LeagueController"
-		p:leagueService-ref="leagueService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="createUserController" class="com.xwin.web.controller.user.CreateUserController"
-		p:userService-ref="userService"
 		p:commandClass="com.xwin.web.command.UserInfoCommand"/>	
 	
 	<bean id="manageGameWdlController" class="com.xwin.web.controller.admin.ManageGameWdlController"
-		p:gameWdlService-ref="gameWdlService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="manageEventController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/manageEvent"/>
+	
+	<bean id="joinMemberController"
+		class="com.xwin.web.controller.user.JoinMemberController"
+		p:methodNameResolver-ref="controllerNameResolver"
+		p:memberDao-ref="memberDao"/>
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

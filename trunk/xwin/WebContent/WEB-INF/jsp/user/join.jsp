@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
 <tr>
@@ -153,7 +153,7 @@ function SetNICK(nick){
 	<table width="800" style="margin-top:10">
 	<tr><td align="center">
 		<img src="images/btn_join.gif" onclick="FnMemReg(frm_reg);" style="cursor:hand;" hspace="5">
-		<img src="images/btn_cancle.gif" onclick="location.href='/';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5">
+		<img src="images/btn_cancle.gif" onclick="location.href='';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5">
 
 	</td></tr>
 	</table>
@@ -165,5 +165,5 @@ function SetNICK(nick){
 </td></tr>
 </table>
 
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>
 

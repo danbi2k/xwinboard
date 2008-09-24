@@ -2,8 +2,8 @@ package com.xwin.service.sports;
 
 import java.util.List;
 
-import com.xwin.dao.EventDao;
 import com.xwin.domain.sports.Event;
+import com.xwin.infra.dao.EventDao;
 
 public class EventService
 {

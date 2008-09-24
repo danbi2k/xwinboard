@@ -1,5 +1,5 @@
 
-// ÇÃ·¡½¬(swf) ÆÄÀÏ ¸µÅ©
+// í”Œë˜ì‰¬(swf) íŒŒì¼ ë§í¬
 function FnFlash(id,w,h,s,wmode) {
   var str="", sID="";
   if (id.length > 0) { sID = " id='"+id+"' name='"+id+"'"; }
@@ -21,8 +21,8 @@ function FnFlash(id,w,h,s,wmode) {
 
 
 function FnLogin_Submit(frm){	
-	if(frm.id.value==""){ alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä"); frm.id.focus(); return false; }
-	if(frm.pw.value==""){ alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä"); frm.pw.focus(); return false; }
+	if(frm.id.value==""){ alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”"); frm.id.focus(); return false; }
+	if(frm.pw.value==""){ alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”"); frm.pw.focus(); return false; }
 	frm.action="/member/login.asp";
 	frm.method = "post";
 	frm.target = "hidden_iframe";	
@@ -30,7 +30,7 @@ function FnLogin_Submit(frm){
 }
 
 function FnLogout(){	
-	if(!confirm("·Î±×¾Æ¿ô ÇÏ½Ã°Ú½À´Ï±î?")){ return false; }
+	if(!confirm("ë¡œê·¸ì•„ì›ƒ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){ return false; }
 	hidden_iframe.location.href = "/member/logout.asp";
 }
 

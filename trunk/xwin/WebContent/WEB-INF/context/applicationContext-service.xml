@@ -10,6 +10,7 @@
 	<bean id="ktfSmsConnector" class="com.xwin.infra.sms.KtfSmsConnector"
 		p:ktfSmsDao-ref="ktfSmsDao" />
 	
+	<!--
 	<bean id="leagueService" class="com.xwin.service.sports.LeagueService"
 		p:leagueDao-ref="leagueDao" />
 			
@@ -21,4 +22,5 @@
 		
 	<bean id="eventService" class="com.xwin.service.sports.EventService"
 		p:eventDao-ref="eventDao"/>
+	  -->
 </beans>

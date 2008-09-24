@@ -6,6 +6,7 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/joinMember.aspx">joinMemberController</prop>
 				<prop key="/index.aspx">indexController</prop>
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/ktfsms.aspx">ktfSmsController</prop>

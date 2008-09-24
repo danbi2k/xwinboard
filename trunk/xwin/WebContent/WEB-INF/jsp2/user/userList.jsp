@@ -11,18 +11,17 @@
 <body>
 <table>
 	<%
-		List<User> userList = (List<User>) request.getAttribute("userList");
-		Iterator<User> userIter = userList.iterator();
-		
-		while (userIter.hasNext()) {
-			User user = userIter.next();
+		List<Member> userList = (List<Member>) request.getAttribute("userList");
+			Iterator<Member> userIter = userList.iterator();
+			
+			while (userIter.hasNext()) {
+		Member user = userIter.next();
 	%>
 	<tr>
 		<td><%=user.getId()%></td>
 		<td><%=user.getUserId()%></td>
 		<td><%=user.getNickName()%></td>
 		<td><%=user.getEmail()%></td>
-		<td><%=user.getBalance()%></td>
 	</tr>
 	<%
 		}
