@@ -6,26 +6,29 @@
 	
 <sqlMap namespace="GameWdl">
 
-	<typeAlias alias="GameWdl" type="com.xwin.domain.sports.GameWdl" />
+	<typeAlias alias="GameWdl" type="com.xwin.domain.game.GameWdl" />
 	
 	<resultMap id="GameWdlResultMap" class="GameWdl">
 		<result property="id" column="ID"/>
-		<result property="homeTeamName" column="HOME_TEAM_NAME"/>
-		<result property="awayTeamName" column="AWAY_TEAM_NAME"/>
+		<result property="homeTeam" column="HOME_TEAM"/>
+		<result property="awayTeam" column="AWAY_TEAM"/>
 		<result property="winRate" column="WIN_RATE"/>
 		<result property="drawRate" column="DRAW_RATE"/>
 		<result property="loseRate" column="LOSE_RATE"/>
 		<result property="status" column="STATUS"/>
+		<result property="date" column="DATE"/>
+		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="leagueName" column="LEAGUE_NAME"/>
 	</resultMap>
 	
 	<select id="selectGameWdlList" resultMap="GameWdlResultMap"
 		parameterClass="map">
-		SELECT * FROM GAME_WDL
+		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game_wdl g, tbl_league l where g.LEAGUE_ID = l.ID
 	</select>
 	
 	<insert id="insertGameWdl" parameterClass="GameWdl">
-		INSERT INTO GAME_WDL(HOME_TEAM_ID, AWAY_TEAM_ID, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, DATE)
-			VALUES(#homeTeam.id#, #awayTeam.id#, #winRate#, #drawRate#, #loseRate#, #status#, #date#)
+		INSERT INTO tbl_game_wdl(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, DATE, LEAGUE_ID)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #date#, #leagueId#)
 	</insert>
 	
 </sqlMap>

@@ -16,7 +16,7 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
-	<META HTTP-EQUIV="Refresh" Content="1800; URL=/member/logout.asp?auto=1">
+	<!--META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout"-->
 
     <link rel="stylesheet" href="common/default.css">
     <script language="JavaScript" src="common/default.js"></script>
@@ -106,7 +106,7 @@ if (login) {
 	<td style="padding-right:10;padding-left:10;">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td><img src="images/money_1.gif"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;">0</td>
+			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=member.getBalance()%></td>
 			<td><img src="images/money_3.gif"></td>			
 		</tr>
 		</table>

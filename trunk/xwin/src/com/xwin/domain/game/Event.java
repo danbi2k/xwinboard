@@ -1,10 +1,9 @@
-package com.xwin.domain.sports;
+package com.xwin.domain.game;
 
-public class Team
+public class Event
 {
 	private String id;
 	private String name;
-	private League league;
 	
 	public String getId() {
 		return id;
@@ -17,11 +16,5 @@ public class Team
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public League getLeague() {
-		return league;
-	}
-	public void setLeague(League league) {
-		this.league = league;
-	}
+	}	
 }

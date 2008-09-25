@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="header.jsp"%>
+<%@ page import="com.xwin.domain.game.*" %>
+<%@ page import="java.util.*" %>
+
+<%@include file="../header.jsp"%>
+
+<%
+	List<GameWdl> gameWdlList = (List<GameWdl>) request.getAttribute("gameWdlList");
+%>
 
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -57,7 +64,62 @@
 
 	</table>
 
-	<iframe name="GameList" src="game_list_wdl.jsp" frameborder="0" width="900" height="278"></iframe>
+	<!-- ***************************************************** -->
+	<form name="frm">
+
+
+	<table width="900" bgcolor="#9A9492" cellspacing="1" cellpadding="3">
+
+	<colgroup>
+		<col bgcolor="#0a0a0a" align="center" width="100">
+		<col bgcolor="#0a0a0a" width="*">
+		<col bgcolor="#0a0a0a" width="180" align="right">
+		<col bgcolor="#0a0a0a" width="80"  align="center" >
+		<col bgcolor="#0a0a0a" width="180">
+		<col bgcolor="#0a0a0a" width="50"  align="center">
+	</colgroup>
+	
+	<%
+	if (gameWdlList != null && gameWdlList.size() > 0) {
+		for (GameWdl gameWdl : gameWdlList) {
+	%>
+	<tr height="34" >
+		<td><%=gameWdl.getDate()%></td>
+		<td>
+			<table cellpadding="0" cellspacing="2"><tr><td><img src="symbol/165.gif" style="display:none" onload="this.style.display='';"></td>
+
+			<td><%=gameWdl.getLeagueName()%></tr>
+			</table>
+		</td>
+		<td><%=gameWdl.getHomeTeam()%><input type="checkbox" name="Game_7714" value="1"  onclick="FnGameBet('7714',0);"><%=gameWdl.getWinRate()%><span style="width:8;">&nbsp;</span>
+		</td>
+		<td>
+			<%if (gameWdl.getDrawRate() > 0) { %>
+			<input type="checkbox" name="Game_7714" value="0"  onclick="FnGameBet('7714',1);">
+			<%} else { %>
+			<b style="font-size:15px;">□</b>
+			<%} %>
+			<%=gameWdl.getDrawRate()%>
+		</td>
+		<td><span style="width:8;">&nbsp;</span>
+
+			<%=gameWdl.getLoseRate()%><input type="checkbox" name="Game_7714" value="2"  onclick="FnGameBet('7714',2);"><%=gameWdl.getAwayTeam()%>
+		</td>
+		<td><font color="darkorange"><%=gameWdl.getStatus()%></td>
+	</tr>
+	<%
+		}
+	} else {
+	%>
+	<tr><td colspan='6' align='center'>등록된 경기가 없습니다.</td></tr>
+	<%} %>
+	
+	</table>
+
+
+</form>
+
+<!-- --------------------------------------------------------------------------- -->
 
 </tr>
 <tr><td align="center" style="padding-top:10px;">
@@ -74,4 +136,4 @@
 </table>
 </form>
 
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>

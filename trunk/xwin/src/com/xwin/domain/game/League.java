@@ -1,19 +1,12 @@
-package com.xwin.domain.sports;
+package com.xwin.domain.game;
 
 public class League
 {
 	private String id;
 	private String name;
 	private String type;
+	private String image;
 	
-	public League() {};
-	
-	public League(String id, String name, String type) {
-		this.id = id;
-		this.name = name;
-		this.type = type;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -33,5 +26,13 @@ public class League
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }

@@ -6,27 +6,28 @@
 	
 <sqlMap namespace="League">
 
-	<typeAlias alias="League" type="com.xwin.domain.sports.League" />
+	<typeAlias alias="League" type="com.xwin.domain.game.League" />
 	
 	<resultMap id="leagueResultMap" class="League">
 		<result property="id" column="ID"/>
 		<result property="name" column="NAME"/>
 		<result property="type" column="TYPE"/>
+		<result property="image" column="LEAGUE"/>
 	</resultMap>
 	
 	<select id="selectLeagueList" resultMap="leagueResultMap"
 		parameterClass="map">
-		select * from League
-		order by ID desc
+		SELECT * FROM tbl_league
+		ORDER BY NAME DESC
 	</select>
 	
 	<select id="selectLeagueById" resultMap="leagueResultMap"
 		parameterClass="java.lang.String">
-		select * from LEAGUE WHERE ID = #value#
+		SELECT * FROM tbl_league WHERE ID = #value#
 	</select>
 	
 	<insert id="insertLeague" parameterClass="League">
-		INSERT INTO LEAGUE(NAME, TYPE) VALUES(#name#, #type#)
+		INSERT INTO LEAGUE(NAME, TYPE, IMAGE) VALUES(#name#, #type#, #image#)
 	</insert>
 	
 </sqlMap>

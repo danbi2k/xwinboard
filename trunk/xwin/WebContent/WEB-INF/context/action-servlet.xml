@@ -9,14 +9,9 @@
 				<prop key="/index.aspx">indexController</prop>
 				<prop key="/joinMember.aspx">joinMemberController</prop>
 				<prop key="/login.aspx">loginController</prop>
-				<prop key="/index.aspx">indexController</prop>
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/ktfsms.aspx">ktfSmsController</prop>
-				<prop key="/eventService.aspx">eventController</prop>
-				<prop key="/leagueService.aspx">leagueController</prop>
 				<prop key="/game_wdl.aspx">gameWdlController</prop>
-				<prop key="/admin/manageGameWdl.aspx">manageGameWdlController</prop>
-				<prop key="/admin/manageEvent.aspx">manageEventController</prop>
 			</props>
 		</property>
 	</bean>

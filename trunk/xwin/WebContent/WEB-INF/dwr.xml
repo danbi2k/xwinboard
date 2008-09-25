@@ -6,7 +6,7 @@
 
 <dwr>
 	<allow>
-		<convert converter="bean" match="com.xwin.domain.sports.Event" />
+		<convert converter="bean" match="com.xwin.domain.game.Event" />
 		<create creator="spring" javascript="EventService">
 			<param name="beanName" value="eventService"/>
 		</create>

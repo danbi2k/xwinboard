@@ -1,4 +1,4 @@
-package com.xwin.domain.sports;
+package com.xwin.domain.game;
 
 public class GameHandy extends Game
 {

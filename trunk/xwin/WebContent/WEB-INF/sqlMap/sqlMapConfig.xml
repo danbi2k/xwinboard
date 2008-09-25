@@ -8,7 +8,7 @@
 	<sqlMap resource="com/xwin/infra/ibatis/KtfSmsMessage.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Team.xml" />
-	<!--sqlMap resource="com/xwin/infra/ibatis/GameWdl.xml" / -->
+	<sqlMap resource="com/xwin/infra/ibatis/GameWdl.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Member.xml"/>
 	<!--sqlMap resource="com/xwin/infra/dao/ibatis/Event.xml" /-->
 </sqlMapConfig>

@@ -6,13 +6,13 @@ import java.util.Map;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.xwin.domain.sports.GameWdl;
+import com.xwin.domain.game.GameWdl;
 
 public class GameWdlDao
 {	
-	public void insertGameWdl(GameWdl game)
+	public void insertGameWdl(GameWdl gameWdl)
 	{
-		sqlMapClientTemplate.insert("insertGameWdl", game);
+		sqlMapClientTemplate.insert("insertGameWdl", gameWdl);
 	}
 	
 	public GameWdl selectGameWdl(String id)
@@ -26,7 +26,7 @@ public class GameWdlDao
 	}
 
 	public List<GameWdl> selectGameWdlList() {
-		return sqlMapClientTemplate.queryForList("selectGameWdl");
+		return sqlMapClientTemplate.queryForList("selectGameWdlList");
 	}
 	
 	public void updateGameWdl(Map<String, String> value, Map<String, String> where)

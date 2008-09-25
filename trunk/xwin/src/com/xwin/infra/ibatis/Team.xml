@@ -6,7 +6,7 @@
 	
 <sqlMap namespace="Team">
 
-	<typeAlias alias="Team" type="com.xwin.domain.sports.Team" />
+	<typeAlias alias="Team" type="com.xwin.domain.game.Team" />
 	
 	<resultMap id="teamResultMap" class="Team">
 		<result property="id" column="ID"/>

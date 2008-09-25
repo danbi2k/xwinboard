@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.xwin.domain.sports.GameHandy;
-import com.xwin.domain.sports.GameWdl;
+import com.xwin.domain.game.GameHandy;
+import com.xwin.domain.game.GameWdl;
 
 public class GameHandyDao
 {

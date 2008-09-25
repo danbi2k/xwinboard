@@ -13,17 +13,9 @@
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
 	
-	<bean id="eventController" class="com.xwin.web.controller.sports.EventController"/>
-		
-	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"/>
-	
-	<bean id="createLeagueController" class="com.xwin.web.controller.sports.LeagueController"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="leagueController" class="com.xwin.web.controller.sports.LeagueController"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-	
-	<bean id="manageGameWdlController" class="com.xwin.web.controller.admin.ManageGameWdlController"
+	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"
+		p:gameWdlDao-ref="gameWdlDao"
+		p:leagueDao-ref="leagueDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
@@ -34,13 +26,13 @@
 	
 	<bean id="joinMemberController"
 		class="com.xwin.web.controller.user.JoinMemberController"
-		p:methodNameResolver-ref="controllerNameResolver"
-		p:memberDao-ref="memberDao"/>
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="loginController"
 		class="com.xwin.web.controller.user.LoginController"
-		p:methodNameResolver-ref="controllerNameResolver"
-		p:memberDao-ref="memberDao"/>	
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

@@ -45,6 +45,6 @@ function FnLogin_Submit(frm){
 
 function FnLogout(){	
 	if(!confirm("로그아웃 하시겠습니까?")){ return false; }
-	hidden_iframe.location.href = "/member/logout.asp";
+	document.location.href = "login.aspx?mode=processLogout";
 }
 

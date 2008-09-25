@@ -50,12 +50,11 @@ public class LoginController extends MultiActionController
 	public ModelAndView processLogout(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
+		HttpSession session = request.getSession();
 		
+		session.removeAttribute("Member");		
 		
-		
-		ModelAndView mv = new ModelAndView("");
+		ModelAndView mv = new ModelAndView("redirect:/index.aspx");
 		return mv;
 	}
 	

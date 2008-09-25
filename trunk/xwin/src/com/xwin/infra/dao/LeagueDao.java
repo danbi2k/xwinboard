@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.xwin.domain.sports.League;
+import com.xwin.domain.game.League;
 
 public class LeagueDao
 {
