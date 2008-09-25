@@ -21,9 +21,13 @@
 		<result property="leagueName" column="LEAGUE_NAME"/>
 	</resultMap>
 	
-	<select id="selectGameWdlList" resultMap="GameWdlResultMap"
-		parameterClass="map">
+	<select id="selectGameWdlList" resultMap="GameWdlResultMap">
 		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game_wdl g, tbl_league l where g.LEAGUE_ID = l.ID
+	</select>
+	
+	<select id="selectGameWdlListByLeagueId" resultMap="GameWdlResultMap"
+		parameterClass="java.lang.String">
+		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game_wdl g, tbl_league l where g.LEAGUE_ID = l.ID AND g.LEAGUE_ID = #value#
 	</select>
 	
 	<insert id="insertGameWdl" parameterClass="GameWdl">

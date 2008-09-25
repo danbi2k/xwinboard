@@ -2,26 +2,26 @@ package com.xwin.domain.game;
 
 public class GameWdl extends Game
 {
-	private double winRate;
-	private double drawRate;
-	private double loseRate;
+	private Double winRate;
+	private Double drawRate;
+	private Double loseRate;
 	
-	public double getWinRate() {
+	public Double getWinRate() {
 		return winRate;
 	}
-	public void setWinRate(double winRate) {
+	public void setWinRate(Double winRate) {
 		this.winRate = winRate;
 	}
-	public double getDrawRate() {
+	public Double getDrawRate() {
 		return drawRate;
 	}
-	public void setDrawRate(double drawRate) {
+	public void setDrawRate(Double drawRate) {
 		this.drawRate = drawRate;
 	}
-	public double getLoseRate() {
+	public Double getLoseRate() {
 		return loseRate;
 	}
-	public void setLoseRate(double loseRate) {
+	public void setLoseRate(Double loseRate) {
 		this.loseRate = loseRate;
 	}
 }

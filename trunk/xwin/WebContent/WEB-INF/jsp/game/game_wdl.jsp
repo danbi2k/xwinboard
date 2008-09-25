@@ -8,6 +8,14 @@
 
 <%
 	List<GameWdl> gameWdlList = (List<GameWdl>) request.getAttribute("gameWdlList");
+	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
+	
+	String leagueId = (String) request.getParameter("leagueId");
+	leagueId = leagueId == null ? "" : leagueId;
+%>
+
+<%
+ 
 %>
 
 <!--
@@ -29,9 +37,21 @@
 
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
-		<tr><td>리그선택 : <select name="GameGroup" style="color:white;background-color:black;" onchange="GameList.location.href='game_list.asp?m=0&GameGroup='+ this.value;"><option value="">--전체--</option><option value='60' style=''>UEFA 챔피언스리그</option><option value='114' style=''>2010월드컵 예선</option><option value='45' style=''>올림픽 남자축구</option><option value='33' style=''>올림픽 여자축구</option><option value='117' style=''>국제친선[A매치]</option><option value='12' style=''>국제 Club 친선경기</option><option value='47' style=''>남미축구연맹 Copa</option><option value='178' style=''>네덜란드 1부리그</option><option value='127' style=''>네덜란드 2부리그</option><option value='187' style=''>네덜란드 Cup</option><option value='40' style=''>노르웨이 1부리그</option><option value='104' style=''>노르웨이 2부리그</option><option value='121' style=''>노르웨이 Junior U19</option><option value='152' style=''>노르웨이 여자</option><option value='10' style=''>대한민국 K리그</option><option value='165' style=''>K-리그 Cup</option><option value='116' style=''>대한민국 FA Cup</option><option value='77' style=''>덴마크 1부리그</option><option value='102' style=''>덴마크 2부리그</option><option value='79' style=''>독일 분데스리가</option><option value='90' style=''>독일 분데스리가 2부</option><option value='188' style=''>독일 Cup</option><option value='142' style=''>러시아 프리미어리그</option><option value='36' style=''>러시아 1부리그</option><option value='163' style=''>러시아 RRL</option><option value='28' style=''>러시아 Cup</option><option value='173' style=''>러시아 RPL</option><option value='119' style=''>루마니아 1부리그</option><option value='75' style=''>미국프로축구 MLS</option><option value='68' style=''>멕시코 1부리그</option><option value='158' style=''>북중미축구연맹 Champions</option><option value='31' style=''>브라질 1부 Serie A</option><option value='30' style=''>브라질 2부 Serie B</option><option value='80' style=''>벨기에 1부리그</option><option value='65' style=''>벨기에 2부리그</option><option value='14' style=''>싱가폴 1부리그</option><option value='43' style=''>스위스 1부리그</option><option value='57' style=''>스웨덴 1부리그</option><option value='73' style=''>스웨덴 Superettan</option><option value='122' style=''>스웨덴 Cup</option><option value='67' style=''>슬로바키아 1부리그</option><option value='160' style=''>슬로바키아 2부리그</option><option value='181' style=''>슬로바키아 Cup</option><option value='190' style=''>슬로베니아 1부리그</option><option value='183' style=''>슬로베니아 Cup</option><option value='66' style=''>스코틀랜드 리그컵</option><option value='81' style=''>스코틀랜드 Premier</option><option value='82' style=''>스코틀랜드 1부리그</option><option value='128' style=''>스코틀랜드 3부리그</option><option value='143' style=''>스페인 Primera</option><option value='144' style=''>스페인 2부리그</option><option value='135' style=''>스페인 Super Cup</option><option value='161' style=''>스페인 Cup</option><option value='49' style=''>아르헨티나 1부리그</option><option value='140' style=''>아르헨티나 2부리그</option><option value='184' style=''>아이슬란드 Premier</option><option value='44' style=''>아이슬란드 1부리그</option><option value='138' style=''>아일랜드 프리미어리그</option><option value='139' style=''>아일랜드 1부리그</option><option value='103' style=''>아일랜드 Cup</option><option value='182' style=''>아시아축구연맹 CL</option><option value='185' style=''>아시아축구연맹 Cup</option><option value='176' style=''>아프리카축구연맹 CL</option><option value='172' style=''>알제리 1부리그</option><option value='87' style=''>일본 J리그 1st</option><option value='137' style=''>일본 J리그 2st</option><option value='169' style=''>일본 리그 Cup</option><option value='157' style=''>일본 Nabisco Cup</option><option value='11' style=''>잉글랜드 프리미어리그</option><option value='70' style=''>잉글랜드 Conference</option><option value='159' style=''>잉글랜드 JPT</option><option value='83' style=''>잉글랜드 1부리그</option><option value='171' style=''>잉글랜드 North Premier</option><option value='129' style=''>잉글랜드 칼링컵</option><option value='131' style=''>잉글랜드 챔피언쉽</option><option value='164' style=''>웨일즈 1부리그</option><option value='155' style=''>웨일즈 Cup</option><option value='145' style=''>이탈리아 Serie A</option><option value='150' style=''>이탈리아 Serie B</option><option value='115' style=''>이탈리아 Cup</option><option value='136' style=''>이탈리아 Super Cup</option><option value='123' style=''>이란 1부리그</option><option value='125' style=''>오스트리아 Erste Liga</option><option value='174' style=''>오스트리아 Cup</option><option value='130' style=''>우크라이나 1부리그</option><option value='126' style=''>에스토니아 1부리그</option><option value='149' style=''>중국 슈퍼리그</option><option value='96' style=''>체코 1부리그</option><option value='118' style=''>체코 2부리그</option><option value='151' style=''>체코 Cup</option><option value='180' style=''>칠레 1부리그</option><option value='132' style=''>터키 1부리그</option><option value='170' style=''>터키 2부리그</option><option value='156' style=''>터키 Cup</option><option value='177' style=''>캐나다 Premier Leaue</option><option value='92' style=''>크로아티아 1부리그</option><option value='133' style=''>코스타리카 1부리그</option><option value='89' style=''>콜롬비아 1부리그</option><option value='86' style=''>프랑스 1부 리그</option><option value='94' style=''>프랑스 2부 리그</option><option value='162' style=''>프랑스 Cup</option><option value='56' style=''>핀란드 1부리그</option><option value='63' style=''>핀란드 2부리그</option><option value='120' style=''>핀란드 3부리그</option><option value='134' style=''>포르투칼 1부리그</option><option value='189' style=''>포르투칼 리그 Cup</option><option value='41' style=''>페루 1부리그</option><option value='85' style=''>폴란드 1부리그</option><option value='39' style=''>폴란드 2부리그</option><option value='153' style=''>폴란드 Cup</option><option value='175' style=''>헝가리 1부리그</option><option value='186' style=''>헝가리 Cup</option><option value='76' style=''>호주 1부리그</option><option value='166' style=''>호주 Foxtel Cup</option><option value='167' style=''>호주NSW 프리미어리그</option><option value='72' style=''>UEFA CUP</option><option value='93' style=''>UEFA U21 CHAMPIONSHIP</option><option value='141' style=''>UEFA 슈퍼컵</option><option value='147' style=''>USA  Open Cup</option><option value='9' style=''>미국 남자프로농구</option><option value='55' style=''>올림픽 남자농구</option><option value='112' style=''>올림픽 여자농구</option><option value='6' style=''>한국프로야구</option><option value='8' style=''>일본 프로야구</option><option value='58' style=''>미국 메이저리그</option><option value='61' style=''>올림픽 야구</option><option value='98' style=''>올림픽 남자배구</option><option value='113' style=''>올림픽 여자배구</option><option value='52' style=''>PGA</option><option value='88' style=''>LPGA</option><option value='54' style=''>올림픽 남자 핸드볼</option><option value='71' style=''>올림픽 여자 핸드볼</option><option value='100' style=''>올림픽 여자 하키</option><option value='124' style=''>올림픽 남자 하키</option></select></td>
+		<tr><td>리그선택 : 
+	<select name="GameGroup" style="color:white;background-color:black;" onchange="FnGetGameList(this.value);">
+		<option value="">--전체--</option>
+		<%
+		if (leagueList != null && leagueList.size() > 0) {
+			for (League league : leagueList) {
+		%>
+			<option value='<%=league.getId()%>' style='' <%=leagueId.equals(league.getId()) ? "selected" : ""%>><%=league.getName()%></option>
+		<%
+			}
+		}
+		%>
+	</select></td>
 
-			<td><img src="images/btn_reload.gif" onclick="GameList.location.href=GameList.location.href;" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><img src="images/btn_reload.gif" onclick="document.location.reload();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 		</tr></table>
 	</td>
 	</table>
@@ -65,60 +85,7 @@
 	</table>
 
 	<!-- ***************************************************** -->
-	<form name="frm">
-
-
-	<table width="900" bgcolor="#9A9492" cellspacing="1" cellpadding="3">
-
-	<colgroup>
-		<col bgcolor="#0a0a0a" align="center" width="100">
-		<col bgcolor="#0a0a0a" width="*">
-		<col bgcolor="#0a0a0a" width="180" align="right">
-		<col bgcolor="#0a0a0a" width="80"  align="center" >
-		<col bgcolor="#0a0a0a" width="180">
-		<col bgcolor="#0a0a0a" width="50"  align="center">
-	</colgroup>
-	
-	<%
-	if (gameWdlList != null && gameWdlList.size() > 0) {
-		for (GameWdl gameWdl : gameWdlList) {
-	%>
-	<tr height="34" >
-		<td><%=gameWdl.getDate()%></td>
-		<td>
-			<table cellpadding="0" cellspacing="2"><tr><td><img src="symbol/165.gif" style="display:none" onload="this.style.display='';"></td>
-
-			<td><%=gameWdl.getLeagueName()%></tr>
-			</table>
-		</td>
-		<td><%=gameWdl.getHomeTeam()%><input type="checkbox" name="Game_7714" value="1"  onclick="FnGameBet('7714',0);"><%=gameWdl.getWinRate()%><span style="width:8;">&nbsp;</span>
-		</td>
-		<td>
-			<%if (gameWdl.getDrawRate() > 0) { %>
-			<input type="checkbox" name="Game_7714" value="0"  onclick="FnGameBet('7714',1);">
-			<%} else { %>
-			<b style="font-size:15px;">□</b>
-			<%} %>
-			<%=gameWdl.getDrawRate()%>
-		</td>
-		<td><span style="width:8;">&nbsp;</span>
-
-			<%=gameWdl.getLoseRate()%><input type="checkbox" name="Game_7714" value="2"  onclick="FnGameBet('7714',2);"><%=gameWdl.getAwayTeam()%>
-		</td>
-		<td><font color="darkorange"><%=gameWdl.getStatus()%></td>
-	</tr>
-	<%
-		}
-	} else {
-	%>
-	<tr><td colspan='6' align='center'>등록된 경기가 없습니다.</td></tr>
-	<%} %>
-	
-	</table>
-
-
-</form>
-
+	<div id="gameListDiv"></div>
 <!-- --------------------------------------------------------------------------- -->
 
 </tr>
@@ -129,11 +96,87 @@
 </td></tr>
 
 <tr><td align="center">
+<!-- ---------------------------------------------------------------------- -->
+<table width="900" cellpadding="3" cellspacing="1" bgcolor="#0a0a0a">
+<tr><td width="555" align="center" valign="top">
+		<div id="gameCartDiv">		
+		</div>		
+	</td>
+	<td width="345" align="right">
 
-	<iframe name="GameCart" src="game_cart.jsp" frameborder="0" width="900" height="100"></iframe>
+		<table width="340" style="border:1 solid #d9d8d6" cellpadding="5" cellspacing="0">
+		<colgroup>
+			<col width="100" align="right">
+			<col width="80" align="right">
 
+			<col width="80" align="right">
+			<col width="80" align="right">
+		</colgroup>
+		<tr><td style="color:darkorange;">배팅금액</td>
+			<td colspan="3" align="left">
+				<table cellpadding="0" cellspacing="0">
+				<tr><td><input type="" class="member" size="10" name="BetAmt" maxlength="7" value="5,000" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this);" onblur="comma(this);btn_buy.style.filter='gray()';btn_apply.style.filter='';">원</td>
+					<td><img src="images/btn_apply.gif" id="btn_apply" onclick="FnCartApply(CartFrm);" style="filter:gray();cursor:hand;" hspace="5"></td>
+
+				</tr></table>
+			</td></tr>
+		<tr><td style="border-bottom:1 solid #d9d8d6;">&nbsp;</td>
+			<td colspan="3" style="border-bottom:1 solid #d9d8d6;" align="left">
+
+				<table width="">
+				<tr>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='5,000';FnCartApply(CartFrm);">5천</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='10,000';FnCartApply(CartFrm);">1만</span></td>
+
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='20,000';FnCartApply(CartFrm);">2만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='30,000';FnCartApply(CartFrm);">3만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='50,000';FnCartApply(CartFrm);">5만</span></td>
+				</tr>
+				<tr>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='100,000';FnCartApply(CartFrm);">10만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='200,000';FnCartApply(CartFrm);">20만</span></td>
+
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='300,000';FnCartApply(CartFrm);">30만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='500,000';FnCartApply(CartFrm);">50만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='1,000,000';FnCartApply(CartFrm);">100만</span></td>
+				</tr>
+				</table>
+			
+			</td>
+		</tr>
+
+		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">배당율</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><b>× 0.00</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">예상배당금</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;"><b>0 원</td></tr>
+		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">잔여 머니</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;">0 원</td>
+
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">배팅후 머니</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">0 원</td></tr>
+
+		</table>
+
+		<table width="100%">
+		<tr><td align="right">
+			
+				<img src="images/btn_buy.gif" id="btn_buy" onclick="alert('배팅카트가 비어있습니다.');" style="filter:gray();">
+			
+		</td></tr>
+
+		</table>
+		
+		<br>
+
+	</td>
+</tr>
+</table>
+<script>
+FnGetGameList();
+FnDrawCart();
+</script>
+<!-- ---------------------------------------------------------------------- -->
 </td></tr>
 </table>
 </form>
-
 <%@include file="../footer.jsp"%>

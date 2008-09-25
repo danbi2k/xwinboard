@@ -12,7 +12,7 @@
 		<result property="id" column="ID"/>
 		<result property="name" column="NAME"/>
 		<result property="type" column="TYPE"/>
-		<result property="image" column="LEAGUE"/>
+		<result property="image" column="IMAGE"/>
 	</resultMap>
 	
 	<select id="selectLeagueList" resultMap="leagueResultMap"
@@ -27,7 +27,7 @@
 	</select>
 	
 	<insert id="insertLeague" parameterClass="League">
-		INSERT INTO LEAGUE(NAME, TYPE, IMAGE) VALUES(#name#, #type#, #image#)
+		INSERT INTO tbl_league(NAME, TYPE, IMAGE) VALUES(#name#, #type#, #image#)
 	</insert>
 	
 </sqlMap>

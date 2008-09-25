@@ -24,6 +24,7 @@
 	<script language="JavaScript" src="common/member.js"></script>
 	<script language="JavaScript" src="common/board.js"></script>
 	<script language="JavaScript" src="common/jkl-parsexml.js"></script>
+	<script language="JavaScript" src="common/xwin.js"></script>
 </head>
 <body style="margin:0" oncontextmenu="return false">
 <a name="top"></a>
@@ -44,7 +45,7 @@
 </table>
 
 <MAP NAME="map_top_menu">
-	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="gameWdl.jsp" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="game_wdl.aspx?mode=viewGameList" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="102,0,197,33" href="gameHandy.jsp" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="199,0,281,33" href="gameOE.jsp" onMouseOver="clipthis('top1','top2',199,0,281,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="283,0,387,33" href="result.jsp"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">

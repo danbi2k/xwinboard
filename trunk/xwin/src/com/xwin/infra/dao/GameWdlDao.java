@@ -29,6 +29,10 @@ public class GameWdlDao
 		return sqlMapClientTemplate.queryForList("selectGameWdlList");
 	}
 	
+	public List<GameWdl> selectGameWdlListByLeagueId(String leagueId) {
+		return sqlMapClientTemplate.queryForList("selectGameWdlListByLeagueId", leagueId);
+	}
+	
 	public void updateGameWdl(Map<String, String> value, Map<String, String> where)
 	{
 		Map<String, String> condition = new HashMap<String, String>();
