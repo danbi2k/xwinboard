@@ -40,7 +40,7 @@ function FnDrawGameList(data)
 	if (data.length > 0) {
 		for (var i in data) {
 			row.push("<tr height='34'>");
-			row.push("<td>" + data[i].date + "</td>");
+			row.push("<td>" + data[i].dateStr + "</td>");
 			row.push("<td>");
 			row.push("<table cellpadding='0' cellspacing='2'><tr><td><img src='symbol/165.gif' style='display:none' onload=\"this.style.display=''\"></td>");
 			row.push("<td>" + data[i].leagueName + "</tr>");

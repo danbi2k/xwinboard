@@ -93,11 +93,11 @@ public class GameWdlController extends MultiActionController
 		gci.setHomeTeam(gameWdl.getHomeTeam());
 		gci.setAwayTeam(gameWdl.getAwayTeam());
 		if (match.equals("w"))
-			gci.setRate(XwinUtil.float2Digit(gameWdl.getWinRate()));
+			gci.setRate(XwinUtil.to2Digit(gameWdl.getWinRate()));
 		else if (match.equals("d"))
-			gci.setRate(XwinUtil.float2Digit(gameWdl.getDrawRate()));
+			gci.setRate(XwinUtil.to2Digit(gameWdl.getDrawRate()));
 		else if (match.equals("l"))
-			gci.setRate(XwinUtil.float2Digit(gameWdl.getLoseRate()));
+			gci.setRate(XwinUtil.to2Digit(gameWdl.getLoseRate()));
 		gci.setMatch(match);
 		gci.setLeague(gameWdl.getLeagueName());
 		
