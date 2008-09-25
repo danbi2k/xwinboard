@@ -73,3 +73,13 @@ CREATE TABLE  `xwin`.`userinfo` (
   `PASSWORD` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `xwin`.`tbl_betting`;
+CREATE TABLE  `xwin`.`tbl_betting` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `DATE` varchar(45) NOT NULL,
+  `RATE` varchar(45) NOT NULL,
+  `MONEY` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
