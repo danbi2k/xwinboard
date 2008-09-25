@@ -13,7 +13,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>Encoding Filter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.aspx</url-pattern>
 	</filter-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

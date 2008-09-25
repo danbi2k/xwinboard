@@ -9,6 +9,7 @@ public class Member
 	private String mobile;
 	private String email;
 	private String pin;
+	private Integer balance;
 	
 	public String getId() {
 		return id;
@@ -51,5 +52,11 @@ public class Member
 	}
 	public void setPin(String pin) {
 		this.pin = pin;
+	}
+	public Integer getBalance() {
+		return balance;
+	}
+	public void setBalance(Integer balance) {
+		this.balance = balance;
 	}
 }

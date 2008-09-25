@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="home/home"/>
-	
 	<bean id="adminController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/admin"/>
 			  
@@ -28,6 +25,9 @@
 	
 	<bean id="manageGameWdlController" class="com.xwin.web.controller.admin.ManageGameWdlController"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="index"/>
 		
 	<bean id="manageEventController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/manageEvent"/>

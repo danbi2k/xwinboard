@@ -1,19 +1,24 @@
 package com.xwin.infra.util;
 
 import com.thoughtworks.xstream.XStream;
-import com.xwin.domain.comm.KtfSmsMessage;
-import com.xwin.domain.sports.League;
+import com.xwin.web.command.ResultXml;
 
 public class XmlUtil
 {
 	private static XStream xstream = new XStream();
 	
 	static {
-		xstream.alias("ktfSmsMessage", KtfSmsMessage.class);
-		xstream.alias("league", League.class);
+		xstream.alias("list", java.util.List.class);
+		xstream.alias("resultXml", ResultXml.class);
 	}
 	
-	public static String toXML(Object obj) {
-		return xstream.toXML(obj);
+	public static String toXml(Object object)
+	{
+		return xstream.toXML(object);
+	}
+	
+	public static Object fromXml(String xml)
+	{
+		return xstream.fromXML(xml);
 	}
 }

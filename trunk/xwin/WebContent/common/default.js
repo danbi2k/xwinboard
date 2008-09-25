@@ -23,10 +23,24 @@ function FnFlash(id,w,h,s,wmode) {
 function FnLogin_Submit(frm){	
 	if(frm.id.value==""){ alert("아이디를 입력하세요"); frm.id.focus(); return false; }
 	if(frm.pw.value==""){ alert("비밀번호를 입력하세요"); frm.pw.focus(); return false; }
-	frm.action="/member/login.asp";
-	frm.method = "post";
-	frm.target = "hidden_iframe";	
-	frm.submit();
+//	frm.action="login.aspx";
+//	frm.method = "post";
+//	frm.target = "hidden_iframe";	
+//	frm.submit();
+	
+	var query = "mode=processLogin";
+	query += "&userId=" + frm.id.value;
+	query += "&password=" + frm.pw.value;
+	
+	var http = new JKL.ParseXML("login.aspx", query);
+	var result = http.parse();
+	
+	if (result.resultXml.code < 0) {
+		alert(result.resultXml.message);
+		return;
+	}
+	
+	document.location.reload();	
 }
 
 function FnLogout(){	

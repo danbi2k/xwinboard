@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="com.xwin.domain.user.*" %>
+
+<%
+	Member member = (Member) session.getAttribute("Member");
+	boolean login = member == null ? false : true;
+%>
 <html>
 
 <head>
@@ -16,14 +22,15 @@
     <script language="JavaScript" src="common/default.js"></script>
 	<script language="JavaScript" src="common/game.js"></script>
 	<script language="JavaScript" src="common/member.js"></script>
-	<script language="JavaScript" src="common/board.js"></script
+	<script language="JavaScript" src="common/board.js"></script>
+	<script language="JavaScript" src="common/jkl-parsexml.js"></script>
 </head>
 <body style="margin:0" oncontextmenu="return false">
 <a name="top"></a>
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="207" align="center"><a href=""><img src="images/top_logo.jpg" border="0"></a></td>
+<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpg" border="0"></a></td>
     <td width="753" valign="bottom" align="right">
 		<table align="right" width="712" height="33" cellpadding="0" cellspacing="0">
 
@@ -86,13 +93,15 @@ top_menu_init();
 <iframe name='hidden_iframe' style='display:none' src='About:Blank'></iframe>
 <table width="960" height="42" background="images/login_bg.jpg" cellpadding="0" cellspacing="0" >
 
-
+<%
+if (login) {
+%>
 <tr><td>
 
 	<table>
 	<tr>
 	<td><img src="images/login_img2.gif" hspace="10"></td>
-	<td align="center"><b>후지모토</b></td>
+	<td align="center"><b><%=member.getNickName()%></b></td>
 
 	<td style="padding-right:10;padding-left:10;">
 		<table cellpadding="0" cellspacing="0">
@@ -129,8 +138,40 @@ top_menu_init();
 
 </td></tr>
 
+<% } else { %>
+	<form name="login_frm" onsubmit="FnLogin_Submit(this);return false;">
+<tr><td align="left">
+	<table cellpadding="0" cellspacing="0"><tr>
+	<td><img src="images/login_img.gif" hspace="10"></td>
+	<td><img src="images/login_id.gif"></td>
+	<td><input class="member" type="text" name="id" hspace="2"></td>
+	<td><img src="images/login_pw.gif" hspace="3"></td>
+	<td><input class="member" type="password" name="pw"></td>
 
+	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" hspace="5"></td>
+	<td><img src="images/btn_join.gif" hspace="5" onclick="location.href='member/join.asp';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
+	</tr></table>
 
+	</td>
+	<td width="*" align="right">
+
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+	<td><img src="images/smenu_1.gif"></td>
+
+	<td><img src="images/smenu_gap.gif"></td>
+	<td><img src="images/smenu_2.gif"></td>
+	<td><img src="images/smenu_gap.gif"></td>
+	<td><img src="images/smenu_3.gif"></td>
+	<td><img src="images/smenu_gap.gif"></td>
+	<td><img src="images/smenu_4.gif"></td>
+	</tr>
+	</table>
+
+</td></tr>
+</form>
+
+<%} %>
 </table>
 <%if (false) { %>
 <script>FnFlash("main","960","280","images/main.swf","");</script>

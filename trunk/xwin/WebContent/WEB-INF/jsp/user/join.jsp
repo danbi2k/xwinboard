@@ -38,7 +38,8 @@ function SetNICK(nick){
 </td></tr>
 <tr><td valign="top" align="center">
 
-	<form name="frm_reg" method="post">
+	<form name="frm_reg" method="post" action="joinMember.aspx">
+	<input type="hidden" name="mode" value="createMember">
 	<input type="hidden" name="id"    value="">
 	<input type="hidden" name="nick"  value="">
 	<input type="hidden" name="phone">

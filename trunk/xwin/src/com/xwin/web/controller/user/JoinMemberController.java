@@ -8,6 +8,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.MemberDao;
+import com.xwin.web.command.MemberCommand;
 
 public class JoinMemberController extends MultiActionController
 {
@@ -66,13 +67,18 @@ public class JoinMemberController extends MultiActionController
 	}
 	
 	public ModelAndView createMember(HttpServletRequest request,
-			HttpServletResponse response, Member command) throws Exception
+			HttpServletResponse response, MemberCommand command) throws Exception
 	{
-		Member member = (Member) command;
-		ModelAndView mv = new ModelAndView("");
-		
+		Member member = new Member();
+		member.setUserId(command.getId());
+		member.setPassword(command.getPw());
+		member.setNickName(command.getNick());
+		member.setMobile(command.getPhone());
+		member.setEmail(command.getEmail());
+		member.setPin(command.getOut_pw());		
 		memberDao.insertMember(member);
 		
+		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
 	

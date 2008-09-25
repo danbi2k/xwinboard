@@ -11,15 +11,17 @@
 	<resultMap id="memberResultMap" class="Member">
 		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
+		<result property="password" column="PASSWORD"/>
 		<result property="nickName" column="NICKNAME"/>
 		<result property="mobile" column="MOBILE"/>
 		<result property="email" column="EMAIL"/>
 		<result property="pin" column="PIN"/>
+		<result property="balance" column="BALANCE"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, NICKNAME, MOBILE, EMAIL, PIN)
-			VALUES(#userId#, #nickName#, #mobile#, #email#, #pin#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#)
 	</insert>
 	
 	<delete id="deleteMember" parameterClass="java.lang.String">

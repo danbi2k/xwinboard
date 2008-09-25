@@ -20,7 +20,7 @@ public class MemberDao
 	
 	public Member selectMember(String userId)
 	{
-		return (Member) sqlMapClientTemplate.queryForObject("selctMember", userId);
+		return (Member) sqlMapClientTemplate.queryForObject("selectMember", userId);
 	}
 	
 	public List<Member> selectMemberList()
