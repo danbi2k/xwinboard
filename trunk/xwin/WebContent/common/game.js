@@ -1,6 +1,6 @@
 function FnEmptyGameWdlCart()
 {
-	var query = "mode=emptyCartGameWdl";
+	var query = "mode=emptyGameWdlCart";
 	var http = new JKL.ParseXML("game_wdl.aspx", query);
 	var result = http.parse();
 	
@@ -47,13 +47,13 @@ function FnDrawGameList(data)
 			row.push("</table>");
 			row.push("</td>");
 			row.push("<td>" + data[i].homeTeam);
-			row.push("<input type='checkbox' onclick=\"FnGameBet(this, '" + data[i].id + "', 'w');\">");
+			row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "', 'w');\">");
 			row.push(data[i].winRate);
 			row.push("<span style='width:8;'>&nbsp;</span>");
 			row.push("</td>");
 			row.push("<td>");
 			if (data[i].drawRate > 0) {
-				row.push("<input type='checkbox' onclick=\"FnGameBet(this, '" + data[i].id + "', 'd');\">");
+				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "', 'd');\">");
 			} else {
 				row.push("<b style='font-size:15px;'>□</b> ");
 			}
@@ -61,7 +61,7 @@ function FnDrawGameList(data)
 			row.push("</td>");
 			row.push("<td><span style='width:8;'>&nbsp;</span>");
 			row.push(data[i].loseRate);
-			row.push("<input type='checkbox' onclick=\"FnGameBet(this, '" + data[i].id + "', 'l');\">");
+			row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "', 'l');\">");
 			row.push(data[i].awayTeam);
 			row.push("</td>");
 			row.push("<td><font color='darkorange'>" + data[i].status + "</td>");
@@ -79,13 +79,19 @@ function FnDrawGameList(data)
 
 function FnGameBet(cobj, id, match) {
 	var query = "";
+	var boxes = document.getElementsByName("check"+id);
 	if (cobj.checked) {
-		query = "mode=addCartGameWdl";
+		for (var i = 0 ; i < boxes.length ; i++) {
+			if (boxes[i] != cobj) {
+				boxes[i].checked = false;
+			}
+		}
+		query = "mode=addGameWdlCart";
 		query += "&gameId=" + id;
 		query += "&match="+ match;		
 	} else {
-		query = "mode=deleteCartGameWdl";
-		query += "&gameId" + id;
+		query = "mode=deleteGameWdlCart";
+		query += "&gameId=" + id;
 	}
 	
 	var http = new JKL.ParseXML("game_wdl.aspx", query);
@@ -99,6 +105,8 @@ function FnGameBet(cobj, id, match) {
 
 function FnDrawCart(data) {	
 	var row = [];
+	var rate = "0.0";
+	var multi = 1.0;
 	
 	row.push("<table width='550' bgcolor='#d9d8d6' cellspacing='1' bgcolor='#0a0a0a'>");
 
@@ -136,6 +144,8 @@ function FnDrawCart(data) {
 			row.push("<td>");
 			row.push(data[i].rate);
 			row.push("</td></tr>");
+			
+			multi *= data[i].rate;
 		}
 	} else {
 		row.push("<tr id='nonSelect' style='display:block' bgcolor='black'>");
@@ -144,9 +154,12 @@ function FnDrawCart(data) {
 	}
 	
 	row.push("</table>");
-	
+		
 	var gameCartDiv = document.getElementById("gameCartDiv");
+	var rateDiv = document.getElementById("rateDiv");
+	
 	gameCartDiv.innerHTML = row.join("");
+	rateDiv.innerHTML = Xwin.Digit2(multi);
 }
 
 function CheckAll(obj){

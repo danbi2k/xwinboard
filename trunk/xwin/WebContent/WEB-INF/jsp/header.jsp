@@ -26,7 +26,7 @@
 	<script language="JavaScript" src="common/jkl-parsexml.js"></script>
 	<script language="JavaScript" src="common/xwin.js"></script>
 </head>
-<body style="margin:0" oncontextmenu="return false">
+<body style="margin:0">
 <a name="top"></a>
 
 
@@ -117,7 +117,6 @@ if (login) {
 	<td><img src="images/btn_meminfo.gif" onclick="location.href='modify.jsp'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 	<td><img src="images/btn_mybet.gif" onclick="location.href='mybet.jsp'" style="cursor:hand;"></td>
 	</tr>
-	</form>
 	</table>
 
 </td><td align="right">
@@ -145,11 +144,11 @@ if (login) {
 	<table cellpadding="0" cellspacing="0"><tr>
 	<td><img src="images/login_img.gif" hspace="10"></td>
 	<td><img src="images/login_id.gif"></td>
-	<td><input class="member" type="text" name="id" hspace="2"></td>
+	<td><input class="member" type="text" name="id" style="margin:0 0 0 5;"></td>
 	<td><img src="images/login_pw.gif" hspace="3"></td>
 	<td><input class="member" type="password" name="pw"></td>
 
-	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" hspace="5"></td>
+	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
 	<td><img src="images/btn_join.gif" hspace="5" onclick="location.href='member/join.asp';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 	</tr></table>
 
@@ -178,7 +177,7 @@ if (login) {
 <script>FnFlash("main","960","280","images/main.swf","");</script>
 <%} %>
 <table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
-<tr><td width="80" align="center"><b style="color:white">Notice</td>
+<tr><td width="80" align="center"><b style="color:white">Notice</b></td>
 	<td width="880">&nbsp;
 	<marquee>
 	★ 입금계좌 변경안내 ★ 계좌를 확인하시고 충전신청바랍니다.

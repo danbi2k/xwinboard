@@ -1,6 +1,8 @@
 package com.xwin.domain.game;
 
-public class Event
+import com.xwin.domain.XwinObject;
+
+public class Event extends XwinObject
 {
 	private String id;
 	private String name;

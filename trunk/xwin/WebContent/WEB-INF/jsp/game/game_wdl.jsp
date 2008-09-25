@@ -33,7 +33,7 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_gamelist.gif"></td><td>1~10경기까지 자유롭게 조합배팅이 가능합니다.</td></td>
+	<tr><td width="100"><img src="images/title_gamelist.gif"></td><td>1~10경기까지 자유롭게 조합배팅이 가능합니다.</td>
 
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
@@ -51,7 +51,7 @@
 		%>
 	</select></td>
 
-			<td><img src="images/btn_reload.gif" onclick="document.location.reload();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><img src="images/btn_reload.gif" onclick="FnEmptyGameWdlCart()" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 		</tr></table>
 	</td>
 	</table>
@@ -71,15 +71,15 @@
 	</colgroup>
 
 	<tr bgcolor="#ce892c">
-		<td height=34 style="color:white;"><b>경기일시</td>
+		<td height=34 style="color:white;"><b>경기일시</b></td>
 
-		<td style="color:white;"><b>리그</td>
-		<td style="color:white;"><b>승</td>
+		<td style="color:white;"><b>리그</b></td>
+		<td style="color:white;"><b>승</b></td>
 		
-			<td style="color:white;"><b>무</td>
+			<td style="color:white;"><b>무</b></td>
 		
-		<td style="color:white;"><b>패</td>
-		<td style="color:white;"><b>상태</td>
+		<td style="color:white;"><b>패</b></td>
+		<td style="color:white;"><b>상태</b></td>
 	</tr>
 
 	</table>
@@ -91,7 +91,7 @@
 </tr>
 <tr><td align="center" style="padding-top:10px;">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_betcart.gif"></td><td></td></td>
+	<tr><td width="100"><img src="images/title_betcart.gif"></td><td></td>
 	</table>
 </td></tr>
 
@@ -115,7 +115,7 @@
 		<tr><td style="color:darkorange;">배팅금액</td>
 			<td colspan="3" align="left">
 				<table cellpadding="0" cellspacing="0">
-				<tr><td><input type="" class="member" size="10" name="BetAmt" maxlength="7" value="5,000" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this);" onblur="comma(this);btn_buy.style.filter='gray()';btn_apply.style.filter='';">원</td>
+				<tr><td><input type="text" class="member" size="10" name="BetAmt" maxlength="7" value="5,000" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this);" onblur="comma(this);btn_buy.style.filter='gray()';btn_apply.style.filter='';">원</td>
 					<td><img src="images/btn_apply.gif" id="btn_apply" onclick="FnCartApply(CartFrm);" style="filter:gray();cursor:hand;" hspace="5"></td>
 
 				</tr></table>
@@ -146,9 +146,9 @@
 		</tr>
 
 		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">배당율</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><b>× 0.00</td>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><b>× <div id="rateDiv" style="display:inline">0.00</div></b></td>
 			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">예상배당금</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;"><b>0 원</td></tr>
+			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;"><b>0 원</b></td></tr>
 		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">잔여 머니</td>
 			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;">0 원</td>
 

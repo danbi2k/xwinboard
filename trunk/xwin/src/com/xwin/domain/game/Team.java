@@ -1,6 +1,8 @@
 package com.xwin.domain.game;
 
-public class Team
+import com.xwin.domain.XwinObject;
+
+public class Team extends XwinObject
 {
 	private String id;
 	private String name;

@@ -17,3 +17,14 @@ Xwin.ToArray = function(data)
 	
 	return data;
 }
+
+Xwin.Digit2 = function(value)
+{
+	var str = "" + value;
+	var num = str.split(".");
+	var frag = num[1].substr(0, 2);
+	
+	var ret = num[0] + "." + frag;
+	
+	return ret;
+}

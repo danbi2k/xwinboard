@@ -2,7 +2,9 @@ package com.xwin.domain.game;
 
 import java.util.Date;
 
-public class Game
+import com.xwin.domain.XwinObject;
+
+public class Game extends XwinObject
 {
 	private String id;
 	private String homeTeam;

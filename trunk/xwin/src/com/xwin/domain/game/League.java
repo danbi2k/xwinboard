@@ -1,6 +1,8 @@
 package com.xwin.domain.game;
 
-public class League
+import com.xwin.domain.XwinObject;
+
+public class League extends XwinObject
 {
 	private String id;
 	private String name;

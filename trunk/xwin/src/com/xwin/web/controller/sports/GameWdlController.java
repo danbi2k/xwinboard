@@ -18,6 +18,7 @@ import com.xwin.domain.game.League;
 import com.xwin.infra.dao.GameWdlDao;
 import com.xwin.infra.dao.LeagueDao;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
 
@@ -43,8 +44,8 @@ public class GameWdlController extends MultiActionController
 			session.setAttribute("gameWdlMap", gameWdlMap);
 		}
 		
-		if (session.getAttribute("GameWdlCart") == null) {
-			session.setAttribute("GameWdlCart", new HashMap<String, GameCartItem>());
+		if (session.getAttribute("gameWdlCart") == null) {
+			session.setAttribute("gameWdlCart", new HashMap<String, GameCartItem>());
 		}		
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
@@ -75,11 +76,11 @@ public class GameWdlController extends MultiActionController
 		return mv;
 	}
 	
-	public ModelAndView addCartGameWdl(HttpServletRequest request,
+	public ModelAndView addGameWdlCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		HttpSession session = request.getSession();
-		Map<String, GameCartItem> gameWdlCart = (Map<String, GameCartItem>) session.getAttribute("GameWdlCart");
+		Map<String, GameCartItem> gameWdlCart = (Map<String, GameCartItem>) session.getAttribute("gameWdlCart");
 		Map<String, GameWdl> gameWdlMap = (Map<String, GameWdl>) session.getAttribute("gameWdlMap");
 		
 		String gameId = request.getParameter("gameId");
@@ -92,11 +93,11 @@ public class GameWdlController extends MultiActionController
 		gci.setHomeTeam(gameWdl.getHomeTeam());
 		gci.setAwayTeam(gameWdl.getAwayTeam());
 		if (match.equals("w"))
-			gci.setRate(gameWdl.getWinRate().toString());
+			gci.setRate(XwinUtil.float2Digit(gameWdl.getWinRate()));
 		else if (match.equals("d"))
-			gci.setRate(gameWdl.getDrawRate().toString());
+			gci.setRate(XwinUtil.float2Digit(gameWdl.getDrawRate()));
 		else if (match.equals("l"))
-			gci.setRate(gameWdl.getLoseRate().toString());
+			gci.setRate(XwinUtil.float2Digit(gameWdl.getLoseRate()));
 		gci.setMatch(match);
 		gci.setLeague(gameWdl.getLeagueName());
 		
@@ -105,9 +106,7 @@ public class GameWdlController extends MultiActionController
 		List<GameCartItem> itemList = new ArrayList<GameCartItem>(gameWdlCart.size());
 		itemList.addAll(gameWdlCart.values());
 		
-		ResultXml rx = new ResultXml();
-		rx.setCode(0);
-		rx.setObject(itemList);
+		ResultXml rx = new ResultXml(0, null, itemList);
 				
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -119,7 +118,7 @@ public class GameWdlController extends MultiActionController
 			HttpServletResponse response) throws Exception
 	{
 		HttpSession session = request.getSession();
-		Map<String, GameCartItem> gameWdlCart = (Map<String, GameCartItem>) session.getAttribute("GameWdlCart");
+		Map<String, GameCartItem> gameWdlCart = (Map<String, GameCartItem>) session.getAttribute("gameWdlCart");
 		Map<String, GameWdl> gameWdlMap = (Map<String, GameWdl>) session.getAttribute("gameWdlMap");
 		
 		String gameId = request.getParameter("gameId");
@@ -139,11 +138,11 @@ public class GameWdlController extends MultiActionController
 		return mv;
 	}
 	
-	public ModelAndView emptyCartGameWdl(HttpServletRequest request,
+	public ModelAndView emptyGameWdlCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		HttpSession session = request.getSession();
-		session.removeAttribute("GameWdlCart");
+		session.removeAttribute("gameWdlCart");
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(new ResultXml(0, null, null)));
