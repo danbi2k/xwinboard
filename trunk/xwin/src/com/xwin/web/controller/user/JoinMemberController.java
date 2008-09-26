@@ -9,8 +9,9 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.web.command.MemberCommand;
+import com.xwin.web.controller.XwinController;
 
-public class JoinMemberController extends MultiActionController
+public class JoinMemberController extends XwinController
 {
 	public ModelAndView joinForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -91,10 +92,4 @@ public class JoinMemberController extends MultiActionController
 		ModelAndView mv = new ModelAndView("");
 		return mv;
 	}
-	
-	private MemberDao memberDao = null;
-
-	public void setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-	}	
 }

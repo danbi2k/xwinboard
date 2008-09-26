@@ -6,12 +6,12 @@ import java.util.Date;
 
 public class XwinUtil
 {
-	private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	
 	public static String to2Digit(double x)
 	{
-		String ret = decimalFormat.format(x);
+		String ret = decimalFormat.format(doubleCut(x));
 		return ret;
 	}
 	
@@ -19,5 +19,15 @@ public class XwinUtil
 	{
 		String ret = dateFormat.format(date);
 		return ret;
+	}
+	
+	public static Double doubleCut(Double x)
+	{
+		Double y = x * 100.0;
+		y = Math.floor(y);
+		
+		y /= 100.0;
+		
+		return y;
 	}
 }

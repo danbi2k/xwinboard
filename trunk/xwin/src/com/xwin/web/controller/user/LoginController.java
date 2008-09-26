@@ -5,14 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.xwin.domain.user.Member;
-import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
+import com.xwin.web.controller.XwinController;
 
-public class LoginController extends MultiActionController
+public class LoginController extends XwinController
 {
 	public ModelAndView processLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
@@ -57,10 +56,4 @@ public class LoginController extends MultiActionController
 		ModelAndView mv = new ModelAndView("redirect:/index.aspx");
 		return mv;
 	}
-	
-	private MemberDao memberDao = null;
-
-	public void setMemberDao(MemberDao memberDao) {
-		this.memberDao = memberDao;
-	}	
 }

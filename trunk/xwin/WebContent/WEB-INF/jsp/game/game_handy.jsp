@@ -6,9 +6,6 @@
 
 <%@include file="../header.jsp"%>
 
-<script>
-var gameType = 'wdl'
-</script>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	
@@ -71,7 +68,7 @@ var gameType = 'wdl'
 		<col align="center" width="50">
 	</colgroup>
 
-	<tr bgcolor="#1e3269">
+	<tr bgcolor="#ce892c">
 		<td height=34 style="color:white;"><b>경기일시</b></td>
 
 		<td style="color:white;"><b>리그</b></td>

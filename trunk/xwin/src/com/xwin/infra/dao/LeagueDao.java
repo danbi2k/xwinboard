@@ -6,10 +6,8 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.xwin.domain.game.League;
 
-public class LeagueDao
+public class LeagueDao extends XwinDao
 {
-	private SqlMapClientTemplate sqlMapClientTemplate;
-	
 	public void insertLeague(League league)
 	{
 		sqlMapClientTemplate.insert("insertLeague", league);
@@ -23,9 +21,5 @@ public class LeagueDao
 	public League selectLeagueById(String id)
 	{
 		return (League) sqlMapClientTemplate.queryForObject("selectLeagueById", id);
-	}
-
-	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
-		this.sqlMapClientTemplate = sqlMapClientTemplate;
 	}
 }

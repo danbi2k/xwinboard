@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Betting">
+
+	<typeAlias alias="Betting" type="com.xwin.domain.game.Betting" />
+	
+	<resultMap id="bettingResultMap" class="Betting">
+		<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="date" column="DATE"/>
+		<result property="rate" column="RATE"/>
+		<result property="money" column="MONEY"/>
+	</resultMap>
+	
+	<insert id="insertBetting" parameterClass="Betting">
+		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY)
+			VALUES(#userId#, #date#, #rate#, #money#)
+		<selectKey keyProperty="id" resultClass="string">
+			SELECT LAST_INSERT_ID()
+		</selectKey>			
+	</insert>
+	
+	<delete id="deleteBetting" parameterClass="string">
+		DELETE FROM tbl_betting WHERE ID = #value#
+	</delete>
+	
+	<select id="selectBetting" resultMap="bettingResultMap"
+		parameterClass="string">
+		SELECT * FROM tbl_betting WHERE ID = #value#
+	</select>
+	
+	<select id="selectBettingByUserId" resultMap="bettingResultMap"
+		parameterClass="string">
+		SELECT * FROM tbl_betting WHERE USERID = #value#
+	</select>
+	
+	<select id="selectBettingList" resultMap="bettingResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_betting
+	</select>
+</sqlMap>

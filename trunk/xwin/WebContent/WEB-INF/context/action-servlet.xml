@@ -11,7 +11,8 @@
 				<prop key="/login.aspx">loginController</prop>
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/ktfsms.aspx">ktfSmsController</prop>
-				<prop key="/game_wdl.aspx">gameWdlController</prop>
+				<prop key="/game.aspx">gameController</prop>
+				<prop key="/betting.aspx">bettingController</prop>
 			</props>
 		</property>
 	</bean>

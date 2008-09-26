@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="BetGame">
+
+	<typeAlias alias="BetGame" type="com.xwin.domain.game.BetGame" />
+	
+	<resultMap id="betGameResultMap" class="BetGame">
+		<result property="id" column="ID"/>
+		<result property="bettingId" column="BETTING_ID"/>
+		<result property="homeTeam" column="HOME_TEAM"/>
+		<result property="awayTeam" column="AWAY_TEAM"/>
+		<result property="winRate" column="WIN_RATE"/>
+		<result property="drawRate" column="DRAW_RATE"/>
+		<result property="loseRate" column="LOSE_RATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="date" column="DATE"/>
+		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="leagueName" column="LEAGUE_NAME"/>
+		<result property="guess" column="GUESS"/>
+	</resultMap>
+	
+	<insert id="insertBetGame" parameterClass="BetGame">
+		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS)
+		VALUES(#bettingId#, #id#, #guess#)
+	</insert>
+	
+	<select id="selectBetGameList" resultMap="betGameResultMap"
+		parameterClass="string">
+		SELECT g.*, l.NAME as LEAGUE_NAME
+		FROM tbl_game g, tbl_league l, tbl_betting_game b
+		WHERE
+		g.LEAGUE_ID = l.ID AND
+		g.ID = b.GAME_ID AND
+		b.BETTING_ID = #value#		 
+	</select>
+</sqlMap>

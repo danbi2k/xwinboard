@@ -6,7 +6,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.xwin.domain.user.Member;
 
-public class MemberDao
+public class MemberDao extends XwinDao
 {
 	public void insertMember(Member member)
 	{
@@ -39,10 +39,4 @@ public class MemberDao
 		Object value = sqlMapClientTemplate.queryForObject("countMemberByNickName", nickName);
 		return (Integer) value;
 	}
-	
-	private SqlMapClientTemplate sqlMapClientTemplate;
-
-	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
-		this.sqlMapClientTemplate = sqlMapClientTemplate;
-	}		
 }

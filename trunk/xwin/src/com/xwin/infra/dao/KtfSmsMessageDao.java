@@ -6,10 +6,8 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 
-public class KtfSmsMessageDao
+public class KtfSmsMessageDao extends XwinDao
 {
-	private SqlMapClientTemplate sqlMapClientTemplate;
-	
 	public void insertMessage(KtfSmsMessage message)
 	{
 		sqlMapClientTemplate.insert("insertMessage", message);
@@ -18,9 +16,5 @@ public class KtfSmsMessageDao
 	public List<KtfSmsMessage> selectList()
 	{
 		return sqlMapClientTemplate.queryForList("selectKtfSmsList");
-	}
-
-	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
-		this.sqlMapClientTemplate = sqlMapClientTemplate;
 	}
 }

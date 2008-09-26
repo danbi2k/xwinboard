@@ -19,6 +19,7 @@
 	<script language="JavaScript" src="common/board.js"></script
 </head>
 <body style="margin:0" oncontextmenu="return false">
+<div id="_debug"></div>
 <a name="top"></a>
 
 

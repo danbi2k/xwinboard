@@ -31,7 +31,7 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpg" border="0"></a></td>
+<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpgx" border="0"></a></td>
     <td width="753" valign="bottom" align="right">
 		<table align="right" width="712" height="33" cellpadding="0" cellspacing="0">
 
@@ -45,8 +45,8 @@
 </table>
 
 <MAP NAME="map_top_menu">
-	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="game_wdl.aspx?mode=viewGameList" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="102,0,197,33" href="gameHandy.jsp" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="game.aspx?mode=viewGameList&type=wdl" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="102,0,197,33" href="game.aspx?mode=viewGameList&type=handy" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="199,0,281,33" href="gameOE.jsp" onMouseOver="clipthis('top1','top2',199,0,281,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="283,0,387,33" href="result.jsp"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="389,0,507,33" href="guide.jsp"   onMouseOver="clipthis('top1','top2',389,0,507,33)" onmouseout="top_menu_out();" onfocus="this.blur();">

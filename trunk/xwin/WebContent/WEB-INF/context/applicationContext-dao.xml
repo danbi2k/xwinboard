@@ -29,9 +29,17 @@
 		class="com.xwin.infra.dao.LeagueDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
-	<bean id="gameWdlDao"
-		class="com.xwin.infra.dao.GameWdlDao"
+	<bean id="gameDao"
+		class="com.xwin.infra.dao.GameDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="bettingDao"
+		class="com.xwin.infra.dao.BettingDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="betGameDao"
+		class="com.xwin.infra.dao.BetGameDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />		
 		
 	<bean id="teamDao"
 		class="com.xwin.infra.dao.TeamDao"

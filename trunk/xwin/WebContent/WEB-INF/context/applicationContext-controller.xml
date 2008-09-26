@@ -13,8 +13,8 @@
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
 	
-	<bean id="gameWdlController" class="com.xwin.web.controller.sports.GameWdlController"
-		p:gameWdlDao-ref="gameWdlDao"
+	<bean id="gameController" class="com.xwin.web.controller.game.GameController"
+		p:gameDao-ref="gameDao"
 		p:leagueDao-ref="leagueDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
@@ -32,7 +32,14 @@
 	<bean id="loginController"
 		class="com.xwin.web.controller.user.LoginController"
 		p:memberDao-ref="memberDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>	
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="bettingController"
+		class="com.xwin.web.controller.game.BettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>		
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

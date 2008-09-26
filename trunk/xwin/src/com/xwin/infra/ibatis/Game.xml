@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Game">
+
+	<typeAlias alias="Game" type="com.xwin.domain.game.Game" />
+	
+	<resultMap id="GameResultMap" class="Game">
+		<result property="id" column="ID"/>
+		<result property="homeTeam" column="HOME_TEAM"/>
+		<result property="awayTeam" column="AWAY_TEAM"/>
+		<result property="winRate" column="WIN_RATE"/>
+		<result property="drawRate" column="DRAW_RATE"/>
+		<result property="loseRate" column="LOSE_RATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="date" column="DATE"/>
+		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="leagueName" column="LEAGUE_NAME"/>
+	</resultMap>
+	
+	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
+		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.ID = #value#
+	</select>
+	<select id="selectGameList" resultMap="GameResultMap" parameterClass="string">
+		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.TYPE = #value#
+	</select>
+	
+	<select id="selectGameListByLeagueId" resultMap="GameResultMap"
+		parameterClass="map">
+		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.LEAGUE_ID = #leagueId# AND g.TYPE = #type#
+	</select>
+	
+	<insert id="insertGame" parameterClass="Game">
+		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, DATE, LEAGUE_ID, TYPE)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #date#, #leagueId#, #type#)
+	</insert>
+	
+</sqlMap>

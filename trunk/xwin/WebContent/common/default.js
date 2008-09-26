@@ -1,3 +1,7 @@
+function goPost(path, param)
+{
+	
+}
 
 // 플래쉬(swf) 파일 링크
 function FnFlash(id,w,h,s,wmode) {

@@ -27,6 +27,5 @@
 </td></tr>	<tr><td align="right"><a href="http://www.kofree.net/DNSFree/Setup.exe">DNSFree (접속차단해제프로그램</a>)&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 </table>
 
-
 </body>
 </html>

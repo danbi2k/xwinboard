@@ -5,7 +5,7 @@ public class GameCartItem
 	private String gameId;
 	private String homeTeam;
 	private String awayTeam;
-	private String match;
+	private String guess;
 	private String rate;
 	private String league;
 	
@@ -27,11 +27,11 @@ public class GameCartItem
 	public void setAwayTeam(String awayTeam) {
 		this.awayTeam = awayTeam;
 	}
-	public String getMatch() {
-		return match;
+	public String getGuess() {
+		return guess;
 	}
-	public void setMatch(String match) {
-		this.match = match;
+	public void setGuess(String guess) {
+		this.guess = guess;
 	}
 	public String getRate() {
 		return rate;

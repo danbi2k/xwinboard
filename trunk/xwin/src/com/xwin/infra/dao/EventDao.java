@@ -2,11 +2,9 @@ package com.xwin.infra.dao;
 
 import java.util.List;
 
-import org.springframework.orm.ibatis.SqlMapClientTemplate;
-
 import com.xwin.domain.game.Event;
 
-public class EventDao
+public class EventDao extends XwinDao
 {	
 	public void insertEvent(Event event)
 	{
@@ -21,11 +19,5 @@ public class EventDao
 	public void deleteEvent(String eventId) {
 		sqlMapClientTemplate.delete("deleteEvent", eventId);
 		
-	}
-
-	private SqlMapClientTemplate sqlMapClientTemplate;
-	
-	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
-		this.sqlMapClientTemplate = sqlMapClientTemplate;
 	}
 }
