@@ -1,8 +1,8 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import java.util.Map;
 
 import com.xwin.domain.user.Member;
 
@@ -38,5 +38,14 @@ public class MemberDao extends XwinDao
 	{
 		Object value = sqlMapClientTemplate.queryForObject("countMemberByNickName", nickName);
 		return (Integer) value;
+	}
+	
+	public void updateBalance(String userId, String balance)
+	{
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("userId", userId);
+		param.put("balance", balance);
+		
+		sqlMapClientTemplate.update("updateBalance", param);
 	}
 }

@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="adminController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="admin/admin"/>
-			  
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
 	
@@ -21,9 +18,6 @@
 	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="index"/>
 		
-	<bean id="manageEventController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="admin/manageEvent"/>
-	
 	<bean id="joinMemberController"
 		class="com.xwin.web.controller.user.JoinMemberController"
 		p:memberDao-ref="memberDao"
@@ -39,7 +33,29 @@
 		p:memberDao-ref="memberDao"
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>		
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="adminController"
+		class="com.xwin.web.controller.admin.AdminController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="adminBettingController"
+		class="com.xwin.web.controller.admin.AdminBettingController"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminGameController"
+		class="com.xwin.web.controller.admin.AdminGameController"
+		p:gameDao-ref="gameDao"
+		p:leagueDao-ref="leagueDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminMemberController"
+		class="com.xwin.web.controller.admin.AdminMemberController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

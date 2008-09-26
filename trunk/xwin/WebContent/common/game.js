@@ -92,7 +92,7 @@ function FnGameBet(cobj, id, type, guess) {
 		}
 		query = "mode=addGameCart";
 		query += "&gameId=" + id;
-		query += "&match=" + guess;
+		query += "&guess=" + guess;
 		query += "&type=" + type;
 	} else {
 		query = "mode=deleteGameCart";
@@ -182,9 +182,29 @@ function FnDrawCart(data, type) {
 	FnCalcCart();
 }
 
+function FnBetting()
+{
+	var money = CartFrm.BetAmt.value;
+	if (money == undefined || money.length == 0)
+		CartFrm.BetAmt.value = money = "0";
+	
+	var query = "mode=betting";
+	query += "&type=" + gameType;
+	query += "&money=" + money;
+	var http = new JKL.ParseXML("betting.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0) {			
+		document.location.reload();
+	}
+}
+
 function FnCalcCart()
 {
 	var money = CartFrm.BetAmt.value;
+	if (money == undefined || money.length == 0)
+		CartFrm.BetAmt.value = money = "0";
+			
 	money = money.split(",");
 	money = money.join("");
 
@@ -196,8 +216,7 @@ function FnCalcCart()
 	var rate = rateDiv.value;
 	var query = "mode=calculateCart";
 	query += "&type=" + gameType;
-	query += "&rate=" + rate;
-	query += "&bet=" + money;
+	query += "&money=" + money;
 	var http = new JKL.ParseXML("betting.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {

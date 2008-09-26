@@ -17,17 +17,36 @@ CREATE TABLE  `xwin`.`ktfsms` (
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `xwin`.`tbl_game_wdl`;
-CREATE TABLE  `xwin`.`tbl_game_wdl` (
+DROP TABLE IF EXISTS `xwin`.`tbl_betting`;
+CREATE TABLE  `xwin`.`tbl_betting` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `DATE` varchar(45) NOT NULL,
+  `RATE` varchar(45) NOT NULL,
+  `MONEY` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `xwin`.`tbl_betting_game`;
+CREATE TABLE  `xwin`.`tbl_betting_game` (
+  `BETTING_ID` int(10) unsigned NOT NULL,
+  `GAME_ID` int(10) unsigned NOT NULL,
+  `GUESS` varchar(45) NOT NULL,
+  PRIMARY KEY  (`BETTING_ID`,`GAME_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `xwin`.`tbl_game`;
+CREATE TABLE  `xwin`.`tbl_game` (
   `ID` int(10) unsigned NOT NULL auto_increment,
   `HOME_TEAM` varchar(45) NOT NULL,
   `AWAY_TEAM` varchar(45) NOT NULL,
   `WIN_RATE` float(5,2) NOT NULL,
   `DRAW_RATE` float(5,2) NOT NULL,
   `LOSE_RATE` float(5,2) NOT NULL,
-  `STATUS` char(5) character set ucs2 NOT NULL,
+  `STATUS` varchar(45) character set ucs2 NOT NULL,
   `DATE` datetime NOT NULL,
   `LEAGUE_ID` int(10) unsigned NOT NULL,
+  `TYPE` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -73,13 +92,3 @@ CREATE TABLE  `xwin`.`userinfo` (
   `PASSWORD` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `xwin`.`tbl_betting`;
-CREATE TABLE  `xwin`.`tbl_betting` (
-  `ID` int(10) unsigned NOT NULL auto_increment,
-  `USERID` varchar(45) NOT NULL,
-  `DATE` varchar(45) NOT NULL,
-  `RATE` varchar(45) NOT NULL,
-  `MONEY` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;

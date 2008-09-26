@@ -97,32 +97,133 @@ INSERT INTO `ktfsms` (`ID`,`MSG_SEQ`,`IN_DATE`,`MSG`,`SM`,`CALL_BACK`) VALUES
 
 
 --
--- Definition of table `tbl_game_wdl`
+-- Definition of table `tbl_betting`
 --
 
-DROP TABLE IF EXISTS `tbl_game_wdl`;
-CREATE TABLE `tbl_game_wdl` (
+DROP TABLE IF EXISTS `tbl_betting`;
+CREATE TABLE `tbl_betting` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `DATE` varchar(45) NOT NULL,
+  `RATE` varchar(45) NOT NULL,
+  `MONEY` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_betting`
+--
+
+/*!40000 ALTER TABLE `tbl_betting` DISABLE KEYS */;
+INSERT INTO `tbl_betting` (`ID`,`USERID`,`DATE`,`RATE`,`MONEY`) VALUES 
+ (1,'xx','2008-09-26 17:51:12','4.33','150000'),
+ (2,'yy','2008-09-26 17:51:23','4.33','150000'),
+ (3,'zz','2008-09-26 17:51:23','4.33','150000'),
+ (4,'yy','2008-09-26 18:09:01','4.33','150000'),
+ (5,'zz','2008-09-26 18:11:18','4.33','150000'),
+ (6,'xx','2008-09-26 18:24:20','4.33','150000'),
+ (7,'xx','2008-09-26 18:24:28','4.33','150000'),
+ (8,'xx','2008-09-26 18:24:29','4.33','150000'),
+ (9,'xx','2008-09-26 18:24:29','4.33','150000'),
+ (10,'xx','2008-09-26 18:24:29','4.33','150000'),
+ (11,'xx','2008-09-26 18:24:29','4.33','150000'),
+ (12,'xx','2008-09-26 18:39:16','4.33','150000'),
+ (13,'xx','2008-09-26 18:41:07','4.33','150000'),
+ (14,'xx','2008-09-26 18:41:15','4.33','150000'),
+ (15,'xx','2008-09-26 18:41:16','4.33','150000'),
+ (16,'xx','2008-09-26 18:41:16','4.33','150000'),
+ (17,'xx','2008-09-26 18:41:16','4.33','150000'),
+ (18,'xx','2008-09-26 19:32:25','5.24','5000'),
+ (19,'xx','2008-09-26 19:33:46','5.24','10000'),
+ (20,'xx','2008-09-26 19:34:57','1.69','5000'),
+ (21,'xx','2008-09-26 19:42:26','5.24','30000'),
+ (22,'xx','2008-09-26 19:56:25','2.29','100000');
+/*!40000 ALTER TABLE `tbl_betting` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_betting_game`
+--
+
+DROP TABLE IF EXISTS `tbl_betting_game`;
+CREATE TABLE `tbl_betting_game` (
+  `BETTING_ID` int(10) unsigned NOT NULL,
+  `GAME_ID` int(10) unsigned NOT NULL,
+  `GUESS` varchar(45) NOT NULL,
+  PRIMARY KEY  (`BETTING_ID`,`GAME_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_betting_game`
+--
+
+/*!40000 ALTER TABLE `tbl_betting_game` DISABLE KEYS */;
+INSERT INTO `tbl_betting_game` (`BETTING_ID`,`GAME_ID`,`GUESS`) VALUES 
+ (1,1,'W'),
+ (1,2,'D'),
+ (2,1,'W'),
+ (6,1,'W'),
+ (6,2,'L'),
+ (7,1,'W'),
+ (7,2,'L'),
+ (8,1,'W'),
+ (8,2,'L'),
+ (9,1,'W'),
+ (9,2,'L'),
+ (10,1,'W'),
+ (10,2,'L'),
+ (11,1,'W'),
+ (11,2,'L'),
+ (13,1,'W'),
+ (13,2,'L'),
+ (14,1,'W'),
+ (14,2,'L'),
+ (15,1,'W'),
+ (15,2,'L'),
+ (16,1,'W'),
+ (16,2,'L'),
+ (17,1,'W'),
+ (17,2,'L'),
+ (18,1,'L'),
+ (18,2,'L'),
+ (19,1,'L'),
+ (19,2,'L'),
+ (20,1,'W'),
+ (20,2,'W'),
+ (21,1,'L'),
+ (21,2,'L'),
+ (22,1,'L');
+/*!40000 ALTER TABLE `tbl_betting_game` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_game`
+--
+
+DROP TABLE IF EXISTS `tbl_game`;
+CREATE TABLE `tbl_game` (
   `ID` int(10) unsigned NOT NULL auto_increment,
   `HOME_TEAM` varchar(45) NOT NULL,
   `AWAY_TEAM` varchar(45) NOT NULL,
   `WIN_RATE` float(5,2) NOT NULL,
   `DRAW_RATE` float(5,2) NOT NULL,
   `LOSE_RATE` float(5,2) NOT NULL,
-  `STATUS` char(5) character set ucs2 NOT NULL,
+  `STATUS` varchar(45) character set ucs2 NOT NULL,
   `DATE` datetime NOT NULL,
   `LEAGUE_ID` int(10) unsigned NOT NULL,
+  `TYPE` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_game_wdl`
+-- Dumping data for table `tbl_game`
 --
 
-/*!40000 ALTER TABLE `tbl_game_wdl` DISABLE KEYS */;
-INSERT INTO `tbl_game_wdl` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`DATE`,`LEAGUE_ID`) VALUES 
- (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:52:05',1),
- (2,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:58:27',1);
-/*!40000 ALTER TABLE `tbl_game_wdl` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_game` DISABLE KEYS */;
+INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`DATE`,`LEAGUE_ID`,`TYPE`) VALUES 
+ (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:52:05',1,'wdl'),
+ (2,'보스턴','뉴욕',1.30,0.00,2.30,'준비중','2008-09-25 14:58:27',1,'wdl');
+/*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
 
 
 --
@@ -175,7 +276,7 @@ CREATE TABLE `tbl_member` (
 
 /*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
 INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`) VALUES 
- (1,'xx','1111','yy','010-3333-3333','xx@yy','1111',1000000),
+ (1,'xx','1111','yy','010-3333-3333','xx@yy','1111',613800),
  (2,'tt','1111','tt','010-1111-1111','tt@tt','1111',50000);
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
 

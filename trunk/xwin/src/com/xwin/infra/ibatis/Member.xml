@@ -38,11 +38,15 @@
 		SELECT * FROM tbl_member
 	</select>
 	
-	<select id="countMemberByUserId" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+	<select id="countMemberByUserId" parameterClass="string" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_member WHERE USERID = #value#
 	</select>
 	
-	<select id="countMemberByNickName" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+	<select id="countMemberByNickName" parameterClass="string" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_member WHERE NICKNAME = #value#
 	</select>
+	
+	<update id="updateBalance" parameterClass="map" >
+		UPDATE tbl_member SET BALANCE = #balance# WHERE USERID = #userId#
+	</update>
 </sqlMap>

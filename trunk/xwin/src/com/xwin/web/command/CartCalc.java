@@ -2,7 +2,7 @@ package com.xwin.web.command;
 
 public class CartCalc
 {
-	private String bet;
+	private String money;
 	private String rate;
 	private String expect;
 	private String balance;
@@ -10,20 +10,20 @@ public class CartCalc
 	
 	public CartCalc() {}
 		
-	public CartCalc(String after, String balance, String bet, String expect,
+	public CartCalc(String after, String balance, String money, String expect,
 			String rate) {
 		this.after = after;
 		this.balance = balance;
-		this.bet = bet;
+		this.money = money;
 		this.expect = expect;
 		this.rate = rate;
 	}
 	
-	public String getBet() {
-		return bet;
+	public String getMoney() {
+		return money;
 	}
-	public void setBet(String bet) {
-		this.bet = bet;
+	public void setMoney(String money) {
+		this.money = money;
 	}
 	public String getRate() {
 		return rate;

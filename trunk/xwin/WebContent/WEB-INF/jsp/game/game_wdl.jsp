@@ -159,7 +159,7 @@ var gameType = 'wdl'
 		<table width="100%">
 		<tr><td align="right">
 			
-				<img src="images/btn_buy.gif" id="btn_buy" onclick="alert('배팅카트가 비어있습니다.');" style="filter:gray();">
+				<img src="images/btn_buy.gif" id="btn_buy" onclick="FnBetting()" style="filter:gray();">
 			
 		</td></tr>
 

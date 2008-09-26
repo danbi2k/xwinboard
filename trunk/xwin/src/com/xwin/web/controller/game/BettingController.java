@@ -1,7 +1,9 @@
 package com.xwin.web.controller.game;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,28 +27,49 @@ public class BettingController extends XwinController
 	public ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		ResultXml rx = null;
+		
 		String _type = request.getParameter("type");
-		String _bet = request.getParameter("bet");
+		String _money = request.getParameter("money");
 		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("Member");
 		
 		Map<String, GameCartItem> cartMap =
 			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + _type);
 		
-		Integer bet = null;
-		if (_bet != null && _bet.length() > 0)
-			bet = Integer.parseInt(_bet);
-		else
-			bet = 0;
+		Betting betting = new Betting();
+		Integer money = Integer.parseInt(_money);		
+		CartCalc cc = getCartCalc(cartMap, money);
 		
-		CartCalc cc = getCartCalc(cartMap, bet);
-		
-		
-		
-		//CartCalc cc= getCartCalc(_rate, _bet);
-		
-		
+		if (Integer.parseInt(cc.getAfter()) < 0) {
+			rx = new ResultXml(-1, "잔액이 부족합니다.", null);
+		} else {		
+			betting.setUserId(member.getUserId());
+			betting.setMoney(Integer.parseInt(cc.getMoney()));
+			betting.setRate(Double.parseDouble(cc.getRate()));
+			betting.setDate(new Date());
+			
+			String bettingId = bettingDao.insertBetting(betting);
+			
+			List<BetGame> betGameList = new ArrayList<BetGame>();		
+			Collection<GameCartItem> cartCol = cartMap.values();
+			for (GameCartItem gci : cartCol) {
+				BetGame betGame = new BetGame();
+				betGame.setBettingId(bettingId);
+				betGame.setId(gci.getGameId());
+				betGame.setGuess(gci.getGuess());
+				
+				betGameDao.insertBetGame(betGame);
+			}
+			
+			memberDao.updateBalance(member.getUserId(), cc.getAfter());
+			
+			session.removeAttribute("cartMap_" + _type);
+			
+			rx = new ResultXml(0, "배팅 하셨습니다", null);
+		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		//mv.addObject("resultXml", XmlUtil.toXml(rx));
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
 	}
@@ -55,19 +78,15 @@ public class BettingController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		String type = request.getParameter("type");
-		String _bet = request.getParameter("bet");		
+		String _money = request.getParameter("money");		
 		HttpSession session = request.getSession();
 		
 		Map<String, GameCartItem> cartMap =
 			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + type);
 		
-		Integer bet = null;
-		if (_bet != null && _bet.length() > 0)
-			bet = Integer.parseInt(_bet);
-		else
-			bet = 0;
+		Integer money = Integer.parseInt(_money);
 		
-		CartCalc cc = getCartCalc(cartMap, bet);
+		CartCalc cc = getCartCalc(cartMap, money);
 		
 		ResultXml rx = new ResultXml(0, null, cc);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -108,19 +127,22 @@ public class BettingController extends XwinController
 		return mv;
 	}
 
-	private CartCalc getCartCalc(Map cartMap, Integer bet)
+	private CartCalc getCartCalc(Map cartMap, Integer money)
 	{
-		Double totalRate = 1.0;
+		Double totalRate = 0.0;
 		
 		Collection<GameCartItem> cartColl = cartMap.values();
-		for (GameCartItem gci : cartColl) {
-			Double rate = Double.parseDouble(gci.getRate());
-			totalRate *= rate;
+		if (cartColl != null && cartColl.size() > 0) {
+			totalRate = 1.0;
+			for (GameCartItem gci : cartColl) {
+				Double rate = Double.parseDouble(gci.getRate());
+				totalRate *= rate;
+			}
 		}
 		
 		Double cutRate = XwinUtil.doubleCut(totalRate);
 		
-		Double _expect = Math.floor(cutRate * bet);
+		Double _expect = Math.floor(cutRate * money);
 		Integer expect = _expect.intValue();
 		
 		Member member = memberDao.selectMember("xx");
@@ -132,7 +154,7 @@ public class BettingController extends XwinController
 		
 		cc.setRate(XwinUtil.to2Digit(cutRate));
 		cc.setBalance(balance.toString());
-		cc.setBet(bet.toString());
+		cc.setMoney(money.toString());
 		cc.setAfter(after.toString());
 		cc.setExpect(expect.toString());
 		
