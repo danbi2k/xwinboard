@@ -4,6 +4,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BettingDao;
+import com.xwin.infra.dao.BoardDao;
 import com.xwin.infra.dao.GameDao;
 import com.xwin.infra.dao.LeagueDao;
 import com.xwin.infra.dao.MemberDao;
@@ -15,6 +16,7 @@ public class XwinController extends MultiActionController
 	protected LeagueDao leagueDao = null;
 	protected MemberDao memberDao = null;
 	protected BetGameDao betGameDao = null;
+	protected BoardDao boardDao = null;
 
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
@@ -30,5 +32,8 @@ public class XwinController extends MultiActionController
 	}
 	public void setBetGameDao(BetGameDao betGameDao) {
 		this.betGameDao = betGameDao;
+	}
+	public void setBoardDao(BoardDao boardDao) {
+		this.boardDao = boardDao;
 	}
 }

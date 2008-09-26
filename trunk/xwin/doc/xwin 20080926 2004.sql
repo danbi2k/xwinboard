@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.51b-community-nt
+-- Server version	5.0.67-community-nt
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -197,6 +197,62 @@ INSERT INTO `tbl_betting_game` (`BETTING_ID`,`GAME_ID`,`GUESS`) VALUES
 
 
 --
+-- Definition of table `tbl_board_comment`
+--
+
+DROP TABLE IF EXISTS `tbl_board_comment`;
+CREATE TABLE `tbl_board_comment` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `BOARD_ID` varchar(45) NOT NULL,
+  `USERNAME` varchar(45) NOT NULL,
+  `PASSWORD` varchar(45) NOT NULL,
+  `CONTEXT` text NOT NULL,
+  `USERID` varchar(45) NOT NULL,
+  `DATE` datetime NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_board_comment`
+--
+
+/*!40000 ALTER TABLE `tbl_board_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_board_comment` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_board_item`
+--
+
+DROP TABLE IF EXISTS `tbl_board_item`;
+CREATE TABLE `tbl_board_item` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `TITLE` varchar(45) NOT NULL,
+  `USERID` varchar(45) NOT NULL,
+  `DATE` datetime NOT NULL,
+  `READCOUNT` int(10) unsigned NOT NULL,
+  `USERNAME` varchar(45) NOT NULL,
+  `CONTEXT` text NOT NULL,
+  `TYPE` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_board_item`
+--
+
+/*!40000 ALTER TABLE `tbl_board_item` DISABLE KEYS */;
+INSERT INTO `tbl_board_item` (`ID`,`TITLE`,`USERID`,`DATE`,`READCOUNT`,`USERNAME`,`CONTEXT`,`TYPE`) VALUES 
+ (1,'우가차카 우가차카','xx','2008-09-27 00:23:20',55,'yy','fjkdfjakfjdf','free'),
+ (2,'우가차카 우가차카','xx','2008-09-27 00:23:35',55,'yy','fjkdfjakfjdf','free'),
+ (3,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
+ (4,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
+ (5,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
+ (6,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free');
+/*!40000 ALTER TABLE `tbl_board_item` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tbl_game`
 --
 
@@ -224,6 +280,35 @@ INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOS
  (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:52:05',1,'wdl'),
  (2,'보스턴','뉴욕',1.30,0.00,2.30,'준비중','2008-09-25 14:58:27',1,'wdl');
 /*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_game_wdl`
+--
+
+DROP TABLE IF EXISTS `tbl_game_wdl`;
+CREATE TABLE `tbl_game_wdl` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `HOME_TEAM` varchar(45) NOT NULL,
+  `AWAY_TEAM` varchar(45) NOT NULL,
+  `WIN_RATE` float(5,2) NOT NULL,
+  `DRAW_RATE` float(5,2) NOT NULL,
+  `LOSE_RATE` float(5,2) NOT NULL,
+  `STATUS` char(5) character set ucs2 NOT NULL,
+  `DATE` datetime NOT NULL,
+  `LEAGUE_ID` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_game_wdl`
+--
+
+/*!40000 ALTER TABLE `tbl_game_wdl` DISABLE KEYS */;
+INSERT INTO `tbl_game_wdl` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`DATE`,`LEAGUE_ID`) VALUES 
+ (1,'텍사스','뉴욕',1.55,1.27,3.14,'준비중','2008-09-25 14:52:05',1),
+ (2,'LA 다저스','샌디에이고',1.30,0.00,10.20,'준비중','2008-09-25 14:58:27',1);
+/*!40000 ALTER TABLE `tbl_game_wdl` ENABLE KEYS */;
 
 
 --

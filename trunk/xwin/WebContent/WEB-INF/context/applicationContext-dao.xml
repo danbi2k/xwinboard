@@ -52,4 +52,8 @@
 	<bean id="memberDao"
 		class="com.xwin.infra.dao.MemberDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="boardDao"
+		class="com.xwin.infra.dao.BoardDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 </beans>

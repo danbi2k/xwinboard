@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="BoardItem">
+
+	<typeAlias alias="BoardItem" type="com.xwin.domain.board.BoardItem" />
+	<typeAlias alias="BoardComment" type="com.xwin.domain.board.BoardComment" />
+	
+	<resultMap id="boardItemResultMap" class="BoardItem">
+		<result property="id" column="ID"/>		
+		<result property="title" column="TITLE"/>
+		<result property="userId" column="USERID"/>
+		<result property="userName" column="USERNAME"/>		
+		<result property="date" column="DATE"/>
+		<result property="context" column="CONTEXT"/>
+		<result property="readCount" column="READCOUNT"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	
+	<insert id="insertBoardItem" parameterClass="BoardItem">
+		INSERT INTO tbl_board_item(TITLE, USERID, USERNAME, DATE, READCOUNT, CONTEXT, TYPE)
+			VALUES(#title#, #userId#, #userName#, #date#, #readCount#, #context#, #type#)
+		<selectKey keyProperty="id" resultClass="string">
+			SELECT LAST_INSERT_ID()
+		</selectKey>	
+	</insert>
+	
+	<delete id="deleteBoardItem" parameterClass="string">
+		DELETE FROM tbl_board WHERE ID = #value#
+	</delete>
+	
+	<select id="selectBoardItem" resultMap="boardItemResultMap"
+		parameterClass="string">
+		SELECT * FROM tbl_board WHERE ID = #value#
+	</select>
+	
+	<select id="selectBoardItemList" resultMap="boardItemResultMap"
+		parameterClass="map">
+		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT FROM tbl_board
+	</select>
+	
+	<resultMap id="boardCommentResultMap" class="BoardComment">
+		<result property="id" column="ID"/>
+		<result property="boardId" column="BOARD_ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>		
+		<result property="date" column="DATE"/>
+		<result property="context" column="CONTEXT"/>
+	</resultMap>
+	
+	<insert id="insertBoardComment" parameterClass="BoardComment">
+		INSERT INTO tbl_board_comment(BOARD_ID, USERID, USERNAME, PASSWORD, DATE, COMMENT)
+		VALUES(#boardId#, #userId#, #userName#, #password#, #date#, #context#)
+	</insert>
+	
+	<delete id="deleteBoardComment" parameterClass="string">
+		DELETE FROM tbl_board_comment WHERE ID = #value#
+	</delete>
+	
+	<delete id="deleteBoardCommentList" parameterClass="string">
+		DELETE FROM tbl_board_comment WHERE BOARD_ID = #value#
+	</delete>
+	
+	<select id="selectBoardCommentList" resultMap="boardCommentResultMap">
+		SELECT FROM tbl_board_comment WHERE BOARD_ID = #value#
+	</select>
+</sqlMap>

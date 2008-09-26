@@ -34,6 +34,12 @@
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="boardController"
+		class="com.xwin.web.controller.board.BoardController"
+		p:memberDao-ref="memberDao"
+		p:boardDao-ref="boardDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 	
 	<bean id="adminController"
 		class="com.xwin.web.controller.admin.AdminController"
