@@ -6,6 +6,7 @@ public class Event extends XwinObject
 {
 	private String id;
 	private String name;
+	private String code;
 	
 	public String getId() {
 		return id;
@@ -18,5 +19,11 @@ public class Event extends XwinObject
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
 	}	
 }

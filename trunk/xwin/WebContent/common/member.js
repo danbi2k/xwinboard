@@ -1,3 +1,78 @@
+function FnGetMyBetList(pageIndex)
+{
+	var query = "mode=getMyBettingList";
+	query += "&pageIndex=" + pageIndex;
+	var http = new JKL.ParseXML("mybet.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0) {
+		var data = Xwin.ToArray(result.resultXml.object.betting);
+		FnDrawMyBetList(data);
+	}
+}
+
+function FnDrawMyBetList(data)
+{
+	var row = [];
+	row.push("<table width='900' bgcolor='#d9d8d6' cellspacing='1' cellpadding='3'");
+	row.push("<colgroup>")
+	row.push("<col align='center' width='50'>");
+	row.push("<col align='center' width='100'>");
+	row.push("<col align='center'  width='*'>");
+	row.push("<col align='right'  width='80'>");
+	row.push("<col align='center' width='70'>");
+	row.push("<col align='right'  width='80'>");
+	row.push("<col align='center width='70'>");
+	row.push("<col align='center width='70'>");
+	row.push("</colgroup>");
+
+	row.push("<tr bgcolor='#ce892c'>");
+	row.push("<td style='color:white;'><b>No</td>");
+	row.push("<td style='color:white;'><b>배팅일시</td>");
+	row.push("<td style='color:white;'><b>진행상태</td>");
+	row.push("<td style='color:white;' align='center'><b>배팅금액</td>");
+	row.push("<td style='color:white;'><b>배당율</td>");
+	row.push("<td style='color:white;' align='center'><b>배당금</td>");
+	row.push("<td style='color:white;'><b>상태</td>");
+	row.push("<td style='color:white;'><b>자세히</td>");
+	row.push("</tr>");
+
+	if (data.length > 0) {
+		for (i in data) {
+			row.push("<tr height='26' bgcolor='#0a0a0a' onmouseover=\"this.style.background='#303030';\" onmouseout=\"this.style.background='#0a0a0a';\">");
+			row.push("<td>" + data[i].id + "</td>");
+			row.push("<td>" + data[i].date + "</td>");
+			row.push("<td>");
+			row.push("<table width='100%' height='24' cellpadding='0' cellspacing='3' bgcolor='orange'>");
+			row.push("<tr align='center'>");
+			
+			var detail = Xwin.ToArray(data[i].betGameList.betGame);
+			for (j in detail) {
+				row.push("<td width='100%' bgcolor='orange' style='color:black' align='center'>");
+				row.push("o");
+				row.push("</td>");
+			}			
+			row.push("</tr>");
+			row.push("</table>");
+			row.push("</td>");
+			row.push("<td>" + data[i].money + " 원</td>");
+			row.push("<td>" + data[i].rate + "</td>");
+			row.push("<td><font color='orange'>" + (data[i].money * data[i].rate) + "원</td>");
+			row.push("<td><font color='orange'>적중</td>");
+			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover='this.style.filter='';' onmouseout='this.style.filter='gray()';'></td>");
+			row.push("</tr>");
+		}
+	} else {
+		row.push("<tr bgcolor='#0a0a0a'><td colspan='10' height='50' align='center'>배팅 내역이 없습니다.</td></tr>");
+	}
+	
+	row.push("</table>");
+	
+	var tableString = row.join("");
+	var myBetListDiv = document.getElementById("myBetListDiv");
+	
+	myBetListDiv.innerHTML = tableString;
+}
+
 function FnMemReg(frm){
 
 	if(!frm.agree.checked){ alert("약관에 동의하셔야 합니다."); return false; }

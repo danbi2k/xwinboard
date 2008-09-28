@@ -126,7 +126,7 @@ public class BettingController extends XwinController
 		
 		return mv;
 	}
-
+	
 	private CartCalc getCartCalc(Map cartMap, Integer money)
 	{
 		Double totalRate = 0.0;

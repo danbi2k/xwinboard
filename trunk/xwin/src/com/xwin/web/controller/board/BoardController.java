@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
@@ -15,10 +16,19 @@ import com.xwin.web.controller.XwinController;
 
 public class BoardController extends XwinController
 {
-	public ModelAndView viewBoardList(HttpServletRequest request,
+	public ModelAndView getBoardItemList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		List<BoardItem> boardItemList = boardDao.selectBoardItemList();
+		String _pageIndex = request.getParameter("pageIndex");
+		Integer pageIndex = null;
+		try {
+			pageIndex = Integer.parseInt(_pageIndex);
+		} catch (Exception e) {
+			pageIndex = 0;
+		}
+		
+		String _boardType = request.getParameter("type");
+		List<BoardItem> boardItemList = boardDao.selectBoardItemList(pageIndex, _boardType);
 		
 		ResultXml rx = new ResultXml(0, null, boardItemList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -41,11 +51,36 @@ public class BoardController extends XwinController
 		boardItem.setUserName("yy");
 		boardItem.setType(type);
 		
-		boardDao.insertBoardItem(boardItem);
+		String boardId = boardDao.insertBoardItem(boardItem);
 		
-		ResultXml rx = new ResultXml(0, null, null);
+		BoardComment boardComment = new BoardComment();
+		boardComment.setBoardId(boardId);
+		boardComment.setComment("ÄìÄìÄì");
+		boardComment.setDate(new Date());
+		boardComment.setPassword("1234");
+		boardComment.setUserId("xx");
+		boardComment.setUserName("yy");
+		
+		boardDao.insertBoardComment(boardComment);
+		
+		BoardItem dbItem = boardDao.selectBoardItem(boardId);
+		
+		ResultXml rx = new ResultXml(0, null, dbItem);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
+	}
+	
+	public ModelAndView getBoardItem(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		BoardItem boardItem = boardDao.selectBoardItem(id);
+		
+		ResultXml rx = new ResultXml(0, null, boardItem);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;		
 	}
 }

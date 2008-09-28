@@ -49,4 +49,10 @@
 	<update id="updateBalance" parameterClass="map" >
 		UPDATE tbl_member SET BALANCE = #balance# WHERE USERID = #userId#
 	</update>
+	
+	<update id="plusMinusBalance" parameterClass="map">
+	UPDATE tbl_member
+	SET BALANCE = BALANCE + #money#
+	WHERE USERID = #userId#
+	</update>
 </sqlMap>

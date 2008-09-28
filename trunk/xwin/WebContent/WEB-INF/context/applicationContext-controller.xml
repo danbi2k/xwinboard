@@ -18,8 +18,8 @@
 	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="index"/>
 		
-	<bean id="joinMemberController"
-		class="com.xwin.web.controller.user.JoinMemberController"
+	<bean id="memberController"
+		class="com.xwin.web.controller.user.MemberController"
 		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
@@ -35,12 +35,30 @@
 		p:betGameDao-ref="betGameDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
+	<bean id="myBettingController"
+		class="com.xwin.web.controller.user.MyBettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+		
 	<bean id="boardController"
 		class="com.xwin.web.controller.board.BoardController"
 		p:memberDao-ref="memberDao"
 		p:boardDao-ref="boardDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>	
-	
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="accountController"
+		class="com.xwin.web.controller.user.AccountController"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="testController"
+		class="com.xwin.web.controller.test.TestController"
+		p:memberDao-ref="memberDao"/>		
+
+<!-- ADMIN  -->
 	<bean id="adminController"
 		class="com.xwin.web.controller.admin.AdminController"
 		p:memberDao-ref="memberDao"

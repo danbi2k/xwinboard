@@ -24,8 +24,12 @@ public class Game extends XwinObject
 	private String drawRateStr;
 	private String loseRateStr;
 	
+	private Integer homeScore;
+	private Integer awayScore;
+	
 	private Double handy;
 	
+	private String result;
 	private String type;
 
 	public String getId() {
@@ -158,5 +162,29 @@ public class Game extends XwinObject
 
 	public void setLoseRateStr(String loseRateStr) {
 		this.loseRateStr = loseRateStr;
+	}
+
+	public Integer getHomeScore() {
+		return homeScore;
+	}
+
+	public void setHomeScore(Integer homeScore) {
+		this.homeScore = homeScore;
+	}
+
+	public Integer getAwayScore() {
+		return awayScore;
+	}
+
+	public void setAwayScore(Integer awayScore) {
+		this.awayScore = awayScore;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 }

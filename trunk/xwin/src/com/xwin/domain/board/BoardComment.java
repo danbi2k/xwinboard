@@ -11,7 +11,7 @@ public class BoardComment extends XwinObject
 	private String userId;
 	private String userName;
 	private String password;
-	private String context;
+	private String comment;
 	private Date date;
 	
 	public String getId() {
@@ -44,11 +44,11 @@ public class BoardComment extends XwinObject
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getContext() {
-		return context;
+	public String getComment() {
+		return comment;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public Date getDate() {
 		return date;

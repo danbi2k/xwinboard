@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.0.67-community-nt
+-- Server version	5.0.67-community-nt-log
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,30 +20,6 @@
 
 CREATE DATABASE IF NOT EXISTS xwin;
 USE xwin;
-
---
--- Definition of table `event`
---
-
-DROP TABLE IF EXISTS `event`;
-CREATE TABLE `event` (
-  `ID` int(10) unsigned NOT NULL auto_increment,
-  `NAME` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID`),
-  UNIQUE KEY `NAME` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `event`
---
-
-/*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` (`ID`,`NAME`) VALUES 
- (5,'디바이스1'),
- (6,'디바이스2'),
- (7,'디바이스3');
-/*!40000 ALTER TABLE `event` ENABLE KEYS */;
-
 
 --
 -- Definition of table `ktfsms`
@@ -94,6 +70,36 @@ INSERT INTO `ktfsms` (`ID`,`MSG_SEQ`,`IN_DATE`,`MSG`,`SM`,`CALL_BACK`) VALUES
  (26,'36362710','20080812174028','진아가 미역국 끓였다면서? 고맙다고 전해줘 [FW]','S','0167417589'),
  (27,'246071553','20080812165158','지금요리해용 헤헤[FW]','S','01040179992');
 /*!40000 ALTER TABLE `ktfsms` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_account`
+--
+
+DROP TABLE IF EXISTS `tbl_account`;
+CREATE TABLE `tbl_account` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `MONEY` int(10) unsigned NOT NULL,
+  `TYPE` varchar(45) NOT NULL,
+  `BETTING_ID` int(10) unsigned default NULL,
+  `DATE` datetime NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_account`
+--
+
+/*!40000 ALTER TABLE `tbl_account` DISABLE KEYS */;
+INSERT INTO `tbl_account` (`ID`,`USERID`,`MONEY`,`TYPE`,`BETTING_ID`,`DATE`) VALUES 
+ (1,'xx',100,'IN_REQ',NULL,'2008-09-28 12:19:36'),
+ (2,'xx',100,'IN_REQ',NULL,'2008-09-28 12:21:22'),
+ (3,'xx',100,'IN_REQ',NULL,'2008-09-28 12:22:00'),
+ (4,'xx',100,'OUT_REQ',NULL,'2008-09-28 12:22:29'),
+ (5,'xx',100,'OUT_REQ',NULL,'2008-09-28 12:26:00'),
+ (6,'xx',100,'IN_REQ',NULL,'2008-09-28 12:26:02');
+/*!40000 ALTER TABLE `tbl_account` ENABLE KEYS */;
 
 
 --
@@ -206,17 +212,20 @@ CREATE TABLE `tbl_board_comment` (
   `BOARD_ID` varchar(45) NOT NULL,
   `USERNAME` varchar(45) NOT NULL,
   `PASSWORD` varchar(45) NOT NULL,
-  `CONTEXT` text NOT NULL,
+  `COMMENT` text NOT NULL,
   `USERID` varchar(45) NOT NULL,
   `DATE` datetime NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_board_comment`
 --
 
 /*!40000 ALTER TABLE `tbl_board_comment` DISABLE KEYS */;
+INSERT INTO `tbl_board_comment` (`ID`,`BOARD_ID`,`USERNAME`,`PASSWORD`,`COMMENT`,`USERID`,`DATE`) VALUES 
+ (1,'9','yy','1234','쿄쿄쿄','xx','2008-09-27 21:47:34'),
+ (2,'10','yy','1234','쿄쿄쿄','xx','2008-09-28 12:25:49');
 /*!40000 ALTER TABLE `tbl_board_comment` ENABLE KEYS */;
 
 
@@ -235,7 +244,7 @@ CREATE TABLE `tbl_board_item` (
   `CONTEXT` text NOT NULL,
   `TYPE` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_board_item`
@@ -248,7 +257,11 @@ INSERT INTO `tbl_board_item` (`ID`,`TITLE`,`USERID`,`DATE`,`READCOUNT`,`USERNAME
  (3,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
  (4,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
  (5,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
- (6,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free');
+ (6,'우가차카 우가차카','xx','2008-09-27 00:23:36',55,'yy','fjkdfjakfjdf','free'),
+ (7,'우가차카 우가차카','xx','2008-09-27 21:27:42',55,'yy','fjkdfjakfjdf','free'),
+ (8,'우가차카 우가차카','xx','2008-09-27 21:44:55',55,'yy','fjkdfjakfjdf','free'),
+ (9,'우가차카 우가차카','xx','2008-09-27 21:47:33',55,'yy','fjkdfjakfjdf','free'),
+ (10,'우가차카 우가차카','xx','2008-09-28 12:25:49',55,'yy','fjkdfjakfjdf','free');
 /*!40000 ALTER TABLE `tbl_board_item` ENABLE KEYS */;
 
 
@@ -268,6 +281,10 @@ CREATE TABLE `tbl_game` (
   `DATE` datetime NOT NULL,
   `LEAGUE_ID` int(10) unsigned NOT NULL,
   `TYPE` varchar(45) NOT NULL,
+  `HOME_SCORE` int(10) unsigned NOT NULL,
+  `AWAY_SCORE` int(10) unsigned NOT NULL,
+  `RESULT` varchar(45) character set utf8 collate utf8_bin NOT NULL,
+  `HANDY` float(5,2) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -276,9 +293,9 @@ CREATE TABLE `tbl_game` (
 --
 
 /*!40000 ALTER TABLE `tbl_game` DISABLE KEYS */;
-INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`DATE`,`LEAGUE_ID`,`TYPE`) VALUES 
- (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:52:05',1,'wdl'),
- (2,'보스턴','뉴욕',1.30,0.00,2.30,'준비중','2008-09-25 14:58:27',1,'wdl');
+INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`DATE`,`LEAGUE_ID`,`TYPE`,`HOME_SCORE`,`AWAY_SCORE`,`RESULT`,`HANDY`) VALUES 
+ (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'준비중','2008-09-25 14:52:05',1,'wdl',0,0,'',0.00),
+ (2,'보스턴','뉴욕',1.30,0.00,2.30,'준비중','2008-09-25 14:58:27',1,'wdl',0,0,'',0.00);
 /*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
 
 
@@ -319,8 +336,8 @@ DROP TABLE IF EXISTS `tbl_league`;
 CREATE TABLE `tbl_league` (
   `ID` int(10) unsigned NOT NULL auto_increment,
   `NAME` varchar(45) NOT NULL,
-  `TYPE` varchar(45) NOT NULL default '',
-  `IMAGE` varchar(45) NOT NULL,
+  `IMAGE` varchar(45) default NULL,
+  `TYPE` varchar(45) default NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -329,12 +346,12 @@ CREATE TABLE `tbl_league` (
 --
 
 /*!40000 ALTER TABLE `tbl_league` DISABLE KEYS */;
-INSERT INTO `tbl_league` (`ID`,`NAME`,`TYPE`,`IMAGE`) VALUES 
- (1,'MLB','BASEBALL',''),
- (2,'NBA','BASKETBALL',''),
- (3,'프리미어리그','SOCCER',''),
- (4,'WWE','ETC',''),
- (5,'KBO','BASEBALL','');
+INSERT INTO `tbl_league` (`ID`,`NAME`,`IMAGE`,`TYPE`) VALUES 
+ (1,'MLB','',NULL),
+ (2,'NBA','',NULL),
+ (3,'프리미어리그','',NULL),
+ (4,'WWE','',NULL),
+ (5,'KBO','',NULL);
 /*!40000 ALTER TABLE `tbl_league` ENABLE KEYS */;
 
 

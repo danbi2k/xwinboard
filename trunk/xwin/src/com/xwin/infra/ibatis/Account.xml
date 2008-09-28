@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Account">
+
+	<typeAlias alias="Account" type="com.xwin.domain.user.Account" />
+	
+	<resultMap id="accountResultMap" class="Account">
+		<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="money" column="MONEY"/>
+		<result property="type" column="TYPE"/>
+		<result property="bettingId" column="BETTING_ID"/>
+		<result property="date" column="DATE"/>
+	</resultMap>
+	
+	<insert id="insertAccount" parameterClass="Account">
+		INSERT INTO tbl_account(USERID, MONEY, TYPE, BETTING_ID, DATE)
+		VALUES(#userId#, #money#, #type#, #bettingId#, #date#)
+	</insert>
+	
+	<delete id="deleteAccount" parameterClass="string">
+		DELETE FROM tbl_account WHERE ID = #value#
+	</delete>
+	
+	<select id="selectAccountListByUserId" resultMap="accountResultMap"
+		parameterClass="string">
+		SELECT * FROM tbl_account WHERE USERID = #value#
+	</select>
+</sqlMap>

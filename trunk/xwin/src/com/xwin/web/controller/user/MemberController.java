@@ -4,14 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.xwin.domain.user.Member;
-import com.xwin.infra.dao.MemberDao;
 import com.xwin.web.command.MemberCommand;
 import com.xwin.web.controller.XwinController;
 
-public class JoinMemberController extends XwinController
+public class MemberController extends XwinController
 {
 	public ModelAndView joinForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

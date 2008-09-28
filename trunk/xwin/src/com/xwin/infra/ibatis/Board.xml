@@ -29,17 +29,19 @@
 	</insert>
 	
 	<delete id="deleteBoardItem" parameterClass="string">
-		DELETE FROM tbl_board WHERE ID = #value#
+		DELETE FROM tbl_board_item WHERE ID = #value#
 	</delete>
 	
 	<select id="selectBoardItem" resultMap="boardItemResultMap"
 		parameterClass="string">
-		SELECT * FROM tbl_board WHERE ID = #value#
+		SELECT * FROM tbl_board_item WHERE ID = #value#
 	</select>
 	
 	<select id="selectBoardItemList" resultMap="boardItemResultMap"
 		parameterClass="map">
-		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT FROM tbl_board
+		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT, '' as CONTEXT, TYPE
+		FROM tbl_board_item WHERE TYPE = #boardType#
+		LIMIT #pageIndex#, #pageSize#
 	</select>
 	
 	<resultMap id="boardCommentResultMap" class="BoardComment">
@@ -49,12 +51,12 @@
 		<result property="userName" column="USERNAME"/>
 		<result property="password" column="PASSWORD"/>		
 		<result property="date" column="DATE"/>
-		<result property="context" column="CONTEXT"/>
+		<result property="comment" column="COMMENT"/>
 	</resultMap>
 	
 	<insert id="insertBoardComment" parameterClass="BoardComment">
 		INSERT INTO tbl_board_comment(BOARD_ID, USERID, USERNAME, PASSWORD, DATE, COMMENT)
-		VALUES(#boardId#, #userId#, #userName#, #password#, #date#, #context#)
+		VALUES(#boardId#, #userId#, #userName#, #password#, #date#, #comment#)
 	</insert>
 	
 	<delete id="deleteBoardComment" parameterClass="string">
@@ -66,6 +68,6 @@
 	</delete>
 	
 	<select id="selectBoardCommentList" resultMap="boardCommentResultMap">
-		SELECT FROM tbl_board_comment WHERE BOARD_ID = #value#
+		SELECT * FROM tbl_board_comment WHERE BOARD_ID = #value#
 	</select>
 </sqlMap>

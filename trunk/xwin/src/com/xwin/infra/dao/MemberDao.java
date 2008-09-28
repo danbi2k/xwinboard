@@ -48,4 +48,13 @@ public class MemberDao extends XwinDao
 		
 		sqlMapClientTemplate.update("updateBalance", param);
 	}
+	
+	public void plusMinusBalance(String userId, Integer money)
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("money", money);
+		
+		sqlMapClientTemplate.update("plusMinusBalance", param);
+	}
 }

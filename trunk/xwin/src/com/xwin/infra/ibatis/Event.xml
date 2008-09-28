@@ -11,6 +11,7 @@
 	<resultMap id="eventResultMap" class="Event">
 		<result property="id" column="ID"/>
 		<result property="name" column="NAME"/>
+		<result property="code" column="CODE"/>
 	</resultMap>
 	
 	<select id="selectEventList" resultMap="eventResultMap"

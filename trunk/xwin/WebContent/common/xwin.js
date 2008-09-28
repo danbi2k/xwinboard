@@ -1,4 +1,4 @@
-if ( typeof(Terebi) == 'undefined' ) Xwin = function() {};
+if ( typeof(Xwin) == 'undefined' ) Xwin = function() {};
 
 debug = function(str)
 {

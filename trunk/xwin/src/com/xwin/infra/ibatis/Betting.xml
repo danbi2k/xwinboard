@@ -14,6 +14,7 @@
 		<result property="date" column="DATE"/>
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
+		<result property="betGameList" column="ID" select="selectBetGameList"/>
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
@@ -33,9 +34,10 @@
 		SELECT * FROM tbl_betting WHERE ID = #value#
 	</select>
 	
-	<select id="selectBettingByUserId" resultMap="bettingResultMap"
-		parameterClass="string">
-		SELECT * FROM tbl_betting WHERE USERID = #value#
+	<select id="selectBettingListByUserId" resultMap="bettingResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_betting WHERE USERID = #userId#
+		LIMIT #pageIndex#, #pageSize#
 	</select>
 	
 	<select id="selectBettingList" resultMap="bettingResultMap"

@@ -38,7 +38,7 @@ public class GameController extends XwinController
 		return mv; 
 	}
 	
-	public ModelAndView getGameListXml(HttpServletRequest request,
+	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		String leagueId = request.getParameter("leagueId");
@@ -127,30 +127,6 @@ public class GameController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(new ResultXml(0, null, null)));
-		return mv;
-	}
-	
-	public ModelAndView createGame(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		String type = request.getParameter("type");
-		
-		Game game = new Game();
-		game.setHomeTeam("LA 다저스");
-		game.setAwayTeam("샌디에이고");
-		game.setWinRate(1.30);
-		game.setDrawRate(0.0);
-		game.setLoseRate(2.30);
-		game.setStatus("준비중");
-		game.setDate(new Date());
-		game.setLeagueId("1");
-		game.setType(type);
-		game.setHandy(-1.5);
-		
-		gameDao.insertGame(game);
-		
-		ModelAndView mv = new ModelAndView("game/game_" + type);
-		
 		return mv;
 	}
 }

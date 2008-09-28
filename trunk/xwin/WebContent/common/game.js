@@ -13,7 +13,7 @@ function FnEmptyGameWdlCart(type)
 
 function FnGetGameList(type, leagueId)
 {
-	var query = "mode=getGameListXml";
+	var query = "mode=getGameList";
 	if (leagueId != undefined)
 		query += "&leagueId=" + leagueId;
 	if (type != undefined)

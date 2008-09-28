@@ -30,7 +30,7 @@
 	
 	<select id="selectBetGameList" resultMap="betGameResultMap"
 		parameterClass="string">
-		SELECT g.*, l.NAME as LEAGUE_NAME
+		SELECT g.*, l.NAME as LEAGUE_NAME, b.BETTING_ID, b.GUESS
 		FROM tbl_game g, tbl_league l, tbl_betting_game b
 		WHERE
 		g.LEAGUE_ID = l.ID AND

@@ -1,10 +1,16 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.xwin.domain.game.Betting;
 
 
 public class BettingDao extends XwinDao
 {
+	private static final Integer pageSize = 3;
+	
 	public String insertBetting(Betting betting)
 	{
 		String bettingId = (String) sqlMapClientTemplate.insert("insertBetting", betting);
@@ -17,18 +23,23 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteBetting", id);
 	}
 	
-	public void selectBetting(String id)
+	public Betting selectBetting(String id)
 	{
-		sqlMapClientTemplate.queryForObject("selectBetting", id);
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBetting", id);
 	}
 	
-	public void selectBettingList()
+	public List<Betting> selectBettingList()
 	{
-		sqlMapClientTemplate.queryForList("selectBettingList");
+		return sqlMapClientTemplate.queryForList("selectBettingList");
 	}
 	
-	public void selectBettingByUserId(String userId)
+	public List<Betting> selectBettingListByUserId(String userId, Integer pageIndex)
 	{
-		sqlMapClientTemplate.queryForList("selectBettingByUserId", userId);
+		Map<String, Object> param = new HashMap<String, Object>(3);
+		param.put("userId", userId);
+		param.put("pageIndex", pageIndex * pageSize);
+		param.put("pageSize", pageSize);
+		
+		return sqlMapClientTemplate.queryForList("selectBettingListByUserId", param);
 	}
 }

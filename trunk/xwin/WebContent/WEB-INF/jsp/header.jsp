@@ -115,7 +115,7 @@ if (login) {
 	<td><img src="images/btn_logout.gif" onclick="FnLogout();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 
 	<td><img src="images/btn_meminfo.gif" onclick="location.href='modify.jsp'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
-	<td><img src="images/btn_mybet.gif" onclick="location.href='mybet.jsp'" style="cursor:hand;"></td>
+	<td><img src="images/btn_mybet.gif" onclick="location.href='mybet.aspx?mode=viewMyBettingList'" style="cursor:hand;"></td>
 	</tr>
 	</table>
 
