@@ -40,7 +40,7 @@ function FnDrawMyBetList(data)
 		for (i in data) {
 			row.push("<tr height='26' bgcolor='#0a0a0a' onmouseover=\"this.style.background='#303030';\" onmouseout=\"this.style.background='#0a0a0a';\">");
 			row.push("<td>" + data[i].id + "</td>");
-			row.push("<td>" + data[i].date + "</td>");
+			row.push("<td>" + data[i].dateStr + "</td>");
 			row.push("<td>");
 			row.push("<table width='100%' height='24' cellpadding='0' cellspacing='3' bgcolor='orange'>");
 			row.push("<tr align='center'>");

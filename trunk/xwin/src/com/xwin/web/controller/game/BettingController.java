@@ -47,6 +47,8 @@ public class BettingController extends XwinController
 			betting.setUserId(member.getUserId());
 			betting.setMoney(Integer.parseInt(cc.getMoney()));
 			betting.setRate(Double.parseDouble(cc.getRate()));
+			betting.setExpect(Integer.parseInt(cc.getExpect()));
+			betting.setStatus("BS001");
 			betting.setDate(new Date());
 			
 			String bettingId = bettingDao.insertBetting(betting);

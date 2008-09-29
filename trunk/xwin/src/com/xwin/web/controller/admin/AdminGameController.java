@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
@@ -17,10 +18,56 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
 {
+	public ModelAndView registerGameForm(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String type = (String) request.getParameter("type");
+		List<League> leagueList = leagueDao.selectLeagueList();
+		
+		ModelAndView mv = new ModelAndView("admin/register_game_" + type);
+		mv.addObject("leagueList", leagueList);
+		return mv;
+	}
+	
+	public ModelAndView registerGame(HttpServletRequest request,
+			HttpServletResponse response, GameCommand command) throws Exception
+	{
+		String type = (String) request.getParameter("type");
+		List<League> leagueList = leagueDao.selectLeagueList();
+		
+		Game game = new Game();
+//		game.setHomeTeam(command.getHomeTeam());
+//		game.setAwayScore(command.getAwayTeam());
+//		game.setLeagueId(command.getLeagueId());
+		
+		BeanUtils.copyProperties(command, game);
+		
+		Date date = new Date();
+		date.setYear(command.getYear());
+		date.setMonth(command.getMonth()-1);
+		date.setDate(command.getDate());
+		date.setHours(command.getHour());
+		date.setMinutes(command.getMinute());
+		
+		game.setGameDate(date);
+		game.setType(type);
+		
+		gameDao.insertGame(game);
+		
+		ResultXml rx = new ResultXml(0, null, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("admin/game");
+		List<League> leagueList = leagueDao.selectLeagueList();
+		String type = request.getParameter("type");
+		
+		ModelAndView mv = new ModelAndView("admin/admin_game_" + type);
+		mv.addObject("leagueList", leagueList);
 		return mv;
 	}
 	
@@ -29,16 +76,8 @@ public class AdminGameController extends XwinController
 	{
 		String status = request.getParameter("status");
 		String type = request.getParameter("type");
-		String _pageIndex = request.getParameter("pageIndex");
 		
-		Integer pageIndex = null;
-		try {
-			pageIndex = Integer.parseInt(_pageIndex);
-		}  catch (Exception e) {
-			pageIndex = 0;
-		}
-		
-		List<Game> gameList = gameDao.selectGameList(type, status, pageIndex);
+		List<Game> gameList = gameDao.selectGameList(type);//, status);//'', pageIndex);
 		
 		ResultXml rx = new ResultXml(0, null, gameList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -59,6 +98,40 @@ public class AdminGameController extends XwinController
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
 		ResultXml rx = new ResultXml(0, null, leagueList);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView updateGameScore(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		String id = request.getParameter("id");
+		String _homeScore = request.getParameter("homeScore");
+		String _awayScore = request.getParameter("awayScore");
+		
+		Integer homeScore = null;
+		Integer awayScore = null;
+		
+		ResultXml rx = null;
+		
+		try {
+			homeScore = Integer.parseInt(_homeScore);
+			awayScore = Integer.parseInt(_awayScore);
+		} catch(Exception e) {
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+		}
+		
+		String result = null;
+		if (homeScore > awayScore)
+			result = "W";
+		else if (homeScore < awayScore)
+			result = "L";
+		else
+			result = "D";
+		
+		gameDao.updateGameScore(id, homeScore, awayScore, result, "GS004");
+		rx = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -85,7 +158,7 @@ public class AdminGameController extends XwinController
 		game.setDrawRate(0.0);
 		game.setLoseRate(2.30);
 		game.setStatus("준비중");
-		game.setDate(new Date());
+		game.setGameDate(new Date());
 		game.setLeagueId("1");
 		game.setType(type);
 		game.setHandy(-1.5);

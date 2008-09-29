@@ -1,7 +1,6 @@
 package com.xwin.web.controller.game;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
@@ -46,7 +46,7 @@ public class GameController extends XwinController
 		
 		List<Game> gameList = null;
 		if (leagueId == null || leagueId.length() == 0)
-			gameList = gameDao.selectGameList(type);
+			gameList = gameDao.selectGameList(type);//, "GS001");
 		else
 			gameList = gameDao.selectGameListByLeagueId(leagueId, type);
 		

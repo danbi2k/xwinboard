@@ -1,6 +1,7 @@
-function goPost(path, param)
+function go(url)
 {
-	
+	alert(url);
+	location.href = url;
 }
 
 // 플래쉬(swf) 파일 링크

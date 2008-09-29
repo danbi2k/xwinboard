@@ -23,14 +23,14 @@ public class GameDao extends XwinDao
 	{
 		return sqlMapClientTemplate.queryForList("selectGameByWhere");
 	}
-
-	public List<Game> selectGameList(String type, String status, Integer pageIndex)
+	
+	public List<Game> selectGameList(String type)//, String status)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(4);
 		param.put("type", type);
-		param.put("status", status);
-		param.put("pageIndex", pageIndex * pageSize);
-		param.put("pageSize", pageSize);
+		//param.put("status", status);
+		//param.put("pageIndex", pageIndex * pageSize);
+		//param.put("pageSize", pageSize);
 		
 		return sqlMapClientTemplate.queryForList("selectGameList", param);
 	}
@@ -41,6 +41,18 @@ public class GameDao extends XwinDao
 		param.put("type", type);
 		
 		return sqlMapClientTemplate.queryForList("selectGameListByLeagueId", param);
+	}
+	
+	public void updateGameScore(String id, Integer homeScore, Integer awayScore, String result, String status)
+	{
+		Map<String, Object> param = new HashMap(5);
+		param.put("id", id);
+		param.put("homeScore", homeScore);
+		param.put("awayScore", awayScore);
+		param.put("result", result);
+		param.put("status", status);
+		
+		sqlMapClientTemplate.update("updateGameScore", param);
 	}
 	
 	public void updateGame(Map<String, String> value, Map<String, String> where)

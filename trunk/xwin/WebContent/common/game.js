@@ -11,13 +11,15 @@ function FnEmptyGameWdlCart(type)
 	}
 }
 
-function FnGetGameList(type, leagueId)
+function FnGetGameList(type, leagueId, status)
 {
 	var query = "mode=getGameList";
 	if (leagueId != undefined)
 		query += "&leagueId=" + leagueId;
 	if (type != undefined)
 		query += "&type=" + type;
+	if (status != undefined)
+		query += "&status=" + status;
 	
 	var http = new JKL.ParseXML("game.aspx", query);
 	var result = http.parse();
@@ -44,7 +46,7 @@ function FnDrawGameList(data, type)
 	if (data.length > 0) {
 		for (var i in data) {
 			row.push("<tr height='34'>");
-			row.push("<td>" + data[i].dateStr + "</td>");
+			row.push("<td>" + data[i].gameDateStr + "</td>");
 			row.push("<td>");
 			row.push("<table cellpadding='0' cellspacing='2'><tr><td><img src='symbol/165.gif' style='display:none' onload=\"this.style.display=''\"></td>");
 			row.push("<td>" + data[i].leagueName + "</tr>");
@@ -68,7 +70,7 @@ function FnDrawGameList(data, type)
 			row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
 			row.push(data[i].awayTeam );
 			row.push("</td>");
-			row.push("<td><font color='darkorange'>" + data[i].status + "</td>");
+			row.push("<td><font color='darkorange'>" + C(data[i].status) + "</td>");
 			row.push("</tr>");
 		}
 	} else {

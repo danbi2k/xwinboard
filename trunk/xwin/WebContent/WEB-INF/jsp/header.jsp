@@ -19,9 +19,11 @@
 	<!--META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout"-->
 
     <link rel="stylesheet" href="common/default.css">
+	<script language="JavaScript" src="common/code.js"></script>
     <script language="JavaScript" src="common/default.js"></script>
 	<script language="JavaScript" src="common/game.js"></script>
 	<script language="JavaScript" src="common/member.js"></script>
+	<script language="JavaScript" src="common/mybet.js"></script>
 	<script language="JavaScript" src="common/board.js"></script>
 	<script language="JavaScript" src="common/jkl-parsexml.js"></script>
 	<script language="JavaScript" src="common/xwin.js"></script>

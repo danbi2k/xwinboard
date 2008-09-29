@@ -14,12 +14,16 @@
 		<result property="date" column="DATE"/>
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
+		<result property="expect" column="EXPECT"/>
+		<result property="status" column="STATUS"/>
+		<result property="gameCount" column="GAME_COUNT"/>
+		<result property="endCount" column="END_COUNT"/>
 		<result property="betGameList" column="ID" select="selectBetGameList"/>
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY)
-			VALUES(#userId#, #date#, #rate#, #money#)
+		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY, EXPECT, STATUS)
+			VALUES(#userId#, #date#, #rate#, #money#, #expect#, #status#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -31,17 +35,28 @@
 	
 	<select id="selectBetting" resultMap="bettingResultMap"
 		parameterClass="string">
-		SELECT * FROM tbl_betting WHERE ID = #value#
+		SELECT *,
+		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
+		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		FROM tbl_betting b
+		WHERE ID = #value#
 	</select>
 	
 	<select id="selectBettingListByUserId" resultMap="bettingResultMap"
 		parameterClass="map">
-		SELECT * FROM tbl_betting WHERE USERID = #userId#
+		SELECT *,
+		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
+		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		FROM tbl_betting b
+		WHERE USERID = #userId#
 		LIMIT #pageIndex#, #pageSize#
 	</select>
 	
 	<select id="selectBettingList" resultMap="bettingResultMap"
 		parameterClass="map">
-		SELECT * FROM tbl_betting
+		SELECT *,
+		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
+		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		FROM tbl_betting b
 	</select>
 </sqlMap>

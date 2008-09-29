@@ -17,8 +17,13 @@
 		<result property="drawRate" column="DRAW_RATE"/>
 		<result property="loseRate" column="LOSE_RATE"/>
 		<result property="status" column="STATUS"/>
-		<result property="date" column="DATE"/>
+		<result property="gameDate" column="GAME_DATE"/>
+		<result property="type" column="TYPE"/>
+		<result property="homeScore" column="HOME_SCORE"/>
+		<result property="awayScore" column="AWAY_SCORE"/>
+		<result property="result" column="RESULT"/>
 		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="handy" column="HANDY"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
 		<result property="guess" column="GUESS"/>
 	</resultMap>

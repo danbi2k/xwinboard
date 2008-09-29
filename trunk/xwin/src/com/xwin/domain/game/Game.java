@@ -11,8 +11,8 @@ public class Game extends XwinObject
 	private String homeTeam;
 	private String awayTeam;
 	private String status;
-	private String dateStr;
-	private Date date;
+	private String gameDateStr;
+	private Date gameDate;
 	private String leagueId;
 	private String leagueName;
 	
@@ -65,20 +65,20 @@ public class Game extends XwinObject
 	}
 
 	public String getDateStr() {
-		return dateStr;
+		return gameDateStr;
 	}
 
-	public void setDateStr(String dateStr) {
-		this.dateStr = dateStr;
+	public void setDateStr(String gameDateStr) {
+		this.gameDateStr = gameDateStr;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getGameDate() {
+		return gameDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-		this.dateStr = XwinUtil.toDate(date);
+	public void setGameDate(Date gameDate) {
+		this.gameDate = gameDate;
+		this.gameDateStr = XwinUtil.toDate(gameDate);
 	}
 
 	public String getLeagueId() {

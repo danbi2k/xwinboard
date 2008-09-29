@@ -19,6 +19,6 @@
  <div id="leagueListDiv"></div>
   
  <script>
- Admin.GetLeagueList();
+ AdminGame.GetLeagueList();
  </script>
  <%@include file="admin_footer.jsp"%>
