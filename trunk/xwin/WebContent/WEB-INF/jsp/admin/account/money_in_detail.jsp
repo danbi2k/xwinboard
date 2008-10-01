@@ -5,6 +5,10 @@
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
+
+<%
+	MoneyIn moneyIn = (MoneyIn) request.getAttribute("moneyIn");
+%>
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -51,13 +55,16 @@
                   <tr>
                     <td><!----컨텐츠---->
 					<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
-		var d=document.regist;
-		if(confirm('충전하시겠습니까?')) {			
-			d.action='/admin_mode/calc/index.php';
-		}
-		else {
-			return false;
+	function checkIT(id) {
+		if(confirm('충전하시겠습니까?')) {
+			var query = "mode=acceptMoneyInRequest";
+			query += "&id=" + id;
+			var http = new JKL.ParseXML("adminAccount.aspx", query);
+			var result = http.parse();
+			alert(result.resultXml.message);
+			if (result.resultXml.code == 0) {
+				location.reload();		
+			} 
 		}
 	}
 
@@ -78,19 +85,23 @@
                     <form method='post' name='regist' enctype="multipart/form-data" onSubmit="return checkIT()">  
 					 <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">신청자아이디</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>개똥이</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyIn.getUserId()%></td>
                       </tr>		
 					 <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">입금자명</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>개똥이</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyIn.getName()%></td>
                       </tr>		
 					   <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">충전요청금액</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>1,000,000</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyIn.getMoney()%></td>
                       </tr>		
 					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">요청일자</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>2008-10-01 18:19:02</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyIn.getReqDateStr()%></td>
+                      </tr>
+					     <tr bgcolor="E7E7E7">
+						<td align="center" bgcolor="E7E7E7" width="15%">상태</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=Code.getValue(moneyIn.getStatus())%></td>
                       </tr>				
 					  					 
                 </table>
@@ -99,9 +110,9 @@
               <tr>
                 <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
                               <tr>
-							                                  <td><input type='image' src="./../images/admin/but_input.gif" border="0"></td>                               
-								                                <td><img src="./../images/admin/but_s_del.gif" border="0" onClick='delIT(13)' style='cursor:hand'></td>                               
-                                <td><img src="./../images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+                                <td><img src="images/admin/but_input.gif" border="0" onclick="checkIT(<%=moneyIn.getId()%>)"></td>                               
+                                <td><img src="images/admin/but_s_del.gif" border="0" onClick='delIT(13)' style='cursor:hand'></td>                               
+                                <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
                               </tr>
                           </table></td>
               </tr>

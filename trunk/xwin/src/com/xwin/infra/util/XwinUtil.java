@@ -9,7 +9,8 @@ import java.util.Date;
 public class XwinUtil
 {
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
-	private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static Date toDate(String dateStr)
@@ -47,11 +48,17 @@ public class XwinUtil
 		return ret;
 	}
 	
-	public static String toDateStr(Date date)
+	public static String toDateStr(Date date, Integer type)
 	{
 		if (date == null)
 			return "";
-		String ret = dateTimeFormat.format(date);
+		
+		String ret = null;
+		if (type == 0)
+			ret = dateMinuteFormat.format(date);
+		else
+			ret = dateSecondFormat.format(date);
+		
 		return ret;
 	}
 	

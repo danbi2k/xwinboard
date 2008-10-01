@@ -6,6 +6,10 @@
 
  <%@ include file="../admin_header.jsp"%>
 
+<%
+	MoneyOut moneyOut = (MoneyOut) request.getAttribute("moneyOut");
+%>
+
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -104,8 +108,8 @@
               <tr>
                 <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
                               <tr>
-							                                  <td><img src="./../images/admin/but_s_del.gif" border="0" onClick='delIT(6)' style='cursor:hand'></td>                               
-                                <td><img src="./../images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+							                                  <td><img src="images/admin/but_s_del.gif" border="0" onClick='delIT(6)' style='cursor:hand'></td>                               
+                                <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
                               </tr>
                           </table></td>
               </tr>

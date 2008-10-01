@@ -123,8 +123,8 @@
 							%>
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><%=moneyIn.getId()%></td>
-								<td><a href='calc/index.php?mode=read&idx=12&page=1&page_list=1&search=&kwd=&type='><B><%=moneyIn.getUserId()%></B></a></td>
-								<td><a href='calc/index.php?mode=read&idx=12&page=1&page_list=1&search=&kwd=&type='><%=moneyIn.getName()%></td>
+								<td><a href='adminAccount.aspx?mode=viewMoneyInDetail&id=<%=moneyIn.getId()%>'><B><%=moneyIn.getUserId()%></B></a></td>
+								<td><a href='adminAccount.aspx?mode=viewMoneyInDetail&id=<%=moneyIn.getId()%>'><%=moneyIn.getName()%></td>
 								<td><%=moneyIn.getMoney()%></td>
 								<td><%=moneyIn.getReqDateStr()%></td>
 								<td><%=Code.getValue(moneyIn.getStatus())%></td>

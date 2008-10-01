@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.xwin.domain.user.*"%>
+<%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
+
+<%
+	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
+%>
 
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
@@ -37,7 +41,7 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 입출금 정산</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 내역관리</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -52,68 +56,89 @@
                   <tr>
                     <td><!----컨텐츠---->
 					<SCRIPT LANGUAGE="JavaScript">
-<!--
-	function insert_date(D1, D2){
-		document.getElementById("sdate").value = D1;
-		document.getElementById("edate").value = D2;
-		document.search.submit();
+	function checkIT() {
+		var d=document.regist;
+		if(confirm('환전하시겠습니까?')) {			
+			d.action='/admin_mode/calc/trans.php';
+		}
+		else {
+			return false;
+		}
 	}
-//-->
+
+	function delIT() {
+		if(confirm('해당 정보를 삭제하시겠습니까?\n\n삭제하셔도 해당 유저의 환전금액이 삭제되지는 않습니다.')) {
+			location='/admin_mode/calc/trans.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
+		}
+		else {
+			return false;
+		}
+	}
+
 </SCRIPT>
-
-
 	<table width="100%"  border="0" cellspacing="0" cellpadding="0">
-		<form method='post' name='search' action='/admin_mode/calc/in_out.php'>
-		 <tr>
-			<td align='left' height=30>						
-			&nbsp;[<A HREF="/admin_mode/calc/in_out.php">전체</A>]
-			</td>
-			<td align='right' height=30 style="padding-right:10px">	
-				<A HREF="#" onclick="insert_date('2008-07-03','2008-10-01')"><img src="../../img/90.gif" border="0" align="absmiddle"></A>
-		 <A HREF="#" onclick="insert_date('2008-08-02','2008-10-01')"><img src="../../img/60.gif" border="0" align="absmiddle"></A>
-		 <A HREF="#" onclick="insert_date('2008-09-01','2008-10-01')"><img src="../../img/30.gif" border="0" align="absmiddle"></A>
-		 <A HREF="#" onclick="insert_date('2008-09-24','2008-10-01')"><img src="../../img/7.gif" border="0" align="absmiddle"></A>
-		 <A HREF="#" onclick="insert_date('2008-09-30','2008-10-01')"><img src="../../img/1.gif" border="0" align="absmiddle"></A>
-		 <A HREF="#" onclick="insert_date('2008-10-01','2008-10-01')"><img src="../../img/0.gif" border="0" align="absmiddle"></A>
-				
-				 <input type='text' name='sdate' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand" value=''>
-				 ~
-				 <input type='text' name='edate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''>		
+                        <tr>
+                          <td height="30"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td> * 유저들의 입출금 내역을 조회하실 수 있습니다.</td>
+                              </tr>
+                          </table></td>
+                        </tr>
+							<form method='post' name='search' action='adminAccount.aspx'>
+							<input type='hidden' name='mode' value='viewMoneySummary'/>
+						 <tr>
+                          <td align='left' height=30>						
+						 <select name='search'>
+						 <option value='userid' >회원아이디</option>
+						 </select>
+						 <input type='text' name='kwd' value=''>
+						
+						일자별검색
+						 <input type='text' name='sdate' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand" value=''>
+						 ~
+						 <input type='text' name='edate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''>		
 
-				 <input type='submit' value='검 색'>
-			</td>
-		</tr>  
-		</form>
-	</table>
+						 <input type='submit' value='검 색'>
+						  </td>
+                        </tr>  
+						</form>
+						<tr>
+							<td colspan='3'>
+							<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
+                              <tr align="center" bgcolor="#E4E4E4">
+								<td width=5%>번호</td>
+								<td>아이디</td>
+								<td>거래전금액</td>
+								<td>거래금액</td>
+								<td>거래후금액</td>
+								<td>내역</td>
+								<td>일자</td>
+							  </tr>
+							<%
+							if (accountList != null) {
+								for (Account account : accountList) {
+							%>
+                              <tr align='center' bgcolor='#ffffff'>
+								<td width=5%><%=account.getId()%></td>
+								<td><B><%=account.getUserId()%></B></td>
+								<td><%=account.getOldBalance()%></td>
+								<td><%=account.getMoney()%></td>
+								<td><%=account.getBalance()%></td>
+								<td><%=Code.getValue(account.getType())%></td>
+								<td><%=account.getDateStr()%></td>
+							  </tr>
+							<%
+								}
+							}
+							%>
 
-
-	<TABLE width='99%' cellpadding='10' cellspacing='1' border='0' bgcolor='#C0C0C0' align='center'>
-		<TR bgcolor='#F5F5F5' align='center'>
-			<TD></TD>
-			<TD><B>총충전액</B> (①)</TD>
-			<TD><B>총환전액</B> (②)</TD>
-			<TD><B>거래차액</B> (① - ②)</TD>
-			<TD><B>회원보유액</B> (③)</TD>
-			<TD><B>정산액</B> (① - (② + ③))</TD>
-		</TR>
-		<TR bgcolor='#FFFFFF'>
-			<TD align='center'><B>금액</B></TD>
-			<TD align='center'>10,500,000원</TD>
-			<TD align='center'>20,000원</TD>
-			<TD align='center'>10,480,000원</TD>
-			<TD align='center'>6,280,000원</TD>
-			<TD align='center'>4,200,000원</TD>
-		</TR>
-		<TR bgcolor='#FFFFFF'>
-			<TD align='center'>횟수</TD>
-			<TD align='center'>5</TD>
-			<TD align='center'>1</TD>
-			<TD align='center'>-</TD>
-			<TD align='center'>2</TD>
-			<TD align='center'>-</TD>
-		</TR>
-	</TABLE>
-<!-- *** 현재 배팅액 : 2000000 -->
+                          </table></td>
+                        </tr>
+                        <tr>
+                          <td align='center' height=50>
+						 &nbsp;<b>1</b>&nbsp;<a href='/admin_mode/calc/trans.php?page=2&page_list=1&&search=&kwd=&sdate=&edate='>[2]</a>&nbsp;<a href='/admin_mode/calc/trans.php?page=3&page_list=1&&search=&kwd=&sdate=&edate='>[3]</a>&nbsp;&nbsp;						  </td>
+                        </tr>    						
+                      </table>
                       
 		  <!-- 세부 내용 끝 -->
                 </td>

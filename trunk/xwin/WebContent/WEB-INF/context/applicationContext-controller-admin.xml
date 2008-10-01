@@ -37,6 +37,7 @@
 		p:accountDao-ref="accountDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
+		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 					
 	<bean id="adminController"

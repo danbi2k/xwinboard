@@ -23,12 +23,12 @@
 	</resultMap>
 	
 	<insert id="insertAccount" parameterClass="Account">
-		INSERT INTO tbl_money_out(USERID, MONEY, BALANCE, OLD_BALANCE, DESCRIPTION, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
+		INSERT INTO tbl_account(USERID, MONEY, BALANCE, OLD_BALANCE, DESCRIPTION, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
 		VALUES(#userId#, #money#, #balance#, #oldBalance#, #description#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#)
 	</insert>
 	
 	<delete id="deleteAccount" parameterClass="string">
-		DELETE FROM tbl_money_out WHERE ID = #value#
+		DELETE FROM tbl_account WHERE ID = #value#
 	</delete>
 	
 	<select id="selectAccountList" resultMap="accountResultMap" parameterClass="map">
@@ -38,7 +38,30 @@
 				USERID = #userId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="type">
-				STATUS = #type#
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromReqDate">
+				<![CDATA[
+				REQ_DATE >= #fromReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toReqDate">
+				<![CDATA[
+				REQ_DATE <= #toReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromProcDate">
+				<![CDATA[
+				PROC_DATE >= #fromProcDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toProcDate">
+				<![CDATA[
+				PROC_DATE <= #procProcDate#
+				]]>
 			</isNotNull>
 		</dynamic>
 	</select>

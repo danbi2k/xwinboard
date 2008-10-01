@@ -13,6 +13,10 @@ public class MoneyInDao extends XwinDao
 	public void insertMoneyIn(MoneyIn account) {
 		sqlMapClientTemplate.insert("insertMoneyIn", account);
 	}
+	
+	public void updateMoneyIn(MoneyIn moneyIn) {
+		sqlMapClientTemplate.update("updateMoneyIn", moneyIn);
+	}
 
 	public List<MoneyIn> selectMoneyInList(String userId, String status)
 	{
@@ -33,5 +37,10 @@ public class MoneyInDao extends XwinDao
 		param.put("toProcDate", toProcDate);
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);		
+	}
+
+	public MoneyIn selectMoneyIn(String id)
+	{
+		return (MoneyIn) sqlMapClientTemplate.queryForObject("selectMoneyIn", id);		
 	}
 }

@@ -31,7 +31,7 @@ public class Account extends XwinObject
 	}
 	public void setDate(Date date) {
 		this.date = date;
-		this.dateStr = XwinUtil.toDateStr(date);
+		this.dateStr = XwinUtil.toDateStr(date, 1);
 	}
 	public String getDateStr() {
 		return dateStr;

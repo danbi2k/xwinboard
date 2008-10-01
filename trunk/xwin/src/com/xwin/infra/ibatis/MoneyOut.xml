@@ -25,9 +25,18 @@
 		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#)
 	</insert>
 	
+	<update id="updateMoneyOut" parameterClass="MoneyOut">
+		UPDATE tbl_money_out SET STATUS = #status#, PROC_DATE = #procDate#
+		WHERE ID = #id#
+	</update>
+	
 	<delete id="deleteMoneyOut" parameterClass="string">
 		DELETE FROM tbl_money_out WHERE ID = #value#
 	</delete>
+	
+	<select id="selectMoneyOut" resultMap="moneyOutResultMap" parameterClass="string">
+		SELECT * FROM tbl_money_out WHERE ID = #value#
+	</select>
 	
 	<select id="selectMoneyOutList" resultMap="moneyOutResultMap" parameterClass="map">
 		SELECT * FROM tbl_money_out
@@ -37,6 +46,29 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromReqDate">
+				<![CDATA[
+				REQ_DATE >= #fromReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toReqDate">
+				<![CDATA[
+				REQ_DATE <= #toReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromProcDate">
+				<![CDATA[
+				PROC_DATE >= #fromProcDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toProcDate">
+				<![CDATA[
+				PROC_DATE <= #procProcDate#
+				]]>
 			</isNotNull>
 		</dynamic>
 	</select>

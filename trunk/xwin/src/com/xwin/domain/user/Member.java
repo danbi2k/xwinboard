@@ -84,7 +84,7 @@ public class Member
 	}
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
-		this.joinDateStr = XwinUtil.toDateStr(joinDate);
+		this.joinDateStr = XwinUtil.toDateStr(joinDate, 1);
 	}
 	public String getJoinDateStr() {
 		return joinDateStr;

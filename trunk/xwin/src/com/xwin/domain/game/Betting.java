@@ -39,7 +39,7 @@ public class Betting
 	}
 	public void setDate(Date date) {
 		this.date = date;
-		this.dateStr = XwinUtil.toDateStr(date);
+		this.dateStr = XwinUtil.toDateStr(date, 0);
 	}
 	public Double getRate() {
 		return rate;

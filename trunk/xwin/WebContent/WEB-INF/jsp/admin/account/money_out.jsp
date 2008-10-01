@@ -5,7 +5,9 @@
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
-
+<%
+	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyOutList");
+%>
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -80,22 +82,23 @@
                               </tr>
                           </table></td>
                         </tr>
-							<form method='post' name='search' action='/admin_mode/calc/exchange.php'>
+							<form method='post' name='search' action='adminAccount.aspx'>
+							<input type='hidden' name='mode' value='viewMoneyOut'/>
 						 <tr>
                           <td align='left' height=30>						
 						 <select name='search'>
-						 <option value='userid' >회원아이디</option>
-						 <option value='name' >입금자명</option>
+						 <option value='userId' >회원아이디</option>
+						 <option value='name' >예금주명</option>
 						 </select>
-						 <input type='text' name='kwd' value=''>
+						 <input type='text' name='keyword' value=''>
 
-						  <select name='search2'>
-						 <option value='exchange_date' >환전일</option>
-						 <option value='regdate' >신청일</option>
+						  <select name='searchDate'>
+						 <option value='procDate'>환전일</option>
+						 <option value='regDate'>신청일</option>
 						 </select>
-						 <input type='text' name='sdate' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand" value=''>
+						 <input type='text' name='fromDate' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand" value=''>
 						 ~
-						 <input type='text' name='edate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''>				
+						 <input type='text' name='toDate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''>				
 						 <input type='submit' value='검 색'>
 						  </td>
                         </tr>  
@@ -114,18 +117,24 @@
 								<td>상태</td>
 							  </tr>
 							 
+							<%
+							if (moneyOutList != null) {
+								for (MoneyOut moneyOut : moneyOutList) {
+							%>
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%>1</td>
-								<td><a href='/admin_mode/calc/exchange.php?mode=read&idx=6&page=1&page_list=1&search=&kwd=&type='><B>개똥이</B>(개똥이)</a></td>
-								<td><a href='/admin_mode/calc/exchange.php?mode=read&idx=6&page=1&page_list=1&search=&kwd=&type='>20,000</td>
-								<td>신한</td>
-								<td>3333</td>
-								<td>3333</td>
-								<td>2008-09-30 00:50:21</td>
-								<td>환전완료</td>
+								<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><B><%=moneyOut.getUserId()%></B></a></td>
+								<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><%=moneyOut.getMoney()%></a></td>
+								<td><%=moneyOut.getBankName()%></td>
+								<td><%=moneyOut.getNumber()%></td>
+								<td><%=moneyOut.getName()%></td>
+								<td><%=moneyOut.getReqDateStr()%></td>
+								<td><%=Code.getValue(moneyOut.getStatus())%></td>
 							  </tr>
-					
-
+							<%
+								}
+							}
+							%>
 							
                           </table></td>
                         </tr>

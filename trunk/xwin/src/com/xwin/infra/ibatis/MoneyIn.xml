@@ -25,9 +25,18 @@
 		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#)
 	</insert>
 	
+	<update id="updateMoneyIn" parameterClass="MoneyIn">
+		UPDATE tbl_money_in SET STATUS = #status#, PROC_DATE = #procDate#
+		WHERE ID = #id#
+	</update>
+	
 	<delete id="deleteMoneyIn" parameterClass="string">
 		DELETE FROM tbl_money_in WHERE ID = #value#
 	</delete>
+	
+	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
+		SELECT * FROM tbl_money_in WHERE ID = #value#
+	</select>
 	
 	<select id="selectMoneyInList" resultMap="moneyInResultMap" parameterClass="map">
 		SELECT * FROM tbl_money_in
