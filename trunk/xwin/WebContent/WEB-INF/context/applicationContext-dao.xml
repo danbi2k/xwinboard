@@ -57,6 +57,18 @@
 		class="com.xwin.infra.dao.BoardDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 	
+	<bean id="moneyInDao"
+		class="com.xwin.infra.dao.MoneyInDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="moneyOutDao"
+		class="com.xwin.infra.dao.MoneyOutDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="bankBookDao"
+		class="com.xwin.infra.dao.BankBookDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
 	<bean id="accountDao"
 		class="com.xwin.infra.dao.AccountDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	

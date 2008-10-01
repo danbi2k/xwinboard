@@ -12,11 +12,13 @@ public class Betting
 	private Date date;
 	private String dateStr;
 	private Double rate;
+	private String rateStr;
 	private Integer money;
 	private Integer expect;
 	private String status;
-	private Integer gameCount;
-	private Integer endCount;
+	private Integer totalCount;
+	private Integer successCount;
+	private Integer failureCount;
 	
 	private List<BetGame> betGameList;
 	
@@ -44,6 +46,13 @@ public class Betting
 	}
 	public void setRate(Double rate) {
 		this.rate = rate;
+		this.rateStr = XwinUtil.to2Digit(rate);
+	}
+	public String getRateStr() {
+		return rateStr;
+	}
+	public void setRateStr(String rateStr) {
+		this.rateStr = rateStr;
 	}
 	public Integer getMoney() {
 		return money;
@@ -75,16 +84,22 @@ public class Betting
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Integer getGameCount() {
-		return gameCount;
+	public Integer getTotalCount() {
+		return totalCount;
 	}
-	public void setGameCount(Integer gameCount) {
-		this.gameCount = gameCount;
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
 	}
-	public Integer getEndCount() {
-		return endCount;
+	public Integer getSuccessCount() {
+		return successCount;
 	}
-	public void setEndCount(Integer endCount) {
-		this.endCount = endCount;
+	public void setSuccessCount(Integer successCount) {
+		this.successCount = successCount;
+	}
+	public Integer getFailureCount() {
+		return failureCount;
+	}
+	public void setFailureCount(Integer failureCount) {
+		this.failureCount = failureCount;
 	}
 }

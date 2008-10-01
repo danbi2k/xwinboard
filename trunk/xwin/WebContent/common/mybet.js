@@ -2,7 +2,7 @@ function FnGetMyBetList(pageIndex)
 {
 	var query = "mode=getMyBettingList";
 	query += "&pageIndex=" + pageIndex;
-	var http = new JKL.ParseXML("mybet.aspx", query);
+	var http = new JKL.ParseXML("myBet.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.betting);
@@ -45,30 +45,36 @@ function FnDrawMyBetList(data)
 			row.push("<table width='100%' height='24' cellpadding='0' cellspacing='3' bgcolor='black'>");
 			row.push("<tr align='center'>");
 			
-			var detail = Xwin.ToArray(data[i].betGameList.betGame);
-			for (j in detail) {
+			var betGame = Xwin.ToArray(data[i].betGameList.betGame);
+			for (j in betGame) {
 				var width = 100.0 / data[i].gameCount;
-				if (detail[j].status == 'GS001' || detail[j].status == 'GS002' || detail[j].status == 'GS003') {
-					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>");
-					row.push("&nbsp;");
-				}
-				else if (detail[j].result != undefined) {
-					if (detail[j].result == detail[j].guess) {
-						row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>");
-						row.push("o");
-					} else {
-						row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>");
-						row.push("x");
+				if (betGame[j].status == 'GS001' || betGame[j].status == 'GS002' || betGame[j].status == 'GS003') {
+					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>-</td>");
+				} else if (betGame[j].status == 'GS005') {
+					row.push("<td width='" + width + "%' bgcolor='white' style='color:black' align='center'>-</td>");
+				} else if (betGame[j].status == 'GS004') {
+					if (betGame[j].result != undefined) {
+						if (betGame[j].result == betGame[j].guess) {
+							row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>o</td>");
+						} else {
+							row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>x</td>");
+						}
 					}
-					row.push("</td>");
 				}
 			}			
 			row.push("</tr>");
 			row.push("</table>");
 			row.push("</td>");
 			row.push("<td>" + data[i].money + " 원</td>");
-			row.push("<td>" + data[i].rate + "</td>");
-			row.push("<td><font color='orange'>" + data[i].expect + " 원</td>");
+			row.push("<td>" + data[i].rateStr + "</td>");
+			row.push("<td><font color='orange'>");
+			var strike = (data[i].status == 'BS003' || data[i].status == 'BS004' || data[i].satus == 'BS005');
+			if (strike)
+				row.push("<STRIKE>");
+			row.push(data[i].expect);
+			if (strike)
+				row.push("</STRIKE>");
+			row.push(" 원</td>");
 			row.push("<td><font color='orange'>" + C(data[i].status) + "</td>");
 			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover='this.style.filter='';' onmouseout='this.style.filter='gray()';'></td>");
 			row.push("</tr>");

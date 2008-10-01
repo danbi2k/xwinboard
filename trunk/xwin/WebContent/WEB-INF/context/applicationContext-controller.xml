@@ -48,38 +48,28 @@
 		p:boardDao-ref="boardDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
-	<bean id="accountController"
-		class="com.xwin.web.controller.user.AccountController"
+	<bean id="moneyInController"
+		class="com.xwin.web.controller.user.MoneyInController"
+		p:memberDao-ref="memberDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:bankBookDao-ref="bankBookDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="moneyOutController"
+		class="com.xwin.web.controller.user.MoneyOutController"
+		p:memberDao-ref="memberDao"
+		p:moneyOutDao-ref="moneyOutDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="myMoneyController"
+		class="com.xwin.web.controller.user.MyMoneyController"
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="testController"
 		class="com.xwin.web.controller.test.TestController"
-		p:memberDao-ref="memberDao"/>		
-
-<!-- ADMIN  -->
-	<bean id="adminController"
-		class="com.xwin.web.controller.admin.AdminController"
-		p:memberDao-ref="memberDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-	
-	<bean id="adminBettingController"
-		class="com.xwin.web.controller.admin.AdminBettingController"
-		p:bettingDao-ref="bettingDao"
-		p:betGameDao-ref="betGameDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="adminGameController"
-		class="com.xwin.web.controller.admin.AdminGameController"
-		p:gameDao-ref="gameDao"
-		p:leagueDao-ref="leagueDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="adminMemberController"
-		class="com.xwin.web.controller.admin.AdminMemberController"
-		p:memberDao-ref="memberDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
+		p:memberDao-ref="memberDao"/>
 			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

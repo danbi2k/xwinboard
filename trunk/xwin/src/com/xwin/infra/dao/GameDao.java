@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,28 +25,20 @@ public class GameDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectGameByWhere");
 	}
 	
-	public List<Game> selectGameList(String type)//, String status)
+	public List<Game> selectGameList(String type, String status, String leagueId, Date fromDate)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(4);
 		param.put("type", type);
-		//param.put("status", status);
-		//param.put("pageIndex", pageIndex * pageSize);
-		//param.put("pageSize", pageSize);
+		param.put("status", status);
+		param.put("leagueId", leagueId);
+		param.put("fromDate", fromDate);
 		
 		return sqlMapClientTemplate.queryForList("selectGameList", param);
 	}
 	
-	public List<Game> selectGameListByLeagueId(String leagueId, String type) {
-		Map<String, String> param = new HashMap<String, String>(2);
-		param.put("leagueId", leagueId);
-		param.put("type", type);
-		
-		return sqlMapClientTemplate.queryForList("selectGameListByLeagueId", param);
-	}
-	
 	public void updateGameScore(String id, Integer homeScore, Integer awayScore, String result, String status)
 	{
-		Map<String, Object> param = new HashMap(5);
+		Map<String, Object> param = new HashMap<String, Object>(5);
 		param.put("id", id);
 		param.put("homeScore", homeScore);
 		param.put("awayScore", awayScore);

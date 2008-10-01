@@ -2,6 +2,8 @@ package com.xwin.web.command;
 
 public class ResultXml
 {
+	public static final ResultXml SUCCESS = new ResultXml(0, null, null);
+	
 	private Integer code;
 	private String message;
 	private Object object;

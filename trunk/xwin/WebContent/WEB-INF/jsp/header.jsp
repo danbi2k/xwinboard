@@ -27,13 +27,14 @@
 	<script language="JavaScript" src="common/board.js"></script>
 	<script language="JavaScript" src="common/jkl-parsexml.js"></script>
 	<script language="JavaScript" src="common/xwin.js"></script>
+	<script language="JavaScript" src="common/utf8.js"></script>
 </head>
 <body style="margin:0">
 <a name="top"></a>
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpgx" border="0"></a></td>
+<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpg" border="0"></a></td>
     <td width="753" valign="bottom" align="right">
 		<table align="right" width="712" height="33" cellpadding="0" cellspacing="0">
 
@@ -116,8 +117,8 @@ if (login) {
 	</td>	
 	<td><img src="images/btn_logout.gif" onclick="FnLogout();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 
-	<td><img src="images/btn_meminfo.gif" onclick="location.href='modify.jsp'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
-	<td><img src="images/btn_mybet.gif" onclick="location.href='mybet.aspx?mode=viewMyBettingList'" style="cursor:hand;"></td>
+	<td><img src="images/btn_meminfo.gif" onclick="location.href='member.aspx?mode=viewModifyForm'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
+	<td><img src="images/btn_mybet.gif" onclick="location.href='myBet.aspx?mode=viewMyBettingList'" style="cursor:hand;"></td>
 	</tr>
 	</table>
 
@@ -126,11 +127,11 @@ if (login) {
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 
-	<td><img src="images/smenu_1.gif" onclick="location.href='inmoney.jsp';" style="cursor:hand"></td>
+	<td><img src="images/smenu_1.gif" onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest';" style="cursor:hand"></td>
 	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_2.gif" onclick="location.href='outmoney.jsp';" style="cursor:hand"></td>
+	<td><img src="images/smenu_2.gif" onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequest';" style="cursor:hand"></td>
 	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_3.gif" onclick="location.href='mymoney.jsp';" style="cursor:hand"></td>
+	<td><img src="images/smenu_3.gif" onclick="location.href='myMoney.aspx?mode=viewMyMoneyList';" style="cursor:hand"></td>
 <!--
 	<td><img src="images/smenu_gap.gif"></td>
 	<td><img src="images/smenu_5.gif"></td>
@@ -141,17 +142,17 @@ if (login) {
 </td></tr>
 
 <% } else { %>
-	<form name="login_frm" onsubmit="FnLogin_Submit(this);return false;">
-<tr><td align="left">
+	<form name="login_frm" onsubmit="FnLogin_Submit(login_frm);return false;">
+	<tr><td align="left">
 	<table cellpadding="0" cellspacing="0"><tr>
 	<td><img src="images/login_img.gif" hspace="10"></td>
 	<td><img src="images/login_id.gif"></td>
-	<td><input class="member" type="text" name="id" style="margin:0 0 0 5;"></td>
+	<td><input class="member" type="text" name="userId" style="margin:0 0 0 5;"></td>
 	<td><img src="images/login_pw.gif" hspace="3"></td>
-	<td><input class="member" type="password" name="pw"></td>
+	<td><input class="member" type="password" name="password"></td>
 
 	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
-	<td><img src="images/btn_join.gif" hspace="5" onclick="location.href='member/join.asp';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
+	<td><img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 	</tr></table>
 
 	</td>

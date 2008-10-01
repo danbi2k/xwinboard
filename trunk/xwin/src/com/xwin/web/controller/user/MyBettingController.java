@@ -22,6 +22,20 @@ public class MyBettingController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView viewMyBettingDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String bettingId = request.getParameter("bettingId");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		Betting betting =
+			bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
+		
+		ModelAndView mv = new ModelAndView("user/my_betting_detail");
+		mv.addObject("betting", betting);
+		return mv;
+	}
+	
 	public ModelAndView getMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -38,6 +52,21 @@ public class MyBettingController extends XwinController
 			bettingDao.selectBettingListByUserId(member.getUserId(), pageIndex);
 		
 		ResultXml resultXml = new ResultXml(0, null, bettingList);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(resultXml));		
+		return mv;
+	}
+	
+	public ModelAndView getMyBettingDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String bettingId = request.getParameter("bettingId");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		Betting betting =
+			bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
+		
+		ResultXml resultXml = new ResultXml(0, null, betting);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(resultXml));		
 		return mv;

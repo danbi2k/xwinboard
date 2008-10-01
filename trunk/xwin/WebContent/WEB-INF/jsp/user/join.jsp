@@ -38,13 +38,8 @@ function SetNICK(nick){
 </td></tr>
 <tr><td valign="top" align="center">
 
-	<form name="frm_reg" method="post" action="joinMember.aspx">
-	<input type="hidden" name="mode" value="createMember">
-	<input type="hidden" name="id"    value="">
-	<input type="hidden" name="nick"  value="">
-	<input type="hidden" name="phone">
-	<input type="hidden" name="email">
-
+	<form name="frm_reg">
+	<input name="password" type="hidden" value=""/>
 	<table width="800" style="margin-top:10">
 	<tr><td><b>회원이용약관</b></td></tr>
 	</table>
@@ -90,6 +85,7 @@ function SetNICK(nick){
 
       회사는 불법적인 시도에 대한 모든 일련의 행위는 모두 취소 처리 하고 지불하지 않을 권리가 있습니다.<br>
 <b style='color:white'>13.</b> 이 이용약관은 앞서 공시된 모든 이용약관을 대체 하며 2008년 5월 31일 자로 적용됩니다. <br>
+	</span>
 	</td></tr>
 	</table>
 	<table width="800">
@@ -108,21 +104,17 @@ function SetNICK(nick){
 	</colgroup>
 	<tr><td>회원아이디</td>
 		<td><table cellpadding="0" cellspacing="0"><tr>
-			<td><input class="member" name="id_input" type="text" value=""></td>
-			<td><img src="images/btn_dualcheck.gif" onclick="check_id(frm_reg);" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><input class="member" name="userId" type="text" value=""></td>
 			</tr></table>
 		</td></tr>
 	<tr><td>비밀번호</td>
-
-		<td><input class="member" name="pw" type="password"></td></tr>
+		<td><input class="member" name="password1" type="password"></td></tr>
 	<tr><td>비밀번호 확인</td>
-		<td><input class="member" name="pw2" type="password"></td></tr>
+		<td><input class="member" name="password2" type="password"></td></tr>
 	<tr><td>닉네임</td>
 		<td><table cellpadding="0" cellspacing="0"><tr>
-			<td><input class="member" name="nick_input" type="text" value=""></td>
-			<td><img src="images/btn_dualcheck.gif" onclick="check_nick(frm_reg);" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><input class="member" name="nickName" type="text" value=""></td>
 			</tr></table>
-
 		</td></tr>
 	<tr><td>휴대폰번호</td>
 		<td><select class="member" name="phone1">
@@ -130,19 +122,20 @@ function SetNICK(nick){
 			<option value="011" >011</option>
 			<option value="016" >016</option>
 			<option value="017" >017</option>
-
 			<option value="018" >018</option>
 			<option value="019" >019</option>
 			</select> -
 			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
 			</td></tr>
+	<tr><td>인증번호</td>
+		<td><input class="member" name="phonePin" type="password"></td></tr>
 	<tr><td>이메일</td>
 
 		<td><input class="member" name="email1" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
 			<input class="member" name="email2" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
 	<tr><td valign=top><b><font color=#FF9933>출금비밀번호<br>[사이트 해킹방지용<br> 비밀번호입니다]</font></b></td>
-		<td><input class="member" name="out_pw" type="password" value=""><br>
+		<td><input class="member" name="pin" type="password" value=""><br>
 		본 비밀번호는 최초 회원가입시 1회만 입력되며 이후 수정이 불가능합니다.<br>
                 신중하게 입력해주시고 개인 전화번호등 노출이 쉬운번호를 입력하여 피해가<br>
 

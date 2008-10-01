@@ -10,6 +10,8 @@ public class Member
 	private String email;
 	private String pin;
 	private Integer balance;
+	private String status;
+	private String grade;
 	
 	public String getId() {
 		return id;
@@ -58,5 +60,17 @@ public class Member
 	}
 	public void setBalance(Integer balance) {
 		this.balance = balance;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 }

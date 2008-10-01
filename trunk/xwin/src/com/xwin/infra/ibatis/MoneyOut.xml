@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="MoneyOut">
+
+	<typeAlias alias="MoneyOut" type="com.xwin.domain.user.MoneyOut" />
+	
+	<resultMap id="moneyOutResultMap" class="MoneyOut">
+		<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="money" column="MONEY"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="number" column="NUMBER"/>
+		<result property="name" column="NAME"/>
+		<result property="status" column="STATUS"/>
+		<result property="reqDate" column="REQ_DATE"/>
+		<result property="procDate" column="PROC_DATE"/>
+	</resultMap>
+	
+	<insert id="insertMoneyOut" parameterClass="MoneyOut">
+		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE)
+		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#)
+	</insert>
+	
+	<delete id="deleteMoneyOut" parameterClass="string">
+		DELETE FROM tbl_money_out WHERE ID = #value#
+	</delete>
+	
+	<select id="selectMoneyOutList" resultMap="moneyOutResultMap" parameterClass="map">
+		SELECT * FROM tbl_money_out
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

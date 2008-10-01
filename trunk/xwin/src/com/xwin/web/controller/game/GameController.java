@@ -1,6 +1,7 @@
 package com.xwin.web.controller.game;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,11 +45,7 @@ public class GameController extends XwinController
 		String leagueId = request.getParameter("leagueId");
 		String type = request.getParameter("type");
 		
-		List<Game> gameList = null;
-		if (leagueId == null || leagueId.length() == 0)
-			gameList = gameDao.selectGameList(type);//, "GS001");
-		else
-			gameList = gameDao.selectGameListByLeagueId(leagueId, type);
+		List<Game> gameList = gameDao.selectGameList(type, Code.GAME_STATUS_READY, leagueId, new Date());
 		
 		ResultXml resultXml = new ResultXml(0, null, gameList);
 
@@ -64,32 +61,36 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		Map<String, GameCartItem> gameCart = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
-		
 		String gameId = request.getParameter("gameId");
 		String guess = request.getParameter("guess");
 		
-		Game game = gameDao.selectGame(gameId);
+		ResultXml rx = null;
+		if (gameCart.size() < 10 || (gameCart.size() == 10 && gameCart.containsKey(gameId))) {			
+			Game game = gameDao.selectGame(gameId);
+			
+			GameCartItem gci = new GameCartItem();
+			gci.setGameId(gameId);
+			gci.setHomeTeam(game.getHomeTeam());
+			gci.setAwayTeam(game.getAwayTeam());
+			if (guess.equals("W"))
+				gci.setRate(game.getWinRateStr());
+			else if (guess.equals("D"))
+				gci.setRate(game.getDrawRateStr());
+			else if (guess.equals("L"))
+				gci.setRate(game.getLoseRateStr());
+			gci.setGuess(guess);
+			gci.setLeague(game.getLeagueName());
+			
+			gameCart.put(gameId, gci);
+			List<GameCartItem> itemList = new ArrayList<GameCartItem>(gameCart.size());
+			itemList.addAll(gameCart.values());
+			rx = new ResultXml(0, null, itemList);
+		} else {
+			List<GameCartItem> itemList = new ArrayList<GameCartItem>(gameCart.size());
+			itemList.addAll(gameCart.values());
+			rx = new ResultXml(-1, "게임은 10개까지 선택 하실 수 있습니다", itemList);
+		}
 		
-		GameCartItem gci = new GameCartItem();
-		gci.setGameId(gameId);
-		gci.setHomeTeam(game.getHomeTeam());
-		gci.setAwayTeam(game.getAwayTeam());
-		if (guess.equals("W"))
-			gci.setRate(game.getWinRateStr());
-		else if (guess.equals("D"))
-			gci.setRate(game.getDrawRateStr());
-		else if (guess.equals("L"))
-			gci.setRate(game.getLoseRateStr());
-		gci.setGuess(guess);
-		gci.setLeague(game.getLeagueName());
-		
-		gameCart.put(gci.getGameId(), gci);
-		
-		List<GameCartItem> itemList = new ArrayList<GameCartItem>(gameCart.size());
-		itemList.addAll(gameCart.values());
-		
-		ResultXml rx = new ResultXml(0, null, itemList);
-				
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

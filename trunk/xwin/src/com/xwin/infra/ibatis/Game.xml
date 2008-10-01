@@ -32,13 +32,19 @@
 	<select id="selectGameList" resultMap="GameResultMap" parameterClass="map">
 		SELECT g.*, l.NAME as LEAGUE_NAME
 		FROM tbl_game g, tbl_league l
-		WHERE g.LEAGUE_ID = l.ID AND
-		g.TYPE = #type#
-	</select>
-	
-	<select id="selectGameListByLeagueId" resultMap="GameResultMap"
-		parameterClass="map">
-		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.LEAGUE_ID = #leagueId# AND g.TYPE = #type#
+		WHERE g.LEAGUE_ID = l.ID
+		<isNotNull prepend="AND" property="type">
+			g.TYPE = #type#
+		</isNotNull>
+		<isNotNull prepend="AND" property="leagueId">
+			l.ID = #leagueId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			g.GAME_DATE > #fromDate#
+		</isNotNull>
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">

@@ -18,9 +18,18 @@ public class MemberDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteMember", userId);
 	}
 	
-	public Member selectMember(String userId)
+	public void updateMember(Member member)
 	{
-		return (Member) sqlMapClientTemplate.queryForObject("selectMember", userId);
+		sqlMapClientTemplate.insert("updateMember", member);
+	}
+	
+	public Member selectMember(String userId, String grade)
+	{
+		Map<String, String> param = new HashMap<String, String>(2);
+		param.put("userId", userId);
+		param.put("grade", grade);
+		
+		return (Member) sqlMapClientTemplate.queryForObject("selectMember", param);
 	}
 	
 	public List<Member> selectMemberList()
@@ -56,5 +65,14 @@ public class MemberDao extends XwinDao
 		param.put("money", money);
 		
 		sqlMapClientTemplate.update("plusMinusBalance", param);
+	}
+
+	public void updateMemberStatus(String userId, String status)
+	{
+		Map<String, String> param = new HashMap<String, String>(2);
+		param.put("userId", userId);
+		param.put("status", status);
+		
+		sqlMapClientTemplate.update("updateMemberStatus", param);		
 	}
 }

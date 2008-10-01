@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="adminIndexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="admin/admin_login"/>
+		
+	<bean id="adminLoginController"
+		class="com.xwin.web.controller.admin.AdminLoginController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminMainController"
+		class="com.xwin.web.controller.admin.AdminMainController"
+		p:gameDao-ref="gameDao"
+		p:bettingDao-ref="bettingDao"
+		p:boardDao-ref="boardDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+			
+	<bean id="adminController"
+		class="com.xwin.web.controller.admin.AdminLoginController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="adminBettingController"
+		class="com.xwin.web.controller.admin.AdminBettingController"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminGameController"
+		class="com.xwin.web.controller.admin.AdminGameController"
+		p:gameDao-ref="gameDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:leagueDao-ref="leagueDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminMemberController"
+		class="com.xwin.web.controller.admin.AdminMemberController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+</beans>

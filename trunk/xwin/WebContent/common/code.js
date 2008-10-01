@@ -1,8 +1,8 @@
 var CODE_TABLE = new Object();
 CODE_TABLE["GS001"] =  "준비중";
 CODE_TABLE["GS002"] = "접수중";
-CODE_TABLE["GS003"] = "진행중";
-CODE_TABLE["GS004"] = "종료";
+CODE_TABLE["GS003"] = "경기진행";
+CODE_TABLE["GS004"] = "경기종료";
 CODE_TABLE["GS005"] = "경기취소";
 
 CODE_TABLE["BS001"] = "진행중";

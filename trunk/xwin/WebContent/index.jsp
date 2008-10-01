@@ -6,5 +6,5 @@
 <META 
      HTTP-EQUIV="Refresh"
      CONTENT="0; URL=index.aspx">
-</head
+</head>
 </html>

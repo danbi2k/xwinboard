@@ -103,27 +103,49 @@ INSERT INTO `ktfsms` (`ID`,`MSG_SEQ`,`IN_DATE`,`MSG`,`SM`,`CALL_BACK`) VALUES
 DROP TABLE IF EXISTS `tbl_account`;
 CREATE TABLE `tbl_account` (
   `ID` int(10) unsigned NOT NULL auto_increment,
-  `USERID` varchar(45) NOT NULL,
+  `DATE` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `MONEY` int(10) unsigned NOT NULL,
+  `BALANCE` int(10) unsigned NOT NULL,
+  `DESCRIPTION` varchar(45) NOT NULL,
+  `BETTING_ID` varchar(45) default NULL,
+  `MONEYIN_ID` varchar(45) default NULL,
+  `MONEYOUT_ID` varchar(45) default NULL,
   `TYPE` varchar(45) NOT NULL,
-  `BETTING_ID` int(10) unsigned default NULL,
-  `DATE` datetime NOT NULL,
+  `USERID` varchar(45) NOT NULL,
+  `OLD_BALANCE` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_account`
 --
 
 /*!40000 ALTER TABLE `tbl_account` DISABLE KEYS */;
-INSERT INTO `tbl_account` (`ID`,`USERID`,`MONEY`,`TYPE`,`BETTING_ID`,`DATE`) VALUES 
- (1,'xx',100,'IN_REQ',NULL,'2008-09-28 12:19:36'),
- (2,'xx',100,'IN_REQ',NULL,'2008-09-28 12:21:22'),
- (3,'xx',100,'IN_REQ',NULL,'2008-09-28 12:22:00'),
- (4,'xx',100,'OUT_REQ',NULL,'2008-09-28 12:22:29'),
- (5,'xx',100,'OUT_REQ',NULL,'2008-09-28 12:26:00'),
- (6,'xx',100,'IN_REQ',NULL,'2008-09-28 12:26:02');
 /*!40000 ALTER TABLE `tbl_account` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_bankbook`
+--
+
+DROP TABLE IF EXISTS `tbl_bankbook`;
+CREATE TABLE `tbl_bankbook` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `BANKNAME` varchar(45) NOT NULL,
+  `NUMBER` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `STATUS` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_bankbook`
+--
+
+/*!40000 ALTER TABLE `tbl_bankbook` DISABLE KEYS */;
+INSERT INTO `tbl_bankbook` (`ID`,`BANKNAME`,`NUMBER`,`NAME`,`STATUS`) VALUES 
+ (1,'한국','123-456789-01','김한국','BBS01');
+/*!40000 ALTER TABLE `tbl_bankbook` ENABLE KEYS */;
 
 
 --
@@ -139,17 +161,20 @@ CREATE TABLE `tbl_betting` (
   `MONEY` int(10) unsigned NOT NULL,
   `EXPECT` int(10) unsigned NOT NULL,
   `STATUS` varchar(45) NOT NULL,
+  `TOTAL_COUNT` int(10) unsigned NOT NULL default '0',
+  `SUCCESS_COUNT` int(10) unsigned NOT NULL default '0',
+  `FAILURE_COUNT` int(10) unsigned NOT NULL default '0',
+  `CANCEL_COUNT` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_betting`
 --
 
 /*!40000 ALTER TABLE `tbl_betting` DISABLE KEYS */;
-INSERT INTO `tbl_betting` (`ID`,`USERID`,`DATE`,`RATE`,`MONEY`,`EXPECT`,`STATUS`) VALUES 
- (3,'xx','2008-09-29 21:13:43',1.56,5000,7800,'BS001'),
- (4,'xx','2008-09-29 21:13:48',1.58,5000,7900,'BS001');
+INSERT INTO `tbl_betting` (`ID`,`USERID`,`DATE`,`RATE`,`MONEY`,`EXPECT`,`STATUS`,`TOTAL_COUNT`,`SUCCESS_COUNT`,`FAILURE_COUNT`,`CANCEL_COUNT`) VALUES 
+ (21,'xx','2008-09-30 22:43:59',1.10,5000,5500,'BS001',1,0,0,0);
 /*!40000 ALTER TABLE `tbl_betting` ENABLE KEYS */;
 
 
@@ -171,11 +196,7 @@ CREATE TABLE `tbl_betting_game` (
 
 /*!40000 ALTER TABLE `tbl_betting_game` DISABLE KEYS */;
 INSERT INTO `tbl_betting_game` (`BETTING_ID`,`GAME_ID`,`GUESS`) VALUES 
- (3,45,'L'),
- (3,48,'D'),
- (4,44,'D'),
- (4,46,'W'),
- (4,47,'D');
+ (21,67,'W');
 /*!40000 ALTER TABLE `tbl_betting_game` ENABLE KEYS */;
 
 
@@ -243,6 +264,24 @@ INSERT INTO `tbl_board_item` (`ID`,`TITLE`,`USERID`,`DATE`,`READCOUNT`,`USERNAME
 
 
 --
+-- Definition of table `tbl_config`
+--
+
+DROP TABLE IF EXISTS `tbl_config`;
+CREATE TABLE `tbl_config` (
+  `NOTICE` text NOT NULL,
+  `ACCOUNT` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_config`
+--
+
+/*!40000 ALTER TABLE `tbl_config` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_config` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tbl_game`
 --
 
@@ -263,7 +302,7 @@ CREATE TABLE `tbl_game` (
   `RESULT` varchar(45) character set utf8 collate utf8_bin default NULL,
   `HANDY` float(5,2) default NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_game`
@@ -271,13 +310,7 @@ CREATE TABLE `tbl_game` (
 
 /*!40000 ALTER TABLE `tbl_game` DISABLE KEYS */;
 INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`GAME_DATE`,`LEAGUE_ID`,`TYPE`,`HOME_SCORE`,`AWAY_SCORE`,`RESULT`,`HANDY`) VALUES 
- (1,'LA 다저스','샌디에이고',1.30,0.00,2.30,'GS004','2008-09-25 14:52:05',1,'wdl',4,1,0x57,0.00),
- (43,'팀1','팀2',1.10,1.20,1.30,'GS004','3908-01-01 00:00:34',3,'wdl',3,3,0x44,NULL),
- (44,'팀1','팀2',1.10,1.20,1.30,'GS004','3908-01-01 00:00:36',3,'wdl',4,2,0x57,NULL),
- (45,'팀1','팀2',1.10,1.20,1.30,'GS004','3908-01-01 00:00:38',3,'wdl',1,3,0x4C,NULL),
- (46,'팀1','팀2',1.10,1.20,1.30,'GS004','3908-01-01 00:00:35',3,'wdl',5,5,0x44,NULL),
- (47,'팀1','팀2',1.10,1.20,1.30,'GS001','3908-01-01 00:00:46',3,'wdl',NULL,NULL,NULL,NULL),
- (48,'팀1','팀2',1.10,1.20,1.30,'GS004','3908-01-01 00:00:50',2,'wdl',2,5,0x4C,NULL);
+ (67,'팀1','팀2',1.10,1.20,1.30,'GS003','2008-09-30 23:10:00',3,'wdl',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
 
 
@@ -351,6 +384,8 @@ CREATE TABLE `tbl_member` (
   `EMAIL` varchar(45) NOT NULL,
   `PIN` varchar(45) NOT NULL,
   `BALANCE` int(10) unsigned NOT NULL default '0',
+  `STATUS` varchar(45) NOT NULL,
+  `GRADE` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -359,10 +394,75 @@ CREATE TABLE `tbl_member` (
 --
 
 /*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
-INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`) VALUES 
- (1,'xx','1111','yy','010-3333-3333','xx@yy','1111',574850),
- (2,'tt','1111','tt','010-1111-1111','tt@tt','1111',50000);
+INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`,`STATUS`,`GRADE`) VALUES 
+ (1,'xx','4444','후지모토','016-4444-4444','huzi@gmail.com','1111',161401,'US001','UG001'),
+ (2,'secadmin','1111','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100');
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_money_in`
+--
+
+DROP TABLE IF EXISTS `tbl_money_in`;
+CREATE TABLE `tbl_money_in` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `MONEY` int(10) unsigned NOT NULL,
+  `STATUS` varchar(45) NOT NULL,
+  `REQ_DATE` datetime NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `BANKBOOK_ID` int(10) unsigned NOT NULL,
+  `PROC_DATE` datetime default NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_money_in`
+--
+
+/*!40000 ALTER TABLE `tbl_money_in` DISABLE KEYS */;
+INSERT INTO `tbl_money_in` (`ID`,`USERID`,`MONEY`,`STATUS`,`REQ_DATE`,`NAME`,`BANKBOOK_ID`,`PROC_DATE`) VALUES 
+ (16,'xx',600000,'MC001','2008-10-01 14:52:31','개똥이',1,NULL),
+ (17,'xx',500000,'MC001','2008-10-01 16:40:15','개똥이',1,NULL),
+ (18,'xx',500000,'MC001','2008-10-01 16:45:27','개똥이',1,NULL),
+ (19,'xx',500000,'MC001','2008-10-01 16:47:07','개똥이',1,NULL),
+ (20,'xx',500000,'MC001','2008-10-01 16:48:20','개똥이',1,NULL),
+ (21,'xx',600000,'MC001','2008-10-01 16:49:09','개똥이',1,NULL),
+ (22,'xx',700000,'MC001','2008-10-01 16:50:19','개똥이',1,NULL),
+ (23,'xx',1000000,'MC001','2008-10-01 16:53:45','개똥이',1,NULL),
+ (24,'xx',10000,'MC001','2008-10-01 17:02:43','개똥이',1,NULL);
+/*!40000 ALTER TABLE `tbl_money_in` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_money_out`
+--
+
+DROP TABLE IF EXISTS `tbl_money_out`;
+CREATE TABLE `tbl_money_out` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `MONEY` int(10) unsigned NOT NULL,
+  `BANKNAME` varchar(45) NOT NULL,
+  `NUMBER` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `REQ_DATE` datetime NOT NULL,
+  `PROC_DATE` datetime default NULL,
+  `STATUS` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_money_out`
+--
+
+/*!40000 ALTER TABLE `tbl_money_out` DISABLE KEYS */;
+INSERT INTO `tbl_money_out` (`ID`,`USERID`,`MONEY`,`BANKNAME`,`NUMBER`,`NAME`,`REQ_DATE`,`PROC_DATE`,`STATUS`) VALUES 
+ (1,'xx',333,'국민','1111111111','1111','2008-10-01 17:18:04',NULL,'ME001'),
+ (2,'xx',33333,'국민','3424234234234','342424','2008-10-01 17:19:00',NULL,'ME001'),
+ (3,'xx',333,'국민','22222222','333','2008-10-01 17:23:38',NULL,'ME001');
+/*!40000 ALTER TABLE `tbl_money_out` ENABLE KEYS */;
 
 
 --

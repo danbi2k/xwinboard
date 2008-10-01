@@ -9,7 +9,7 @@ import com.xwin.domain.game.Betting;
 
 public class BettingDao extends XwinDao
 {
-	private static final Integer pageSize = 3;
+	private static final Integer pageSize = 100;
 	
 	public String insertBetting(Betting betting)
 	{
@@ -41,5 +41,20 @@ public class BettingDao extends XwinDao
 		param.put("pageSize", pageSize);
 		
 		return sqlMapClientTemplate.queryForList("selectBettingListByUserId", param);
+	}
+
+	public Betting selectBettingByUserId(String userId, String bettingId) {
+		Map<String, String> param = new HashMap<String, String>(2);
+		param.put("userId", userId);
+		param.put("bettingId", bettingId);
+		
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingByUserId", param);
+	}
+	
+	public void updateBettingStatus(String gameId)
+	{
+		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
+		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
+		sqlMapClientTemplate.update("updateBettingStatusByCount");
 	}
 }

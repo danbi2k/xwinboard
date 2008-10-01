@@ -7,7 +7,7 @@ import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
-import com.xwin.domain.user.Account;
+import com.xwin.domain.user.MoneyIn;
 import com.xwin.web.command.CartCalc;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
@@ -22,7 +22,7 @@ public class XmlUtil
 		xstream.alias("league", League.class);
 		xstream.alias("betGame", BetGame.class);
 		xstream.alias("betting", Betting.class);
-		xstream.alias("account", Account.class);
+		xstream.alias("account", MoneyIn.class);
 		xstream.alias("gameCartItem", GameCartItem.class);
 		xstream.alias("boardItem", BoardItem.class);
 		xstream.alias("boardComment", BoardComment.class);

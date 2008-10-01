@@ -1,139 +1,62 @@
-function FnGetMyBetList(pageIndex)
+function FnMemReg(frm)
 {
-	var query = "mode=getMyBettingList";
-	query += "&pageIndex=" + pageIndex;
-	var http = new JKL.ParseXML("mybet.aspx", query);
+	frm.password.value = frm.password1.value;
+	var query = "mode=registerMember";
+	query += "&userId=" + frm.userId.value;
+	query += "&password1=" + frm.password1.value;
+	query += "&password2=" + frm.password2.value;
+	query += "&nickName=" + frm.nickName.value;
+	query += "&phone1=" + frm.phone1.value;
+	query += "&phone2=" + frm.phone2.value;
+	query += "&phone3=" + frm.phone3.value;
+	query += "&email1=" + frm.email1.value;
+	query += "&email2=" + frm.email2.value;
+	query += "&pin=" + frm.pin.value;
+	
+	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();
+	
 	if (result.resultXml.code == 0) {
-		var data = Xwin.ToArray(result.resultXml.object.betting);
-		FnDrawMyBetList(data);
-	}
-}
-
-function FnDrawMyBetList(data)
-{
-	var row = [];
-	row.push("<table width='900' bgcolor='#d9d8d6' cellspacing='1' cellpadding='3'");
-	row.push("<colgroup>")
-	row.push("<col align='center' width='50'>");
-	row.push("<col align='center' width='100'>");
-	row.push("<col align='center'  width='*'>");
-	row.push("<col align='right'  width='80'>");
-	row.push("<col align='center' width='70'>");
-	row.push("<col align='right'  width='80'>");
-	row.push("<col align='center width='70'>");
-	row.push("<col align='center width='70'>");
-	row.push("</colgroup>");
-
-	row.push("<tr bgcolor='#ce892c'>");
-	row.push("<td style='color:white;'><b>No</td>");
-	row.push("<td style='color:white;'><b>배팅일시</td>");
-	row.push("<td style='color:white;'><b>진행상태</td>");
-	row.push("<td style='color:white;' align='center'><b>배팅금액</td>");
-	row.push("<td style='color:white;'><b>배당율</td>");
-	row.push("<td style='color:white;' align='center'><b>배당금</td>");
-	row.push("<td style='color:white;'><b>상태</td>");
-	row.push("<td style='color:white;'><b>자세히</td>");
-	row.push("</tr>");
-
-	if (data.length > 0) {
-		for (i in data) {
-			row.push("<tr height='26' bgcolor='#0a0a0a' onmouseover=\"this.style.background='#303030';\" onmouseout=\"this.style.background='#0a0a0a';\">");
-			row.push("<td>" + data[i].id + "</td>");
-			row.push("<td>" + data[i].dateStr + "</td>");
-			row.push("<td>");
-			row.push("<table width='100%' height='24' cellpadding='0' cellspacing='3' bgcolor='orange'>");
-			row.push("<tr align='center'>");
-			
-			var detail = Xwin.ToArray(data[i].betGameList.betGame);
-			for (j in detail) {
-				row.push("<td width='100%' bgcolor='orange' style='color:black' align='center'>");
-				row.push("o");
-				row.push("</td>");
-			}			
-			row.push("</tr>");
-			row.push("</table>");
-			row.push("</td>");
-			row.push("<td>" + data[i].money + " 원</td>");
-			row.push("<td>" + data[i].rate + "</td>");
-			row.push("<td><font color='orange'>" + (data[i].money * data[i].rate) + "원</td>");
-			row.push("<td><font color='orange'>적중</td>");
-			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover='this.style.filter='';' onmouseout='this.style.filter='gray()';'></td>");
-			row.push("</tr>");
-		}
+		alert("환영합니다");
+		frm.password.value = frm.password1.value;
+		FnLogin_Submit(frm);
 	} else {
-		row.push("<tr bgcolor='#0a0a0a'><td colspan='10' height='50' align='center'>배팅 내역이 없습니다.</td></tr>");
+		alert(result.resultXml.message);
 	}
-	
-	row.push("</table>");
-	
-	var tableString = row.join("");
-	var myBetListDiv = document.getElementById("myBetListDiv");
-	
-	myBetListDiv.innerHTML = tableString;
 }
 
-function FnMemReg(frm){
-
-	if(!frm.agree.checked){ alert("약관에 동의하셔야 합니다."); return false; }
-	if(frm.id_input.value.length<2){ alert("회원 ID는 2자리 이상 입력하셔야 합니다."); frm.id_input.focus(); return; }
-	if(frm.id_input.value!=frm.id.value){ alert("ID 중복 체크를 합니다."); check_id(frm); return; }
-
-	if(frm.pw.value.length<4){ alert("비밀번호는 최소 4자리 이상 입력하셔야 합니다."); frm.pw.focus(); return; }
-	if(frm.pw2.value.length<4){ alert("비밀번호는 최소 4자리 이상 입력하셔야 합니다."); frm.pw2.focus(); return; }
-	if(frm.pw.value!=frm.pw2.value){ alert("비밀번호가 일치하지 않습니다.\n비밀번호를 다시 입력해주세요."); frm.pw.value=""; frm.pw2.value=""; frm.pw.focus(); return; }
-
-	if(frm.nick_input.value.length<2){ alert("닉네임을 2자리 이상 입력하셔야 합니다."); frm.nick_input.focus(); return; }
-	if(frm.nick.value!=frm.nick_input.value){ alert("닉네임 중복 체크를 합니다."); check_nick(frm); return; }
-
-	if(frm.phone2.value.length<3){ alert("핸드폰 번호를 정확히 입력하여주세요!"); frm.phone2.focus(); return false; }
-	if(frm.phone3.value.length<4){ alert("핸드폰 번호를 정확히 입력하여주세요!"); frm.phone3.focus(); return false; }
-
-	if(frm.out_pw.value.length<4){ alert("출금 비밀번호를 입력하여 주세요!."); frm.out_pw.value=""; frm.out_pw.focus(); return; }
-
-
-//	if(frm.email1.value.length<3){ alert("E-mail 주소를 정확히 입력해주세요!"); frm.email1.focus(); return false; }
-//	if(frm.email2.value.length<5){ alert("E-mail 주소를 정확히 입력해주세요!"); frm.email2.focus(); return false; }
-
-//	if(!FnEmailCheck(frm.email1.value + "@"+ frm.email2.value)){ alert("메일주소가 올바르지 않습니다.\n메일주소를 정확히 입력하시기 바랍니다."); frm.email1.value=""; frm.email2.value=""; frm.email1.focus(); return; }
-
-	frm.phone.value = frm.phone1.value +"-"+ frm.phone2.value +"-"+ frm.phone3.value;
-	frm.email.value = frm.email1.value +"@"+ frm.email2.value;
-
-	if(confirm("회원가입을 하시겠습니까?\n\n- 잘못 기입한 항목이 없는지 확인바랍니다.\n- 아이디 및 비밀번호가 잘못 입력되었을경우 로그인이 되지 않습니다.\n- 기타 잘못된 정보는 회원정보수정에서 수정가능합니다.")){		
-		frm.submit();
-	}
-
-}
-function FnMemModify(frm){
-
-	if(frm.pw.value.length>0){
-		if(frm.pw.value.length<4){ alert("비밀번호는 최소 4자리 이상 입력하셔야 합니다."); frm.pw.focus(); return; }
-		if(frm.pw2.value.length<4){ alert("비밀번호는 최소 4자리 이상 입력하셔야 합니다."); frm.pw2.focus(); return; }
-		if(frm.pw.value!=frm.pw2.value){ alert("비밀번호가 일치하지 않습니다.\n비밀번호를 다시 입력해주세요."); frm.pw.value=""; frm.pw2.value=""; frm.pw.focus(); return; }
-	}
-
-	if(frm.nick_input.value.length<2){ alert("닉네임을 2자리 이상 입력하셔야 합니다."); frm.nick_input.focus(); return; }
-	if(frm.nick.value!=frm.nick_input.value){ alert("닉네임 중복 체크를 합니다."); check_nick(frm); return; }
-
-	if(frm.phone2.value.length<3){ alert("핸드폰 번호를 정확히 입력하여주세요!"); frm.phone2.focus(); return false; }
-	if(frm.phone3.value.length<4){ alert("핸드폰 번호를 정확히 입력하여주세요!"); frm.phone3.focus(); return false; }
-
-	//if(frm.email1.value.length<3){ alert("E-mail 주소를 정확히 입력해주세요!"); frm.email1.focus(); return false; }
-	//if(frm.email2.value.length<5){ alert("E-mail 주소를 정확히 입력해주세요!"); frm.email2.focus(); return false; }
-
-	//if(!FnEmailCheck(frm.email1.value + "@"+ frm.email2.value)){ alert("메일주소가 올바르지 않습니다.\n메일주소를 정확히 입력하시기 바랍니다."); frm.email1.value=""; frm.email2.value=""; frm.email1.focus(); return; }
-
-	frm.phone.value = frm.phone1.value +"-"+ frm.phone2.value +"-"+ frm.phone3.value;
-	frm.email.value = frm.email1.value +"@"+ frm.email2.value;
+function FnMemModify(frm)
+{
+	var query = "mode=modifyMember";
+	query += "&userId=" + frm.userId.value;
+	query += "&password1=" + frm.password1.value;
+	query += "&password2=" + frm.password2.value;
+	query += "&nickName=" + frm.nickName.value;
+	query += "&phone1=" + frm.phone1.value;
+	query += "&phone2=" + frm.phone2.value;
+	query += "&phone3=" + frm.phone3.value;
+	query += "&email1=" + frm.email1.value;
+	query += "&email2=" + frm.email2.value;
 	
-	frm.target = "hidden_iframe";
-	frm.submit();
+	var http = new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
 	
+	if (result.resultXml.code == 0) {
+		alert("수정되었습니다");
+		location.href ="index.aspx";
+	} else {
+		alert(result.resultXml.message);
+	}	
 }
 function FnMemOut(){
 	if(confirm("탈퇴를 신청하시겠습니까?\n\n탈퇴를 신청하시면, 관리자가 확인후 탈퇴를 시켜드립니다.")){
-		hidden_iframe.location.href = "/member/member_out.asp";
+		var query = "mode=requestSecede";
+		var http = new JKL.ParseXML("member.aspx", query);
+		var result = http.parse();
+		if (result.resultXml.code == 0) {
+			alert(result.resultXml.message);
+			location.href = "index.aspx";
+		}
 	}
 }
 function FnMemOutCancle(){
@@ -142,12 +65,18 @@ function FnMemOutCancle(){
 	}
 }
 function check_id(frm){
-	var w = 380;
-	var h = 200;
-	var window_left = (screen.width-w)/2;
-	var window_top  = (screen.height-h)/2;
-	window.open("joinMember.aspx?mode=checkExistUserId&userId="+ frm.id_input.value,"checkIDwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+	var query = "mode=checkExistUserId";
+	query += "&userId=" + frm.id_input.value;
+	var http= new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+	
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		frm.id.value = frm.id_input.value;
+	else
+		frm.id.value = '';
 }
+
 function check_rid(frm){
 	var w = 380;
 	var h = 200;
@@ -155,13 +84,20 @@ function check_rid(frm){
 	var window_top  = (screen.height-h)/2;
 	window.open("check_rid.asp?r_id="+ frm.r_id.value,"checkRIDwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
 }
+
 function check_nick(frm){
-	var w = 380;
-	var h = 200;
-	var window_left = (screen.width-w)/2;
-	var window_top  = (screen.height-h)/2;
-	window.open("joinMember.aspx?mode=checkExistNickName&nick="+ frm.nick_input.value,"checkNICKwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+	var query = "mode=checkExistNickName";
+	query += "&nickName=" + frm.nick_input.value;
+	var http= new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+	
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		frm.nick.value = frm.nick_input.value;
+	else
+		frm.nick.value = '';
 }
+
 function checkid_form(frm){
 	if(frm.id.value.length<2){ alert("아이디를 2자 이상 입력해주세요!"); frm.id.focus(); return false; }
 	frm.submit();
@@ -183,10 +119,20 @@ function out_pw_set(){
 }
 
 //######### 머니충전신청 ##############
-function FnInMoney_Submit(frm){
-	if(frm.in_name.value.length<2){ alert("입금자명을 입력하세요!"); frm.in_name.focus(); return; }
-	frm.submit();
+function FnInMoney_Submit(frm)
+{
+	var query = "mode=moneyInRequest";
+	query += "&money=" + frm.money.value;
+	query += "&name=" + frm.name.value;
+	query += "&bankBookId=" + frm.bankBookId.value;
+	var http = new JKL.ParseXML("moneyIn.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0) {
+		location.href="moneyIn.aspx?mode=viewMoneyInRequestList";
+	}
 }
+
 function FnInMoneyCancle(idx){
 	if(confirm("머니충전신청을 취소하시겠습니까?")){
 		location.href="inmoney.asp?cancle="+ idx;
@@ -196,7 +142,21 @@ function FnOutMoney_Submit(frm){
 	if(frm.account_bank.value==""){ alert("출금받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
 	if(frm.account_num.value.length<7){ alert("출금받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
-	frm.submit();
+	
+	var query = "mode=moneyOutRequest";
+	query += "&money=" + frm.out_money.value;
+	query += "&bankName=" + frm.account_bank.value;
+	query += "&number=" + frm.account_num.value;
+	query += "&name=" + frm.account_name.value;
+	query += "&pin=" + frm.pin.value;
+	
+	var http = new JKL.ParseXML("moneyOut.aspx", query);
+	var result = http.parse();
+	
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0) {
+		location.href='moneyOut.aspx?mode=viewMoneyOutRequestList';
+	}
 }
 function FnOutMoneyCancle(idx){
 	if(confirm("출금신청을 취소하시겠습니까?")){

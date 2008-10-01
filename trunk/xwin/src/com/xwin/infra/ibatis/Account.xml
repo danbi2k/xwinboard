@@ -6,28 +6,40 @@
 	
 <sqlMap namespace="Account">
 
-	<typeAlias alias="Account" type="com.xwin.domain.user.Account" />
+	<typeAlias alias="Account" type="com.xwin.domain.admin.Account" />
 	
 	<resultMap id="accountResultMap" class="Account">
-		<result property="id" column="ID"/>
+		<result property="id" column="ID"/>		
 		<result property="userId" column="USERID"/>
 		<result property="money" column="MONEY"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="oldBalance" column="OLD_BALANCE"/>
+		<result property="description" column="DESCRIPTION"/>
 		<result property="type" column="TYPE"/>
-		<result property="bettingId" column="BETTING_ID"/>
 		<result property="date" column="DATE"/>
+		<result property="bettingId" column="BETTING_ID"/>
+		<result property="moneyInId" column="MONEYIN_ID"/>
+		<result property="moneyOutId" column="MONEYOUT_ID"/>
 	</resultMap>
 	
 	<insert id="insertAccount" parameterClass="Account">
-		INSERT INTO tbl_account(USERID, MONEY, TYPE, BETTING_ID, DATE)
-		VALUES(#userId#, #money#, #type#, #bettingId#, #date#)
+		INSERT INTO tbl_money_out(USERID, MONEY, BALANCE, OLD_BALANCE, DESCRIPTION, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
+		VALUES(#userId#, #money#, #balance#, #oldBalance#, #description#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#)
 	</insert>
 	
 	<delete id="deleteAccount" parameterClass="string">
-		DELETE FROM tbl_account WHERE ID = #value#
+		DELETE FROM tbl_money_out WHERE ID = #value#
 	</delete>
 	
-	<select id="selectAccountListByUserId" resultMap="accountResultMap"
-		parameterClass="string">
-		SELECT * FROM tbl_account WHERE USERID = #value#
+	<select id="selectAccountList" resultMap="accountResultMap" parameterClass="map">
+		SELECT * FROM tbl_account
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				STATUS = #type#
+			</isNotNull>
+		</dynamic>
 	</select>
 </sqlMap>

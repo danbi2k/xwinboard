@@ -15,7 +15,6 @@ AdminGame.RegisterGame = function(frm, type)
 	query += "&hour=" + frm.hour.value;
 	query += "&minute=" + frm.minute.value;
 	query += "&type=" + type;
-	query += "&status=" + 'GS001';
 	var http = new JKL.ParseXML("adminGame.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
@@ -61,6 +60,7 @@ AdminGame.DrawGameList = function(data)
 	row.push("<th nowrap>결과</th>");
 	row.push("<th nowrap>상태</th>");
 	row.push("<th nowrap>적용</th>");
+	row.push("<th nowrap>취소</th>");
 	row.push("</tr>")
 	row.push("</thead>");
 	for (var i in data) {
@@ -73,17 +73,25 @@ AdminGame.DrawGameList = function(data)
 		row.push("<td>" + data[i].drawRate + "</td>");
 		row.push("<td>" + data[i].loseRate + "</td>");
 		if (data[i].homeScore == undefined)
-			row.push("<td><input type='text' id='homeScore_" + data[i].id + "'></td>");
+			row.push("<td><input type='text' size='3' maxlength='3' id='homeScore_" + data[i].id + "'></td>");
 		else
 			row.push("<td>" + data[i].homeScore + "</td>");
 		
 		if (data[i].awayScore == undefined)
-			row.push("<td><input type='text' id='awayScore_" + data[i].id + "'></td>");
+			row.push("<td><input type='text' size='3' maxlength='3' id='awayScore_" + data[i].id + "'></td>");
 		else
 			row.push("<td>" + data[i].awayScore + "</td>");
 		row.push("<td>" + C(data[i].result) + "</td>");
-		row.push("<td>" + C(data[i].status) + "</td>");
+		row.push("<td>");
+		row.push("<select>");
+		row.push("<option value='GS002' " + (data[i].status=="GS002"?"selected":"") + ">접수중</option>");
+		row.push("<option value='GS003' " + (data[i].status=="GS003"?"selected":"") + ">경기진행</option>");
+		row.push("<option value='GS004' " + (data[i].status=="GS004"?"selected":"") + ">경기종료</option>");
+		row.push("<option value='GS005' " + (data[i].status=="GS005"?"selected":"") + ">경기취소</option>");
+		row.push("</select>");
+		row.push("</td>");
 		row.push("<td><a onclick='AdminGame.UpdateScore(" + data[i].id + ")'>[적용]</a></td>");
+		row.push("<td><a onclick='AdminGame.CancelScore(" + data[i].id + ")'>[취소]</a></td>");
 		row.push("</tr>");
 	}
 	row.push("</table>");
@@ -101,6 +109,21 @@ AdminGame.UpdateScore = function(idval)
 	query += "&id=" + idval;
 	query += "&homeScore=" + homeScore.value;
 	query += "&awayScore=" + awayScore.value;
+	var http = new JKL.ParseXML("adminGame.aspx", query);
+	var result = http.parse();
+	
+	if (result.resultXml.code == 0) {
+		AdminGame.GetGameList(gameType, gameStatus);
+	}
+	else {
+		alert(result.resultXml.message);
+	}	
+}
+
+AdminGame.CancelScore = function(idval)
+{
+	var query = "mode=cancelGameScore";
+	query += "&id=" + idval;
 	var http = new JKL.ParseXML("adminGame.aspx", query);
 	var result = http.parse();
 	

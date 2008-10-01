@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.CartCalc;
@@ -39,21 +40,21 @@ public class BettingController extends XwinController
 		
 		Betting betting = new Betting();
 		Integer money = Integer.parseInt(_money);		
-		CartCalc cc = getCartCalc(cartMap, money);
+		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
 		
 		if (Integer.parseInt(cc.getAfter()) < 0) {
-			rx = new ResultXml(-1, "ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù.", null);
+			rx = new ResultXml(-1, "ìž”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤.", null);
 		} else {		
 			betting.setUserId(member.getUserId());
 			betting.setMoney(Integer.parseInt(cc.getMoney()));
 			betting.setRate(Double.parseDouble(cc.getRate()));
 			betting.setExpect(Integer.parseInt(cc.getExpect()));
-			betting.setStatus("BS001");
+			betting.setStatus(Code.BET_STATUS_RUN);
+			betting.setTotalCount(cartMap.size());
 			betting.setDate(new Date());
 			
 			String bettingId = bettingDao.insertBetting(betting);
 			
-			List<BetGame> betGameList = new ArrayList<BetGame>();		
 			Collection<GameCartItem> cartCol = cartMap.values();
 			for (GameCartItem gci : cartCol) {
 				BetGame betGame = new BetGame();
@@ -68,7 +69,7 @@ public class BettingController extends XwinController
 			
 			session.removeAttribute("cartMap_" + _type);
 			
-			rx = new ResultXml(0, "¹èÆÃ ÇÏ¼Ì½À´Ï´Ù", null);
+			rx = new ResultXml(0, "ë°°íŒ… í•˜ì…¨ìŠµë‹ˆë‹¤", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -86,9 +87,11 @@ public class BettingController extends XwinController
 		Map<String, GameCartItem> cartMap =
 			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + type);
 		
+		Member member = (Member) session.getAttribute("Member");
+		
 		Integer money = Integer.parseInt(_money);
 		
-		CartCalc cc = getCartCalc(cartMap, money);
+		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
 		
 		ResultXml rx = new ResultXml(0, null, cc);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -129,7 +132,7 @@ public class BettingController extends XwinController
 		return mv;
 	}
 	
-	private CartCalc getCartCalc(Map cartMap, Integer money)
+	private CartCalc getCartCalc(Map cartMap, Integer money, Integer memberBalance)
 	{
 		Double totalRate = 0.0;
 		
@@ -147,8 +150,7 @@ public class BettingController extends XwinController
 		Double _expect = Math.floor(cutRate * money);
 		Integer expect = _expect.intValue();
 		
-		Member member = memberDao.selectMember("xx");
-		Integer balance = member.getBalance();
+		Integer balance = memberBalance;
 		
 		Integer after = balance - expect;
 		

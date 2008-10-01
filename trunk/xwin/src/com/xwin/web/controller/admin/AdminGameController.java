@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.GameCommand;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -42,13 +44,9 @@ public class AdminGameController extends XwinController
 		
 		BeanUtils.copyProperties(command, game);
 		
-		Date date = new Date();
-		date.setYear(command.getYear());
-		date.setMonth(command.getMonth()-1);
-		date.setDate(command.getDate());
-		date.setHours(command.getHour());
-		date.setMinutes(command.getMinute());
-		
+		Date date = 
+			XwinUtil.getDate(command.getYear(), command.getMonth(), command.getDate(), command.getHour(), command.getMinute());		
+		game.setStatus(Code.GAME_STATUS_READY);
 		game.setGameDate(date);
 		game.setType(type);
 		
@@ -74,10 +72,10 @@ public class AdminGameController extends XwinController
 	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String status = request.getParameter("status");
+		String status = null;//request.getParameter("status");
 		String type = request.getParameter("type");
 		
-		List<Game> gameList = gameDao.selectGameList(type);//, status);//'', pageIndex);
+		List<Game> gameList = gameDao.selectGameList(type, status, null, null);
 		
 		ResultXml rx = new ResultXml(0, null, gameList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -102,6 +100,26 @@ public class AdminGameController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
+		
+	public ModelAndView cancelGameScore(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		Integer homeScore = null;
+		Integer awayScore = null;
+		
+		ResultXml rx = null;		
+		String result = null;
+		
+		gameDao.updateGameScore(id, homeScore, awayScore, result, Code.GAME_STATUS_RUN);
+		bettingDao.updateBettingStatus(id);
+		
+		rx = new ResultXml(0, null, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
 	
 	public ModelAndView updateGameScore(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
@@ -118,20 +136,23 @@ public class AdminGameController extends XwinController
 		try {
 			homeScore = Integer.parseInt(_homeScore);
 			awayScore = Integer.parseInt(_awayScore);
-		} catch(Exception e) {
-			rx = new ResultXml(-1, "¼ýÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä", null);
+		
+			String result = null;
+			if (homeScore > awayScore)
+				result = "W";
+			else if (homeScore < awayScore)
+				result = "L";
+			else
+				result = "D";
+			
+			gameDao.updateGameScore(id, homeScore, awayScore, result, Code.GAME_STATUS_END);
+			bettingDao.updateBettingStatus(id);
+			
+			rx = ResultXml.SUCCESS;
+		} catch(NumberFormatException e) {
+			rx = new ResultXml(-1, "ìˆ«ìžë¥¼ ìž…ë ¥í•˜ì„¸ìš”", null);
 		}
 		
-		String result = null;
-		if (homeScore > awayScore)
-			result = "W";
-		else if (homeScore < awayScore)
-			result = "L";
-		else
-			result = "D";
-		
-		gameDao.updateGameScore(id, homeScore, awayScore, result, "GS004");
-		rx = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -152,12 +173,12 @@ public class AdminGameController extends XwinController
 		String type = request.getParameter("type");
 		
 		Game game = new Game();
-		game.setHomeTeam("LA ´ÙÀú½º");
-		game.setAwayTeam("»÷µð¿¡ÀÌ°í");
+		game.setHomeTeam("LA ë‹¤ì €ìŠ¤");
+		game.setAwayTeam("ìƒŒë””ì—ì´ê³ ");
 		game.setWinRate(1.30);
 		game.setDrawRate(0.0);
 		game.setLoseRate(2.30);
-		game.setStatus("ÁØºñÁß");
+		game.setStatus("ì¤€ë¹„ì¤‘");
 		game.setGameDate(new Date());
 		game.setLeagueId("1");
 		game.setType(type);

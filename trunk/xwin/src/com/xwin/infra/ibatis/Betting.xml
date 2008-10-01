@@ -16,18 +16,55 @@
 		<result property="money" column="MONEY"/>
 		<result property="expect" column="EXPECT"/>
 		<result property="status" column="STATUS"/>
-		<result property="gameCount" column="GAME_COUNT"/>
-		<result property="endCount" column="END_COUNT"/>
+		<result property="totalCount" column="TOTAL_COUNT"/>
+		<result property="successCount" column="SUCCESS_COUNT"/>
+		<result property="failureCount" column="FAILURE_COUNT"/>
 		<result property="betGameList" column="ID" select="selectBetGameList"/>
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY, EXPECT, STATUS)
-			VALUES(#userId#, #date#, #rate#, #money#, #expect#, #status#)
+		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY, EXPECT, STATUS, TOTAL_COUNT)
+			VALUES(#userId#, #date#, #rate#, #money#, #expect#, #status#, #totalCount#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
 	</insert>
+	
+	<update id="updateGameCountSuccess" parameterClass="string">
+		UPDATE tbl_betting b SET SUCCESS_COUNT =
+		(
+		SELECT COUNT(*)
+		FROM tbl_betting_game bg, tbl_game g
+		WHERE
+		bg.GAME_ID = g.ID AND
+		bg.GUESS = g.RESULT AND
+		bg.BETTING_ID = b.ID
+		)
+		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#);
+	</update>
+	
+	<update id="updateGameCountFailure" parameterClass="string">
+		UPDATE tbl_betting b SET FAILURE_COUNT =
+		(
+		SELECT COUNT(*)
+		FROM tbl_betting_game bg, tbl_game g
+		WHERE
+		bg.GAME_ID = g.ID AND
+		bg.GUESS != g.RESULT AND
+		bg.BETTING_ID = b.ID
+		)
+		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#);
+	</update>
+	
+	<update id="updateBettingStatusByCount">
+		UPDATE tbl_betting SET STATUS =
+		(CASE
+		WHEN FAILURE_COUNT > 0 THEN 'BS003'
+		WHEN TOTAL_COUNT = CANCEL_COUNT THEN 'BS005'
+		WHEN TOTAL_COUNT = (SUCCESS_COUNT + CANCEL_COUNT) THEN 'BS002'
+		ELSE 'BS001'
+		END)
+	</update>
 	
 	<delete id="deleteBetting" parameterClass="string">
 		DELETE FROM tbl_betting WHERE ID = #value#
@@ -35,18 +72,14 @@
 	
 	<select id="selectBetting" resultMap="bettingResultMap"
 		parameterClass="string">
-		SELECT *,
-		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
-		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		SELECT *
 		FROM tbl_betting b
 		WHERE ID = #value#
 	</select>
 	
 	<select id="selectBettingListByUserId" resultMap="bettingResultMap"
 		parameterClass="map">
-		SELECT *,
-		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
-		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		SELECT *
 		FROM tbl_betting b
 		WHERE USERID = #userId#
 		LIMIT #pageIndex#, #pageSize#
@@ -54,9 +87,13 @@
 	
 	<select id="selectBettingList" resultMap="bettingResultMap"
 		parameterClass="map">
-		SELECT *,
-		(SELECT COUNT(*) FROM tbl_betting_game g WHERE b.ID = g.BETTING_ID) as GAME_COUNT,
-		(SELECT COUNT(*) FROM tbl_betting_game g, tbl_game gg WHERE b.ID = g.BETTING_ID AND GG.ID = g.GAME_ID AND gg.STATUS = 'GS004') as END_COUNT
+		SELECT *
 		FROM tbl_betting b
+	</select>
+	
+	<select id="selectBettingByUserId" resultMap="bettingResultMap" parameterClass="map">
+		SELECT *
+		FROM tbl_betting b
+		WHERE b.ID = #bettingId# AND b.USERID = #userId#
 	</select>
 </sqlMap>

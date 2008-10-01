@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -19,18 +20,24 @@ public class LoginController extends XwinController
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
-		Member member = memberDao.selectMember(userId);	
+		Member member = memberDao.selectMember(userId, null);	
 		
 		ResultXml rx = new ResultXml();
 		
 		if (member == null) {
 			rx.setCode(-1);
-			rx.setMessage("Á¸ÀçÇÏÁö ¾Ê´Â »ç¿ëÀÚ ÀÔ´Ï´Ù.");
-		} else if (comparePassword(member.getPassword(), password)) {
-			rx.setCode(0);
-		} else {
+			rx.setMessage("ë“±ë¡ë˜ì§€ ì•Šì€ ì‚¬ìš©ì ì…ë‹ˆë‹¤");
+		} else if (comparePassword(member.getPassword(), password) == false) {
 			rx.setCode(-1);
-			rx.setMessage("ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù.");
+			rx.setMessage("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤");
+		} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
+			rx.setCode(-1);
+			rx.setMessage("íƒˆí‡´ ìš”ì²­ ì¤‘ì…ë‹ˆë‹¤");
+		} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
+			rx.setCode(-1);
+			rx.setMessage("íƒˆí‡´í•œ ì‚¬ìš©ì ì…ë‹ˆë‹¤");
+		} else {
+			rx.setCode(0);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

@@ -15,10 +15,10 @@
 <a href="board.aspx?mode=getBoardItem&id=9">getBoardItem</a><br>
 <h3>betting</h3>
 <h3>mybet</h3>
-<a href="mybet.aspx?mode=getMyBettingList">getMyBettingList</a><br>
+<a href="myBet.aspx?mode=getMyBettingList">getMyBettingList</a><br>
 <h3>account</h3>
-<a href="account.aspx?mode=moneyOutRequest&money=100">moneyOutRequest</a><br>
-<a href="account.aspx?mode=moneyInRequest&money=100">moneyInRequest</a><br>
-<a href="account.aspx?mode=getAccountInfo">getAccountInfo</a><br>
+<a href="moneyIn.aspx?mode=moneyOutRequest&money=100">moneyOutRequest</a><br>
+<a href="moneyIn.aspx?mode=moneyInRequest&money=100">moneyInRequest</a><br>
+<a href="moneyIn.aspx?mode=getAccountInfo">getAccountInfo</a><br>
 </body>
 </html>

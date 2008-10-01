@@ -16,7 +16,7 @@
     <script language="JavaScript" src="common/default.js"></script>
 	<script language="JavaScript" src="common/game.js"></script>
 	<script language="JavaScript" src="common/member.js"></script>
-	<script language="JavaScript" src="common/board.js"></script
+	<script language="JavaScript" src="common/board.js"></script>
 </head>
 <body style="margin:0" oncontextmenu="return false">
 <div id="_debug"></div>
@@ -105,7 +105,7 @@ top_menu_init();
 	</td>	
 	<td><img src="images/btn_logout.gif" onclick="FnLogout();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 
-	<td><img src="images/btn_meminfo.gif" onclick="location.href='modify.jsp'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
+	<td><img src="images/btn_meminfo.gif" onclick="location.href='member.aspx?mode=viewModifyForm'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
 	<td><img src="images/btn_mybet.gif" onclick="location.href='mybet.jsp'" style="cursor:hand;"></td>
 	</tr>
 	</form>

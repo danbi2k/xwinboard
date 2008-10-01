@@ -1,8 +1,10 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.xwin.domain.user.Account;
+import com.xwin.domain.admin.Account;
 
 public class AccountDao extends XwinDao
 {
@@ -11,8 +13,13 @@ public class AccountDao extends XwinDao
 		sqlMapClientTemplate.insert("insertAccount", account);
 	}
 	
-	public List<Account> selectAccountListByUserId(String userId)
+
+	public List<Account> selectAccountList(String userId, String type)
 	{
-		return sqlMapClientTemplate.queryForList("selectAccountListByUserId", userId);
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("userId", userId);
+		param.put("status", type);
+		
+		return sqlMapClientTemplate.queryForList("selectAccountList", param);		
 	}
 }

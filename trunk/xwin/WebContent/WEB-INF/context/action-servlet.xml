@@ -5,20 +5,26 @@
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
-			<props>			
+			<props>
+				<prop key="/index.aspx">indexController</prop>			
 				<prop key="/login.aspx">loginController</prop>
-				<prop key="/index.aspx">indexController</prop>
 				<prop key="/member.aspx">memberController</prop>
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/ktfsms.aspx">ktfSmsController</prop>
 				<prop key="/game.aspx">gameController</prop>
 				<prop key="/betting.aspx">bettingController</prop>
 				<prop key="/board.aspx">boardController</prop>
-				<prop key="/account.aspx">accountController</prop>
-				<prop key="/mybet.aspx">myBettingController</prop>
+				<prop key="/moneyIn.aspx">moneyInController</prop>
+				<prop key="/moneyOut.aspx">moneyOutController</prop>
+				<prop key="/myBet.aspx">myBettingController</prop>
+				<prop key="/myMoney.aspx">myMoneyController</prop>
 				
 				<prop key="/test.aspx">testController</prop>
 				
+				
+				<prop key="/adminIndex.aspx">adminIndexController</prop>
+				<prop key="/adminLogin.aspx">adminLoginController</prop>
+				<prop key="/adminMain.aspx">adminMainController</prop>
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/adminBetting.aspx">adminBettingController</prop>
 				<prop key="/adminGame.aspx">adminGameController</prop>

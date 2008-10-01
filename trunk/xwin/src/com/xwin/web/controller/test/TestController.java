@@ -17,7 +17,7 @@ public class TestController implements Controller
 	{
 		
 		ModelAndView mv = new ModelAndView("xmlTest");
-		Member member = memberDao.selectMember("xx");
+		Member member = memberDao.selectMember("xx", null);
 		request.getSession().setAttribute("Member", member);
 		
 		return mv;
