@@ -1,8 +1,6 @@
-@charset "utf-8"
-
 BODY { 
 	margin:0; 
-	background-color:#282828;
+	background-color:black;
 	cursor:default; 
 	font-size:13px; color:#b0b0b0;
 	text-align:center;
