@@ -21,7 +21,24 @@
 		p:bettingDao-ref="bettingDao"
 		p:boardDao-ref="boardDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
-			
+		
+	<bean id="adminInfoController"
+		class="com.xwin.web.controller.admin.AdminInfoController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+	
+	<bean id="adminMemberController"
+		class="com.xwin.web.controller.admin.AdminMemberController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="adminAccountController"
+		class="com.xwin.web.controller.admin.AdminAccountController"
+		p:accountDao-ref="accountDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:moneyOutDao-ref="moneyOutDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+					
 	<bean id="adminController"
 		class="com.xwin.web.controller.admin.AdminLoginController"
 		p:memberDao-ref="memberDao"
@@ -39,10 +56,5 @@
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
 		p:leagueDao-ref="leagueDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="adminMemberController"
-		class="com.xwin.web.controller.admin.AdminMemberController"
-		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 </beans>

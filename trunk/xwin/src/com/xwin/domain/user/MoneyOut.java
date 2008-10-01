@@ -50,14 +50,14 @@ public class MoneyOut
 	}
 	public void setReqDate(Date reqDate) {
 		this.reqDate = reqDate;
-		this.reqDateStr = XwinUtil.toDate(reqDate);
+		this.reqDateStr = XwinUtil.toDateStr(reqDate);
 	}
 	public Date getProcDate() {
 		return procDate;
 	}
 	public void setProcDate(Date procDate) {
 		this.procDate = procDate;
-		this.procDateStr = XwinUtil.toDate(procDate);
+		this.procDateStr = XwinUtil.toDateStr(procDate);
 	}
 	public String getReqDateStr() {
 		return reqDateStr;

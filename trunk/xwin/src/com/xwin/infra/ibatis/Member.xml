@@ -19,11 +19,12 @@
 		<result property="balance" column="BALANCE"/>
 		<result property="status" column="STATUS"/>
 		<result property="grade" column="GRADE"/>
+		<result property="joinDate" column="JOIN_DATE"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#)
 	</insert>
 	
 	<insert id="updateMember" parameterClass="Member">
@@ -55,7 +56,22 @@
 	
 	<select id="selectMemberList" resultMap="memberResultMap"
 		parameterClass="map">
-		SELECT * FROM tbl_member
+		SELECT * FROM tbl_member WHERE GRADE != 'UG100'
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+				USERID LIKE #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickName">
+				NICKNAME LIKE #nickName#
+			</isNotNull>			
+			<isNotNull prepend="AND" property="mobile">
+				MOBILE LIKE #mobile#
+			</isNotNull>			
+			<isNotNull prepend="AND" property="email">
+				EMAIL LIKE #email#
+			</isNotNull>
 	</select>
 	
 	<select id="countMemberByUserId" parameterClass="string" resultClass="integer">

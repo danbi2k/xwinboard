@@ -1,6 +1,7 @@
 package com.xwin.infra.util;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +9,37 @@ import java.util.Date;
 public class XwinUtil
 {
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+	private static final SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public static Date toDate(String dateStr)
+	{
+		Date date = null;
+		
+		try {
+			date = dateFormat.parse(dateStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return date;
+	}
+	
+	public static String nvl(String str)
+	{
+		if (str == null)
+			return "";
+		
+		return str;
+	}
+	
+	public static String aNvl(String str)
+	{
+		if (str != null && str.length() == 0)
+			return null;
+		
+		return str;
+	}
 	
 	public static String to2Digit(double x)
 	{
@@ -16,11 +47,11 @@ public class XwinUtil
 		return ret;
 	}
 	
-	public static String toDate(Date date)
+	public static String toDateStr(Date date)
 	{
 		if (date == null)
 			return "";
-		String ret = dateFormat.format(date);
+		String ret = dateTimeFormat.format(date);
 		return ret;
 	}
 	

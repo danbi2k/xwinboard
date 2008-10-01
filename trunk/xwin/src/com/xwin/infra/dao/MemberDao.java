@@ -32,9 +32,12 @@ public class MemberDao extends XwinDao
 		return (Member) sqlMapClientTemplate.queryForObject("selectMember", param);
 	}
 	
-	public List<Member> selectMemberList()
+	public List<Member> selectMemberList(String grade, String search, String keyword)
 	{
-		return (List<Member>) sqlMapClientTemplate.queryForList("selectMemberList");
+		Map<String, String> param = new HashMap<String, String>(3);
+		param.put("grade", grade);
+		param.put(search, "%" + keyword + "%");
+		return (List<Member>) sqlMapClientTemplate.queryForList("selectMemberList", param);
 	}
 	
 	public Integer countMemberByUserId(String id)

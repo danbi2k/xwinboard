@@ -1,77 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
-<head>
-<title>관리자페이지</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8>
-<link href="/xwin/common/style.css" rel="stylesheet" type="text/css">
-<SCRIPT LANGUAGE="JavaScript" src="js/calendar.js"></SCRIPT>
-<SCRIPT LANGUAGE="JavaScript" src="js/main.js"></SCRIPT>
-</head>	
-<body>
 
-<!-- 로고 및 상단 메뉴 -->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" >
- <tr>
-  <td>
-  <table width="950"  border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="60"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="7%"><a href="main.php"><img src="image/logo.gif" width="170" height="60" border="0"></a></td>
-          <td width="42%"><table width="360"  border="0" cellspacing="0" cellpadding="0">
-              <tr>
-				<!--td width="72" height="60" align="center" style="padding-top:35px" background="image/topm41.gif"><a href="members/" class="menu" >회원관리</a>
-			
-				</td-->
+<%@ include file="admin_header.jsp"%>
 
-                <td width="72" height="60" background="image/topm11.gif" align="center" style="padding-top:35px"><a href="admin/" class="menu" >관리자정보</a></td>
-                <td width="72" height="60" background="image/topm21.gif" align="center" style="padding-top:35px"><a href="member/" class="menu" >회원관리</a></td>
-                <td width="72" height="60" background="image/topm31.gif" align="center" style="padding-top:35px"><a href="calc/" class="menu" >입출금관리</a></td>
-                <td width="72" height="60" background="image/topm41.gif" align="center" style="padding-top:35px"><a href="game/" class="menu" >경기관리</a></td>
-                <td width="72" height="60" background="image/topm51.gif" align="center" style="padding-top:35px"><a href="board/?db_name=일반게시판" class="menu" >게시판관리</a></td>
-			
-                <!--td width="72" height="60"  align="center" style="padding-top:35px" background="image/topm31.gif"><a href="school" class="menu" >학교관리</a></td-->                
-				</tr>
-          </table></td>
-		  <td width="34%" valign="bottom" align="center">
-		  </td>
-		  <td width="17%" valign="bottom" style="padding-bottom:5px"> <a href="/" target="_blank">  바로가기</a> | <a href="logout.php">로그아웃</a> &nbsp;</td>
-        </tr>
-    </table></td>
-  </tr>
-  </table>
-  </td>
- </tr>
-</table>
-<!-- 로고 및 상단 메뉴 -->
-<!-- 상단 이미지 -->
-<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="000000">
- <tr>
-  <td>
-  <table width="950" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="25" bgcolor="000000"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="175">&nbsp;</td>
-          <td class="fcolorWhite"></td>
-        </tr>
-    </table></td>
-  </tr>
-
-  </table>
-  </td>
- </tr>
-</table><!-- 상단 이미지 -->
-<!-- 페이지 내용 -->
-<table width="100%"  border="0" cellpadding="0" cellspacing="0" >
- <tr>
-  <td>
-<table width="950" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="100%" valign="top"><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td width="170" height="500" background="image/left_bg.gif" valign="top">
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -80,7 +11,7 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin/image/leftm_icon.gif" width="9" height="9"><a href="/admin/admin"> 관리자정보관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin/image/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
     </tr>
 </table></td>
               </tr>
@@ -177,7 +108,7 @@
 								<td width=15%>작성일</td>
 							  </tr>
                               <tr align="center" bgcolor="#FFFFFF">
-								<td width=100% colspan='6' align='center'>등록된 회원이 없습니다.</td>
+								<td width=100% colspan='4' align='center'>등록된 회원이 없습니다.</td>
 							  </tr>
 					
 </table>							</td>
@@ -276,16 +207,5 @@
 </table>
 </td></tr></table>
 <!-- 페이지 내용 -->
-<!-- 하단 copy -->
 
-  <table width="100%" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="5" bgcolor="CDCDCD"> </td>
-  </tr>
-  <tr>
-    <td height="40" align="center" bgcolor="E7E7E7">Copyright ⓒ 2008 <b>CASHBET24</b> All rights reserved.</td>
-  </tr>
-  </table>
-<!-- 하단 copy-->
-</body>
-</html>
+<%@ include file="admin_footer.jsp"%>

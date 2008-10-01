@@ -380,12 +380,13 @@ CREATE TABLE `tbl_member` (
   `USERID` varchar(45) NOT NULL,
   `PASSWORD` varchar(45) NOT NULL,
   `NICKNAME` varchar(45) NOT NULL,
-  `MOBILE` varchar(45) NOT NULL,
-  `EMAIL` varchar(45) NOT NULL,
-  `PIN` varchar(45) NOT NULL,
+  `MOBILE` varchar(45) default NULL,
+  `EMAIL` varchar(45) default NULL,
+  `PIN` varchar(45) default NULL,
   `BALANCE` int(10) unsigned NOT NULL default '0',
   `STATUS` varchar(45) NOT NULL,
   `GRADE` varchar(45) NOT NULL,
+  `JOIN_DATE` datetime NOT NULL,
   PRIMARY KEY  (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
@@ -394,9 +395,9 @@ CREATE TABLE `tbl_member` (
 --
 
 /*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
-INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`,`STATUS`,`GRADE`) VALUES 
- (1,'xx','4444','후지모토','016-4444-4444','huzi@gmail.com','1111',161401,'US001','UG001'),
- (2,'secadmin','1111','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100');
+INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`,`STATUS`,`GRADE`,`JOIN_DATE`) VALUES 
+ (1,'xx','4444','후지모토','016-4444-4444','huzi@gmail.com','1111',161401,'US001','UG001','2008-09-30 00:00:00'),
+ (2,'secadmin','2222','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100','2008-09-30 00:00:00');
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
 
 

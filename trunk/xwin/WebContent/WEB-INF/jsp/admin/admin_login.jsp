@@ -4,8 +4,8 @@
 <head>
 <title>관리자인증</title>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-<link href="common/style.css" rel="stylesheet" type="text/css">
-<script src="js/jkl-parsexml.js"></script>
+	<link rel="stylesheet" href="common/style.css">
+	<script src="common/jkl-parsexml.js"></script>
 </head>
 <SCRIPT LANGUAGE="JavaScript">
 <!--

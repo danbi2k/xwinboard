@@ -38,6 +38,29 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromReqDate">
+				<![CDATA[
+				REQ_DATE >= #fromReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toReqDate">
+				<![CDATA[
+				REQ_DATE <= #toReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromProcDate">
+				<![CDATA[
+				PROC_DATE >= #fromProcDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toProcDate">
+				<![CDATA[
+				PROC_DATE <= #procProcDate#
+				]]>
+			</isNotNull>
 		</dynamic>
 	</select>
 </sqlMap>

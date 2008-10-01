@@ -78,7 +78,7 @@ public class Game extends XwinObject
 
 	public void setGameDate(Date gameDate) {
 		this.gameDate = gameDate;
-		this.gameDateStr = XwinUtil.toDate(gameDate);
+		this.gameDateStr = XwinUtil.toDateStr(gameDate);
 	}
 
 	public String getLeagueId() {

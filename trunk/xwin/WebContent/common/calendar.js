@@ -1,27 +1,27 @@
 
 <!--
-var fixedX = -1; // ∑π¿ÃæÓ X√‡ ¿ßƒ° (-1 : πˆ∆∞ø° πŸ∑Œ æ∆∑°ø° «•Ω√)
-var fixedY = -1; // ∑π¿ÃæÓ Y√‡ ¿ßƒ° (-1 : πˆ∆∞ø° πŸ∑Œ æ∆∑°ø° «•Ω√)
-var startAt = 0; // ¿œø‰¿œ «•Ω√ ∫Œ∫– / 0 : ¿œø‰¿œ(¿œø˘»≠...) / 1 : ø˘ø‰¿œ(...±›≈‰¿œ)
-var showWeekNumber = 0; // ¡÷(week)∫∏¿” ¿Øπ´ - 0 : ∞®√„ / 1 : ∫∏¿”
-var showToday = 1; // ø¿¥√ ≥Ø¿⁄ «•Ω√ ¿Øπ´ - 0 : ∞®√„ / 1 : ∫∏¿”
-var imgDir = '/images/calandar/'; // ¿ÃπÃ¡ˆ µ∑∫≈‰∏Æ - ./ : «ˆ¿Á µ∑∫≈‰∏Æ
+var fixedX = -1; // Î†àÏù¥Ïñ¥ XÏ∂ï ÏúÑÏπò (-1 : Î≤ÑÌäºÏóê Î∞îÎ°ú ÏïÑÎûòÏóê ÌëúÏãú)
+var fixedY = -1; // Î†àÏù¥Ïñ¥ YÏ∂ï ÏúÑÏπò (-1 : Î≤ÑÌäºÏóê Î∞îÎ°ú ÏïÑÎûòÏóê ÌëúÏãú)
+var startAt = 0; // ÏùºÏöîÏùº ÌëúÏãú Î∂ÄÎ∂Ñ / 0 : ÏùºÏöîÏùº(ÏùºÏõîÌôî...) / 1 : ÏõîÏöîÏùº(...Í∏àÌÜ†Ïùº)
+var showWeekNumber = 0; // Ï£º(week)Î≥¥ÏûÑ Ïú†Î¨¥ - 0 : Í∞êÏ∂§ / 1 : Î≥¥ÏûÑ
+var showToday = 1; // Ïò§Îäò ÎÇ†Ïûê ÌëúÏãú Ïú†Î¨¥ - 0 : Í∞êÏ∂§ / 1 : Î≥¥ÏûÑ
+var imgDir = 'images/calandar/'; // Ïù¥ÎØ∏ÏßÄ ÎîîÎ†âÌÜ†Î¶¨ - ./ : ÌòÑÏû¨ ÎîîÎ†âÌÜ†Î¶¨
 
-var gotoString = "ø¿¥√ ≥Ø¿⁄∑Œ «•Ω√" // ø¿¥√ ≥Ø¿⁄ ∏µ≈©ø° ∏∂øÏΩ∫ ø√∑»¿ªΩ√ ªÛ≈¬πŸøÕ title∏ﬁºº¡ˆ / ø¯πÆ : Go To Current Month
-var todayString = "ø¿¥√¿∫ " // ø¿¥√ ≥Ø¿⁄ ∏ﬁºº¡ˆ / ø¯πÆ : Today is
-var weekString = "¡÷" // ¡¬√¯ ¡÷(week)«•Ω√ / ø¯πÆ : Wk
-var scrollLeftMessage = "¿Ã¿¸ ¥ﬁ(month)∑Œ ¿Ãµø" // ¿Ã¿¸ ¥ﬁ(month)∑Œ ¿Ãµø«œ¥¬ πˆ∆∞ø° ∏∂øÏΩ∫ ø√∏Æ∏È ªÛ≈¬πŸø° ≥™≈∏¥¬ ∏ﬁºº¡ˆ
-// ø¯πÆ : Click to scroll to previous month. Hold mouse button to scroll automatically.
-var scrollRightMessage = "¥Ÿ¿Ω ¥ﬁ(month)∑Œ ¿Ãµø" // ¥Ÿ¿Ω ¥ﬁ(month)∑Œ ¿Ãµø«œ¥¬ πˆ∆∞ø° ∏∂øÏΩ∫ ø√∏Æ∏È ªÛ≈¬πŸø° ≥™≈∏¥¬ ∏ﬁºº¡ˆ
-// ø¯πÆ : Click to scroll to next month. Hold mouse button to scroll automatically.
-var selectMonthMessage = "¥ﬁ(month)∏¶ º±≈√«’¥œ¥Ÿ." // ¥ﬁ(month)¿ª º±≈√«œ¥¬ ∫Œ∫–ø° ∏∂øÏΩ∫ ø√∏Æ∏È ªÛ≈¬πŸø° ≥™≈∏≥™¥¬ ∏ﬁºº¡ˆ
-// ø¯πÆ : Click to select a month.
-var selectYearMessage = "≥‚(year)¿ª º±≈√«’¥œ¥Ÿ." // ≥‚(year)¿ª º±≈√«œ¥¬ ∫Œ∫–ø° ∏∂øÏΩ∫ ø√∏Æ∏È ªÛ≈¬πŸø° ≥™≈∏≥™¥¬ ∏ﬁºº¡ˆ
-// ø¯πÆ : Click to select a year.
-var selectDateMessage = "≥Ø¿⁄∏¶ º±≈√«’¥œ¥Ÿ. : [date]" // ≥Ø¿⁄ø° ∏∂øÏΩ∫ ø√∑»¿ªΩ√ ªÛ¥ÎπŸø° ≥™≈∏≥™¥¬ ∏ﬁºº¡ˆ / [data] : ≥Ø¿⁄∏¶ «•Ω√
-// ø¯πÆ : Select [date] as date.
+var gotoString = "Ïò§Îäò ÎÇ†ÏûêÎ°ú ÌëúÏãú" // Ïò§Îäò ÎÇ†Ïûê ÎßÅÌÅ¨Ïóê ÎßàÏö∞Ïä§ Ïò¨Î†∏ÏùÑÏãú ÏÉÅÌÉúÎ∞îÏôÄ titleÎ©îÏÑ∏ÏßÄ / ÏõêÎ¨∏ : Go To Current Month
+var todayString = "Ïò§ÎäòÏùÄ " // Ïò§Îäò ÎÇ†Ïûê Î©îÏÑ∏ÏßÄ / ÏõêÎ¨∏ : Today is
+var weekString = "Ï£º" // Ï¢åÏ∏° Ï£º(week)ÌëúÏãú / ÏõêÎ¨∏ : Wk
+var scrollLeftMessage = "Ïù¥Ï†Ñ Îã¨(month)Î°ú Ïù¥Îèô" // Ïù¥Ï†Ñ Îã¨(month)Î°ú Ïù¥ÎèôÌïòÎäî Î≤ÑÌäºÏóê ÎßàÏö∞Ïä§ Ïò¨Î¶¨Î©¥ ÏÉÅÌÉúÎ∞îÏóê ÎÇòÌÉÄÎäî Î©îÏÑ∏ÏßÄ
+// ÏõêÎ¨∏ : Click to scroll to previous month. Hold mouse button to scroll automatically.
+var scrollRightMessage = "Îã§Ïùå Îã¨(month)Î°ú Ïù¥Îèô" // Îã§Ïùå Îã¨(month)Î°ú Ïù¥ÎèôÌïòÎäî Î≤ÑÌäºÏóê ÎßàÏö∞Ïä§ Ïò¨Î¶¨Î©¥ ÏÉÅÌÉúÎ∞îÏóê ÎÇòÌÉÄÎäî Î©îÏÑ∏ÏßÄ
+// ÏõêÎ¨∏ : Click to scroll to next month. Hold mouse button to scroll automatically.
+var selectMonthMessage = "Îã¨(month)Î•º ÏÑ†ÌÉùÌï©ÎãàÎã§." // Îã¨(month)ÏùÑ ÏÑ†ÌÉùÌïòÎäî Î∂ÄÎ∂ÑÏóê ÎßàÏö∞Ïä§ Ïò¨Î¶¨Î©¥ ÏÉÅÌÉúÎ∞îÏóê ÎÇòÌÉÄÎÇòÎäî Î©îÏÑ∏ÏßÄ
+// ÏõêÎ¨∏ : Click to select a month.
+var selectYearMessage = "ÎÖÑ(year)ÏùÑ ÏÑ†ÌÉùÌï©ÎãàÎã§." // ÎÖÑ(year)ÏùÑ ÏÑ†ÌÉùÌïòÎäî Î∂ÄÎ∂ÑÏóê ÎßàÏö∞Ïä§ Ïò¨Î¶¨Î©¥ ÏÉÅÌÉúÎ∞îÏóê ÎÇòÌÉÄÎÇòÎäî Î©îÏÑ∏ÏßÄ
+// ÏõêÎ¨∏ : Click to select a year.
+var selectDateMessage = "ÎÇ†ÏûêÎ•º ÏÑ†ÌÉùÌï©ÎãàÎã§. : [date]" // ÎÇ†ÏûêÏóê ÎßàÏö∞Ïä§ Ïò¨Î†∏ÏùÑÏãú ÏÉÅÎåÄÎ∞îÏóê ÎÇòÌÉÄÎÇòÎäî Î©îÏÑ∏ÏßÄ / [data] : ÎÇ†ÏûêÎ•º ÌëúÏãú
+// ÏõêÎ¨∏ : Select [date] as date.
 
-// ∞¢ ∫Øºˆ º±æ
+// Í∞Å Î≥ÄÏàò ÏÑ†Ïñ∏
 var crossobj, crossMonthObj, crossYearObj, monthSelected, yearSelected, dateSelected, omonthSelected, oyearSelected, odateSelected, monthConstructed, yearConstructed, intervalID1, intervalID2, timeoutID1, timeoutID2, ctlToPlaceValue, ctlNow, dateFormat, nStartingYear
 
 var bPageLoaded = false;
@@ -30,25 +30,25 @@ var dom = document.getElementById;
 var bShow = false;
 var ns4 = document.layers;
 
-var today = new	Date(); // ≥Ø¿⁄ ∫Øºˆ º±æ
-var dateNow = today.getDate(); // ∑Œƒ√ ƒƒ«ª≈Õ¿« ¿œ(day)¿ª ±∏«‘  
-var monthNow = today.getMonth(); // ∑Œƒ√ ƒƒ«ª≈Õ¿« ø˘(month)¿ª ±∏«‘
-var yearNow = today.getYear(); // ∑Œƒ√ ƒƒ«ª≈Õ¿« ≥‚(year)¿ª ±∏«‘
-var imgsrc = new Array("drop1.gif","drop2.gif","left1.gif","left2.gif","right1.gif","right2.gif"); // ¿ÃπÃ¡ˆ πËø≠
-var img	= new Array(); // πËø≠ º±æ
+var today = new	Date(); // ÎÇ†Ïûê Î≥ÄÏàò ÏÑ†Ïñ∏
+var dateNow = today.getDate(); // Î°úÏª¨ Ïª¥Ìì®ÌÑ∞Ïùò Ïùº(day)ÏùÑ Íµ¨Ìï®  
+var monthNow = today.getMonth(); // Î°úÏª¨ Ïª¥Ìì®ÌÑ∞Ïùò Ïõî(month)ÏùÑ Íµ¨Ìï®
+var yearNow = today.getYear(); // Î°úÏª¨ Ïª¥Ìì®ÌÑ∞Ïùò ÎÖÑ(year)ÏùÑ Íµ¨Ìï®
+var imgsrc = new Array("drop1.gif","drop2.gif","left1.gif","left2.gif","right1.gif","right2.gif"); // Ïù¥ÎØ∏ÏßÄ Î∞∞Ïó¥
+var img	= new Array(); // Î∞∞Ïó¥ ÏÑ†Ïñ∏
 
-// ø˘(month)¿ª «•Ω√«œ¥¬ m¿ª 3∞≥(mmm) ¿˚æ˙¿ªΩ√ 
-var monthName = new Array("1ø˘","2ø˘","3ø˘","4ø˘","5ø˘","6ø˘","7ø˘","8ø˘","9ø˘","10ø˘","11ø˘","12ø˘");
-// ø˘(month)¿ª «•Ω√«œ¥¬ m¿ª 4∞≥(mmmm) ¿˚æ˙¿ªΩ√ 
-var monthName2 = new Array("1ø˘","2ø˘","3ø˘","4ø˘","5ø˘","6ø˘","7ø˘","8ø˘","9ø˘","10ø˘","11ø˘","12ø˘");
+// Ïõî(month)ÏùÑ ÌëúÏãúÌïòÎäî mÏùÑ 3Í∞ú(mmm) Ï†ÅÏóàÏùÑÏãú 
+var monthName = new Array("1Ïõî","2Ïõî","3Ïõî","4Ïõî","5Ïõî","6Ïõî","7Ïõî","8Ïõî","9Ïõî","10Ïõî","11Ïõî","12Ïõî");
+// Ïõî(month)ÏùÑ ÌëúÏãúÌïòÎäî mÏùÑ 4Í∞ú(mmmm) Ï†ÅÏóàÏùÑÏãú 
+var monthName2 = new Array("1Ïõî","2Ïõî","3Ïõî","4Ïõî","5Ïõî","6Ïõî","7Ïõî","8Ïõî","9Ïõî","10Ïõî","11Ïõî","12Ïõî");
 
-// ¥ﬁ∑¬ ±∏º∫ - ¿ß "¿œø‰¿œ «•Ω√ ∫Œ∫–"∞˙ ∞¸∑√
+// Îã¨Î†• Íµ¨ÏÑ± - ÏúÑ "ÏùºÏöîÏùº ÌëúÏãú Î∂ÄÎ∂Ñ"Í≥º Í¥ÄÎ†®
 if (startAt==0) {
-	// ¿œ ø˘ »≠ ºˆ ∏Ò ±› ≈‰
-	dayName = new Array("¿œ","ø˘","»≠","ºˆ","∏Ò","±›","≈‰");
+	// Ïùº Ïõî Ìôî Ïàò Î™© Í∏à ÌÜ†
+	dayName = new Array("Ïùº","Ïõî","Ìôî","Ïàò","Î™©","Í∏à","ÌÜ†");
 } else {
-	// ø˘ »≠ ºˆ ∏Ò ±› ≈‰ ¿œ
-	dayName = new Array("ø˘","»≠","ºˆ","∏Ò","±›","≈‰","¿œ");
+	// Ïõî Ìôî Ïàò Î™© Í∏à ÌÜ† Ïùº
+	dayName = new Array("Ïõî","Ìôî","Ïàò","Î™©","Í∏à","ÌÜ†","Ïùº");
 }
 
 function hideElement(elmID, overDiv) {
@@ -150,7 +150,7 @@ function init() {
 		yearConstructed = false;
 
 		if(showToday==1) {
-			document.getElementById("lblToday").innerHTML =	todayString+" <a onmousemove='window.status=\""+gotoString+"\"' onmouseout='window.status=\"\"' title='"+gotoString+"' style='"+styleAnchor+"' href='javascript:monthSelected=monthNow;yearSelected=yearNow;constructCalendar();'>"+dayName[(today.getDay()-startAt==-1)?6:(today.getDay()-startAt)]+"ø‰¿œ, "+yearNow+"≥‚ "+monthName[monthNow].substring(0,3)+" "+dateNow+"¿œ</a>";
+			document.getElementById("lblToday").innerHTML =	todayString+" <a onmousemove='window.status=\""+gotoString+"\"' onmouseout='window.status=\"\"' title='"+gotoString+"' style='"+styleAnchor+"' href='javascript:monthSelected=monthNow;yearSelected=yearNow;constructCalendar();'>"+dayName[(today.getDay()-startAt==-1)?6:(today.getDay()-startAt)]+"ÏöîÏùº, "+yearNow+"ÎÖÑ "+monthName[monthNow].substring(0,3)+" "+dateNow+"Ïùº</a>";
 		}
 
 		sHTML1 = "<span id='spanLeft' style='border-style:solid;border-width:1;border-color:#E5EDFD;cursor:pointer' onmouseover='swapImage(\"changeLeft\",\"left2.gif\");this.style.borderColor=\"#88AAFF\";window.status=\""+scrollLeftMessage+"\"' onclick='javascript:decMonth()' onmouseout='clearInterval(intervalID1);swapImage(\"changeLeft\",\"left1.gif\");this.style.borderColor=\"#E5EDFD\";window.status=\"\"' onmousedown='clearTimeout(timeoutID1);timeoutID1=setTimeout(\"StartDecMonth()\",500)'	onmouseup='clearTimeout(timeoutID1);clearInterval(intervalID1)'>&nbsp<IMG id='changeLeft' SRC='"+imgDir+"left1.gif' width=10 height=11 BORDER=0>&nbsp</span>&nbsp;";

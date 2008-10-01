@@ -1,5 +1,9 @@
 package com.xwin.domain.user;
 
+import java.util.Date;
+
+import com.xwin.infra.util.XwinUtil;
+
 public class Member
 {
 	private String id;
@@ -12,6 +16,8 @@ public class Member
 	private Integer balance;
 	private String status;
 	private String grade;
+	private Date joinDate;
+	private String joinDateStr;
 	
 	public String getId() {
 		return id;
@@ -72,5 +78,18 @@ public class Member
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+	public Date getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+		this.joinDateStr = XwinUtil.toDateStr(joinDate);
+	}
+	public String getJoinDateStr() {
+		return joinDateStr;
+	}
+	public void setJoinDateStr(String joinDateStr) {
+		this.joinDateStr = joinDateStr;
 	}
 }
