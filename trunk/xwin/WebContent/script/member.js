@@ -157,8 +157,6 @@ function FnOutMoney_Submit(frm){
 	if (result.resultXml.code == 0) {
 		location.href='moneyOut.aspx?mode=viewMoneyOutRequestList';
 	}
-	else {
-	}
 }
 function FnOutMoneyCancle(idx){
 	if(confirm("출금신청을 취소하시겠습니까?")){

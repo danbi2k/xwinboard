@@ -1,6 +1,8 @@
+@charset "utf-8"
+
 BODY { 
 	margin:0; 
-	background-color:darkgray;
+	background-color:#282828;
 	cursor:default; 
 	font-size:13px; color:#b0b0b0;
 	text-align:center;
@@ -16,18 +18,18 @@ BODY {
 
 p,span,table,tr,td {
 	cursor:default; 
-	font-family:µ¸¿ò,Arial Black;
+	font-family:ë‹ì›€,Arial Black;
 	font-size:13px; color:#b0b0b0; 
 }
 
-A:link    { font-family:µ¸¿ò,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
-A:visited { font-family:µ¸¿ò,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
-A:active  { font-family:µ¸¿ò,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
-A:hover   { font-family:µ¸¿ò,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:underline; }
+A:link    { font-family:ë‹ì›€,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
+A:visited { font-family:ë‹ì›€,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
+A:active  { font-family:ë‹ì›€,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:none;}
+A:hover   { font-family:ë‹ì›€,Arial Black;  font-size:13px; color:#b0b0b0; text-decoration:underline; }
 
 form {margin:0;}
 input.member,select.member { 
 	Background-Color:Black; 
-	font-family:µ¸¿ò,Arial Black; 
+	font-family:ë‹ì›€,Arial Black; 
 	font-size:13px;color:white;  height:19px; border:1 solid #555555; 
 }

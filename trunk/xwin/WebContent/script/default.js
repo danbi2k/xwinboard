@@ -41,7 +41,7 @@ function FnLogin_Submit(frm){
 		return;
 	}
 	
-	location.href = "";	
+	location.href = "index.aspx";	
 }
 
 function FnLogout(){	

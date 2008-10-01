@@ -5,7 +5,7 @@ var fixedY = -1; // 레이어 Y축 위치 (-1 : 버튼에 바로 아래에 표�
 var startAt = 0; // 일요일 표시 부분 / 0 : 일요일(일월화...) / 1 : 월요일(...금토일)
 var showWeekNumber = 0; // 주(week)보임 유무 - 0 : 감춤 / 1 : 보임
 var showToday = 1; // 오늘 날자 표시 유무 - 0 : 감춤 / 1 : 보임
-var imgDir = '/images/calandar/'; // 이미지 디렉토리 - ./ : 현재 디렉토리
+var imgDir = 'images/calandar/'; // 이미지 디렉토리 - ./ : 현재 디렉토리
 
 var gotoString = "오늘 날자로 표시" // 오늘 날자 링크에 마우스 올렸을시 상태바와 title메세지 / 원문 : Go To Current Month
 var todayString = "오늘은 " // 오늘 날자 메세지 / 원문 : Today is

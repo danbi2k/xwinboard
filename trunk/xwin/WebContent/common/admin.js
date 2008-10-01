@@ -1,6 +1,6 @@
 if ( typeof(AdminGame) == 'undefined' ) AdminGame = function() {};
 
-AdminGame.RegisterGame = function(frm, type)
+Admin.RegisterGame = function(frm, type)
 {
 	var query = "mode=registerGame";
 	query += "&leagueId=" + frm.leagueId.value;
@@ -15,6 +15,7 @@ AdminGame.RegisterGame = function(frm, type)
 	query += "&hour=" + frm.hour.value;
 	query += "&minute=" + frm.minute.value;
 	query += "&type=" + type;
+	query += "&status=" + 'GS001';
 	var http = new JKL.ParseXML("adminGame.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
@@ -26,7 +27,7 @@ AdminGame.RegisterGame = function(frm, type)
 	}
 }
 
-AdminGame.GetGameList = function(type, status)
+Admin.GetGameList = function(type, status)
 {
 	var query = "mode=getGameList";
 	if (type)
@@ -38,29 +39,28 @@ AdminGame.GetGameList = function(type, status)
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.game);
-		AdminGame.DrawGameList(data);
+		Admin.DrawGameList(data);
 	}
 }
 
-AdminGame.DrawGameList = function(data)
+Admin.DrawGameList = function(data)
 {
 	var row = [];
 	row.push("<table>");
 	row.push("<thead>")
 	row.push("<tr>")
-	row.push("<th nowrap>번호</th>");
-	row.push("<th nowrap>날짜</th>");
-	row.push("<th nowrap>홈팀</th>");
-	row.push("<th nowrap>원정팀</th>");
-	row.push("<th nowrap>승</th>");
-	row.push("<th nowrap>무</th>");
-	row.push("<th nowrap>패</th>");
-	row.push("<th nowrap>홈점수</th>");
-	row.push("<th nowrap>원정점수</th>");
-	row.push("<th nowrap>결과</th>");
-	row.push("<th nowrap>상태</th>");
-	row.push("<th nowrap>적용</th>");
-	row.push("<th nowrap>취소</th>");
+	row.push("<th nowrap>번호</th nowrap>");
+	row.push("<th nowrap>날짜</th nowrap>");
+	row.push("<th nowrap>홈팀</th nowrap>");
+	row.push("<th nowrap>원정팀</th nowrap>");
+	row.push("<th nowrap>승</th nowrap>");
+	row.push("<th nowrap>무</th nowrap>");
+	row.push("<th nowrap>패</th nowrap>");
+	row.push("<th nowrap>홈점수</th nowrap>");
+	row.push("<th nowrap>원정점수</th nowrap>");
+	row.push("<th nowrap>결과</th nowrap>");
+	row.push("<th nowrap>상태</th nowrap>");
+	row.push("<th nowrap>적용</th nowrap>");
 	row.push("</tr>")
 	row.push("</thead>");
 	for (var i in data) {
@@ -73,25 +73,17 @@ AdminGame.DrawGameList = function(data)
 		row.push("<td>" + data[i].drawRate + "</td>");
 		row.push("<td>" + data[i].loseRate + "</td>");
 		if (data[i].homeScore == undefined)
-			row.push("<td><input type='text' size='3' maxlength='3' id='homeScore_" + data[i].id + "'></td>");
+			row.push("<td><input type='text' id='homeScore_" + data[i].id + "'></td>");
 		else
 			row.push("<td>" + data[i].homeScore + "</td>");
 		
 		if (data[i].awayScore == undefined)
-			row.push("<td><input type='text' size='3' maxlength='3' id='awayScore_" + data[i].id + "'></td>");
+			row.push("<td><input type='text' id='awayScore_" + data[i].id + "'></td>");
 		else
 			row.push("<td>" + data[i].awayScore + "</td>");
 		row.push("<td>" + C(data[i].result) + "</td>");
-		row.push("<td>");
-		row.push("<select>");
-		row.push("<option value='GS002' " + (data[i].status=="GS002"?"selected":"") + ">접수중</option>");
-		row.push("<option value='GS003' " + (data[i].status=="GS003"?"selected":"") + ">경기진행</option>");
-		row.push("<option value='GS004' " + (data[i].status=="GS004"?"selected":"") + ">경기종료</option>");
-		row.push("<option value='GS005' " + (data[i].status=="GS005"?"selected":"") + ">경기취소</option>");
-		row.push("</select>");
-		row.push("</td>");
-		row.push("<td><a onclick='AdminGame.UpdateGame(" + data[i].id + ")'>[적용]</a></td>");
-		row.push("<td><a onclick='AdminGame.CancelScore(" + data[i].id + ")'>[취소]</a></td>");
+		row.push("<td>" + C(data[i].status) + "</td>");
+		row.push("<td><a onclick='Admin.UpdateScore(" + data[i].id + ")'>[적용]</a></td>");
 		row.push("</tr>");
 	}
 	row.push("</table>");
@@ -100,7 +92,7 @@ AdminGame.DrawGameList = function(data)
 	gameListDiv.innerHTML = tableString;
 }
 
-AdminGame.UpdateScore = function(idval)
+Admin.UpdateScore = function(idval)
 {
 	var homeScore = document.getElementById("homeScore_" + idval);
 	var awayScore = document.getElementById("awayScore_" + idval);
@@ -113,29 +105,14 @@ AdminGame.UpdateScore = function(idval)
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
-		AdminGame.GetGameList(gameType, gameStatus);
+		Admin.GetGameList(gameType, gameStatus);
 	}
 	else {
 		alert(result.resultXml.message);
 	}	
 }
 
-AdminGame.CancelScore = function(idval)
-{
-	var query = "mode=cancelGameScore";
-	query += "&id=" + idval;
-	var http = new JKL.ParseXML("adminGame.aspx", query);
-	var result = http.parse();
-	
-	if (result.resultXml.code == 0) {
-		AdminGame.GetGameList(gameType, gameStatus);
-	}
-	else {
-		alert(result.resultXml.message);
-	}	
-}
-
-AdminGame.GetLeagueList = function()
+Admin.GetLeagueList = function()
 {
 	var query = "mode=getLeagueList";
 	var http = new JKL.ParseXML("adminGame.aspx", query);
@@ -143,11 +120,11 @@ AdminGame.GetLeagueList = function()
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.league);
-		AdminGame.DrawLeagueList(data);
+		Admin.DrawLeagueList(data);
 	}
 }
 
-AdminGame.DrawLeagueList = function(data)
+Admin.DrawLeagueList = function(data)
 {
 	var row = [];
 	row.push("<table>");

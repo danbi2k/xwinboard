@@ -19,14 +19,14 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="image/leftm_icon.gif" width="9" height="9"><a href="adminMember.aspx?mode=viewAdminMember"> 회원관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminMember.aspx?mode=viewAdminMember"> 회원관리</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="image/leftm_icon.gif" width="9" height="9"><a href="member/login_status.php"> 로그인현황</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="member/login_status.php"> 로그인현황</a></td>
 
     </tr>
 	<!--tr>
-		<td bgcolor="#FFFFFF"><img src="image/leftm_icon.gif" width="9" height="9"><a href="member/contents.php"> 컨텐츠관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="member/contents.php"> 컨텐츠관리</a></td>
     </tr-->
 </table></td>
               </tr>
@@ -41,7 +41,7 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 회원관리</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 회원관리</td>
                   </tr>
                   <tr>
 
@@ -163,9 +163,9 @@
 							  <tr align="center" bgcolor="#E4E4E4" height=20>
 								<td width=100% bgcolor='#ffffff' align='center'>
 								
-								<img src='image/but_modify.gif' border=0 onclick="checkIT()">
-								<!--img src="image/but_s_del.gif" border=0 onClick="delIT('ori7907')" style='cursor:hand' -->
-								<img src='image/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand">
+								<img src='images/admin/but_modify.gif' border=0 onclick="checkIT()">
+								<!--img src="images/admin/but_s_del.gif" border=0 onClick="delIT('ori7907')" style='cursor:hand' -->
+								<img src='images/admin/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand">
 								</td>
 							  </tr>
 							 </table>
@@ -193,7 +193,7 @@
 								<td align='left' bgcolor='#ffffff'><input type='text' name='msg' size=50 value=''> </td>
 							  </tr>
                               <tr align="center" bgcolor="#FFFFFF">
-								<td colspan='2'><input type=image src='image/but_input.gif' border=0 align='absmiddle'></td>
+								<td colspan='2'><input type=image src='images/admin/but_input.gif' border=0 align='absmiddle'></td>
 							  </tr>
 
 						</table>

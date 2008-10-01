@@ -4,8 +4,8 @@
 <head>
 <title>관리자인증</title>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-	<link rel="stylesheet" href="common/style.css">
-	<script src="common/jkl-parsexml.js"></script>
+	<link rel="stylesheet" href="style/admin.css">
+	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>
 </head>
 <SCRIPT LANGUAGE="JavaScript">
 <!--
@@ -54,7 +54,7 @@ function checkIT() {
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="1" maxLength="20" name="userid" value=""></td>
 							<td style="PADDING-LEFT: 5px" rowSpan="2">							
-							<img src="image/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
+							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>

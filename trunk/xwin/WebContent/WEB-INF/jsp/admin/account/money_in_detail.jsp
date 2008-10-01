@@ -13,16 +13,16 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyIn"> 입금현황</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyIn"> 입금현황</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyOut"> 출금현황</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyOut"> 출금현황</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneySummary"> 내역관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneySummary"> 내역관리</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyCalculation"> 입출금 정산</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminAccount.aspx?mode=viewMoneyCalculation"> 입출금 정산</a></td>
     </tr>
 </table></td>
               </tr>
@@ -36,7 +36,7 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="/admin_mode/image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 입금현황</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 입금현황</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -99,9 +99,9 @@
               <tr>
                 <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
                               <tr>
-							                                  <td><input type='image' src="./../image/but_input.gif" border="0"></td>                               
-								                                <td><img src="./../image/but_s_del.gif" border="0" onClick='delIT(13)' style='cursor:hand'></td>                               
-                                <td><img src="./../image/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+							                                  <td><input type='image' src="./../images/admin/but_input.gif" border="0"></td>                               
+								                                <td><img src="./../images/admin/but_s_del.gif" border="0" onClick='delIT(13)' style='cursor:hand'></td>                               
+                                <td><img src="./../images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
                               </tr>
                           </table></td>
               </tr>

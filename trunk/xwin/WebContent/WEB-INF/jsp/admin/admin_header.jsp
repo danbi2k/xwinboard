@@ -9,10 +9,10 @@
 <head>
 <title>관리자페이지</title>
 <meta>
-	<link rel="stylesheet" href="common/style.css">
-	<script LANGUAGE="JavaScript" src="common/jkl-parsexml.js"></script>	
-	<SCRIPT LANGUAGE="JavaScript" src="common/calendar.js"></SCRIPT>
-	<SCRIPT LANGUAGE="JavaScript" src="common/main.js"></SCRIPT>
+	<link rel="stylesheet" href="style/admin.css">
+	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>	
+	<SCRIPT LANGUAGE="JavaScript" src="script/calendar.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript" src="script/main.js"></SCRIPT>
 </head>	
 <body>
 
@@ -24,20 +24,20 @@
   <tr>
     <td height="60"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="7%"><a href="adminMain.aspx?mode=viewAdminMain"><img src="image/logo.gif" width="170" height="60" border="0"></a></td>
+          <td width="7%"><a href="adminMain.aspx?mode=viewAdminMain"><img src="images/admin/logo.gif" width="170" height="60" border="0"></a></td>
           <td width="42%"><table width="360"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-				<!--td width="72" height="60" align="center" style="padding-top:35px" background="image/topm41.gif"><a href="members/" class="menu" >회원관리</a>
+				<!--td width="72" height="60" align="center" style="padding-top:35px" background="images/admin/topm41.gif"><a href="members/" class="menu" >회원관리</a>
 			
 				</td-->
 
-                <td width="72" height="60" background="image/topm11.gif" align="center" style="padding-top:35px"><a href="adminInfo.aspx?mode=viewAdminInfo" class="menu" >관리자정보</a></td>
-                <td width="72" height="60" background="image/topm21.gif" align="center" style="padding-top:35px"><a href="adminMember.aspx?mode=viewAdminMember" class="menu" >회원관리</a></td>
-                <td width="72" height="60" background="image/topm31.gif" align="center" style="padding-top:35px"><a href="adminAccount.aspx?mode=viewMoneyIn" class="menu" >입출금관리</a></td>
-                <td width="72" height="60" background="image/topm41.gif" align="center" style="padding-top:35px"><a href="game/" class="menu" >경기관리</a></td>
-                <td width="72" height="60" background="image/topm51.gif" align="center" style="padding-top:35px"><a href="board/?db_name=일반게시판" class="menu" >게시판관리</a></td>
+                <td width="72" height="60" background="images/admin/topm11.gif" align="center" style="padding-top:35px"><a href="adminInfo.aspx?mode=viewAdminInfo" class="menu" >관리자정보</a></td>
+                <td width="72" height="60" background="images/admin/topm21.gif" align="center" style="padding-top:35px"><a href="adminMember.aspx?mode=viewAdminMember" class="menu" >회원관리</a></td>
+                <td width="72" height="60" background="images/admin/topm31.gif" align="center" style="padding-top:35px"><a href="adminAccount.aspx?mode=viewMoneyIn" class="menu" >입출금관리</a></td>
+                <td width="72" height="60" background="images/admin/topm41.gif" align="center" style="padding-top:35px"><a href="game/" class="menu" >경기관리</a></td>
+                <td width="72" height="60" background="images/admin/topm51.gif" align="center" style="padding-top:35px"><a href="board/?db_name=일반게시판" class="menu" >게시판관리</a></td>
 			
-                <!--td width="72" height="60"  align="center" style="padding-top:35px" background="image/topm31.gif"><a href="school" class="menu" >학교관리</a></td-->                
+                <!--td width="72" height="60"  align="center" style="padding-top:35px" background="images/admin/topm31.gif"><a href="school" class="menu" >학교관리</a></td-->                
 				</tr>
           </table></td>
 		  <td width="34%" valign="bottom" align="center">
@@ -77,4 +77,4 @@
   <tr>
     <td height="100%" valign="top"><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td width="170" height="500" background="image/left_bg.gif" valign="top">
+          <td width="170" height="500" background="images/admin/left_bg.gif" valign="top">

@@ -2,7 +2,7 @@ function FnGetMyBetList(pageIndex)
 {
 	var query = "mode=getMyBettingList";
 	query += "&pageIndex=" + pageIndex;
-	var http = new JKL.ParseXML("mybet.aspx", query);
+	var http = new JKL.ParseXML("myBet.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.betting);

@@ -22,13 +22,13 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminMember.aspx?mode=viewAdminMember"> 회원관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminMember.aspx?mode=viewAdminMember"> 회원관리</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/login_status.php"> 로그인현황</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/login_status.php"> 로그인현황</a></td>
     </tr>
 	<!--tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/contents.php"> 컨텐츠관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/contents.php"> 컨텐츠관리</a></td>
     </tr-->
 </table></td>
               </tr>
@@ -42,7 +42,7 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="/admin_mode/image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 회원관리</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 회원관리</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>

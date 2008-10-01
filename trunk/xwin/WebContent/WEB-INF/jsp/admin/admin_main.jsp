@@ -11,7 +11,7 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin/image/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin/images/admin/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
     </tr>
 </table></td>
               </tr>
@@ -37,7 +37,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근가입회원</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근가입회원</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -90,7 +90,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근문의사항</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근문의사항</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -121,7 +121,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근충전신청</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근충전신청</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -168,7 +168,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근환전신청</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근환전신청</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>

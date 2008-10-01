@@ -90,7 +90,7 @@ AdminGame.DrawGameList = function(data)
 		row.push("<option value='GS005' " + (data[i].status=="GS005"?"selected":"") + ">경기취소</option>");
 		row.push("</select>");
 		row.push("</td>");
-		row.push("<td><a onclick='AdminGame.UpdateGame(" + data[i].id + ")'>[적용]</a></td>");
+		row.push("<td><a onclick='AdminGame.UpdateScore(" + data[i].id + ")'>[적용]</a></td>");
 		row.push("<td><a onclick='AdminGame.CancelScore(" + data[i].id + ")'>[취소]</a></td>");
 		row.push("</tr>");
 	}

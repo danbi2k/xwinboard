@@ -32,7 +32,7 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
     </tr>
 </table></td>
               </tr>
@@ -46,7 +46,7 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="/admin_mode/image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 관리자정보관리</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 관리자정보관리</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -106,8 +106,8 @@
 							<table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
 							  <tr align="center" bgcolor="#E4E4E4" height=20>
 								<td width=100% bgcolor='#ffffff' align='center'>
-								<img src='image/but_modify.gif' border=0 onclick="checkIT()" style="cursor:hand">
-								<img src='image/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand">
+								<img src='images/admin/but_modify.gif' border=0 onclick="checkIT()" style="cursor:hand">
+								<img src='images/admin/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand">
 								</td>
 							  </tr>
 							 </table>

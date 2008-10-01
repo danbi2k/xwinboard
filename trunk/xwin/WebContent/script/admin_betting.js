@@ -36,7 +36,6 @@ AdminBet.DrawBettingList = function(data)
 		row.push("<td>" + data[i].dateStr + "</td>");
 		row.push("<td>" + "상태" + "</td>");
 		row.push("<td>" + data[i].money + "</td>");
-		row.push("<td>" + data[i].awayTeam + "</td>");
 		row.push("<td>" + data[i].rate + "</td>");
 		row.push("<td>" + data[i].expect + "</td>");
 		row.push("<td>" + data[i].status + "</td>");

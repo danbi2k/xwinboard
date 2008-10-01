@@ -1,4 +1,4 @@
-if ( typeof(Terebi) == 'undefined' ) Xwin = function() {};
+if ( typeof(Xwin) == 'undefined' ) Xwin = function() {};
 
 debug = function(str)
 {
@@ -46,7 +46,7 @@ Xwin.ToInt = function(value)
 
 Xwin.Currency = function(value)
 {
-	var strvalue = Xwin.ToInt(value);
+	var strvalue = "" + value;
     var minus = false;
     if(strvalue.indexOf("-") != -1)
         minus = true;
