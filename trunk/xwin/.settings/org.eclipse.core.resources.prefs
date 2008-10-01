@@ -1,12 +1,13 @@
-#Thu Oct 02 00:40:50 KST 2008
+#Thu Oct 02 03:31:53 KST 2008
 eclipse.preferences.version=1
 encoding//WebContent/admin.jsp=UTF-8
-encoding//WebContent/common/admin_betting.js=UTF-8
-encoding//WebContent/common/admin_game.js=UTF-8
-encoding//WebContent/common/board.js=UTF-8
-encoding//WebContent/common/code.js=UTF-8
-encoding//WebContent/common/default.js=UTF-8
-encoding//WebContent/common/game.js=UTF-8
-encoding//WebContent/common/member.js=UTF-8
-encoding//WebContent/common/mybet.js=UTF-8
+encoding//WebContent/script/admin_betting.js=UTF-8
+encoding//WebContent/script/admin_game.js=UTF-8
+encoding//WebContent/script/board.js=UTF-8
+encoding//WebContent/script/code.js=UTF-8
+encoding//WebContent/script/default.js=UTF-8
+encoding//WebContent/script/game.js=UTF-8
+encoding//WebContent/script/member.js=UTF-8
+encoding//WebContent/script/mybet.js=UTF-8
+encoding//WebContent/style/default.css=UTF-8
 encoding/<project>=UTF-8
