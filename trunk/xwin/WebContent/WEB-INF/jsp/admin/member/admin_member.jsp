@@ -25,7 +25,7 @@
 		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminMember.aspx?mode=viewAdminMember"> 회원관리</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/login_status.php"> 로그인현황</a></td>
+		<!-- td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/login_status.php"> 로그인현황</a></td -->
     </tr>
 	<!--tr>
 		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/member/contents.php"> 컨텐츠관리</a></td>

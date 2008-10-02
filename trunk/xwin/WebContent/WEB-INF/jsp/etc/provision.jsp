@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
 <tr>
@@ -91,4 +91,4 @@
 </form>
 
 
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>

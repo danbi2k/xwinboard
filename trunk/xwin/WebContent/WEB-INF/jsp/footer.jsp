@@ -12,12 +12,12 @@
 
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-	<td><img src="images/tail_menu_1.gif" onclick="location.href='provision.jsp';" style="cursor:hand"></td>
+	<td><img src="images/tail_menu_1.gif" onclick="location.href='provision.aspx';" style="cursor:hand"></td>
 	<td><img src="images/tail_menu_gap.gif"></td>
-	<td><img src="images/tail_menu_2.gif" onclick="location.href='rules.jsp';" style="cursor:hand"></td>
+	<td><img src="images/tail_menu_2.gif" onclick="location.href='rules.aspx';" style="cursor:hand"></td>
 	<td><img src="images/tail_menu_gap.gif"></td>
 
-	<td><img src="images/tail_menu_3.gif" onclick="location.href='customer.jsp';" style="cursor:hand"></td>
+	<td><img src="images/tail_menu_3.gif" onclick="alert('준비중입니다');return false;location.href='customer.jsp';" style="cursor:hand"></td>
 	</tr>
 	</table>
 

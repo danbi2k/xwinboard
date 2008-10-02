@@ -7,16 +7,25 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="index"/>
+	
+	<bean id="guideController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/guide"/>
+		
+	<bean id="provisionController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/provision"/>
+		
+	<bean id="rulesController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/rules"/>
+			
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
 	
 	<bean id="gameController" class="com.xwin.web.controller.game.GameController"
 		p:gameDao-ref="gameDao"
 		p:leagueDao-ref="leagueDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
-	
-	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="index"/>
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 		
 	<bean id="memberController"
 		class="com.xwin.web.controller.user.MemberController"
