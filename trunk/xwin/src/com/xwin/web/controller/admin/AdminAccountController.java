@@ -159,4 +159,26 @@ public class AdminAccountController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;		
 	}
+	
+	public ModelAndView acceptMoneyOutRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ResultXml rx = null;
+		String id = request.getParameter("id");
+		
+		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);
+		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST)) {			
+			moneyOut.setStatus(Code.MONEY_IN_SUCCESS);
+			moneyOut.setProcDate(new Date());
+			moneyOutDao.updateMoneyOut(moneyOut);
+		
+			rx = new ResultXml(0, "환전되었습니다", null);
+		} else {
+			rx = new ResultXml(0, "환전요청 상태가 아닙니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;	
+	}
 }

@@ -10,7 +10,7 @@
 <html>
 
 <head>
-<title>10xBet-local</title>
+<title>bwin-Kor-local</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">

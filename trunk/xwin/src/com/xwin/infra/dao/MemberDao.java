@@ -78,4 +78,13 @@ public class MemberDao extends XwinDao
 		
 		sqlMapClientTemplate.update("updateMemberStatus", param);		
 	}
+
+	public List<Member> selectRecentlyJoinMemberList()
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("pageIndex", 0);
+		param.put("pageSize", 5);
+		
+		return sqlMapClientTemplate.queryForList("selectMemberList", param);
+	}
 }

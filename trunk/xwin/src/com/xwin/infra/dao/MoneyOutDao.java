@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.xwin.domain.user.MoneyIn;
 import com.xwin.domain.user.MoneyOut;
 
 public class MoneyOutDao extends XwinDao
@@ -43,5 +42,14 @@ public class MoneyOutDao extends XwinDao
 	public MoneyOut selectMoneyOut(String id)
 	{
 		return (MoneyOut) sqlMapClientTemplate.queryForObject("selectMoneyOut", id);		
+	}
+
+	public List<MoneyOut> selectRecentlyRequestList()
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("pageIndex", 0);
+		param.put("pageSize", 5);
+		
+		return sqlMapClientTemplate.queryForList("selectMoneyOutList", param);
 	}
 }

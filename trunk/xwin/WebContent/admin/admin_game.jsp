@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>°ü¸®ÀÚÆäÀÌÁö</title>
+<title>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</title>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
 <link href="/admin_mode/common/style.css" rel="stylesheet" type="text/css">
 <SCRIPT LANGUAGE="JavaScript" src="/lib/calendar.js"></SCRIPT>
@@ -8,7 +8,7 @@
 </head>	
 <body>
 
-<!-- ·Î°í ¹× »ó´Ü ¸Þ´º -->
+<!-- ï¿½Î°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" >
  <tr>
   <td>
@@ -19,23 +19,23 @@
           <td width="7%"><a href="/admin_mode/main.php"><img src="/admin_mode/image/logo.gif" width="170" height="60" border="0"></a></td>
           <td width="42%"><table width="360"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-				<!--td width="72" height="60" align="center" style="padding-top:35px" background="/admin_mode/image/topm41.gif"><a href="/admin_mode/members/" class="menu" >È¸¿ø°ü¸®</a>
+				<!--td width="72" height="60" align="center" style="padding-top:35px" background="/admin_mode/image/topm41.gif"><a href="/admin_mode/members/" class="menu" >È¸ï¿½ï¿½ï¿½</a>
 			
 				</td-->
 
-                <td width="72" height="60" background="/admin_mode/image/topm11.gif" align="center" style="padding-top:35px"><a href="/admin_mode/admin/" class="menu" >°ü¸®ÀÚÁ¤º¸</a></td>
-                <td width="72" height="60" background="/admin_mode/image/topm21.gif" align="center" style="padding-top:35px"><a href="/admin_mode/member/" class="menu" >È¸¿ø°ü¸®</a></td>
-                <td width="72" height="60" background="/admin_mode/image/topm31.gif" align="center" style="padding-top:35px"><a href="/admin_mode/calc/" class="menu" >ÀÔÃâ±Ý°ü¸®</a></td>
-                <td width="72" height="60" background="/admin_mode/image/topm41.gif" align="center" style="padding-top:35px"><a href="/admin_mode/game/" class="menu" >°æ±â°ü¸®</a></td>
-                <td width="72" height="60" background="/admin_mode/image/topm51.gif" align="center" style="padding-top:35px"><a href="/admin_mode/board/?db_name=ÀÏ¹Ý°Ô½ÃÆÇ" class="menu" >°Ô½ÃÆÇ°ü¸®</a></td>
+                <td width="72" height="60" background="/admin_mode/image/topm11.gif" align="center" style="padding-top:35px"><a href="/admin_mode/admin/" class="menu" >ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½</a></td>
+                <td width="72" height="60" background="/admin_mode/image/topm21.gif" align="center" style="padding-top:35px"><a href="/admin_mode/member/" class="menu" >È¸ï¿½ï¿½ï¿½</a></td>
+                <td width="72" height="60" background="/admin_mode/image/topm31.gif" align="center" style="padding-top:35px"><a href="/admin_mode/calc/" class="menu" >ï¿½ï¿½ï¿½ï¿½Ý°ï¿½</a></td>
+                <td width="72" height="60" background="/admin_mode/image/topm41.gif" align="center" style="padding-top:35px"><a href="/admin_mode/game/" class="menu" >ï¿½ï¿½ï¿½ï¿½</a></td>
+                <td width="72" height="60" background="/admin_mode/image/topm51.gif" align="center" style="padding-top:35px"><a href="/admin_mode/board/?db_name=ï¿½Ï¹Ý°Ô½ï¿½ï¿½ï¿½" class="menu" >ï¿½Ô½ï¿½ï¿½Ç°ï¿½</a></td>
 			
-                <!--td width="72" height="60"  align="center" style="padding-top:35px" background="/admin_mode/image/topm31.gif"><a href="/admin_mode/school" class="menu" >ÇÐ±³°ü¸®</a></td-->                
+                <!--td width="72" height="60"  align="center" style="padding-top:35px" background="/admin_mode/image/topm31.gif"><a href="/admin_mode/school" class="menu" >ï¿½Ð±ï¿½ï¿½ï¿½</a></td-->                
 				</tr>
           </table></td>
 		  <td width="34%" valign="bottom" align="center">
 		  <iframe src='/admin_mode/ip.php' style='width:250px;height:25px;border:0px' scrolling=no frameborder=0></iframe>
 		  </td>
-		  <td width="17%" valign="bottom" style="padding-bottom:5px"> <a href="/" target="_blank">  ¹Ù·Î°¡±â</a> | <a href="/admin_mode/logout.php">·Î±×¾Æ¿ô</a> &nbsp;</td>
+		  <td width="17%" valign="bottom" style="padding-bottom:5px"> <a href="/" target="_blank">  ï¿½Ù·Î°ï¿½ï¿½ï¿½</a> | <a href="/admin_mode/logout.php">ï¿½Î±×¾Æ¿ï¿½</a> &nbsp;</td>
         </tr>
     </table></td>
   </tr>
@@ -43,8 +43,8 @@
   </td>
  </tr>
 </table>
-<!-- ·Î°í ¹× »ó´Ü ¸Þ´º -->
-<!-- »ó´Ü ÀÌ¹ÌÁö -->
+<!-- ï¿½Î°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ -->
+<!-- ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ -->
 <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="000000">
  <tr>
   <td>
@@ -61,8 +61,8 @@
   </table>
   </td>
  </tr>
-</table><!-- »ó´Ü ÀÌ¹ÌÁö -->
-<!-- ÆäÀÌÁö ³»¿ë -->
+</table><!-- ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ -->
+<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
 <table width="100%"  border="0" cellpadding="0" cellspacing="0" >
  <tr>
   <td>
@@ -71,49 +71,49 @@
     <td height="100%" valign="top"><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="170" height="500" background="/admin_mode/image/left_bg.gif" valign="top">
-		  <!-- ÁÂÃø ¸Þ´º -->
+		  <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td height="45" background="imgae/leftm_bg.gif" style="padding-left:20px" class="sub_menu_left"> °æ±â°ü¸®</td>
+                <td height="45" background="imgae/leftm_bg.gif" style="padding-left:20px" class="sub_menu_left"> ï¿½ï¿½ï¿½ï¿½</td>
               </tr>
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/1x2game.php"> °æ±â°ü¸® - ½Â¹«ÆÐ</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/1x2game.php"> ï¿½ï¿½ï¿½ï¿½ - ï¿½Â¹ï¿½ï¿½ï¿½</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame.php?handitype=handicap"> °æ±â°ü¸® - (¾ß±¸)ÇÚµðÄ¸</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame.php?handitype=handicap"> ï¿½ï¿½ï¿½ï¿½ - (ï¿½ß±ï¿½)ï¿½Úµï¿½Ä¸</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame_SC.php?handitype=handicap_SC"> °æ±â°ü¸® - (Ãà±¸)ÇÚµðÄ¸</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame_SC.php?handitype=handicap_SC"> ï¿½ï¿½ï¿½ï¿½ - (ï¿½à±¸)ï¿½Úµï¿½Ä¸</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/bat.php"> ¹èÆÃ°ü¸®</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/bat.php"> ï¿½ï¿½ï¿½Ã°ï¿½</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/calc.php"> Á¤»ê°ü¸®</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/calc.php"> dï¿½ï¿½ï¿½</a></td>
     </tr>
 	<!--
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/time.php"> ¹èÆÃ½Ã°£ÀÔ·Â</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/time.php"> ï¿½ï¿½ï¿½Ã½Ã°ï¿½ï¿½Ô·ï¿½</a></td>
     </tr>
 	-->
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/"> ¸®±×°ü¸®</a></td>
+		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/"> ï¿½ï¿½ï¿½×°ï¿½</a></td>
     </tr>
 </table></td>
               </tr>
           </table>
-		  <!-- ÁÂÃø ¸Þ´º -->
+		  <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ -->
 		  </td>
           <td style="padding:15" valign="top">
-		  <!-- ¼¼ºÎ ³»¿ë -->
+		  <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-                  <!-- ¼­¹ö Å¸ÀÌÆ² -->
+                  <!-- ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Æ² -->
 				  <tr>
-                    <td height="30" background="/admin_mode/image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> °æ±â°ü¸® - ½Â¹«ÆÐ</td>
+                    <td height="30" background="/admin_mode/image/tit_bg.gif" style="padding-left:15px" class="sub_tit"> ï¿½ï¿½ï¿½ï¿½ - ï¿½Â¹ï¿½ï¿½ï¿½</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -121,37 +121,37 @@
                   <tr>
                     <td height="2" bgcolor="E7E7E7"> </td>
                   </tr>
-				  <!-- ¼­¹ö Å¸ÀÌÆ² -->
+				  <!-- ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Æ² -->
                   <tr>
                     <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td><!----ÄÁÅÙÃ÷---->
+                    <td><!----ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½---->
 					<SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.tbl_cat_idx.value) { alert('¸®±×¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.tbl_cat_idx.focus(); return false; }
-		if(!d.gamedate.value) { alert('°Ô½ÃÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä'); d.gamedate.focus(); return false; }f
-		if(!d.gametime.value) { alert('°æ±â ½ÃÀÛ ½Ã°¢(ÀÏÀÚ)À» ¼±ÅÃÇÏ¼¼¿ä'); d.gametime.focus(); return false; }
-		if(!d.gametime2.value) { alert('°æ±â ½ÃÀÛ ½Ã°¢(½Ã)À» ¼±ÅÃÇÏ¼¼¿ä'); d.gametime2.focus(); return false; }
-		if(!d.gametime3.value) { alert('°æ±â ½ÃÀÛ ½Ã°¢(ºÐ)À» ¼±ÅÃÇÏ¼¼¿ä'); d.gametime3.focus(); return false; }
-		if(!d.gametime4.value) { alert('°æ±â ½ÃÀÛ ½Ã°¢(ÃÊ)À» ¼±ÅÃÇÏ¼¼¿ä'); d.gametime4.focus(); return false; }
-		if(!d.a1.value) { alert('È¨ÆÀ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.a1.focus(); return false; }
-		if(!d.a1_by.value) { alert('È¨ÆÃ ¹è´ç·üÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.a1_by.focus(); return false; }
+		if(!d.tbl_cat_idx.value) { alert('ï¿½ï¿½ï¿½×¸ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.tbl_cat_idx.focus(); return false; }
+		if(!d.gamedate.value) { alert('ï¿½Ô½ï¿½ï¿½ï¿½; ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.gamedate.focus(); return false; }f
+		if(!d.gametime.value) { alert('ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½(ï¿½ï¿½ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.gametime.focus(); return false; }
+		if(!d.gametime2.value) { alert('ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½(ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.gametime2.focus(); return false; }
+		if(!d.gametime3.value) { alert('ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½(ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.gametime3.focus(); return false; }
+		if(!d.gametime4.value) { alert('ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½(ï¿½ï¿½); ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.gametime4.focus(); return false; }
+		if(!d.a1.value) { alert('È¨ï¿½8ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.a1.focus(); return false; }
+		if(!d.a1_by.value) { alert('È¨ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.a1_by.focus(); return false; }
 		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('¹«½ÂºÎ ¹è´ç·üÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.x_by.focus(); return false; }
+			if(!d.x_by.value) { alert('ï¿½ï¿½ï¿½Âºï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.x_by.focus(); return false; }
 		}
 		else {
-			if(!d.handicap_title.value) { alert('ÇÚµðÄ¸À» ÀÔ·ÂÇÏ¼¼¿ä'); return false; }
+			if(!d.handicap_title.value) { alert('ï¿½Úµï¿½Ä¸; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); return false; }
 		}
-		if(!d.a2.value) { alert('¿øÁ¤ÆÀ¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.a2.focus(); return false; }
-		if(!d.a2_by.value) { alert('¿øÁ¤ÆÀ¸í ¹è´ç·üÀ» ÀÔ·ÂÇÏ¼¼¿ä'); d.a2_by.focus(); return false; }
+		if(!d.a2.value) { alert('ï¿½ï¿½dï¿½8ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.a2.focus(); return false; }
+		if(!d.a2_by.value) { alert('ï¿½ï¿½dï¿½8ï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); d.a2_by.focus(); return false; }
 		d.action='/admin_mode/game/1x2game.php';
 	//	d.submit();
 	}
 
 	function delIT() {
-		if(confirm('ÇØ´ç Á¤º¸¸¦ »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?')) {
+		if(confirm('ï¿½Ø´ï¿½ dï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½fï¿½Ï½Ã°Ú½4Ï±ï¿½?')) {
 			location='/admin_mode/game/1x2game.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
 		}
 		else {
@@ -165,13 +165,13 @@
 		var msg
 
 		if (st=='Y') {
-				msg = 'ÁøÇà';
+				msg = 'ï¿½ï¿½ï¿½ï¿½';
 			}else if(st=='N') {
-				msg = '°­Á¦Á¾·á';
+				msg = 'ï¿½ï¿½f~ï¿½ï¿½';
 			}else if(st=='P') {
-				msg = '¹èÆÃÂ÷´Ü';
+				msg = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 			}else {
-				msg = '¿Ï·á';
+				msg = 'ï¿½Ï·ï¿½';
 			}
 
 
@@ -180,9 +180,9 @@
 			if(d.elements[i].checked==true) { chk++; }
 		}
 
-		if(!chk) { alert('°ÔÀÓÀ» ¼±ÅÃÇÏ¼¼¿ä'); return; }
+		if(!chk) { alert('ï¿½ï¿½ï¿½ï¿½; ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); return; }
 
-		if(confirm(msg+' Ã³¸® ÇÏ½Ã°Ú½À´Ï±î?')) {
+		if(confirm(msg+' Ã³ï¿½ï¿½ ï¿½Ï½Ã°Ú½4Ï±ï¿½?')) {
 			d.action='/admin_mode/game/1x2game.php?mode=update_exe&st='+st;
 			d.submit();
 		}
@@ -209,14 +209,14 @@
 		if(d.gametype_set.value=='handicap') {
 			d.x_by.disabled=true;
 			d.handicap_title.disabled=false;
-			document.all['td_title'].innerHTML='ÇÚµðÄ¸¼³¸í';
+			document.all['td_title'].innerHTML='ï¿½Úµï¿½Ä¸ï¿½ï¿½ï¿½ï¿½';
 			document.all['1x2_dp'].style.display='none';
 			document.all['handicap_dp'].style.display='';
 		}
 		else {
 			d.x_by.disabled=false;
 			d.handicap_title.disabled=true;
-			document.all['td_title'].innerHTML='¹«½ÂºÎ';
+			document.all['td_title'].innerHTML='ï¿½ï¿½ï¿½Âºï¿½';
 			document.all['1x2_dp'].style.display='';
 			document.all['handicap_dp'].style.display='none';
 		}
@@ -232,7 +232,7 @@
 				alert(d.all['score[]'][i].value);
 				alert(d.all['score2[]'][i].value);
 				if(!d.all['score[]'][i].value || !d.all['score2[]'][i].value) { 
-					alert('½ºÄÚ¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä');
+					alert('ï¿½ï¿½ï¿½Ú¾î¸¦ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½');
 					d.all['score[]'][i].focus();
 				}
 				else {
@@ -243,9 +243,9 @@
 		}
 		alert("haha");
 		alert("chk="+chk);
-		if(!chk) { alert('½ÂÆÐ¸¦ ÀÔ·ÂÇÏ½Ç °ÔÀÓÀÇ °á°ú¸¦ ¼±ÅÃÇÏ½Ã°í ½ºÄÚ¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä'); return; }
+		if(!chk) { alert('ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ô·ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°ï¿½ ï¿½ï¿½ï¿½Ú¾î¸¦ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½'); return; }
 
-		if(confirm('°ÔÀÓ°á°ú¸¦ ÀÔ·ÂÇÏ½Ã°Ú½À´Ï±î?\n\nÀÔ·ÂÇÏ½Ã¸é ÀÚµ¿À¸·Î °ÔÀÓÀº Á¾·áµË´Ï´Ù')) {
+		if(confirm('ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï½Ã°Ú½4Ï±ï¿½?\n\nï¿½Ô·ï¿½ï¿½Ï½Ã¸ï¿½ ï¿½Úµï¿½8ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: ~ï¿½ï¿½Ë´Ï´ï¿½')) {
 			d.action='/admin_mode/game/1x2game.php?mode=update_all_exe';
 			d.submit();
 		}
@@ -260,7 +260,7 @@
                         <tr>
                           <td height="30"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                               <tr>
-                                <td> * °ÔÀÓÁ¤º¸¸¦ Á¶È¸ÇÏ½Ã°Å³ª ¼öÁ¤ , »èÁ¦ ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</td>
+                                <td> * ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½ï¿½ï¿½ vÈ¸ï¿½Ï½Ã°Å³ï¿½ ï¿½ï¿½d , ï¿½ï¿½f ï¿½Ï½ï¿½ ï¿½ï¿½ ï¿½Ö½4Ï´ï¿½.</td>
                                 <td align="right"><a href='/admin_mode/game/1x2game.php?mode=write&handitype=1x2&gametype=1x2'><img src='/admin_mode/image/but_input.gif' border=0></a></td>
                               </tr>
                           </table></td>
@@ -269,39 +269,39 @@
 						 <tr>
                           <td align='left' height=30>
 						  <!--
-						  °ÔÀÓÁ¾·ù
+						  ï¿½ï¿½ï¿½ï¿½~ï¿½ï¿½
 						<select name='gametype' onChange='this.form.submit()'>
-						<option value='' >ÀüÃ¼</option>
+						<option value='' >ï¿½ï¿½Ã¼</option>
 						<option value='1x2' selected>1x2</option>
-						<option value='handicap' >ÇÚµðÄ¸</option>
+						<option value='handicap' >ï¿½Úµï¿½Ä¸</option>
 						</select>
 						-->
-						¸®±×¸í
+						ï¿½ï¿½ï¿½×¸ï¿½
 						<select name='tbl_cat_idx' onChange='this.form.submit()'>
-						<option value='' selected>ÀüÃ¼</option>
+						<option value='' selected>ï¿½ï¿½Ã¼</option>
 												<option value='30' > Fre. National Cup </option>
-												<option value='38' >A ¸ÅÄ¡</option>
-												<option value='28' >Aus.³»¼Å³Î½ÎÄ¿</option>
-												<option value='21' >Aus.¸·½ººÐµ¥½º</option>
-												<option value='19' >Bel.ÁÖÇÊ·¯¸®±×</option>
-												<option value='42' >Bel.Æ®À§µåÅ¬¶ó½ê</option>
+												<option value='38' >A ï¿½ï¿½Ä¡</option>
+												<option value='28' >Aus.ï¿½ï¿½ï¿½Å³Î½ï¿½Ä¿</option>
+												<option value='21' >Aus.ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½</option>
+												<option value='19' >Bel.ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='42' >Bel.Æ®'ï¿½ï¿½Å¬ï¿½ï¿½ï¿½</option>
 												<option value='48' >Cze.2nd League</option>
-												<option value='25' >Cze.°¨ºÎ¸®´©½º</option>
-												<option value='16' >Dan. ½´ÆÛ¸®°¡¿£</option>
-												<option value='37' >Eng. ÇÁ¸®¹Ì¾î</option>
+												<option value='25' >Cze.ï¿½ï¿½ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='16' >Dan. ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='37' >Eng. ï¿½xï¿½ï¿½Ì¾ï¿½</option>
 												<option value='40' >Eng.League Two</option>
 												<option value='34' >Euro U21 Qualifiers</option>
 												<option value='35' >Fin. League2</option>
-												<option value='2' >Fin.º£ÀÌÄ«¿ì½º</option>
+												<option value='2' >Fin.ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ì½º</option>
 												<option value='44' >Fre. Fa Cup</option>
-												<option value='14' >Fre.¸£¼§ÇÇ¿À³ª</option>
-												<option value='3' >Ger.ºÐµ¥½º¸®°¡</option>
-												<option value='22' >Gre.³»¼Å³Î¸®±×</option>
-												<option value='49' >Hun.½ºÆ÷¸£´Ï</option>
-												<option value='39' >Ire. ÇÁ¸®¹Ì¾î</option>
+												<option value='14' >Fre.ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿3ï¿½</option>
+												<option value='3' >Ger.ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='22' >Gre.ï¿½ï¿½ï¿½Å³Î¸ï¿½ï¿½ï¿½</option>
+												<option value='49' >Hun.ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='39' >Ire. ï¿½xï¿½ï¿½Ì¾ï¿½</option>
 												<option value='46' >Ita. Fa Cup</option>
 												<option value='31' >Ita. FA Cup</option>
-												<option value='6' >Ita.¼¼¸®¿¡A</option>
+												<option value='6' >Ita.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A</option>
 												<option value='17' >J-League</option>
 												<option value='43' >Jp. Cup</option>
 												<option value='36' >Jpn.Kirin Cup</option>
@@ -309,37 +309,37 @@
 												<option value='9' >KBO</option>
 												<option value='8' >MLB</option>
 												<option value='45' >NBA</option>
-												<option value='11' >Net.¿¡·¹µðºñÁö</option>
-												<option value='18' >Nor.¿¤¸®Æ®¼¼¸®..</option>
+												<option value='11' >Net.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+												<option value='18' >Nor.ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½..</option>
 												<option value='10' >NPB</option>
-												<option value='15' >por.¿¢½ºÆ®¶ó...</option>
-												<option value='20' >Por.ÇÁ¸®¸ÞÀÌ¶ó</option>
-												<option value='26' >Rom.µðºñÁö¾ÆA</option>
-												<option value='13' >Rus.ÇÁ¸®¹Ì¾î</option>
-												<option value='29' >Ser.½´ÆÛ¸®°¡</option>
+												<option value='15' >por.ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½...</option>
+												<option value='20' >Por.ï¿½xï¿½ï¿½ï¿½ï¿½Ì¶ï¿½</option>
+												<option value='26' >Rom.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A</option>
+												<option value='13' >Rus.ï¿½xï¿½ï¿½Ì¾ï¿½</option>
+												<option value='29' >Ser.ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½</option>
 												<option value='47' >Sing.League</option>
-												<option value='33' >Spa. ¼¼±º´Ù2ºÎ</option>
-												<option value='4' >Spa.ÇÁ¸®¸Þ¶ó</option>
-												<option value='50' >Svk.ÄÚ¸£°ï</option>
-												<option value='41' >Swe.½´Æä¸£Åº</option>
-												<option value='23' >Swe.¾Ë½ºº¥½ºÄ­</option>
-												<option value='24' >Swi.³ªÄ¡¿À³¯A</option>
-												<option value='12' >Tur.½´ÆÛ¸®°¡</option>
+												<option value='33' >Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</option>
+												<option value='4' >Spa.ï¿½xï¿½ï¿½Þ¶ï¿½</option>
+												<option value='50' >Svk.ï¿½Ú¸ï¿½ï¿½ï¿½</option>
+												<option value='41' >Swe.ï¿½ï¿½ï¿½ä¸£Åº</option>
+												<option value='23' >Swe.ï¿½Ë½ï¿½ï¿½ï¿½ï¿½ï¿½Ä­</option>
+												<option value='24' >Swi.ï¿½ï¿½Ä¡ï¿½3ï¿½A</option>
+												<option value='12' >Tur.ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½</option>
 												<option value='27' >Usa.MLS</option>
 												</select>
-						 °æ±âÀÏÀÚ <input type='text' name='sdate'value='' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand">
+						 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <input type='text' name='sdate'value='' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand">
 						 <select name='search'>
-						 <option value='a1' >È¨ÆÀ¸í</option>
-						 <option value='a2' >¿øÁ¤ÆÀ¸í</option>
+						 <option value='a1' >È¨ï¿½8ï¿½</option>
+						 <option value='a2' >ï¿½ï¿½dï¿½8ï¿½</option>
 						 </select>
 						 <input type='text' name='kwd' value=''>
-						 <input type='submit' value='°Ë »ö'>
+						 <input type='submit' value='ï¿½ï¿½ ï¿½ï¿½'>
 						  </td>
                         </tr>
 						<!--
 						<tr>
 							<td>
-								<font color='#FFFF00'> ¡á </font>ÇÚµðÄ¸ °æ±â / ¡à 1x2 °æ±â
+								<font color='#FFFF00'> ï¿½ï¿½ </font>ï¿½Úµï¿½Ä¸ ï¿½ï¿½ï¿½ / ï¿½ï¿½ 1x2 ï¿½ï¿½ï¿½
 								</td>
 							</tr>
 						</tr>
@@ -351,37 +351,37 @@
 							<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
                               <tr align="center" bgcolor="#E4E4E4">
 								<td width=5%><a onClick="allcheck()" style='cursor:hand'><input type='checkbox' name='ac'></a></td>
-								<td width=5%>¹øÈ£</td>
-								<td>¸®±×¸í</td>
-								<td>ÀÏÀÚ</td>
-								<td>°æ±â½Ã°£</td>
-								<td>È¨ÆÀ</td>
-								<td>¿øÁ¤ÆÀ</td>
-								<td>½Â</td>
+								<td width=5%>ï¿½ï¿½È£</td>
+								<td>ï¿½ï¿½ï¿½×¸ï¿½</td>
+								<td>ï¿½ï¿½ï¿½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½Ã°ï¿½</td>
+								<td>È¨ï¿½ï¿½</td>
+								<td>ï¿½ï¿½dï¿½ï¿½</td>
+								<td>ï¿½ï¿½</td>
 								<td>
-								¹«</td>
-								<td>ÆÐ</td>
-								<td>°á°ú</td>
-								<td>½ºÄÚ¾î</td>
-								<td>»óÅÂ</td>
+								ï¿½ï¿½</td>
+								<td>ï¿½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½Ú¾ï¿½</td>
+								<td>ï¿½ï¿½ï¿½ï¿½</td>
 							  </tr>
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='298'></td>
 								<td width=5%>77</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=298&page=1&page_list=1&search=&kwd=&type='>A ¸ÅÄ¡</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=298&page=1&page_list=1&search=&kwd=&type='>A ï¿½ï¿½Ä¡</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=298&page=1&page_list=1&search=&kwd=&type='>2008-09-23</td>
 								<td>2008-09-25 00:00:00</td>
 								<td>dddd</td>
 								<td>xxxx</td>
-								<td>2<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2<BR><B>¹èÆÃ : 0¿ø</B>
+								2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								½Â								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								2:1																</td>
 								<td>E</td>
@@ -394,15 +394,15 @@
 								<td>2008-09-25 10:00:00</td>
 								<td>dd</td>
 								<td>xx</td>
-								<td>1.5<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>1.5<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								1.3<BR><B>¹èÆÃ : 0¿ø</B>
+								1.3<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>1.4<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>1.4<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								¹«								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								2:2																</td>
 								<td>E</td>
@@ -410,20 +410,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='295'></td>
 								<td width=5%>75</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=295&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=295&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=295&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 00:00:00</td>
-								<td>ÄÚ¸£µµ¹Ù</td>
-								<td>´©¸¸½Ã¾Æ</td>
-								<td>2.2<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½ï¿½ï¿½Ã¾ï¿½</td>
+								<td>2.2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2.9<BR><B>¹èÆÃ : 0¿ø</B>
+								2.9<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								½Â								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								3:2																</td>
 								<td>E</td>
@@ -431,20 +431,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='294'></td>
 								<td width=5%>74</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=294&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=294&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=294&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 01:00:00</td>
-								<td>Çì¶óÅ¬·¹½º</td>
-								<td>¶ó½ºÆÈ¸¶½º</td>
-								<td>2<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½</td>
+								<td>2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2.9<BR><B>¹èÆÃ : 0¿ø</B>
+								2.9<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3.3<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3.3<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								ÆÐ								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								1:2																</td>
 								<td>E</td>
@@ -452,20 +452,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='293'></td>
 								<td width=5%>73</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=293&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=293&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=293&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 01:00:00</td>
-								<td>Æú¸®µ¥Æ÷¸£Æ¼º¸ ¿¡È÷µµ</td>
-								<td>¿¤Ã¼CF</td>
-								<td>1.8<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</td>
+								<td>ï¿½ï¿½Ã¼CF</td>
+								<td>1.8<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								3.1<BR><B>¹èÆÃ : 0¿ø</B>
+								3.1<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3.4<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3.4<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								½Â								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								2:0																</td>
 								<td>E</td>
@@ -473,20 +473,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='292'></td>
 								<td width=5%>72</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=292&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=292&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=292&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 01:00:00</td>
-								<td>SD ¿¡ÀÌ¹Ù¸£</td>
-								<td>¼¼·¹Áî CD</td>
-								<td>1.8<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>SD ï¿½ï¿½ï¿½Ì¹Ù¸ï¿½</td>
+								<td>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ CD</td>
+								<td>1.8<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								3.1<BR><B>¹èÆÃ : 0¿ø</B>
+								3.1<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3.35<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3.35<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								¹«								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								0:0																</td>
 								<td>E</td>
@@ -494,20 +494,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='291'></td>
 								<td width=5%>71</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=291&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=291&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=291&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 01:00:00</td>
-								<td>Ä«µðÁî FC </td>
-								<td>Èû³ª½ºÆ½ Å¸¶ó°í³ª</td>
-								<td>2.2<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>Ä«ï¿½ï¿½ï¿½ï¿½ FC </td>
+								<td>ï¿½ï¿½Æ½ Å¸ï¿½ï¿½?</td>
+								<td>2.2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2.7<BR><B>¹èÆÃ : 0¿ø</B>
+								2.7<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3.2<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3.2<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								ÆÐ								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								0:2																</td>
 								<td>E</td>
@@ -515,20 +515,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='290'></td>
 								<td width=5%>70</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=290&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=290&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=290&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 01:00:00</td>
-								<td>»ì¶ó¸ÁÄ«</td>
-								<td>¶ó½Ì Æä·Ñ</td>
-								<td>2.15<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½ï¿½ï¿½ï¿½Ä«</td>
+								<td>ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½</td>
+								<td>2.15<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2.7<BR><B>¹èÆÃ : 0¿ø</B>
+								2.7<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>3.15<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>3.15<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								½Â								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								2:1																</td>
 								<td>E</td>
@@ -536,20 +536,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='289'></td>
 								<td width=5%>69</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=289&page=1&page_list=1&search=&kwd=&type='>Spa. ¼¼±º´Ù2ºÎ</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=289&page=1&page_list=1&search=&kwd=&type='>Spa. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=289&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 03:30:00</td>
-								<td>¾Ë¶óº£½º</td>
-								<td>·¹¾Ë½ºÆ÷¸£ÆÃ µ¥ È÷È¥</td>
-								<td>2.8<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½Ë¶óº£½ï¿½</td>
+								<td>ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¥</td>
+								<td>2.8<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								2.8<BR><B>¹èÆÃ : 0¿ø</B>
+								2.8<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>2.25<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>2.25<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								¹«								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								0:0																</td>
 								<td>E</td>
@@ -557,20 +557,20 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=5%><input type='checkbox' name='idx[]' value='288'></td>
 								<td width=5%>68</td>
-								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=288&page=1&page_list=1&search=&kwd=&type='>A ¸ÅÄ¡</a></td>
+								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=288&page=1&page_list=1&search=&kwd=&type='>A ï¿½ï¿½Ä¡</a></td>
 								<td><a href='/admin_mode/game/1x2game.php?mode=read&idx=288&page=1&page_list=1&search=&kwd=&type='>2008-05-26</td>
 								<td>2008-05-26 02:15:00</td>
-								<td>½º¿þµ§ U21</td>
-								<td>Æ÷¸£ÅõÄ® U21</td>
-								<td>2.55<BR><B>¹èÆÃ : 0¿ø</B></td>
+								<td>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ U21</td>
+								<td>ï¿½ï¿½ï¿½ï¿½Ä® U21</td>
+								<td>2.55<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B></td>
 								<td>
 																
-								3<BR><B>¹èÆÃ : 0¿ø</B>
+								3<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 																</td>
-								<td>2.45<BR><B>¹èÆÃ : 0¿ø</B>
+								<td>2.45<BR><B>ï¿½ï¿½ï¿½ï¿½ : 0ï¿½ï¿½</B>
 								</td>
 								<td>
-								¹«								</td>
+								ï¿½ï¿½								</td>
 								<td>
 																								0:0																</td>
 								<td>E</td>
@@ -582,11 +582,11 @@
                         </tr>
 						<tr>
                           <td align='right' height=40>
-						  <input type='button' value='½ÂÆÐÀû¿ë' onClick="upIT()">
-						  <input type='button' value='°ÔÀÓ»èÁ¦' onClick="stIT('D')">
-						  <input type='button' value='°­Á¦Á¾·á' onClick="stIT('N')">
-						  <input type='button' value='°ÔÀÓÁøÇà' onClick="stIT('Y')">
-						  <input type='button' value='¹èÆÃÂ÷´Ü' onClick="stIT('P')">
+						  <input type='button' value='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' onClick="upIT()">
+						  <input type='button' value='ï¿½ï¿½ï¿½Ó»ï¿½f' onClick="stIT('D')">
+						  <input type='button' value='ï¿½ï¿½f~ï¿½ï¿½' onClick="stIT('N')">
+						  <input type='button' value='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' onClick="stIT('Y')">
+						  <input type='button' value='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' onClick="stIT('P')">
 						  </td>
 						 </tr>
                         <tr>
@@ -596,7 +596,7 @@
 						</form>
                       </table>
                       
-		  <!-- ¼¼ºÎ ³»¿ë ³¡ -->
+		  <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ -->
                 </td>
               </tr>
           </table></td>
@@ -605,17 +605,17 @@
   </tr>
 </table>
 </td></tr></table>
-<!-- ÆäÀÌÁö ³»¿ë -->
-<!-- ÇÏ´Ü copy -->
+<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
+<!-- ï¿½Ï´ï¿½ copy -->
 
   <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td height="5" bgcolor="CDCDCD"> </td>
   </tr>
   <tr>
-    <td height="40" align="center" bgcolor="E7E7E7">Copyright ¨Ï 2008 <b>CASHBET24</b> All rights reserved.</td>
+    <td height="40" align="center" bgcolor="E7E7E7">Copyright ï¿½ï¿½ 2008 <b>bwin-Kor</b> All rights reserved.</td>
   </tr>
   </table>
-<!-- ÇÏ´Ü copy-->
+<!-- ï¿½Ï´ï¿½ copy-->
 </body>
 </html>

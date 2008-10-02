@@ -56,13 +56,17 @@
                   <tr>
                     <td><!----컨텐츠---->
 					<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
+	function checkIT(id) {
 		var d=document.regist;
 		if(confirm('환전하시겠습니까?')) {			
-			d.action='/admin_mode/calc/exchange.php';
-		}
-		else {
-			return false;
+			var query = "mode=acceptMoneyOutRequest";
+			query += "&id=" + id;
+			var http = new JKL.ParseXML("adminAccount.aspx", query);
+			var result = http.parse();
+			alert(result.resultXml.message);
+			if (result.resultXml.code == 0) {
+				location.reload();		
+			} 
 		}
 	}
 
@@ -83,23 +87,23 @@
                     <form method='post' name='regist' enctype="multipart/form-data" onSubmit="return checkIT()">  
 					 <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">신청자아이디</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>개똥이</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyOut.getUserId()%></td>
                       </tr>		
 					   <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">환전요청금액</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>20,000</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyOut.getMoney()%></td>
                       </tr>		
 					 <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">환전계좌정보</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>(신한) 3333 <B>(예금주 : 3333)</B></td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3>(<%=moneyOut.getBankName()%>) <%=moneyOut.getNumber()%> <B>(예금주 : <%=moneyOut.getName()%>)</B></td>
                       </tr>		
 					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">요청일자</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3>2008-09-30 00:50:21</td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyOut.getReqDateStr()%></td>
                       </tr>				
 					  					   <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">환전일자</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3></td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3><%=moneyOut.getProcDateStr()%></td>
                       </tr>		
 					  					 
                 </table>
@@ -108,7 +112,8 @@
               <tr>
                 <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
                               <tr>
-							                                  <td><img src="images/admin/but_s_del.gif" border="0" onClick='delIT(6)' style='cursor:hand'></td>                               
+                                <td><img src="images/admin/but_input.gif" border="0" onclick="checkIT(<%=moneyOut.getId()%>)"></td>                               
+                                <!--td><img src="images/admin/but_s_del.gif" border="0" onClick='delIT(13)' style='cursor:hand'></td-->                               
                                 <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
                               </tr>
                           </table></td>

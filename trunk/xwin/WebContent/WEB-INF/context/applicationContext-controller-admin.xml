@@ -17,9 +17,12 @@
 		
 	<bean id="adminMainController"
 		class="com.xwin.web.controller.admin.AdminMainController"
+		p:memberDao-ref="memberDao"
 		p:gameDao-ref="gameDao"
 		p:bettingDao-ref="bettingDao"
 		p:boardDao-ref="boardDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:moneyOutDao-ref="moneyOutDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 		
 	<bean id="adminInfoController"

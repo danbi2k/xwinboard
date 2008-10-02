@@ -56,22 +56,27 @@
 	
 	<select id="selectMemberList" resultMap="memberResultMap"
 		parameterClass="map">
-		SELECT * FROM tbl_member WHERE GRADE != 'UG100'
-			<isNotNull prepend="AND" property="grade">
-				GRADE = #grade#
-			</isNotNull>
-			<isNotNull prepend="AND" property="userId">
-				USERID LIKE #userId#
-			</isNotNull>
-			<isNotNull prepend="AND" property="nickName">
-				NICKNAME LIKE #nickName#
-			</isNotNull>			
-			<isNotNull prepend="AND" property="mobile">
-				MOBILE LIKE #mobile#
-			</isNotNull>			
-			<isNotNull prepend="AND" property="email">
-				EMAIL LIKE #email#
-			</isNotNull>
+		SELECT * FROM tbl_member
+		WHERE GRADE != 'UG100'
+		<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			USERID LIKE #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickName">
+			NICKNAME LIKE #nickName#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="mobile">
+			MOBILE LIKE #mobile#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="email">
+			EMAIL LIKE #email#
+		</isNotNull>
+		ORDER BY ID DESC
+		<isNotNull prepend="" property="pageIndex">
+			LIMIT #pageIndex#, #pageSize#
+		</isNotNull>
 	</select>
 	
 	<select id="countMemberByUserId" parameterClass="string" resultClass="integer">

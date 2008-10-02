@@ -43,4 +43,13 @@ public class MoneyInDao extends XwinDao
 	{
 		return (MoneyIn) sqlMapClientTemplate.queryForObject("selectMoneyIn", id);		
 	}
+
+	public List<MoneyIn> selectRecentlyRequestList()
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("pageIndex", 0);
+		param.put("pageSize", 5);
+		
+		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);	
+	}
 }

@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.domain.user.*"%>
+<%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="java.util.*"%>
 
 <%@ include file="admin_header.jsp"%>
+
+<%
+	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+	List<MoneyIn> moneyInList = (List<MoneyIn>) request.getAttribute("moneyInList");
+	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyOutList");
+%>
 
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
@@ -54,36 +63,20 @@
 								<td width=15%>닉네임</td>
 								<td width=15%>가입일</td>
 							  </tr>
+                              <%
+                              if (memberList != null) {
+                            	  for (Member member : memberList) {
+                              %>
                               <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>1</td>
-								<td width=15%><a href='./member/?mode=read&userid=ori7907&page=&page_list=&search=&kwd=&type='>ori7907</a></td>
-								<td width=15%>TOTO J</td>
-								<td width=15%>2008-05-27 00:35:12</td>
+								<td width=10%><%=member.getId()%></td>
+								<td width=15%><a href='adminMember.aspx?mode=viewMemberDetail&userId=<%=member.getUserId()%>'><%=member.getUserId()%></a></td>
+								<td width=15%><%=member.getNickName()%></td>
+								<td width=15%><%=member.getJoinDateStr()%></td>
 							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>2</td>
-								<td width=15%><a href='./member/?mode=read&userid=181818&page=&page_list=&search=&kwd=&type='>181818</a></td>
-								<td width=15%>일지매</td>
-								<td width=15%>2008-05-26 21:11:31</td>
-							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>3</td>
-								<td width=15%><a href='./member/?mode=read&userid=alltt&page=&page_list=&search=&kwd=&type='>alltt</a></td>
-								<td width=15%>alltt</td>
-								<td width=15%>2008-05-26 18:42:42</td>
-							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>4</td>
-								<td width=15%><a href='./member/?mode=read&userid=개똥이1&page=&page_list=&search=&kwd=&type='>개똥이1</a></td>
-								<td width=15%>개똥이1</td>
-								<td width=15%>2008-05-26 16:37:40</td>
-							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>5</td>
-								<td width=15%><a href='./member/?mode=read&userid=개똥이&page=&page_list=&search=&kwd=&type='>개똥이</a></td>
-								<td width=15%>개똥이</td>
-								<td width=15%>2008-05-26 16:36:40</td>
-							  </tr>
+							<%
+                            	  }
+                              }
+							%>
 					
 </table>							</td>
 							<td width=50% valign='top'>
@@ -108,7 +101,7 @@
 								<td width=15%>작성일</td>
 							  </tr>
                               <tr align="center" bgcolor="#FFFFFF">
-								<td width=100% colspan='4' align='center'>등록된 회원이 없습니다.</td>
+								<td width=100% colspan='4' align='center'>등록된 문의사항이 없습니다.</td>
 							  </tr>
 					
 </table>							</td>
@@ -138,30 +131,20 @@
 								<td width=15%>금액</td>
 								<td width=15%>신청일</td>
 							  </tr>
+ 							  <%
+                              if (moneyInList != null) {
+                            	  for (MoneyIn moneyIn : moneyInList) {
+                              %>
                               <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>1</td>
-								<td width=15%><a href='./calc/?mode=read&idx=12&page=&page_list=&search=&kwd=&type='>개똥이</a></td>
-								<td width=15%>3,000,000</td>
-								<td width=15%>2008-09-30 00:37:26</td>
+								<td width=10%><%=moneyIn.getId()%></td>
+								<td width=15%><%=moneyIn.getName()%></td>
+								<td width=15%><%=moneyIn.getMoney()%></td>
+								<td width=15%><%=moneyIn.getReqDateStr()%></td>
 							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>2</td>
-								<td width=15%><a href='./calc/?mode=read&idx=11&page=&page_list=&search=&kwd=&type='>최강</a></td>
-								<td width=15%>1,000,000</td>
-								<td width=15%>2008-05-27 00:38:25</td>
-							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>3</td>
-								<td width=15%><a href='./calc/?mode=read&idx=10&page=&page_list=&search=&kwd=&type='>정현주</a></td>
-								<td width=15%>500,000</td>
-								<td width=15%>2008-05-27 00:38:16</td>
-							  </tr>
-                              <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>4</td>
-								<td width=15%><a href='./calc/?mode=read&idx=9&page=&page_list=&search=&kwd=&type='>일지매</a></td>
-								<td width=15%>5,000,000</td>
-								<td width=15%>2008-05-27 00:36:15</td>
-							  </tr>
+							<%
+                            	  }
+                              }
+							%>
 					
 </table>							</td>
 							<td width=50% valign='top'>
@@ -185,12 +168,20 @@
 								<td width=15%>금액</td>
 								<td width=15%>신청일</td>
 							  </tr>
+							 <%
+                              if (moneyOutList != null) {
+                            	  for (MoneyOut moneyOut : moneyOutList) {
+                              %>
                               <tr align='center' bgcolor='#ffffff'>
-								<td width=10%>1</td>
-								<td width=15%><a href='./calc/exchange.php?mode=read&idx=6&page=&page_list=&search=&kwd=&type='>개똥이</a></td>
-								<td width=15%>20,000</td>
-								<td width=15%>2008-09-30 00:50:21</td>
+								<td width=10%><%=moneyOut.getId()%></td>
+								<td width=15%><%=moneyOut.getName()%></td>
+								<td width=15%><%=moneyOut.getMoney()%></td>
+								<td width=15%><%=moneyOut.getReqDateStr()%></td>
 							  </tr>
+							<%
+                            	  }
+                              }
+							%>
 					
 </table>							</td>
 						</tr>

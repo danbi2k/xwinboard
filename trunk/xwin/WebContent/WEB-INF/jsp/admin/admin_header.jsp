@@ -24,7 +24,7 @@
   <tr>
     <td height="60"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="7%"><a href="adminMain.aspx?mode=viewAdminMain"><img src="images/admin/logo.gif" width="170" height="60" border="0"></a></td>
+          <td width="7%"><a href="adminMain.aspx?mode=viewAdminMain"><h3>Bwin-Kor</H3></a></td>
           <td width="42%"><table width="360"  border="0" cellspacing="0" cellpadding="0">
               <tr>
 				<!--td width="72" height="60" align="center" style="padding-top:35px" background="images/admin/topm41.gif"><a href="members/" class="menu" >회원관리</a>

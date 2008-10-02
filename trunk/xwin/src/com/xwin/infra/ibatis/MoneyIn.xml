@@ -71,5 +71,9 @@
 				]]>
 			</isNotNull>
 		</dynamic>
+		ORDER BY ID DESC
+		<isNotNull property="pageIndex">
+		LIMIT #pageIndex#, #pageSize#
+		</isNotNull>
 	</select>
 </sqlMap>
