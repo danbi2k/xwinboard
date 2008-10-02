@@ -68,6 +68,7 @@
 		class="com.xwin.web.controller.user.MoneyOutController"
 		p:memberDao-ref="memberDao"
 		p:moneyOutDao-ref="moneyOutDao"
+		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myMoneyController"
