@@ -45,6 +45,7 @@ public class LoginController extends XwinController
 		
 		HttpSession session = request.getSession();		
 		session.setAttribute("Member", member);
+		session.setAttribute("MemberDao", memberDao);
 		
 		return mv;
 	}

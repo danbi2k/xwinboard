@@ -2,13 +2,16 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.xwin.domain.user.*" %>
-
+<%@ page import="com.xwin.infra.dao.*" %>
 <%
 	Member member = (Member) session.getAttribute("Member");
+	if (member != null) {
+		MemberDao memberDao = (MemberDao) session.getAttribute("MemberDao");
+		member = memberDao.selectMember(member.getUserId(), null);
+	}
 	boolean login = member == null ? false : true;
 %>
 <html>
-
 <head>
 <title>bwin-Kor-local</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
@@ -30,6 +33,7 @@
 	<script language="JavaScript" src="script/utf8.js"></script>
 </head>
 <body style="margin:0">
+
 <a name="top"></a>
 
 
