@@ -34,8 +34,8 @@
                 <td width="72" height="60" background="images/admin/topm11.gif" align="center" style="padding-top:35px"><a href="adminInfo.aspx?mode=viewAdminInfo" class="menu" >관리자정보</a></td>
                 <td width="72" height="60" background="images/admin/topm21.gif" align="center" style="padding-top:35px"><a href="adminMember.aspx?mode=viewAdminMember" class="menu" >회원관리</a></td>
                 <td width="72" height="60" background="images/admin/topm31.gif" align="center" style="padding-top:35px"><a href="adminAccount.aspx?mode=viewMoneyIn" class="menu" >입출금관리</a></td>
-                <td width="72" height="60" background="images/admin/topm41.gif" align="center" style="padding-top:35px"><a href="game/" class="menu" >경기관리</a></td>
-                <td width="72" height="60" background="images/admin/topm51.gif" align="center" style="padding-top:35px"><a href="board/?db_name=일반게시판" class="menu" >게시판관리</a></td>
+                <td width="72" height="60" background="images/admin/topm41.gif" align="center" style="padding-top:35px"><a href="adminLeague.aspx?mode=viewLeagueList" class="menu" >경기관리</a></td>
+                <td width="72" height="60" background="images/admin/topm51.gif" align="center" style="padding-top:35px"><a href="adminBoard.aspx?mode=viewBoardList" class="menu" >게시판관리</a></td>
 			
                 <!--td width="72" height="60"  align="center" style="padding-top:35px" background="images/admin/topm31.gif"><a href="school" class="menu" >학교관리</a></td-->                
 				</tr>

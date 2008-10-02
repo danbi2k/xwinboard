@@ -19,14 +19,13 @@ import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
-{
-	public ModelAndView registerGameForm(HttpServletRequest request,
+{	
+	public ModelAndView viewRegisterGameForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String type = (String) request.getParameter("type");
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
-		ModelAndView mv = new ModelAndView("admin/register_game_" + type);
+		ModelAndView mv = new ModelAndView("admin/game/register_game");
 		mv.addObject("leagueList", leagueList);
 		return mv;
 	}
@@ -64,7 +63,7 @@ public class AdminGameController extends XwinController
 		List<League> leagueList = leagueDao.selectLeagueList();
 		String type = request.getParameter("type");
 		
-		ModelAndView mv = new ModelAndView("admin/admin_game_" + type);
+		ModelAndView mv = new ModelAndView("admin/game/admin_game");
 		mv.addObject("leagueList", leagueList);
 		return mv;
 	}
@@ -78,24 +77,6 @@ public class AdminGameController extends XwinController
 		List<Game> gameList = gameDao.selectGameList(type, status, null, null);
 		
 		ResultXml rx = new ResultXml(0, null, gameList);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		return mv;
-	}
-	
-	public ModelAndView viewLeagueList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		ModelAndView mv = new ModelAndView("admin/league");
-		return mv;
-	}
-	
-	public ModelAndView getLeagueList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		List<League> leagueList = leagueDao.selectLeagueList();
-		
-		ResultXml rx = new ResultXml(0, null, leagueList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

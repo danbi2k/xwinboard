@@ -15,9 +15,7 @@ public class AdminInfoController extends XwinController
 	public ModelAndView viewAdminInfo(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception
 	{
-		ResultXml rx = null;		
 		ModelAndView mv = new ModelAndView("admin/admin_info");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
 	
