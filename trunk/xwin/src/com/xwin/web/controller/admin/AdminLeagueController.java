@@ -18,8 +18,8 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView viewLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String search = XwinUtil.aNvl(request.getParameter("search"));
-		String keyword = XwinUtil.aNvl(request.getParameter("keyword"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		
 		if (keyword == null)
 			search = null;

@@ -24,6 +24,7 @@
 		<result property="leagueId" column="LEAGUE_ID"/>
 		<result property="handy" column="HANDY"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
+		<result property="betStatus" column="BET_STATUS"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -33,6 +34,12 @@
 		SELECT g.*, l.NAME as LEAGUE_NAME
 		FROM tbl_game g, tbl_league l
 		WHERE g.LEAGUE_ID = l.ID
+		<isNotNull prepend="AND" property="homeTeam">
+			g.HOME_TEAM LIKE #homeTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="awayTeam">
+			g.AWAY_TEAM LIKE #awayTeam#
+		</isNotNull>
 		<isNotNull prepend="AND" property="type">
 			g.TYPE = #type#
 		</isNotNull>
@@ -42,14 +49,105 @@
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
 		</isNotNull>
+		<isNotNull prepend="AND" property="betStatus">
+			g.BET_STATUS = #betStatus#
+		</isNotNull>
 		<isNotNull prepend="AND" property="fromDate">
 			g.GAME_DATE > #fromDate#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			g.GAME_DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			g.GAME_DATE <= #toDate#
+			]]>
+		</isNotNull>
+		ORDER BY GAME_DATE DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectGameCount" resultClass="int" parameterClass="map">
+		SELECT COUNT(*)
+		FROM tbl_game g, tbl_league l
+		WHERE g.LEAGUE_ID = l.ID
+		<isNotNull prepend="AND" property="homeTeam">
+			g.HOME_TEAM LIKE #homeTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="awayTeam">
+			g.AWAY_TEAM LIKE #awayTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="type">
+			g.TYPE = #type#
+		</isNotNull>
+		<isNotNull prepend="AND" property="leagueId">
+			l.ID = #leagueId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="betStatus">
+			g.BET_STATUS = #betStatus#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			g.GAME_DATE > #fromDate#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			g.GAME_DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			g.GAME_DATE <= #toDate#
+			]]>
 		</isNotNull>
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">
 		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE)
 			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#)
+	</insert>
+	
+	<insert id="updateGame" parameterClass="Game">
+		UPDATE tbl_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="homeTeam">
+			HOME_TEAM = #homeTeam#
+			</isNotNull>
+			<isNotNull prepend="," property="awayTeam">
+			AWAY_TEAM = #awayTeam#
+			</isNotNull>
+			<isNotNull prepend="," property="winRate">
+			WIN_RATE = #winRate#
+			</isNotNull>
+			<isNotNull prepend="," property="drawRate">
+			DRAW_RATE = #drawRate#
+			</isNotNull>
+			<isNotNull prepend="," property="loseRate">
+			LOSE_RATE = #loseRate#
+			</isNotNull>
+			<isNotNull prepend="," property="gameDate">
+			GAME_DATE = #gameDate#
+			</isNotNull>
+			<isNotNull prepend="," property="leagueId">
+			LEAGUE_ID = #leagueId#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+			TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="betStatus">
+			BET_STATUS = #betStatus#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
 	</insert>
 	
 	<update id="updateGameScore" parameterClass="map">

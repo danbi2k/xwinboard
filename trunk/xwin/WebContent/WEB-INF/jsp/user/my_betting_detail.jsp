@@ -19,8 +19,8 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
 	<META HTTP-EQUIV="Refresh" Content="1800; URL=/member/logout.asp?auto=1">
 
-    <link rel="stylesheet" href="common/default.css">
-    <script language="JavaScript" src="common/default.js"></script>
+    <link rel="stylesheet" href="style/default.css">
+    <script language="JavaScript" src="script/default.js"></script>
 </head>
 <script src="game.js"></script>
 <body style="margin:0" oncontextmenu="return false">
@@ -55,7 +55,7 @@
 			for (BetGame betGame : betGameList) {
 		%>
 		<tr height="26" bgcolor="#0a0a0a">
-			<td>08-09-28 17:00</td>
+			<td><%=betGame.getGameDateStr()%></td>
 			<td align="left">
 				<table cellpadding="0" cellspacing="2"><tr><td><img src="symbol/6.gif" style="display:none" onload="this.style.display='';"></td>
 				<td><%=betGame.getLeagueName()%></td>

@@ -9,7 +9,6 @@ import com.xwin.domain.game.Game;
 
 public class GameDao extends XwinDao
 {	
-	private static final Integer pageSize = 5;
 	public void insertGame(Game gameWdl)
 	{
 		sqlMapClientTemplate.insert("insertGame", gameWdl);
@@ -20,9 +19,14 @@ public class GameDao extends XwinDao
 		return (Game) sqlMapClientTemplate.queryForObject("selectGameById", id);
 	}
 	
-	public List<Game> selectGame(Map<String, String> where)
+	public List<Game> selectGameList(Map<String, Object> param)
 	{
-		return sqlMapClientTemplate.queryForList("selectGameByWhere");
+		return sqlMapClientTemplate.queryForList("selectGameList", param);
+	}
+	
+	public Integer selectGameCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectGameCount", param);
 	}
 	
 	public List<Game> selectGameList(String type, String status, String leagueId, Date fromDate)
@@ -48,13 +52,9 @@ public class GameDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameScore", param);
 	}
 	
-	public void updateGame(Map<String, String> value, Map<String, String> where)
+	public void updateGame(Game game)
 	{
-		Map<String, String> condition = new HashMap<String, String>();
-		condition.putAll(value);
-		condition.putAll(where);
-		
-		sqlMapClientTemplate.update("updateGame", condition);
+		sqlMapClientTemplate.update("updateGame", game);
 	}
 	
 	public void deleteGame(String id)

@@ -31,6 +31,7 @@ public class Game extends XwinObject
 	
 	private String result;
 	private String type;
+	private String betStatus;
 
 	public String getId() {
 		return id;
@@ -64,11 +65,11 @@ public class Game extends XwinObject
 		this.status = status;
 	}
 
-	public String getDateStr() {
+	public String getGameDateStr() {
 		return gameDateStr;
 	}
 
-	public void setDateStr(String gameDateStr) {
+	public void setGameDateStr(String gameDateStr) {
 		this.gameDateStr = gameDateStr;
 	}
 
@@ -186,5 +187,23 @@ public class Game extends XwinObject
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+	
+	public String getGameHour()
+	{
+		return XwinUtil.getHour(this.gameDate);
+	}
+	
+	public String getGameMinute()
+	{
+		return XwinUtil.getMinute(this.gameDate);
+	}
+
+	public String getBetStatus() {
+		return betStatus;
+	}
+
+	public void setBetStatus(String betStatus) {
+		this.betStatus = betStatus;
 	}
 }

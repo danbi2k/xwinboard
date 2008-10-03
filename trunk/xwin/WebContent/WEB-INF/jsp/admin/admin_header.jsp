@@ -35,7 +35,7 @@
                 <td width="72" height="60" background="images/admin/topm21.gif" align="center" style="padding-top:35px"><a href="adminMember.aspx?mode=viewAdminMember" class="menu" >회원관리</a></td>
                 <td width="72" height="60" background="images/admin/topm31.gif" align="center" style="padding-top:35px"><a href="adminAccount.aspx?mode=viewMoneyIn" class="menu" >입출금관리</a></td>
                 <td width="72" height="60" background="images/admin/topm41.gif" align="center" style="padding-top:35px"><a href="adminLeague.aspx?mode=viewLeagueList" class="menu" >경기관리</a></td>
-                <td width="72" height="60" background="images/admin/topm51.gif" align="center" style="padding-top:35px"><a href="adminBoard.aspx?mode=viewBoardList" class="menu" >게시판관리</a></td>
+                <td width="72" height="60" background="images/admin/topm51.gif" align="center" style="padding-top:35px"><a onclick="alert('준비중')" class="menu" >게시판관리</a></td>
 			
                 <!--td width="72" height="60"  align="center" style="padding-top:35px" background="images/admin/topm31.gif"><a href="school" class="menu" >학교관리</a></td-->                
 				</tr>
@@ -73,8 +73,8 @@
 <table width="100%"  border="0" cellpadding="0" cellspacing="0" >
  <tr>
   <td>
-<table width="950" border="0" cellpadding="0" cellspacing="0">
+<table width="1100" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td height="100%" valign="top"><table width="100%" height="100%"  border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td width="170" height="500" background="images/admin/left_bg.gif" valign="top">
+          <td width="150" height="500" background="images/admin/left_bg.gif" valign="top">

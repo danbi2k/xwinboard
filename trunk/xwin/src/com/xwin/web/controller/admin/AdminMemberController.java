@@ -16,7 +16,7 @@ public class AdminMemberController extends XwinController
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String grade = XwinUtil.aNvl(request.getParameter("grade"));
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		String search = request.getParameter("search");
 		String keyword = request.getParameter("keyword");
 						

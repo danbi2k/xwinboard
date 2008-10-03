@@ -2,19 +2,26 @@ package com.xwin.web.command;
 
 public class GameCommand
 {
+	private String gameId;
 	private String homeTeam;
 	private String awayTeam;
 	private Double winRate;
 	private Double drawRate;
 	private Double loseRate;
-	private Integer year;
-	private Integer month;
-	private Integer date;
-	private Integer hour;
-	private Integer minute;
+	private String gameDate;
+	private Integer gameHour;
+	private Integer gameMinute;
 	private String status;
 	private String leagueId;
+	private Integer homeScore;
+	private Integer awayScore;
 	
+	public String getGameId() {
+		return gameId;
+	}
+	public void setGameId(String gameId) {
+		this.gameId = gameId;
+	}
 	public String getHomeTeam() {
 		return homeTeam;
 	}
@@ -45,41 +52,23 @@ public class GameCommand
 	public void setLoseRate(Double loseRate) {
 		this.loseRate = loseRate;
 	}
-	public Integer getYear() {
-		return year;
+	public String getGameDate() {
+		return gameDate;
 	}
-	public void setYear(Integer year) {
-		this.year = year;
+	public void setGameDate(String gameDate) {
+		this.gameDate = gameDate;
 	}
-	public Integer getMonth() {
-		return month;
+	public Integer getGameHour() {
+		return gameHour;
 	}
-	public void setMonth(Integer month) {
-		this.month = month;
+	public void setGameHour(Integer gameHour) {
+		this.gameHour = gameHour;
 	}
-	public Integer getDate() {
-		return date;
+	public Integer getGameMinute() {
+		return gameMinute;
 	}
-	public void setDate(Integer date) {
-		this.date = date;
-	}
-	public Integer getHour() {
-		return hour;
-	}
-	public void setHour(Integer hour) {
-		this.hour = hour;
-	}
-	public Integer getMinute() {
-		return minute;
-	}
-	public void setMinute(Integer minute) {
-		this.minute = minute;
-	}
-	public String getLeagueId() {
-		return leagueId;
-	}
-	public void setLeagueId(String leagueId) {
-		this.leagueId = leagueId;
+	public void setGameMinute(Integer gameMinute) {
+		this.gameMinute = gameMinute;
 	}
 	public String getStatus() {
 		return status;
@@ -87,4 +76,22 @@ public class GameCommand
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getLeagueId() {
+		return leagueId;
+	}
+	public void setLeagueId(String leagueId) {
+		this.leagueId = leagueId;
+	}
+	public Integer getHomeScore() {
+		return homeScore;
+	}
+	public void setHomeScore(Integer homeScore) {
+		this.homeScore = homeScore;
+	}
+	public Integer getAwayScore() {
+		return awayScore;
+	}
+	public void setAwayScore(Integer awayScore) {
+		this.awayScore = awayScore;
+	}	
 }

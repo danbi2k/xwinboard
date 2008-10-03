@@ -23,12 +23,12 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyIn(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String search = XwinUtil.aNvl(request.getParameter("search"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
 		
-		String searchDate = XwinUtil.aNvl(request.getParameter("searchDate"));
-		String fromDate = XwinUtil.aNvl(request.getParameter("fromDate"));
-		String toDate = XwinUtil.aNvl(request.getParameter("toDate"));
+		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
 		List<MoneyIn> moneyInList = null;
 		
@@ -59,12 +59,12 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyOut(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String search = XwinUtil.aNvl(request.getParameter("search"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
 		
-		String searchDate = XwinUtil.aNvl(request.getParameter("searchDate"));
-		String fromDate = XwinUtil.aNvl(request.getParameter("fromDate"));
-		String toDate = XwinUtil.aNvl(request.getParameter("toDate"));
+		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
 		List<MoneyOut> moneyOutList = null;
 		
@@ -95,12 +95,12 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneySummary(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String search = XwinUtil.aNvl(request.getParameter("search"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
 		
-		String searchDate = XwinUtil.aNvl(request.getParameter("searchDate"));
-		String fromDate = XwinUtil.aNvl(request.getParameter("fromDate"));
-		String toDate = XwinUtil.aNvl(request.getParameter("toDate"));
+		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
 		List<Account> accountList = null;
 		

@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.xwin.domain.user.*"%>
+<%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
+<%
+	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
+	Game game = (Game) request.getAttribute("Game");
+	String type = request.getParameter("type");	
+%>
 		  <!-- 좌측 메뉴 -->
 		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -13,27 +18,22 @@
               <tr>
                 <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/1x2game.php"> 경기관리 - 승무패</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminGame.aspx?mode=viewGameList&type=wdl"> 경기관리 - 승무패</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame.php?handitype=handicap"> 경기관리 - (야구)핸디캡</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminGame.aspx?mode=viewGameList&type=handy"> 경기관리 - 핸디캡</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/hcgame_SC.php?handitype=handicap_SC"> 경기관리 - (축구)핸디캡</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminGame.aspx?mode=viewGameList&type=oe"> 경기관리 - 홀짝</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/bat.php"> 배팅관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminBetting.aspx"> 배팅관리</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/calc.php"> 정산관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="game/calc.php"> 정산관리</a></td>
     </tr>
-	<!--
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/time.php"> 배팅시간입력</a></td>
-    </tr>
-	-->
-	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin_mode/image/leftm_icon.gif" width="9" height="9"><a href="/admin_mode/game/"> 리그관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminLeague.aspx?mode=viewLeagueList"> 리그관리</a></td>
     </tr>
 </table></td>
               </tr>
@@ -63,25 +63,44 @@
                     <td><!----컨텐츠---->
 					<SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
-		var d=document.regist;
-		if(!d.tbl_cat_idx.value) { alert('리그명을 입력하세요'); d.tbl_cat_idx.focus(); return false; }
-		if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
-		if(!d.gametime.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gametime.focus(); return false; }
-		if(!d.gametime2.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gametime2.focus(); return false; }
-		if(!d.gametime3.value) { alert('경기 시작 시각(분)을 선택하세요'); d.gametime3.focus(); return false; }
-		if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
-		if(!d.a1.value) { alert('홈팀명을 입력하세요'); d.a1.focus(); return false; }
-		if(!d.a1_by.value) { alert('홈팅 배당률을 입력하세요'); d.a1_by.focus(); return false; }
+		var d=document.registerGame;
+		if(!d.leagueId.value) { alert('리그명을 선택하세요'); d.reagueId.focus(); return false; }
+		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
+		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
+		if(!d.gameHour.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gameHour.focus(); return false; }
+		if(!d.gameMinute.value) { alert('경기 시작 시각(분)을 선택하세요'); d.gameMinute.focus(); return false; }
+		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
+		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }
+		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }		
+		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
+		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
+		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		/*
 		if(d.gametype_set.value=='1x2') {
 			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
 		}
 		else {
 			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
+		}*/
+
+		var query = "mode=registerGame";
+		query += "&type=wdl";
+		query += "&leagueId=" + d.leagueId.value;
+		query += "&gameDate=" + d.gameDate.value;
+		query += "&gameHour=" + d.gameHour.value;
+		query += "&gameMinute=" + d.gameMinute.value;
+		query += "&homeTeam=" + d.homeTeam.value;
+		query += "&winRate=" + d.winRate.value;
+		query += "&awayTeam=" + d.awayTeam.value;
+		query += "&loseRate=" + d.loseRate.value;
+		query += "&drawRate=" + d.drawRate.value;
+
+		var http = new JKL.ParseXML("adminGame.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resulXml.code == 0) {
+			location.href = "adminGame.aspx?mode=viewGameList&type=wdl";
 		}
-		if(!d.a2.value) { alert('원정팀명을 입력하세요'); d.a2.focus(); return false; }
-		if(!d.a2_by.value) { alert('원정팀명 배당률을 입력하세요'); d.a2_by.focus(); return false; }
-		d.action='/admin_mode/game/1x2game.php';
-	//	d.submit();
 	}
 
 	function delIT() {
@@ -193,7 +212,7 @@
 <table width="100%"  border="0" cellspacing="0" cellpadding="0">		
               <tr>
                 <td height="30"><table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
-                    <form method='post' name='regist' enctype="multipart/form-data" onSubmit="return checkIT()"> 
+                    <form method='post' name='registerGame' onSubmit="return checkIT()">
 						<!--
 					 <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">게임종류</td>
@@ -208,67 +227,29 @@
 					  <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
                         <td bgcolor="#FFFFFF"  colspan=3>
-						<select name='tbl_cat_idx'>
-						<option value=''>선택하세요</option>
-												<option value='30'> Fre. National Cup </option>
-												<option value='38'>A 매치</option>
-												<option value='28'>Aus.내셔널싸커</option>
-												<option value='21'>Aus.막스분데스</option>
-												<option value='19'>Bel.주필러리그</option>
-												<option value='42'>Bel.트위드클라쎄</option>
-												<option value='48'>Cze.2nd League</option>
-												<option value='25'>Cze.감부리누스</option>
-												<option value='16'>Dan. 슈퍼리가엔</option>
-												<option value='37'>Eng. 프리미어</option>
-												<option value='40'>Eng.League Two</option>
-												<option value='34'>Euro U21 Qualifiers</option>
-												<option value='35'>Fin. League2</option>
-												<option value='2'>Fin.베이카우스</option>
-												<option value='44'>Fre. Fa Cup</option>
-												<option value='14'>Fre.르샹피오나</option>
-												<option value='3'>Ger.분데스리가</option>
-												<option value='22'>Gre.내셔널리그</option>
-												<option value='49'>Hun.스포르니</option>
-												<option value='39'>Ire. 프리미어</option>
-												<option value='46'>Ita. Fa Cup</option>
-												<option value='31'>Ita. FA Cup</option>
-												<option value='6'>Ita.세리에A</option>
-												<option value='17'>J-League</option>
-												<option value='43'>Jp. Cup</option>
-												<option value='36'>Jpn.Kirin Cup</option>
-												<option value='7'>K-League</option>
-												<option value='9'>KBO</option>
-												<option value='8'>MLB</option>
-												<option value='45'>NBA</option>
-												<option value='11'>Net.에레디비지</option>
-												<option value='18'>Nor.엘리트세리..</option>
-												<option value='10'>NPB</option>
-												<option value='15'>por.엑스트라...</option>
-												<option value='20'>Por.프리메이라</option>
-												<option value='26'>Rom.디비지아A</option>
-												<option value='13'>Rus.프리미어</option>
-												<option value='29'>Ser.슈퍼리가</option>
-												<option value='47'>Sing.League</option>
-												<option value='33'>Spa. 세군다2부</option>
-												<option value='4'>Spa.프리메라</option>
-												<option value='50'>Svk.코르곤</option>
-												<option value='41'>Swe.슈페르탄</option>
-												<option value='23'>Swe.알스벤스칸</option>
-												<option value='24'>Swi.나치오날A</option>
-												<option value='12'>Tur.슈퍼리가</option>
-												<option value='27'>Usa.MLS</option>
-												</select>
+						<select name='leagueId'>
+							<%
+							if (leagueList != null) {
+								for (League league : leagueList) {
+									
+							%>
+							<option value='<%=league.getId()%>' > <%=league.getName()%> </option>
+							<%
+								}
+							}
+							%>
+						</select>
 
 						</td>
                       </tr>		
-					   <tr bgcolor="E7E7E7">
+					   <!--tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">게시일자</td>
                         <td bgcolor="#FFFFFF"  colspan=3><input type='text' name='gamedate' size=10 readonly onClick="popUpCalendar(this,gamedate,'yyyy-mm-dd');" style="cursor:hand"></td>
-                      </tr>		
+                      </tr-->		
 					   <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">게임시간</td>
-                        <td bgcolor="#FFFFFF"  colspan=3><input type='text' name='gametime' size=10 readonly onClick="popUpCalendar(this,gametime,'yyyy-mm-dd');" style="cursor:hand">
-						<select name='gametime2'>
+                        <td bgcolor="#FFFFFF"  colspan=3><input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
+						<select name='gameHour'>
 												<option value='0'>00</option>
 												<option value='1'>01</option>
 												<option value='2'>02</option>
@@ -295,7 +276,7 @@
 												<option value='23'>23</option>
 												</select>
 						시
-						<select name='gametime3'>
+						<select name='gameMinute'>
 												<option value='0'>00</option>
 												<option value='1'>01</option>
 												<option value='2'>02</option>
@@ -359,7 +340,7 @@
 												</select>
 						분
 
-						<select name='gametime4'>
+						<!-- select name='gametime4'>
 												<option value='0'>00</option>
 												<option value='1'>01</option>
 												<option value='2'>02</option>
@@ -423,17 +404,17 @@
 												</select>
 						초
 
-						</td>
+						</td-->
                       </tr>		
 					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">홈팀</td>
                         <td bgcolor="#FFFFFF" width=35%>
-						팀명 <input type='text' name='a1'>
+						팀명 <input type='text' name='homeTeam'>
 						<!--배당률 <input type='text' name='a1_by' size=5>-->
 						</td>
 						 <td align="center" bgcolor="E7E7E7" width="15%">원정팀</td>
                         <td bgcolor="#FFFFFF" width="35%">
-						팀명 <input type='text' name='a2'>
+						팀명 <input type='text' name='awayTeam'>
 						<!--배당률 <input type='text' name='a1_by' size=5>-->
 						</td>
                       </tr>	
@@ -457,7 +438,7 @@
 					   					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
                         <td bgcolor="#FFFFFF"  colspan=3>
-						승 <input type='text' name='a1_by' size=5> 무 <input type='text' name='x_by' size=5> 패 <input type='text' name='a2_by' size=5>					
+						승 <input type='text' name='winRate' size=5> 무 <input type='text' name='drawRate' size=5> 패 <input type='text' name='loseRate' size=5>					
 						</td>
                       </tr>		
 					 
@@ -468,13 +449,11 @@
               <tr>
                 <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
                               <tr>
-                                <td><input type='image' src="./../image/but_input.gif" border="0"></td>                               
-                                <td><img src="./../image/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+                                <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
+                                <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
                               </tr>
                           </table></td>
               </tr>
-			  <input type='hidden' name='mode' value='write_exe'>
-			  <input type='hidden' name='gametype_set' value='1x2'>
               </form>
               <tr>
                 <td>&nbsp;</td>

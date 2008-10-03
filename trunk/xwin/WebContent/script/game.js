@@ -170,7 +170,7 @@ function FnDrawCart(data, type) {
 		}
 	} else {
 		row.push("<tr id='nonSelect' style='display:block' bgcolor='black'>");
-		row.push("<td colspan='4' height='110' align='center' style='line-height:30px;'>배팅할 경기를 선택하세요!<br>최대 10 경기까지 복수선택 가능합니다.</td>");
+		row.push("<td colspan='4' height='118' align='center' style='line-height:30px;'>배팅할 경기를 선택하세요!<br>최대 10 경기까지 복수선택 가능합니다.</td>");
 		row.push("</tr>");
 		
 		multi = 0.00;

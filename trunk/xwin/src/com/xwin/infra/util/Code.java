@@ -22,7 +22,6 @@ public class Code
 	public static final String BET_STATUS_CANCEL		= "BS004";
 	public static final String BET_STATUS_NOMATCH		= "BS005";
 	
-	public static final String GAME_STATUS_PREPARE		= "GS001";
 	public static final String GAME_STATUS_READY		= "GS002";
 	public static final String GAME_STATUS_RUN			= "GS003";
 	public static final String GAME_STATUS_END			= "GS004";
@@ -46,8 +45,18 @@ public class Code
 	public static final String ACCOUNT_TYPE_BETCANCEL	= "AT005";
 	public static final String ACCOUNT_TYPE_NOMATCH		= "AT006";
 	
+	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
+	public static final String BETTING_STATUS_DENY		= "BTS02";
+	public static final String BETTING_STATUS_COMMIT	= "BTS03";
+	
+	
+	
 	static 
 	{
+		put(BETTING_STATUS_ACCEPT, "가능");
+		put(BETTING_STATUS_DENY, "금지");
+		put(BETTING_STATUS_COMMIT, "정산");
+		
 		put(ACCOUNT_TYPE_BETTING, "배팅출금");
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");
 		put(ACCOUNT_TYPE_MONEYIN, "머니충전");
@@ -66,8 +75,7 @@ public class Code
 		put(MONEY_OUT_SUCCESS, "출금성공");
 		put(MONEY_OUT_FAILURE, "환전실패");
 		
-		put(GAME_STATUS_PREPARE, "준비중");
-		put(GAME_STATUS_READY, "접수중");
+		put(GAME_STATUS_READY, "경기대기");
 		put(GAME_STATUS_RUN, "경기진행");
 		put(GAME_STATUS_END, "경기종료");
 		put(GAME_STATUS_CANCEL, "경기취소");
@@ -100,6 +108,8 @@ public class Code
 	
 	public static String getValue(String key)
 	{
+		if (key == null)
+			return "-";
 		return valueMap.get(key);
 	}
 	

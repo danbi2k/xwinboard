@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 
- <%@include file="admin_header.jsp"%>
+ <%@include file="header.jsp"%>
 
 <%
 List<League> leagueList = (List<League>)request.getAttribute("leagueList");
@@ -98,4 +98,4 @@ function makeSeqOption(oobj, start, end, diff)
  <script>
  init();
  </script>
- <%@include file="admin_footer.jsp"%>
+ <%@include file="footer.jsp"%>

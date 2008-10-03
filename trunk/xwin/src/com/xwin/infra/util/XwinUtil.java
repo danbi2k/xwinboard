@@ -13,10 +13,57 @@ public class XwinUtil
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
+	public static Date[] getDatePair(String dateStr) throws Exception
+	{
+		Date date = dateFormat.parse(dateStr);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		Date pair[] = new Date[2];
+		pair[0] = cal.getTime();
+		
+		cal.add(Calendar.DATE, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		
+		pair[1] = cal.getTime();
+		
+		return pair;
+	}
+	
+	public static String getHour(Date date)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		return "" + cal.get(Calendar.HOUR_OF_DAY);
+	}
+	
+	public static String getMinute(Date date)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		return "" + cal.get(Calendar.MINUTE);
+	}
+	
+	public static String Int2Digit(Integer x)
+	{
+		if (x < 10)
+			return "0" + x;
+		
+		return "" + x;
+	}
+	
 	public static Date toDate(String dateStr)
 	{
-		Date date = null;
+		if (dateStr == null)
+			return null;
 		
+		Date date = null;		
 		try {
 			date = dateFormat.parse(dateStr);
 		} catch (ParseException e) {
@@ -26,15 +73,15 @@ public class XwinUtil
 		return date;
 	}
 	
-	public static String nvl(String str)
+	public static String nvl(Object obj)
 	{
-		if (str == null)
+		if (obj == null)
 			return "";
 		
-		return str;
+		return obj.toString();
 	}
 	
-	public static String aNvl(String str)
+	public static String arcNvl(String str)
 	{
 		if (str != null && str.length() == 0)
 			return null;
@@ -56,8 +103,10 @@ public class XwinUtil
 		String ret = null;
 		if (type == 0)
 			ret = dateMinuteFormat.format(date);
-		else
+		else if (type == 1)
 			ret = dateSecondFormat.format(date);
+		else
+			ret = dateFormat.format(date);
 		
 		return ret;
 	}
@@ -78,6 +127,21 @@ public class XwinUtil
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month - 1);
 		cal.set(Calendar.DATE, date);
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		return cal.getTime();
+	}
+	
+	public static Date getDate(String date, Integer hour, Integer minute)
+	{
+		String[] parse = date.split("-");
+		Calendar cal = Calendar.getInstance();		
+		cal.set(Calendar.YEAR, Integer.parseInt(parse[0]));
+		cal.set(Calendar.MONTH, Integer.parseInt(parse[1]) - 1);
+		cal.set(Calendar.DATE, Integer.parseInt(parse[2]));
 		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, 0);
