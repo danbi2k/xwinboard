@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setAttribute("isIndex", Boolean.TRUE);
+%>
 <%@include file="../header.jsp"%>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">

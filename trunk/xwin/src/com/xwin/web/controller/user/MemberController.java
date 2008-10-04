@@ -1,5 +1,7 @@
 package com.xwin.web.controller.user;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,6 +58,7 @@ public class MemberController extends XwinController
 								member.setPin(command.getPin());
 								member.setStatus(Code.USER_STATUS_NORMAL);
 								member.setGrade(Code.USER_GRADE_NORMAL);
+								member.setJoinDate(new Date());
 								memberDao.insertMember(member);
 								
 								rx = ResultXml.SUCCESS;

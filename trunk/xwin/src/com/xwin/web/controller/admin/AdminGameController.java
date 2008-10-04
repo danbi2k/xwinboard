@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.game.BetGame;
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
 import com.xwin.infra.util.Code;
@@ -21,7 +23,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
 {	
-	public static final int ROWSIZE = 25;
+	public static final int ROWSIZE = 10;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -165,10 +167,11 @@ public class AdminGameController extends XwinController
 	public ModelAndView runGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		ResultXml rx = null;
-		
+		ResultXml rx = null;		
 		String id = request.getParameter("id");
-		gameDao.updateGameScore(id, null, null, null, Code.GAME_STATUS_RUN);
+		
+		gameDao.updateGameScoreNull(id, null, null, null, Code.GAME_STATUS_RUN);
+		bettingDao.updateBettingStatus(id);
 		
 		rx = new ResultXml(0, "경기가 진행 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -207,7 +210,13 @@ public class AdminGameController extends XwinController
 			else
 				result = "D";
 			
-			gameDao.updateGameScore(id, homeScore, awayScore, result, Code.GAME_STATUS_END);
+			game.setHomeScore(homeScore);
+			game.setAwayScore(awayScore);
+			game.setResult(result);
+			game.setStatus(Code.GAME_STATUS_END);
+			
+			gameDao.updateGame(game);			
+			bettingDao.updateBettingStatus(id);
 			
 			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 		} 
@@ -220,10 +229,55 @@ public class AdminGameController extends XwinController
 	public ModelAndView cancelGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		ResultXml rx = null;
-		
+		ResultXml rx = null;		
 		String id = request.getParameter("id");
-		gameDao.updateGameScore(id, null, null, null, Code.GAME_STATUS_CANCEL);
+		
+		Game game = new Game();
+		game.setId(id);
+		game.setHomeScore(null);
+		game.setAwayScore(null);
+		game.setResult(null);
+		game.setWinRate(1.0);
+		game.setDrawRate(1.0);
+		game.setLoseRate(1.0);		
+		game.setStatus(Code.GAME_STATUS_CANCEL);
+		
+		// 1. 켄슬된 게임의 승률을 1.0 으로 하고 상태를 CANCEL로
+		gameDao.updateGameScoreNull(id, null, null, null, Code.GAME_STATUS_CANCEL);
+		gameDao.updateGame(game);
+		
+		// 3. 관련 배팅 전체에 대해서 배팅률 재계산 해서 업데이트
+		Map<String, Object> param = new HashMap<String, Object>(1);
+		param.put("gameId", game.getId());
+		List<Betting> bettingList = bettingDao.selectBettingList(param);
+		
+		for (Betting betting : bettingList) {
+			List<BetGame> betGameList = betting.getBetGameList();
+			Double totalRate = 0.0;
+			for (BetGame betGame : betGameList)	{
+				String guess = betGame.getGuess();
+				Double selectRate = 0.0;
+				if (guess.equals("W"))
+					selectRate = betGame.getWinRate();
+				else if (guess.equals("D"))
+					selectRate = betGame.getDrawRate();
+				else if (guess.equals("L"))
+					selectRate = betGame.getLoseRate();
+				
+				if (totalRate == 0.0)
+					totalRate = selectRate;
+				else
+					totalRate *= selectRate;
+			}
+			Long expect = XwinUtil.calcExpectMoney(totalRate, betting.getMoney());
+			
+			betting.setRate(totalRate);
+			betting.setExpect(expect);
+			bettingDao.updateBetting(betting);
+		}
+		
+
+		bettingDao.updateBettingStatus(id);
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -237,7 +291,9 @@ public class AdminGameController extends XwinController
 		ResultXml rx = null;
 		
 		String id = request.getParameter("id");
-		gameDao.updateGameScore(id, null, null, null, Code.GAME_STATUS_READY);
+		
+		gameDao.updateGameScoreNull(id, null, null, null, Code.GAME_STATUS_READY);
+		bettingDao.updateBettingStatus(id);
 		
 		rx = new ResultXml(0, "경기가 대기 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

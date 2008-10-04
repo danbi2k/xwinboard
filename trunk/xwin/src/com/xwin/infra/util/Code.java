@@ -17,10 +17,11 @@ public class Code
 	public static final String USER_STATUS_SECEDE		= "US003";
 	
 	public static final String BET_STATUS_RUN			= "BS001";
-	public static final String BET_STATUS_SUCESS		= "BS002";
+	public static final String BET_STATUS_SUCCESS		= "BS002";
 	public static final String BET_STATUS_FAILURE		= "BS003";
 	public static final String BET_STATUS_CANCEL		= "BS004";
 	public static final String BET_STATUS_NOMATCH		= "BS005";
+	public static final String BET_STATUS_COMMIT		= "BS006";
 	
 	public static final String GAME_STATUS_READY		= "GS002";
 	public static final String GAME_STATUS_RUN			= "GS003";
@@ -46,16 +47,12 @@ public class Code
 	public static final String ACCOUNT_TYPE_NOMATCH		= "AT006";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
-	public static final String BETTING_STATUS_DENY		= "BTS02";
-	public static final String BETTING_STATUS_COMMIT	= "BTS03";
-	
-	
+	public static final String BETTING_STATUS_DENY		= "BTS02";	
 	
 	static 
 	{
 		put(BETTING_STATUS_ACCEPT, "가능");
 		put(BETTING_STATUS_DENY, "금지");
-		put(BETTING_STATUS_COMMIT, "정산");
 		
 		put(ACCOUNT_TYPE_BETTING, "배팅출금");
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");
@@ -81,10 +78,11 @@ public class Code
 		put(GAME_STATUS_CANCEL, "경기취소");
 		
 		put(BET_STATUS_RUN, "진행중");
-		put(BET_STATUS_SUCESS, "적중");
+		put(BET_STATUS_SUCCESS, "적중");
 		put(BET_STATUS_FAILURE, "실패");
 		put(BET_STATUS_CANCEL, "취소(환불)");
 		put(BET_STATUS_NOMATCH, "경기취소");
+		put(BET_STATUS_COMMIT, "정산완료");
 
 		put(USER_GRADE_NORMAL, "일반");
 		put(USER_GRADE_VIP, "VIP");

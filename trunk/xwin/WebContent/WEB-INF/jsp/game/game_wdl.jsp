@@ -115,8 +115,9 @@ var gameType = 'wdl'
 		<tr><td style="color:darkorange;">배팅금액</td>
 			<td colspan="3" align="left">
 				<table cellpadding="0" cellspacing="0">
-				<tr><td><input type="text" class="member" size="10" name="BetAmt" maxlength="7" value="5000" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this);FnCalcCart()">원</td>
-
+				<tr><td>
+				<input type="text" class="member" size="10" name="BetAmt" maxlength="7" value="5000" style="IME-MODE: disabled;text-align:right;" onkeydown="" onkeyup="only123(this);FnCalcCart()">원
+				</td>
 				</tr></table>
 				</form>
 			</td></tr>

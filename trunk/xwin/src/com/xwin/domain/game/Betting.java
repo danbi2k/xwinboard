@@ -13,12 +13,15 @@ public class Betting
 	private String dateStr;
 	private Double rate;
 	private String rateStr;
-	private Integer money;
-	private Integer expect;
+	private Long money;
+	private Long expect;
 	private String status;
 	private Integer totalCount;
 	private Integer successCount;
 	private Integer failureCount;
+	
+	private String gameType;
+	private String nickName;
 	
 	private List<BetGame> betGameList;
 	
@@ -54,10 +57,10 @@ public class Betting
 	public void setRateStr(String rateStr) {
 		this.rateStr = rateStr;
 	}
-	public Integer getMoney() {
+	public Long getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Long money) {
 		this.money = money;
 	}
 	public List<BetGame> getBetGameList() {
@@ -72,10 +75,10 @@ public class Betting
 	public void setDateStr(String dateStr) {
 		this.dateStr = dateStr;
 	}
-	public Integer getExpect() {
+	public Long getExpect() {
 		return expect;
 	}
-	public void setExpect(Integer expect) {
+	public void setExpect(Long expect) {
 		this.expect = expect;
 	}
 	public String getStatus() {
@@ -101,5 +104,17 @@ public class Betting
 	}
 	public void setFailureCount(Integer failureCount) {
 		this.failureCount = failureCount;
+	}
+	public String getGameType() {
+		return gameType;
+	}
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 }

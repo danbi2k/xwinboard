@@ -7,9 +7,6 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="indexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="index"/>
-	
 	<bean id="guideController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/guide"/>
 		
@@ -21,6 +18,9 @@
 			
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>
+	
+	<bean id="indexController" class="com.xwin.web.controller.IndexController"
+		p:gameDao-ref="gameDao"/>
 	
 	<bean id="gameController" class="com.xwin.web.controller.game.GameController"
 		p:gameDao-ref="gameDao"
@@ -42,6 +42,7 @@
 		p:memberDao-ref="memberDao"
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
+		p:gameDao-ref="gameDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myBettingController"

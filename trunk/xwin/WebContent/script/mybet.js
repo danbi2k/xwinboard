@@ -76,7 +76,7 @@ function FnDrawMyBetList(data)
 				row.push("</STRIKE>");
 			row.push(" 원</td>");
 			row.push("<td><font color='orange'>" + C(data[i].status) + "</td>");
-			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover='this.style.filter='';' onmouseout='this.style.filter='gray()';'></td>");
+			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover=\"this.style.filter='';\" onmouseout=\"this.style.filter='gray()';\"></td>");
 			row.push("</tr>");
 		}
 	} else {

@@ -13,15 +13,31 @@ public class XwinUtil
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
+	public static Long calcExpectMoney(Double rate, Long money)
+	{
+		Double cutRate = doubleCut(rate);
+		Double _expect = Math.floor(cutRate * money);
+		Long expect = _expect.longValue();
+		
+		return expect;
+	}
+	
+	public static Calendar getOnlyDate(Calendar cal)
+	{
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		return cal;
+	}
+	
 	public static Date[] getDatePair(String dateStr) throws Exception
 	{
 		Date date = dateFormat.parse(dateStr);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+		cal = getOnlyDate(cal);
 		
 		Date pair[] = new Date[2];
 		pair[0] = cal.getTime();

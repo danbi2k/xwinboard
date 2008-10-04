@@ -11,11 +11,13 @@
 	<resultMap id="bettingResultMap" class="Betting">
 		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
 		<result property="date" column="DATE"/>
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
 		<result property="expect" column="EXPECT"/>
 		<result property="status" column="STATUS"/>
+		<result property="gameType" column="GAME_TYPE"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
 		<result property="successCount" column="SUCCESS_COUNT"/>
 		<result property="failureCount" column="FAILURE_COUNT"/>
@@ -23,12 +25,28 @@
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, DATE, RATE, MONEY, EXPECT, STATUS, TOTAL_COUNT)
-			VALUES(#userId#, #date#, #rate#, #money#, #expect#, #status#, #totalCount#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, TOTAL_COUNT)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #totalCount#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
 	</insert>
+	
+	<update id="updateBetting" parameterClass="Betting">
+		UPDATE tbl_betting b
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="rate">
+			RATE = #rate#
+			</isNotNull>
+			<isNotNull prepend="," property="expect">
+			EXPECT = #expect#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
 	
 	<update id="updateGameCountSuccess" parameterClass="string">
 		UPDATE tbl_betting b SET SUCCESS_COUNT =
@@ -38,9 +56,10 @@
 		WHERE
 		bg.GAME_ID = g.ID AND
 		bg.GUESS = g.RESULT AND
-		bg.BETTING_ID = b.ID
+		bg.BETTING_ID = b.ID AND
+		g.STATUS = 'GS004'
 		)
-		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#);
+		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
 	</update>
 	
 	<update id="updateGameCountFailure" parameterClass="string">
@@ -51,7 +70,21 @@
 		WHERE
 		bg.GAME_ID = g.ID AND
 		bg.GUESS != g.RESULT AND
-		bg.BETTING_ID = b.ID
+		bg.BETTING_ID = b.ID AND
+		g.STATUS = 'GS004'
+		)
+		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+	</update>
+	
+	<update id="updateGameCountCancel" parameterClass="string">
+		UPDATE tbl_betting b SET CANCEL_COUNT =
+		(
+		SELECT COUNT(*)
+		FROM tbl_betting_game bg, tbl_game g
+		WHERE
+		bg.GAME_ID = g.ID AND
+		bg.BETTING_ID = b.ID AND
+		g.STATUS = 'GS005'
 		)
 		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#);
 	</update>
@@ -70,30 +103,85 @@
 		DELETE FROM tbl_betting WHERE ID = #value#
 	</delete>
 	
-	<select id="selectBetting" resultMap="bettingResultMap"
-		parameterClass="string">
-		SELECT *
-		FROM tbl_betting b
-		WHERE ID = #value#
-	</select>
-	
-	<select id="selectBettingListByUserId" resultMap="bettingResultMap"
-		parameterClass="map">
-		SELECT *
-		FROM tbl_betting b
-		WHERE USERID = #userId#
-		LIMIT #pageIndex#, #pageSize#
-	</select>
-	
 	<select id="selectBettingList" resultMap="bettingResultMap"
 		parameterClass="map">
-		SELECT *
+		SELECT b.*
 		FROM tbl_betting b
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+			ID = #id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameType">
+			GAME_TYPE = #gameType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+			USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+			NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			DATE >= #fromDate#
+			]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			DATE <= #toDate#
+			]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameId">
+			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			</isNotNull>
+		</dynamic>
+		ORDER BY DATE DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
 	</select>
 	
-	<select id="selectBettingByUserId" resultMap="bettingResultMap" parameterClass="map">
-		SELECT *
+	<select id="selectBettingCount" resultClass="integer"
+		parameterClass="map">
+		SELECT COUNT(*)
 		FROM tbl_betting b
-		WHERE b.ID = #bettingId# AND b.USERID = #userId#
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="bettingId">
+			ID = #id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameType">
+			GAME_TYPE = #gameType#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+			USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+			NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			DATE >= #fromDate#
+			]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			DATE <= #toDate#
+			]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameId">
+			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			</isNotNull>
+		</dynamic>
 	</select>
 </sqlMap>

@@ -25,7 +25,10 @@ public class BettingDao extends XwinDao
 	
 	public Betting selectBetting(String id)
 	{
-		return (Betting) sqlMapClientTemplate.queryForObject("selectBetting", id);
+		Map<String, Object> param = new HashMap<String, Object>(1);
+		param.put("id", id);
+		
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingList", param);
 	}
 	
 	public List<Betting> selectBettingList()
@@ -33,26 +36,50 @@ public class BettingDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectBettingList");
 	}
 	
+	public List<Betting> selectBettingList(Map<String, Object> param)
+	{
+		return sqlMapClientTemplate.queryForList("selectBettingList", param);
+	}
+	
+	public Integer selectBettingCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingCount", param);
+	}
+	
 	public List<Betting> selectBettingListByUserId(String userId, Integer pageIndex)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(3);
 		param.put("userId", userId);
-		param.put("pageIndex", pageIndex * pageSize);
-		param.put("pageSize", pageSize);
+		param.put("fromRow", pageIndex * pageSize);
+		param.put("rowSize", pageSize);
 		
-		return sqlMapClientTemplate.queryForList("selectBettingListByUserId", param);
+		return sqlMapClientTemplate.queryForList("selectBettingList", param);
 	}
 
-	public Betting selectBettingByUserId(String userId, String bettingId) {
+	public Betting selectBettingByUserId(String userId, String id) {
 		Map<String, String> param = new HashMap<String, String>(2);
 		param.put("userId", userId);
-		param.put("bettingId", bettingId);
+		param.put("id", id);
 		
-		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingByUserId", param);
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingList", param);
+	}
+	
+	public void updateBetting(Betting betting)
+	{
+		sqlMapClientTemplate.update("updateBetting", betting);
 	}
 	
 	public void updateBettingStatus(String gameId)
 	{
+		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
+		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
+		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
+		sqlMapClientTemplate.update("updateBettingStatusByCount");
+	}
+	
+	public void updateBettingStatusWhenGameCancel(String gameId)
+	{
+		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
 		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
 		sqlMapClientTemplate.update("updateBettingStatusByCount");

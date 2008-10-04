@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="common/default.css">
     <script language="JavaScript" src="common/default.js"></script>
 	<script language="JavaScript" src="common/game.js"></script>
+	<script language="JavaScript" src="common/betting.js"></script>
 	<script language="JavaScript" src="common/member.js"></script>
 	<script language="JavaScript" src="common/board.js"></script>
 </head>

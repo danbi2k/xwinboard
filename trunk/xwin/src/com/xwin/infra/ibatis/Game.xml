@@ -113,7 +113,7 @@
 			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#)
 	</insert>
 	
-	<insert id="updateGame" parameterClass="Game">
+	<update id="updateGame" parameterClass="Game">
 		UPDATE tbl_game
 		<dynamic prepend="SET">
 			<isNotNull prepend="," property="homeTeam">
@@ -146,14 +146,55 @@
 			<isNotNull prepend="," property="betStatus">
 			BET_STATUS = #betStatus#
 			</isNotNull>
+			<isNotNull prepend="," property="homeScore">
+			HOME_SCORE = #homeScore# 
+			</isNotNull>
+			<isNotNull prepend="," property="awayScore">
+			AWAY_SCORE = #awayScore# 
+			</isNotNull>
+			<isNotNull prepend="," property="result">
+			RESULT = #result# 
+			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
-	</insert>
-	
-	<update id="updateGameScore" parameterClass="map">
-		UPDATE tbl_game
-		SET HOME_SCORE = #homeScore#, AWAY_SCORE = #awayScore#, RESULT = #result#, STATUS = #status#
-		WHERE id = #id#
 	</update>
 	
+	<update id="updateGameScoreNull" parameterClass="map">
+		UPDATE tbl_game SET
+			HOME_SCORE = #homeScore#,
+			AWAY_SCORE = #awayScore#,
+			RESULT = #result#,
+			STATUS = #statue#
+		WHERE ID = #id#		
+	</update>
+	
+	<update id="updateGameRateNull" parameterClass="game">
+		UPDATE tbl_game SET
+			WIN_RATE = #winRate#
+			DRAW_RATE = #drawRate#
+			Lose_Rate = #loseRate# 
+		WHERE ID = #id#		
+	</update>
+	
+	<update id="batchGameBetStatus" parameterClass="date">
+		<![CDATA[
+		UPDATE tbl_game
+		SET
+			BET_STATUS = 'BTS02'
+		WHERE
+			GAME_DATE <= #date# AND
+			BET_STATUS = 'BTS01'
+		]]>			
+	</update>
+	
+	<update id="batchGameStatus" parameterClass="date">
+		<![CDATA[
+		UPDATE tbl_game
+		SET
+			STATUS = 'GS003'
+		WHERE
+			GAME_DATE <= #date# AND
+			STATUS = 'GS002'
+		]]>			
+	</update>
 </sqlMap>

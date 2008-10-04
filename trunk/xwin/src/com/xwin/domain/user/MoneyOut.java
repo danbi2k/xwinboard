@@ -9,7 +9,7 @@ public class MoneyOut
 {
 	private String id;
 	private String userId;
-	private Integer money;
+	private Long money;
 	private String bankName;
 	private String number;
 	private String name;
@@ -33,10 +33,10 @@ public class MoneyOut
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Integer getMoney() {
+	public Long getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Long money) {
 		this.money = money;
 	}
 	public String getName() {

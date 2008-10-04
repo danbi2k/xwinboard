@@ -53,7 +53,7 @@ public class MoneyInController extends XwinController
 		
 		ResultXml rx = null;
 		try {
-			Integer money = Integer.parseInt(_money);
+			Long money = Long.parseLong(_money);
 			
 			if (_name == null || _name.length() == 0)
 				rx = new ResultXml(-1, "입금자를 입력하세요", null);

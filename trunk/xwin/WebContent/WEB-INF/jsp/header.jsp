@@ -5,6 +5,10 @@
 <%@ page import="com.xwin.infra.dao.*" %>
 <%
 	Member member = (Member) session.getAttribute("Member");
+	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
+	if (isIndex == null)
+		isIndex = false;
+	
 	if (member != null) {
 		MemberDao memberDao = (MemberDao) session.getAttribute("MemberDao");
 		member = memberDao.selectMember(member.getUserId(), null);
@@ -13,7 +17,7 @@
 %>
 <html>
 <head>
-<title>bwin-Kor-local</title>
+<title>bwin-Kor</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -25,6 +29,7 @@
 	<script language="JavaScript" src="script/code.js"></script>
     <script language="JavaScript" src="script/default.js"></script>
 	<script language="JavaScript" src="script/game.js"></script>
+	<script language="JavaScript" src="script/betting.js"></script>
 	<script language="JavaScript" src="script/member.js"></script>
 	<script language="JavaScript" src="script/mybet.js"></script>
 	<script language="JavaScript" src="script/board.js"></script>
@@ -63,6 +68,14 @@
 
 
 <script language="JavaScript">
+<%
+if (login == false && isIndex == false) {
+%>
+alert("로그인이 필요합니다");
+location.href = "index.aspx";
+<%
+}
+%>
 function top_menu_out(){
     if (window.menu_out){ clearInterval(menu_out); }
     menu_out=setInterval("top_menu_init()",500);
@@ -180,9 +193,14 @@ if (login) {
 
 <%} %>
 </table>
-<%if (false) { %>
-<script>FnFlash("main","960","280","images/main.swf","");</script>
-<%} %>
+<img id="mainImage" src="images/stadium.jpg" style="display:none">
+<script>
+//FnFlash("main","960","280","images/main.swf","");
+if (document.URL.indexOf("index.aspx") > 0) {
+	var mainImage = document.getElementById("mainImage");
+	mainImage.style.display = "block";
+}
+</script>
 <table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
 <tr><td width="80" align="center"><b style="color:white">Notice</b></td>
 	<td width="880">&nbsp;

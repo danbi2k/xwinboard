@@ -42,7 +42,7 @@
           </table></td>
 		  <td width="34%" valign="bottom" align="center">
 		  </td>
-		  <td width="17%" valign="bottom" style="padding-bottom:5px"> <a href="/" target="_blank">  바로가기</a> | <a href="logout.php">로그아웃</a> &nbsp;</td>
+		  <td width="17%" valign="bottom" style="padding-bottom:5px"> <a href="admin/">로그아웃</a> &nbsp;</td>
         </tr>
     </table></td>
   </tr>

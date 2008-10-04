@@ -29,27 +29,15 @@ public class GameDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectGameCount", param);
 	}
 	
-	public List<Game> selectGameList(String type, String status, String leagueId, Date fromDate)
+	public List<Game> selectGameList(String type, String status, String leagueId, Date toDate)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(4);
 		param.put("type", type);
 		param.put("status", status);
 		param.put("leagueId", leagueId);
-		param.put("fromDate", fromDate);
+		param.put("toDate", toDate);
 		
 		return sqlMapClientTemplate.queryForList("selectGameList", param);
-	}
-	
-	public void updateGameScore(String id, Integer homeScore, Integer awayScore, String result, String status)
-	{
-		Map<String, Object> param = new HashMap<String, Object>(5);
-		param.put("id", id);
-		param.put("homeScore", homeScore);
-		param.put("awayScore", awayScore);
-		param.put("result", result);
-		param.put("status", status);
-		
-		sqlMapClientTemplate.update("updateGameScore", param);
 	}
 	
 	public void updateGame(Game game)
@@ -57,8 +45,30 @@ public class GameDao extends XwinDao
 		sqlMapClientTemplate.update("updateGame", game);
 	}
 	
+	public void updateGameScoreNull(String id, String homeScore, String awayScore, String result, String status)
+	{
+		Map<String, String> param = new HashMap<String, String>(5);
+		param.put("id", id);
+		param.put("homeScore", homeScore);
+		param.put("awayScore", awayScore);
+		param.put("result", result);
+		param.put("statue", status);
+		
+		sqlMapClientTemplate.update("updateGameScoreNull", param);
+	}
+	
 	public void deleteGame(String id)
 	{
 		sqlMapClientTemplate.delete("deleteGameById", id);
+	}
+
+	public void batchGameBetStatus(Date date)
+	{	
+		sqlMapClientTemplate.update("batchGameBetStatus", date);
+	}
+	
+	public void batchGameStatus(Date date)
+	{	
+		sqlMapClientTemplate.update("batchGameStatus", date);
 	}
 }

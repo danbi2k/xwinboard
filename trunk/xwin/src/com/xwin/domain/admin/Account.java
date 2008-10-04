@@ -10,9 +10,9 @@ public class Account extends XwinObject
 	private String id;
 	private Date date;
 	private String dateStr;
-	private Integer money;
-	private Integer balance;
-	private Integer oldBalance;
+	private Long money;
+	private Long balance;
+	private Long oldBalance;
 	private String description;
 	private String bettingId;
 	private String moneyInId;
@@ -39,22 +39,22 @@ public class Account extends XwinObject
 	public void setDateStr(String dateStr) {
 		this.dateStr = dateStr;
 	}
-	public Integer getMoney() {
+	public Long getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Long money) {
 		this.money = money;
 	}
-	public Integer getBalance() {
+	public Long getBalance() {
 		return balance;
 	}
-	public void setBalance(Integer balance) {
+	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
-	public Integer getOldBalance() {
+	public Long getOldBalance() {
 		return oldBalance;
 	}
-	public void setOldBalance(Integer oldBalance) {
+	public void setOldBalance(Long oldBalance) {
 		this.oldBalance = oldBalance;
 	}
 	public String getDescription() {

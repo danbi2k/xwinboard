@@ -65,5 +65,7 @@
 		class="com.xwin.web.controller.admin.AdminBettingController"
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 </beans>

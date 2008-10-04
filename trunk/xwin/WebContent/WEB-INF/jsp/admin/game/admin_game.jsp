@@ -5,7 +5,7 @@
 <%@ page import="java.util.*"%>
 
 <%
-	final Integer ROWSIZE = AdminGameController.ROWSIZE;
+	final Integer ROWSIZE = 10;
 	final Integer SHOWPAGE = 10;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
@@ -41,10 +41,7 @@
 		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminGame.aspx?mode=viewGameList&type=oe"> 경기관리 - 홀짝</a></td>
     </tr>
 	<tr>
-		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminBetting.aspx"> 배팅관리</a></td>
-    </tr>
-	<tr>
-		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="game/calc.php"> 정산관리</a></td>
+		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminBetting.aspx?mode=viewBettingList"> 배팅관리</a></td>
     </tr>
 	<tr>
 		<td bgcolor="#FFFFFF"><img src="images/admin/leftm_icon.gif" width="9" height="9"><a href="adminLeague.aspx?mode=viewLeagueList"> 리그관리</a></td>
@@ -352,8 +349,7 @@
 						<select name='betStatus' onChange='this.form.submit()'>
 							<option value=''>전체</option>
 							<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=betStatus.equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
-							<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>
-							<!--option value='<%=Code.BETTING_STATUS_COMMIT%>' <%=betStatus.equals(Code.BETTING_STATUS_COMMIT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_COMMIT)%></option-->	
+							<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>	
 						 </select>
 
 						 경기일자
@@ -378,8 +374,12 @@
 						</form>
 							 <form method='get' name='game'>
 						<tr>
-							<td colspan='3'>
-							<font color='red'>V : 스코어 적용&nbsp;&nbsp;&nbsp;&nbsp;C : 스코어 취소&nbsp;&nbsp;&nbsp;X : 경기삭제</font><br>
+							<td colspan='3'><b>
+							게임진행: <img src="images/admin/btn_run.jpg">
+							게임대기: <img src="images/admin/btn_ready.jpg">
+							게임종료: <img src="images/admin/btn_end.jpg">
+							게임취소: <img src="images/admin/btn_cancel.jpg">
+							</b>
 							<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 
                               <tr align="center" bgcolor="#E4E4E4">
@@ -410,10 +410,9 @@
 								<td><%=game.getGameDateStr()%></td>
 								<td><%=game.getHomeTeam()%></td>
 								<td><%=game.getAwayTeam()%></td>
-								<td><%=game.getWinRateStr()%><BR><B>0</B></td>
-								<td><%=game.getDrawRateStr()%><BR><B>0</B></td>
-								<td><%=game.getLoseRateStr()%><BR><B>0</B>
-								</td>
+								<td><%=game.getWinRateStr()%></td>
+								<td><%=game.getDrawRateStr()%></td>
+								<td><%=game.getLoseRateStr()%></td>
 								<td>
 									<%
 									if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
@@ -434,7 +433,6 @@
 							<select name='betStatus_<%=game.getId()%>' onchange='changeBetStatus(<%=game.getId()%>, this)'>
 								<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
 								<option value='<%=Code.BETTING_STATUS_DENY%>' <%=game.getBetStatus().equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>
-								<!--option value='<%=Code.BETTING_STATUS_COMMIT%>' <%=game.getBetStatus().equals(Code.BETTING_STATUS_COMMIT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_COMMIT)%></option-->
 							</select>
 								</td>								
 								<td><B><%=Code.getValue(game.getStatus())%></B></td>

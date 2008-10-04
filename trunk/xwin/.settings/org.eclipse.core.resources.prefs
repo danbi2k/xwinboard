@@ -1,4 +1,4 @@
-#Thu Oct 02 23:03:08 KST 2008
+#Sat Oct 04 05:52:09 KST 2008
 eclipse.preferences.version=1
 encoding//WebContent/admin.jsp=UTF-8
 encoding//WebContent/script/admin_betting.js=UTF-8
@@ -6,7 +6,6 @@ encoding//WebContent/script/admin_game.js=UTF-8
 encoding//WebContent/script/board.js=UTF-8
 encoding//WebContent/script/code.js=UTF-8
 encoding//WebContent/script/default.js=UTF-8
-encoding//WebContent/script/game.js=UTF-8
 encoding//WebContent/script/member.js=UTF-8
 encoding//WebContent/script/mybet.js=UTF-8
 encoding//WebContent/style/ad.css=UTF-8

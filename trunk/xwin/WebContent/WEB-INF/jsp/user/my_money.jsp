@@ -7,7 +7,7 @@
 <%@include file="../header.jsp"%>
 
 <%
-	List<Account> accountList = (List<Account>) session.getAttribute("accountList");
+	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">

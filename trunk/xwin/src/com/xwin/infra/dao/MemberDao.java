@@ -52,16 +52,16 @@ public class MemberDao extends XwinDao
 		return (Integer) value;
 	}
 	
-	public void updateBalance(String userId, String balance)
+	public void updateBalance(String userId, Long balance)
 	{
-		Map<String, String> param = new HashMap<String, String>();
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("balance", balance);
 		
 		sqlMapClientTemplate.update("updateBalance", param);
 	}
 	
-	public void plusMinusBalance(String userId, Integer money)
+	public void plusMinusBalance(String userId, Long money)
 	{
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", userId);

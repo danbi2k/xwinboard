@@ -25,7 +25,7 @@
 
 	<table width="800" style="margin-top:10;">
 	<tr><td colspan="2"><font color="orange"><b>1. 머니충전하기</td></tr>
-	<tr><td width="410"><img src="images/guide_1.gif"></td>
+	<tr><td width="410"><img src="images/guide1.jpg"></td>
 		<td valign="top" style="line-height:30px;">
 			A. 머니충전 페이지로 이동합니다. [<a href="member/inmoney.asp">☞ 바로가기</a>]<br>
 
@@ -39,7 +39,7 @@
 	<tr><td colspan="2" height="30"><hr style="height:1;"></td></tr>
 
 	<tr><td colspan="2"><font color="orange"><b>2. 배팅하기</td></tr>
-	<tr><td width="410"><img src="images/guide_2.gif"></td>
+	<tr><td width="410"><img src="images/guide2.jpg"></td>
 		<td valign="top" style="line-height:30px;">
 			A. 상단 메뉴의 [승무패/핸디캡/홀짝] 중 하나를 선택합니다.<br>
 			B. 경기리스트에서 자신이 배팅하고 싶은 경기의 팀을 체크합니다.<br>
@@ -53,7 +53,7 @@
 	<tr><td colspan="2" height="30"><hr style="height:1;"></td></tr>
 
 	<tr><td colspan="2"><font color="orange"><b>3. 배팅내역</td></tr>
-	<tr><td width="410"><img src="images/guide_3.gif"></td>
+	<tr><td width="410"><img src="images/guide3.jpg"></td>
 		<td valign="top" style="line-height:30px;">
 			A. 배팅내역 페이지로 이동합니다. [<a href="member/mybet.asp">☞ 바로가기</a>]<br>
 			B. 자신이 배팅한 내역이 표시되며, 경기 결과에 따라 그래프형태로 표시됩니다.<br>
@@ -65,7 +65,7 @@
 	<tr><td colspan="2" height="30"><hr style="height:1;"></td></tr>
 
 	<tr><td colspan="2"><font color="orange"><b>4. 출금요청</td></tr>
-	<tr><td width="410"><img src="images/guide_4.gif"></td>
+	<tr><td width="410"><img src="images/guide4.jpg"><br><img src="images/guide5.jpg"></td>
 		<td valign="top" style="line-height:30px;">
 			A. 출금요청 페이지로 이동합니다. [<a href="member/outmoney.asp">☞ 바로가기</a>]<br>
 

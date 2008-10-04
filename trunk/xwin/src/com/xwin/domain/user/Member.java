@@ -13,7 +13,7 @@ public class Member
 	private String mobile;
 	private String email;
 	private String pin;
-	private Integer balance;
+	private Long balance;
 	private String status;
 	private String grade;
 	private Date joinDate;
@@ -61,10 +61,10 @@ public class Member
 	public void setPin(String pin) {
 		this.pin = pin;
 	}
-	public Integer getBalance() {
+	public Long getBalance() {
 		return balance;
 	}
-	public void setBalance(Integer balance) {
+	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
 	public String getStatus() {
