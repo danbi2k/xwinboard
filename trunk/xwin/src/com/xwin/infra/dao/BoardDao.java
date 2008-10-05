@@ -1,6 +1,5 @@
 package com.xwin.infra.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +8,6 @@ import com.xwin.domain.board.BoardItem;
 
 public class BoardDao extends XwinDao
 {
-	public static final Integer pageSize = 5;
-	
 	public String insertBoardItem(BoardItem boardItem)
 	{
 		String boardId = (String)
@@ -37,13 +34,8 @@ public class BoardDao extends XwinDao
 		return boardItem;
 	}
 	
-	public List<BoardItem> selectBoardItemList(Integer pageIndex, String boardType)
-	{
-		Map<String, Object> param = new HashMap<String, Object>(3);
-		param.put("boardType", boardType);
-		param.put("pageIndex", pageIndex * pageSize);
-		param.put("pageSize", pageSize);
-		
+	public List<BoardItem> selectBoardItemList(Map<String, Object> param)
+	{		
 		return (List<BoardItem>) sqlMapClientTemplate.queryForList("selectBoardItemList", param);
 	}
 	

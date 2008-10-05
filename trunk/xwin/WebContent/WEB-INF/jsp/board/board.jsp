@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.xwin.domain.board.*" %>
 
-<%@include file="header.jsp"%>
+<%@include file="../header.jsp"%>
 
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
-</table>
+<%
+	List<BoardItem> boardItemList = (List<BoardItem>) request.getAttribute("boardItemList");
+%>
 
--->
 
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
@@ -25,18 +21,40 @@
 
 
 <link rel='stylesheet' href='common/board.css'><script language='JavaScript' src='common/board.js'></script><br><table align='center' width='95%' cellpadding='0' cellspacing='0' style='margin-top:7px;'><tr align='center'><td width='10'><img src='images/title_left.gif'></td><td width='50'  background='images/title_bg.gif'>번호</td><td width='*'   background='images/title_bg.gif'>제목</td><td width='100' background='images/title_bg.gif'>작성자</td><td width='100' background='images/title_bg.gif'>작성일</td><td width='50'  background='images/title_bg.gif'>조회수</td><td width='10'><img src='images/title_right.gif'></td></tr>
+	
+
+<%
+	if (boardItemList != null) {
+		for (BoardItem boardItem : boardItemList) {
+			if (boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)) {
+%>
 	<tr height='23' align="center">
 		<td>&nbsp;</td>
-
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b>공지</td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list' align="left"><span style="width:100%;color:orange;height:15;overflow:hidden;"><b><a class="board_list" style="color:orange;" href="boardDetail.jsp" title="9월9차무료 홀짝 이벤트 10개를 맞추시면 당첨금 ★50만원★ [76]">9월9차무료 홀짝 이벤트 10개를 맞추시면 당첨금 ★50만원★ <b>[76]</span></td>
+		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
+<%
+			} else {
+%>
+		<td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><%=boardItem.getId()%></td>
+<%
+			}
+%>
+		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list' align="left">
+			<span style="width:100%;color:orange;height:15;overflow:hidden;">
+				<b><a class="board_list" style="color:orange;" href="boardDetail.jsp" title="9월9차무료 홀짝 이벤트 10개를 맞추시면 당첨금 ★50만원★ [76]">
+				9월9차무료 홀짝 이벤트 10개를 맞추시면 당첨금 ★50만원★ 
+				<b>[76]
+			</span>
+		</td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b>관리자</td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'>09/23</td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'>131</td>
 		<td>&nbsp;</td>
 
 	</tr>
-	
+<%
+		}
+	}
+%>	
 	<tr height='23' align="center">
 		<td>&nbsp;</td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b>공지</td>
@@ -321,4 +339,4 @@
 </td></tr>
 </table>
 
-<%@include file="footer.jsp"%>
+<%@include file="../footer.jsp"%>

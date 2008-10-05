@@ -15,6 +15,9 @@ public class BoardItem extends XwinObject
 	private Integer readCount;
 	private String context;
 	private String type;
+	private String status;
+	private String boardName;
+	private Integer commentCount;
 	
 	private List<BoardComment> boardCommentList;
 	
@@ -71,5 +74,23 @@ public class BoardItem extends XwinObject
 	}
 	public void setBoardCommentList(List<BoardComment> boardCommentList) {
 		this.boardCommentList = boardCommentList;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
 	}	
 }

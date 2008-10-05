@@ -18,11 +18,13 @@
 		<result property="context" column="CONTEXT"/>
 		<result property="readCount" column="READCOUNT"/>
 		<result property="type" column="TYPE"/>
+		<result property="boardName" column="BOARDNAME"/>
+		<result property="commentCount" column="COMMENT_CUNT"/>
 	</resultMap>
 	
 	<insert id="insertBoardItem" parameterClass="BoardItem">
-		INSERT INTO tbl_board_item(TITLE, USERID, USERNAME, DATE, READCOUNT, CONTEXT, TYPE)
-			VALUES(#title#, #userId#, #userName#, #date#, #readCount#, #context#, #type#)
+		INSERT INTO tbl_board_item(TITLE, USERID, USERNAME, DATE, READCOUNT, CONTEXT, TYPE, BOARDNAME)
+			VALUES(#title#, #userId#, #userName#, #date#, #readCount#, #context#, #type#, #boardName#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>	
@@ -39,9 +41,13 @@
 	
 	<select id="selectBoardItemList" resultMap="boardItemResultMap"
 		parameterClass="map">
-		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT, '' as CONTEXT, TYPE
-		FROM tbl_board_item WHERE TYPE = #boardType#
-		LIMIT #pageIndex#, #pageSize#
+		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT,
+		'' as CONTEXT, TYPE,
+		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.BOARD_ID) as COMMENT_COUNT 
+		FROM tbl_board_item bi
+		WHERE BOARDNAME = #boardName#		
+		ORDER BY TYPE ASC, DATE DESC
+		LIMIT #fromRow#, #rowSize#
 	</select>
 	
 	<resultMap id="boardCommentResultMap" class="BoardComment">

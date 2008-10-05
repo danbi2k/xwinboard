@@ -1,6 +1,7 @@
 package com.xwin.infra.util;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,6 +13,12 @@ public class XwinUtil
 	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public static String comma3(Long num)
+	{
+		NumberFormat nf = NumberFormat.getInstance();
+		return nf.format(num);
+	}
 	
 	public static Long calcExpectMoney(Double rate, Long money)
 	{

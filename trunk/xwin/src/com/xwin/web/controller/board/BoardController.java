@@ -1,7 +1,9 @@
 package com.xwin.web.controller.board;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,23 +18,27 @@ import com.xwin.web.controller.XwinController;
 
 public class BoardController extends XwinController
 {
-	public ModelAndView getBoardItemList(HttpServletRequest request,
+	public static final Integer ROWSIZE = 5;
+	
+	public ModelAndView viewUserBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String _pageIndex = request.getParameter("pageIndex");
-		Integer pageIndex = null;
-		try {
-			pageIndex = Integer.parseInt(_pageIndex);
-		} catch (Exception e) {
-			pageIndex = 0;
-		}
+		String pageIndex = request.getParameter("pageIndex");
 		
-		String _boardType = request.getParameter("type");
-		List<BoardItem> boardItemList = boardDao.selectBoardItemList(pageIndex, _boardType);
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
 		
-		ResultXml rx = new ResultXml(0, null, boardItemList);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
+
+		Map<String, Object> param = new HashMap<String, Object>(3);
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<BoardItem> boardItemList = boardDao.selectBoardItemList(param);
+		
+		ModelAndView mv = new ModelAndView("board/board");
+		mv.addObject("boardItemList", boardItemList);
+		
 		return mv;
 	}
 	
@@ -46,7 +52,7 @@ public class BoardController extends XwinController
 		boardItem.setContext("fjkdfjakfjdf");
 		boardItem.setDate(new Date());
 		boardItem.setReadCount(55);
-		boardItem.setTitle("¿ì°¡Â÷Ä« ¿ì°¡Â÷Ä«");
+		boardItem.setTitle("ï¿½ì°¡ï¿½ï¿½Ä« ï¿½ì°¡ï¿½ï¿½Ä«");
 		boardItem.setUserId("xx");
 		boardItem.setUserName("yy");
 		boardItem.setType(type);
@@ -55,7 +61,7 @@ public class BoardController extends XwinController
 		
 		BoardComment boardComment = new BoardComment();
 		boardComment.setBoardId(boardId);
-		boardComment.setComment("ÄìÄìÄì");
+		boardComment.setComment("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		boardComment.setDate(new Date());
 		boardComment.setPassword("1234");
 		boardComment.setUserId("xx");

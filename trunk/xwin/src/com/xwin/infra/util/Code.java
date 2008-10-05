@@ -47,10 +47,22 @@ public class Code
 	public static final String ACCOUNT_TYPE_NOMATCH		= "AT006";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
-	public static final String BETTING_STATUS_DENY		= "BTS02";	
+	public static final String BETTING_STATUS_DENY		= "BTS02";
+	
+	public static final String BOARDITEM_TYPE_NOTICE		= "BIT01";
+	public static final String BOARDITEM_TYPE_USER			= "BIT10";
+	
+	public static final String BOARDITEM_STATUS_NORMAL		= "BIS01";
+	public static final String BOARDITEM_STATUS_REMOVE		= "BIS03";
 	
 	static 
 	{
+		put(BOARDITEM_STATUS_NORMAL, "정상");
+		put(BOARDITEM_STATUS_REMOVE, "삭제");
+		
+		put(BOARDITEM_TYPE_NOTICE, "공지");
+		put(BOARDITEM_TYPE_USER, "일반");
+		
 		put(BETTING_STATUS_ACCEPT, "가능");
 		put(BETTING_STATUS_DENY, "금지");
 		

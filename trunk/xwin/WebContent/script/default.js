@@ -1,3 +1,22 @@
+function comma3(num)
+{
+	var str = "";
+	if (num.length == undefined)
+		str += num;
+	
+	var tmp = [];
+	var cnt = 0;
+	for (var i = str.length-1 ; i >= 0 ; i--) {
+		cnt++;
+		tmp.push(charAt(i));
+		if (cnt % 3 == 0 && cnt < str.length)
+			tmp.push(",");
+	}
+	
+	var ret = tmp.join("");
+	return ret;
+}
+
 function go(url)
 {
 	alert(url);

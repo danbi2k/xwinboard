@@ -32,6 +32,10 @@ public class Game extends XwinObject
 	private String result;
 	private String type;
 	private String betStatus;
+	
+	private String winBetStatus;
+	private String drawBetStatus;
+	private String loseBetStatus;
 
 	public String getId() {
 		return id;
@@ -205,5 +209,29 @@ public class Game extends XwinObject
 
 	public void setBetStatus(String betStatus) {
 		this.betStatus = betStatus;
+	}
+
+	public String getWinBetStatus() {
+		return winBetStatus;
+	}
+
+	public void setWinBetStatus(String winBetStatus) {
+		this.winBetStatus = winBetStatus;
+	}
+
+	public String getDrawBetStatus() {
+		return drawBetStatus;
+	}
+
+	public void setDrawBetStatus(String drawBetStatus) {
+		this.drawBetStatus = drawBetStatus;
+	}
+
+	public String getLoseBetStatus() {
+		return loseBetStatus;
+	}
+
+	public void setLoseBetStatus(String loseBetStatus) {
+		this.loseBetStatus = loseBetStatus;
 	}
 }

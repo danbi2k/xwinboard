@@ -3,6 +3,7 @@
 
 <%@ page import="com.xwin.domain.user.*" %>
 <%@ page import="com.xwin.infra.dao.*" %>
+<%@ page import="com.xwin.infra.util.*" %>
 <%
 	Member member = (Member) session.getAttribute("Member");
 	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
@@ -12,6 +13,7 @@
 	if (member != null) {
 		MemberDao memberDao = (MemberDao) session.getAttribute("MemberDao");
 		member = memberDao.selectMember(member.getUserId(), null);
+		session.setAttribute("Member", member);
 	}
 	boolean login = member == null ? false : true;
 %>
@@ -63,7 +65,7 @@
 	<AREA SHAPE=RECT COORDS="283,0,387,33" href="javascript:alert('준비중입니다');"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="389,0,507,33" href="guide.aspx"   onMouseOver="clipthis('top1','top2',389,0,507,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="509,0,613,33" href="rules.aspx"	 onMouseOver="clipthis('top1','top2',509,0,613,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="615,0,712,33" href="javascript:alert('준비중입니다');"   onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 </MAP>
 
 
@@ -127,7 +129,7 @@ if (login) {
 	<td style="padding-right:10;padding-left:10;">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td><img src="images/money_1.gif"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=member.getBalance()%></td>
+			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=XwinUtil.comma3(member.getBalance())%></td>
 			<td><img src="images/money_3.gif"></td>			
 		</tr>
 		</table>
