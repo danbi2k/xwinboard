@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +22,14 @@ public class BoardDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteBoardItem", id);
 	}
 	
-	public BoardItem selectBoardItem(String id)
+	public BoardItem selectBoardItem(String id, String boardName)
 	{
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("id", id);
+		param.put("boardName", boardName);
+		
 		BoardItem boardItem = 
-			(BoardItem) sqlMapClientTemplate.queryForObject("selectBoardItem", id);
+			(BoardItem) sqlMapClientTemplate.queryForObject("selectBoardItem", param);
 		
 		List<BoardComment> boardCommentList = 
 			selectBoardCommentList(boardItem.getId());
@@ -64,5 +69,10 @@ public class BoardDao extends XwinDao
 	public List<BoardComment> selectBoardCommentList(String boardId)
 	{
 		return (List<BoardComment>) sqlMapClientTemplate.queryForList("selectBoardCommentList", boardId);
+	}
+	
+	public void plusBoardItemReadCout(String boardId)
+	{
+		sqlMapClientTemplate.update("plusBoardItemReadCout", boardId);
 	}
 }

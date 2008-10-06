@@ -2,12 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.board.*" %>
+<%@ page import="com.xwin.web.controller.board.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
+
+<%
+	String boardName = request.getParameter("boardName");
+%>
 
 <%@include file="../header.jsp"%>
 
 <%
-	Integer ROWSIZE = 5;
+	Integer ROWSIZE = BoardController.ROWSIZE;
 	final Integer SHOWPAGE = 10;
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
@@ -18,7 +23,10 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_board.gif"></td><td>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.</td></td>
+	<tr><td width="100"><img src="images/title_board.gif"></td>
+	<td>
+	<%=boardName.equals("user")?"게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.":"1:1 고객센터 입니다. 문의사항 및 건의사항을 적어주세요."%>
+	</td></td>
 
 	</table>
 </td></tr>
@@ -38,9 +46,8 @@
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list' align="left">
 			<span style="width:100%;color:orange;height:15;overflow:hidden;">
-				<b><a class="board_list" style="color:orange;" href="board.aspx?mode=viewUserBoardDetail&id=<%=boardItem.getId()%>">
-				<%=boardItem.getTitle()%>
-				[<%=boardItem.getCommentCount()%>]
+				<b><a class="board_list" style="color:orange;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>id=<%=boardItem.getId()%>">
+				<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 				</a></b>
 			</span>
 		</td>
@@ -58,7 +65,7 @@
     <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><%=boardItem.getId()%></td>
     <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list' align="left">
 		<span style="width:100%;height:15;overflow:hidden;">
-		<a class="board_list" href="board.aspx?mode=viewUserBoardDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%><b>[<%=boardItem.getCommentCount()%>]</b></a>
+		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
 		</span>
 	</td>
     <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><b><%=boardItem.getNickName()%></b></td>
@@ -82,7 +89,7 @@
     <td width="50%" height="30" align="right">
 		
         &nbsp;&nbsp;<br><br>
-        <a href="board.aspx?mode=viewUserBoardWrite"><img src="images/btn_write.gif" border="0"></a>
+        <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
     </td></tr>
 </table>
 
@@ -135,7 +142,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewUserBoard&pageIndex=" + pageIndex;
+	location.href="board.aspx?mode=viewUserBoard&boardName=<%=boardName%>pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

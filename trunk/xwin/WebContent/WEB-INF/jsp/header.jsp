@@ -75,7 +75,7 @@
 	<AREA SHAPE=RECT COORDS="283,0,387,33" href="game.aspx?mode=viewGameResultList"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="389,0,507,33" href="guide.aspx"   onMouseOver="clipthis('top1','top2',389,0,507,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="509,0,613,33" href="rules.aspx"	 onMouseOver="clipthis('top1','top2',509,0,613,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard&boardName=user" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 </MAP>
 
 

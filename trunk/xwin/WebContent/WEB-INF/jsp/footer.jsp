@@ -17,7 +17,7 @@
 	<td><img src="images/tail_menu_2.gif" onclick="location.href='rules.aspx';" style="cursor:hand"></td>
 	<td><img src="images/tail_menu_gap.gif"></td>
 
-	<td><img src="images/tail_menu_3.gif" onclick="location.href='customer.jsp';" style="cursor:hand"></td>
+	<td><img src="images/tail_menu_3.gif" onclick="location.href='board.aspx?mode=viewQnaBoard&boardName=qna';" style="cursor:hand"></td>
 	</tr>
 	</table>
 

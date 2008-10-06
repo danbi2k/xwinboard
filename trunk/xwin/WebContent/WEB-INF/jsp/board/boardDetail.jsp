@@ -3,12 +3,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.board.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
+<%@ page import="org.apache.commons.lang.*"%>
 
 <%@include file="../header.jsp"%>
 
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
+	String boardName = request.getParameter("boardName");
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -25,13 +27,12 @@
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
 	<tr><td width="100"><img src="images/title_board.gif"></td><td>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.</td></td>
-
 	</table>
 </td></tr>
 <tr><td valign="top" align="center" height="300">
 
 
-<link rel='stylesheet' href='/board/skin_board/board.css'><script language='JavaScript' src='/board/skin_board/board.js'></script>
+<link rel='stylesheet' href='style/board.css'><script language='JavaScript' src='script/board.js'></script>
 
 <script>
 function img_resize(obj,max_width){
@@ -49,50 +50,71 @@ function img_resize(obj,max_width){
 <tr align="center">
 <td width="10"><img src="images/title_left.gif"></td>
 <td width="*" background="images/title_bg.gif"><b style="color:white"><%=boardItem.getTitle()%></td>
-
 <td width="10"><img src="images/title_right.gif"></td>
 </tr>
 </table>
 
 <table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #4a4a4a;">
 <tr height="200" valign="top"><td style="padding:13px;" bgcolor="#f5f5f5" style="color:black;">
-<p>
-<%=boardItem.getContext()%>
-</p>
+
+    <%
+    String context = boardItem.getContext();
+    context = StringEscapeUtils.escapeHtml(context);
+    context = context.replaceAll("\n", "<br>");
+    out.print(context);
+    %>
+
 </td></tr>
 <tr><td bgcolor="#525252">
     <table width="100%" style="color:#8b8b8b;">
     <tr>
         <td width="33%"><b style="color:black">작성자 : <b><%=boardItem.getNickName()%></b></td>
-        <td width="33%" align="center"><b style="color:black"><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
-        <td width="33%" align="right"><b style="color:black">Read : <%=boardItem.getReadCount()%></td>
+        <td width="33%" align="center"><b style="color:black"><%=XwinUtil.getBoardItemDate(boardItem.getDate()) %></td>
+        <td width="33%" align="right"><b style="color:black">Read : <%=boardItem.getReadCount() %></td>
     </tr></table>
-
 </td></tr>
+</table>
+
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="padding-top:8px">
+<tr><td width="50%" height="30">
+		<!--
+        <img src="images/btn_list.gif" onclick="list();" style="cursor:hand;">
+        &nbsp;&nbsp;
+        <img src="images/btn_prev.gif" onclick="pre_go();" style="cursor:hand;">
+        <img src="images/btn_next.gif" onclick="next_go();" style="cursor:hand;">
+          -->
+    </td>
+    <td width="50%" height="30" align="right">
+		
+        &nbsp;&nbsp;
+        <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
+    </td></tr>
 </table>
 
 
 <script>
 function list(){
-    location.href="board/board.asp?idx=board";
+    location.href="/board/board.asp?idx=board";
 }
 function pre_go(){
     
-        location.href="board/board.asp?idx=board&no=13";
+        location.href="/board/board.asp?idx=board&no=1568";
     
 }
 function next_go(){
     
-        location.href="board/board.asp?idx=board&no=15";
+        alert("다음 게시믈이 없습니다.");
     
 }
 function edit(no){
     if(confirm("수정하시겠습니까?")){
-        location.href="board/board.asp?idx=board&m=e&no="+ no;
+        location.href="/board/board.asp?idx=board&m=e&no="+ no;
     }
 }
 function del(no){
-    location.href="board/board.asp?idx=board&m=d&no="+ no;
+    location.href="/board/board.asp?idx=board&m=d&no="+ no;
 }
 </script>
 
@@ -104,8 +126,7 @@ function comment_add(){
 	
     if(comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
     if(comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
-    //if(comment_frm.password.value==""){ alert("패스워드를 입력하세요.");  comment_frm.password.focus(); return false; }
-    comment_frm.action = "?m=c";
+    comment_frm.action = "board.aspx";
     comment_frm.method = "post";
     comment_frm.submit();
 
@@ -132,19 +153,20 @@ function comment_submit(){
 </script>
 
 
+<form name="comment_frm" method="post" onsubmit="comment_add();return false;">
+<input type="hidden" name="mode" value="writeBoardComment">
+<input type="hidden" name="boardId" value="<%=boardItem.getId()%>">
+<input type="hidden" name="boardName" value="<%=boardName%>">
 <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px;border:1 solid #4a4a4a">
-<form name="comment_frm" action="?m=c" method="post" onsubmit="comment_add();return false;">
-<input type="hidden" name="idx" value="board">
-<input type="hidden" name="b_uid" value="14">
-<input type="hidden" name="mem_id" value="huzi">
-
 <tr bgcolor="#525252" height="30">
-	<td width="120" bgcolor="#3a3a3a" align="center"><b style="color:white"><b>Comment</td>
+	<td width="120" bgcolor="#3a3a3a" align="center"><b style="color:white"><b>Comment</b></td>
 	<td width="*" style="padding-left:15;">
+	작성자 <input type="text" name="name" value="<%=member.getNickName()%>" style="width:90;height:19px;border:1 #efefef solid;background-color:#8a8a8a;" readonly>
 	내용 <input type="text" name="comment" style="width:500;height:19px;border:1 #7f9db9 solid;"></td>
-	<td width="100"><input type="image" src="images/btn_write.gif"  style="cursor:hand"></td>
+	<td width="100">&nbsp;<input type="image" src="images/btn_write.gif"  style="cursor:hand"></td>
 </tr>
 </table>
+</form>
 
 <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
 <tr align="center">
@@ -153,54 +175,41 @@ function comment_submit(){
 
         
         <table width="97%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:2px;margin-top:12px;margin-bottom:12px;border-top:1 #c5c5c5 dotted">
-        
-<%
-	if (boardCommentList != null && boardCommentList.size() > 0) {
-		for (BoardComment boardComment : boardCommentList) {			
-%>
+        <%
+        if (boardCommentList != null) {
+        	for (BoardComment boardComment : boardCommentList) {
+        %>
         <tr><td>
-
             <table width="100%" height="25" style="border-bottom:1 #c5c5c5 dotted">
             <tr><td width="90"  style="color:black"><b><%=boardComment.getNickName()%></b></td>
-                <td width="*"   style="color:black">
-				<p>
-				<%=boardComment.getComment()%>
-				</p>
-				</td>
-                <td width="70" align="center" style="color:black"><%=XwinUtil.getBoardItemDate(boardComment.getDate())%></td>
+                <td width="*"   style="color:black"><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
+                <td width="70" title="2008-10-06 오후 5:47:04" align="center" style="color:black"><b><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
 				
 					<td width="16" align="center">&nbsp;</td>
+				
              </tr>
              </table>
-
         </td></tr>
- <%
-		}
-	} else {
-%>
-<%
-	}
-%>
-                
+        <%
+        	}
+        }
+        %>
         </table>
-
         
 
     </td>
 </tr>
 </form>
-</table>
 
 
 <table id="comment_delbox" cellspacing="0" width="180" style="position:absolute;visibility:hidden;border:1 gray solid;">
 <form name="comment_delfrm" action="?m=c" method="post">
 <input type="hidden" name="idx"   value="board">
-<input type="hidden" name="b_uid" value="14">
+<input type="hidden" name="b_uid" value="1570">
 <input type="hidden" name="c_del" value="">
 <tr><td bgcolor="#efefef" align="center" onclick="cdbox.style.visibility='hidden';" style="filter:gray();cursor:hand;">
     <table cellspacing="0" cellpadding="0" width="100%" height="22">
     <tr><td width="*" align="center"><b>댓글 삭제</tD>
-
         <td width="20" align="right"><img src="images/btn_coment_del.gif"></td>
     </tr></table>
 </td></tr>

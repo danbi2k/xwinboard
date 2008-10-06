@@ -34,10 +34,13 @@
 	</delete>
 	
 	<select id="selectBoardItem" resultMap="boardItemResultMap"
-		parameterClass="string">
+		parameterClass="map">
 		SELECT *,
 		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
-		FROM tbl_board_item bi WHERE bi.ID = #value#
+		FROM tbl_board_item bi
+		WHERE
+			bi.ID = #id# AND
+			bi.boardName = #boardName#
 	</select>
 	
 	<select id="selectBoardItemList" resultMap="boardItemResultMap" parameterClass="map">
@@ -47,7 +50,11 @@
 			TYPE,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
-		WHERE bi.BOARDNAME = #boardName#
+		WHERE
+			bi.BOARDNAME = #boardName#
+			<isNotNull prepend="AND" property="userId">
+			bi.USERID = #userId#
+			</isNotNull>
 		ORDER BY TYPE ASC, DATE DESC
 		LIMIT #fromRow#, #rowSize#
 	</select>
@@ -84,4 +91,8 @@
 	<select id="selectBoardCommentList" resultMap="boardCommentResultMap">
 		SELECT * FROM tbl_board_comment WHERE BOARD_ID = #value#
 	</select>
+	
+	<update id="plusBoardItemReadCout">
+		UPDATE tbl_board_item SET READCOUNT = READCOUNT + 1 WHERE ID = #value#
+	</update>
 </sqlMap>
