@@ -75,7 +75,7 @@ public class BoardController extends XwinController
 		String boardName = request.getParameter("boardName");
 		String addComment = request.getParameter("addComment");
 		
-		if (addComment != null)
+		if (addComment == null)
 			boardDao.plusBoardItemReadCout(id);
 		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
 		

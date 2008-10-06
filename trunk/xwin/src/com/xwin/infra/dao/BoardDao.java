@@ -75,4 +75,9 @@ public class BoardDao extends XwinDao
 	{
 		sqlMapClientTemplate.update("plusBoardItemReadCout", boardId);
 	}
+	
+	public Integer selectUnAnsweredQna()
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectUnAnsweredQna");
+	}
 }

@@ -13,6 +13,9 @@
 	<bean id="adminLoginController"
 		class="com.xwin.web.controller.admin.AdminLoginController"
 		p:memberDao-ref="memberDao"
+		p:boardDao-ref="boardDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:moneyOutDao-ref="moneyOutDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminMainController"

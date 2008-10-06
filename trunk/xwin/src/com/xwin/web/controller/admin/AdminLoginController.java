@@ -24,6 +24,9 @@ public class AdminLoginController extends XwinController
 		
 		if (admin!= null && admin.getPassword().equals(password)) {
 			request.getSession().setAttribute("Admin", admin);
+			request.getSession().setAttribute("boardDao", boardDao);
+			request.getSession().setAttribute("moneyInDao", moneyInDao);
+			request.getSession().setAttribute("moneyInDao", moneyOutDao);
 			rx = ResultXml.SUCCESS;
 		} else {
 			rx = new ResultXml(-1, "관리자 정보가 잘못되었습니다", null);

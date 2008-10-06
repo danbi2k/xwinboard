@@ -253,8 +253,8 @@
 								</B>
 								</td>
 								<td colspan='3'>
-									<img src="images/admin/btn_run.jpg" onclick="calculateBetting(<%=betting.getId()%>, <%=betting.getGameType()%>)">
-									<img src="images/admin/btn_cancel.jpg" onclick="cancelBetting(<%=betting.getId()%>, <%=betting.getGameType()%>)">
+									<img src="images/admin/btn_run.jpg" onclick="calculateBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')">
+									<img src="images/admin/btn_cancel.jpg" onclick="cancelBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')">
 								</td>
 							</tr>
 			<%
@@ -320,6 +320,7 @@ function calculateBetting(id, gameType)
 	if (confirm("정산하시겠습니까?")) {
 		var query = "mode=calculateBetting";
 		query += "&id=" + id;
+		query += "&gameType=" + gameType;
 		var http = new JKL.ParseXML("adminBetting.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message)
