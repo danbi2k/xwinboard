@@ -60,7 +60,7 @@ public class AdminLeagueController extends XwinController
 		
 		League league = new League();
 		league.setName(command.getName());
-		league.setImage(fileName);
+		league.setImage("");
 		
 		leagueDao.insertLeague(league);		
 		

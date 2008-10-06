@@ -2,6 +2,7 @@ package com.xwin.web.command;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class LeagueCommand
 {
 	private String name;
