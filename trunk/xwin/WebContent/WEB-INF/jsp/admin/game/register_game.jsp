@@ -7,7 +7,6 @@
  <%@ include file="../admin_header.jsp"%>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
-	Game game = (Game) request.getAttribute("Game");
 	String type = request.getParameter("type");	
 %>
 		  <!-- 좌측 메뉴 -->
@@ -81,7 +80,7 @@
 		}*/
 
 		var query = "mode=registerGame";
-		query += "&type=wdl";
+		query += "&type=<%=type%>";
 		query += "&leagueId=" + d.leagueId.value;
 		query += "&gameDate=" + d.gameDate.value;
 		query += "&gameHour=" + d.gameHour.value;
@@ -245,163 +244,29 @@
                       </tr-->		
 					   <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">게임시간</td>
-                        <td bgcolor="#FFFFFF"  colspan=3><input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
+                        <td bgcolor="#FFFFFF"  colspan=3>
+						<input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
 						<select name='gameHour'>
-												<option value='0'>00</option>
-												<option value='1'>01</option>
-												<option value='2'>02</option>
-												<option value='3'>03</option>
-												<option value='4'>04</option>
-												<option value='5'>05</option>
-												<option value='6'>06</option>
-												<option value='7'>07</option>
-												<option value='8'>08</option>
-												<option value='9'>09</option>
-												<option value='10'>10</option>
-												<option value='11'>11</option>
-												<option value='12'>12</option>
-												<option value='13'>13</option>
-												<option value='14'>14</option>
-												<option value='15'>15</option>
-												<option value='16'>16</option>
-												<option value='17'>17</option>
-												<option value='18'>18</option>
-												<option value='19'>19</option>
-												<option value='20'>20</option>
-												<option value='21'>21</option>
-												<option value='22'>22</option>
-												<option value='23'>23</option>
-												</select>
+						<%
+							for (int i = 0 ; i < 24 ; i++) {
+								String hour = "" + i;
+						%>
+							<option value='<%=hour%>'><%=XwinUtil.Int2Digit(i)%></option>
+						<%
+							}
+						%>
+						</select>
 						시
 						<select name='gameMinute'>
-												<option value='0'>00</option>
-												<option value='1'>01</option>
-												<option value='2'>02</option>
-												<option value='3'>03</option>
-												<option value='4'>04</option>
-												<option value='5'>05</option>
-												<option value='6'>06</option>
-												<option value='7'>07</option>
-												<option value='8'>08</option>
-												<option value='9'>09</option>
-												<option value='10'>10</option>
-												<option value='11'>11</option>
-												<option value='12'>12</option>
-												<option value='13'>13</option>
-												<option value='14'>14</option>
-												<option value='15'>15</option>
-												<option value='16'>16</option>
-												<option value='17'>17</option>
-												<option value='18'>18</option>
-												<option value='19'>19</option>
-												<option value='20'>20</option>
-												<option value='21'>21</option>
-												<option value='22'>22</option>
-												<option value='23'>23</option>
-												<option value='24'>24</option>
-												<option value='25'>25</option>
-												<option value='26'>26</option>
-												<option value='27'>27</option>
-												<option value='28'>28</option>
-												<option value='29'>29</option>
-												<option value='30'>30</option>
-												<option value='31'>31</option>
-												<option value='32'>32</option>
-												<option value='33'>33</option>
-												<option value='34'>34</option>
-												<option value='35'>35</option>
-												<option value='36'>36</option>
-												<option value='37'>37</option>
-												<option value='38'>38</option>
-												<option value='39'>39</option>
-												<option value='40'>40</option>
-												<option value='41'>41</option>
-												<option value='42'>42</option>
-												<option value='43'>43</option>
-												<option value='44'>44</option>
-												<option value='45'>45</option>
-												<option value='46'>46</option>
-												<option value='47'>47</option>
-												<option value='48'>48</option>
-												<option value='49'>49</option>
-												<option value='50'>50</option>
-												<option value='51'>51</option>
-												<option value='52'>52</option>
-												<option value='53'>53</option>
-												<option value='54'>54</option>
-												<option value='55'>55</option>
-												<option value='56'>56</option>
-												<option value='57'>57</option>
-												<option value='58'>58</option>
-												<option value='59'>59</option>
-												</select>
-						분
-
-						<!-- select name='gametime4'>
-												<option value='0'>00</option>
-												<option value='1'>01</option>
-												<option value='2'>02</option>
-												<option value='3'>03</option>
-												<option value='4'>04</option>
-												<option value='5'>05</option>
-												<option value='6'>06</option>
-												<option value='7'>07</option>
-												<option value='8'>08</option>
-												<option value='9'>09</option>
-												<option value='10'>10</option>
-												<option value='11'>11</option>
-												<option value='12'>12</option>
-												<option value='13'>13</option>
-												<option value='14'>14</option>
-												<option value='15'>15</option>
-												<option value='16'>16</option>
-												<option value='17'>17</option>
-												<option value='18'>18</option>
-												<option value='19'>19</option>
-												<option value='20'>20</option>
-												<option value='21'>21</option>
-												<option value='22'>22</option>
-												<option value='23'>23</option>
-												<option value='24'>24</option>
-												<option value='25'>25</option>
-												<option value='26'>26</option>
-												<option value='27'>27</option>
-												<option value='28'>28</option>
-												<option value='29'>29</option>
-												<option value='30'>30</option>
-												<option value='31'>31</option>
-												<option value='32'>32</option>
-												<option value='33'>33</option>
-												<option value='34'>34</option>
-												<option value='35'>35</option>
-												<option value='36'>36</option>
-												<option value='37'>37</option>
-												<option value='38'>38</option>
-												<option value='39'>39</option>
-												<option value='40'>40</option>
-												<option value='41'>41</option>
-												<option value='42'>42</option>
-												<option value='43'>43</option>
-												<option value='44'>44</option>
-												<option value='45'>45</option>
-												<option value='46'>46</option>
-												<option value='47'>47</option>
-												<option value='48'>48</option>
-												<option value='49'>49</option>
-												<option value='50'>50</option>
-												<option value='51'>51</option>
-												<option value='52'>52</option>
-												<option value='53'>53</option>
-												<option value='54'>54</option>
-												<option value='55'>55</option>
-												<option value='56'>56</option>
-												<option value='57'>57</option>
-												<option value='58'>58</option>
-												<option value='59'>59</option>
-												</select>
-						초
-
-						</td-->
+						<%
+							for (int i = 0 ; i < 60 ; i+=5) {
+								String minute = "" + i;
+						%>
+							<option value='<%=minute%>'><%=XwinUtil.Int2Digit(i)%></option>
+						<%
+							}
+						%>
+						</select>
                       </tr>		
 					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">홈팀</td>
@@ -415,27 +280,25 @@
 						<!--배당률 <input type='text' name='a1_by' size=5>-->
 						</td>
                       </tr>	
-					  <!--
 					     <tr bgcolor="E7E7E7">
-                        <td align="center" bgcolor="E7E7E7" width="15%"><div id='td_title'>무승부</div></td>
-                        <td bgcolor="#FFFFFF"  colspan=3>	
-						<table border=0 width=100% id='1x2_dp'>
-							<tr>
-								<Td>배당률 <input type='text' name='x_by' size=5></td>
-							</tr>
-						</table>
-						<table border=0 width=100% id='handicap_dp' style='display:none'>
-							<tr>
-								<Td><input type='text' name='handicap_title' size=50></td>
-							</tr>
-						</table>
-						</td>
-                      </tr>		
-					  -->
-					   					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
                         <td bgcolor="#FFFFFF"  colspan=3>
-						승 <input type='text' name='winRate' size=5> 무 <input type='text' name='drawRate' size=5> 패 <input type='text' name='loseRate' size=5>					
+						승 <input type='text' name='winRate' size=5>
+						<%if (type.equals("wdl")) {%>
+						무 <input type='text' name='drawRate' size=5>
+						<%} else { %>
+						핸디
+						<select name='drawRate'>
+						<%
+						for (double i = -20 ; i <= 20 ; i+=0.5) {
+						%>
+							<option value="<%=i%>"><%=i%></option>
+						<%
+						}
+						%>	
+						</select>
+						<%} %>
+						패 <input type='text' name='loseRate' size=5>											
 						</td>
                       </tr>		
 					 
@@ -444,12 +307,14 @@
 				</td>
               </tr>
               <tr>
-                <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
-                              <tr>
-                                <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
-                                <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
-                              </tr>
-                          </table></td>
+                <td height="50" align="center">
+				<table width="2%"  border="0" cellspacing="5" cellpadding="0">
+	                <tr>
+	                  <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
+	                  <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+	                </tr>
+	            </table>
+				</td>
               </tr>
               </form>
               <tr>

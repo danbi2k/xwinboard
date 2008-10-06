@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
@@ -86,6 +87,16 @@ public class BettingController extends XwinController
 				betGameDao.insertBetGame(betGame);
 			}
 			
+			Account account = new Account();
+			account.setUserId(member.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_BETTING);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(betting.getMoney() * -1);
+			account.setBalance(member.getBalance() - betting.getMoney());
+			account.setBettingId(betting.getId());
+			
+			accountDao.insertAccount(account);			
 			memberDao.updateBalance(member.getUserId(), cc.getAfter());
 			
 			session.removeAttribute("cartMap_" + _type);

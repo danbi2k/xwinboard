@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Code
 {	
+	public static String LEAGUE_IMAGE_PATH	= "";
 	private static final Map<String, String> valueMap = new HashMap<String, String>();
 	private static final Map<String, String> keyMap = new HashMap<String, String>();
 	
@@ -22,6 +23,7 @@ public class Code
 	public static final String BET_STATUS_CANCEL		= "BS004";
 	public static final String BET_STATUS_NOMATCH		= "BS005";
 	public static final String BET_STATUS_COMMIT		= "BS006";
+	public static final String BET_STATUS_HANDYDRAW		= "BS007";
 	
 	public static final String GAME_STATUS_READY		= "GS002";
 	public static final String GAME_STATUS_RUN			= "GS003";
@@ -92,9 +94,10 @@ public class Code
 		put(BET_STATUS_RUN, "진행중");
 		put(BET_STATUS_SUCCESS, "적중");
 		put(BET_STATUS_FAILURE, "실패");
-		put(BET_STATUS_CANCEL, "취소(환불)");
-		put(BET_STATUS_NOMATCH, "경기취소");
+		put(BET_STATUS_CANCEL, "배팅취소(환불)");
+		put(BET_STATUS_NOMATCH, "경기취소(환불)");
 		put(BET_STATUS_COMMIT, "정산완료");
+		put(BET_STATUS_HANDYDRAW, "무승부(환불)");
 
 		put(USER_GRADE_NORMAL, "일반");
 		put(USER_GRADE_VIP, "VIP");

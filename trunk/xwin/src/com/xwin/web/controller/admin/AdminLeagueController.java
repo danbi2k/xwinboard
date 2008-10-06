@@ -5,11 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.League;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.web.command.LeagueCommand;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -50,12 +53,14 @@ public class AdminLeagueController extends XwinController
 	}
 	
 	public ModelAndView registerLeague(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
+			HttpServletResponse response, LeagueCommand command) throws Exception
 	{
-		String name = request.getParameter("name");
+		MultipartFile mf = command.getImage();
+		String fileName = XwinUtil.uploadContent(mf, Code.LEAGUE_IMAGE_PATH);
 		
 		League league = new League();
-		league.setName(name);
+		league.setName(command.getName());
+		league.setImage(fileName);
 		
 		leagueDao.insertLeague(league);		
 		

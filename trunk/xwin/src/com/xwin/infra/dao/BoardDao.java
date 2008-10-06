@@ -38,6 +38,11 @@ public class BoardDao extends XwinDao
 	{		
 		return (List<BoardItem>) sqlMapClientTemplate.queryForList("selectBoardItemList", param);
 	}
+
+	public Integer selectBoardItemCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectBoardItemCount", param);
+	}
 	
 	/**************************************************/
 	

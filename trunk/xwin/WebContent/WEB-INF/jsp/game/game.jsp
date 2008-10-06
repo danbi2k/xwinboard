@@ -6,8 +6,11 @@
 
 <%@include file="../header.jsp"%>
 
+<%
+	String type = request.getParameter("type");
+%>
 <script>
-var gameType = 'wdl'
+var gameType = '<%=type%>'
 </script>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
@@ -77,7 +80,15 @@ var gameType = 'wdl'
 		<td style="color:white;"><b>리그</b></td>
 		<td style="color:white;"><b>승</b></td>
 		
-			<td style="color:white;"><b>무</b></td>
+		<%if (type.equals("wdl")) {%>
+		<td style="color:white;"><b>무</b></td>
+		<%
+		} else {
+		%>
+		<td style="color:white;"><b>핸디</b></td>
+		<%
+		}
+		%>
 		
 		<td style="color:white;"><b>패</b></td>
 		<td style="color:white;"><b>상태</b></td>
@@ -172,7 +183,7 @@ var gameType = 'wdl'
 </tr>
 </table>
 <script>
-FnGetGameList('wdl');
+FnGetGameList('<%=type%>');
 FnDrawCart();
 </script>
 <!-- ---------------------------------------------------------------------- -->

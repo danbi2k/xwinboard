@@ -20,6 +20,8 @@
 	String gameDate = XwinUtil.nvl(request.getParameter("gameDate"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	
+	String type = request.getParameter("type");
 %>
  <%@ include file="../admin_header.jsp"%>
 		  <!-- 좌측 메뉴 -->
@@ -60,7 +62,19 @@
                 <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 경기관리 - 승무패</td>
+                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 경기관리 -
+					<%
+					if (type.equals("wdl")) {
+					%> 
+					승무패
+					<%
+					} else {
+					%>
+					핸디캡
+					<%
+					}
+					%>
+					</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -89,6 +103,7 @@
 		if (confirm("경기를 대기 하시겠습니까?")) {
 			var query = "mode=readyGame";
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -104,6 +119,7 @@
 		if (confirm("경기를 진행 하시겠습니까?")) {	
 			var query = "mode=runGame";
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -128,6 +144,7 @@
 			query += "&homeScore=" + homeScore;
 			query += "&awayScore=" + awayScore;
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -143,6 +160,7 @@
 		if (confirm("경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -313,14 +331,14 @@
                               <tr>
                                 <td> * 게임정보를 조회하시거나 수정 , 삭제 하실 수 있습니다.</td>
 
-                                <td align="right"><a href='adminGame.aspx?mode=viewRegisterGameForm&type=wdl'><img src='images/admin/but_input.gif' border=0></a></td>
+                                <td align="right"><a href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'><img src='images/admin/but_input.gif' border=0></a></td>
                               </tr>
                           </table></td>
                         </tr>
 							<form method='get' name='search'>
 							<input type='hidden' name='pageIndex' value='0'/>
 							<input type='hidden' name='mode' value='viewGameList'/>
-							<input type='hidden' name='type' value='wdl'/>
+							<input type='hidden' name='type' value='<%=type%>'/>
 						 <tr>
                           <td align='left' height=30>
 						리그명
@@ -389,7 +407,17 @@
 								<td>홈팀</td>
 								<td>원정팀</td>
 								<td>승</td>
+								<%
+								if (type.equals("wdl")) {
+								%>
 								<td>무</td>
+								<%
+								} else {
+								%>
+								<td>핸디</td>
+								<%
+								}
+								%>
 								<td>패</td>								
 								<td>스코어</td>
 								<td>결과</td>
@@ -404,14 +432,24 @@
 									
 							%>
                               <tr align='center' bgcolor='#ffffff'>
-								<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=wdl&id=<%=game.getId()%>"><%=game.getId()%></a></td>
+								<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>"><%=game.getId()%></a></td>
 								<td><%=game.getLeagueName()%></td>
 
 								<td><%=game.getGameDateStr()%></td>
 								<td><%=game.getHomeTeam()%></td>
 								<td><%=game.getAwayTeam()%></td>
 								<td><%=game.getWinRateStr()%></td>
+								<%
+								if (type.equals("wdl")) {
+								%>
 								<td><%=game.getDrawRateStr()%></td>
+								<%
+								} else {
+								%>
+								<td><%=game.getDrawRate()%></td>
+								<%
+								}
+								%>
 								<td><%=game.getLoseRateStr()%></td>
 								<td>
 									<%

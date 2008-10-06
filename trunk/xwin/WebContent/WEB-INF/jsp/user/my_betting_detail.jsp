@@ -68,7 +68,15 @@
 			<td>
 				<%=Code.getValue(betGame.getGuess())%>
 			</td>
+			<%if (betting.getGameType().equals("wdl")) { %>
 			<td><%=betGame.getHomeScore()==null ? "-":betGame.getHomeScore()%> : <%=betGame.getAwayScore()==null ? "-":betGame.getAwayScore()%></td>
+			<%
+			} else if (betting.getGameType().equals("handy")) {
+				String oper = betGame.getDrawRate() >= 0 ? "+":"-";
+				double abs = Math.abs(betGame.getDrawRate());
+			%>
+			<td><%=betGame.getHomeScore()==null ? "-":betGame.getHomeScore()%> <%=oper%> (<%=abs%>) : <%=betGame.getAwayScore()==null ? "-":betGame.getAwayScore()%></td>
+			<%} %>
 			<td>
 				<%=Code.getValue(betGame.getResult())==null?"-":Code.getValue(betGame.getResult())%>
 			</td>

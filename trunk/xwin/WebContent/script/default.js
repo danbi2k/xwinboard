@@ -1,18 +1,16 @@
 function comma3(num)
 {
-	var str = "";
-	if (num.length == undefined)
-		str += num;
+	var str = "" + num;
 	
 	var tmp = [];
 	var cnt = 0;
 	for (var i = str.length-1 ; i >= 0 ; i--) {
 		cnt++;
-		tmp.push(charAt(i));
+		tmp.push(str.charAt(i));
 		if (cnt % 3 == 0 && cnt < str.length)
 			tmp.push(",");
 	}
-	
+	tmp = tmp.reverse();
 	var ret = tmp.join("");
 	return ret;
 }

@@ -57,7 +57,7 @@
 	function checkIT() {
 		var d=document.regist;
 		if(!d.name.value) { alert('리그명을 입력하세요'); d.name.focus(); return false; }
-		d.action='adminLeague.aspx?mode=registerLeague';
+		alert(regist.action);
 		d.submit();
 	}
 
@@ -71,36 +71,42 @@
 	}
 
 </SCRIPT>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0">		
+			<form method='post' action="adminLeague.aspx" name='regist' onSubmit="return checkIT()" > 
+			<table width="100%"  border="0" cellspacing="0" cellpadding="0">		
               <tr>
-                <td height="30"><table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
-                    <form method='post' name='regist' onSubmit="return checkIT()">    					
+                <td height="30">                   
+			    <input type="hidden" name="mode" value="registerLeague"/>					
+				<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 					  <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3> <input type='text' name='name' size='80'></td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3>
+							<input type='text' name='name' size='80'>
+						</td>
                       </tr>												
 					  <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">파일업로드</td>
-                        <td bgcolor="#FFFFFF" width="85%" colspan=3> <input type='file' name='filename' size='40'></td>
+                        <td bgcolor="#FFFFFF" width="85%" colspan=3>
+							<input type='file' name='image' size='40'>
+						</td>
                       </tr>												
                 </table>
 				</td>
               </tr>
               <tr>
-                <td height="50" align="center"><table width="2%"  border="0" cellspacing="5" cellpadding="0">
-                              <tr>
-                                <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
-                                <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
-                              </tr>
-                          </table></td>
+                <td height="50" align="center">
+					<table width="2%"  border="0" cellspacing="5" cellpadding="0">
+                          <tr>
+                            <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
+                            <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+                          </tr>
+                    </table>
+				</td>
               </tr>
-			  <input type='hidden' name='mode' value='write_exe'>
-              </form>
               <tr>
                 <td>&nbsp;</td>
               </tr>              
             </table>
-                      
+            </form> 
 		  <!-- 세부 내용 끝 -->
                 </td>
               </tr>

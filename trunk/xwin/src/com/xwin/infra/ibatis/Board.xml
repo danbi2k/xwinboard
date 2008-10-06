@@ -5,7 +5,6 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
 <sqlMap namespace="BoardItem">
-
 	<typeAlias alias="BoardItem" type="com.xwin.domain.board.BoardItem" />
 	<typeAlias alias="BoardComment" type="com.xwin.domain.board.BoardComment" />
 	
@@ -13,18 +12,18 @@
 		<result property="id" column="ID"/>		
 		<result property="title" column="TITLE"/>
 		<result property="userId" column="USERID"/>
-		<result property="userName" column="USERNAME"/>		
+		<result property="nickName" column="NICKNAME"/>		
 		<result property="date" column="DATE"/>
 		<result property="context" column="CONTEXT"/>
 		<result property="readCount" column="READCOUNT"/>
 		<result property="type" column="TYPE"/>
 		<result property="boardName" column="BOARDNAME"/>
-		<result property="commentCount" column="COMMENT_CUNT"/>
+		<result property="commentCount" column="COMMENT_COUNT"/>
 	</resultMap>
 	
 	<insert id="insertBoardItem" parameterClass="BoardItem">
-		INSERT INTO tbl_board_item(TITLE, USERID, USERNAME, DATE, READCOUNT, CONTEXT, TYPE, BOARDNAME)
-			VALUES(#title#, #userId#, #userName#, #date#, #readCount#, #context#, #type#, #boardName#)
+		INSERT INTO tbl_board_item(TITLE, USERID, NICKNAME, DATE, CONTEXT, TYPE, BOARDNAME, STATUS)
+			VALUES(#title#, #userId#, #nickName#, #date#, #context#, #type#, #boardName#, #status#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>	
@@ -36,33 +35,42 @@
 	
 	<select id="selectBoardItem" resultMap="boardItemResultMap"
 		parameterClass="string">
-		SELECT * FROM tbl_board_item WHERE ID = #value#
+		SELECT *,
+		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
+		FROM tbl_board_item bi WHERE bi.ID = #value#
 	</select>
 	
-	<select id="selectBoardItemList" resultMap="boardItemResultMap"
-		parameterClass="map">
-		SELECT ID, TITLE, USERID, USERNAME, DATE, READCOUNT,
-		'' as CONTEXT, TYPE,
-		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.BOARD_ID) as COMMENT_COUNT 
+	<select id="selectBoardItemList" resultMap="boardItemResultMap" parameterClass="map">
+		SELECT
+			ID, TITLE, USERID, NICKNAME, DATE, READCOUNT, BOARDNAME,
+			'' as CONTEXT,
+			TYPE,
+			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
-		WHERE BOARDNAME = #boardName#		
+		WHERE bi.BOARDNAME = #boardName#
 		ORDER BY TYPE ASC, DATE DESC
 		LIMIT #fromRow#, #rowSize#
+	</select>
+	
+	<select id="selectBoardItemCount" parameterClass="map" resultClass="integer">
+		SELECT COUNT(*)
+		FROM tbl_board_item bi
+		WHERE bi.BOARDNAME = #boardName#
 	</select>
 	
 	<resultMap id="boardCommentResultMap" class="BoardComment">
 		<result property="id" column="ID"/>
 		<result property="boardId" column="BOARD_ID"/>
 		<result property="userId" column="USERID"/>
-		<result property="userName" column="USERNAME"/>
+		<result property="nickName" column="NICKNAME"/>
 		<result property="password" column="PASSWORD"/>		
 		<result property="date" column="DATE"/>
 		<result property="comment" column="COMMENT"/>
 	</resultMap>
 	
 	<insert id="insertBoardComment" parameterClass="BoardComment">
-		INSERT INTO tbl_board_comment(BOARD_ID, USERID, USERNAME, PASSWORD, DATE, COMMENT)
-		VALUES(#boardId#, #userId#, #userName#, #password#, #date#, #comment#)
+		INSERT INTO tbl_board_comment(BOARD_ID, USERID, NICKNAME, PASSWORD, DATE, COMMENT)
+		VALUES(#boardId#, #userId#, #nickName#, #password#, #date#, #comment#)
 	</insert>
 	
 	<delete id="deleteBoardComment" parameterClass="string">

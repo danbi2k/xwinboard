@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -33,47 +34,60 @@ public class BoardController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>(3);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("boardName", "user");
 		
 		List<BoardItem> boardItemList = boardDao.selectBoardItemList(param);
+		Integer boardItemCount = boardDao.selectBoardItemCount(param);
 		
 		ModelAndView mv = new ModelAndView("board/board");
 		mv.addObject("boardItemList", boardItemList);
+		mv.addObject("boardItemCount", boardItemCount);
 		
 		return mv;
 	}
 	
-	public ModelAndView createBoardItem(HttpServletRequest request,
+	public ModelAndView viewUserBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String type = request.getParameter("type");
+		String id = request.getParameter("id");
+		
+		BoardItem boardItem = boardDao.selectBoardItem(id);
+		
+		ModelAndView mv = new ModelAndView("board/boardDetail");
+		mv.addObject("boardItem", boardItem);
+		
+		return mv;
+	}
+	
+	public ModelAndView writeBoardItem(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{	
+		String title = request.getParameter("title");
+		String context = request.getParameter("context");
+		
+		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		BoardItem boardItem = new BoardItem();
-		
-		boardItem.setContext("fjkdfjakfjdf");
+		boardItem.setBoardName("user");
+		boardItem.setContext(context);
 		boardItem.setDate(new Date());
-		boardItem.setReadCount(55);
-		boardItem.setTitle("�찡��ī �찡��ī");
-		boardItem.setUserId("xx");
-		boardItem.setUserName("yy");
-		boardItem.setType(type);
+		boardItem.setNickName(member.getNickName());
+		boardItem.setUserId(member.getUserId());
+		boardItem.setStatus(Code.BOARDITEM_STATUS_NORMAL);
+		boardItem.setTitle(title);
+		boardItem.setType(Code.BOARDITEM_TYPE_USER);
+		boardDao.insertBoardItem(boardItem);
 		
-		String boardId = boardDao.insertBoardItem(boardItem);
+		ModelAndView mv = new ModelAndView("redirect:/board.aspx?mode=viewUserBoard");
 		
-		BoardComment boardComment = new BoardComment();
-		boardComment.setBoardId(boardId);
-		boardComment.setComment("������");
-		boardComment.setDate(new Date());
-		boardComment.setPassword("1234");
-		boardComment.setUserId("xx");
-		boardComment.setUserName("yy");
+		return mv;
+	}
+	
+	public ModelAndView viewUserBoardWrite(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ModelAndView mv = new ModelAndView("board/boardWrite");
 		
-		boardDao.insertBoardComment(boardComment);
-		
-		BoardItem dbItem = boardDao.selectBoardItem(boardId);
-		
-		ResultXml rx = new ResultXml(0, null, dbItem);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
 	

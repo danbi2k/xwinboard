@@ -67,29 +67,17 @@ public class AdminBettingController extends XwinController
 		Integer code = 0;
 		
 		String id = request.getParameter("id");
+		String gameType= request.getParameter("gameType");
 		Betting betting = bettingDao.selectBetting(id);
 		
 		if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false) {
 			code = -1;
 			message = "배팅이 적중 상태가 아닙니다";
-		} else {		
-			String userId = betting.getUserId();
-			Member member = memberDao.selectMember(userId, null);
-						
-			betting.setStatus(Code.BET_STATUS_COMMIT);
-			bettingDao.updateBetting(betting);
-			
-			Account account = new Account();
-			account.setUserId(userId);
-			account.setType(Code.ACCOUNT_TYPE_JACKPOT);
-			account.setDate(new Date());
-			account.setOldBalance(member.getBalance());
-			account.setMoney(betting.getExpect());
-			account.setBalance(member.getBalance() + betting.getExpect());
-			account.setBettingId(betting.getId());
-			accountDao.insertAccount(account);
-			
-			memberDao.plusMinusBalance(userId, betting.getExpect());
+		} else {
+			if (gameType.equals("wdl"))
+				calculateWdl(betting);
+			else if (gameType.equals("handy"))
+				calculateHandy(betting);
 			message = "정산되었습니다";
 		}
 		
@@ -98,6 +86,66 @@ public class AdminBettingController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
+	}
+
+	public void calculateWdl(Betting betting) {
+		String userId = betting.getUserId();
+		Member member = memberDao.selectMember(userId, null);
+					
+		betting.setStatus(Code.BET_STATUS_COMMIT);
+		bettingDao.updateBetting(betting);
+		
+		Account account = new Account();
+		account.setUserId(userId);
+		account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+		account.setDate(new Date());
+		account.setOldBalance(member.getBalance());
+		account.setMoney(betting.getExpect());
+		account.setBalance(member.getBalance() + betting.getExpect());
+		account.setBettingId(betting.getId());
+		accountDao.insertAccount(account);
+		
+		memberDao.plusMinusBalance(userId, betting.getExpect());
+	}
+	
+	public void calculateHandy(Betting betting) {
+		String userId = betting.getUserId();
+		Member member = memberDao.selectMember(userId, null);
+					
+		betting.setStatus(Code.BET_STATUS_COMMIT);
+		bettingDao.updateBetting(betting);
+		
+		Account account = new Account();
+		account.setUserId(userId);
+		account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+		account.setDate(new Date());
+		account.setOldBalance(member.getBalance());
+		account.setMoney(betting.getExpect());
+		account.setBalance(member.getBalance() + betting.getExpect());
+		account.setBettingId(betting.getId());
+		accountDao.insertAccount(account);
+		
+		memberDao.plusMinusBalance(userId, betting.getExpect());
+	}
+	
+	public void calculateAllCancel(Betting betting) {
+		String userId = betting.getUserId();
+		Member member = memberDao.selectMember(userId, null);
+					
+		betting.setStatus(Code.BET_STATUS_COMMIT);
+		bettingDao.updateBetting(betting);
+		
+		Account account = new Account();
+		account.setUserId(userId);
+		account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+		account.setDate(new Date());
+		account.setOldBalance(member.getBalance());
+		account.setMoney(betting.getExpect());
+		account.setBalance(member.getBalance() + betting.getExpect());
+		account.setBettingId(betting.getId());
+		accountDao.insertAccount(account);
+		
+		memberDao.plusMinusBalance(userId, betting.getExpect());
 	}
 	
 	public ModelAndView cancelBetting(HttpServletRequest request,

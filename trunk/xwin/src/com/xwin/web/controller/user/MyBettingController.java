@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -42,6 +43,8 @@ public class MyBettingController extends XwinController
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		String _pageIndex = request.getParameter("pageIndex");
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String gameType = XwinUtil.arcNvl(request.getParameter("gameType"));
 		Integer pageIndex = null;
 		try {
 			pageIndex = Integer.parseInt(_pageIndex);
@@ -49,7 +52,7 @@ public class MyBettingController extends XwinController
 			pageIndex = 0;
 		}
 		List<Betting> bettingList =
-			bettingDao.selectBettingListByUserId(member.getUserId(), pageIndex);
+			bettingDao.selectBettingListByUserId(member.getUserId(), status, gameType, pageIndex);
 		
 		ResultXml resultXml = new ResultXml(0, null, bettingList);
 		ModelAndView mv = new ModelAndView("xmlFacade");

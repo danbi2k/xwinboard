@@ -43,6 +43,7 @@
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
 		p:gameDao-ref="gameDao"
+		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myBettingController"

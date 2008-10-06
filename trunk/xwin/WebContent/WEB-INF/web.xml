@@ -40,6 +40,12 @@
 		<servlet-class> org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>XwinInit</servlet-name>
+		<servlet-class>
+			com.xwin.web.XwinInitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>context/action</servlet-name>
 		<url-pattern>*.aspx</url-pattern>

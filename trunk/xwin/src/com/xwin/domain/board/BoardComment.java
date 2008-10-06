@@ -9,7 +9,7 @@ public class BoardComment extends XwinObject
 	private String id;
 	private String boardId;
 	private String userId;
-	private String userName;
+	private String nickName;
 	private String password;
 	private String comment;
 	private Date date;
@@ -32,11 +32,11 @@ public class BoardComment extends XwinObject
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getPassword() {
 		return password;

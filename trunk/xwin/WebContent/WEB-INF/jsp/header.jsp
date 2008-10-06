@@ -38,6 +38,16 @@
 	<script language="JavaScript" src="script/jkl-parsexml.js"></script>
 	<script language="JavaScript" src="script/xwin.js"></script>
 	<script language="JavaScript" src="script/utf8.js"></script>
+	<script language="JavaScript">
+	<%
+	if (login == false && isIndex == false) {
+	%>
+	alert("로그인이 필요합니다");
+	location.href = "index.aspx";
+	<%
+	}
+	%>
+	</script>
 </head>
 <body style="margin:0">
 
@@ -60,9 +70,9 @@
 
 <MAP NAME="map_top_menu">
 	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="game.aspx?mode=viewGameList&type=wdl" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="102,0,197,33" href="javascript:alert('준비중입니다')" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="199,0,281,33" href="javascript:alert('준비중입니다');" onMouseOver="clipthis('top1','top2',199,0,281,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="283,0,387,33" href="javascript:alert('준비중입니다');"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	<AREA SHAPE=RECT COORDS="102,0,197,33" href="game.aspx?mode=viewGameList&type=handy" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
+	
+	<AREA SHAPE=RECT COORDS="283,0,387,33" href="game.aspx?mode=viewGameResultList"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="389,0,507,33" href="guide.aspx"   onMouseOver="clipthis('top1','top2',389,0,507,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="509,0,613,33" href="rules.aspx"	 onMouseOver="clipthis('top1','top2',509,0,613,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
@@ -70,14 +80,6 @@
 
 
 <script language="JavaScript">
-<%
-if (login == false && isIndex == false) {
-%>
-alert("로그인이 필요합니다");
-location.href = "index.aspx";
-<%
-}
-%>
 function top_menu_out(){
     if (window.menu_out){ clearInterval(menu_out); }
     menu_out=setInterval("top_menu_init()",500);

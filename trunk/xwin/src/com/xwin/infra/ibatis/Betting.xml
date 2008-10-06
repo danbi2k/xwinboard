@@ -69,7 +69,21 @@
 		FROM tbl_betting_game bg, tbl_game g
 		WHERE
 		bg.GAME_ID = g.ID AND
-		bg.GUESS != g.RESULT AND
+		((bg.GUESS != g.RESULT AND g.TYPE='wdl') OR (bg.GUESS != g.RESULT AND g.RESULT != 'D' AND g.TYPE='handy')) AND
+		bg.BETTING_ID = b.ID AND
+		g.STATUS = 'GS004'
+		)
+		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+	</update>
+	
+	<update id="updateGameCountHandyDraw" parameterClass="string">
+		UPDATE tbl_betting b SET HANDYDRAW_COUNT =
+		(
+		SELECT COUNT(*)
+		FROM tbl_betting_game bg, tbl_game g
+		WHERE
+		bg.GAME_ID = g.ID AND
+		(bg.GUESS != g.RESULT AND g.RESULT = 'D' AND g.TYPE='handy') AND
 		bg.BETTING_ID = b.ID AND
 		g.STATUS = 'GS004'
 		)
@@ -95,8 +109,10 @@
 		WHEN FAILURE_COUNT > 0 THEN 'BS003'
 		WHEN TOTAL_COUNT = CANCEL_COUNT THEN 'BS005'
 		WHEN TOTAL_COUNT = (SUCCESS_COUNT + CANCEL_COUNT) THEN 'BS002'
+		WHEN TOTAL_COUNT = HANDYDRAW_COUNT THEN 'BS007'
 		ELSE 'BS001'
 		END)
+		WHERE STATUS != 'BS004' AND STATUS != 'BS006'
 	</update>
 	
 	<delete id="deleteBetting" parameterClass="string">

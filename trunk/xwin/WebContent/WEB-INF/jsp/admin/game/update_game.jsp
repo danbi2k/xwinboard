@@ -82,7 +82,7 @@
 
 		var query = "mode=updateGame";
 		query += "&gameId=" + <%=game.getId()%>;
-		query += "&type=wdl";
+		query += "&type=<%=type%>";
 		query += "&leagueId=" + d.leagueId.value;
 		query += "&gameDate=" + d.gameDate.value;
 		query += "&gameHour=" + d.gameHour.value;
@@ -287,9 +287,22 @@
 					     <tr bgcolor="E7E7E7">
                         <td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
                         <td bgcolor="#FFFFFF"  colspan=3>
-						승 <input type='text' name='winRate' value='<%=game.getWinRateStr()%>' size=5>
-						무 <input type='text' name='drawRate' value='<%=game.getDrawRateStr()%>' size=5>
-						패 <input type='text' name='loseRate' value='<%=game.getLoseRateStr()%>' size=5>					
+						승 <input type='text' name='winRate' size=5 value='<%=game.getWinRateStr()%>'>
+						<%if (type.equals("wdl")) {%>
+						무 <input type='text' name='drawRate' size=5 value='<%=game.getDrawRateStr()%>'>
+						<%} else { %>
+						핸디
+						<select name='drawRate'>
+						<%
+						for (double i = -20 ; i <= 20 ; i+=0.5) {
+						%>
+							<option value="<%=i%>" <%=game.getDrawRate()==i?"selected":""%>><%=i%></option>
+						<%
+						}
+						%>	
+						</select>
+						<%} %>
+						패 <input type='text' name='loseRate' size=5 value='<%=game.getLoseRateStr()%>'>											
 						</td>
                       </tr>		
 					 

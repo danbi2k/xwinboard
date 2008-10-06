@@ -166,9 +166,9 @@ function FnCalcCart()
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var data = result.resultXml.object;
-		expectDiv.innerHTML = data.expect;
-		afterDiv.innerHTML = data.after;
-		balanceDiv.innerHTML = data.balance;
+		expectDiv.innerHTML = comma3(data.expect);
+		afterDiv.innerHTML = comma3(data.after);
+		balanceDiv.innerHTML = comma3(data.balance);
 	} else {
 		alert(result.resultXml.message);
 		CartFrm.BetAmt.value = 0;

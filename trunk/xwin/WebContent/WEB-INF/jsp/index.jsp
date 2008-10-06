@@ -20,7 +20,7 @@
 
 <table width="100%" style="border-bottom:1 solid #909090;margin-bottom:5px;">
 <tr><td><img src="images/main_list_title.gif"></td>
-	<td align="right"><a href="game/game.asp">전체목록</a></td>
+	<td align="right"><a href="game.aspx?mode=viewGameList&type=wdl">전체목록</a></td>
 </tr>
 </table>
 
@@ -34,7 +34,7 @@
 	<tr><td width="70" align="center"><%=game.getGameDateStr().substring(3)%></td>
 		<td align="left">
 			<table cellpadding="0" cellspacing="2">
-			<tr><td><img src="" style="display:none" onload="this.style.display='';"></td>
+			<tr><td><img src="images/league/<%=game.getLeagueImage()%>" style="display:none" onload="this.style.display='';">&nbsp;&nbsp;</td>
 				<td><%=game.getLeagueName()%></td></tr>
 			</table>
 		</td>

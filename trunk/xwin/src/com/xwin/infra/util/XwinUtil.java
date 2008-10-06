@@ -1,11 +1,17 @@
 package com.xwin.infra.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class XwinUtil
 {
@@ -13,11 +19,23 @@ public class XwinUtil
 	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat boardNoticeFormat = new SimpleDateFormat("MM/dd");
+	private static final SimpleDateFormat boardItemFormat = new SimpleDateFormat("MM/dd HH:mm");
 	
 	public static String comma3(Long num)
 	{
 		NumberFormat nf = NumberFormat.getInstance();
 		return nf.format(num);
+	}
+	
+	public static String getBoardItemDate(Date date)
+	{
+		return boardItemFormat.format(date);
+	}
+	
+	public static String getBoardNoticeDate(Date date)
+	{
+		return boardNoticeFormat.format(date);
 	}
 	
 	public static Long calcExpectMoney(Double rate, Long money)
@@ -128,7 +146,7 @@ public class XwinUtil
 			ret = dateMinuteFormat.format(date);
 		else if (type == 1)
 			ret = dateSecondFormat.format(date);
-		else
+		else if (type == 2)
 			ret = dateFormat.format(date);
 		
 		return ret;
@@ -171,5 +189,33 @@ public class XwinUtil
 		cal.set(Calendar.MILLISECOND, 0);
 		
 		return cal.getTime();
+	}
+	
+	public static String uploadContent(MultipartFile mf, String parentPath)
+	{
+		String orgFileName = mf.getOriginalFilename();
+		int dotIndex = orgFileName.lastIndexOf('.');
+		String ext = orgFileName.substring(dotIndex);
+		
+		String fileName = UUID.randomUUID().toString() + ext;
+		
+		try {
+			InputStream is = mf.getInputStream();
+			File dir = new File(parentPath);
+			if (dir.exists() == false)
+				dir.mkdir();
+			
+			String path = parentPath + File.separator + fileName;
+			FileOutputStream fos = new FileOutputStream(path);
+			
+			int data = 0;
+			while ((data = is.read()) != -1) {
+				fos.write(data);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return fileName;
 	}
 }

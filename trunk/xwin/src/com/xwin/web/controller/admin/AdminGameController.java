@@ -72,7 +72,7 @@ public class AdminGameController extends XwinController
 		String type = request.getParameter("type");
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
-		ModelAndView mv = new ModelAndView("admin/game/register_game_" + type);
+		ModelAndView mv = new ModelAndView("admin/game/register_game");
 		mv.addObject("leagueList", leagueList);
 		return mv;
 	}
@@ -85,7 +85,7 @@ public class AdminGameController extends XwinController
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Game game = gameDao.selectGame(id);
 		
-		ModelAndView mv = new ModelAndView("admin/game/update_game_" + type);
+		ModelAndView mv = new ModelAndView("admin/game/update_game");
 		mv.addObject("leagueList", leagueList);
 		mv.addObject("game", game);
 		return mv;
@@ -169,6 +169,7 @@ public class AdminGameController extends XwinController
 	{
 		ResultXml rx = null;		
 		String id = request.getParameter("id");
+		String type = request.getParameter("type");
 		
 		gameDao.updateGameScoreNull(id, null, null, null, Code.GAME_STATUS_RUN);
 		bettingDao.updateBettingStatus(id);
@@ -185,6 +186,7 @@ public class AdminGameController extends XwinController
 		String id = request.getParameter("id");
 		String _homeScore = request.getParameter("homeScore");
 		String _awayScore = request.getParameter("awayScore");
+		String type = request.getParameter("type");
 		
 		Integer homeScore = null;
 		Integer awayScore = null;
@@ -203,12 +205,26 @@ public class AdminGameController extends XwinController
 			rx = new ResultXml(-1, "경기진행 상태가 아닙니다", null);
 		} else {
 			String result = null;
-			if (homeScore > awayScore)
-				result = "W";
-			else if (homeScore < awayScore)
-				result = "L";
-			else
-				result = "D";
+			if (type.equals("wdl")) {			
+				if (homeScore > awayScore)
+					result = "W";
+				else if (homeScore < awayScore)
+					result = "L";
+				else
+					result = "D";
+			} else if (type.equals("handy")) {
+				double homeScoreDouble = (double)homeScore;
+				double awayScoreDouble = (double)awayScore;
+				
+				homeScoreDouble += game.getDrawRate();
+				
+				if (homeScoreDouble > awayScoreDouble)
+					result = "W";
+				else if (homeScoreDouble < awayScoreDouble)
+					result = "L";
+				else
+					result = "D";
+			}
 			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
@@ -231,6 +247,7 @@ public class AdminGameController extends XwinController
 	{
 		ResultXml rx = null;		
 		String id = request.getParameter("id");
+		String type = request.getParameter("type");
 		
 		Game game = new Game();
 		game.setId(id);
@@ -288,9 +305,10 @@ public class AdminGameController extends XwinController
 	public ModelAndView readyGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		ResultXml rx = null;
-		
 		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+		
+		ResultXml rx = null;	
 		
 		gameDao.updateGameScoreNull(id, null, null, null, Code.GAME_STATUS_READY);
 		bettingDao.updateBettingStatus(id);
@@ -306,6 +324,7 @@ public class AdminGameController extends XwinController
 	{
 		String id = request.getParameter("id");
 		String betStatus = request.getParameter("betStatus");
+		String type = request.getParameter("type");
 		
 		Game game = new Game();
 		game.setId(id);
@@ -316,15 +335,6 @@ public class AdminGameController extends XwinController
 		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		return mv;
-	}
-	
-	public ModelAndView createLeague(HttpServletRequest request,
-			HttpServletResponse response, League command) throws Exception
-	{
-		leagueDao.insertLeague(command);
-		
-		ModelAndView mv = new ModelAndView("admin/league");
 		return mv;
 	}
 }

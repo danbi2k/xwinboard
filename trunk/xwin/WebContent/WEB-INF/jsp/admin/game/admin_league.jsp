@@ -113,7 +113,7 @@
 												 
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=20%><%=league.getId()%></td>
-								<td width=20%><img src='<%=league.getImage()%>' width='20' height='12' border=0></td>
+								<td width=20%><img src='images/league/<%=league.getImage()%>' width='20' height='12' border=0></td>
 								<td width=80%><a href='adminLeague.aspx?mode=viewUpdateLeagueForm&id=<%=league.getId()%>'><%=league.getName()%></a></td>
 							  </tr>
 							<%
@@ -121,10 +121,6 @@
 							}
 							%>
                           </table></td>
-                        </tr>
-                        <tr>
-                          <td align='center' height=50>
-						 &nbsp;<b>1</b>&nbsp;<a href='game/index.php?page=2&page_list=1&&search=&kwd='>[2]</a>&nbsp;<a href='game/index.php?page=3&page_list=1&&search=&kwd='>[3]</a>&nbsp;<a href='game/index.php?page=4&page_list=1&&search=&kwd='>[4]</a>&nbsp;<a href='game/index.php?page=5&page_list=1&&search=&kwd='>[5]</a>&nbsp;&nbsp;						  </td>
                         </tr>    						
                       </table>
                       

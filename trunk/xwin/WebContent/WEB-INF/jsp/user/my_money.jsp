@@ -32,7 +32,7 @@
 	<table width="800" cellpadding="0" cellspacing="0" style="margin-top:15">
 	<tr><td>
 		<table  cellpadding="0" cellspacing="0" >
-		<tr><td><img src="images/tab_money.gif"  onclick="location.href='?'" style="cursor:hand;"></td>
+		<tr><td><img src="images/tab_money.gif" style="cursor:hand;"></td>
 			
 		</tr></table>
 

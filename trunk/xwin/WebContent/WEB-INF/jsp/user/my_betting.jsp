@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%
+	String status = XwinUtil.nvl(request.getParameter("status"));
+	String gameType = XwinUtil.nvl(request.getParameter("gameType"));
+%>
 <%@include file="../header.jsp"%>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -13,7 +17,8 @@
 
 -->
 
-<form name="frm">
+<form name="frm" action="myBet.aspx">
+<input type="hidden" name="mode" value="viewMyBettingList"/>
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 
@@ -22,7 +27,22 @@
 	<tr><td width="100"><img src="images/title_mybet.gif"></td><td>배팅 내역 및 결과입니다.</td>
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
-		<tr><td>상태 : <select name="Status" style="color:white;background-color:black;" onchange="frm.submit();"><option value="">--전체--</option><option value='0' style='color:#b0b0b0;'>진행중</option><option value='1' style='color:orange;'>적중</option><option value='2' style='color:#505050;'>실패</option><option value='8' style='color:#a47842;'>취소(환불)</option><option value='9' style=''>경기취소</option></select></td>
+		<tr><td>
+			경기종류:
+			<select name="gameType" style="color:white;background-color:black;" onchange="FnGetMyBetList(0);">
+				<option value="">--전체--</option>
+				<option value='wdl' <%=gameType.equals("wdl")?"selected":""%> style='color:#b0b0b0;'>승무패</option>
+				<option value='handy' <%=gameType.equals("handy")?"selected":""%> style='color:#b0b0b0;'>핸디캡</option>
+			</select>
+			상태 :
+			<select name="status" style="color:white;background-color:black;" onchange="FnGetMyBetList(0);">
+				<option value="">--전체--</option>
+				<option value='<%=Code.BET_STATUS_RUN%>' <%=status.equals(Code.BET_STATUS_RUN)?"selected":""%> style='color:#b0b0b0;'><%=Code.getValue(Code.BET_STATUS_RUN)%></option>
+				<option value='<%=Code.BET_STATUS_SUCCESS%>' <%=status.equals(Code.BET_STATUS_SUCCESS)?"selected":""%> style='color:orange;'><%=Code.getValue(Code.BET_STATUS_SUCCESS)%></option>
+				<option value='<%=Code.BET_STATUS_FAILURE%>' <%=status.equals(Code.BET_STATUS_FAILURE)?"selected":""%> style='color:#505050;'><%=Code.getValue(Code.BET_STATUS_FAILURE)%></option>
+				<option value='<%=Code.BET_STATUS_HANDYDRAW%>' <%=status.equals(Code.BET_STATUS_HANDYDRAW)?"selected":""%> style='color:#a47842;'><%=Code.getValue(Code.BET_STATUS_HANDYDRAW)%></option>
+				<option value='<%=Code.BET_STATUS_CANCEL%>' <%=status.equals(Code.BET_STATUS_CANCEL)?"selected":""%> style='color:#a47842;'><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>
+				<option value='<%=Code.BET_STATUS_NOMATCH%>' <%=status.equals(Code.BET_STATUS_NOMATCH)?"selected":""%> style=''><%=Code.getValue(Code.BET_STATUS_NOMATCH)%></option></select></td>
 			<td><img src="images/btn_reload.gif" onclick="location.href=location.href;" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 
 		</tr></table>

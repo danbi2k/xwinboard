@@ -15,6 +15,7 @@ public class Game extends XwinObject
 	private Date gameDate;
 	private String leagueId;
 	private String leagueName;
+	private String leagueImage;
 	
 	private Double winRate;
 	private Double drawRate;
@@ -233,5 +234,13 @@ public class Game extends XwinObject
 
 	public void setLoseBetStatus(String loseBetStatus) {
 		this.loseBetStatus = loseBetStatus;
+	}
+
+	public String getLeagueImage() {
+		return leagueImage;
+	}
+
+	public void setLeagueImage(String leagueImage) {
+		this.leagueImage = leagueImage;
 	}
 }

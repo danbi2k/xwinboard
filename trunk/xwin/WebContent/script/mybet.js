@@ -2,6 +2,10 @@ function FnGetMyBetList(pageIndex)
 {
 	var query = "mode=getMyBettingList";
 	query += "&pageIndex=" + pageIndex;
+	if (frm.status.value.length > 0)
+		query += "&status=" + frm.status.value;
+	if (frm.gameType.value.length > 0)
+		query += "&gameType=" + frm.gameType.value;
 	var http = new JKL.ParseXML("myBet.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
@@ -49,15 +53,20 @@ function FnDrawMyBetList(data)
 			for (j in betGame) {
 				var width = 100.0 / data[i].gameCount;
 				if (betGame[j].status == 'GS001' || betGame[j].status == 'GS002' || betGame[j].status == 'GS003') {
-					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>-</td>");
+					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>－</td>");
 				} else if (betGame[j].status == 'GS005') {
-					row.push("<td width='" + width + "%' bgcolor='white' style='color:black' align='center'>-</td>");
+					row.push("<td width='" + width + "%' bgcolor='darkgray' style='color:black' align='center'>－</td>");
 				} else if (betGame[j].status == 'GS004') {
 					if (betGame[j].result != undefined) {
 						if (betGame[j].result == betGame[j].guess) {
-							row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>o</td>");
-						} else {
-							row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>x</td>");
+							row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>○</td>");
+						} else if (betGame[j].type == 'wdl' && betGame[j].result != betGame[j].guess) {
+							row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>×</td>");
+						} else if (betGame[j].type == 'handy') {
+							if (betGame[j].result == 'D')
+								row.push("<td width='" + width + "%' bgcolor='orange' style='color:black' align='center'>△</td>");
+							else
+								row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>×</td>");
 						}
 					}
 				}
@@ -65,13 +74,13 @@ function FnDrawMyBetList(data)
 			row.push("</tr>");
 			row.push("</table>");
 			row.push("</td>");
-			row.push("<td>" + data[i].money + " 원</td>");
+			row.push("<td>" + comma3(data[i].money) + " 원</td>");
 			row.push("<td>" + data[i].rateStr + "</td>");
-			row.push("<td><font color='orange'>");
+			row.push("<td><font color='orange' align='right'>");
 			var strike = (data[i].status == 'BS003' || data[i].status == 'BS004' || data[i].satus == 'BS005');
 			if (strike)
 				row.push("<STRIKE>");
-			row.push(data[i].expect);
+			row.push(comma3(data[i].expect));
 			if (strike)
 				row.push("</STRIKE>");
 			row.push(" 원</td>");

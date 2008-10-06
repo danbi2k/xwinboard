@@ -46,10 +46,12 @@ public class BettingDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingCount", param);
 	}
 	
-	public List<Betting> selectBettingListByUserId(String userId, Integer pageIndex)
+	public List<Betting> selectBettingListByUserId(String userId, String status, String gameType, Integer pageIndex)
 	{
-		Map<String, Object> param = new HashMap<String, Object>(3);
+		Map<String, Object> param = new HashMap<String, Object>(5);
 		param.put("userId", userId);
+		param.put("status", status);
+		param.put("gameType", gameType);
 		param.put("fromRow", pageIndex * pageSize);
 		param.put("rowSize", pageSize);
 		
@@ -74,6 +76,7 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
 		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
+		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
 		sqlMapClientTemplate.update("updateBettingStatusByCount");
 	}
 	
@@ -82,6 +85,7 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
 		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
+		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
 		sqlMapClientTemplate.update("updateBettingStatusByCount");
 	}
 }

@@ -24,14 +24,16 @@
 		<result property="leagueId" column="LEAGUE_ID"/>
 		<result property="handy" column="HANDY"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
+		<result property="leagueImage" column="LEAGUE_IMAGE"/>
 		<result property="betStatus" column="BET_STATUS"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
-		SELECT g.*, l.NAME as LEAGUE_NAME FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.ID = #value#
+		SELECT g.*, l.NAME as LEAGUE_NAME, l.IMAGE as LEAGUE_IMAGE
+		FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.ID = #value#
 	</select>
 	<select id="selectGameList" resultMap="GameResultMap" parameterClass="map">
-		SELECT g.*, l.NAME as LEAGUE_NAME
+		SELECT g.*, l.NAME as LEAGUE_NAME, l.IMAGE as LEAGUE_IMAGE
 		FROM tbl_game g, tbl_league l
 		WHERE g.LEAGUE_ID = l.ID
 		<isNotNull prepend="AND" property="homeTeam">

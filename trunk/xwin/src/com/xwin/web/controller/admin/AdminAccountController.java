@@ -168,7 +168,7 @@ public class AdminAccountController extends XwinController
 		
 		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);
 		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST)) {			
-			moneyOut.setStatus(Code.MONEY_IN_SUCCESS);
+			moneyOut.setStatus(Code.MONEY_OUT_SUCCESS);
 			moneyOut.setProcDate(new Date());
 			moneyOutDao.updateMoneyOut(moneyOut);
 		

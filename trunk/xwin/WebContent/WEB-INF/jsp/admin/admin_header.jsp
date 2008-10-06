@@ -13,7 +13,15 @@
 	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>	
 	<SCRIPT LANGUAGE="JavaScript" src="script/calendar.js"></SCRIPT>
 	<SCRIPT LANGUAGE="JavaScript" src="script/main.js"></SCRIPT>
-</head>	
+</head>
+<script>
+<%
+if (admin == null) {
+	out.print("alert('로그인이 필요합니다');");
+	out.print("location.href='admin';");	
+}
+%>
+</script>
 <body>
 
 <!-- 로고 및 상단 메뉴 -->
