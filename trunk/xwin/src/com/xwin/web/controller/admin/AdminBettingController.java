@@ -84,7 +84,7 @@ public class AdminBettingController extends XwinController
 			if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false ||
 					betting.getStatus().equals(Code.BET_STATUS_HANDYDRAW) == false) {
 				code = -1;
-				message = "정산 가능 상태가 아닙니다");
+				message = "정산 가능 상태가 아닙니다";
 			} else {
 				calculateHandy(betting);
 				message = "정산되었습니다";

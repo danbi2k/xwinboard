@@ -39,7 +39,7 @@ CREATE TABLE `tbl_account` (
   `USERID` varchar(45) NOT NULL,
   `OLD_BALANCE` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_account`
@@ -54,7 +54,10 @@ INSERT INTO `tbl_account` (`ID`,`DATE`,`MONEY`,`BALANCE`,`DESCRIPTION`,`BETTING_
  (36,'2008-10-06 19:45:57',-10000,3070000,NULL,'60',NULL,NULL,'AT001','test01',3080000),
  (37,'2008-10-06 19:46:58',-5000,3065000,NULL,'61',NULL,NULL,'AT001','test01',3070000),
  (38,'2008-10-06 19:47:48',-5000,3060000,NULL,'62',NULL,NULL,'AT001','test01',3065000),
- (39,'2008-10-06 19:50:34',-10000,3050000,NULL,'63',NULL,NULL,'AT001','test01',3060000);
+ (39,'2008-10-06 19:50:34',-10000,3050000,NULL,'63',NULL,NULL,'AT001','test01',3060000),
+ (40,'2008-10-06 21:59:42',-5000,3045000,NULL,'64',NULL,NULL,'AT001','test01',3050000),
+ (41,'2008-10-06 22:39:43',-9999,3035001,NULL,'65',NULL,NULL,'AT001','test01',3045000),
+ (42,'2008-10-06 22:40:29',-5000,3030001,NULL,'66',NULL,NULL,'AT001','test01',3035001);
 /*!40000 ALTER TABLE `tbl_account` ENABLE KEYS */;
 
 
@@ -103,7 +106,7 @@ CREATE TABLE `tbl_betting` (
   `NICKNAME` varchar(45) NOT NULL,
   `HANDYDRAW_COUNT` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_betting`
@@ -117,7 +120,10 @@ INSERT INTO `tbl_betting` (`ID`,`USERID`,`DATE`,`RATE`,`MONEY`,`EXPECT`,`STATUS`
  (60,'test01','2008-10-06 19:45:57',4.00,10000,40000,'BS002',2,2,0,0,'wdl','테스트01',0),
  (61,'test01','2008-10-06 19:46:58',4.00,5000,20000,'BS003',2,1,1,0,'wdl','테스트01',0),
  (62,'test01','2008-10-06 19:47:48',2.00,5000,10000,'BS002',2,1,0,1,'wdl','테스트01',0),
- (63,'test01','2008-10-06 19:50:33',2.00,10000,20000,'BS002',1,1,0,0,'handy','테스트01',0);
+ (63,'test01','2008-10-06 19:50:33',2.00,10000,20000,'BS002',1,1,0,0,'handy','테스트01',0),
+ (64,'test01','2008-10-06 21:59:42',2.00,5000,10000,'BS001',2,0,0,1,'wdl','테스트01',0),
+ (65,'test01','2008-10-06 22:39:43',20.00,9999,199980,'BS001',2,0,0,0,'wdl','테스트01',0),
+ (66,'test01','2008-10-06 22:40:29',0.00,5000,0,'BS001',0,0,0,0,'wdl','테스트01',0);
 /*!40000 ALTER TABLE `tbl_betting` ENABLE KEYS */;
 
 
@@ -150,7 +156,11 @@ INSERT INTO `tbl_betting_game` (`BETTING_ID`,`GAME_ID`,`GUESS`) VALUES
  (61,144,'W'),
  (62,145,'W'),
  (62,146,'W'),
- (63,147,'W');
+ (63,147,'W'),
+ (64,148,'D'),
+ (64,149,'D'),
+ (65,148,'W'),
+ (65,150,'W');
 /*!40000 ALTER TABLE `tbl_betting_game` ENABLE KEYS */;
 
 
@@ -168,7 +178,7 @@ CREATE TABLE `tbl_board_comment` (
   `USERID` varchar(45) NOT NULL,
   `DATE` datetime NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_board_comment`
@@ -195,7 +205,9 @@ INSERT INTO `tbl_board_comment` (`ID`,`BOARD_ID`,`NICKNAME`,`PASSWORD`,`COMMENT`
  (17,'30','대박이',NULL,'423423','xx','2008-10-06 19:26:23'),
  (18,'35','대박이',NULL,'fdfaafa','xx','2008-10-06 19:29:39'),
  (19,'35','대박이',NULL,'fadsfdafaf','xx','2008-10-06 19:29:42'),
- (20,'35','대박이',NULL,'fadfa','xx','2008-10-06 19:29:44');
+ (20,'35','대박이',NULL,'fadfa','xx','2008-10-06 19:29:44'),
+ (21,'38','테스트01',NULL,'ㅇㅇㅇㅇ','test01','2008-10-07 02:46:18'),
+ (22,'32','테스트01',NULL,'ㅇㅇㅇㅇ','test01','2008-10-07 02:47:07');
 /*!40000 ALTER TABLE `tbl_board_comment` ENABLE KEYS */;
 
 
@@ -216,7 +228,7 @@ CREATE TABLE `tbl_board_item` (
   `BOARDNAME` varchar(45) NOT NULL,
   `STATUS` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_board_item`
@@ -254,13 +266,14 @@ INSERT INTO `tbl_board_item` (`ID`,`TITLE`,`USERID`,`DATE`,`READCOUNT`,`NICKNAME
  (28,'fad','xx','2008-10-06 19:23:28',2,'대박이','fad','BIT10','user','BIS01'),
  (29,'fad','xx','2008-10-06 19:26:01',0,'대박이','fdas','BIT10','user','BIS01'),
  (30,'43243','xx','2008-10-06 19:26:07',3,'대박이','4324','BIT10','user','BIS01'),
- (31,'432432','xx','2008-10-06 19:26:29',0,'대박이','432','BIT10','user','BIS01'),
- (32,'4324','xx','2008-10-06 19:26:36',0,'대박이','432','BIT10','user','BIS01'),
+ (31,'432432','xx','2008-10-06 19:26:29',1,'대박이','432','BIT10','user','BIS01'),
+ (32,'4324','xx','2008-10-06 19:26:36',2,'대박이','432','BIT10','user','BIS01'),
  (33,'3','xx','2008-10-06 19:29:24',1,'대박이','3\r\n3\r\n3\r\n3\r\n3\r\n','BIT10','user','BIS01'),
  (34,'4324','xx','2008-10-06 19:29:31',0,'대박이','432','BIT10','qna','BIS01'),
  (35,'432432','xx','2008-10-06 19:29:35',3,'대박이','43244','BIT10','qna','BIS01'),
  (36,'ddd','xx','2008-10-06 19:36:01',0,'대박이','dd','BIT10','qna','BIS01'),
- (37,'dd','xx','2008-10-06 19:37:54',1,'대박이','dd','BIT10','qna','BIS01');
+ (37,'dd','xx','2008-10-06 19:37:54',1,'대박이','dd','BIT10','qna','BIS01'),
+ (38,'테스','test01','2008-10-07 02:45:40',1,'테스트01','ㅌㅌㅌㅌㅌㅌ','BIT10','user','BIS01');
 /*!40000 ALTER TABLE `tbl_board_item` ENABLE KEYS */;
 
 
@@ -304,7 +317,7 @@ CREATE TABLE `tbl_game` (
   `HANDY` float(5,2) default NULL,
   `BET_STATUS` varchar(45) NOT NULL default 'BTS02',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_game`
@@ -312,18 +325,21 @@ CREATE TABLE `tbl_game` (
 
 /*!40000 ALTER TABLE `tbl_game` DISABLE KEYS */;
 INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`GAME_DATE`,`LEAGUE_ID`,`TYPE`,`HOME_SCORE`,`AWAY_SCORE`,`RESULT`,`HANDY`,`BET_STATUS`) VALUES 
- (136,'삼성','부산',2.10,-1.00,3.20,'GS004','2008-10-06 21:00:00',13,'handy',3,2,0x44,NULL,'BTS01'),
- (137,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',12,'wdl',2,1,0x57,NULL,'BTS01'),
- (138,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (139,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (140,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (141,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (142,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS01'),
- (143,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (144,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS01'),
- (145,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS01'),
- (146,'취소','취소',1.00,1.00,1.00,'GS005','2008-10-07 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS01'),
- (147,'당첨','당첨',2.00,0.50,2.00,'GS004','2008-10-07 00:00:00',13,'handy',1,1,0x57,NULL,'BTS01');
+ (136,'삼성','부산',2.10,-1.00,3.20,'GS004','2008-10-06 21:00:00',13,'handy',3,2,0x44,NULL,'BTS02'),
+ (137,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',12,'wdl',2,1,0x57,NULL,'BTS02'),
+ (138,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (139,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (140,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (141,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (142,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS02'),
+ (143,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (144,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS02'),
+ (145,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
+ (146,'취소','취소',1.00,1.00,1.00,'GS005','2008-10-07 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS02'),
+ (147,'당첨','당첨',2.00,0.50,2.00,'GS004','2008-10-07 00:00:00',13,'handy',1,1,0x57,NULL,'BTS02'),
+ (148,'ㅇㅇ','ㅇㅇ',2.00,2.00,2.00,'GS003','2008-10-07 00:00:00',10,'wdl',NULL,NULL,NULL,NULL,'BTS02'),
+ (149,'롯데','한화',1.00,1.00,1.00,'GS005','2008-10-08 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS01'),
+ (150,'ㅛㅛㅛ','ㅠㅠㅠ',10.00,10.00,10.00,'GS002','2008-10-08 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS01');
 /*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
 
 
@@ -439,7 +455,7 @@ INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`
  (1,'xx','4444','대박이','016-4444-4444','jackpot@hotmail.com','1111',1000000,'US001','UG001','2008-09-29 00:00:00'),
  (2,'secadmin','3333','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100','2008-09-30 00:00:00'),
  (3,'test','test','테스트','010-2222-2222','test@test.com','test1111',2000000,'US001','UG001','2008-10-04 15:53:42'),
- (4,'test01','1111','테스트01','010-111-1111','1111@1111','1111',3050000,'US001','UG001','2008-10-05 20:12:29');
+ (4,'test01','1111','테스트01','010-111-1111','1111@1111','1111',3035001,'US001','UG001','2008-10-05 20:12:29');
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
 
 
@@ -458,13 +474,15 @@ CREATE TABLE `tbl_money_in` (
   `BANKBOOK_ID` int(10) unsigned NOT NULL,
   `PROC_DATE` datetime default NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_money_in`
 --
 
 /*!40000 ALTER TABLE `tbl_money_in` DISABLE KEYS */;
+INSERT INTO `tbl_money_in` (`ID`,`USERID`,`MONEY`,`STATUS`,`REQ_DATE`,`NAME`,`BANKBOOK_ID`,`PROC_DATE`) VALUES 
+ (31,'test01',1121,'MC001','2008-10-06 21:52:17','nnn',1,NULL);
 /*!40000 ALTER TABLE `tbl_money_in` ENABLE KEYS */;
 
 
@@ -484,7 +502,7 @@ CREATE TABLE `tbl_money_out` (
   `PROC_DATE` datetime default NULL,
   `STATUS` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_money_out`
