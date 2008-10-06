@@ -67,20 +67,30 @@ public class AdminBettingController extends XwinController
 		Integer code = 0;
 		
 		String id = request.getParameter("id");
-		String gameType= request.getParameter("gameType");
+		//String gameType= request.getParameter("gameType");
 		Betting betting = bettingDao.selectBetting(id);
+		String gameType = betting.getGameType();
 		
-		if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false) {
-			code = -1;
-			message = "배팅이 적중 상태가 아닙니다";
-		} else {
-			if (gameType.equals("wdl"))
+		if (gameType.equals("wdl")) {
+			if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false) {
+				code = -1;
+				message = "배팅이 적중 상태가 아닙니다";
+			} else {
 				calculateWdl(betting);
-			else if (gameType.equals("handy"))
-				calculateHandy(betting);
-			message = "정산되었습니다";
+				message = "정산되었습니다";
+			}
 		}
-		
+		else if (gameType.equals("handy")) {
+			if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false ||
+					betting.getStatus().equals(Code.BET_STATUS_HANDYDRAW) == false) {
+				code = -1;
+				message = "정산 가능 상태가 아닙니다");
+			} else {
+				calculateHandy(betting);
+				message = "정산되었습니다";
+			}
+		}
+				
 		ResultXml rx = new ResultXml(code, message, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -111,7 +121,7 @@ public class AdminBettingController extends XwinController
 	public void calculateHandy(Betting betting) {
 		String userId = betting.getUserId();
 		Member member = memberDao.selectMember(userId, null);
-					
+		
 		betting.setStatus(Code.BET_STATUS_COMMIT);
 		bettingDao.updateBetting(betting);
 		

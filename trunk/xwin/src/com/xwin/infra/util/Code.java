@@ -25,6 +25,10 @@ public class Code
 	public static final String BET_STATUS_COMMIT		= "BS006";
 	public static final String BET_STATUS_HANDYDRAW		= "BS007";
 	
+	public static final String BET_CALC_DIABLE			= "BTC01";
+	public static final String BET_CALC_ENABLE			= "BTC02";
+	public static final String BET_CALC_COMMIT			= "BTC10";
+	
 	public static final String GAME_STATUS_READY		= "GS002";
 	public static final String GAME_STATUS_RUN			= "GS003";
 	public static final String GAME_STATUS_END			= "GS004";

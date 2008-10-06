@@ -115,6 +115,11 @@
 		WHERE STATUS != 'BS004' AND STATUS != 'BS006'
 	</update>
 	
+	<update id="updateBettingStatusByCount">
+		UPDATE tbl_betting SET CALC_STATUS = 'BTC02'
+		WHERE STATUS in ('BS003', 'BS005', 'BS002'
+	</update>
+	
 	<delete id="deleteBetting" parameterClass="string">
 		DELETE FROM tbl_betting WHERE ID = #value#
 	</delete>
