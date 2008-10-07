@@ -6,7 +6,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 
-public class KtfSmsMessageDao extends XwinDao
+public class KtfSmsDao extends XwinDao
 {
 	public void insertMessage(KtfSmsMessage message)
 	{

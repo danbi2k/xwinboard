@@ -18,7 +18,7 @@
 		p:sqlMapClient-ref="sqlMapClient" />
 	
 	<bean id="ktfSmsDao"
-		class="com.xwin.infra.dao.KtfSmsMessageDao"
+		class="com.xwin.infra.dao.KtfSmsDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 	
 	<bean id="EventDao"

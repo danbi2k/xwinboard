@@ -19,12 +19,12 @@
 	
 	<select id="selectKtfSmsList" resultMap="ktfSmsResultMap"
 		parameterClass="map">
-		select * from KTFSMS
-		order by IN_DATE desc
+		SELECT * from tbl_ktfsms
+		ORDER BY IN_DATE desc
 	</select>
 	
 	<insert id="insertMessage" parameterClass="KtfSmsMessage">
-		INSERT INTO KTFSMS(MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES(#msgSeq#, #inDate#, #msg#, #sm#, #callBack#)
+		INSERT INTO tbl_ktfsms(MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES(#msgSeq#, #inDate#, #msg#, #sm#, #callBack#)
 	</insert>
 	
 </sqlMap>

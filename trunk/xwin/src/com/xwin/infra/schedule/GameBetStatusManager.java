@@ -15,19 +15,11 @@ public class GameBetStatusManager extends QuartzJobBean
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException
 	{
-		System.out.println("**************");
-		System.out.println("START Game Status Updater");
-		System.out.println("**************");
-		
 		GameDao gameDao = (GameDao) context.getJobDetail().getJobDataMap().get("gameDao");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, 10);
 
 		gameDao.batchGameBetStatus(cal.getTime());
 		gameDao.batchGameStatus(new Date());
-		
-		System.out.println("**************");
-		System.out.println("END Game Status Updater");
-		System.out.println("**************");
 	}
 }

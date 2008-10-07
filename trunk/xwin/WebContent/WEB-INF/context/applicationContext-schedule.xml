@@ -18,16 +18,37 @@
 		</property>
 	</bean>
 	
+	<bean id="ktfSmsJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.xwin.infra.schedule.KtfSmsManager"/>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="ktfSmsDao">
+					<ref bean="ktfSmsDao"/>
+				</entry>
+				<entry key="ktfSmsConnector">
+					<ref bean="ktfSmsConnector"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
 	<bean id="gameBetStatusTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="gameBetStatusJob"/>
 		<property name="startDelay" value="10000"/>
 		<property name="repeatInterval" value="60000"/>
 	</bean>
 	
+	<bean id="ktfSmsTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="ktfSmsJob"/>
+		<property name="startDelay" value="10000"/>
+		<property name="repeatInterval" value="120000"/>
+	</bean>
+	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
 		<property name="triggers">
 			<list>
 				<ref bean="gameBetStatusTrigger"/>
+				<ref bean="ktfSmsTrigger"/>
 			</list>
 		</property>
 		<property name="quartzProperties">
