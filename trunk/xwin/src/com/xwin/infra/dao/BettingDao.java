@@ -78,6 +78,7 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
 		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
 		sqlMapClientTemplate.update("updateBettingStatusByCount");
+		sqlMapClientTemplate.update("updateCalcStatusByBetStatus");
 	}
 	
 	public void updateBettingStatusWhenGameCancel(String gameId)
@@ -87,5 +88,6 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
 		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
 		sqlMapClientTemplate.update("updateBettingStatusByCount");
+		sqlMapClientTemplate.update("updateCalcStatusByBetStatus");
 	}
 }

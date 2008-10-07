@@ -16,6 +16,7 @@
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
 		<result property="expect" column="EXPECT"/>
+		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameType" column="GAME_TYPE"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
@@ -43,6 +44,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="calcStatus">
+			CALC_STATUS = #calcStatus#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
@@ -91,7 +95,7 @@
 	</update>
 	
 	<update id="updateGameCountCancel" parameterClass="string">
-		UPDATE tbl_betting b SET CANCEL_COUNT =
+		UPDATE tbl_betting b SET NOMATCH_COUNT =
 		(
 		SELECT COUNT(*)
 		FROM tbl_betting_game bg, tbl_game g
@@ -107,19 +111,34 @@
 		UPDATE tbl_betting SET STATUS =
 		(CASE
 		WHEN FAILURE_COUNT > 0 THEN 'BS003'
-		WHEN TOTAL_COUNT = CANCEL_COUNT THEN 'BS005'
-		WHEN TOTAL_COUNT = (SUCCESS_COUNT + CANCEL_COUNT) THEN 'BS002'
+		WHEN TOTAL_COUNT = NOMATCH_COUNT THEN 'BS005'
 		WHEN TOTAL_COUNT = HANDYDRAW_COUNT THEN 'BS007'
+		WHEN TOTAL_COUNT = (SUCCESS_COUNT + NOMATCH_COUNT) THEN 'BS002'
+		WHEN TOTAL_COUNT = (SUCCESS_COUNT + HANDYDRAW_COUNT) THEN 'BS002'
 		ELSE 'BS001'
 		END)
-		WHERE STATUS != 'BS004' AND STATUS != 'BS006'
+		WHERE STATUS != 'BS004' AND CALC_STATUS != 'BTC10'
 	</update>
 	
-	<update id="updateBettingStatusByCount">
+	<update id="updateCalcStatusByBetStatus">
 		UPDATE tbl_betting SET CALC_STATUS = 'BTC02'
-		WHERE STATUS in ('BS003', 'BS005', 'BS002'
+		WHERE STATUS in ('BS005', 'BS002', 'BS007')
 	</update>
+
+<!--
+BET_STATUS_RUN			= "BS001";
+BET_STATUS_SUCCESS		= "BS002";
+BET_STATUS_FAILURE		= "BS003";
+BET_STATUS_CANCEL		= "BS004";
+BET_STATUS_NOMATCH		= "BS005";
+BET_STATUS_COMMIT		= "BS006";
+BET_STATUS_HANDYDRAW	= "BS007";
 	
+BET_CALC_DIABLE			= "BTC01";
+BET_CALC_ENABLE			= "BTC02";
+BET_CALC_COMMIT			= "BTC10"; 
+ -->
+ 
 	<delete id="deleteBetting" parameterClass="string">
 		DELETE FROM tbl_betting WHERE ID = #value#
 	</delete>

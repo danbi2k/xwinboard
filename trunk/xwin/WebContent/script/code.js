@@ -8,8 +8,8 @@ CODE_TABLE["BTS01"] = "접수중";
 CODE_TABLE["BTS02"] = "진행중";
 
 CODE_TABLE["BS001"] = "진행중";
-CODE_TABLE["BS002"] = "적중";
-CODE_TABLE["BS003"] = "실패";
+CODE_TABLE["BS002"] = "당첨";
+CODE_TABLE["BS003"] = "미당첨";
 CODE_TABLE["BS004"] = "취소<br>(환불)";
 CODE_TABLE["BS005"] = "경기취소<br>(환불)";
 CODE_TABLE["BS006"] = "정산완료";

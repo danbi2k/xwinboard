@@ -25,7 +25,7 @@ public class Code
 	public static final String BET_STATUS_COMMIT		= "BS006";
 	public static final String BET_STATUS_HANDYDRAW		= "BS007";
 	
-	public static final String BET_CALC_DIABLE			= "BTC01";
+	public static final String BET_CALC_DISABLE			= "BTC01";
 	public static final String BET_CALC_ENABLE			= "BTC02";
 	public static final String BET_CALC_COMMIT			= "BTC10";
 	
@@ -63,6 +63,10 @@ public class Code
 	
 	static 
 	{
+		put(BET_CALC_DISABLE, "정산불가");
+		put(BET_CALC_ENABLE, "정산가능");
+		put(BET_CALC_COMMIT, "정산완료");
+		
 		put(BOARDITEM_STATUS_NORMAL, "정상");
 		put(BOARDITEM_STATUS_REMOVE, "삭제");
 		
@@ -96,8 +100,8 @@ public class Code
 		put(GAME_STATUS_CANCEL, "경기취소");
 		
 		put(BET_STATUS_RUN, "진행중");
-		put(BET_STATUS_SUCCESS, "적중");
-		put(BET_STATUS_FAILURE, "실패");
+		put(BET_STATUS_SUCCESS, "당첨");
+		put(BET_STATUS_FAILURE, "미당첨");
 		put(BET_STATUS_CANCEL, "배팅취소(환불)");
 		put(BET_STATUS_NOMATCH, "경기취소(환불)");
 		put(BET_STATUS_COMMIT, "정산완료");

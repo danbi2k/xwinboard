@@ -16,6 +16,7 @@ public class Betting
 	private Long money;
 	private Long expect;
 	private String status;
+	private String calcStatus;
 	private Integer totalCount;
 	private Integer successCount;
 	private Integer failureCount;
@@ -116,5 +117,11 @@ public class Betting
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getCalcStatus() {
+		return calcStatus;
+	}
+	public void setCalcStatus(String calcStatus) {
+		this.calcStatus = calcStatus;
 	}
 }

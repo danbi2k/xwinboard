@@ -197,7 +197,7 @@ if (login) {
 
 <%} %>
 </table>
-<img id="mainImage" src="images/stadium.jpg" style="display:none">
+<img id="mainImage" src="images/bwin.jpg" style="display:none">
 <script>
 //FnFlash("main","960","280","images/main.swf","");
 if (document.URL.indexOf("index.aspx") > 0) {

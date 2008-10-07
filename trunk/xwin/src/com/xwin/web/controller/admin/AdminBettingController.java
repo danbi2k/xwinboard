@@ -81,13 +81,13 @@ public class AdminBettingController extends XwinController
 			}
 		}
 		else if (gameType.equals("handy")) {
-			if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) == false ||
-					betting.getStatus().equals(Code.BET_STATUS_HANDYDRAW) == false) {
-				code = -1;
-				message = "정산 가능 상태가 아닙니다";
-			} else {
+			if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) ||
+					betting.getStatus().equals(Code.BET_STATUS_HANDYDRAW)) {
 				calculateHandy(betting);
 				message = "정산되었습니다";
+			} else {
+				code = -1;
+				message = "정산 가능 상태가 아닙니다";
 			}
 		}
 				
@@ -102,7 +102,7 @@ public class AdminBettingController extends XwinController
 		String userId = betting.getUserId();
 		Member member = memberDao.selectMember(userId, null);
 					
-		betting.setStatus(Code.BET_STATUS_COMMIT);
+		betting.setCalcStatus(Code.BET_CALC_COMMIT);
 		bettingDao.updateBetting(betting);
 		
 		Account account = new Account();
@@ -122,7 +122,7 @@ public class AdminBettingController extends XwinController
 		String userId = betting.getUserId();
 		Member member = memberDao.selectMember(userId, null);
 		
-		betting.setStatus(Code.BET_STATUS_COMMIT);
+		betting.setCalcStatus(Code.BET_CALC_COMMIT);
 		bettingDao.updateBetting(betting);
 		
 		Account account = new Account();

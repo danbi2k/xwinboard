@@ -204,9 +204,10 @@
 								<td>홈팀</td>
 								<td>무승부<BR>/핸디캡</td>
 								<td>원정팀</td>
-								<td>유저배팅</td>
-								<td>경기결과</td>
-								<td>상태</td>
+								<td nowrap>배팅</td>
+								<td nowrap>결과</td>
+								<td nowrap>상태</td>
+								<td nowrap>정산</td>
 							  </tr>
 							 
 			<%
@@ -236,6 +237,7 @@
 								if (count++ == 0) {
 								%>
 								<td rowspan='<%=betting.getTotalCount()%>'><%=Code.getValue(betting.getStatus())%></td>
+								<td rowspan='<%=betting.getTotalCount()%>'><%=Code.getValue(betting.getCalcStatus())%></td>
 								<%
 								}
 								%>
@@ -252,7 +254,7 @@
 								배팅금액 : <%=betting.getMoney()%> 원&nbsp; / &nbsp; 예상금액 : <%=betting.getExpect()%> 원
 								</B>
 								</td>
-								<td colspan='3'>
+								<td colspan='4'>
 									<img src="images/admin/btn_run.jpg" onclick="calculateBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')">
 									<img src="images/admin/btn_cancel.jpg" onclick="cancelBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')">
 								</td>

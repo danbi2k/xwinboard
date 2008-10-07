@@ -61,9 +61,13 @@ public class BettingController extends XwinController
 		}
 		
 		Long expect = cc.getExpect();
-		if (expect > MAX_EXPECT) {
+		if (cartCol.size() == 0) {
+			rx = new ResultXml(-1, "경기를 선택 하십시오", null);
+		}
+		else if (expect > MAX_EXPECT) {
 			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
-		} if (cc.getAfter() < 0) {
+		}
+		else if (cc.getAfter() < 0) {
 			rx = new ResultXml(-1, "잔액이 부족합니다", null);
 		} else {
 			betting.setUserId(member.getUserId());

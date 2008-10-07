@@ -128,9 +128,9 @@ if (gameList != null) {
 
 		<td>
 		<%
-		if (game.getGameDate().equals("wdl")) {
+		if (game.getType().equals("wdl")) {
 		%>
-		<%=game.getHomeScore()%> : <%=game.getAwayTeam()%>
+		<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
 		<%
 		} else {
 			double homeScoreDouble = (double) game.getHomeScore();
