@@ -9,6 +9,9 @@
 	
 	<bean id="adminIndexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/admin_login"/>
+	
+	<bean id="testController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="admin/test"/>
 		
 	<bean id="adminLoginController"
 		class="com.xwin.web.controller.admin.AdminLoginController"

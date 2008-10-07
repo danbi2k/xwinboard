@@ -79,10 +79,6 @@
 		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
-	<bean id="testController"
-		class="com.xwin.web.controller.test.TestController"
-		p:memberDao-ref="memberDao"/>
-			
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
 		p:paramName="mode"/>
