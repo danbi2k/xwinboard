@@ -36,6 +36,7 @@
 				<prop key="/guide.aspx">guideController</prop>
 				<prop key="/provision.aspx">provisionController</prop>
 				<prop key="/rules.aspx">rulesController</prop>
+				<prop key="/livescore.aspx">liveScoreController</prop>
 			</props>
 		</property>
 	</bean>

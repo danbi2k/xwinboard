@@ -61,7 +61,7 @@ var gameType = '<%=type%>'
 	</table>
 </td></tr>
 <tr><td valign="top" align="center">
-
+<!--
 	<table width="900" bgcolor="#d9d8d6" cellspacing="1" cellpadding="3">
 
 	<colgroup>
@@ -95,7 +95,7 @@ var gameType = '<%=type%>'
 	</tr>
 
 	</table>
-
+  -->
 	<!-- ***************************************************** -->
 	<div id="gameListDiv"></div>
 <!-- --------------------------------------------------------------------------- -->
@@ -123,7 +123,7 @@ var gameType = '<%=type%>'
 			<col width="80" align="right">
 			<col width="80" align="right">
 		</colgroup>
-		<tr><td style="color:darkorange;">배팅금액</td>
+		<tr><td style="color:#FFC602;">배팅금액</td>
 			<td colspan="3" align="left">
 				<table cellpadding="0" cellspacing="0">
 				<tr><td>
@@ -145,27 +145,27 @@ var gameType = '<%=type%>'
 				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='50000';FnCalcCart();">5만</span></td>
 				</tr>
 				<tr>
-				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='100000';FnCalcCart();">10만</span></td>
-				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='200000';FnCalcCart();">20만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:#FFC602;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='100000';FnCalcCart();">10만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:#FFC602;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='200000';FnCalcCart();">20만</span></td>
 
-				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='300000';FnCalcCart();">30만</span></td>
-				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='500000';FnCalcCart();">50만</span></td>
-				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='1000000';FnCalcCart();">100만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:#FFC602;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='300000';FnCalcCart();">30만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:#FFC602;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='500000';FnCalcCart();">50만</span></td>
+				<td><span style="width:40;height:16;background:url('images/btn_money_bg2.gif');color:#FFC602;font-size:11px;text-align:center;padding-top:2;margin-right:3;cursor:hand" onclick="CartFrm.BetAmt.value='1000000';FnCalcCart();">100만</span></td>
 				</tr>
 				</table>
 			
 			</td>
 		</tr>
 
-		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">배당율</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><b>× <div id="rateDiv" style="display:inline" value='0'>0.00</div></b></td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">예상배당금</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;"><b><div id="expectDiv" style="display:inline">0</div> 원</b></td></tr>
-		<tr><td style="color:darkorange;border-bottom:1 solid #d9d8d6;">잔여 머니</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><div id="balanceDiv" style="display:inline">0</div> 원</td>
+		<tr><td style="color:#FFC602;border-bottom:1 solid #d9d8d6;">배당율</td>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><b>× <div id="rateDiv" style="display:inline" value='0'>0.00</div></b></td>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;">예상배당금</td>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;"><b><div id="expectDiv" style="display:inline">0</div> 원</b></td></tr>
+		<tr><td style="color:#FFC602;border-bottom:1 solid #d9d8d6;">잔여 머니</td>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;border-right:1 solid #d9d8d6;"><div id="balanceDiv" style="display:inline">0</div> 원</td>
 
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;">배팅후 머니</td>
-			<td style="color:darkorange;border-bottom:1 solid #d9d8d6;"><div id="afterDiv" style="display:inline">0</div> 원</td></tr>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;">배팅후 머니</td>
+			<td style="color:#FFC602;border-bottom:1 solid #d9d8d6;"><div id="afterDiv" style="display:inline">0</div> 원</td></tr>
 
 		</table>
 		<table width="100%">

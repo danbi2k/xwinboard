@@ -29,7 +29,7 @@ function FnDrawMyBetList(data)
 	row.push("<col align='center' width='70'>");
 	row.push("</colgroup>");
 
-	row.push("<tr bgcolor='#ce892c'>");
+	row.push("<tr bgcolor=424242>");
 	row.push("<th style='color:white;'>No</td>");
 	row.push("<th style='color:white;'>배팅일시</td>");
 	row.push("<th style='color:white;'>진행상태</td>");
@@ -84,7 +84,12 @@ function FnDrawMyBetList(data)
 			if (strike)
 				row.push("</STRIKE>");
 			row.push(" 원</td>");
-			row.push("<td><font color='orange'>" + C(data[i].status) + "</td>");
+			if (data[i].status == 'BS002')
+				row.push("<td><font color='#f1fd35'><b>" + C(data[i].status) + "</b></td>");
+			else if (data[i].status == 'BS003')
+				row.push("<td><font color='red'><b>" + C(data[i].status) + "</b></td>");
+			else
+				row.push("<td><font color='orange'>" + C(data[i].status) + "</td>");
 			row.push("<td><img src='images/btn_detail.gif' onclick='BetListView(" + data[i].id + ");' style='cursor:hand;filter:gray();' onmouseover=\"this.style.filter='';\" onmouseout=\"this.style.filter='gray()';\"></td>");
 			row.push("</tr>");
 		}

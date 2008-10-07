@@ -6,7 +6,10 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
+	<bean id="liveScoreController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/livescore"/>
+		
 	<bean id="guideController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/guide"/>
 		

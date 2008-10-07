@@ -199,4 +199,10 @@
 			STATUS = 'GS002'
 		]]>			
 	</update>
+	
+	<select id="selectGameWithBetMoney" resultMap="GameResultMap">
+		SELECT
+			ID, LEAGUE_ID, HOMETEAM, AWAYTEAM, GAME_DATE,
+			(SELECT COUNT(*)
+	</select>
 </sqlMap>

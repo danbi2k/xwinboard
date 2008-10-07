@@ -71,7 +71,7 @@ function FnDrawCart(data, type) {
 	row.push("<col align='center' width='60'>");
 	row.push("</colgroup>");
 
-	row.push("<tr bgcolor='#ce892c' align='center'>");
+	row.push("<tr bgcolor='#424242' align='center'>");
 	row.push("<td style='color:white'>");
 	//row.push("<input type='checkbox' name='GameDel' onclick=\"CheckAll(CartFrm.GameDel);\">");
 	row.push("<b>No.</b></td>");

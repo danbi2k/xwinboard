@@ -81,6 +81,10 @@
 	<td><img src="images/main_banner_08.gif"></td></tr>
 <tr><td><img src="images/main_banner_09.gif"></td>
 	<td><img src="images/main_banner_10.gif"></td></tr>
+<tr>
+	<td><img src="images/livescore.jpg" onclick="location.href='livescore.aspx'"></td>
+	<td></td>
+</tr>
 </table>
 
 <!--############################################################//-->

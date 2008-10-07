@@ -13,8 +13,100 @@ function FnGetGameList(type, leagueId, status)
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.game);
-		FnDrawGameList(data, type);
+		FnDrawGameList2(data, type);
 	}
+}
+function FnDrawGameList2(data,type)
+{
+	var row = [];
+	row.push("<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424142>");
+	row.push("<tr bgcolor=212021 height=27>");
+	row.push("<td  width=130 align=center ><font color=FFFFFF><b>경기일시</td>");
+	row.push("<td  width=150 align=center ><font color=FFFFFF><b>리 그</td>");
+	row.push("<td  width=500 align=center ><font color=FFFFFF><b>(승)홈 팀</td>");
+	
+	if (type == 'wdl')
+		row.push("<td  width=70 align=center ><font color=FFFFFF><b>무</td>");
+	else
+		row.push("<td  width=70 align=center ><font color=FFFFFF><b>핸디</td>");
+	row.push("<td  width=600 align=center ><font color=FFFFFF><b>(패)원정팀</td>");
+	row.push("<td  width=60 align=center ><font color=FFFFFF><b>상태</td>");
+	row.push("</tr>");
+	
+	if (data.length > 0) {
+		for (var i in data) {
+			row.push("<tr height=25 bgcolor=000000>");
+			row.push("<td align=center  ><nobr><font color=FFC602>" + data[i].gameDateStr + "</td>");
+			row.push("<td align=center  ><nobr><font color=FFC602>" + data[i].leagueName + "</td>");
+			row.push("<td align=right  >");
+			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
+			row.push("<tr>");
+			row.push("<td align=center width=60><nobr>&nbsp;</td>");
+			row.push("<td align=center width=60>&nbsp;</td>");								
+			row.push("<td width=90% align=right><nobr><font color=FFC602>");
+			row.push("<span id='team1_2567'>" + data[i].homeTeam + "</span>");
+			
+			if (data[i].betStatus == 'BTS01') {
+				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
+			} else {
+				row.push("<b style='font-size:15px;'>□</b> ");
+			}
+			
+			row.push("</td>");
+			row.push("<td width=1 bgcolor=FFFFFF></td>");
+			row.push("<td width=90% align=right>&nbsp;<font color=FFC602><span id='bet1_2567'>" + data[i].winRateStr + "</span>&nbsp;</td>");
+			row.push("<td width=1 bgcolor=FFFFFF></td>");
+			row.push("<td width=90% align=right><nobr><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle></td>");
+			row.push("</tr>");
+			row.push("</table>");
+			row.push("</td>");
+			row.push("<td align=center ><nobr>");
+			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424242>");
+			row.push("<tr>");
+			row.push("<td align=center bgcolor=424242><nobr><font color=FFC602>");
+			
+			if (data[i].type == 'wdl') {
+				if (data[i].drawRate > 0 && data[i].betStatus == 'BTS01') {
+					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
+				} else {
+					row.push("<b style='font-size:15px;'>□</b> ");
+				}
+				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRateStr + "</span>");	
+			} else {
+				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRate + "</span>");	
+			}
+			
+			row.push("</td>");
+			row.push("</tr>");
+			row.push("</table>");		
+			row.push("</td>");
+			row.push("<td align=left >");
+			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
+			row.push("<tr>");
+			row.push("<td ><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle> </td>");
+			row.push("<td width=1% >&nbsp;<font color=FFC602><span id='bet2_2567'>" + data[i].loseRateStr + "</span>&nbsp;</td>");
+			row.push("<td width=90% ><nobr>");
+			
+			if (data[i].betStatus == 'BTS01') {
+				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
+			} else {
+				row.push("<b style='font-size:15px;'>□</b> ");
+			}
+			
+			row.push("<font color=FFC602><span id='team2_2567'>" + data[i].awayTeam + "</span>&nbsp;");
+			row.push("</td>");								
+			row.push("</tr>");
+			row.push("</table>");
+			row.push("</td>");
+			row.push("<td align=center ><nobr><font color=FFC602>" + C(data[i].status) + "</td>");
+			row.push("</tr>");
+		}
+	}
+	
+	row.push("</table>");
+	var tbodyString = row.join("");
+	var gameListDiv = document.getElementById("gameListDiv");
+	gameListDiv.innerHTML = tbodyString;
 }
 
 function FnDrawGameList(data, type)

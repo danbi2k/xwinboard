@@ -88,64 +88,61 @@
 </td></tr>
 <tr><td valign="top" align="center" height="300">
 
-	<table width="900" bgcolor="#d9d8d6" cellspacing="1" cellpadding="3">
-	<colgroup>
-		<col align="center" width="100">
-
-		<col align="center" width="*">
-		<col align="center" width="180">
-		<col align="center" width="180">
-		<col align="center" width="70">
-		<col align="center" width="50">
-	</colgroup>
-
-	<tr bgcolor="#ce892c" height="34">
-		<td style="color:white;"><b>경기일시</td>
-		<td style="color:white;"><b>리그</td>
-		<td style="color:white;"><b>홈팀</td>
-		<td style="color:white;"><b>원정팀</td>
-		<td style="color:white;"><b>Score</td>
-		<td style="color:white;"><b>결과</td>
-	</tr>
-
+	<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424242>
+		<tr bgcolor=212021 height=27>
+			<td  width=270 align=center ><nobr><font color=FFFFFF><b>경기일시</td>
+			<td  width=100 align=center ><nobr><font color=FFFFFF><b>리그</td>
+			<td  width=550 align=center ><nobr><font color=FFFFFF><b>(승)홈 팀</td>
+			<td  width=130 align=center ><nobr><font color=FFFFFF><b>무/핸디캡</td>
+			<td  width=550 align=center ><nobr><font color=FFFFFF><b>(패)원정팀</td>
+			<td  width=210 align=center ><nobr><font color=FFFFFF><b>경기결과</td>
+		</tr>
 
 <%
 if (gameList != null) {
 	for (Game game : gameList) {
 		
-%>
-	<tr height="34" bgcolor="#0a0a0a">
-		<td><%=game.getGameDateStr()%></td>
-		<td align="left">
-			<table cellpadding="0" cellspacing="2"><tr><td><img src="images/league/<%=game.getLeagueImage()%>" style="display:none" onload="this.style.display='';"></td>
-			<td>&nbsp;<%=game.getLeagueName()%></td>
-			<td style="color:darkorange">&nbsp;<%=game.getType().equals("wdl")?"승무패":"핸디캡" %></td></tr>
+%>																								
+		<tr height=25 bgcolor=000000>
+			<td align=center  ><nobr><%=game.getGameDateStr()%></td>
+			<td align=center ><nobr><%=game.getLeagueName()%></td>
+			<td align=right >
+				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
+					<tr>
+						<td align=right width=100%><nobr><%=game.getHomeTeam()%></td>
+						<td align=right width=30>&nbsp;<%=game.getWinRateStr()%>&nbsp;</td>
+						<td align=right width=10><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td align=center align=center><nobr>
+				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
+					<tr>
+						<%if (game.getType().equals("wdl")){%>
+						<td align=center ><nobr><%=game.getDrawRateStr()%></td>
+						<%} else { %>
+						<td align=center ><nobr><%=game.getDrawRate()%></td>
+						<%}%>
+					</tr>
+				</table>
+			</td>
+			<td align=left >
+				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
+					<tr>
+						<td width=20><nobr><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle></td>
+						<td width=30>&nbsp;<%=game.getLoseRateStr()%>&nbsp;</td>
+						<td ><nobr><%=game.getAwayTeam()%></td>
+						
+					</tr>
+				</table>
+			</td>
+			<td align=center ><nobr>
+			<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
+			&nbsp;<%=Code.getValue(game.getResult())%>
+			</td>
+		</tr>
 
-			</table>
-		</td>
-		<td><%=game.getHomeTeam()%></td>
-		<td><%=game.getAwayTeam()%></td>
-
-		<td>
-		<%
-		if (game.getType().equals("wdl")) {
-		%>
-		<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
-		<%
-		} else {
-			double homeScoreDouble = (double) game.getHomeScore();
-			homeScoreDouble += game.getDrawRate();
-		%>		
-		<%=homeScoreDouble%> : <%=game.getAwayScore()%>
-		<%
-		}		
-		%>
-		</td>
-		<td style="color:orange">
-			<%=Code.getValue(game.getResult())%>
-		</td>
-
-	</tr>
 <%
 	}
 }
