@@ -47,7 +47,7 @@ public class MoneyOutController extends XwinController
 		ResultXml rx = null;
 		String pin = request.getParameter("pin");
 		if (member.getPin().equals(pin) == false) {
-			rx = new ResultXml(-1, "출금비밀번호가 틀렸습니다", null);
+			rx = new ResultXml(-1, "환전비밀번호가 틀렸습니다", null);
 		} else if (member.getBalance() < moneyOut.getMoney()) {
 			rx = new ResultXml(-1, "잔액이 부족합니다", null);
 		} else {
@@ -71,7 +71,7 @@ public class MoneyOutController extends XwinController
 			
 			member.setBalance(member.getBalance() - moneyOut.getMoney());
 			
-			rx = new ResultXml(0, "출금신청이 등록되었습니다", null);
+			rx = new ResultXml(0, "환전신청이 등록되었습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

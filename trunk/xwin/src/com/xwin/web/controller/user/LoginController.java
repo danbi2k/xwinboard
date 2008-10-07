@@ -1,11 +1,14 @@
 package com.xwin.web.controller.user;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Access;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -43,6 +46,13 @@ public class LoginController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
+		Access access = new Access();
+		access.setDate(new Date());
+		access.setUserId(member.getUserId());
+		access.setNickName(member.getNickName());
+		access.setIpAddress(request.getRemoteAddr());
+		
+		accessDao.insertAccess(access);
 		HttpSession session = request.getSession();		
 		session.setAttribute("Member", member);
 		session.setAttribute("MemberDao", memberDao);

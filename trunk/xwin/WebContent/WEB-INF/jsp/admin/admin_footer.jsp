@@ -15,15 +15,15 @@
 			</div>
 		</div>
 		<div id="money" class="boxed">
-			<h2 class="heading">입출금관리</h2>
+			<h2 class="heading">입환전관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="#">충전요청</a></li>
-					<li><a href="#">환전요청</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyIn">충전내역</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyOut">환전내역</a></li>
-					<li><a href="#">직충전내역</a></li>
-					<li><a href="#">직환전내역</a></li>
+					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">충전요청</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">환전요청</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC002">충전내역</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME002">환전내역</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC004">직충전내역</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME004">직환전내역</a></li>
 				</ul>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminBetting.aspx?mode=viewBettingList">사용자배팅현황</a></li>
-					<li><a href="#">경기별배팅현황</a></li>
+					<li><a href="javascript:alert('준비중')">경기별배팅현황</a></li>
 				</ul>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminMember.aspx?mode=viewAdminMember">회원목록</a></li>
-					<li><a href="#">접속목록</a></li>
+					<li><a href="adminMember.aspx?mode=viewAccessList">접속목록</a></li>
 				</ul>
 			</div>
 		</div>

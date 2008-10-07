@@ -139,8 +139,8 @@ function FnInMoneyCancle(idx){
 	}
 }
 function FnOutMoney_Submit(frm){
-	if(frm.account_bank.value==""){ alert("출금받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
-	if(frm.account_num.value.length<7){ alert("출금받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
+	if(frm.account_bank.value==""){ alert("환전받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
+	if(frm.account_num.value.length<7){ alert("환전받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
 	
 	var query = "mode=moneyOutRequest";
@@ -159,7 +159,7 @@ function FnOutMoney_Submit(frm){
 	}
 }
 function FnOutMoneyCancle(idx){
-	if(confirm("출금신청을 취소하시겠습니까?")){
+	if(confirm("환전신청을 취소하시겠습니까?")){
 		location.href="outmoney.asp?cancle="+ idx;
 	}
 }

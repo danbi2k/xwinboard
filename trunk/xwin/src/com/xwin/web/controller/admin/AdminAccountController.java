@@ -20,11 +20,12 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminAccountController extends XwinController
 {
-	public ModelAndView viewMoneyIn(HttpServletRequest request,
+	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
+		String status = request.getParameter("status");
 		
 		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
@@ -33,34 +34,28 @@ public class AdminAccountController extends XwinController
 		List<MoneyIn> moneyInList = null;
 		
 		if (searchDate != null && searchDate.equals("reqDate"))
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null);
+			moneyInList = moneyInDao.selectMoneyInList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null, status);
 		else if (searchDate != null && searchDate.equals("procDate"))
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate));
+			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), status);
 		else
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, null, null);
+			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, null, null, status);
 		
-		ModelAndView mv = new ModelAndView("admin/account/money_in");
+		ModelAndView mv = null;
+		if (status.equals(Code.MONEY_IN_REQUEST))
+			mv = new ModelAndView("admin/account/money_in_req");
+		else
+			mv = new ModelAndView("admin/account/money_in");
 		mv.addObject("moneyInList", moneyInList);
 		
 		return mv;
 	}
 	
-	public ModelAndView viewMoneyInDetail(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		String id = request.getParameter("id");
-		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);
-		
-		ModelAndView mv = new ModelAndView("admin/account/money_in_detail");
-		mv.addObject("moneyIn", moneyIn);
-		return mv;
-	}
-	
-	public ModelAndView viewMoneyOut(HttpServletRequest request,
+	public ModelAndView viewMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
+		String status = request.getParameter("status");
 		
 		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
@@ -69,50 +64,18 @@ public class AdminAccountController extends XwinController
 		List<MoneyOut> moneyOutList = null;
 		
 		if (searchDate != null && searchDate.equals("reqDate"))
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null);
+			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null, status);
 		else if (searchDate != null && searchDate.equals("procDate"))
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate));
+			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), status);
 		else
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, null, null);
+			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, null, null, status);
 		
-		ModelAndView mv = new ModelAndView("admin/account/money_out");
+		ModelAndView mv = null;
+		if (status.equals(Code.MONEY_OUT_REQUEST))
+			mv = new ModelAndView("admin/account/money_out_req");
+		else
+			mv = new ModelAndView("admin/account/money_out");
 		mv.addObject("moneyOutList", moneyOutList);
-		
-		return mv;
-	}
-	
-	public ModelAndView viewMoneyOutDetail(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		String id = request.getParameter("id");
-		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);
-		
-		ModelAndView mv = new ModelAndView("admin/account/money_out_detail");
-		mv.addObject("moneyOut", moneyOut);
-		return mv;
-	}
-	
-	public ModelAndView viewMoneySummary(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		String search = XwinUtil.arcNvl(request.getParameter("search"));
-		String keyword = request.getParameter("keyword");
-		
-		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
-		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
-		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
-		
-		List<Account> accountList = null;
-		
-		if (searchDate != null && searchDate.equals("reqDate"))
-			accountList = accountDao.selectAccountList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null);
-		else if (searchDate != null && searchDate.equals("procDate"))
-			accountList = accountDao.selectAccountList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate));
-		else
-			accountList = accountDao.selectAccountList(search, keyword, null, null, null, null);
-		
-		ModelAndView mv = new ModelAndView("admin/account/money_summary");
-		mv.addObject("accountList", accountList);
 		
 		return mv;
 	}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Access">
+
+	<typeAlias alias="Access" type="com.xwin.domain.admin.Access" />
+	
+	<resultMap id="accessResultMap" class="Access">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="date" column="DATE"/>
+		<result property="ipAddress" column="IP_ADDR"/>
+	</resultMap>
+	
+	<insert id="insertAccess" parameterClass="Access">
+		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR)
+		VALUES(#userId#, #nickName#, #date#, #ipAddress#)
+	</insert>
+	
+	<delete id="deleteAccess" parameterClass="string">
+		DELETE FROM tbl_access WHERE ID = #value#
+	</delete>
+	
+	<select id="selectAccessList" resultMap="accessResultMap">
+		SELECT * FROM tbl_access ORDER BY ID DESC
+	</select>
+</sqlMap>

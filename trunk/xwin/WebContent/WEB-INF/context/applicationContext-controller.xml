@@ -35,6 +35,7 @@
 	<bean id="loginController"
 		class="com.xwin.web.controller.user.LoginController"
 		p:memberDao-ref="memberDao"
+		p:accessDao-ref="accessDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="bettingController"

@@ -23,7 +23,7 @@
 <table width="960"  style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_outmoney.gif"></td><td>출금요청을 하시면 머니를 실계좌로 입금해 드립니다.</td></td>
+	<tr><td width="100"><img src="images/title_outmoney.gif"></td><td>환전요청을 하시면 머니를 실계좌로 입금해 드립니다.</td></td>
 
 	</table>
 </td></tr>
@@ -54,8 +54,8 @@
 
 	<tr bgcolor="#ce892c">
 		<th style="color:white">신청일시</th>
-		<th style="color:white" align="center">출금계좌</th>
-		<th style="color:white" align="center">출금액</th>
+		<th style="color:white" align="center">환전계좌</th>
+		<th style="color:white" align="center">환전액</th>
 		<th style="color:white">상태</th>
 		<th style="color:white">처리일시</th>
 	</tr>
@@ -75,7 +75,7 @@
 			}
 		} else {
 	%>
-	<tr bgcolor='black'><td colspan='6' height='150' align='center'>최근 출금 신청내역이 없습니다.</td></tr>
+	<tr bgcolor='black'><td colspan='6' height='150' align='center'>최근 환전 신청내역이 없습니다.</td></tr>
 	<%
 		}
 	%>

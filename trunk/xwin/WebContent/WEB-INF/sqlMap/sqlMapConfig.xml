@@ -17,4 +17,5 @@
 	<sqlMap resource="com/xwin/infra/ibatis/MoneyOut.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/BankBook.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Account.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Access.xml" />
 </sqlMapConfig>

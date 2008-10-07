@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Access;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.controller.XwinController;
@@ -36,6 +37,15 @@ public class AdminMemberController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
+		return mv;
+	}
+	
+	public ModelAndView viewAccessList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		List<Access> accessList = accessDao.selectAccessList();
+		ModelAndView mv = new ModelAndView("admin/member/member_access");
+		mv.addObject("accessList", accessList);
 		return mv;
 	}
 }

@@ -154,7 +154,7 @@
 	}
 </SCRIPT>
 
-<h2 class="title"><%=type.equals("wdl")?"승무패":"핸디캡"%></h2>
+<h2 class="heading"><%=type.equals("wdl")?"승무패":"핸디캡"%></h2>
 <input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'">
 <br>
 <br>

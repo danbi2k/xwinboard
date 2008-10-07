@@ -64,14 +64,14 @@
 
 	<tr><td colspan="2" height="30"><hr style="height:1;"></td></tr>
 
-	<tr><td colspan="2"><font color="orange"><b>4. 출금요청</td></tr>
+	<tr><td colspan="2"><font color="orange"><b>4. 환전요청</td></tr>
 	<tr><td width="410"><img src="images/guide4.jpg"><br><img src="images/guide5.jpg"></td>
 		<td valign="top" style="line-height:30px;">
-			A. 출금요청 페이지로 이동합니다. [<a href="member/outmoney.asp">☞ 바로가기</a>]<br>
+			A. 환전요청 페이지로 이동합니다. [<a href="member/outmoney.asp">☞ 바로가기</a>]<br>
 
-			B. 보유한 머니잔액 만큼	출금 요청이 가능합니다.<br>
-			C. 출금 받으실 은행/게좌번호/수취인 명을 정확히 기재하여 주세요.<br>
-			D. 출금 요청시 10분이내로 출금을 해드립니다.<br>
+			B. 보유한 머니잔액 만큼	환전 요청이 가능합니다.<br>
+			C. 환전 받으실 은행/게좌번호/수취인 명을 정확히 기재하여 주세요.<br>
+			D. 환전 요청시 10분이내로 환전을 해드립니다.<br>
 			<br>
 	</td></tr>
 	</table>

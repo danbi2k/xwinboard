@@ -12,41 +12,13 @@
 	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyOutList");
 %>
 
-		  <!-- 좌측 메뉴 -->
-		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td height="45" background="imgae/leftm_bg.gif" style="padding-left:20px" class="sub_menu_left"> QuickMenu</td>
-              </tr>
-              <tr>
-                <td align="right"><table width="96%"  border="0" cellpadding="5" cellspacing="1" bgcolor="D9D9D9"> 
-	<tr>
-		<td bgcolor="#FFFFFF"><img src="/admin/images/admin/leftm_icon.gif" width="9" height="9"><a href="adminInfo.aspx?mode=viewAdminInfo"> 관리자정보관리</a></td>
-    </tr>
-</table></td>
-              </tr>
-          </table>
-		  <!-- 좌측 메뉴 -->
-		  </td>
-          <td style="padding:15" valign="top">
-		  <!-- 세부 내용 -->
-		  <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
-                  <!-- 서버 타이틀 -->
-				 
-				  <!-- 서버 타이틀 -->
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td><!----컨텐츠---->
-                      <table border=0 width=100%>
+                      <table border=0 width=100% class="prettytable">
 						<Tr>
 							<td width=50% valign='top'>
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근가입회원</td>
+                    <td height="30" style="padding-left:15px" class="sub_tit"> 최근가입회원</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -83,7 +55,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근문의사항</td>
+                    <td height="30" style="padding-left:15px" class="sub_tit"> 최근문의사항</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -114,7 +86,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근충전신청</td>
+                    <td height="30" style="padding-left:15px" class="sub_tit"> 최근충전신청</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>
@@ -151,7 +123,7 @@
 							<table width="100%"  border="0" cellspacing="0" cellpadding="0">
                   <!-- 서버 타이틀 -->
 				  <tr>
-                    <td height="30" background="images/admin/tit_bg.gif" style="padding-left:15px" class="sub_tit"> 최근환전신청</td>
+                    <td height="30" style="padding-left:15px" class="sub_tit"> 최근환전신청</td>
                   </tr>
                   <tr>
                     <td height="1" bgcolor="CDCDCD"> </td>

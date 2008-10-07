@@ -69,7 +69,7 @@ function SetNICK(nick){
 
    하거나 가입 승인을 취소하거나, 심지어 배팅을 하였다 하더라도 이에 대한 금액 지불을 거부할 수 있습니다.<br>
 <b style='color:white'>6.</b> 회원은 자신의 회원아이디와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 이러한 세부사항을 인지하고 있는 제 3자에 의해 만들어진 배팅이 유효한 것으로 간주 되며, 이에 따른 어떠한 책임도 회사는 지지 않습니다. <br>
-    출금비밀번호의 변경은 회원의 보유머니가 없는경우에만 변경될수 있습니다. [아이디 해킹방지를 위해 출금비밀번호제도를 운영합니다]<br>
+    환전비밀번호의 변경은 회원의 보유머니가 없는경우에만 변경될수 있습니다. [아이디 해킹방지를 위해 환전비밀번호제도를 운영합니다]<br>
 <b style='color:white'>7.</b> 회원은 언제든지 자신의 배팅머니를 사용하거나 환전신청하여 인출 할 수 있습니다.<br>
 <b style='color:white'>8.</b> 만약 회원의 배팅머니와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구<br>
 
@@ -137,13 +137,13 @@ function SetNICK(nick){
 
 		<td><input class="member" name="email1" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
 			<input class="member" name="email2" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
-	<tr><td valign=top><b><font color=#FF9933>출금비밀번호<br>[사이트 해킹방지용<br> 비밀번호입니다]</font></b></td>
+	<tr><td valign=top><b><font color=#FF9933>환전비밀번호<br>[사이트 해킹방지용<br> 비밀번호입니다]</font></b></td>
 		<td><input class="member" name="pin" type="password" value=""><br>
 		본 비밀번호는 최초 회원가입시 1회만 입력되며 이후 수정이 불가능합니다.<br>
                 신중하게 입력해주시고 개인 전화번호등 노출이 쉬운번호를 입력하여 피해가<br>
 
                 발생하는경우 책임지지않습니다.<br><b>
-                출금요청시 출금비밀번호가 입력되지않는경우 출금신청이 되지않습니다.</b> </td></tr>
+                환전요청시 환전비밀번호가 입력되지않는경우 환전신청이 되지않습니다.</b> </td></tr>
 	
 	</table>
 

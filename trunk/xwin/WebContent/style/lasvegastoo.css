@@ -155,7 +155,7 @@ a:hover {
 	float: right;
 	width: 968px;
 	height: 50px;
-	background: #abcdef;
+	background: #EEEEEE;
 }
 
 #pages h2 {
@@ -177,8 +177,8 @@ a:hover {
 #pages a {
 	padding-left: 2em;
 	text-decoration: none;
-	font: bold 1em Tahoma, Arial, Helvetica, sans-serif;
-	color: #000000;
+	font: bold 2em Tahoma, Arial, Helvetica, sans-serif;
+	color: red;
 }
 
 #pages a:hover {

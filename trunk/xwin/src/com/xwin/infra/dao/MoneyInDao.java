@@ -27,14 +27,15 @@ public class MoneyInDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);		
 	}
 	
-	public List<MoneyIn> selectMoneyInList(String search, String keyword, Date fromReqDate, Date toReqDate, Date fromProcDate, Date toProcDate)
+	public List<MoneyIn> selectMoneyInList(String search, String keyword, Date fromReqDate, Date toReqDate, Date fromProcDate, Date toProcDate, String status)
 	{
-		Map<String, Object> param = new HashMap<String, Object>(6);
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put(search, keyword);
 		param.put("fromReqDate", fromReqDate);
 		param.put("toReqDate", toReqDate);
 		param.put("fromProcDate", fromProcDate);
 		param.put("toProcDate", toProcDate);
+		param.put("status", status);
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);		
 	}

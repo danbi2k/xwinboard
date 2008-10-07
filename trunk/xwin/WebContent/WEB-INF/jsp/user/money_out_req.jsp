@@ -20,7 +20,7 @@
 <table width="960"  style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_outmoney.gif"></td><td>출금요청을 하시면 머니를 실계좌로 입금해 드립니다.</td>
+	<tr><td width="100"><img src="images/title_outmoney.gif"></td><td>환전요청을 하시면 머니를 실계좌로 입금해 드립니다.</td>
 
 	</table>
 </td></tr>
@@ -49,26 +49,26 @@
 	</colgroup>
 	<tr><td>머니 잔액</td>
 		<td><%=member.getBalance()%> 원</td></tr>
-	<tr><td>출금 신청액</td>
+	<tr><td>환전 신청액</td>
 		<td><input class="member" name="out_money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right" onkeyup="only123(this);"> 원
 			
 		</td></tr>
-	<tr><td>출금계좌 은행</td>
+	<tr><td>환전계좌 은행</td>
 
 		<td><select name="account_bank" style="background-color:black;color:white;">
 				<option value="">--선택--</option>
 				<option value='국민' style=''>국민</option><option value='기업' style=''>기업</option><option value='농협' style=''>농협</option><option value='신한' style=''>신한</option><option value='조흥' style=''>조흥</option><option value='외환' style=''>외환</option><option value='우체국' style=''>우체국</option><option value='SC제일' style=''>SC제일</option><option value='하나' style=''>하나</option><option value='한국시티' style=''>한국시티</option><option value='한미' style=''>한미</option><option value='우리' style=''>우리</option><option value='경남' style=''>경남</option><option value='광주' style=''>광주</option><option value='대구' style=''>대구</option><option value='도이치' style=''>도이치</option><option value='부산' style=''>부산</option><option value='산업' style=''>산업</option><option value='수협' style=''>수협</option><option value='전북' style=''>전북</option><option value='제주' style=''>제주</option><option value='새마을' style=''>새마을</option><option value='신협' style=''>신협</option><option value='HSBC' style=''>HSBC</option><option value='상호저축' style=''>상호저축</option>
 
 			</select>
-	<tr><td>출금계좌 번호</td>
+	<tr><td>환전계좌 번호</td>
 		<td><input class="member" name="account_num" type="text" value=""></td></tr>
-	<tr><td>출금계좌 수취인</td>
+	<tr><td>환전계좌 수취인</td>
 		<td><input class="member" name="account_name" type="text" value=""></td></tr>
 
-	<tr><td>출금 비밀번호</td>
+	<tr><td>환전 비밀번호</td>
 		<td><input class="member" name="pin" type="password" value="">
 
-		회원가입시 입력하신 출금 비밀번호를 입력하세요!)
+		회원가입시 입력하신 환전 비밀번호를 입력하세요!)
 		</td></tr>
 
 	

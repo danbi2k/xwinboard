@@ -213,7 +213,7 @@ if (document.URL.indexOf("index.aspx") > 0) {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	[bwin-kor@hotmail.com] 관리자 이메일(MSN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-	★ 배팅제한 최소1천원 ~ 최대100만원 적중지급상한 300만원 ★ 승무패, 핸디캡, 홀짝 다양한배팅방식 최고의 서비스 3분이내 입출금&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	★ 배팅제한 최소1천원 ~ 최대100만원 적중지급상한 300만원 ★ 승무패, 핸디캡, 홀짝 다양한배팅방식 최고의 서비스 3분이내 입환전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	
 	</marquee>
 	</td>

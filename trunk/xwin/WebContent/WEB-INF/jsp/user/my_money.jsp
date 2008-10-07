@@ -23,7 +23,7 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_mymoney.gif"></td><td>머니 입출금 내역 입니다.</td>
+	<tr><td width="100"><img src="images/title_mymoney.gif"></td><td>머니 입환전 내역 입니다.</td>
 
 	</table>
 </td></tr>
@@ -52,7 +52,7 @@
 	<tr bgcolor="#ce892c">
 		<th style="color:white" align="center">거래일자</th>
 		<th style="color:white" align="center">기잔고</th>
-		<th style="color:white" align="center">입출금</th>
+		<th style="color:white" align="center">입환전</th>
 		<th style="color:white" align="center">잔액</th>
 		<th style="color:white" align="center">비고</th>
 	</tr>
