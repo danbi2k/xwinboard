@@ -8,6 +8,7 @@ public class KtfSmsMessage
 	private String msg;
 	private String sm;
 	private String callBack;	
+	private String status;
 	
 	public KtfSmsMessage() {};
 	
@@ -55,5 +56,13 @@ public class KtfSmsMessage
 	}
 	public void setCallBack(String callBack) {
 		this.callBack = callBack;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

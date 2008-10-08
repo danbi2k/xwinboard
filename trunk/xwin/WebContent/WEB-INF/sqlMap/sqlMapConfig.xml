@@ -5,7 +5,7 @@
 	"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 	
 <sqlMapConfig>
-	<sqlMap resource="com/xwin/infra/ibatis/KtfSmsMessage.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/KtfSms.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Team.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Game.xml" />

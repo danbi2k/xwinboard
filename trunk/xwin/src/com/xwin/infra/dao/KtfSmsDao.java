@@ -1,8 +1,8 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import java.util.Map;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 
@@ -16,5 +16,20 @@ public class KtfSmsDao extends XwinDao
 	public List<KtfSmsMessage> selectList()
 	{
 		return sqlMapClientTemplate.queryForList("selectKtfSmsList");
+	}
+	
+	public List<KtfSmsMessage> searchAssociateWitnMoneyIn(String name, String money)
+	{
+		String keyword = "%" + name + "%" + money + "%";
+		return sqlMapClientTemplate.queryForList("searchAssociateWitnMoneyIn", keyword);
+	}
+	
+	public void updateStatus(String id, String status)
+	{
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("id", id);
+		param.put("status", status);
+		
+		sqlMapClientTemplate.update("updateKtfSmsMessage", param);
 	}
 }

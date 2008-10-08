@@ -34,11 +34,10 @@ public class Code
 	public static final String GAME_STATUS_END			= "GS004";
 	public static final String GAME_STATUS_CANCEL		= "GS005";
 	
-	public static final String MONEY_IN_REQUEST		= "MC001";
-	public static final String MONEY_IN_SUCCESS		= "MC002";
-	public static final String MONEY_IN_FAILURE		= "MC003";
-	public static final String MONEY_IN_DIRECT		= "MC004";
-	public static final String MONEY_IN_AUTO		= "MC005";
+	public static final String MONEY_IN_REQUEST			= "MC001";
+	public static final String MONEY_IN_SUCCESS			= "MC002";
+	public static final String MONEY_IN_FAILURE			= "MC003";
+	public static final String MONEY_IN_DIRECT			= "MC004";
 	
 	public static final String MONEY_OUT_REQUEST	= "ME001";
 	public static final String MONEY_OUT_SUCCESS	= "ME002";

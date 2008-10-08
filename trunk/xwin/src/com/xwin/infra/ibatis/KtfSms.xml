@@ -15,16 +15,29 @@
 		<result property="msg" column="MSG"/>
 		<result property="sm" column="SM"/>
 		<result property="callBack" column="CALL_BACK"/>
+		<result property="status" column="STATUS"/>
 	</resultMap>
 	
 	<select id="selectKtfSmsList" resultMap="ktfSmsResultMap"
 		parameterClass="map">
-		SELECT * from tbl_ktfsms
+		SELECT * FROM tbl_ktfsms
 		ORDER BY IN_DATE desc
+	</select>
+	
+	<select id="searchAssociateWitnMoneyIn" resultMap="ktfSmsResultMap"
+		parameterClass="string">
+		SELECT * FROM tbl_ktfsms
+		WHERE
+			STATUS = 'MC001' AND
+			MSG LIKE #value#
 	</select>
 	
 	<insert id="insertMessage" parameterClass="KtfSmsMessage">
 		INSERT INTO tbl_ktfsms(MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES(#msgSeq#, #inDate#, #msg#, #sm#, #callBack#)
 	</insert>
+	
+	<update id="updateKtfSmsMessage" parameterClass="map">
+		UPDATE tbl_ktfSms SET STATUS = #status# WHERE ID = #id#
+	</update>
 	
 </sqlMap>
