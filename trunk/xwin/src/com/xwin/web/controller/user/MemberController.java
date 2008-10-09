@@ -39,7 +39,7 @@ public class MemberController extends XwinController
 		ResultXml rx = null;
 		rx = checkExistUserId(command.getUserId());
 		if (rx.getCode() == 0) {
-			rx = checkExistNickName(command.getNickName());
+			rx = checkExistNickName(command.getNickName(), "");
 			if (rx.getCode() == 0) {
 				rx = checkPassword(command.getPassword1(), command.getPassword2());
 				if (rx.getCode() == 0) {
@@ -79,7 +79,7 @@ public class MemberController extends XwinController
 	{
 		Member member = (Member) request.getSession().getAttribute("Member");
 		ResultXml rx = null;
-		rx = checkExistNickName(command.getNickName());
+		rx = checkExistNickName(command.getNickName(), member.getNickName());
 		if (rx.getCode() == 0) {
 			rx = checkPassword(command.getPassword1(), command.getPassword2());
 			if (rx.getCode() == 0) {
@@ -173,16 +173,17 @@ public class MemberController extends XwinController
 		return rx;
 	}
 	
-	private ResultXml checkExistNickName(String nickName) throws Exception
+	private ResultXml checkExistNickName(String nickName, String orgNickName) throws Exception
 	{
-		ResultXml rx = null;
+		ResultXml rx = ResultXml.SUCCESS;
+		
+		if (nickName.equals(orgNickName))
+			return rx;
 		
 		if (nickName == null || nickName.length() < 2)
 			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
-		else if (memberDao.countMemberByNickName(nickName) > 0)
+		else if (memberDao.countMemberByNickName(nickName) > 0)			
 			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
-		else
-			rx = ResultXml.SUCCESS;
 		
 		return rx;
 	}

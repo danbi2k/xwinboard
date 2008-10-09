@@ -19,6 +19,11 @@ public class AutoMoneyInManager extends QuartzJobBean
 		MoneyInService moneyInService = (MoneyInService) context.getJobDetail().getJobDataMap().get("moneyInService");
 		
 		ktfSmsConnector.processDbTranscation();
-		moneyInService.processMoneyInAuto();
+		try {
+			moneyInService.processMoneyInAuto();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

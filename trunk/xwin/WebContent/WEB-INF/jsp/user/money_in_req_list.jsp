@@ -81,7 +81,7 @@
 			<td><%=moneyIn.getReqDateStr()%></td>
 			<td>[<%=moneyIn.getBankBook().getBankName()%>] <%=moneyIn.getBankBook().getNumber()%></td>
 			<td><%=moneyIn.getName()%></td>
-			<td><%=moneyIn.getMoney()%></td>
+			<td><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 			<td><%=Code.getValue(moneyIn.getStatus())%></td>
 			<td><%=moneyIn.getProcDateStr()%></td>
 		</tr>

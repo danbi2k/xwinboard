@@ -62,9 +62,9 @@
 	%>
 	<tr bgcolor='black'>
 	<td><%=account.getDateStr()%></td>
-	<td><%=account.getOldBalance()%></td>
-	<td><%=account.getMoney()%></td>
-	<td><%=account.getBalance()%></td>
+	<td><%=XwinUtil.comma3(account.getOldBalance())%></td>
+	<td><%=XwinUtil.comma3(account.getMoney())%></td>
+	<td><%=XwinUtil.comma3(account.getBalance())%></td>
 	<td><%=Code.getValue(account.getType())%></td>
 	</tr>
 	<%

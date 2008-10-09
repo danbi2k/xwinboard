@@ -14,6 +14,7 @@ import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -233,6 +234,24 @@ public class AdminGameController extends XwinController
 			
 			gameDao.updateGame(game);			
 			bettingDao.updateBettingStatus(id);
+			
+			List<Betting> bettingList = bettingDao.selectBettingByNoticeReaquired();
+			if (bettingList != null) {
+				for (Betting betting : bettingList) {
+					Member member = memberDao.selectMember(betting.getUserId(), null);
+					String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+							Code.getValue(betting.getStatus()) + " 되었습니다.";
+					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+						message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
+					
+					sendSmsConnector.sendSms(message, member.getMobile(), "000-000-0000");
+					
+					bettingService.calcuateBettingCommon(betting);
+					
+					betting.setIsNotice(Code.BET_NOTICE_COMMIT);
+					bettingDao.updateBetting(betting);
+				}
+			}
 			
 			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 		} 

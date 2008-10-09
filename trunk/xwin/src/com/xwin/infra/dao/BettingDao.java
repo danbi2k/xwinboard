@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.game.Betting;
+import com.xwin.infra.util.Code;
 
 
 public class BettingDao extends XwinDao
@@ -64,6 +65,11 @@ public class BettingDao extends XwinDao
 		param.put("id", id);
 		
 		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingList", param);
+	}
+	
+	public List<Betting> selectBettingByNoticeReaquired()
+	{
+		return sqlMapClientTemplate.queryForList("selectBettingByNoticeReaquired");
 	}
 	
 	public void updateBetting(Betting betting)

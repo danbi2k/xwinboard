@@ -84,7 +84,7 @@ if (memberList != null) {
 		<td width=10%><%=Code.getValue(member.getGrade())%></td>
 		<td width=10%><a href='adminMember.aspx?mode=viewMemberDetail&userId=<%=member.getUserId()%>'><%=member.getUserId()%></a></td>
 		<td width=15%><%=member.getNickName()%></td>
-		<td width=10%><%=member.getBalance()%></td>
+		<td width=10%><%=XwinUtil.comma3(member.getBalance())%></td>
 		<td width=15%><%=member.getMobile()%></td>
 		<td width=20%><%=member.getEmail()%></td>
 		<td width=15%><%=member.getJoinDateStr()%></td>

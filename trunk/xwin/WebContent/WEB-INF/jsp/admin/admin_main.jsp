@@ -110,7 +110,7 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=10%><%=moneyIn.getId()%></td>
 								<td width=15%><%=moneyIn.getName()%></td>
-								<td width=15%><%=moneyIn.getMoney()%></td>
+								<td width=15%><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 								<td width=15%><%=moneyIn.getReqDateStr()%></td>
 							  </tr>
 							<%
@@ -147,7 +147,7 @@
                               <tr align='center' bgcolor='#ffffff'>
 								<td width=10%><%=moneyOut.getId()%></td>
 								<td width=15%><%=moneyOut.getName()%></td>
-								<td width=15%><%=moneyOut.getMoney()%></td>
+								<td width=15%><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 								<td width=15%><%=moneyOut.getReqDateStr()%></td>
 							  </tr>
 							<%

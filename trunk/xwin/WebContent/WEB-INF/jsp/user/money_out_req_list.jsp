@@ -67,7 +67,7 @@
 		<tr bgcolor='black'>
 			<td><%=moneyOut.getReqDateStr()%></td>
 			<td>[<%=moneyOut.getBankName()%>] <%=moneyOut.getNumber()%> <%=moneyOut.getName()%></td>
-			<td><%=moneyOut.getMoney()%></td>
+			<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 			<td><%=Code.getValue(moneyOut.getStatus())%></td>
 			<td><%=moneyOut.getProcDateStr()%></td>
 		</tr>

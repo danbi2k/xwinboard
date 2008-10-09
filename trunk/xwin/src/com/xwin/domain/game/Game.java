@@ -34,9 +34,9 @@ public class Game extends XwinObject
 	private String type;
 	private String betStatus;
 	
-	private String winBetStatus;
-	private String drawBetStatus;
-	private String loseBetStatus;
+	private Long winMoney;
+	private Long drawMoney;
+	private Long loseMoney;
 
 	public String getId() {
 		return id;
@@ -212,35 +212,35 @@ public class Game extends XwinObject
 		this.betStatus = betStatus;
 	}
 
-	public String getWinBetStatus() {
-		return winBetStatus;
-	}
-
-	public void setWinBetStatus(String winBetStatus) {
-		this.winBetStatus = winBetStatus;
-	}
-
-	public String getDrawBetStatus() {
-		return drawBetStatus;
-	}
-
-	public void setDrawBetStatus(String drawBetStatus) {
-		this.drawBetStatus = drawBetStatus;
-	}
-
-	public String getLoseBetStatus() {
-		return loseBetStatus;
-	}
-
-	public void setLoseBetStatus(String loseBetStatus) {
-		this.loseBetStatus = loseBetStatus;
-	}
-
 	public String getLeagueImage() {
 		return leagueImage;
 	}
 
 	public void setLeagueImage(String leagueImage) {
 		this.leagueImage = leagueImage;
+	}
+
+	public Long getWinMoney() {
+		return winMoney;
+	}
+
+	public void setWinMoney(Long winMoney) {
+		this.winMoney = winMoney;
+	}
+
+	public Long getDrawMoney() {
+		return drawMoney;
+	}
+
+	public void setDrawMoney(Long drawMoney) {
+		this.drawMoney = drawMoney;
+	}
+
+	public Long getLoseMoney() {
+		return loseMoney;
+	}
+
+	public void setLoseMoney(Long loseMoney) {
+		this.loseMoney = loseMoney;
 	}
 }

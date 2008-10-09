@@ -143,7 +143,7 @@ function cancelBetting(id, gameType)
 		<td colspan='6'>
 			<B>
 			배팅시각 : <%=betting.getDateStr()%>&nbsp; / &nbsp; 배당률 : x<%=betting.getRateStr()%><br>
-			배팅금액 : <%=betting.getMoney()%> 원&nbsp; / &nbsp; 예상금액 : <%=betting.getExpect()%> 원
+			배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%> 원&nbsp; / &nbsp; 예상금액 : <%=XwinUtil.comma3(betting.getExpect())%> 원
 			</B>
 		</td>
 		<td colspan='4'>

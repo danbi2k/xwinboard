@@ -48,7 +48,7 @@
 	<table width="800" cellpadding="0" cellspacing="0" style="margin-top:15">
 	<tr><td>
 		<table  cellpadding="0" cellspacing="0" >
-		<tr><td><img src="images/tab_inmoney.gif"		onclick="location.href='?'" style="cursor:hand;"></td>
+		<tr><td><img src="images/tab_inmoney.gif"		onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest" style="cursor:hand;"></td>
 			<td><img src="images/tab_inmoney_list.gif" onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequestList'" style="cursor:hand;filter:gray();" hspace="3"></td>
 		</tr></table>
 	</td></tr>

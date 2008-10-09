@@ -19,6 +19,7 @@
 		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameType" column="GAME_TYPE"/>
+		<result property="isNotice" column="ISNOTICE"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
 		<result property="successCount" column="SUCCESS_COUNT"/>
 		<result property="failureCount" column="FAILURE_COUNT"/>
@@ -47,6 +48,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="calcStatus">
 			CALC_STATUS = #calcStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="isNotice">
+			ISNOTICE = #isNotice#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
@@ -124,6 +128,12 @@
 		UPDATE tbl_betting SET CALC_STATUS = 'BTC02'
 		WHERE STATUS in ('BS005', 'BS002', 'BS007')
 	</update>
+	
+	<select id="selectBettingByNoticeReaquired" resultMap="bettingResultMap">
+		SELECT * FROM tbl_betting
+		WHERE
+		ISNOTICE = 'BTN01' AND STATUS in ('BS002', 'BS003', 'BS005', 'BS007')
+	</select>
 
 <!--
 BET_STATUS_RUN			= "BS001";
@@ -153,6 +163,9 @@ BET_CALC_COMMIT			= "BTC10";
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isNotice">
+			ISNOTICE = #isNotice#
 			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#
@@ -196,6 +209,9 @@ BET_CALC_COMMIT			= "BTC10";
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isNotice">
+			ISNOTICE = #isNotice#
 			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#

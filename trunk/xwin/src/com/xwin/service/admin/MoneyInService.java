@@ -14,34 +14,41 @@ public class MoneyInService extends XwinService
 {
 	public Integer processMoneyIn(String moneyInId)
 	{
-		return processMoneyIn(moneyInId, Code.MONEY_IN_SUCCESS);
+		MoneyIn moneyIn = moneyInDao.selectMoneyIn(moneyInId);		
+		Member member = memberDao.selectMember(moneyIn.getUserId(), null);		
+		return processMoneyIn(moneyIn, Code.MONEY_IN_SUCCESS, member);
 	}
 	
-	public void processMoneyInAuto()
+	public void processMoneyInAuto() throws Exception
 	{
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(null, Code.MONEY_IN_REQUEST);
 		if (moneyInList != null) {
 			for (MoneyIn moneyIn : moneyInList) {
 				String name = moneyIn.getName();
-				String money = XwinUtil.comma3(moneyIn.getMoney());
+				String money = XwinUtil.comma3(moneyIn.getMoney());	
 				
 				List<KtfSmsMessage> ktfSmsMessageList = ktfSmsDao.searchAssociateWitnMoneyIn(name, money);
 				
 				if (ktfSmsMessageList != null && ktfSmsMessageList.size() == 1) {
-					KtfSmsMessage ktfSmsMessage = ktfSmsMessageList.get(0);
-					processMoneyIn(moneyIn.getId(), Code.MONEY_IN_SUCCESS);
-					ktfSmsDao.updateStatus(ktfSmsMessage.getId(), Code.MONEY_IN_SUCCESS);
+					KtfSmsMessage ktfSmsMessage = ktfSmsMessageList.get(0);		
+
+					Member member = memberDao.selectMember(moneyIn.getUserId(), null);
+					int result = processMoneyIn(moneyIn, Code.MONEY_IN_SUCCESS, member);
+					if (result == 0) {
+						ktfSmsDao.updateStatus(ktfSmsMessage.getId(), Code.MONEY_IN_SUCCESS);
+						String nickName = member.getNickName();
+						String mobile = member.getMobile().replaceAll("-", "");
+						String message = nickName + " 님께 " + money + "원이 충전 되었습니다. -bwin-";
+						sendSmsConnector.sendSms(message, mobile, "0000000000");
+					}
 				}
 			}
 		}
 	}
 	
-	private Integer processMoneyIn(String moneyInId, String moneyInStatus)
+	private Integer processMoneyIn(MoneyIn moneyIn, String moneyInStatus, Member member)
 	{
-		MoneyIn moneyIn = moneyInDao.selectMoneyIn(moneyInId);
-		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) {
-			Member member = memberDao.selectMember(moneyIn.getUserId(), null);
 			
 			Account account = new Account();
 			account.setUserId(member.getUserId());

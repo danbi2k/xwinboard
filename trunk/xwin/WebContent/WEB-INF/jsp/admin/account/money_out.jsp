@@ -65,7 +65,7 @@
 	<tr>
 		<td>1</td>
 		<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><B><%=moneyOut.getUserId()%></B></a></td>
-		<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><%=moneyOut.getMoney()%></a></td>
+		<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><%=XwinUtil.comma3(moneyOut.getMoney())%></a></td>
 		<td><%=moneyOut.getBankName()%></td>
 		<td><%=moneyOut.getNumber()%></td>
 		<td><%=moneyOut.getName()%></td>

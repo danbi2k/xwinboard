@@ -14,5 +14,15 @@
 		p:accountDao-ref="accountDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:memberDao-ref="memberDao"
-		p:ktfSmsDao-ref="ktfSmsDao"/>
+		p:ktfSmsDao-ref="ktfSmsDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"/>
+		
+	<bean id="bettingService" class="com.xwin.service.admin.BettingService"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"/>	
+		
+	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector"/>
 </beans>

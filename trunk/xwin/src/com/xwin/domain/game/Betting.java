@@ -17,6 +17,7 @@ public class Betting
 	private Long expect;
 	private String status;
 	private String calcStatus;
+	private String isNotice;
 	private Integer totalCount;
 	private Integer successCount;
 	private Integer failureCount;
@@ -123,5 +124,11 @@ public class Betting
 	}
 	public void setCalcStatus(String calcStatus) {
 		this.calcStatus = calcStatus;
+	}
+	public String getIsNotice() {
+		return isNotice;
+	}
+	public void setIsNotice(String isNotice) {
+		this.isNotice = isNotice;
 	}
 }

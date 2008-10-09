@@ -111,10 +111,10 @@
 	</tr>
 	<tr height="26" bgcolor="#0a0a0a">		
 		<td><%=betting.getDateStr()%></td>
-		<td><%=betting.getMoney()%> 원</td>
+		<td><%=XwinUtil.comma3(betting.getMoney())%> 원</td>
 		<td><%=betting.getRateStr()%></td>
 		<td>
-		<font color="pink"><%=betting.getExpect()%>원</font>
+		<font color="pink"><%=XwinUtil.comma3(betting.getExpect())%>원</font>
 		</td>
 		<td><font color="pink"><%=Code.getValue(betting.getStatus())%></font></td>
 	</tr>	

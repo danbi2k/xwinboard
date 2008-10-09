@@ -9,6 +9,9 @@ public class Code
 	private static final Map<String, String> valueMap = new HashMap<String, String>();
 	private static final Map<String, String> keyMap = new HashMap<String, String>();
 	
+	public static final String BET_NOTICE_READY			= "BTN01";
+	public static final String BET_NOTICE_COMMIT		= "BTN02";
+	
 	public static final String USER_GRADE_NORMAL		= "UG001";
 	public static final String USER_GRADE_VIP			= "UG002";
 	public static final String USER_GRADE_ADMIN			= "UG100";

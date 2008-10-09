@@ -67,7 +67,7 @@
 		<td width=5%><%=moneyIn.getId()%></td>
 		<td><a href='adminAccount.aspx?mode=viewMoneyInDetail&id=<%=moneyIn.getId()%>'><B><%=moneyIn.getUserId()%></B></a></td>
 		<td><a href='adminAccount.aspx?mode=viewMoneyInDetail&id=<%=moneyIn.getId()%>'><%=moneyIn.getName()%></td>
-		<td><%=moneyIn.getMoney()%></td>
+		<td><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 		<td><%=moneyIn.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyIn.getStatus())%></td>
 	  </tr>

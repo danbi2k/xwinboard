@@ -55,7 +55,7 @@
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>보유금액</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getBalance()%> 원
+		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.comma3(member.getBalance())%> 원
 	</td>
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>

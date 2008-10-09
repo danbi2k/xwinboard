@@ -48,7 +48,7 @@
 
 	</colgroup>
 	<tr><td>머니 잔액</td>
-		<td><%=member.getBalance()%> 원</td></tr>
+		<td><%=XwinUtil.comma3(member.getBalance())%> 원</td></tr>
 	<tr><td>환전 신청액</td>
 		<td><input class="member" name="out_money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right" onkeyup="only123(this);"> 원
 			
