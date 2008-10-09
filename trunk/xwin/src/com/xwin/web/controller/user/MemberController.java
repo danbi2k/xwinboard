@@ -36,37 +36,43 @@ public class MemberController extends XwinController
 	public ModelAndView registerMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
+		String phonePin = (String) request.getSession().getAttribute("phonePin");
+		
 		ResultXml rx = null;
-		rx = checkExistUserId(command.getUserId());
-		if (rx.getCode() == 0) {
-			rx = checkExistNickName(command.getNickName(), "");
+		if (phonePin.equals(command.getPhonePin())) {
+			rx = checkExistUserId(command.getUserId());
 			if (rx.getCode() == 0) {
-				rx = checkPassword(command.getPassword1(), command.getPassword2());
+				rx = checkExistNickName(command.getNickName(), "");
 				if (rx.getCode() == 0) {
-					rx = checkPhone(command.getPhone1(), command.getPhone2(), command.getPhone3());
+					rx = checkPassword(command.getPassword1(), command.getPassword2());
 					if (rx.getCode() == 0) {
-						rx = checkEmail(command.getEmail1(), command.getEmail2());
+						rx = checkPhone(command.getPhone1(), command.getPhone2(), command.getPhone3());
 						if (rx.getCode() == 0) {
-							rx = checkPin(command.getPin());
+							rx = checkEmail(command.getEmail1(), command.getEmail2());
 							if (rx.getCode() == 0) {
-								Member member = new Member();
-								member.setUserId(command.getUserId());
-								member.setPassword(command.getPassword1());
-								member.setNickName(command.getNickName());
-								member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
-								member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-								member.setPin(command.getPin());
-								member.setStatus(Code.USER_STATUS_NORMAL);
-								member.setGrade(Code.USER_GRADE_NORMAL);
-								member.setJoinDate(new Date());
-								memberDao.insertMember(member);
-								
-								rx = ResultXml.SUCCESS;
+								rx = checkPin(command.getPin());
+								if (rx.getCode() == 0) {
+									Member member = new Member();
+									member.setUserId(command.getUserId());
+									member.setPassword(command.getPassword1());
+									member.setNickName(command.getNickName());
+									member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
+									member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+									member.setPin(command.getPin());
+									member.setStatus(Code.USER_STATUS_NORMAL);
+									member.setGrade(Code.USER_GRADE_NORMAL);
+									member.setJoinDate(new Date());
+									memberDao.insertMember(member);
+									
+									rx = ResultXml.SUCCESS;
+								}
 							}
 						}
 					}
 				}
 			}
+		} else {
+			rx = new ResultXml(-1, "인증번호가 틀렸습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -212,6 +218,29 @@ public class MemberController extends XwinController
 		memberDao.deleteMember(id);
 		
 		ModelAndView mv = new ModelAndView("");
+		return mv;
+	}
+	
+	public ModelAndView sendAuthNumber(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String phone = request.getParameter("phone");
+		
+		String phonePin = "" + ((int)(Math.random() * 10000));
+		request.getSession().setAttribute("phonePin", phonePin);		
+		
+
+		ResultXml rx = null;
+		try {
+			sendSmsConnector.sendSms("Bwin-Kor 가입 인증번호  [ " + phonePin + " ]", phone, "00000000000");
+			rx = new ResultXml(0, "인증번호를 발송하였습니다", null);
+		} catch (Exception e) {
+			rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
 		return mv;
 	}
 }

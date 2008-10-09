@@ -10,7 +10,7 @@
 	function checkIT() {
 		var d=document.regist;
 		if(!d.name.value) { alert('리그명을 입력하세요'); d.name.focus(); return false; }
-		alert("이미지 업로드 준비중입니다");
+		
 		d.submit();
 	}
 
@@ -37,16 +37,16 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">파일업로드</td>
 		<td bgcolor="#FFFFFF" width="85%" colspan=3>
-			<input type='file' name='image' size='40'>
+			<input type='file' name='image'>
 		</td>
 	</tr>												
 </table>
 <BR>
-
+</form>
 <table width="2%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
-		<td><input type="image" src="images/admin/but_input.gif" border="0""></td>                               
-		<td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
+		<td><input type="image" src="images/admin/but_input.gif" border="0" onclick="checkIT()"></td>                               
+		<td><img src="images/admin/but_cancel.gif" border="0" onClick="location.href='adminLeague.aspx?mode=viewLeagueList'" style="cursor:hand"></td>
 	</tr>
 </table>
 

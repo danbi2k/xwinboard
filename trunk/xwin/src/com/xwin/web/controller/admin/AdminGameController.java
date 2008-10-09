@@ -107,7 +107,7 @@ public class AdminGameController extends XwinController
 		game.setLoseRate(command.getLoseRate());
 				
 		game.setStatus(Code.GAME_STATUS_READY);
-		game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+		game.setBetStatus(Code.BETTING_STATUS_DENY);
 		game.setType(type);
 		
 		gameDao.insertGame(game);
@@ -255,7 +255,6 @@ public class AdminGameController extends XwinController
 			
 			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 		} 
-		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

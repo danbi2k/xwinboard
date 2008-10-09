@@ -13,11 +13,16 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
 
-		
-		d.action='member/index.php?mode=modify_exe';
-		d.submit();
+		var query = "mode=updateMember";
+		query += "&userId=" + '<%=member.getUserId()%>';
+		query += "&status=" + regist.status.value;
+		query += "&grade=" + regist.grade.value;
+		var http = new JKL.ParseXML("adminMember.aspx", query);
+		var result = http.parse();
+
+		if (result.resultXml.code == 0)
+			alert(result.resultXml.message);
 	}
 
 	function delIT(userid) {
@@ -44,6 +49,7 @@
 </SCRIPT>
 
 <form method=post name='regist'>
+<input type='hidden' name='mode' value='updateMember'/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>회원아이디</td>
@@ -60,16 +66,17 @@
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='passwd' value='<%=member.getPassword()%>'></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPassword()%></td>
  	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='hp' value='<%=member.getMobile()%>'></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getMobile()%></a></td>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>EMAIL</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='email' size='40' name='email' value='<%=member.getEmail()%>'></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getEmail()%></a></td>
  	</tr>
+	<!-- 
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>회원상태</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
@@ -81,17 +88,18 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>회원종류</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<input type='radio' name='memtype' value='<%=Code.USER_GRADE_NORMAL%>' <%=member.getGrade().equals(Code.USER_GRADE_NORMAL)?"checked":""%>> 일반 
-			<input type='radio' name='memtype' value='<%=Code.USER_GRADE_VIP%>' <%=member.getGrade().equals(Code.USER_GRADE_VIP)?"checked":""%>> VIP
+			<input type='radio' name='grade' value='<%=Code.USER_GRADE_NORMAL%>' <%=member.getGrade().equals(Code.USER_GRADE_NORMAL)?"checked":""%>> 일반 
+			<input type='radio' name='grade' value='<%=Code.USER_GRADE_VIP%>' <%=member.getGrade().equals(Code.USER_GRADE_VIP)?"checked":""%>> VIP
 		</td>
 	</tr>
+	 -->
 </table>
 <BR>													
 <table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>	
-			<img src='images/admin/but_modify.gif' border=0 onclick="checkIT()">
-			<img src='images/admin/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand">
+			<!-- img src='images/admin/but_modify.gif' border=0 onclick="checkIT()" -->
+			<!-- img src='images/admin/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand" -->
 		</td>
 	</tr>
 </table>

@@ -39,4 +39,8 @@
 		UPDATE tbl_league SET NAME = #name# WHERE ID = #id#
 	</update>
 	
+	<delete id="removeLeague" parameterClass="string">
+		DELETE FROM tbl_league WHERE ID = #value#
+	</delete>
+	
 </sqlMap>

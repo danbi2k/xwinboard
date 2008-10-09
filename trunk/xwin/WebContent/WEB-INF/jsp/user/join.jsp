@@ -30,6 +30,26 @@ function SetNICK(nick){
 	frm.nick.value = nick;
 	frm.nick_input.value = nick;
 }
+function sendAuthNumber(){
+	var f = document.frm_reg;
+	if (!f.phone2.value && f.phone2.value.length < 3) {
+		alert("전화번호를 확인하시고 다시 넣어주세요");
+		return;
+	}
+
+	if (!f.phone3.value && f.phone3.value.length < 4) {
+		alert("전화번호를 확인하시고 다시 넣어주세요");
+		return;
+	}
+	
+	var query = "mode=sendAuthNumber";
+	query += "&phone=" + f.phone1.value + " " + f.phone2.value + " " + f.phone3.value;
+	
+	var http = new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+
+	alert(result.resultXml.message); 
+}
 </Script>
 
 <table width="960" height="400" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
@@ -130,6 +150,7 @@ function SetNICK(nick){
 			</select> -
 			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
+			<input type="button" value="인증번호전송" onclick="sendAuthNumber()"/>
 			</td></tr>
 	<tr><td>인증번호</td>
 		<td><input class="member" name="phonePin" type="password"></td></tr>

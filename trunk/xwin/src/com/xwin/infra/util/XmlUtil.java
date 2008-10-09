@@ -10,6 +10,7 @@ import com.xwin.domain.game.League;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.web.command.CartCalc;
 import com.xwin.web.command.GameCartItem;
+import com.xwin.web.command.Indicator;
 import com.xwin.web.command.ResultXml;
 
 public class XmlUtil
@@ -28,6 +29,7 @@ public class XmlUtil
 		xstream.alias("boardComment", BoardComment.class);
 		xstream.alias("cartCalc", CartCalc.class);
 		xstream.alias("resultXml", ResultXml.class);
+		xstream.alias("indicator", Indicator.class);
 	}
 	
 	public static String toXml(Object object)

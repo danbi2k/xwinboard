@@ -4,6 +4,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.xwin.infra.dao.AccessDao;
 import com.xwin.infra.dao.AccountDao;
+import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.BankBookDao;
 import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BettingDao;
@@ -31,6 +32,7 @@ public class XwinController extends MultiActionController
 	protected AccountDao accountDao = null;
 	protected AccessDao accessDao = null;
 	protected KtfSmsDao ktfSmsDao = null;
+	protected AdminDao adminDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected BettingService bettingService = null;
@@ -76,5 +78,8 @@ public class XwinController extends MultiActionController
 	}
 	public void setBettingService(BettingService bettingService) {
 		this.bettingService = bettingService;
+	}
+	public void setAdminDao(AdminDao adminDao) {
+		this.adminDao = adminDao;
 	}
 }

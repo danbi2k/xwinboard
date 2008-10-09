@@ -1,5 +1,6 @@
 package com.xwin.web.controller.game;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -96,10 +97,13 @@ public class GameController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
-		param.put("status", Code.GAME_STATUS_READY);
 		param.put("leagueId", leagueId);
-		param.put("toDate", cal.getTime());
+		List<String> statusList = new ArrayList<String>();
+		statusList.add(Code.GAME_STATUS_READY);
+		statusList.add(Code.GAME_STATUS_RUN);
 		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
+		param.put("statusList", statusList);
+		param.put("toDate", cal.getTime());
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		

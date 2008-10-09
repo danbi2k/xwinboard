@@ -49,10 +49,10 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="#">고객센터</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList">고객센터</a></li>
 					<li><a href="#">게시판</a></li>
 					<li><a href="#">긴급공지</a></li>
-					<li><a href="#">Notice</a></li>
+					<li><a href="">Notice</a></li>
 					<li><a href="#">공지사항</a></li>
 				</ul>
 			</div>
@@ -74,5 +74,9 @@
 		<p>Copyright &copy; 2008 Bwin-Kor.</strong></a></p>
 	</div>
 </div>
+<script>
+checkIndi();
+setInterval("checkIndi()", 10000);
+</script>
 </body>
 </html>

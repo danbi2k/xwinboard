@@ -33,6 +33,7 @@
 	<bean id="memberController"
 		class="com.xwin.web.controller.user.MemberController"
 		p:memberDao-ref="memberDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="loginController"
@@ -86,4 +87,7 @@
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
 		p:paramName="mode"/>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>

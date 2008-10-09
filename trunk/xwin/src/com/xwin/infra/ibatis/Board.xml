@@ -50,13 +50,21 @@
 			TYPE,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
-		WHERE
-			bi.BOARDNAME = #boardName#
-			<isNotNull prepend="AND" property="userId">
-			bi.USERID = #userId#
-			</isNotNull>
+			<dynamic prepend="WHERE">
+				<isNotNull prepend="AND" property="boardName">			
+				bi.BOARDNAME = #boardName#
+				</isNotNull>
+				<isNotNull prepend="AND" property="userId">
+				bi.USERID = #userId#
+				</isNotNull>
+				<isNotNull prepend="AND" property="commentCount">
+				(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#
+				</isNotNull>
+			</dynamic>
 		ORDER BY TYPE ASC, DATE DESC
-		LIMIT #fromRow#, #rowSize#
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
 	</select>
 	
 	<select id="selectBoardItemCount" parameterClass="map" resultClass="integer">
@@ -95,4 +103,11 @@
 	<update id="plusBoardItemReadCout">
 		UPDATE tbl_board_item SET READCOUNT = READCOUNT + 1 WHERE ID = #value#
 	</update>
+	
+	<select id="selectUnAnsweredQna" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_board_item bi
+		WHERE
+		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = 0 AND
+		bi.boardName = 'qna'		
+	</select>
 </sqlMap>

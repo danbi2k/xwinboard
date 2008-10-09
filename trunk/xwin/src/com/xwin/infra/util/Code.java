@@ -78,8 +78,8 @@ public class Code
 		put(BOARDITEM_TYPE_NOTICE, "공지");
 		put(BOARDITEM_TYPE_USER, "일반");
 		
-		put(BETTING_STATUS_ACCEPT, "가능");
-		put(BETTING_STATUS_DENY, "금지");
+		put(BETTING_STATUS_ACCEPT, "표시");
+		put(BETTING_STATUS_DENY, "미표시");
 		
 		put(ACCOUNT_TYPE_BETTING, "배팅출금");
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");

@@ -60,13 +60,11 @@ public class AdminLeagueController extends XwinController
 		
 		League league = new League();
 		league.setName(command.getName());
-		league.setImage("");
+		league.setImage(fileName);
 		
 		leagueDao.insertLeague(league);		
 		
-		List<League> leagueList = leagueDao.selectLeagueList();
-		ModelAndView mv = new ModelAndView("admin/game/admin_league");
-		mv.addObject("leagueList", leagueList);
+		ModelAndView mv = new ModelAndView("redirect:adminLeague.aspx?mode=viewLeagueList");
 		
 		return mv;
 	}
@@ -99,6 +97,20 @@ public class AdminLeagueController extends XwinController
 		ResultXml rx = new ResultXml(0, null, leagueList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView removeLeague(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		leagueDao.removeLeague(id);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml",XmlUtil.toXml(rx));
+		
 		return mv;
 	}
 }

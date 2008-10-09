@@ -20,12 +20,15 @@
 		d.submit();
 	}
 
-	function delIT() {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='game/index.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
+	function delIT(id) {
+		if(confirm('리그를 삭제하시겠습니까?')) {
+			var query = "mode=removeLeague";
+			query += "&id=" + id;
+			var http = new JKL.ParseXML("adminLeague.aspx", query);
+			var result = http.parse();
+			alert(result.resultXml.message);
+
+			location.href = "adminLeague.aspx?mode=viewLeagueList";
 		}
 	}
 </SCRIPT>
@@ -47,7 +50,8 @@
 	<tr align="center" bgcolor="#E4E4E4">
 		<th width=20%>번호</th>
 		<th width=20%>이미지</th>
-		<th width=80%>리그명</th>
+		<th width=70%>리그명</th>
+		<th width=10%>삭제</th>
 	</tr>
 	<%
 	if (leagueList != null) {
@@ -57,7 +61,8 @@
 	<tr align='center' bgcolor='#ffffff'>
 		<td width=20%><%=league.getId()%></td>
 		<td width=20%><img src='images/league/<%=league.getImage()%>' width='20' height='12' border=0></td>
-		<td width=80%><a href='adminLeague.aspx?mode=viewUpdateLeagueForm&id=<%=league.getId()%>'><%=league.getName()%></a></td>
+		<td width=70%><%=league.getName()%></td>
+		<td width=10%><input type="button" onclick="delIT(<%=league.getId()%>)" value="삭제"></td>
 	</tr>
 	<%
 		}

@@ -33,6 +33,8 @@
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/adminBetting.aspx">adminBettingController</prop>
 				<prop key="/adminSms.aspx">adminSmsController</prop>
+				<prop key="/adminQna.aspx">adminQnaController</prop>
+				<prop key="/adminBoard.aspx">adminBoardController</prop>
 				
 				<prop key="/guide.aspx">guideController</prop>
 				<prop key="/provision.aspx">provisionController</prop>

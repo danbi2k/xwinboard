@@ -19,7 +19,7 @@ public class GameBetStatusManager extends QuartzJobBean
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, 10);
 
-		gameDao.batchGameBetStatus(cal.getTime());
+		//gameDao.batchGameBetStatus(cal.getTime());
 		gameDao.batchGameStatus(new Date());
 	}
 }

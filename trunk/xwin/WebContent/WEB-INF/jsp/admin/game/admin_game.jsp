@@ -73,7 +73,7 @@
 			return;
 		}
 
-		if (confirm("경기를 종료 하시겠습니까?")) {
+		if (confirm("입력하신 스코어는 " + homeScore + " : " + awayScore + " 입니다.\n경기를 종료 하시겠습니까?")) {
 			var query = "mode=endGame";
 			query += "&homeScore=" + homeScore;
 			query += "&awayScore=" + awayScore;
@@ -110,11 +110,9 @@
 		var betStatus = oselect.value;
 		var msg = "";
 		if (betStatus == '<%=Code.BETTING_STATUS_ACCEPT%>')
-			msg = "배팅 가능 상태로 바꾸시겠습니까?";
+			msg = "표시 상태로 바꾸시겠습니까?";
 		else if (betStatus == '<%=Code.BETTING_STATUS_DENY%>')
-			msg = "배팅 금지 상태로 바꾸시겠습니까?";
-		else
-			msg = "배팅을 정산 하시겠습니까?";
+			msg = "미표시 상태로 바꾸시겠습니까?";
 
 		if (confirm(msg)) {
 			var query = "mode=changeBetStatus";
@@ -202,10 +200,12 @@
  <input type='text' name='keyword' value='<%=keyword%>'>
  <input type='submit' value='검 색'>
 </form>
+<!--
 게임진행: <img src="images/admin/btn_run.jpg">
 게임대기: <img src="images/admin/btn_ready.jpg">
 게임종료: <img src="images/admin/btn_end.jpg">
 게임취소: <img src="images/admin/btn_cancel.jpg">
+-->
 <form method='get' name='game'>
 	<table class="prettytable">
  		<tr>
@@ -229,7 +229,7 @@
 			<th>패</th>								
 			<th>스코어</th>
 			<th>결과</th>
-			<th>배팅</th>
+			<th>표시</th>
 			<th>상태</th>
 			<th>기능</th>
 	  	</tr>
@@ -283,6 +283,7 @@
 			</td>								
 			<td><B><%=Code.getValue(game.getStatus())%></B></td>
 			<td>
+				<!--
 				<%
 					if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
 				%>
@@ -305,6 +306,11 @@
 				<%
 					}										
 				%>
+				-->
+				<input type='button' value='시작' onclick='runGame(<%=game.getId()%>)' style='cursor:hand'>
+				<input type='button' value='종료' onclick='endGame(<%=game.getId()%>)' style='cursor:hand'>
+				<input type='button' value='취소' onclick='cancelGame(<%=game.getId()%>)' style='cursor:hand'>
+				
 			</td>
 		</tr>
 			<%

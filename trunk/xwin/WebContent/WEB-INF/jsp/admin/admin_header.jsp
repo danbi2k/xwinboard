@@ -24,17 +24,32 @@ if (admin == null) {
 	out.print("location.href='admin';");	
 }
 %>
+function checkIndi()
+{
+	var chargingIndi = document.getElementById("chargingIndi");
+	var exchangeIndi = document.getElementById("exchangeIndi");
+	var centerIndi = document.getElementById("centerIndi");
+
+	var query = "mode=getIndicator";
+	var http = new JKL.ParseXML("admin.aspx", query);
+	var result = http.parse();
+	var data = result.resultXml.object;
+
+	chargingIndi.innerHTML = (data.chargingIndi);
+	exchangeIndi.innerHTML = (data.exchangeIndi);
+	centerIndi.innerHTML = (data.centerIndi);	
+}
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="#">Bwin-Kor</a></h1>
+		<h1><a href="adminMain.aspx?mode=viewAdminMain">Bwin-Kor</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
-			<li class="active"><a id="page1" href="#">충전 ( 0 )</a></li>
-			<li><a id="page2" href="#">환전 ( 0 )</a></li>
-			<li><a id="page3" href="#">고객센터 ( 0 )</a></li>
+			<li class="active">충전 (<a id="chargingIndi" href="#">0</a> )</li>
+			<li>환전 ( <a id="exchangeIndi" href="#">0</a> )</li>
+			<li>고객센터 ( <a id="centerIndi" href="#">0</a> )</li>
 		</ul>
 	</div>
 	<div id="content">

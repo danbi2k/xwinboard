@@ -30,7 +30,7 @@ public class XwinInitServlet implements Servlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {
 		ServletContext ctx = servletConfig.getServletContext();
-		String imagePath = ctx.getRealPath("images/leagueImage");
+		String imagePath = ctx.getRealPath("images/league");
 		Code.LEAGUE_IMAGE_PATH = imagePath;
 	}
 

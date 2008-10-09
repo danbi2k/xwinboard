@@ -12,6 +12,7 @@ function FnMemReg(frm)
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
 	query += "&pin=" + frm.pin.value;
+	query += "&phonePin=" + frm.phonePin.value;
 	
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();

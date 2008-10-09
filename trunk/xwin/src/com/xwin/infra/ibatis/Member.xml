@@ -33,6 +33,8 @@
 			NICKNAME = #nickName#,
 			MOBILE = #mobile#,
 			EMAIL = #email#
+			STATUS = #status#
+			GRADE = #grade#
 		WHERE USERID = #userId#
 			
 	</insert>

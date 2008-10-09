@@ -37,7 +37,7 @@ function FnDrawGameList2(data,type)
 		for (var i in data) {
 			row.push("<tr height=25 bgcolor=000000>");
 			row.push("<td align=center  ><nobr><font color=FFC602>" + data[i].gameDateStr + "</td>");
-			row.push("<td align=center  ><nobr><font color=FFC602>" + data[i].leagueName + "</td>");
+			row.push("<td align=center  ><nobr><font color=FFC602><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle>&nbsp;&nbsp;" + data[i].leagueName + "</td>");
 			row.push("<td align=right  >");
 			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
 			row.push("<tr>");
@@ -46,17 +46,17 @@ function FnDrawGameList2(data,type)
 			row.push("<td width=90% align=right><nobr><font color=FFC602>");
 			row.push("<span id='team1_2567'>" + data[i].homeTeam + "</span>");
 			
-			if (data[i].betStatus == 'BTS01') {
+			if (data[i].status == 'GS002') {
 				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
 			} else {
-				row.push("<b style='font-size:15px;'>□</b> ");
+				row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
 			}
 			
 			row.push("</td>");
 			row.push("<td width=1 bgcolor=FFFFFF></td>");
 			row.push("<td width=90% align=right>&nbsp;<font color=FFC602><span id='bet1_2567'>" + data[i].winRateStr + "</span>&nbsp;</td>");
 			row.push("<td width=1 bgcolor=FFFFFF></td>");
-			row.push("<td width=90% align=right><nobr><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle></td>");
+			row.push("<td width=90% align=right><nobr></td>");
 			row.push("</tr>");
 			row.push("</table>");
 			row.push("</td>");
@@ -66,10 +66,10 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center bgcolor=424242><nobr><font color=FFC602>");
 			
 			if (data[i].type == 'wdl') {
-				if (data[i].drawRate > 0 && data[i].betStatus == 'BTS01') {
+				if (data[i].drawRate > 0 && data[i].status == 'GS002') {
 					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
 				} else {
-					row.push("<b style='font-size:15px;'>□</b> ");
+					row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
 				}
 				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRateStr + "</span>");	
 			} else {
@@ -83,14 +83,14 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=left >");
 			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
 			row.push("<tr>");
-			row.push("<td ><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle> </td>");
+			row.push("<td ></td>");
 			row.push("<td width=1% >&nbsp;<font color=FFC602><span id='bet2_2567'>" + data[i].loseRateStr + "</span>&nbsp;</td>");
 			row.push("<td width=90% ><nobr>");
 			
-			if (data[i].betStatus == 'BTS01') {
+			if (data[i].status == 'GS002') {
 				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
 			} else {
-				row.push("<b style='font-size:15px;'>□</b> ");
+				row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
 			}
 			
 			row.push("<font color=FFC602><span id='team2_2567'>" + data[i].awayTeam + "</span>&nbsp;");
@@ -98,7 +98,10 @@ function FnDrawGameList2(data,type)
 			row.push("</tr>");
 			row.push("</table>");
 			row.push("</td>");
-			row.push("<td align=center ><nobr><font color=FFC602>" + C(data[i].status) + "</td>");
+			if (data[i].status == 'GS002')
+				row.push("<td align=center ><nobr><font color='white'>" + C(data[i].status) + "</td>");
+			else
+				row.push("<td align=center ><nobr><font color='gray'>" + C(data[i].status) + "</td>");
 			row.push("</tr>");
 		}
 	}

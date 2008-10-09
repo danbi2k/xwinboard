@@ -36,4 +36,9 @@ public class LeagueDao extends XwinDao
 		sqlMapClientTemplate.update("updateLeague", league);
 		
 	}
+
+	public void removeLeague(String id)
+	{
+		sqlMapClientTemplate.delete("removeLeague", id);		
+	}
 }

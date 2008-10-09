@@ -9,7 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class AdminMemberController extends XwinController
@@ -46,6 +48,26 @@ public class AdminMemberController extends XwinController
 		List<Access> accessList = accessDao.selectAccessList();
 		ModelAndView mv = new ModelAndView("admin/member/member_access");
 		mv.addObject("accessList", accessList);
+		return mv;
+	}
+	
+	public ModelAndView updateMember(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String userId = request.getParameter("userId");
+		String status = request.getParameter("status");
+		String grade = request.getParameter("grade");
+		
+		Member member = memberDao.selectMember(userId, null);
+		member.setStatus(status);
+		member.setGrade(grade);
+		
+		memberDao.updateMember(member);
+		
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
 		return mv;
 	}
 }

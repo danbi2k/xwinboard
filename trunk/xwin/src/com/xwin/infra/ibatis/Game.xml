@@ -64,6 +64,11 @@
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
 		</isNotNull>
+		<isNotNull prepend="AND" property="statusList">
+			<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				g.STATUS = #statusList[]#
+			</iterate>
+		</isNotNull>
 		<isNotNull prepend="AND" property="betStatus">
 			g.BET_STATUS = #betStatus#
 		</isNotNull>
@@ -104,6 +109,11 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="statusList">
+			<iterate prepend="" property="statusList" open="(" close=")" conjunction="OR">
+				g.STATUS = #statusList[]#
+			</iterate>
 		</isNotNull>
 		<isNotNull prepend="AND" property="betStatus">
 			g.BET_STATUS = #betStatus#
