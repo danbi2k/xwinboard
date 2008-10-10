@@ -22,6 +22,49 @@ CREATE DATABASE IF NOT EXISTS xwin;
 USE xwin;
 
 --
+-- Definition of table `tbl_access`
+--
+
+DROP TABLE IF EXISTS `tbl_access`;
+CREATE TABLE `tbl_access` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `USERID` varchar(45) NOT NULL,
+  `NICKNAME` varchar(45) NOT NULL,
+  `DATE` varchar(45) NOT NULL,
+  `IP_ADDR` varchar(45) NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_access`
+--
+
+/*!40000 ALTER TABLE `tbl_access` DISABLE KEYS */;
+INSERT INTO `tbl_access` (`ID`,`USERID`,`NICKNAME`,`DATE`,`IP_ADDR`) VALUES 
+ (25,'xx','대박이','2008-10-09 22:41:11','127.0.0.1'),
+ (26,'xx','대박이','2008-10-09 23:25:48','127.0.0.1'),
+ (27,'xx','대박이','2008-10-09 23:28:22','127.0.0.1'),
+ (28,'xx','대박이','2008-10-10 00:01:16','127.0.0.1'),
+ (29,'xx','대박이','2008-10-10 00:05:50','127.0.0.1'),
+ (30,'xx','대박이','2008-10-10 00:34:50','127.0.0.1'),
+ (31,'phodo','포도','2008-10-10 01:04:35','127.0.0.1'),
+ (32,'xx','대박이','2008-10-10 01:05:27','127.0.0.1'),
+ (33,'xx','대박이','2008-10-10 02:24:42','127.0.0.1'),
+ (34,'xx','대박이','2008-10-10 03:27:05','127.0.0.1'),
+ (35,'xx','대박이','2008-10-10 03:33:52','127.0.0.1'),
+ (36,'xx','대박이','2008-10-10 03:51:35','127.0.0.1'),
+ (37,'xx','대박이','2008-10-10 03:57:05','127.0.0.1'),
+ (38,'xx','대박이','2008-10-10 03:57:47','127.0.0.1'),
+ (39,'xx','대박이','2008-10-10 03:58:56','127.0.0.1'),
+ (40,'xx','대박이','2008-10-10 04:01:08','127.0.0.1'),
+ (41,'xx','대박이','2008-10-10 04:06:32','127.0.0.1'),
+ (42,'xx','대박이','2008-10-10 04:31:23','127.0.0.1'),
+ (43,'xx','대박이','2008-10-10 05:45:40','127.0.0.1'),
+ (44,'xx','대박이','2008-10-10 05:46:02','127.0.0.1');
+/*!40000 ALTER TABLE `tbl_access` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tbl_account`
 --
 
@@ -39,7 +82,7 @@ CREATE TABLE `tbl_account` (
   `USERID` varchar(45) NOT NULL,
   `OLD_BALANCE` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_account`
@@ -47,18 +90,39 @@ CREATE TABLE `tbl_account` (
 
 /*!40000 ALTER TABLE `tbl_account` DISABLE KEYS */;
 INSERT INTO `tbl_account` (`ID`,`DATE`,`MONEY`,`BALANCE`,`DESCRIPTION`,`BETTING_ID`,`MONEYIN_ID`,`MONEYOUT_ID`,`TYPE`,`USERID`,`OLD_BALANCE`) VALUES 
- (32,'2008-10-06 19:34:49',-10000,2990000,NULL,'58',NULL,NULL,'AT001','test01',3000000),
- (33,'2008-10-06 19:43:02',20000,3010000,NULL,'58',NULL,NULL,'AT002','test01',2990000),
- (34,'2008-10-06 19:44:19',-10000,3000000,NULL,'59',NULL,NULL,'AT001','test01',3010000),
- (35,'2008-10-06 19:45:01',80000,3080000,NULL,'59',NULL,NULL,'AT002','test01',3000000),
- (36,'2008-10-06 19:45:57',-10000,3070000,NULL,'60',NULL,NULL,'AT001','test01',3080000),
- (37,'2008-10-06 19:46:58',-5000,3065000,NULL,'61',NULL,NULL,'AT001','test01',3070000),
- (38,'2008-10-06 19:47:48',-5000,3060000,NULL,'62',NULL,NULL,'AT001','test01',3065000),
- (39,'2008-10-06 19:50:34',-10000,3050000,NULL,'63',NULL,NULL,'AT001','test01',3060000),
- (40,'2008-10-06 21:59:42',-5000,3045000,NULL,'64',NULL,NULL,'AT001','test01',3050000),
- (41,'2008-10-06 22:39:43',-9999,3035001,NULL,'65',NULL,NULL,'AT001','test01',3045000),
- (42,'2008-10-06 22:40:29',-5000,3030001,NULL,'66',NULL,NULL,'AT001','test01',3035001);
+ (150,'2008-10-10 03:25:54',100000,200000,NULL,NULL,'41',NULL,'AT003','xx',100000),
+ (151,'2008-10-10 03:27:19',-50000,150000,NULL,NULL,NULL,NULL,'AT004','xx',200000),
+ (152,'2008-10-10 03:32:48',100000,250000,NULL,NULL,'42',NULL,'AT003','xx',150000),
+ (153,'2008-10-10 03:34:13',-5000,245000,NULL,'126',NULL,NULL,'AT001','xx',250000),
+ (154,'2008-10-10 04:01:21',-5000,240000,NULL,'127',NULL,NULL,'AT001','xx',245000),
+ (155,'2008-10-10 04:01:23',-5000,235000,NULL,'128',NULL,NULL,'AT001','xx',240000),
+ (156,'2008-10-10 04:01:26',-5000,230000,NULL,'129',NULL,NULL,'AT001','xx',235000),
+ (157,'2008-10-10 04:05:31',10000,240000,NULL,'129',NULL,NULL,'AT002','xx',230000);
 /*!40000 ALTER TABLE `tbl_account` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_admin`
+--
+
+DROP TABLE IF EXISTS `tbl_admin`;
+CREATE TABLE `tbl_admin` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `CONSTANT` varchar(45) NOT NULL,
+  `VARIABLE` text NOT NULL,
+  PRIMARY KEY  (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+/*!40000 ALTER TABLE `tbl_admin` DISABLE KEYS */;
+INSERT INTO `tbl_admin` (`ID`,`CONSTANT`,`VARIABLE`) VALUES 
+ (2,'NOTICE','★ 입금계좌 변경안내 ★ 계좌를 확인하시고 충전신청바랍니다.  [bwin-kor@hotmail.com] 관리자 이메일(MSN)  ★ 배팅제한 최소1천원 ~ 최대100만원 적중지급상한 300만원 ★ 승무패, 핸디캡 다양한배팅방식 최고의 서비스 3분이내 입환전'),
+ (3,'POPUP','긴급공지'),
+ (4,'POPUPFLAG','N');
+/*!40000 ALTER TABLE `tbl_admin` ENABLE KEYS */;
 
 
 --
@@ -101,29 +165,20 @@ CREATE TABLE `tbl_betting` (
   `TOTAL_COUNT` int(10) unsigned NOT NULL default '0',
   `SUCCESS_COUNT` int(10) unsigned NOT NULL default '0',
   `FAILURE_COUNT` int(10) unsigned NOT NULL default '0',
-  `CANCEL_COUNT` int(10) unsigned NOT NULL default '0',
+  `NOMATCH_COUNT` int(10) unsigned NOT NULL default '0',
   `GAME_TYPE` varchar(45) NOT NULL,
   `NICKNAME` varchar(45) NOT NULL,
   `HANDYDRAW_COUNT` int(10) unsigned NOT NULL default '0',
+  `CALC_STATUS` varchar(45) NOT NULL default 'BTC01',
+  `ISNOTICE` varchar(45) NOT NULL default 'BTN01',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_betting`
 --
 
 /*!40000 ALTER TABLE `tbl_betting` DISABLE KEYS */;
-INSERT INTO `tbl_betting` (`ID`,`USERID`,`DATE`,`RATE`,`MONEY`,`EXPECT`,`STATUS`,`TOTAL_COUNT`,`SUCCESS_COUNT`,`FAILURE_COUNT`,`CANCEL_COUNT`,`GAME_TYPE`,`NICKNAME`,`HANDYDRAW_COUNT`) VALUES 
- (57,'xx','2008-10-06 17:52:18',2.10,1000000,2100000,'BS007',1,0,0,0,'handy','대박이',1),
- (58,'test01','2008-10-06 19:34:49',2.00,10000,20000,'BS006',1,1,0,0,'wdl','테스트01',0),
- (59,'test01','2008-10-06 19:44:19',8.00,10000,80000,'BS006',3,3,0,0,'wdl','테스트01',0),
- (60,'test01','2008-10-06 19:45:57',4.00,10000,40000,'BS002',2,2,0,0,'wdl','테스트01',0),
- (61,'test01','2008-10-06 19:46:58',4.00,5000,20000,'BS003',2,1,1,0,'wdl','테스트01',0),
- (62,'test01','2008-10-06 19:47:48',2.00,5000,10000,'BS002',2,1,0,1,'wdl','테스트01',0),
- (63,'test01','2008-10-06 19:50:33',2.00,10000,20000,'BS002',1,1,0,0,'handy','테스트01',0),
- (64,'test01','2008-10-06 21:59:42',2.00,5000,10000,'BS001',2,0,0,1,'wdl','테스트01',0),
- (65,'test01','2008-10-06 22:39:43',20.00,9999,199980,'BS001',2,0,0,0,'wdl','테스트01',0),
- (66,'test01','2008-10-06 22:40:29',0.00,5000,0,'BS001',0,0,0,0,'wdl','테스트01',0);
 /*!40000 ALTER TABLE `tbl_betting` ENABLE KEYS */;
 
 
@@ -144,23 +199,6 @@ CREATE TABLE `tbl_betting_game` (
 --
 
 /*!40000 ALTER TABLE `tbl_betting_game` DISABLE KEYS */;
-INSERT INTO `tbl_betting_game` (`BETTING_ID`,`GAME_ID`,`GUESS`) VALUES 
- (57,136,'W'),
- (58,137,'W'),
- (59,138,'W'),
- (59,139,'W'),
- (59,140,'W'),
- (60,141,'W'),
- (60,142,'L'),
- (61,143,'W'),
- (61,144,'W'),
- (62,145,'W'),
- (62,146,'W'),
- (63,147,'W'),
- (64,148,'D'),
- (64,149,'D'),
- (65,148,'W'),
- (65,150,'W');
 /*!40000 ALTER TABLE `tbl_betting_game` ENABLE KEYS */;
 
 
@@ -178,7 +216,7 @@ CREATE TABLE `tbl_board_comment` (
   `USERID` varchar(45) NOT NULL,
   `DATE` datetime NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_board_comment`
@@ -207,7 +245,10 @@ INSERT INTO `tbl_board_comment` (`ID`,`BOARD_ID`,`NICKNAME`,`PASSWORD`,`COMMENT`
  (19,'35','대박이',NULL,'fadsfdafaf','xx','2008-10-06 19:29:42'),
  (20,'35','대박이',NULL,'fadfa','xx','2008-10-06 19:29:44'),
  (21,'38','테스트01',NULL,'ㅇㅇㅇㅇ','test01','2008-10-07 02:46:18'),
- (22,'32','테스트01',NULL,'ㅇㅇㅇㅇ','test01','2008-10-07 02:47:07');
+ (22,'32','테스트01',NULL,'ㅇㅇㅇㅇ','test01','2008-10-07 02:47:07'),
+ (23,'37','관리자',NULL,'fa\n\nfad\n\nfads\nfads\n\nfadsfasfs','secadmin','2008-10-10 05:42:16'),
+ (24,'36','관리자',NULL,'fdfad\n\nfad\n\nfad\n\nfad\n\nfadfdffa','secadmin','2008-10-10 05:43:27'),
+ (25,'34','관리자',NULL,'fadf\nfad\nfaf','secadmin','2008-10-10 05:44:12');
 /*!40000 ALTER TABLE `tbl_board_comment` ENABLE KEYS */;
 
 
@@ -273,7 +314,7 @@ INSERT INTO `tbl_board_item` (`ID`,`TITLE`,`USERID`,`DATE`,`READCOUNT`,`NICKNAME
  (35,'432432','xx','2008-10-06 19:29:35',3,'대박이','43244','BIT10','qna','BIS01'),
  (36,'ddd','xx','2008-10-06 19:36:01',0,'대박이','dd','BIT10','qna','BIS01'),
  (37,'dd','xx','2008-10-06 19:37:54',1,'대박이','dd','BIT10','qna','BIS01'),
- (38,'테스','test01','2008-10-07 02:45:40',1,'테스트01','ㅌㅌㅌㅌㅌㅌ','BIT10','user','BIS01');
+ (38,'테스','test01','2008-10-07 02:45:40',3,'테스트01','ㅌㅌㅌㅌㅌㅌ','BIT10','user','BIS01');
 /*!40000 ALTER TABLE `tbl_board_item` ENABLE KEYS */;
 
 
@@ -317,29 +358,13 @@ CREATE TABLE `tbl_game` (
   `HANDY` float(5,2) default NULL,
   `BET_STATUS` varchar(45) NOT NULL default 'BTS02',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_game`
 --
 
 /*!40000 ALTER TABLE `tbl_game` DISABLE KEYS */;
-INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOSE_RATE`,`STATUS`,`GAME_DATE`,`LEAGUE_ID`,`TYPE`,`HOME_SCORE`,`AWAY_SCORE`,`RESULT`,`HANDY`,`BET_STATUS`) VALUES 
- (136,'삼성','부산',2.10,-1.00,3.20,'GS004','2008-10-06 21:00:00',13,'handy',3,2,0x44,NULL,'BTS02'),
- (137,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',12,'wdl',2,1,0x57,NULL,'BTS02'),
- (138,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (139,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (140,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (141,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (142,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS02'),
- (143,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (144,'실패','실패',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',1,2,0x4C,NULL,'BTS02'),
- (145,'당첨','당첨',2.00,2.00,2.00,'GS004','2008-10-07 00:00:00',13,'wdl',2,1,0x57,NULL,'BTS02'),
- (146,'취소','취소',1.00,1.00,1.00,'GS005','2008-10-07 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS02'),
- (147,'당첨','당첨',2.00,0.50,2.00,'GS004','2008-10-07 00:00:00',13,'handy',1,1,0x57,NULL,'BTS02'),
- (148,'ㅇㅇ','ㅇㅇ',2.00,2.00,2.00,'GS003','2008-10-07 00:00:00',10,'wdl',NULL,NULL,NULL,NULL,'BTS02'),
- (149,'롯데','한화',1.00,1.00,1.00,'GS005','2008-10-08 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS01'),
- (150,'ㅛㅛㅛ','ㅠㅠㅠ',10.00,10.00,10.00,'GS002','2008-10-08 00:00:00',13,'wdl',NULL,NULL,NULL,NULL,'BTS01');
 /*!40000 ALTER TABLE `tbl_game` ENABLE KEYS */;
 
 
@@ -350,47 +375,20 @@ INSERT INTO `tbl_game` (`ID`,`HOME_TEAM`,`AWAY_TEAM`,`WIN_RATE`,`DRAW_RATE`,`LOS
 DROP TABLE IF EXISTS `tbl_ktfsms`;
 CREATE TABLE `tbl_ktfsms` (
   `ID` int(10) unsigned NOT NULL auto_increment,
-  `MSG_SEQ` varchar(16) NOT NULL,
-  `IN_DATE` varchar(16) NOT NULL,
-  `MSG` varchar(256) NOT NULL,
-  `SM` varchar(2) NOT NULL,
-  `CALL_BACK` varchar(16) NOT NULL,
+  `MSG_SEQ` varchar(16) default NULL,
+  `IN_DATE` varchar(16) default NULL,
+  `MSG` varchar(256) default NULL,
+  `SM` varchar(2) default NULL,
+  `CALL_BACK` varchar(16) default NULL,
+  `STATUS` varchar(45) NOT NULL default 'MC001',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_ktfsms`
 --
 
 /*!40000 ALTER TABLE `tbl_ktfsms` DISABLE KEYS */;
-INSERT INTO `tbl_ktfsms` (`ID`,`MSG_SEQ`,`IN_DATE`,`MSG`,`SM`,`CALL_BACK`) VALUES 
- (1,'23780636','20080808103009','아아[FW]','S','01029017589'),
- (2,'55550864','20080808152508','┏━━┓덥쥐?샤~\n┃▒▒~@ 에어컨\n┃    ┃~@ 바람\n┃    ┃느껴져?\n┗━━┛[FW]','S','01040179992'),
- (3,'175544526','20080808152405','오빠 바쁜 것같은데 일 열심히 하고!!오늘 집에서 봐용~쪽쪽쪽 허그허그허그~~~[FW]','S','01040179992'),
- (4,'204189641','20080811113819','오케이ㅋㅋ[FW]','S','01040179992'),
- (5,'55367543','20080811145435','[강남자생]권승로원장 8월17일부터 일요진료중단. 매주 수/일요일은 진료휴진입니다.','S','0232182000'),
- (6,'245061667','20080811140339','응 유리도시키는게나은지봐요[FW]','S','01040179992'),
- (7,'734882332','20080811133346','아 문자못봤다[FW]','S','01046991429'),
- (8,'444151359','20080812113154','ㅈㅈ[FW]','S','01040139992'),
- (9,'494131242','20080812112832','ㅎㅎ[FW]','S','01040139992'),
- (10,'744552495','20080812123846','밥잘ㄴ먹었어?문화센터얌[FW]','S','01040179992'),
- (11,'334842484','20080812132704','ㄹㅇㄹㅇㄹㅇㄹㅇㄹㅇㄹㅇㄹ','S','01040139992'),
- (12,'175693885','20080813154901','문화센터얌[FW]','S','01040179992'),
- (13,'665182804','20080813142351','응 배송얼마나걸리는지도봐여[FW]','S','01040179992'),
- (14,'695174259','20080813142225','응 따로사는게나을것같아키키[FW]','S','01040179992'),
- (15,'504579756','20080813124317','삼성카드\n08/13 12:43\n(주)코스트코코리\n100,000원\n일시불사용\n감사합니다[FW]','S','15888700'),
- (16,'454578686','20080813124307','삼성카드\n08/13 12:42\n(주)코스트코코리\n59,960원\n일시불사용\n감사합니다[FW]','S','15888700'),
- (17,'34542272','20080813123702','추석날동대구행카풀신청했는데입금하면되는건가요?[FW]','S','01028999592'),
- (18,'14474755','20080813122547','집에서 썼던것처럼[FW]','S','0167417589'),
- (19,'14474654','20080813122546','근데 연결이 가능은 한거야? 아님 내가 그런거 하나사서 외장 상태로둬도 되는데 엄마','S','0167417589'),
- (20,'2881266','20080813121430','글쿠나 내가 중국관련 동영상 다운받다가 하드용량 다잡아먹어서.. 담에 꼭 부탁 T.T','S','0167417589'),
- (21,'2419416','20080813121227','우리집 컴? 본체에 들어있어? 연결만 안되있고? 케이스를 분리한거야?','S','0167417589'),
- (22,'14379513','20080813120955','너한테 있는 외장하드 (채운사진있는거) 용량이 얼마?[FW]','S','0167417589'),
- (23,'743975978','20080813110241','아침에누룽지그냥먹고속괜찮았어?지금도마니바빠?괜찮을때전화해주세용[FW]','S','01040179992'),
- (24,'4452461','20080813093313','☎ 캐치콜 ☎\n(통화중) 고객님께 걸려온 전화입니다.\n☆ 캐치콜 조회 \n**070 (무☆료)','S','01020865925'),
- (25,'686713224','20080812183855','[KB카드]성시원님08월25일 KB카드결제하실금액 59,352원 감사합니다(08/08기준)[FW]','S','15881688'),
- (26,'36362710','20080812174028','진아가 미역국 끓였다면서? 고맙다고 전해줘 [FW]','S','0167417589'),
- (27,'246071553','20080812165158','지금요리해용 헤헤[FW]','S','01040179992');
 /*!40000 ALTER TABLE `tbl_ktfsms` ENABLE KEYS */;
 
 
@@ -444,7 +442,7 @@ CREATE TABLE `tbl_member` (
   `GRADE` varchar(45) NOT NULL,
   `JOIN_DATE` datetime NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_member`
@@ -452,10 +450,12 @@ CREATE TABLE `tbl_member` (
 
 /*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
 INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`,`STATUS`,`GRADE`,`JOIN_DATE`) VALUES 
- (1,'xx','4444','대박이','016-4444-4444','jackpot@hotmail.com','1111',1000000,'US001','UG001','2008-09-29 00:00:00'),
+ (1,'xx','4444','대박이','010-2069-9997','jackpot@hotmail.com','1111',240000,'US001','UG001','2008-09-29 00:00:00'),
  (2,'secadmin','3333','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100','2008-09-30 00:00:00'),
  (3,'test','test','테스트','010-2222-2222','test@test.com','test1111',2000000,'US001','UG001','2008-10-04 15:53:42'),
- (4,'test01','1111','테스트01','010-111-1111','1111@1111','1111',3035001,'US001','UG001','2008-10-05 20:12:29');
+ (4,'test01','1111','테스트01','010-111-1111','1111@1111','1111',3741122,'US001','UG001','2008-10-05 20:12:29'),
+ (5,'hong','1111','슈퍼홍','010-4878-4497','superhong@hotmail.com','1111',1000000,'US001','UG001','2008-10-09 16:13:12'),
+ (6,'phodo','1234','포도','010-4013-9992','phodo@hotmail.com','1234',0,'undefined','UG001','2008-10-10 01:04:30');
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
 
 
@@ -473,16 +473,15 @@ CREATE TABLE `tbl_money_in` (
   `NAME` varchar(45) NOT NULL,
   `BANKBOOK_ID` int(10) unsigned NOT NULL,
   `PROC_DATE` datetime default NULL,
+  `ISCHECKED` varchar(45) NOT NULL default 'N',
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_money_in`
 --
 
 /*!40000 ALTER TABLE `tbl_money_in` DISABLE KEYS */;
-INSERT INTO `tbl_money_in` (`ID`,`USERID`,`MONEY`,`STATUS`,`REQ_DATE`,`NAME`,`BANKBOOK_ID`,`PROC_DATE`) VALUES 
- (31,'test01',1121,'MC001','2008-10-06 21:52:17','nnn',1,NULL);
 /*!40000 ALTER TABLE `tbl_money_in` ENABLE KEYS */;
 
 
