@@ -36,4 +36,46 @@ public class AdminController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView viewNotice(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ModelAndView mv = new ModelAndView("admin/admin/notice");
+		
+		return mv;
+	}
+	
+	public ModelAndView saveNotice(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String notice = request.getParameter("notice");
+		adminDao.updateAdmin("NOTICE", notice);
+		
+		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");		
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView viewPopup(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ModelAndView mv = new ModelAndView("admin/admin/popup");
+		
+		return mv;
+	}
+	
+	public ModelAndView savePopup(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String notice = request.getParameter("popup");
+		adminDao.updateAdmin("NOTICE", notice);
+		
+		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");		
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

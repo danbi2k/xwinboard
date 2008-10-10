@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="com.xwin.domain.board.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
 
 <%@ include file="../admin_header.jsp"%>
-
-<%
-	String notice = (String) request.getAttribute("notice");
-%>
 
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
@@ -20,12 +17,14 @@
 	<tr>
 		<td width="10%">내용</td>
 		<td width="*">
+		<textarea name="text" style='width=100%;height=500px'>
 		 <%
-	    String context = notice;
+	    String context = Admin.NOTICE;
 	    context = StringEscapeUtils.escapeHtml(context);
 	    context = context.replaceAll("\n", "<br>");
 	    out.print(context);
 	    %>
+		</textarea>
 		</td>
 	</tr>					
 </table>
@@ -36,11 +35,11 @@
 function saveNotice()
 {
 	var query = "mode=saveNotice";
-	query += "&notice=" + document.answer.comment.value;
-	var http = new JKL.ParseXML("adminBoard.aspx", query);
+	query += "&notice=" + document.notice.text.value;
+	var http = new JKL.ParseXML("admin.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	location.href="adminBoard.aspx?mode=viewNotice";
+	location.href="admin.aspx?mode=viewNotice";
 }
 </script>
 

@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<div id="money" class="boxed">
-			<h2 class="heading">입환전관리</h2>
+			<h2 class="heading">충환전관리</h2>
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">충전요청</a></li>
@@ -51,8 +51,8 @@
 				<ul>
 					<li class="first"><a href="adminQna.aspx?mode=viewQnaList">고객센터</a></li>
 					<li><a href="#">게시판</a></li>
-					<li><a href="#">긴급공지</a></li>
-					<li><a href="">Notice</a></li>
+					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
+					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 					<li><a href="#">공지사항</a></li>
 				</ul>
 			</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ page import="com.xwin.domain.admin.*" %>
 <%@ page import="com.xwin.domain.user.*" %>
 <%@ page import="com.xwin.infra.dao.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
@@ -209,12 +210,7 @@ if (document.URL.indexOf("index.aspx") > 0) {
 <tr><td width="80" align="center"><b style="color:white">Notice</b></td>
 	<td width="880">&nbsp;
 	<marquee>
-	★ 입금계좌 변경안내 ★ 계좌를 확인하시고 충전신청바랍니다.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	[bwin-kor@hotmail.com] 관리자 이메일(MSN)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-	★ 배팅제한 최소1천원 ~ 최대100만원 적중지급상한 300만원 ★ 승무패, 핸디캡, 홀짝 다양한배팅방식 최고의 서비스 3분이내 입환전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
+	<%=Admin.NOTICE%>
 	</marquee>
 	</td>
 </tr>

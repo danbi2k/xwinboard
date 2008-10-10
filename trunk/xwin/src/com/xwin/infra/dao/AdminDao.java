@@ -14,8 +14,8 @@ public class AdminDao extends XwinDao
 		sqlMapClientTemplate.insert("insertAdmin", param);
 	}
 	
-	public String selectAdmin(String key)
+	public String selectAdmin(String constant)
 	{
-		return (String) sqlMapClientTemplate.queryForObject("selectAdmin", key);
+		return (String) sqlMapClientTemplate.queryForObject("selectAdmin", constant);
 	}
 }

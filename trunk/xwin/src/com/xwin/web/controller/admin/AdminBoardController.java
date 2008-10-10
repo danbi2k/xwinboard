@@ -5,17 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.infra.util.XmlUtil;
+import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class AdminBoardController extends XwinController
 {
-	public ModelAndView viewNotice(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		String notice = adminDao.selectAdmin("NOTICE");
-		ModelAndView mv = new ModelAndView("admin/board/notice");
-		
-		mv.addObject(notice);
-		return mv;
-	}
+	
 }

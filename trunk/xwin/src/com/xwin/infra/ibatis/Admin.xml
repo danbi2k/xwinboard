@@ -11,7 +11,7 @@
 		WHERE KEY = #constant#
 	</update>
 	
-	<select id="selectAdmin" parameterClass="string">
+	<select id="selectAdmin" parameterClass="string" resultClass="string">
 		SELECT VARIABLE FROM tbl_admin WHERE CONSTANT = #value#
 	</select>
 	
