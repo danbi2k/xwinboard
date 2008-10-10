@@ -73,7 +73,7 @@ function FnDrawGameList2(data,type)
 				}
 				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRateStr + "</span>");	
 			} else {
-				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRate + "</span>");	
+				row.push("<span id='bet3_2567' bgcolor=424242><B>" + data[i].drawRate + "</B></span>");	
 			}
 			
 			row.push("</td>");

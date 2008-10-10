@@ -8,10 +8,16 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
+	int ROWSIZE = 20;
+	int SHOWPAGE = 10;
+	
 	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+	Integer totalCount = (Integer) request.getAttribute("memberCount");
+	
 	String grade = XwinUtil.nvl(request.getParameter("grade"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -94,5 +100,39 @@ if (memberList != null) {
 }
 %>							
 </table>
+
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + 15;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+</div>
 
 <%@ include file="../admin_footer.jsp"%>

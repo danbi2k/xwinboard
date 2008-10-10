@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.game.Betting;
+import com.xwin.domain.game.Game;
+import com.xwin.domain.game.League;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -53,9 +55,22 @@ public class AdminBettingController extends XwinController
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		Integer bettingCount = bettingDao.selectBettingCount(param);
 		
-		ModelAndView mv = new ModelAndView("admin/betting/admin_betting");
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_list");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
+		
+		return mv;
+	}
+	
+	public ModelAndView viewBettingDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		Betting betting = bettingDao.selectBetting(id);
+		
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_detail");
+		mv.addObject("betting", betting);
 		
 		return mv;
 	}
@@ -63,11 +78,13 @@ public class AdminBettingController extends XwinController
 	public ModelAndView viewBettingMoneyList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String gameType = XwinUtil.arcNvl(request.getParameter("gameType"));
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
+		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
-		String betDate = XwinUtil.arcNvl(request.getParameter("betDate"));
+		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		int pIdx = 0;
@@ -75,25 +92,27 @@ public class AdminBettingController extends XwinController
 			pIdx = Integer.parseInt(pageIndex);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("gameType", gameType);
+		param.put("type", type);
+		param.put("leagueId", leagueId);
 		param.put("status", status);
-
-		if (keyword != null) param.put(search+"LIKE", "%"+keyword+"%");
-		if (betDate != null) {
-			Date[] pair = XwinUtil.getDatePair(betDate);
+		param.put("betStatus", betStatus);
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		if (gameDate != null) {
+			Date[] pair = XwinUtil.getDatePair(gameDate);
 			param.put("fromDate", pair[0]);
 			param.put("toDate", pair[1]);
 		}
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
-		List<Betting> bettingList = bettingDao.selectBettingList(param);
-		Integer bettingCount = bettingDao.selectBettingCount(param);
+		List<League> leagueList = leagueDao.selectLeagueList();
+		Integer gameCount = gameDao.selectGameCount(param);
+		List<Game> gameList = gameDao.selectGameList(param);
 		
-		ModelAndView mv = new ModelAndView("admin/betting/admin_betting");
-		mv.addObject("bettingList", bettingList);
-		mv.addObject("bettingCount", bettingCount);
-		
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_game");
+		mv.addObject("leagueList", leagueList);
+		mv.addObject("gameList", gameList);
+		mv.addObject("gameCount", gameCount);
 		return mv;
 	}
 	

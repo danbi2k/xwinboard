@@ -42,7 +42,7 @@ var gameType = '<%=type%>'
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td>리그선택 : 
-	<select name="GameGroup" style="color:white;background-color:black;" onchange="FnGetGameList('wdl', this.value);">
+	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('wdl', this.value);">
 		<option value="">--전체--</option>
 		<%
 		if (leagueList != null && leagueList.size() > 0) {
@@ -183,7 +183,13 @@ var gameType = '<%=type%>'
 </tr>
 </table>
 <script>
-FnGetGameList('<%=type%>');
+function reload()
+{
+	FnGetGameList('<%=type%>', CartFrm.leagueId.value);	
+}
+
+reload();
+setInterval("reload()", 60000);
 FnDrawCart();
 </script>
 <!-- ---------------------------------------------------------------------- -->

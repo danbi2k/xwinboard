@@ -1,6 +1,8 @@
 package com.xwin.web.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,17 +18,32 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminMemberController extends XwinController
 {
+	public static final int ROWSIZE = 20;
+	
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
-		String search = request.getParameter("search");
-		String keyword = request.getParameter("keyword");
-						
-		List<Member> memberList = memberDao.selectMemberList(grade, search, keyword);
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("grade", grade);
+		if (keyword != null) param.put(search, "%" + keyword + "%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		Integer memberCount = memberDao.selectMemberCount(param);
+		List<Member> memberList = memberDao.selectMemberList(param);		
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member");
 		mv.addObject("memberList", memberList);
+		mv.addObject("memberCount", memberCount);
 		return mv;
 	}
 	
@@ -45,9 +62,25 @@ public class AdminMemberController extends XwinController
 	public ModelAndView viewAccessList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		List<Access> accessList = accessDao.selectAccessList();
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<Access> accessList = accessDao.selectAccessList(param);
+		Integer accessCount = accessDao.selectAccessCount(param);
 		ModelAndView mv = new ModelAndView("admin/member/member_access");
 		mv.addObject("accessList", accessList);
+		mv.addObject("accessCount", accessCount);
+		
 		return mv;
 	}
 	

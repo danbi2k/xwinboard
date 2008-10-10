@@ -87,7 +87,9 @@ function img_resize(obj,max_width){
           -->
     </td>
     <td width="50%" height="30" align="right">
-		
+		<%if (boardItem.getUserId().equals(member.getUserId())) {%>
+		<a href="" onclick="deleteItem()"><img src="images/btn_del.gif" border="0"></a>
+		<%} %>
         &nbsp;&nbsp;
         <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
     </td></tr>
@@ -95,6 +97,35 @@ function img_resize(obj,max_width){
 
 
 <script>
+function deleteItem()
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteBoardItem";
+		query += "&id=<%=boardItem.getId()%>";
+		query += "&boardName=<%=boardName%>";
+		var http = new JKL.ParseXML("board.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.href = "board.aspx?mode=viewUserBoard&boardName=<%=boardName%>";
+		}
+	}
+}
+
+function deleteComment(id)
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteBoardComment";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("board.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.reload();
+		}
+	}
+}
+
 function list(){
     location.href="/board/board.asp?idx=board";
 }
@@ -185,7 +216,13 @@ function comment_submit(){
                 <td width="*"   style="color:black"><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
                 <td width="70" title="2008-10-06 오후 5:47:04" align="center" style="color:black"><b><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
 				
-					<td width="16" align="center">&nbsp;</td>
+					<td width="16" align="center">
+					<%if (boardComment.getUserId().equals(member.getUserId())) {%>
+					<img onclick="deleteComment(<%=boardComment.getId()%>)" src="images/btn_coment_del.gif"></td>
+					<%}else { %>
+					&nbsp;					
+					<%} %>
+					</td>
 				
              </tr>
              </table>

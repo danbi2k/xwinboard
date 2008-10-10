@@ -30,7 +30,7 @@
 	</insert>
 	
 	<delete id="deleteBoardItem" parameterClass="string">
-		DELETE FROM tbl_board_item WHERE ID = #value#
+		UPDATE tbl_board_item SET ISDELETED = 'Y' WHERE ID = #value#
 	</delete>
 	
 	<select id="selectBoardItem" resultMap="boardItemResultMap"
@@ -38,9 +38,14 @@
 		SELECT *,
 		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
-		WHERE
-			bi.ID = #id# AND
-			bi.boardName = #boardName#
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				bi.ID = #id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="boardName">
+				bi.boardName = #boardName#
+			</isNotNull>
+		</dynamic>
 	</select>
 	
 	<select id="selectBoardItemList" resultMap="boardItemResultMap" parameterClass="map">
@@ -50,17 +55,16 @@
 			TYPE,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
-			<dynamic prepend="WHERE">
-				<isNotNull prepend="AND" property="boardName">			
-				bi.BOARDNAME = #boardName#
-				</isNotNull>
-				<isNotNull prepend="AND" property="userId">
-				bi.USERID = #userId#
-				</isNotNull>
-				<isNotNull prepend="AND" property="commentCount">
-				(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#
-				</isNotNull>
-			</dynamic>
+		WHERE bi.ISDELETED = 'N'		
+		<isNotNull prepend="AND" property="boardName">			
+			bi.BOARDNAME = #boardName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			bi.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="commentCount">
+			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#
+		</isNotNull>
 		ORDER BY TYPE ASC, DATE DESC
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
@@ -70,7 +74,16 @@
 	<select id="selectBoardItemCount" parameterClass="map" resultClass="integer">
 		SELECT COUNT(*)
 		FROM tbl_board_item bi
-		WHERE bi.BOARDNAME = #boardName#
+		WHERE bi.ISDELETED = 'N'		
+		<isNotNull prepend="AND" property="boardName">			
+			bi.BOARDNAME = #boardName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			bi.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="commentCount">
+			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#
+		</isNotNull>
 	</select>
 	
 	<resultMap id="boardCommentResultMap" class="BoardComment">
@@ -100,6 +113,10 @@
 		SELECT * FROM tbl_board_comment WHERE BOARD_ID = #value#
 	</select>
 	
+	<select id="selectBoardComment" resultMap="boardCommentResultMap">
+		SELECT * FROM tbl_board_comment WHERE ID = #value#
+	</select>
+	
 	<update id="plusBoardItemReadCout">
 		UPDATE tbl_board_item SET READCOUNT = READCOUNT + 1 WHERE ID = #value#
 	</update>
@@ -108,6 +125,6 @@
 		SELECT COUNT(*) FROM tbl_board_item bi
 		WHERE
 		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = 0 AND
-		bi.boardName = 'qna'		
+		bi.BOARDNAME = 'qna' AND bi.ISDELETED = 'N'	
 	</select>
 </sqlMap>

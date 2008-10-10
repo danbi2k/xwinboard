@@ -24,7 +24,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
 {	
-	public static final int ROWSIZE = 10;
+	public static final int ROWSIZE = 20;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -232,24 +232,64 @@ public class AdminGameController extends XwinController
 			game.setResult(result);
 			game.setStatus(Code.GAME_STATUS_END);
 			
+			if (result.equals("D")) {
+				game.setWinRate(1.0);
+				game.setLoseRate(1.0);
+			}
+			
 			gameDao.updateGame(game);			
 			bettingDao.updateBettingStatus(id);
 			
+			// 핸디 무승부 배팅 1배 처리
+			if (game.getResult().equals("D")) {				
+				Map<String, Object> param = new HashMap<String, Object>(1);
+				param.put("gameId", game.getId());
+				List<Betting> bettingList = bettingDao.selectBettingList(param);
+				
+				for (Betting betting : bettingList) {
+					List<BetGame> betGameList = betting.getBetGameList();
+					Double totalRate = 0.0;
+					for (BetGame betGame : betGameList)	{
+						String guess = betGame.getGuess();
+						Double selectRate = 0.0;
+						if (guess.equals("W"))
+							selectRate = betGame.getWinRate();
+						else if (guess.equals("D"))
+							selectRate = betGame.getDrawRate();
+						else if (guess.equals("L"))
+							selectRate = betGame.getLoseRate();
+						
+						if (totalRate == 0.0)
+							totalRate = selectRate;
+						else
+							totalRate *= selectRate;
+					}
+					Long expect = XwinUtil.calcExpectMoney(totalRate, betting.getMoney());
+					
+					betting.setRate(totalRate);
+					betting.setExpect(expect);
+					bettingDao.updateBetting(betting);
+				}
+			}
+			
 			List<Betting> bettingList = bettingDao.selectBettingByNoticeReaquired();
 			if (bettingList != null) {
-				for (Betting betting : bettingList) {
-					Member member = memberDao.selectMember(betting.getUserId(), null);
-					String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
-							Code.getValue(betting.getStatus()) + " 되었습니다.";
-					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-						message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
-					
-					sendSmsConnector.sendSms(message, member.getMobile(), "000-000-0000");
-					
-					bettingService.calcuateBettingCommon(betting);
-					
+				for (Betting betting : bettingList) {				
+					bettingService.calcuateBettingCommon(betting);					
 					betting.setIsNotice(Code.BET_NOTICE_COMMIT);
 					bettingDao.updateBetting(betting);
+					
+					try {
+						Member member = memberDao.selectMember(betting.getUserId(), null);
+						String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+								Code.getValue(betting.getStatus()) + " 되었습니다.";
+						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
+						
+						sendSmsConnector.sendSms(message, member.getMobile(), "000-000-0000");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			

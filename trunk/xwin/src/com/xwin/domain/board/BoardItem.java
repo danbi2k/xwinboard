@@ -18,6 +18,7 @@ public class BoardItem extends XwinObject
 	private String status;
 	private String boardName;
 	private Integer commentCount;
+	private String isDeleted;
 	
 	private List<BoardComment> boardCommentList;
 	
@@ -92,5 +93,11 @@ public class BoardItem extends XwinObject
 	}
 	public void setCommentCount(Integer commentCount) {
 		this.commentCount = commentCount;
+	}
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}	
 }

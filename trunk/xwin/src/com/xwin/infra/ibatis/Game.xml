@@ -73,9 +73,6 @@
 			g.BET_STATUS = #betStatus#
 		</isNotNull>
 		<isNotNull prepend="AND" property="fromDate">
-			g.GAME_DATE > #fromDate#
-		</isNotNull>
-		<isNotNull prepend="AND" property="fromDate">
 			<![CDATA[
 			g.GAME_DATE >= #fromDate#
 			]]>
@@ -117,9 +114,6 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="betStatus">
 			g.BET_STATUS = #betStatus#
-		</isNotNull>
-		<isNotNull prepend="AND" property="fromDate">
-			g.GAME_DATE > #fromDate#
 		</isNotNull>
 		<isNotNull prepend="AND" property="fromDate">
 			<![CDATA[

@@ -81,6 +81,8 @@
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
 		p:bettingService-ref="bettingService"
+		p:leagueDao-ref="leagueDao"
+		p:gameDao-ref="gameDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminSmsController"

@@ -126,6 +126,9 @@ public class Code
 		put("W", "승");
 		put("D", "무");
 		put("L", "패");
+		
+		put("wdl", "승무패");
+		put("handy", "핸디캡");
 	}
 	
 	private static void put(String key, String value)

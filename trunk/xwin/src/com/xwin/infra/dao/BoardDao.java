@@ -66,6 +66,11 @@ public class BoardDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteBoardCommentList", boardId);
 	}
 	
+	public BoardComment selectBoardComment(String id)
+	{
+		return (BoardComment) sqlMapClientTemplate.queryForObject("selectBoardComment", id);
+	}
+	
 	public List<BoardComment> selectBoardCommentList(String boardId)
 	{
 		return (List<BoardComment>) sqlMapClientTemplate.queryForList("selectBoardCommentList", boardId);

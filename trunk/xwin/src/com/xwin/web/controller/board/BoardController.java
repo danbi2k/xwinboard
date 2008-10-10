@@ -145,6 +145,55 @@ public class BoardController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView deleteBoardItem(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		String boardName = request.getParameter("boardName");
+		
+		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		ResultXml rx = null;
+		if (boardItem.getUserId().equals(member.getUserId())) {
+			//boardDao.deleteBoardCommentList(id);
+			boardDao.deleteBoardItem(id);
+			
+			rx = new ResultXml(0, "삭제되었습니다", null);
+		}
+		else {
+			rx = new ResultXml(-1, "권한이 없습니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView deleteBoardComment(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		BoardComment boardComment = boardDao.selectBoardComment(id);
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		ResultXml rx = null;
+		if (boardComment.getUserId().equals(member.getUserId())) {
+			//boardDao.deleteBoardCommentList(id);
+			boardDao.deleteBoardComment(id);
+			
+			rx = new ResultXml(0, "삭제되었습니다", null);
+		}
+		else {
+			rx = new ResultXml(-1, "권한이 없습니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
 	public ModelAndView getBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{

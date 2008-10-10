@@ -8,44 +8,24 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
+	int ROWSIZE = 20;
+	int SHOWPAGE = 10;
 	List<Access> accessList = (List<Access>) request.getAttribute("accessList");
+	Integer totalCount = (Integer) request.getAttribute("accessCount");
+
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String search = XwinUtil.nvl(request.getParameter("search"));
+	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 %>
 
-<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
-		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
-		d.action='/admin_mode/member/index.php?mode=modify_exe';
-		d.submit();
-	}
-
-	function delIT(userid) {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='/admin_mode/member/index.php?mode=del_exe&userid='+userid+'&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-
-	function chargeIT() {
-		var d=document.charge;
-		if(!d.amt.value) { alert('금액을 입력하세요'); d.amt.focus(); return false; }
-		if(!d.msg.value) { alert('내역을 입력하세요'); d.msg.focus(); return false; }
-		if(!confirm('금액을 충전/삭감 하시겠습니까?')) {
-			return false;
-		}
-		else {
-			d.action='/admin_mode/member/index.php?mode=recharge&userid=&page=&page_list=&search=&kwd=&type=';
-		}
-	}
-
-
-</SCRIPT>
-
-<form method='post' name='search' action='adminMember.aspx'>
-	<input type='hidden' name='mode' value=''/>
+<form method='GET'>
+	<input type='hidden' name='mode' value='viewAccessList'/>
+	<select name='search'>
+		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
+	</select>
+	<input type='text' name='keyword' value='<%=keyword%>'>
+	<input type='submit' value='검 색'>
  </form>
 
 <table class="prettytable">
@@ -72,5 +52,39 @@ if (accessList != null) {
 }
 %>							
 </table>
+
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + 15;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+</div>
 
 <%@ include file="../admin_footer.jsp"%>
