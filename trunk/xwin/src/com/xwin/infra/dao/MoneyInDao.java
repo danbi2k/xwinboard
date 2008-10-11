@@ -6,16 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.user.MoneyIn;
+import com.xwin.infra.util.Code;
 
 public class MoneyInDao extends XwinDao
 {
 
-	public void insertMoneyIn(MoneyIn account) {
-		sqlMapClientTemplate.insert("insertMoneyIn", account);
+	public void insertMoneyIn(MoneyIn moneyIn) {
+		sqlMapClientTemplate.insert("insertMoneyIn", moneyIn);
 	}
 	
 	public void updateMoneyIn(MoneyIn moneyIn) {
 		sqlMapClientTemplate.update("updateMoneyIn", moneyIn);
+	}
+	
+	public List<MoneyIn> selectMoneyInList(Map<String, Object> param)
+	{
+		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);		
 	}
 	
 	public Integer selectMoneyInCount(Map<String, Object> param)
@@ -44,6 +50,19 @@ public class MoneyInDao extends XwinDao
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);		
 	}
+	
+	public Integer selectMoneyInCount(String search, String keyword, Date fromReqDate, Date toReqDate, Date fromProcDate, Date toProcDate, String status)
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put(search, keyword);
+		param.put("fromReqDate", fromReqDate);
+		param.put("toReqDate", toReqDate);
+		param.put("fromProcDate", fromProcDate);
+		param.put("toProcDate", toProcDate);
+		param.put("status", status);
+		
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyInCount", param);		
+	}
 
 	public MoneyIn selectMoneyIn(String id)
 	{
@@ -53,6 +72,7 @@ public class MoneyInDao extends XwinDao
 	public List<MoneyIn> selectRecentlyRequestList()
 	{
 		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("status", Code.MONEY_IN_REQUEST);
 		param.put("pageIndex", 0);
 		param.put("pageSize", 5);
 		

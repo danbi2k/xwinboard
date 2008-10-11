@@ -5,10 +5,9 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
 <sqlMap namespace="Admin">
-
 	<update id="updateAdmin" parameterClass="map">
 		UPDATE tbl_admin SET VARIABLE = #variable#
-		WHERE KEY = #constant#
+		WHERE CONSTANT = #constant#
 	</update>
 	
 	<select id="selectAdmin" parameterClass="string" resultClass="string">

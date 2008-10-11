@@ -11,6 +11,7 @@
 	<resultMap id="moneyInResultMap" class="MoneyIn">
 		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
 		<result property="money" column="MONEY"/>
 		<result property="status" column="STATUS"/>
 		<result property="reqDate" column="REQ_DATE"/>
@@ -21,8 +22,8 @@
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#)
+		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME)
+		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#)
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">
@@ -44,14 +45,17 @@
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+				USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="name">
-				NAME = #name#
-			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-				STATUS = #status#
+			<isNotNull prepend="AND" property="nameLike">
+				NAME LIKE #nameLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
@@ -75,8 +79,8 @@
 			</isNotNull>
 		</dynamic>
 		ORDER BY ID DESC
-		<isNotNull property="pageIndex">
-		LIMIT #pageIndex#, #pageSize#
+		<isNotNull property="fromRow">
+		LIMIT #fromRow#, #rowSize#
 		</isNotNull>
 	</select>
 	
@@ -86,14 +90,17 @@
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+				USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="name">
-				NAME = #name#
-			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-				STATUS = #status#
+			<isNotNull prepend="AND" property="nameLike">
+				NAME LIKE #nameLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[

@@ -11,7 +11,7 @@ public class AdminDao extends XwinDao
 		param.put("constant", constant);
 		param.put("variable", variable);
 		
-		sqlMapClientTemplate.insert("insertAdmin", param);
+		sqlMapClientTemplate.insert("updateAdmin", param);
 	}
 	
 	public String selectAdmin(String constant)

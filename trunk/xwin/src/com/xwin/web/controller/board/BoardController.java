@@ -38,9 +38,14 @@ public class BoardController extends XwinController
 	{
 		String pageIndex = request.getParameter("pageIndex");
 		String boardName = request.getParameter("boardName");
-		
+
+		ModelAndView mv = null;
 		Member member = (Member) request.getSession().getAttribute("Member");
-		ModelAndView mv = viewBoard(pageIndex, boardName, member.getUserId());
+		if (member == null) {
+			mv = new ModelAndView("dummy");
+		} else {
+			mv = viewBoard(pageIndex, boardName, member.getUserId());
+		}
 		
 		return mv;
 	}

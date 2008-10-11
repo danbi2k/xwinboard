@@ -158,9 +158,9 @@ function cancelBetting(id, gameType)
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>

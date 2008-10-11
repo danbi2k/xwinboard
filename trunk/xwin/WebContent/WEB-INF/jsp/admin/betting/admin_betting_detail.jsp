@@ -9,7 +9,7 @@
 <%
 	Betting betting = (Betting) request.getAttribute("betting");
 %>
-		 
+<div class="title">사용자배팅현황</div>		 
 <table class="prettytable">
 	<tr>
 	<th width=5%>번호</th>

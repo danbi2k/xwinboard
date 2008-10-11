@@ -6,8 +6,17 @@
 
  <%@ include file="../admin_header.jsp"%>
 <%
-	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyOutList");
+	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyInOutList");
+	Integer totalCount = (Integer) request.getAttribute("totalCount");
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String status = XwinUtil.nvl(request.getParameter("status"));	
+	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String search = XwinUtil.nvl(request.getParameter("search"));
+	int ROWSIZE = 20;
+	int SHOWPAGE = 10;
 %>
+
+<div class="title">환전요청</div>
 		 
 <SCRIPT LANGUAGE="JavaScript">
 	function acceptMoneyOutRequest(id) {
@@ -26,19 +35,22 @@
 </SCRIPT>
 	
 <form method='post' name='search' action='adminAccount.aspx'>
-	<input type='hidden' name='mode' value='viewMoneyOut'/>
+	<input type='hidden' name='mode' value='viewMoneyOutList'/>
+	<input type='hidden' name='pageIndex'/>
+	<input type='hidden' name='status' value='<%=status%>'/>
 	<select name='search'>
-		<option value='userId' >회원아이디</option>
-		<option value='name' >예금주명</option>
+		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+ 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
+		<option value='name' <%=search.equals("name")?"selected":""%>>예금주명</option>
 	</select>
-	<input type='text' name='keyword' value=''>
-	<select name='searchDate'>
+	<input type='text' name='keyword' value='<%=keyword%>'>
+	<!--select name='searchDate'>
 		<option value='procDate'>환전일</option>
 		<option value='regDate'>신청일</option>
 	</select>
 		<input type='text' name='fromDate' size=10 readonly onClick="popUpCalendar(this,sdate,'yyyy-mm-dd');" style="cursor:hand" value=''>
 		~
-		<input type='text' name='toDate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''>				
+		<input type='text' name='toDate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''  -->				
 		<input type='submit' value='검 색'>  
 </form>
 <table class="prettytable">
@@ -60,8 +72,8 @@
 	%>
 	<tr>
 		<td>1</td>
-		<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><B><%=moneyOut.getUserId()%></B></a></td>
-		<td><a href='adminAccount.aspx?mode=viewMoneyOutDetail&id=<%=moneyOut.getId()%>'><%=XwinUtil.comma3(moneyOut.getMoney())%></a></td>
+		<td><B><%=moneyOut.getUserId()%></B></td>
+		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 		<td><%=moneyOut.getBankName()%></td>
 		<td><%=moneyOut.getNumber()%></td>
 		<td><%=moneyOut.getName()%></td>
@@ -77,4 +89,45 @@
 
 </table>
 
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+</div>
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

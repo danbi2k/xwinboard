@@ -10,12 +10,13 @@
 
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
+	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">고객센터</div>
+<div class="title">게시판</div>
 
 <form method='post' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value=''/>
@@ -43,27 +44,15 @@
 	</tr>					
 </table>
 
-
-<form name="answer">
-<table class="prettytable">
-<tr>
-<td width="10%">답변</td>
-<td width="*"><textarea name="comment" style="width:100%;height:300;"></textarea></td>
-</tr>
-</table>
-</form>
-<input type='button' value='답변저장' onclick="answerQna()"/>
+<input type="button" value="리스트" onclick="history.back()"/>
+<input type="button" value="삭제" onclick="deleteBoardItem()"/>
 
 <script>
-function answerQna()
+function deleteBoardItem()
 {
-	var query = "mode=answerQna";
-	query += "&id=" + <%=boardItem.getId()%>;
-	query += "&comment=" + document.answer.comment.value;
-	var http = new JKL.ParseXML("adminQna.aspx", query);
-	var result = http.parse();
-	alert(result.resultXml.message);
-	location.href="adminQna.aspx?mode=viewQnaList";
+	if (confirm("삭제하시겠습니까?")) {
+		location.href='adminBoard.aspx?mode=deleteBoardItem&id=<%=boardItem.getId()%>';
+	}
 }
 </script>
 

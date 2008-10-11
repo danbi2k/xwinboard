@@ -1,6 +1,8 @@
 package com.xwin.web.controller.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,13 +25,21 @@ public class AdminLeagueController extends XwinController
 	{
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
-		if (keyword == null)
-			search = null;
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
 		
-		List<League> leagueList = leagueDao.selectLeagueList(search, keyword);
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null) param.put(search, "%" + keyword + "%");
+		
+		List<League> leagueList = leagueDao.selectLeagueList(param);
+		Integer leagueCount = leagueDao.selectLeagueCount(param);
+		
 		ModelAndView mv = new ModelAndView("admin/game/admin_league");
 		mv.addObject("leagueList", leagueList);
+		mv.addObject("leagueCount", leagueCount);
 		
 		return mv;
 	}

@@ -207,6 +207,9 @@ a:hover {
 .post .title {
 	margin: 0;
 	font-size: 2em;
+	font-weight: 900;
+	font-fami	ly: 'µ¸¿ò';
+	padding-bottom: 20px;
 }
 
 .post .posted {
@@ -255,6 +258,7 @@ a:hover {
 /* Footer */
 
 #footer {
+	text-align: center;
 	clear: both;
 	border-top: 1px dotted #000000;
 	font: normal .8em Tahoma, Arial, Helvetica, sans-serif;

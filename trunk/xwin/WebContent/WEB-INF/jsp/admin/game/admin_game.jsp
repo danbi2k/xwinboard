@@ -5,7 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
-	final Integer ROWSIZE = 10;
+	final Integer ROWSIZE = 20;
 	final Integer SHOWPAGE = 10;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
@@ -108,21 +108,14 @@
 	function changeBetStatus(id, oselect)
 	{
 		var betStatus = oselect.value;
-		var msg = "";
-		if (betStatus == '<%=Code.BETTING_STATUS_ACCEPT%>')
-			msg = "표시 상태로 바꾸시겠습니까?";
-		else if (betStatus == '<%=Code.BETTING_STATUS_DENY%>')
-			msg = "미표시 상태로 바꾸시겠습니까?";
 
-		if (confirm(msg)) {
-			var query = "mode=changeBetStatus";
-			query += "&betStatus=" + betStatus;
-			query += "&id=" + id;
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-		}
+		var query = "mode=changeBetStatus";
+		query += "&betStatus=" + betStatus;
+		query += "&id=" + id;
+		
+		var http = new JKL.ParseXML("adminGame.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
 	}
 
 	function cancelGameScore(id)
@@ -152,13 +145,14 @@
 	}
 </SCRIPT>
 
-<h2 class="heading"><%=type.equals("wdl")?"승무패":"핸디캡"%></h2>
+<div class="title"><%=type.equals("wdl")?"승무패":"핸디캡"%></div>
 <input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'">
 <br>
 <br>
 <form method='get' name='search'>
 <input type='hidden' name='pageIndex' value='0'/>
 <input type='hidden' name='mode' value='viewGameList'/>
+<input type='hidden' name='pageIndex'/>
 <input type='hidden' name='type' value='<%=type%>'/>
 
 리그명
@@ -318,14 +312,14 @@
 			}
 			%>
 	</table>
-	<div class="pages">
+<div class="pages">
 <%
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
@@ -351,4 +345,12 @@
 	}
 %>
 	</div>
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

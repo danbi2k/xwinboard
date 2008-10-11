@@ -7,7 +7,7 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	final Integer ROWSIZE = 10;
+	final Integer ROWSIZE = 20;
 	final Integer SHOWPAGE = 10;
 	
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
@@ -40,7 +40,10 @@ function cancelBetting(id, gameType)
 }
 </script>
 
-<form method='post' name='search' action='adminBetting.aspx?mode=viewBettingList'>
+<div class="title">사용자배팅현황</div>
+<form method='get' name='search' action='adminBetting.aspx'>
+<input type="hidden" name="mode" value="viewBettingList"/>
+<input type="hidden" name="pageIndex"/>
  게임종류
 <select name='gameType' onChange='this.form.submit()'>
 <option value=''>전체</option>
@@ -70,7 +73,6 @@ function cancelBetting(id, gameType)
 <input type='submit' value='검 색'>
 </form>
 
-<form method='post' name='game'>
 <table class="prettytable">
 	<tr>
 		<th width=5%>번호</th>
@@ -82,7 +84,7 @@ function cancelBetting(id, gameType)
 		<th>예상금액</th>
 		<th>상태</th>		 
 		<th>정산</th>
-		<th>취소</th>
+		<!-- th>취소</th -->
 	</tr>
 							 
 	<%
@@ -100,7 +102,7 @@ function cancelBetting(id, gameType)
 		<td><%=XwinUtil.comma3(betting.getExpect())%></td>
 		<td><%=Code.getValue(betting.getStatus())%></td>
 		<td><%=Code.getValue(betting.getCalcStatus())%></td>
-		<td><input type="button" onclick="cancelBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')" value="취소"/></td>
+		<!--td><input type="button" onclick="cancelBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')" value="취소"/></td  -->
 	</tr>
 	<%
 		}
@@ -113,9 +115,9 @@ function cancelBetting(id, gameType)
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
@@ -141,5 +143,12 @@ function cancelBetting(id, gameType)
 	}
 %>
 </div>
-
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

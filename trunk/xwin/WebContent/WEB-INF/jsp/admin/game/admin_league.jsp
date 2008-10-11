@@ -7,8 +7,12 @@
 
 
 <%
+	int ROWSIZE = 20;
+	int SHOWPAGE = 10;
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
+	Integer totalCount = (Integer) request.getAttribute("leagueCount");
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
  <%@ include file="../admin_header.jsp"%>
 
@@ -33,13 +37,14 @@
 	}
 </SCRIPT>
 
-<h2 class="title">리그관리</h2>
+<div class="title">리그관리</div>
 <input type="button" value="등록하기" onclick="location.href='adminLeague.aspx?mode=viewRegisterLeagueForm'">
 <br>
 <br>
 
 <form method='post' name='search' action='adminLeague.aspx'>
 	<input type="hidden" name="mode" value="viewLeagueList"/>
+	<input type="hidden" name="pageIndex"/>
 	<select name='search'>
 		<option value='name' selected>리그명</option>
 	</select>
@@ -60,7 +65,7 @@
 						 
 	<tr align='center' bgcolor='#ffffff'>
 		<td width=20%><%=league.getId()%></td>
-		<td width=20%><img src='images/league/<%=league.getImage()%>' width='20' height='12' border=0></td>
+		<td width=20%><img src='images/league/<%=league.getImage()%>' width='22' height='14' border=0></td>
 		<td width=70%><%=league.getName()%></td>
 		<td width=10%><input type="button" onclick="delIT(<%=league.getId()%>)" value="삭제"></td>
 	</tr>
@@ -69,5 +74,45 @@
 	}
 	%>
  </table>
-
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+	</div>
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

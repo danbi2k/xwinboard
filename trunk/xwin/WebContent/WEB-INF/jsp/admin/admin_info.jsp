@@ -25,6 +25,7 @@
 //-->
 </SCRIPT>
 
+<div class="title">관리자정보</div>
 <form method=post name='regist'>
 	<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 		<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -35,20 +36,18 @@
 			<td width=20%>관리자명</td>
 			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='name' value='<%=admin.getNickName()%>'></td>
 		</tr>	
-     <tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='passwd' value='<%=admin.getPassword()%>'>
-		</td>
-	</tr>		
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>전화번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='phone' value='<%=admin.getMobile()%>'></a>
-		</td>
-	</tr>					 
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>EMAIL</td>
-		<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='email' value='<%=admin.getEmail()%>'></a></td>
-	</tr>
+	     <tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>비밀번호</td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='passwd' value='<%=admin.getPassword()%>'></td>
+		</tr>		
+		<tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>전화번호</td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='phone' value='<%=admin.getMobile()%>'></td>
+		</tr>					 
+		<tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>EMAIL</td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='email' value='<%=admin.getEmail()%>'></td>
+		</tr>
 	</table>
 	<BR>													
 	<table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>

@@ -26,6 +26,16 @@
 		ORDER BY NAME DESC
 	</select>
 	
+	<select id="selectLeagueCount" resultClass="integer"
+		parameterClass="map">
+		SELECT COUNT(*) FROM tbl_league
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="name">
+				NAME LIKE #name#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
 	<select id="selectLeagueById" resultMap="leagueResultMap"
 		parameterClass="java.lang.String">
 		SELECT * FROM tbl_league WHERE ID = #value#

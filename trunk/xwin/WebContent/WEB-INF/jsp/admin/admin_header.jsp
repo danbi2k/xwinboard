@@ -47,9 +47,9 @@ function checkIndi()
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
-			<li class="active">충전 (<a id="chargingIndi" href="#">0</a> )</li>
-			<li>환전 ( <a id="exchangeIndi" href="#">0</a> )</li>
-			<li>고객센터 ( <a id="centerIndi" href="#">0</a> )</li>
+			<li class="active">충전 (<a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a> )</li>
+			<li>환전 ( <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a> )</li>
+			<li>고객센터 ( <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList">0</a> )</li>
 		</ul>
 	</div>
 	<div id="content">

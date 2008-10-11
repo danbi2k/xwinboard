@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.Indicator;
@@ -51,6 +52,8 @@ public class AdminController extends XwinController
 		String notice = request.getParameter("notice");
 		adminDao.updateAdmin("NOTICE", notice);
 		
+		Admin.NOTICE = notice;
+		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");		
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -69,8 +72,14 @@ public class AdminController extends XwinController
 	public ModelAndView savePopup(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String notice = request.getParameter("popup");
-		adminDao.updateAdmin("NOTICE", notice);
+		String popup = request.getParameter("popup");
+		String popupFlag = request.getParameter("popupFlag");
+		
+		adminDao.updateAdmin("POPUP", popup);
+		adminDao.updateAdmin("POPUPFLAG", popupFlag);
+		
+		Admin.POPUP = popup;
+		Admin.POPUPFLAG = popupFlag;
 		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");		

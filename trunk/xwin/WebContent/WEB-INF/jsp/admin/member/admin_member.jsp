@@ -53,13 +53,16 @@
 
 </SCRIPT>
 
-<form method='post' name='search' action='adminMember.aspx'>
+<div class="title">회원목록</div>
+
+<form method='GET' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value='viewAdminMember'/>
- 	<select name='grade' onChange='this.form.submit()'>
+	<input type='hidden' name='pageIndex'/>
+ 	<!--select name='grade' onChange='this.form.submit()'>
  		<option value='' <%=grade.equals("")?"selected":""%>>전체</option>
 		<option value='<%=Code.USER_GRADE_NORMAL%>' <%=grade.equals(Code.USER_GRADE_NORMAL)?"selected":""%>>일반</option>
 		<option value='<%=Code.USER_GRADE_VIP%>' <%=grade.equals(Code.USER_GRADE_VIP)?"selected":""%>>VIP</option>
- 	</select>
+ 	</select-->
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
@@ -106,9 +109,9 @@ if (memberList != null) {
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
@@ -134,5 +137,12 @@ if (memberList != null) {
 	}
 %>
 </div>
-
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

@@ -46,7 +46,7 @@
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
 		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list' align="left">
 			<span style="width:100%;color:orange;height:15;overflow:hidden;">
-				<b><a class="board_list" style="color:orange;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>id=<%=boardItem.getId()%>">
+				<b><a class="board_list" style="color:orange;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>">
 				<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 				</a></b>
 			</span>
@@ -102,9 +102,9 @@
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
@@ -142,7 +142,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewUserBoard&boardName=<%=boardName%>pageIndex=" + pageIndex;
+	location.href="board.aspx?mode=viewUserBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

@@ -31,7 +31,7 @@ public class MoneyOutController extends XwinController
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		List<MoneyOut> moneyOutList =
-			moneyOutDao.selectMoneyOutList(member.getUserId(), null);//Code.MONEY_OUT_REQUEST);
+			moneyOutDao.selectMoneyOutList(member.getUserId(), Code.MONEY_OUT_REQUEST);
 		
 		ModelAndView mv = new ModelAndView("user/money_out_req_list");
 		mv.addObject("moneyOutList", moneyOutList);
@@ -54,7 +54,7 @@ public class MoneyOutController extends XwinController
 			moneyOut.setUserId(member.getUserId());
 			moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
 			moneyOut.setReqDate(new Date());
-			
+			moneyOut.setNickName(member.getNickName());
 			moneyOutDao.insertMoneyOut(moneyOut);
 			
 			Account account = new Account();

@@ -25,12 +25,12 @@
 %>
 <%@ include file="../admin_header.jsp"%>
 
-<h2 class="heading">경기별 배팅 현황</h2>
-<br>
-<br>
+<div class="title">경기별 배팅 현황</div>
+
 <form method='get' name='search'>
 <input type='hidden' name='pageIndex' value='0'/>
 <input type='hidden' name='mode' value='viewBettingMoneyList'/>
+<input type='hidden' name='pageIndex'/>
 
 경기종류
 <select name="type" onChange='this.form.submit()'>
@@ -113,9 +113,9 @@
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) Math.ceil(totalCount / ROWSIZE);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
-	int nextPage = startPage + 15;
+	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
@@ -141,5 +141,12 @@
 	}
 %>
 </div>
-
+<script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+</script>
 <%@ include file="../admin_footer.jsp"%>

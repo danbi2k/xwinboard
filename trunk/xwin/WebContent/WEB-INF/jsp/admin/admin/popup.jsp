@@ -12,24 +12,22 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
+<div class="title">긴급공지</div>
 <form name="notice">
 <table class="prettytable">
 	<tr>
 		<td width="10%">내용</td>
 		<td width="*">
-		<textarea name="text" style='width=100%;height=500px'>
-		 <%
+		<textarea name="text" style='width=100%;height=500px'><%
 	    String context = Admin.POPUP;
 	    context = StringEscapeUtils.escapeHtml(context);
-	    context = context.replaceAll("\n", "<br>");
 	    out.print(context);
-	    %>
-		</textarea>
+	    %></textarea>
 		<input type="checkbox" name="popupFlag" <%=Admin.POPUPFLAG.equals("Y")?"checked":""%>/> 표시여부
 		</td>
 	</tr>					
 </table>
-<input type='button' value='긴급공지 저장' onclick="saveNotice()"/>
+<input type='button' value='긴급공지 저장' onclick="savePopup()"/>
 </form>
 
 <script>
@@ -37,7 +35,7 @@ function savePopup()
 {
 	var query = "mode=savePopup";
 	query += "&popup=" + document.notice.text.value;
-	if (document.popupFlag.checked == true)
+	if (document.notice.popupFlag.checked == true)
 		query += "&popupFlag=Y";
 	else
 		query += "&popupFlag=N";

@@ -29,10 +29,10 @@
 		SELECT * FROM tbl_access
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
-				USERID = #userId#
+				USERID LIKE #userId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="nickName">
-				NICKNAME = #nickName#
+				NICKNAME LIKE #nickName#
 			</isNotNull>
 		</dynamic>		
 		ORDER BY DATE DESC

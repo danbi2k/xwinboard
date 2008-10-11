@@ -48,6 +48,8 @@
 	}
 </SCRIPT>
 
+<div class="title">회원정보</div>
+
 <form method=post name='regist'>
 <input type='hidden' name='mode' value='updateMember'/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
@@ -103,5 +105,64 @@
 		</td>
 	</tr>
 </table>
+</form>
+
+<form name="charging">
+<table border=1 id='uploadform'>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=100% bgcolor='#ffffff' align='center'>직충전</td>
+		<td width=100% bgcolor='#ffffff' align='center'>
+			<input type="text" name="plus" size=30></input>
+			<input type="button" onclick="plus_charging()" value="직충전"></input>
+		</td>
+	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=100% bgcolor='#ffffff' align='center'>직차감</td>
+		<td width=100% bgcolor='#ffffff' align='center'>
+			<input type="text" name="minus" size=30></input>
+			<input type="button" onclick="minus_charging()" value="직차감"></input>
+		</td>
+	</tr>
+</table>
+</form>
+<script>
+function plus_charging()
+{
+	var f = document.charging;
+	if (!f.plus) {
+		alert("숫자를 입력하세요");
+		return false;
+	}
+	
+	if (confirm("<%=member.getNickName()%>님께 " + f.plus.value + " 원을 직충전 하시겠습니까?")) {
+		var query = "mode=directCharging";
+		query += "&userId=<%=member.getUserId()%>";
+		query += "&money=" + f.plus.value;
+		var http = new JKL.ParseXML("adminAccount.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		location.reload();
+	}
+}
+
+function minus_charging()
+{
+	var f = document.charging;
+	if (!f.minus) {
+		alert("숫자를 입력하세요");
+		return false;
+	}
+	
+	if (confirm("<%=member.getNickName()%>님께 " + f.minus.value + " 원을 직차감 하시겠습니까?")) {
+		var query = "mode=directMinusCharging";
+		query += "&userId=<%=member.getUserId()%>";
+		query += "&money=" + f.minus.value;
+		var http = new JKL.ParseXML("adminAccount.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		location.reload();
+	}
+}
+</script>
 
 <%@ include file="../admin_footer.jsp"%>

@@ -18,6 +18,16 @@ public class LeagueDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectLeagueList");
 	}
 	
+	public List<League> selectLeagueList(Map<String, Object> param)
+	{
+		return sqlMapClientTemplate.queryForList("selectLeagueList", param);
+	}
+	
+	public Integer selectLeagueCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectLeagueCount", param);
+	}
+	
 	public List<League> selectLeagueList(String search, String keyword)
 	{
 		Map<String, String> param = new HashMap<String, String>(1);

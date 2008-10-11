@@ -35,7 +35,7 @@ public class MoneyInController extends XwinController
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		List<MoneyIn> moneyInList =
-			moneyInDao.selectMoneyInList(member.getUserId(), null);//Code.MONEY_IN_REQUEST);
+			moneyInDao.selectMoneyInList(member.getUserId(), Code.MONEY_IN_REQUEST);
 		
 		ModelAndView mv = new ModelAndView("user/money_in_req_list");
 		mv.addObject("moneyInList", moneyInList);
@@ -65,7 +65,7 @@ public class MoneyInController extends XwinController
 				moneyIn.setStatus(Code.MONEY_IN_REQUEST);
 				moneyIn.setBankBookId(_bankBookId);
 				moneyIn.setReqDate(new Date());
-				
+				moneyIn.setNickName(member.getNickName());
 				moneyInDao.insertMoneyIn(moneyIn);
 		
 				rx = new ResultXml(0, "머니충전이 요청되었습니다", null);

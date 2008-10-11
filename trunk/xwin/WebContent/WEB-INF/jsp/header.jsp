@@ -56,16 +56,17 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="207" align="center"><a href="index.aspx"><img src="images/top_logo.jpg" border="0"></a></td>
-    <td width="753" valign="bottom" align="right">
-		<table align="right" width="712" height="33" cellpadding="0" cellspacing="0">
-
-		<tr><td valign="top" bgcolor="white">
-			<IMG id="top1" style="position:absolute;" SRC="images/top_menu0.gif" USEMAP="#map_top_menu" BORDER="0">
-			<IMG id="top2" style="position:absolute;filter:alpha(opacity=100)" SRC="images/top_menu1.gif" USEMAP="#map_top_menu" BORDER="0"  style="cursor:hand;">
-		</td></tr>
-		</table>
-	</td>
+<tr><td width="366" align="center"><a href="index.aspx"><img src="images/newtop.jpg" border="0"></a></td>
+<td width="*" valign="bottom" style="padding:0 0 10 0;">
+<ul class="topmenu">
+<li><a href="game.aspx?mode=viewGameList&type=wdl">승무패</a></li>
+<li><a href="game.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
+<li><a href="game.aspx?mode=viewGameResultList">경기결과</a></li>
+<li><a href="rules.aspx">핸디캡이해</a></li>
+<li><a href="board.aspx?mode=viewUserBoard&boardName=user">게시판</a></li>
+<li><a href="board.aspx?mode=viewQnaBoard&boardName=qna">고객센터</a></li>
+</ul>
+</td>
 </tr>
 </table>
 

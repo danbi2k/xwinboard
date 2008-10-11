@@ -14,6 +14,8 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
+<div class="title">고객센터</div>
+
 <form method='post' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value=''/>
  </form>

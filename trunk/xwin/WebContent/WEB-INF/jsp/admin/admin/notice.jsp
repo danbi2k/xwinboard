@@ -12,19 +12,19 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
+<div class="title">NOTICE</div>
+
 <form name="notice">
 <table class="prettytable">
 	<tr>
 		<td width="10%">내용</td>
 		<td width="*">
-		<textarea name="text" style='width=100%;height=500px'>
-		 <%
+		<textarea name="text" style='width=100%;height=500px'><%
 	    String context = Admin.NOTICE;
 	    context = StringEscapeUtils.escapeHtml(context);
 	    context = context.replaceAll("\n", "<br>");
 	    out.print(context);
-	    %>
-		</textarea>
+	    %></textarea>
 		</td>
 	</tr>					
 </table>

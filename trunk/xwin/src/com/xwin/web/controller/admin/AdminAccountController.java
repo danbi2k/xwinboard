@@ -1,7 +1,9 @@
 package com.xwin.web.controller.admin;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,8 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminAccountController extends XwinController
 {
+	int ROWSIZE = 20;
+	
 	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -31,21 +35,31 @@ public class AdminAccountController extends XwinController
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
-		List<MoneyIn> moneyInList = null;
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
-		if (searchDate != null && searchDate.equals("reqDate"))
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null, status);
-		else if (searchDate != null && searchDate.equals("procDate"))
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), status);
-		else
-			moneyInList = moneyInDao.selectMoneyInList(search, keyword, null, null, null, null, status);
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
+		param.put("status", status);
+		
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(param);
+		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_IN_REQUEST))
 			mv = new ModelAndView("admin/account/money_in_req");
-		else
+		else if (status.equals(Code.MONEY_IN_SUCCESS))
 			mv = new ModelAndView("admin/account/money_in");
-		mv.addObject("moneyInList", moneyInList);
+		else if (status.equals(Code.MONEY_IN_DIRECT))
+			mv = new ModelAndView("admin/account/money_direct");
+		mv.addObject("moneyInOutList", moneyInList);
+		mv.addObject("totalCount", moneyInCount);
 		
 		return mv;
 	}
@@ -61,21 +75,31 @@ public class AdminAccountController extends XwinController
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
-		List<MoneyOut> moneyOutList = null;
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
-		if (searchDate != null && searchDate.equals("reqDate"))
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), null, null, status);
-		else if (searchDate != null && searchDate.equals("procDate"))
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, XwinUtil.toDate(fromDate), XwinUtil.toDate(toDate), status);
-		else
-			moneyOutList = moneyOutDao.selectMoneyOutList(search, keyword, null, null, null, null, status);
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
+		param.put("status", status);
+		
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
+		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_OUT_REQUEST))
 			mv = new ModelAndView("admin/account/money_out_req");
-		else
+		else if (status.equals(Code.MONEY_OUT_SUCCESS))
 			mv = new ModelAndView("admin/account/money_out");
-		mv.addObject("moneyOutList", moneyOutList);
+		else if (status.equals(Code.MONEY_OUT_DIRECT))
+			mv = new ModelAndView("admin/account/money_direct");
+		mv.addObject("moneyInOutList", moneyOutList);
+		mv.addObject("totalCount", moneyOutCount);
 		
 		return mv;
 	}
@@ -143,5 +167,99 @@ public class AdminAccountController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;	
+	}
+	
+	public ModelAndView directCharging(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ResultXml rx = null;
+		String userId = request.getParameter("userId");
+		String _money = request.getParameter("money");
+		
+		Long money = null;
+		try {
+			money = Long.parseLong(_money);
+		} catch (Exception e) {
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+		}
+		
+		if (money != null) {
+			Member member = memberDao.selectMember(userId, null);
+			
+			MoneyIn moneyIn = new MoneyIn();
+			moneyIn.setMoney(money);
+			moneyIn.setProcDate(new Date());
+			moneyIn.setStatus(Code.MONEY_IN_DIRECT);
+			moneyIn.setUserId(userId);
+			moneyIn.setNickName(member.getNickName());
+			moneyInDao.insertMoneyIn(moneyIn);
+			
+			Account account = new Account();
+			account.setUserId(member.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_MONEYIN_DIRECT);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(moneyIn.getMoney());
+			account.setBalance(member.getBalance() + moneyIn.getMoney());
+			account.setMoneyInId(moneyIn.getId());
+			
+			accountDao.insertAccount(account);
+			
+			memberDao.plusMinusBalance(userId, money);
+			rx = new ResultXml(0, "직충전 되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;		
+	}
+	
+	public ModelAndView directMinusCharging(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ResultXml rx = null;
+		String userId = request.getParameter("userId");
+		String _money = request.getParameter("money");
+		
+		Long money = null;
+		try {
+			money = Long.parseLong(_money);
+		} catch (Exception e) {
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+		}
+		
+		if (money != null) {
+			Member member = memberDao.selectMember(userId, null);
+			
+			if (member.getBalance() < money) {
+				rx = new ResultXml(-1, "잔액을 초과하였습니다", null);
+			} 
+			else {
+				MoneyOut moneyOut = new MoneyOut();
+				moneyOut.setMoney(money);
+				moneyOut.setProcDate(new Date());
+				moneyOut.setStatus(Code.MONEY_OUT_DIRECT);
+				moneyOut.setUserId(userId);
+				moneyOut.setNickName(member.getNickName());
+				moneyOutDao.insertMoneyOut(moneyOut);
+				
+				Account account = new Account();
+				account.setUserId(member.getUserId());
+				account.setType(Code.ACCOUNT_TYPE_MONEYOUT_DIRECT);
+				account.setDate(new Date());
+				account.setOldBalance(member.getBalance());
+				account.setMoney(moneyOut.getMoney());
+				account.setBalance(member.getBalance() + moneyOut.getMoney());
+				account.setMoneyInId(moneyOut.getId());
+				
+				accountDao.insertAccount(account);
+				
+				memberDao.plusMinusBalance(userId, money * -1);
+				rx = new ResultXml(0, "직차감 되었습니다", null);
+			}
+		}	
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;		
 	}
 }
