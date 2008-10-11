@@ -53,20 +53,20 @@ function FnDrawMyBetList(data)
 			for (j in betGame) {
 				var width = 100.0 / data[i].gameCount;
 				if (betGame[j].status == 'GS001' || betGame[j].status == 'GS002' || betGame[j].status == 'GS003') {
-					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>－</td>");
+					row.push("<td width='" + width + "%' bgcolor='gray' style='color:black' align='center'>　</td>");
 				} else if (betGame[j].status == 'GS005') {
-					row.push("<td width='" + width + "%' bgcolor='darkgray' style='color:black' align='center'>－</td>");
+					row.push("<td width='" + width + "%' bgcolor='darkgray' style='color:black' align='center'>　</td>");
 				} else if (betGame[j].status == 'GS004') {
 					if (betGame[j].result != undefined) {
 						if (betGame[j].result == betGame[j].guess) {
-							row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>○</td>");
+							row.push("<td width='" + width + "%' bgcolor='green' style='color:black' align='center'>　</td>");
 						} else if (betGame[j].type == 'wdl' && betGame[j].result != betGame[j].guess) {
-							row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>×</td>");
+							row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>　</td>");
 						} else if (betGame[j].type == 'handy') {
 							if (betGame[j].result == 'D')
-								row.push("<td width='" + width + "%' bgcolor='orange' style='color:black' align='center'>△</td>");
+								row.push("<td width='" + width + "%' bgcolor='orange' style='color:black' align='center'>　</td>");
 							else
-								row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>×</td>");
+								row.push("<td width='" + width + "%' bgcolor='red' style='color:black' align='center'>　</td>");
 						}
 					}
 				}

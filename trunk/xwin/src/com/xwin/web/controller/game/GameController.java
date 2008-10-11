@@ -1,6 +1,5 @@
 package com.xwin.web.controller.game;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -106,6 +105,19 @@ public class GameController extends XwinController
 		
 		ResultXml resultXml = new ResultXml(0, null, gameList);
 
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
+		
+		return mv;
+	}
+	
+	public ModelAndView deleteCart(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");
+		request.getSession().setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		
+		ResultXml resultXml = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
 		
