@@ -122,6 +122,25 @@ function FnBetting()
 	}
 }
 
+function FnAddAllCart()
+{
+	if (confirm("장바구니에 넣으시겠습니까?")) {
+		var money = CartFrm.BetAmt.value;
+		if (money == undefined || money.length == 0)
+			CartFrm.BetAmt.value = money = "0";
+		
+		var query = "mode=addAllCart";
+		query += "&type=" + gameType;
+		query += "&money=" + money;
+		var http = new JKL.ParseXML("betting.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0 || result.resultXml.code == -2) {			
+			document.location.reload();
+		}
+	}
+}
+
 function FnDeleteCart(type)
 {
 	var query = "mode=deleteCart";

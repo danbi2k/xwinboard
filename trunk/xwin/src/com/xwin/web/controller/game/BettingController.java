@@ -20,6 +20,7 @@ import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.web.command.AllCartItem;
 import com.xwin.web.command.CartCalc;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
@@ -28,6 +29,17 @@ import com.xwin.web.controller.XwinController;
 public class BettingController extends XwinController
 {
 	private static final long MAX_EXPECT = 3000000;
+	
+	public ModelAndView viewBettingCart(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
+		
+		ModelAndView mv = new ModelAndView("game/betting_cart");
+		mv.addObject(allCartList);
+		
+		return mv;
+	}
 	
 	public ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -108,6 +120,72 @@ public class BettingController extends XwinController
 			session.removeAttribute("cartMap_" + _type);
 			
 			rx = new ResultXml(0, "배팅 하셨습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView addAllCart(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		ResultXml rx = null;
+		
+		String _type = request.getParameter("type");
+		String _money = request.getParameter("money");
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("Member");
+		
+		Map<String, GameCartItem> cartMap =
+			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + _type);
+		
+		Long money = Long.parseLong(_money);		
+		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
+		
+		Collection<GameCartItem> cartCol = cartMap.values();
+		
+		for (GameCartItem gci : cartCol) {
+			Game game = gameDao.selectGame(gci.getGameId());
+			if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
+					game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
+				rx = new ResultXml(-2, "배팅 가능한 상태가 아닌 경기가 포함되어 있습니다", null);
+				
+				ModelAndView mv = new ModelAndView("xmlFacade");
+				mv.addObject("resultXml", XmlUtil.toXml(rx));
+				
+				return mv;
+			}
+		}
+		
+		if (cartCol.size() == 0) {
+			rx = new ResultXml(-1, "경기를 선택 하십시오", null);
+		}
+		else if (cc.getMoney() < 5000) {
+			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
+		}
+		else if (cc.getExpect() > MAX_EXPECT) {
+			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
+		}
+		else if (cc.getAfter() < 0) {
+			rx = new ResultXml(-1, "잔액이 부족합니다", null);
+		} else {
+			List<GameCartItem> cartItemList = new ArrayList<GameCartItem>(cartCol.size());
+			cartItemList.addAll(cartCol);
+			
+			AllCartItem allCartItem = new AllCartItem();
+			allCartItem.setMoney(money);
+			allCartItem.setRate(cc.getRate());
+			allCartItem.setExpect(cc.getExpect());
+			allCartItem.setCartItemList(cartItemList);
+			allCartItem.setDate(new Date());
+			
+			List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
+			allCartList.add(allCartItem);
+			
+			session.removeAttribute("cartMap_" + _type);
+			
+			rx = new ResultXml(-1, "장바구니에 넣었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

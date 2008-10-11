@@ -74,7 +74,7 @@ var gameType = '<%=type%>'
 					<TR>
 						<TD>
 							<IMG src="images/icon02.gif" align=absMiddle><B>선택하신 경기&nbsp;
-							<IMG style="CURSOR: pointer" onclick="location.href='Cart.asp'" src="images/sub02.gif" align=absMiddle> 
+							<IMG style="CURSOR: pointer;display:none" onclick="location.href='betting.aspx?mode=viewBettingCart'" src="images/sub02.gif" align=absMiddle> 
 							<IMG style="CURSOR: pointer" onclick=FnDeleteCart('<%=type%>') src="images/sub03.gif" align=absMiddle></B>
 						</TD>
 					</TR>
@@ -103,7 +103,7 @@ var gameType = '<%=type%>'
 				<TR>
 					<TD align=middle>예상배당율</TD>
 					<TD>: <B><SPAN id=rateDiv value=0>0.00</SPAN></B></TD>
-					<TD align=middle><IMG style="CURSOR: pointer" onclick="betting('cart')" src="images/btn_in.gif"></TD>
+					<TD align=middle><IMG style="CURSOR: pointer;display:none" onclick="FnAddAllCart()" src="images/btn_in.gif"></TD>
 				</TR>
 				<TR>
 					<TD>예상적중금</TD>

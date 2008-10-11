@@ -18,6 +18,9 @@
 		
 	<bean id="rulesController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/rules"/>
+	
+	<bean id="aboutHandyController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/about_handy"/>
 			
 	<bean id="ktfSmsController" class="com.xwin.web.controller.KtfSmsController"
 		p:ktfSmsConnector-ref="ktfSmsConnector"/>

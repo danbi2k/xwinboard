@@ -1,5 +1,6 @@
 package com.xwin.web.controller.game;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import com.xwin.domain.game.League;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.web.command.AllCartItem;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -29,7 +31,12 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		if (session.getAttribute("allCartList") == null)
+			session.setAttribute("allCartList", new ArrayList<AllCartItem>());
+		
+		if (session.getAttribute("cartMap_" + type) == null)
+			session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
 		ModelAndView mv = new ModelAndView("game/game");

@@ -62,7 +62,7 @@
 <li><a href="game.aspx?mode=viewGameList&type=wdl">승무패</a></li>
 <li><a href="game.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
 <li><a href="game.aspx?mode=viewGameResultList">경기결과</a></li>
-<li><a href="rules.aspx">핸디캡이해</a></li>
+<li><a href="aboutHandy.aspx">핸디캡이해</a></li>
 <li><a href="board.aspx?mode=viewUserBoard&boardName=user">게시판</a></li>
 <li><a href="board.aspx?mode=viewQnaBoard&boardName=qna">고객센터</a></li>
 </ul>
@@ -79,43 +79,6 @@
 	<AREA SHAPE=RECT COORDS="509,0,613,33" href="rules.aspx"	 onMouseOver="clipthis('top1','top2',509,0,613,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard&boardName=user" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
 </MAP>
-
-
-<script language="JavaScript">
-function top_menu_out(){
-    if (window.menu_out){ clearInterval(menu_out); }
-    menu_out=setInterval("top_menu_init()",500);
-}
-function top_menu_init(){
-    if (window.menu_out){ clearInterval(menu_out); }
-	
-		clipthis('top1','top2', 0,0,100,33,100);	
-		
-	
-}
-function clipthis(menu1,menu2,clipleft,cliptop,clipright,clipbottom,alpha){
-	if (window.menu_out){ clearInterval(menu_out); }
-    var obj1 = document.getElementById(menu1);
-    var obj2 = document.getElementById(menu2);
-    obj2.filters.alpha.opacity=alpha;
-    high(obj2);
-    if (document.all) { obj2.style.clip ="rect("+cliptop+" "+clipright+" "+clipbottom+" "+clipleft+")"; }
-    if (document.layers) { obj2.clip.left=clipleft; obj2.clip.right=clipright; obj2.clip.top=cliptop; obj2.clip.bottom=clipbottom; }
-}
-function high(obj){
-    theobject=obj;
-    if (window.highlighting){ clearInterval(highlighting); }
-    highlighting=setInterval("highlightit(theobject,100,true)",20);
-}
-function highlightit(obj,val,view){
-	if(view){
-	    if (obj.filters.alpha.opacity<val){ obj.filters.alpha.opacity+=10; } else if (window.highlighting){ clearInterval(highlighting); }
-	}else{
-		if (obj.filters.alpha.opacity>val){ obj.filters.alpha.opacity-=10; } else if (window.highlighting){ clearInterval(highlighting); }
-	}
-}
-top_menu_init();
-</script>
 
 <iframe name='hidden_iframe' style='display:none' src='About:Blank'></iframe>
 <table width="960" height="42" background="images/login_bg.jpg" cellpadding="0" cellspacing="0" >
@@ -134,7 +97,7 @@ if (login) {
 		<table cellpadding="0" cellspacing="0">
 		<tr><td><img src="images/money_1.gif"></td>
 			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=XwinUtil.comma3(member.getBalance())%></td>
-			<td><img src="images/money_3.gif"></td>			
+			<td><img src="images/money_3.gif"></td>	
 		</tr>
 		</table>
 	</td>	

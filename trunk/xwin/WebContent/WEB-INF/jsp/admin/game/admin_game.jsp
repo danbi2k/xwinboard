@@ -69,7 +69,7 @@
 		var awayScore = document.getElementById("awayScore_"+id).value;
 
 		if (homeScore == '' || awayScore == '') {
-			alert("스코어를 입력하세요");
+			alert("" + id +"번 경기에 스코어를 입력하세요");
 			return;
 		}
 
@@ -83,15 +83,15 @@
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
-			if (result.resultXml.code == 0) {
-				location.reload();
-			}
+			//if (result.resultXml.code == 0) {
+			//	location.reload();
+			//}
 		}
 	}
 
 	function cancelGame(id)
 	{
-		if (confirm("경기를 취소 하시겠습니까?")) {
+		if (confirm("" + id + "번 경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
 			query += "&type=" + '<%=type%>';
@@ -99,9 +99,9 @@
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
-			if (result.resultXml.code == 0) {
-				location.reload();
-			}
+			//if (result.resultXml.code == 0) {
+			//	location.reload();
+			//}
 		}
 	}
 
@@ -147,9 +147,27 @@
 	function saveAllScore()
 	{
 		var c = document.game.checkGame;
-		for (var i in c) {
-			alert(c[i].value); 
+		c = Xwin.ToArray(c);
+		for (var i=0; i < c.length ; i++) {
+			if (c[i].checked) {
+				endGame(c[i].value);
+			} 
 		}
+
+		location.reload();
+	}
+
+	function calcelAllGame()
+	{
+		var c = document.game.checkGame;
+		c = Xwin.ToArray(c);
+		for (var i=0; i < c.length ; i++) {
+			if (c[i].checked) {
+				cancelGame(c[i].value);
+			} 
+		}
+
+		location.reload();
 	}
 </SCRIPT>
 
@@ -243,7 +261,7 @@
 				
 		%>
  		<tr>
-			<th><input type="checkbox" name="checkGame value="<%=game.getId()%>"></th>
+			<th><input type="checkbox" name="checkGame" value="<%=game.getId()%>"></th>
 			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>"><%=game.getId()%></a></td>
 			<td><%=game.getLeagueName()%></td>
 			
@@ -267,9 +285,9 @@
 				<%
 				if (game.getBetStatus().equals(Code.BETTING_STATUS_DENY)) {
 				%>
-				<input id='homeScore_<%=game.getId()%>' type='text' name='homeScore' value='<%=XwinUtil.nvl(game.getHomeScore())%>' size=2>
+				<input id='homeScore_<%=game.getId()%>' type='text' name='homeScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getHomeScore())%>' size=2>
 				:
-				<input id='awayScore_<%=game.getId()%>' type='text' name='awayScore' value='<%=XwinUtil.nvl(game.getAwayScore())%>' size=2>
+				<input id='awayScore_<%=game.getId()%>' type='text' name='awayScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getAwayScore())%>' size=2>
 				<%
 				} else {
 				%>
@@ -322,7 +340,7 @@
 			%>
 	</table>
 	<input type='button' value='스코어저장' onclick='saveAllScore()' style='cursor:hand'>
-	<input type='button' value='경기취소' onclick='cancelGame()' style='cursor:hand'>
+	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'>
 <div class="pages">
 <%
 	int pIdx = 0;

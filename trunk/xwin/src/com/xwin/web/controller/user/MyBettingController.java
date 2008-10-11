@@ -1,6 +1,8 @@
 package com.xwin.web.controller.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +18,36 @@ import com.xwin.web.controller.XwinController;
 
 public class MyBettingController extends XwinController
 {
+	int ROWSIZE = 5;
+	
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("user/my_betting");	
+		ModelAndView mv = null;
+		
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null) {
+			mv = new ModelAndView("dummy");
+			return mv;
+		}
+		
+
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<Betting> bettingList =	bettingDao.selectBettingList(param);
+		Integer bettingCount =	bettingDao.selectBettingCount(param);
+		
+		mv = new ModelAndView("user/my_betting");
+		mv.addObject("bettingList", bettingList);
+		mv.addObject("bettingCount", bettingCount);
 		return mv;
 	}
 	

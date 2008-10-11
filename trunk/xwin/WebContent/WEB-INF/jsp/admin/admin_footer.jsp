@@ -78,7 +78,7 @@
 </div>
 <script>
 checkIndi();
-setInterval("checkIndi()", 10000);
+setInterval("checkIndi()", 60000);
 </script>
 </body>
 </html>

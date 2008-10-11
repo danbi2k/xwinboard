@@ -15,8 +15,10 @@
 <script LANGUAGE="javascript" src="script/jkl-parsexml.js"></script>	
 <script LANGUAGE="javascript" src="script/calendar.js"></script>
 <script LANGUAGE="javascript" src="script/main.js"></script>
+<script LANGUAGE="javascript" src="script/xwin.js"></script>
 </head>
 <body>
+<%@ include file="playSound.jsp"%>
 <script>
 <%
 if (admin == null) {
@@ -24,6 +26,9 @@ if (admin == null) {
 	out.print("location.href='admin';");	
 }
 %>
+
+var chargingVal, exchangeVal, centerVal;
+
 function checkIndi()
 {
 	var chargingIndi = document.getElementById("chargingIndi");
@@ -35,10 +40,22 @@ function checkIndi()
 	var result = http.parse();
 	var data = result.resultXml.object;
 
-	chargingIndi.innerHTML = (data.chargingIndi);
-	exchangeIndi.innerHTML = (data.exchangeIndi);
-	centerIndi.innerHTML = (data.centerIndi);	
+	chargingVal = chargingIndi.innerHTML = (data.chargingIndi);
+	exchangeVal = exchangeIndi.innerHTML = (data.exchangeIndi);
+	centerVal = centerIndi.innerHTML = (data.centerIndi);	
 }
+
+function playSound()
+{
+	if (chargingVal > 0)
+		playIt(player1);
+	if (exchangeVal > 0)
+		playIt(player2);
+	if (centerVal > 0)
+		playIt(player3);
+}
+
+setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
 	<div id="header">
