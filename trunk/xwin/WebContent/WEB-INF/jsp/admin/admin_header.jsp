@@ -42,7 +42,7 @@ function checkIndi()
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminMain.aspx?mode=viewAdminMain">Bwin-Kor</a></h1>
+		<h1><a href="adminMain.aspx?mode=viewAdminMain">bwin-kor</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>

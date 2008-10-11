@@ -1,11 +1,11 @@
 var CODE_TABLE = new Object();
-CODE_TABLE["GS002"] = "배팅";
-CODE_TABLE["GS003"] = "마감";
+CODE_TABLE["GS002"] = "경기대기";
+CODE_TABLE["GS003"] = "경기진행";
 CODE_TABLE["GS004"] = "경기종료";
 CODE_TABLE["GS005"] = "경기취소";
 
-CODE_TABLE["BTS01"] = "접수중";
-CODE_TABLE["BTS02"] = "진행중";
+CODE_TABLE["BTS01"] = "배팅";
+CODE_TABLE["BTS02"] = "마감";
 
 CODE_TABLE["BS001"] = "진행중";
 CODE_TABLE["BS002"] = "당첨";

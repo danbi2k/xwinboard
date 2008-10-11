@@ -62,6 +62,9 @@ public class Code
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
 	
+	public static final String GAME_DISPLAY_OPEN		= "GMD01";
+	public static final String GAME_DISPLAY_CLOSE		= "GMD02";
+	
 	public static final String BOARDITEM_TYPE_NOTICE		= "BIT01";
 	public static final String BOARDITEM_TYPE_USER			= "BIT10";
 	
@@ -80,8 +83,11 @@ public class Code
 		put(BOARDITEM_TYPE_NOTICE, "공지");
 		put(BOARDITEM_TYPE_USER, "일반");
 		
-		put(BETTING_STATUS_ACCEPT, "표시");
-		put(BETTING_STATUS_DENY, "미표시");
+		put(BETTING_STATUS_ACCEPT, "배팅");
+		put(BETTING_STATUS_DENY, "마감");
+		
+		put(GAME_DISPLAY_CLOSE, "미표시");
+		put(GAME_DISPLAY_OPEN, "표시");
 		
 		put(ACCOUNT_TYPE_BETTING, "배팅출금");
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");

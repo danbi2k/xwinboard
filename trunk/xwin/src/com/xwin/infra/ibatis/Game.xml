@@ -29,6 +29,7 @@
 		<result property="winMoney" column="WIN_MONEY"/>
 		<result property="drawMoney" column="DRAW_MONEY"/>
 		<result property="loseMoney" column="LOSE_MONEY"/>
+		<result property="displayStatus" column="DP_STATUS"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -64,6 +65,9 @@
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
 		</isNotNull>
+		<isNotNull prepend="AND" property="displayStatus">
+			g.DP_STATUS = #displayStatus#
+		</isNotNull>
 		<isNotNull prepend="AND" property="statusList">
 			<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
 				g.STATUS = #statusList[]#
@@ -82,7 +86,7 @@
 			g.GAME_DATE <= #toDate#
 			]]>
 		</isNotNull>
-		ORDER BY GAME_DATE DESC
+		ORDER BY GAME_DATE $ORDERBY$
 		<isNotNull prepend="LIMIT" property="fromRow">
 			#fromRow#, #rowSize#
 		</isNotNull>
@@ -107,6 +111,9 @@
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
 		</isNotNull>
+		<isNotNull prepend="AND" property="displayStatus">
+			g.DP_STATUS = #displayStatus#
+		</isNotNull>
 		<isNotNull prepend="AND" property="statusList">
 			<iterate prepend="" property="statusList" open="(" close=")" conjunction="OR">
 				g.STATUS = #statusList[]#
@@ -128,8 +135,8 @@
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">
-		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS)
-			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#)
+		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#)
 	</insert>
 	
 	<update id="updateGame" parameterClass="Game">
@@ -161,6 +168,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="displayStatus">
+			DP_STATUS = #displayStatus#
 			</isNotNull>
 			<isNotNull prepend="," property="betStatus">
 			BET_STATUS = #betStatus#

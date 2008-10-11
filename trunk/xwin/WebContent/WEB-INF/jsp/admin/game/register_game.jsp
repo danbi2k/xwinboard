@@ -113,9 +113,9 @@
 		핸디
 		<select name='drawRate'>
 		<%
-		for (double i = -20 ; i <= 20 ; i+=0.5) {
+		for (double i = -100 ; i <= 100 ; i+=0.5) {
 		%>
-			<option value="<%=i%>"><%=i%></option>
+			<option value="<%=i%>" <%=i==0?"selected":""%>><%=i>0?"+"+i:i%></option>
 		<%
 		}
 		%>	

@@ -64,6 +64,7 @@
 		p:memberDao-ref="memberDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:bettingService-ref="bettingService"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 					
 	<bean id="adminController"

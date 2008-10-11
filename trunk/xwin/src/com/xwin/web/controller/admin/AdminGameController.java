@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
@@ -31,7 +33,6 @@ public class AdminGameController extends XwinController
 	{
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
-		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
@@ -45,7 +46,7 @@ public class AdminGameController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("leagueId", leagueId);
-		param.put("status", status);
+		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("betStatus", betStatus);
 		if (keyword != null) param.put(search, "%"+keyword+"%");
 		if (gameDate != null) {
@@ -61,6 +62,53 @@ public class AdminGameController extends XwinController
 		List<Game> gameList = gameDao.selectGameList(param);
 		
 		ModelAndView mv = new ModelAndView("admin/game/admin_game");
+		mv.addObject("leagueList", leagueList);
+		mv.addObject("gameList", gameList);
+		mv.addObject("gameCount", gameCount);
+		return mv;
+	}
+	
+	public ModelAndView viewEndGameList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
+		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("type", type);
+		param.put("leagueId", leagueId);
+		if (status != null) {
+			param.put("status", status);
+		} else {
+			List<String> statusList = new ArrayList<String>();
+			statusList.add(Code.GAME_STATUS_END);
+			statusList.add(Code.GAME_STATUS_CANCEL);
+			param.put("statusList", statusList);
+		}
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		if (gameDate != null) {
+			Date[] pair = XwinUtil.getDatePair(gameDate);
+			param.put("fromDate", pair[0]);
+			param.put("toDate", pair[1]);
+		}
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		param.put("ORDERBY", "DESC");
+		
+		List<League> leagueList = leagueDao.selectLeagueList();
+		Integer gameCount = gameDao.selectGameCount(param);
+		List<Game> gameList = gameDao.selectGameList(param);
+		
+		ModelAndView mv = new ModelAndView("admin/game/admin_end_game");
 		mv.addObject("leagueList", leagueList);
 		mv.addObject("gameList", gameList);
 		mv.addObject("gameCount", gameCount);
@@ -106,8 +154,9 @@ public class AdminGameController extends XwinController
 		game.setDrawRate(command.getDrawRate());
 		game.setLoseRate(command.getLoseRate());
 				
-		game.setStatus(Code.GAME_STATUS_READY);
-		game.setBetStatus(Code.BETTING_STATUS_DENY);
+		game.setStatus(Code.GAME_STATUS_RUN);
+		game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
+		game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
 		game.setType(type);
 		
 		gameDao.insertGame(game);
@@ -189,6 +238,28 @@ public class AdminGameController extends XwinController
 		String _awayScore = request.getParameter("awayScore");
 		String type = request.getParameter("type");
 		
+		ResultXml rx = endGameProcess(id, _homeScore, _awayScore, type); 
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView endGameList(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		String id = request.getParameter("id");
+		String _homeScore = request.getParameter("homeScore");
+		String _awayScore = request.getParameter("awayScore");
+		String type = request.getParameter("type");
+		
+		ResultXml rx = endGameProcess(id, _homeScore, _awayScore, type); 
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+
+	private ResultXml endGameProcess(String id, String _homeScore,
+			String _awayScore, String type) {
 		Integer homeScore = null;
 		Integer awayScore = null;
 		
@@ -286,7 +357,12 @@ public class AdminGameController extends XwinController
 						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
 							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
 						
-						sendSmsConnector.sendSms(message, member.getMobile(), "000-000-0000");
+						SmsWait smsWait = new SmsWait();
+						smsWait.setMsg(message);
+						smsWait.setPhone(member.getMobile());
+						smsWait.setCallback("000-000-0000");
+						
+						smsWaitDao.insertSmsWait(smsWait);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -294,10 +370,8 @@ public class AdminGameController extends XwinController
 			}
 			
 			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
-		} 
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		return mv;
+		}
+		return rx;
 	}
 	
 	public ModelAndView cancelGame(HttpServletRequest request,
@@ -377,16 +451,15 @@ public class AdminGameController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView changeBetStatus(HttpServletRequest request,
+	public ModelAndView changeDisplayStatus(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
 		String id = request.getParameter("id");
-		String betStatus = request.getParameter("betStatus");
-		String type = request.getParameter("type");
+		String displayStatus = request.getParameter("displayStatus");
 		
 		Game game = new Game();
 		game.setId(id);
-		game.setBetStatus(betStatus);
+		game.setDisplayStatus(displayStatus);
 		
 		gameDao.updateGame(game);
 		

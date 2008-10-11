@@ -49,7 +49,7 @@ public class BettingController extends XwinController
 		Collection<GameCartItem> cartCol = cartMap.values();
 		for (GameCartItem gci : cartCol) {
 			Game game = gameDao.selectGame(gci.getGameId());
-			if (game.getStatus().equals(Code.GAME_STATUS_READY) == false ||
+			if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
 					game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
 				rx = new ResultXml(-2, "배팅 가능한 상태가 아닌 경기가 포함되어 있습니다", null);
 				
@@ -177,7 +177,7 @@ public class BettingController extends XwinController
 			cartMap.remove(game.getId());
 			retCode = -1;
 			message = "게임은 10개까지 선택 하실 수 있습니다";
-		} else if (game.getStatus().equals(Code.GAME_STATUS_READY) == false ||
+		} else if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
 				game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
 			cartMap.remove(game.getId());
 			retCode = -2;

@@ -11,6 +11,8 @@
 					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl">승무패</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(승무패)</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy">경기결과(핸디캡)</a></li>
 				</ul>
 			</div>
 		</div>

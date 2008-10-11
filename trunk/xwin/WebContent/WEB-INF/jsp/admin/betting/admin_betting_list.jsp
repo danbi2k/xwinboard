@@ -83,7 +83,7 @@ function cancelBetting(id, gameType)
 		<th>배팅금액</th>
 		<th>예상금액</th>
 		<th>상태</th>		 
-		<th>정산</th>
+		<!-- th>정산</th -->
 		<!-- th>취소</th -->
 	</tr>
 							 
@@ -100,8 +100,11 @@ function cancelBetting(id, gameType)
 		<td><%=betting.getRateStr()%></td>
 		<td><%=XwinUtil.comma3(betting.getMoney())%></td>
 		<td><%=XwinUtil.comma3(betting.getExpect())%></td>
-		<td><%=Code.getValue(betting.getStatus())%></td>
-		<td><%=Code.getValue(betting.getCalcStatus())%></td>
+		<td><B>
+		<font color="<%=betting.getStatus().equals(Code.BET_STATUS_SUCCESS)?"orange":"red"%>">
+			<%=Code.getValue(betting.getStatus())%>
+		</font></B></td>
+		<!-- td><%=Code.getValue(betting.getCalcStatus())%></td -->
 		<!--td><input type="button" onclick="cancelBetting(<%=betting.getId()%>, '<%=betting.getGameType()%>')" value="취소"/></td  -->
 	</tr>
 	<%

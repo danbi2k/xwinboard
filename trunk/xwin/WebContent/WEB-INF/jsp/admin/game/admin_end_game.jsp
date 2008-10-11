@@ -16,7 +16,6 @@
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String status = XwinUtil.nvl(request.getParameter("status"));
-	String betStatus = XwinUtil.nvl(request.getParameter("betStatus"));
 	String gameDate = XwinUtil.nvl(request.getParameter("gameDate"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -159,7 +158,7 @@
 <br>
 <form method='get' name='search'>
 <input type='hidden' name='pageIndex' value='0'/>
-<input type='hidden' name='mode' value='viewGameList'/>
+<input type='hidden' name='mode' value='viewEndGameList'/>
 <input type='hidden' name='pageIndex'/>
 <input type='hidden' name='type' value='<%=type%>'/>
 
@@ -177,26 +176,11 @@
 	}
 	%>
 </select>
-배팅상태
-<select name='betStatus' onChange='this.form.submit()'>
-	<option value=''>전체</option>
-	<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=betStatus.equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
-	<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>	
- </select>
-<!--
 경기상태
 <select name='status' onChange='this.form.submit()'>
 	<option value=''>전체</option>
-	<option value='<%=Code.GAME_STATUS_READY%>' <%=status.equals(Code.GAME_STATUS_READY)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_READY)%></option>
-	<option value='<%=Code.GAME_STATUS_RUN%>' <%=status.equals(Code.GAME_STATUS_RUN)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_RUN)%></option>
 	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
 	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
- </select-->
-표시
-<select name='betStatus' onChange='this.form.submit()'>
-	<option value=''>전체</option>
-	<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=betStatus.equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
-	<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>	
  </select>
 
  경기일자
@@ -209,10 +193,15 @@
  <input type='text' name='keyword' value='<%=keyword%>'>
  <input type='submit' value='검 색'>
 </form>
+<!--
+게임진행: <img src="images/admin/btn_run.jpg">
+게임대기: <img src="images/admin/btn_ready.jpg">
+게임종료: <img src="images/admin/btn_end.jpg">
+게임취소: <img src="images/admin/btn_cancel.jpg">
+-->
 <form method='get' name='game'>
 	<table class="prettytable">
  		<tr>
-			<th><input type="checkbox"></th>
 			<th width=5%>번호</th>
 			<th>리그명</th>
 			<th>경기시각</th>
@@ -232,8 +221,8 @@
 			%>
 			<th>패</th>								
 			<th>스코어</th>
-			<th>표시</th>
-			<th>배팅</th>
+			<th>결과</th>
+			<th>상태</th>
 			<!--th>기능</th  -->
 	  	</tr>
 
@@ -243,8 +232,7 @@
 				
 		%>
  		<tr>
-			<th><input type="checkbox" name="checkGame value="<%=game.getId()%>"></th>
-			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>"><%=game.getId()%></a></td>
+			<td width=5%><%=game.getId()%></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>
@@ -265,7 +253,7 @@
 			<td><%=game.getLoseRateStr()%></td>
 			<td>
 				<%
-				if (game.getBetStatus().equals(Code.BETTING_STATUS_DENY)) {
+				if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
 				%>
 				<input id='homeScore_<%=game.getId()%>' type='text' name='homeScore' value='<%=XwinUtil.nvl(game.getHomeScore())%>' size=2>
 				:
@@ -278,13 +266,8 @@
 				}
 				%>
 			</td>
-			<td>
-				<select name='displayStatus' onchange='changeDisplayStatus(<%=game.getId()%>, this)'>
-					<option value='<%=Code.GAME_DISPLAY_CLOSE%>' <%=game.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE)?"selected":""%>><%=Code.getValue(Code.GAME_DISPLAY_CLOSE)%></option>
-					<option value='<%=Code.GAME_DISPLAY_OPEN%>' <%=game.getDisplayStatus().equals(Code.GAME_DISPLAY_OPEN)?"selected":""%>><%=Code.getValue(Code.GAME_DISPLAY_OPEN)%></option>
-				</select>
-			</td>
-			<td><B><%=Code.getValue(game.getBetStatus())%></B></td>
+			<td><%=Code.getValue(game.getResult())%></td>
+			<td><B><%=Code.getValue(game.getStatus())%></B></td>
 			<!-- td>
 				<!--
 				<%

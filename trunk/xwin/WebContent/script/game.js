@@ -46,7 +46,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td width=90% align=right><nobr><font color=FFC602>");
 			row.push("<span id='team1_2567'>" + data[i].homeTeam + "</span>");
 			
-			if (data[i].status == 'GS002') {
+			if (data[i].betStatus== 'BTS01') {
 				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
 			} else {
 				row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
@@ -66,7 +66,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center bgcolor=424242><nobr><font color=FFC602>");
 			
 			if (data[i].type == 'wdl') {
-				if (data[i].drawRate > 0 && data[i].status == 'GS002') {
+				if (data[i].betStatus == 'BTS01') {
 					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
 				} else {
 					row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
@@ -87,7 +87,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td width=1% >&nbsp;<font color=FFC602><span id='bet2_2567'>" + data[i].loseRateStr + "</span>&nbsp;</td>");
 			row.push("<td width=90% ><nobr>");
 			
-			if (data[i].status == 'GS002') {
+			if (data[i].betStatus == 'BTS01') {
 				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
 			} else {
 				row.push("<b style='font-size:15px;'><input type='checkbox' disabled></b> ");
@@ -98,10 +98,11 @@ function FnDrawGameList2(data,type)
 			row.push("</tr>");
 			row.push("</table>");
 			row.push("</td>");
-			if (data[i].status == 'GS002')
-				row.push("<td align=center ><nobr><font color='white'>" + C(data[i].status) + "</td>");
-			else
-				row.push("<td align=center ><nobr><font color='gray'>" + C(data[i].status) + "</td>");
+			if (data[i].betStatus == 'BTS01') {
+				row.push("<td align=center ><nobr><font color='white'>" + C(data[i].betStatus) + "</td>");
+			} else {
+				row.push("<td align=center ><nobr><font color='gray'>" + C(data[i].betStatus) + "</td>");
+			}
 			row.push("</tr>");
 		}
 	}

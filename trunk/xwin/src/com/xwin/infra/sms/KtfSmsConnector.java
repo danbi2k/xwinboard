@@ -101,20 +101,20 @@ public class KtfSmsConnector
 	public void processDbTranscation()
 	{
 		List<Map<String, String>> smsList = parseKTF();
-		Iterator<Map<String, String>> smsIter = smsList.iterator();
-		while (smsIter.hasNext()) {
-			Map<String, String> smsMap = smsIter.next();
-			
-			KtfSmsMessage message = new KtfSmsMessage(
-				null,
-				smsMap.get("msg_seq"),
-				smsMap.get("msg"),
-				smsMap.get("call_back"),
-				smsMap.get("in_date"),				
-				smsMap.get("sm"));
-			
-			ktfSmsDao.insertMessage(message);
-		}		
+		if (smsList != null) {
+			for (Map<String, String> smsMap : smsList) {
+				
+				KtfSmsMessage message = new KtfSmsMessage(
+					null,
+					smsMap.get("msg_seq"),
+					smsMap.get("msg"),
+					smsMap.get("call_back"),
+					smsMap.get("in_date"),				
+					smsMap.get("sm"));
+				
+				ktfSmsDao.insertMessage(message);
+			}	
+		}
 	}
 	
 	public List<KtfSmsMessage> getMessageList()

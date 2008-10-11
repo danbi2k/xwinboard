@@ -80,4 +80,8 @@
 	<bean id="adminDao"
 		class="com.xwin.infra.dao.AdminDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="smsWaitDao"
+		class="com.xwin.infra.dao.SmsWaitDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 </beans>

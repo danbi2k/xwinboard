@@ -10,7 +10,7 @@ div.pages {
 }
 table.prettytable {
   width: 100%;
-  margin: 1em 1em 1em 2em;
+  margin: 1em 0em 1em 0em;
   background: whitesmoke;
   border-collapse: collapse;
 }
@@ -69,7 +69,7 @@ a:hover {
 .boxed {
 	float: left;
 	clear: left;
-	width: 200px;
+	width: 130px;
 	margin: 0 0 10px 0;
 	padding: 0;
 	background: #DEE2E8;
@@ -115,7 +115,7 @@ a:hover {
 /* Wrapper */
 
 #wrapper {
-	width: 1178px;
+	width: 970px;
 	margin: 0 auto;
 }
 
@@ -123,9 +123,9 @@ a:hover {
 
 #header {
 	float: left;
-	width: 200px;
+	width: 130px;
 	height: 50px;
-	background: orange;
+	background: #ffffff;
 }
 
 #header h1 {
@@ -134,6 +134,7 @@ a:hover {
 	text-align: center;
 	letter-spacing: -1px;
 	font-size: 2.5em;
+	font-style: italic;
 }
 
 #header h2 {
@@ -153,7 +154,7 @@ a:hover {
 
 #pages {
 	float: right;
-	width: 968px;
+	width: 840px;
 	height: 50px;
 	background: #EEEEEE;
 }
@@ -196,7 +197,7 @@ a:hover {
 
 #posts {
 	float: right;
-	width: 920px;
+	width: 790px;
 	padding-right: 20px;
 }
 
@@ -208,7 +209,7 @@ a:hover {
 	margin: 0;
 	font-size: 2em;
 	font-weight: 900;
-	font-fami	ly: 'µ¸¿ò';
+	font-family: 'µ¸¿ò';
 	padding-bottom: 20px;
 }
 

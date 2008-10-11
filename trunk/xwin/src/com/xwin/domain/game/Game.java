@@ -37,6 +37,8 @@ public class Game extends XwinObject
 	private Long winMoney;
 	private Long drawMoney;
 	private Long loseMoney;
+	
+	private String displayStatus;
 
 	public String getId() {
 		return id;
@@ -242,5 +244,13 @@ public class Game extends XwinObject
 
 	public void setLoseMoney(Long loseMoney) {
 		this.loseMoney = loseMoney;
+	}
+
+	public String getDisplayStatus() {
+		return displayStatus;
+	}
+
+	public void setDisplayStatus(String displayStatus) {
+		this.displayStatus = displayStatus;
 	}
 }
