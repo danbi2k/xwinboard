@@ -69,7 +69,11 @@ public class BettingService extends XwinService
 		
 		Account account = new Account();
 		account.setUserId(userId);
-		account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+		if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+			account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+		else
+			account.setType(Code.ACCOUNT_TYPE_HANDYDRAW);
+	
 		account.setDate(new Date());
 		account.setOldBalance(member.getBalance());
 		account.setMoney(betting.getExpect());

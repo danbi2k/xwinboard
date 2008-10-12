@@ -7,10 +7,15 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	Betting betting = (Betting) request.getAttribute("betting");
+	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
+	String id = request.getParameter("id");
 %>
-<div class="title">사용자배팅현황</div>		 
+<div class="title">경기별 배팅 현황</div>		 
 <table class="prettytable">
+<%
+if (bettingList != null) {
+	for (Betting betting : bettingList) {		
+%>
 	<tr>
 	<th width=5%>번호</th>
 		<th>아이디</th>
@@ -75,11 +80,13 @@
 			</B>
 		</td>
 	</tr>
-	<%
+	<tr><td colspan=11>&nbsp;</td></tr>
+<%
 	}
-	%>
+	}
+}
+%>
 </table>
-
 <script>
 function cancelBetting(id)
 {
@@ -90,9 +97,8 @@ function cancelBetting(id)
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
-			location.href='adminBetting.aspx?mode=viewBettingList';
+			location.href='adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=id%>';
 	}
 }
 </script>
-
 <%@ include file="../admin_footer.jsp"%>

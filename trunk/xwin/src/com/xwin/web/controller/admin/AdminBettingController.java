@@ -116,6 +116,22 @@ public class AdminBettingController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView viewBettingMoneyDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("gameId", id);
+		
+		List<Betting> bettingList = bettingDao.selectBettingList(param);
+		
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_game_detail");
+		mv.addObject("bettingList", bettingList);
+		
+		return mv;
+	}
+	
 	public ModelAndView calculateBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -129,26 +145,6 @@ public class AdminBettingController extends XwinController
 		return mv;
 	}
 	
-	public void calculateAllCancel(Betting betting) {
-		String userId = betting.getUserId();
-		Member member = memberDao.selectMember(userId, null);
-					
-		betting.setStatus(Code.BET_STATUS_COMMIT);
-		bettingDao.updateBetting(betting);
-		
-		Account account = new Account();
-		account.setUserId(userId);
-		account.setType(Code.ACCOUNT_TYPE_JACKPOT);
-		account.setDate(new Date());
-		account.setOldBalance(member.getBalance());
-		account.setMoney(betting.getExpect());
-		account.setBalance(member.getBalance() + betting.getExpect());
-		account.setBettingId(betting.getId());
-		accountDao.insertAccount(account);
-		
-		memberDao.plusMinusBalance(userId, betting.getExpect());
-	}
-	
 	public ModelAndView cancelBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -158,10 +154,10 @@ public class AdminBettingController extends XwinController
 		String id = request.getParameter("id");
 		Betting betting = bettingDao.selectBetting(id);
 		
-		if (betting.getStatus().equals(Code.BET_STATUS_COMMIT)) {
+		if (betting.getStatus().equals(Code.BET_STATUS_RUN) == false) {
 			code = -1;
 			message = "배팅이 취소 가능 상태가 아닙니다";
-		} else {		
+		} else {
 			String userId = betting.getUserId();
 			Member member = memberDao.selectMember(userId, null);
 			
@@ -176,6 +172,7 @@ public class AdminBettingController extends XwinController
 			accountDao.insertAccount(account);
 			
 			betting.setStatus(Code.BET_STATUS_CANCEL);
+			betting.setCalcStatus(Code.BET_CALC_COMMIT);
 			bettingDao.updateBetting(betting);			
 
 			memberDao.plusMinusBalance(userId, betting.getMoney());			

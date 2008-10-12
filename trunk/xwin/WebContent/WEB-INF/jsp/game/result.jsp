@@ -91,10 +91,10 @@
 	<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424242>
 		<tr bgcolor=212021 height=27>
 			<td  width=270 align=center ><nobr><font color=FFFFFF><b>경기일시</td>
-			<td  width=100 align=center ><nobr><font color=FFFFFF><b>리그</td>
-			<td  width=550 align=center ><nobr><font color=FFFFFF><b>(승)홈 팀</td>
+			<td  width=200 align=center ><nobr><font color=FFFFFF><b>리그</td>
+			<td  width=500 align=center ><nobr><font color=FFFFFF><b>(승)홈 팀</td>
 			<td  width=130 align=center ><nobr><font color=FFFFFF><b>무/핸디캡</td>
-			<td  width=550 align=center ><nobr><font color=FFFFFF><b>(패)원정팀</td>
+			<td  width=500 align=center ><nobr><font color=FFFFFF><b>(패)원정팀</td>
 			<td  width=210 align=center ><nobr><font color=FFFFFF><b>경기결과</td>
 		</tr>
 
@@ -105,13 +105,14 @@ if (gameList != null) {
 %>																								
 		<tr height=25 bgcolor=000000>
 			<td align=center  ><nobr><%=game.getGameDateStr()%></td>
-			<td align=center ><nobr><%=game.getLeagueName()%></td>
+			<td align=center ><nobr><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle>
+			<font color="#ffffff"><%=game.getLeagueName()%></font></td>
 			<td align=right >
 				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
 					<tr>
-						<td align=right width=100%><nobr><%=game.getHomeTeam()%></td>
+						<td align=right width=100%><nobr><font color="#ffffff"><%=game.getHomeTeam()%></font></td>
 						<td align=right width=30>&nbsp;<%=game.getWinRateStr()%>&nbsp;</td>
-						<td align=right width=10><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle>
+						<td align=right width=10>
 						</td>
 					</tr>
 				</table>
@@ -130,16 +131,17 @@ if (gameList != null) {
 			<td align=left >
 				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
 					<tr>
-						<td width=20><nobr><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle></td>
+						<td width=20><nobr></td>
 						<td width=30>&nbsp;<%=game.getLoseRateStr()%>&nbsp;</td>
-						<td ><nobr><%=game.getAwayTeam()%></td>
+						<td ><nobr><font color="#ffffff"><%=game.getAwayTeam()%></font></td>
 						
 					</tr>
 				</table>
 			</td>
 			<td align=center ><nobr>
 			<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
-			&nbsp;<%=Code.getValue(game.getResult())%>
+			&nbsp;
+			<%=Code.getValue(game.getResult())%>
 			</td>
 		</tr>
 

@@ -122,9 +122,9 @@
 			핸디
 			<select name='drawRate'>
 			<%
-			for (double i = -20 ; i <= 20 ; i+=0.5) {
+			for (double i = -100 ; i <= 100 ; i+=0.5) {
 			%>
-				<option value="<%=i%>" <%=game.getDrawRate()==i?"selected":""%>><%=i%></option>
+				<option value="<%=i%>" <%=game.getDrawRate()==i?"selected":""%>><%=i>0?"+"+i:i%></option>
 			<%
 			}
 			%>	

@@ -69,7 +69,10 @@
 		if ((event.keyCode>=48 && event.keyCode<=57) || event.keyCode==13 || event.keyCode==8) {
 			var homeScore = document.getElementById("homeScore_"+id).value;
 			var awayScore = document.getElementById("awayScore_"+id).value;
-			var handy = document.getElementById("handy_"+id).value;
+			var handySpan = document.getElementById("handy_"+id);
+			var handy = 0;
+			if (handySpan != undefined)
+				handy = handySpan.value;
 			var resultSpan = document.getElementById("resultSpan_"+id);
 
 			if (handy == undefined)

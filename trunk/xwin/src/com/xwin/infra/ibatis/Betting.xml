@@ -19,7 +19,6 @@
 		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameType" column="GAME_TYPE"/>
-		<result property="isNotice" column="ISNOTICE"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
 		<result property="successCount" column="SUCCESS_COUNT"/>
 		<result property="failureCount" column="FAILURE_COUNT"/>
@@ -49,9 +48,6 @@
 			<isNotNull prepend="," property="calcStatus">
 			CALC_STATUS = #calcStatus#
 			</isNotNull>
-			<isNotNull prepend="," property="isNotice">
-			ISNOTICE = #isNotice#
-			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
 	</update>
@@ -67,7 +63,8 @@
 		bg.BETTING_ID = b.ID AND
 		g.STATUS = 'GS004'
 		)
-		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+		WHERE b.CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
 	</update>
 	
 	<update id="updateGameCountFailure" parameterClass="string">
@@ -81,7 +78,8 @@
 		bg.BETTING_ID = b.ID AND
 		g.STATUS = 'GS004'
 		)
-		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+		WHERE b.CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
 	</update>
 	
 	<update id="updateGameCountHandyDraw" parameterClass="string">
@@ -95,7 +93,8 @@
 		bg.BETTING_ID = b.ID AND
 		g.STATUS = 'GS004'
 		)
-		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+		WHERE b.CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
 	</update>
 	
 	<update id="updateGameCountCancel" parameterClass="string">
@@ -108,11 +107,12 @@
 		bg.BETTING_ID = b.ID AND
 		g.STATUS = 'GS005'
 		)
-		WHERE b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#);
+		WHERE b.CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
 	</update>
 	
 	<update id="updateBettingStatusByCount">
-		UPDATE tbl_betting SET STATUS =
+		UPDATE tbl_betting b SET STATUS =
 		(CASE
 		WHEN FAILURE_COUNT > 0 THEN 'BS003'
 		WHEN TOTAL_COUNT = NOMATCH_COUNT THEN 'BS005'
@@ -122,17 +122,26 @@
 		ELSE 'BS001'
 		END)
 		WHERE STATUS != 'BS004' AND CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
 	</update>
 	
 	<update id="updateCalcStatusByBetStatus">
-		UPDATE tbl_betting SET CALC_STATUS = 'BTC02'
-		WHERE STATUS in ('BS005', 'BS002', 'BS007')
+		UPDATE tbl_betting b SET CALC_STATUS = 'BTC02'
+		WHERE STATUS in ('BS005', 'BS002', 'BS007') AND CALC_STATUS != 'BTC10'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
 	</update>
 	
-	<select id="selectBettingByNoticeReaquired" resultMap="bettingResultMap">
-		SELECT * FROM tbl_betting
+	<update id="updateCalcStatusByBetStatusOnAllFailure">
+		UPDATE tbl_betting b SET CALC_STATUS = 'BTC10'
+		WHERE STATUS = 'BS003' AND TOTAL_COUNT = (FAILURE_COUNT + NOMATCH_COUNT + HANDYDRAW_COUNT)
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
+	</update>
+	
+	<select id="selectCalcRequiredBetting" resultMap="bettingResultMap">
+		SELECT * FROM tbl_betting b
 		WHERE
-		ISNOTICE = 'BTN01' AND STATUS in ('BS002', 'BS003', 'BS005', 'BS007')
+		CALC_STATUS = 'BTC02'
+		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)		
 	</select>
 
 <!--
@@ -141,7 +150,6 @@ BET_STATUS_SUCCESS		= "BS002";
 BET_STATUS_FAILURE		= "BS003";
 BET_STATUS_CANCEL		= "BS004";
 BET_STATUS_NOMATCH		= "BS005";
-BET_STATUS_COMMIT		= "BS006";
 BET_STATUS_HANDYDRAW	= "BS007";
 	
 BET_CALC_DIABLE			= "BTC01";
@@ -164,8 +172,11 @@ BET_CALC_COMMIT			= "BTC10";
 			<isNotNull prepend="AND" property="status">
 			STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="isNotice">
-			ISNOTICE = #isNotice#
+			<isNotNull prepend="AND" property="calcStatus">
+			CALC_STATUS = #calcStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="notCalcStatus">
+			CALC_STATUS != #notCalcStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#
@@ -210,8 +221,11 @@ BET_CALC_COMMIT			= "BTC10";
 			<isNotNull prepend="AND" property="status">
 			STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="isNotice">
-			ISNOTICE = #isNotice#
+			<isNotNull prepend="AND" property="calcStatus">
+			CALC_STATUS = #calcStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="notCalcStatus">
+			CALC_STATUS != #notCalcStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#

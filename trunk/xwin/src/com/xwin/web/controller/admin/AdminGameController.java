@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
@@ -136,6 +137,18 @@ public class AdminGameController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("admin/game/update_game");
 		mv.addObject("leagueList", leagueList);
+		mv.addObject("game", game);
+		return mv;
+	}
+	
+	public ModelAndView viewReprocessGame(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String type = request.getParameter("type");
+		String id = request.getParameter("id");
+		Game game = gameDao.selectGame(id);
+		
+		ModelAndView mv = new ModelAndView("admin/game/reprocess_game");
 		mv.addObject("game", game);
 		return mv;
 	}
@@ -295,19 +308,17 @@ public class AdminGameController extends XwinController
 					result = "W";
 				else if (homeScoreDouble < awayScoreDouble)
 					result = "L";
-				else
+				else {
 					result = "D";
+					game.setWinRate(1.0);
+					game.setLoseRate(1.0);
+				}
 			}
 			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
 			game.setResult(result);
 			game.setStatus(Code.GAME_STATUS_END);
-			
-			if (result.equals("D")) {
-				game.setWinRate(1.0);
-				game.setLoseRate(1.0);
-			}
 			
 			gameDao.updateGame(game);			
 			bettingDao.updateBettingStatus(id);
@@ -344,12 +355,10 @@ public class AdminGameController extends XwinController
 				}
 			}
 			
-			List<Betting> bettingList = bettingDao.selectBettingByNoticeReaquired();
+			List<Betting> bettingList = bettingDao.selectCalcRequiredBetting(id);
 			if (bettingList != null) {
 				for (Betting betting : bettingList) {				
-					bettingService.calcuateBettingCommon(betting);					
-					betting.setIsNotice(Code.BET_NOTICE_COMMIT);
-					bettingDao.updateBetting(betting);
+					bettingService.calcuateBettingCommon(betting);
 					
 					try {
 						Member member = memberDao.selectMember(betting.getUserId(), null);
@@ -432,11 +441,45 @@ public class AdminGameController extends XwinController
 		bettingDao.updateBettingStatus(id);
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		
+		processNoMatchReturn();
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
 	
+	private void processNoMatchReturn()
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.BET_STATUS_NOMATCH);
+		param.put("calcStatus", Code.BET_CALC_ENABLE);
+		
+		List<Betting> bettingList = bettingDao.selectBettingList(param);
+		if (bettingList != null) {
+			for (Betting betting : bettingList) {
+				betting.setCalcStatus(Code.BET_CALC_COMMIT);
+				bettingDao.updateBetting(betting);
+				
+				Long money = betting.getMoney();
+				Member member = (Member) memberDao.selectMember(betting.getUserId(), null);
+				
+				Account account = new Account();
+				account.setUserId(betting.getUserId());
+				account.setType(Code.ACCOUNT_TYPE_NOMATCH);
+				account.setDate(new Date());
+				account.setOldBalance(member.getBalance());
+				account.setMoney(money);
+				account.setBalance(member.getBalance() + money);
+				account.setBettingId(betting.getId());
+				
+				accountDao.insertAccount(account);				
+				memberDao.plusMinusBalance(betting.getUserId(), money);
+			}
+		}
+		
+	}
+
 	public ModelAndView readyGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
@@ -467,6 +510,25 @@ public class AdminGameController extends XwinController
 		gameDao.updateGame(game);
 		
 		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView reprocessGame(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		String _homeScore = request.getParameter("homeScore");
+		String _awayScore = request.getParameter("awayScore");
+		String type = request.getParameter("type");
+		
+		Game game = gameDao.selectGame(id);
+		game.setStatus(Code.GAME_STATUS_RUN);
+		gameDao.updateGame(game);
+		
+		ResultXml rx = endGameProcess(id, _homeScore, _awayScore, type);
+		rx.setMessage("경기가 재처리 되었습니다");
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

@@ -13,6 +13,8 @@ import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.xwin.domain.game.BetGame;
+
 public class XwinUtil
 {
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -21,6 +23,24 @@ public class XwinUtil
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static final SimpleDateFormat boardNoticeFormat = new SimpleDateFormat("MM/dd");
 	private static final SimpleDateFormat boardItemFormat = new SimpleDateFormat("MM/dd HH:mm");
+	
+	public static String judgeBetGame(BetGame betGame)
+	{
+		if (betGame.getResult() == null) {
+			if (betGame.getStatus().equals(Code.GAME_STATUS_CANCEL))
+				return "경기취소";
+			else
+				return "진행중";
+		} else if (betGame.getResult().equals(betGame.getGuess())) {
+			return "적중";
+		} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {
+			return "미적중";
+		} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {
+			return "무승부";
+		}
+		
+		return "-";
+	}
 	
 	public static String comma3(Long num)
 	{

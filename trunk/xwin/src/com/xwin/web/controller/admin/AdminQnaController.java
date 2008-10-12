@@ -23,7 +23,7 @@ public class AdminQnaController extends XwinController
 	{
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("boardName", "qna");
-		param.put("commentCount", new Integer(0));
+		param.put("ISDELETED", "N");
 		List<BoardItem> qnaList = boardDao.selectBoardItemList(param);
 		
 		ModelAndView mv = new ModelAndView("admin/qna/admin_qna_list");
@@ -60,6 +60,21 @@ public class AdminQnaController extends XwinController
 		boardDao.insertBoardComment(boardComment);
 		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView deleteQnaItem(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String[] id = request.getParameterValues("id");
+
+		for (int i = 0 ; i < id.length ; i++)
+			boardDao.deleteBoardItem(id[i]);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

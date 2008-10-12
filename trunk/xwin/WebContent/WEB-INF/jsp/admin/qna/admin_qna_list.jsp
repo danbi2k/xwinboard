@@ -16,12 +16,14 @@
 
 <div class="title">고객센터</div>
 
-<form method='post' name='search' action='adminMember.aspx'>
+<form method='get' name='search' action='adminQna.aspx'>
 	<input type='hidden' name='mode' value=''/>
  </form>
 
-<table class="prettytable">
+<form name="qnaList">
+<table class="list">
 	<tr>
+		<th width=5%></th>
 		<th width=5%>번호</th>
 		<th width=10%>아이디</th>
 		<th width=10%>닉네임</th>
@@ -33,17 +35,43 @@ if (qnaList != null) {
 	for (BoardItem boardItem : qnaList) {
 %>
 	<tr>
-		<td width=5%><%=boardItem.getId()%></td>
-		<td width=10%><%=boardItem.getUserId()%></td>
-		<td width=10%><%=boardItem.getNickName()%></td>
-		<td width=*><a href="adminQna.aspx?mode=viewQnaDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%></a></td>
-		<td width=15%><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
+		<th width=5%><input type="checkbox" name="checkQna" value="<%=boardItem.getId()%>"/></th>
+		<td width=5% align='center'><%=boardItem.getId()%></td>
+		<td width=10% align='center'><%=boardItem.getUserId()%></td>
+		<td width=10% align='center'><%=boardItem.getNickName()%></td>
+		<td width=*>&nbsp;&nbsp;<a href="adminQna.aspx?mode=viewQnaDetail&id=<%=boardItem.getId()%>">
+			<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
+		</a></td>
+		<td width=15% align='center'><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
 	</tr>
 <%
 	}
 }
 %>							
 </table>
+</form>
 
+<input type="button" onclick="deleteQnaItem()" value="삭제">
+
+<script>
+function deleteQnaItem()
+{
+	var query = "mode=deleteQnaItem";
+	
+	var c = document.qnaList.checkQna;
+	c = Xwin.ToArray(c);
+	for (var i=0; i < c.length ; i++) {
+		if (c[i].checked)
+			query += "&id=" + c[i].value;
+	}
+	
+	var http = new JKL.ParseXML("adminQna.aspx", query);
+	var result = http.parse();
+
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		location.reload();		
+}
+</script>
 
 <%@ include file="../admin_footer.jsp"%>

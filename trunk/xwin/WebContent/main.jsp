@@ -45,7 +45,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 			</div>
 		</div>
 		<div id="money" class="boxed">
-			<h2 class="heading">입환전관리</h2>
+			<h2 class="heading">입출금관리</h2>
 			<div class="content">
 				<ul>
 					<li class="first"><a href="#">충전요청</a></li>

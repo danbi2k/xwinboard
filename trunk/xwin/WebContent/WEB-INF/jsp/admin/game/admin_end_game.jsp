@@ -232,7 +232,7 @@
 				
 		%>
  		<tr>
-			<td width=5%><%=game.getId()%></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewReprocessGame&id=<%=game.getId()%>&type=<%=type%>"><%=game.getId()%></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>
@@ -304,8 +304,6 @@
 			}
 			%>
 	</table>
-	<input type='button' value='스코어저장' onclick='saveAllScore()' style='cursor:hand'>
-	<input type='button' value='경기취소' onclick='cancelGame()' style='cursor:hand'>
 <div class="pages">
 <%
 	int pIdx = 0;

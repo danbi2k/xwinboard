@@ -28,7 +28,6 @@
 <div class="title">경기별 배팅 현황</div>
 
 <form method='get' name='search'>
-<input type='hidden' name='pageIndex' value='0'/>
 <input type='hidden' name='mode' value='viewBettingMoneyList'/>
 <input type='hidden' name='pageIndex'/>
 
@@ -92,7 +91,7 @@
 			
 	%>
 		<tr>
-		<td width=5%><%=game.getId()%></td>
+		<td width=5%><a href="adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=game.getId()%>"><%=game.getId()%></a></td>
 		<td><%=Code.getValue(game.getType())%></td>
 		<td><%=game.getLeagueName()%></td>			
 		<td><%=game.getGameDateStr()%></td>

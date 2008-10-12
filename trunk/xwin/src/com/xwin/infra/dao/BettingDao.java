@@ -67,9 +67,9 @@ public class BettingDao extends XwinDao
 		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingList", param);
 	}
 	
-	public List<Betting> selectBettingByNoticeReaquired()
+	public List<Betting> selectCalcRequiredBetting(String gameId)
 	{
-		return sqlMapClientTemplate.queryForList("selectBettingByNoticeReaquired");
+		return sqlMapClientTemplate.queryForList("selectCalcRequiredBetting", gameId);
 	}
 	
 	public void updateBetting(Betting betting)
@@ -83,17 +83,8 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
 		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
 		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
-		sqlMapClientTemplate.update("updateBettingStatusByCount");
-		sqlMapClientTemplate.update("updateCalcStatusByBetStatus");
-	}
-	
-	public void updateBettingStatusWhenGameCancel(String gameId)
-	{
-		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
-		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
-		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
-		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
-		sqlMapClientTemplate.update("updateBettingStatusByCount");
-		sqlMapClientTemplate.update("updateCalcStatusByBetStatus");
+		sqlMapClientTemplate.update("updateBettingStatusByCount", gameId);
+		sqlMapClientTemplate.update("updateCalcStatusByBetStatus", gameId);
+		sqlMapClientTemplate.update("updateCalcStatusByBetStatusOnAllFailure", gameId);
 	}
 }

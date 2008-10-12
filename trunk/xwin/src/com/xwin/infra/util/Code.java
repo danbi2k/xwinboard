@@ -58,6 +58,7 @@ public class Code
 	public static final String ACCOUNT_TYPE_NOMATCH		= "AT006";
 	public static final String ACCOUNT_TYPE_MONEYIN_DIRECT		= "AT007";
 	public static final String ACCOUNT_TYPE_MONEYOUT_DIRECT		= "AT008";
+	public static final String ACCOUNT_TYPE_HANDYDRAW	= "AT009";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
@@ -93,10 +94,11 @@ public class Code
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");
 		put(ACCOUNT_TYPE_MONEYIN, "머니충전");
 		put(ACCOUNT_TYPE_MONEYOUT, "머니환전");
-		put(ACCOUNT_TYPE_BETCANCEL,"배팅취소");
-		put(ACCOUNT_TYPE_NOMATCH, "게임취소");
+		put(ACCOUNT_TYPE_BETCANCEL,"배팅취소(환불)");
+		put(ACCOUNT_TYPE_NOMATCH, "게임취소(환불)");
 		put(ACCOUNT_TYPE_MONEYIN_DIRECT, "직충전");
 		put(ACCOUNT_TYPE_MONEYOUT_DIRECT, "직차감");
+		put(ACCOUNT_TYPE_HANDYDRAW, "무승부(환불)");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
 		put(BANKBOOK_STATUS_UNUSED, "사용중지");

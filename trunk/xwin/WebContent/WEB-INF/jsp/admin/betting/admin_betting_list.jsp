@@ -49,7 +49,6 @@ function cancelBetting(id, gameType)
 <option value=''>전체</option>
 <option value='wdl' <%=gameType.equals("wdl")?"selected":""%>>승무패</option>
 <option value='handy' <%=gameType.equals("handy")?"selected":""%>>핸디캡</option>
-                  <option value='oe' <%=gameType.equals("oe")?"selected":""%>>홀짝</option>
 </select>
 
 배팅상태
@@ -101,7 +100,7 @@ function cancelBetting(id, gameType)
 		<td><%=XwinUtil.comma3(betting.getMoney())%></td>
 		<td><%=XwinUtil.comma3(betting.getExpect())%></td>
 		<td><B>
-		<font color="<%=betting.getStatus().equals(Code.BET_STATUS_SUCCESS)?"orange":"red"%>">
+		<font color="<%=betting.getStatus().equals(Code.BET_STATUS_SUCCESS)?"orange":betting.getStatus().equals(Code.BET_STATUS_FAILURE)?"red":betting.getStatus().equals(Code.BET_STATUS_RUN)?"blue":"gray"%>">
 			<%=Code.getValue(betting.getStatus())%>
 		</font></B></td>
 		<!-- td><%=Code.getValue(betting.getCalcStatus())%></td -->
