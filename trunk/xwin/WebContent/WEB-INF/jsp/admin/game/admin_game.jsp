@@ -62,6 +62,34 @@
 				location.reload();
 		}
 	}
+
+	function calcResult(id)
+	{
+//		alert(event.keyCode);
+		if ((event.keyCode>=48 && event.keyCode<=57) || event.keyCode==13 || event.keyCode==8) {
+			var homeScore = document.getElementById("homeScore_"+id).value;
+			var awayScore = document.getElementById("awayScore_"+id).value;
+			var handy = document.getElementById("handy_"+id).value;
+			var resultSpan = document.getElementById("resultSpan_"+id);
+
+			if (handy == undefined)
+				handy = 0;
+	
+			if (homeScore == '' || awayScore == '') {
+				return;
+			}
+
+			var hScore = parseInt(homeScore) + parseFloat(handy);
+			var aScore = parseInt(awayScore);
+
+			if (hScore < aScore)
+				resultSpan.innerHTML = "패";
+			else if (hScore == aScore)
+				resultSpan.innerHTML = "무";
+			else
+				resultSpan.innerHTML = "승";
+		}
+	}
 	
 	function endGame(id)
 	{
@@ -69,11 +97,11 @@
 		var awayScore = document.getElementById("awayScore_"+id).value;
 
 		if (homeScore == '' || awayScore == '') {
-			alert("" + id +"번 경기에 스코어를 입력하세요");
+			//alert("" + id +"번 경기에 스코어를 입력하세요");
 			return;
 		}
 
-		if (confirm("입력하신 스코어는 " + homeScore + " : " + awayScore + " 입니다.\n경기를 종료 하시겠습니까?")) {
+		//if (confirm("입력하신 스코어는 " + homeScore + " : " + awayScore + " 입니다.\n경기를 종료 하시겠습니까?")) {
 			var query = "mode=endGame";
 			query += "&homeScore=" + homeScore;
 			query += "&awayScore=" + awayScore;
@@ -82,11 +110,11 @@
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
-			alert(result.resultXml.message);
+			//alert(result.resultXml.message);
 			//if (result.resultXml.code == 0) {
 			//	location.reload();
 			//}
-		}
+		//}
 	}
 
 	function cancelGame(id)
@@ -115,7 +143,7 @@
 		
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
-		alert(result.resultXml.message);
+		//alert(result.resultXml.message);
 	}
 
 	function cancelGameScore(id)
@@ -149,11 +177,11 @@
 		var c = document.game.checkGame;
 		c = Xwin.ToArray(c);
 		for (var i=0; i < c.length ; i++) {
-			if (c[i].checked) {
+			//if (c[i].checked) {
 				endGame(c[i].value);
-			} 
+			//} 
 		}
-
+		alert("저장되었습니다");
 		location.reload();
 	}
 
@@ -250,6 +278,7 @@
 			%>
 			<th>패</th>								
 			<th>스코어</th>
+			<th>결과</th>
 			<th>표시</th>
 			<th>배팅</th>
 			<!--th>기능</th  -->
@@ -276,18 +305,18 @@
 			<%
 			} else {
 			%>
-			<td><%=game.getDrawRate()%></td>
+			<td><span id="handy_<%=game.getId()%>" value="<%=game.getDrawRate()%>"><%=game.getDrawRate()%></span></td>
 			<%
 			}
 			%>
 			<td><%=game.getLoseRateStr()%></td>
 			<td>
 				<%
-				if (game.getBetStatus().equals(Code.BETTING_STATUS_DENY)) {
+				if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
 				%>
-				<input id='homeScore_<%=game.getId()%>' type='text' name='homeScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getHomeScore())%>' size=2>
+				<input onkeyup='calcResult(<%=game.getId()%>)' id='homeScore_<%=game.getId()%>' type='text' name='homeScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getHomeScore())%>' size=2>
 				:
-				<input id='awayScore_<%=game.getId()%>' type='text' name='awayScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getAwayScore())%>' size=2>
+				<input onkeyup='calcResult(<%=game.getId()%>)' id='awayScore_<%=game.getId()%>' type='text' name='awayScore_<%=game.getId()%>' value='<%=XwinUtil.nvl(game.getAwayScore())%>' size=2>
 				<%
 				} else {
 				%>
@@ -296,6 +325,7 @@
 				}
 				%>
 			</td>
+			<td><B><span id="resultSpan_<%=game.getId()%>"></span></B></td>
 			<td>
 				<select name='displayStatus' onchange='changeDisplayStatus(<%=game.getId()%>, this)'>
 					<option value='<%=Code.GAME_DISPLAY_CLOSE%>' <%=game.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE)?"selected":""%>><%=Code.getValue(Code.GAME_DISPLAY_CLOSE)%></option>

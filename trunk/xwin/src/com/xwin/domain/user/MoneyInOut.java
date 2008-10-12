@@ -14,6 +14,8 @@ public class MoneyInOut extends XwinObject
 	private String status;
 	private Date procDate;
 	private String procDateStr;
+	private String isChecked;
+	private String isDeleted;
 	
 	public String getId() {
 		return id;
@@ -57,5 +59,17 @@ public class MoneyInOut extends XwinObject
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getIsChecked() {
+		return isChecked;
+	}
+	public void setIsChecked(String isChecked) {
+		this.isChecked = isChecked;
+	}
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}	
 }

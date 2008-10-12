@@ -19,6 +19,10 @@ public class MoneyOutDao extends XwinDao
 		sqlMapClientTemplate.update("updateMoneyOut", moneyOut);
 	}
 	
+	public void deleteMoneyOut(String id) {
+		sqlMapClientTemplate.update("deleteMoneyOut", id);
+	}
+	
 	public List<MoneyOut> selectMoneyOutList(Map<String, Object> param)
 	{
 		return sqlMapClientTemplate.queryForList("selectMoneyOutList", param);

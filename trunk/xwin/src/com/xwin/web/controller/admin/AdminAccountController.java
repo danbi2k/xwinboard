@@ -47,6 +47,7 @@ public class AdminAccountController extends XwinController
 		
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("isDeleted", "N");
 		
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
@@ -87,6 +88,7 @@ public class AdminAccountController extends XwinController
 		
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("isDeleted", "N");
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
@@ -261,5 +263,33 @@ public class AdminAccountController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;		
+	}
+	
+	public ModelAndView deleteMoneyIn(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		moneyInDao.deleteMoneyIn(id);
+		
+		ResultXml rx = ResultXml.SUCCESS;
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView deleteMoneyOut(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		moneyInDao.deleteMoneyIn(id);
+		
+		ResultXml rx = ResultXml.SUCCESS;
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
 	}
 }

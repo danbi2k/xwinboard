@@ -70,12 +70,34 @@
 							<tr bgcolor="#000000" height="25">
 								<td align="center"><nobr><font color="#ffffff"><%=betting.getDateStr() %></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=betGame.getGameDateStr()%></font></nobr></td>
-								<td align="right"><nobr><font color="#ffffff"><%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font></nobr></td>
+								<td align="right"><nobr>
+									<%if (betGame.getResult() == null) { %>
+									<font color="#ffffff">
+									<%} else if (betGame.getResult().equals("W")) { %>
+									<font color="#FFC602">
+									<%} else if (betGame.getResult().equals("L")) {%>
+									<font color="#FF0000">
+									<%} else if (betGame.getResult().equals("D")) {%>
+									<font color="#EEEEEE">
+									<%} %>
+									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font>
+									</nobr></td>
 								<td align="center"><nobr>
 									<font color="#ffffff"><%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + betGame.getDrawRate()%>
 								</font></nobr></td>
 								
-								<td><nobr>&nbsp;<font color="#ffffff"><%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
+								<td><nobr>&nbsp;
+								<font color="#ffffff">
+								<%if (betGame.getResult() == null) { %>
+								<font color="#ffffff">
+								<%} else if (betGame.getResult().equals("W")) { %>
+								<font color="#FFC602">
+								<%} else if (betGame.getResult().equals("L")) {%>
+								<font color="#FF0000">
+								<%} else if (betGame.getResult().equals("D")) {%>
+								<font color="#EEEEEE">
+								<%} %>
+								<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
 								<td><nobr>&nbsp;<font color="#ffffff">
 								<%=Code.getValue(betGame.getResult())%>
@@ -90,9 +112,9 @@
 										out.print("<font color='#ffffff'><B>진행중</B></font>");
 								} else if (betGame.getResult().equals(betGame.getGuess())) {
 									out.print("<font color='#FFC602'><B>적중</B></font>");
-								} else if (betGame.getType().equals("wdl")) {
+								} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {
 									out.print("<font color='#FF0000'><B>미적중</B></font>");
-								} else {
+								} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {
 									out.print("<font color='#FF0000'><B>무승부</B></font>");
 								}
 								%>

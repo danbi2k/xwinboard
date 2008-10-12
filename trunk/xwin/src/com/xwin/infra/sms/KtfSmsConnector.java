@@ -1,10 +1,10 @@
 package com.xwin.infra.sms;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.NoRouteToHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +66,8 @@ public class KtfSmsConnector
 				
 				mapList.add(boxMap);
 			}				
+		} catch (ConnectException e) {
+			System.out.println("SMS 서버에 연결하지 못하였습니다");			
 		} catch (NoRouteToHostException e) {
 			System.out.println("SMS 서버에 연결하지 못하였습니다");
 		} catch (ParserConfigurationException e) {

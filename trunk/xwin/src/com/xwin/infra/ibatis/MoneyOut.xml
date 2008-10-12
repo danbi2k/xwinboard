@@ -19,6 +19,8 @@
 		<result property="status" column="STATUS"/>
 		<result property="reqDate" column="REQ_DATE"/>
 		<result property="procDate" column="PROC_DATE"/>
+		<result property="isChecked" column="ISCHECKED"/>
+		<result property="isDeleted" column="ISDELETED"/>
 	</resultMap>
 	
 	<insert id="insertMoneyOut" parameterClass="MoneyOut">
@@ -27,13 +29,27 @@
 	</insert>
 	
 	<update id="updateMoneyOut" parameterClass="MoneyOut">
-		UPDATE tbl_money_out SET STATUS = #status#, PROC_DATE = #procDate#
+		UPDATE tbl_money_out
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="procDate">
+			PROC_DATE = #procDate#
+			</isNotNull>
+			<isNotNull prepend="," property="isDeleted">
+			ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="," property="isChecked">
+			ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
 		WHERE ID = #id#
 	</update>
 	
-	<delete id="deleteMoneyOut" parameterClass="string">
-		DELETE FROM tbl_money_out WHERE ID = #value#
-	</delete>
+	<update id="deleteMoneyOut" parameterClass="string">
+		UPDATE tbl_money_out SET ISDELETED = 'Y" WHERE ID = #value#
+	</update>
 	
 	<select id="selectMoneyOut" resultMap="moneyOutResultMap" parameterClass="string">
 		SELECT * FROM tbl_money_out WHERE ID = #value#
@@ -56,6 +72,12 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
@@ -101,6 +123,12 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[

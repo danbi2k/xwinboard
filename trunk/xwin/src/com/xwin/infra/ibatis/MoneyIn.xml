@@ -19,6 +19,8 @@
 		<result property="name" column="NAME"/>
 		<result property="bankBookId" column="BANKBOOK_ID"/>
 		<result property="bankBook" column="BANKBOOK_ID" select="selectBankBook"/>
+		<result property="isChecked" column="ISCHECKED"/>
+		<result property="isDeleted" column="ISDELETED"/>
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
@@ -27,13 +29,27 @@
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">
-		UPDATE tbl_money_in SET STATUS = #status#, PROC_DATE = #procDate#
+		UPDATE tbl_money_in
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="procDate">
+			PROC_DATE = #procDate#
+			</isNotNull>
+			<isNotNull prepend="," property="isDeleted">
+			ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="," property="isChecked">
+			ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
 		WHERE ID = #id#
 	</update>
 	
-	<delete id="deleteMoneyIn" parameterClass="string">
-		DELETE FROM tbl_money_in WHERE ID = #value#
-	</delete>
+	<update id="deleteMoneyIn" parameterClass="string">
+		UPDATE tbl_money_in SET ISDELETED = 'Y" WHERE ID = #value#
+	</update>
 	
 	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
 		SELECT * FROM tbl_money_in WHERE ID = #value#
@@ -56,6 +72,12 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
@@ -101,6 +123,12 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
