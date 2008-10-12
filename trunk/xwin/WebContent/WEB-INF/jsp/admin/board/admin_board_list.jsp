@@ -26,7 +26,7 @@
 	<input type='hidden' name='pageIndex'/>
  </form>
 
-<table class="prettytable">
+<table class="list">
 	<tr>
 		<th width=5%>번호</th>
 		<th width=10%>아이디</th>
@@ -39,11 +39,11 @@ if (boardItemList != null) {
 	for (BoardItem boardItem : boardItemList) {
 %>
 	<tr>
-		<td width=5%><%=boardItem.getId()%></td>
-		<td width=10%><%=boardItem.getUserId()%></td>
-		<td width=10%><%=boardItem.getNickName()%></td>
-		<td width=*><a href="adminBoard.aspx?mode=viewBoardDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%></a></td>
-		<td width=15%><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
+		<td width=5% align=center><%=boardItem.getId()%></td>
+		<td width=10% align=center><%=boardItem.getUserId()%></td>
+		<td width=10% align=center><%=boardItem.getNickName()%></td>
+		<td width=*>&nbsp;&nbsp;<a href="adminBoard.aspx?mode=viewBoardDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</a></td>
+		<td width=15% align=center><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
 	</tr>
 <%
 	}

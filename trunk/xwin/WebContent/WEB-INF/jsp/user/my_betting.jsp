@@ -77,7 +77,10 @@
 								
 								<td><nobr>&nbsp;<font color="#ffffff"><%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
-								<td><nobr>&nbsp;<font color="#ffffff"><%=Code.getValue(betGame.getResult())%></font></nobr></td>
+								<td><nobr>&nbsp;<font color="#ffffff">
+								<%=Code.getValue(betGame.getResult())%>
+								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
+								</font></nobr></td>
 								<td align="center"><nobr>
 								<%
 								if (betGame.getResult() == null) {
@@ -87,8 +90,10 @@
 										out.print("<font color='#ffffff'><B>진행중</B></font>");
 								} else if (betGame.getResult().equals(betGame.getGuess())) {
 									out.print("<font color='#FFC602'><B>적중</B></font>");
+								} else if (betGame.getType().equals("wdl")) {
+									out.print("<font color='#FF0000'><B>미적중</B></font>");
 								} else {
-									out.print("<font color='#FF0000'><B>실패</B></font>");
+									out.print("<font color='#FF0000'><B>무승부</B></font>");
 								}
 								%>
 								</nobr></td>

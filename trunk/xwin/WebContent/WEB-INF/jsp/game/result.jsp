@@ -122,7 +122,7 @@ if (gameList != null) {
 						<%if (game.getType().equals("wdl")){%>
 						<td align=center ><nobr><%=game.getDrawRateStr()%></td>
 						<%} else { %>
-						<td align=center ><nobr><%=game.getDrawRate()%></td>
+						<td align=center ><nobr><%=game.getDrawRate()>0?"+":""%><%=game.getDrawRate()%></td>
 						<%}%>
 					</tr>
 				</table>

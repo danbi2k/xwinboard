@@ -78,6 +78,9 @@ public class BettingController extends XwinController
 		else if (cc.getMoney() < 5000) {
 			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
 		}
+		else if (cc.getMoney() >= 1000000) {
+			rx = new ResultXml(-1, "최대 배팅 금액은 1000,000원 입니다", null);
+		}
 		else if (cc.getExpect() > MAX_EXPECT) {
 			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
 		}
@@ -196,6 +199,11 @@ public class BettingController extends XwinController
 	public ModelAndView calculateCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		Member member = getLoginMember(request);
+		if (member == null) {
+			return new ModelAndView("dummy");
+		}
+			
 		String type = request.getParameter("type");
 		String _money = request.getParameter("money");		
 		HttpSession session = request.getSession();
@@ -203,17 +211,25 @@ public class BettingController extends XwinController
 		Map<String, GameCartItem> cartMap =
 			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + type);
 		
-		Member member = (Member) session.getAttribute("Member");
-		
-		Long money = Long.parseLong(_money);
-		
-		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
+		Long money = null;
 		ResultXml rx = null;
-		if (cc.getExpect() > MAX_EXPECT) {
-			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", cc);
-		} else {
-			rx = new ResultXml(0, null, cc);
+		
+		try {
+			money = Long.parseLong(_money);
+		} catch (Exception e) {
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
 		}
+		
+		if (money != null) {
+			CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
+			
+			if (cc.getExpect() > MAX_EXPECT) {
+				rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", cc);
+			} else {
+				rx = new ResultXml(0, null, cc);
+			}
+		}
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

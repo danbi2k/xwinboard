@@ -1,7 +1,10 @@
 package com.xwin.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.AccessDao;
 import com.xwin.infra.dao.AccountDao;
 import com.xwin.infra.dao.AdminDao;
@@ -38,6 +41,12 @@ public class XwinController extends MultiActionController
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected BettingService bettingService = null;
+	
+	public Member getLoginMember(HttpServletRequest request) {
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		return member;
+	}
 	
 	public void setBettingDao(BettingDao bettingDao) {
 		this.bettingDao = bettingDao;

@@ -78,6 +78,10 @@
 		<td width=20%>EMAIL</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=member.getEmail()%></a></td>
  	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>출금비밀번호</td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPin()%></a></td>
+ 	</tr>
 	<!-- 
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>회원상태</td>

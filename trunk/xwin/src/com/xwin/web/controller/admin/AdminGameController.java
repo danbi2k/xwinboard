@@ -313,7 +313,7 @@ public class AdminGameController extends XwinController
 			bettingDao.updateBettingStatus(id);
 			
 			// 핸디 무승부 배팅 1배 처리
-			if (game.getResult().equals("D")) {				
+			if (game.getType().equals("handy") && game.getResult().equals("D")) {				
 				Map<String, Object> param = new HashMap<String, Object>(1);
 				param.put("gameId", game.getId());
 				List<Betting> bettingList = bettingDao.selectBettingList(param);
@@ -353,17 +353,19 @@ public class AdminGameController extends XwinController
 					
 					try {
 						Member member = memberDao.selectMember(betting.getUserId(), null);
-						String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
-								Code.getValue(betting.getStatus()) + " 되었습니다.";
-						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
-						
-						SmsWait smsWait = new SmsWait();
-						smsWait.setMsg(message);
-						smsWait.setPhone(member.getMobile());
-						smsWait.setCallback("000-000-0000");
-						
-						smsWaitDao.insertSmsWait(smsWait);
+						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS)) {
+							String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+									Code.getValue(betting.getStatus()) + " 되었습니다.";
+							if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+								message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
+							
+							SmsWait smsWait = new SmsWait();
+							smsWait.setMsg(message);
+							smsWait.setPhone(member.getMobile());
+							smsWait.setCallback("000-000-0000");
+							
+							smsWaitDao.insertSmsWait(smsWait);
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

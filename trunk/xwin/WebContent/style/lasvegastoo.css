@@ -33,6 +33,25 @@ table.prettytable caption {
   margin-right: inherit;
 }
 
+table.list {
+  width: 100%;
+  margin: 1em 0em 1em 0em;
+  background: whitesmoke;
+  border-collapse: collapse;
+}
+table.list th {
+  border: 1px silver solid;
+  padding: 0.2em;
+  text-align: center;
+  font: normal .7em Tahoma, Arial, Helvetica, sans-serif;
+  background: gainsboro;
+}
+table.list td {
+  border: 1px silver solid;
+  padding: 0.2em;
+  font: normal .7em Tahoma, Arial, Helvetica, sans-serif;
+}
+
 body {
 	margin: 20px;
 	padding: 0;

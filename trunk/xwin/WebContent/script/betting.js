@@ -155,8 +155,10 @@ function FnDeleteCart(type)
 function FnCalcCart()
 {
 	var money = CartFrm.BetAmt.value;
-	if (money == undefined || money.length == 0)
-		CartFrm.BetAmt.value = money = "0";
+	if (money == undefined || money.length == 0) {
+		CartFrm.BetAmt.value = "";
+		money = "0";
+	}
 			
 	var rateDiv = document.getElementById("rateDiv");
 	var expectDiv = document.getElementById("expectDiv");
@@ -176,7 +178,7 @@ function FnCalcCart()
 		//balanceDiv.innerHTML = comma3(data.balance);
 	} else {
 		alert(result.resultXml.message);
-		CartFrm.BetAmt.value = 0;
+		CartFrm.BetAmt.value = "";
 		FnCalcCart();
 	}
 }

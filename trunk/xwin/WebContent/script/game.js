@@ -37,7 +37,7 @@ function FnDrawGameList2(data,type)
 		for (var i in data) {
 			row.push("<tr height=25 bgcolor=000000>");
 			row.push("<td align=center  ><nobr><font color=FFC602>" + data[i].gameDateStr + "</td>");
-			row.push("<td align=center  ><nobr><font color=FFC602><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle>&nbsp;&nbsp;" + data[i].leagueName + "</td>");
+			row.push("<td align=center  ><nobr><font color=FFFFFF><img width=22 height=14 src='images/league/" + data[i].leagueImage + "' align=absmiddle>&nbsp;&nbsp;" + data[i].leagueName + "</td>");
 			row.push("<td align=right  >");
 			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
 			row.push("<tr>");
@@ -73,7 +73,10 @@ function FnDrawGameList2(data,type)
 				}
 				row.push("<span id='bet3_2567' bgcolor=424242>" + data[i].drawRateStr + "</span>");	
 			} else {
-				row.push("<span id='bet3_2567' bgcolor=424242><B>" + data[i].drawRate + "</B></span>");	
+				row.push("<span id='bet3_2567' bgcolor=424242><B>");
+				if (data[i].drawRate > 0)
+					row.push("+");
+				row.push(data[i].drawRate + "</B></span>");	
 			}
 			
 			row.push("</td>");

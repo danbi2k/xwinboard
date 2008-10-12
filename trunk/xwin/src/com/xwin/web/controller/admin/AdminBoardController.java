@@ -128,4 +128,18 @@ public static final int ROWSIZE = 20;
 		
 		return mv;
 	}
+	
+	public ModelAndView deleteBoardComment(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		boardDao.deleteBoardComment(id);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }
