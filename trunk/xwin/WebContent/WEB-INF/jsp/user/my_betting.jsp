@@ -77,7 +77,7 @@
 									<font color="#FFC602">
 									<%} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {%>
 									<font color="#FF0000">
-									<%} if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
+									<%} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
 									<font color="#DDDDDD">
 									<%} %>
 									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font>
@@ -94,7 +94,7 @@
 									<font color="#FFC602">
 									<%} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {%>
 									<font color="#FF0000">
-									<%} if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
+									<%} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
 									<font color="#DDDDDD">
 									<%} %>
 									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
