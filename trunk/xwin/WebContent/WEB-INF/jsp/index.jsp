@@ -122,7 +122,7 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 	<tr><td width="70" align="center"><%=game.getGameDateStr().substring(3)%></td>
 		<td align="left">
 			<table cellpadding="0" cellspacing="2">
-			<tr><td><img src="images/league/<%=game.getLeagueImage()%>" style="display:none" onload="this.style.display='';">&nbsp;&nbsp;</td>
+			<tr><td><img width='22' height='14' src="images/league/<%=game.getLeagueImage()%>" style="display:none" onload="this.style.display='';">&nbsp;&nbsp;</td>
 				<td><%=game.getLeagueName()%></td></tr>
 			</table>
 		</td>
