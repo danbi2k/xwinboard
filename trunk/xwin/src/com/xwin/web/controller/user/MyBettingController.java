@@ -19,7 +19,7 @@ import com.xwin.web.controller.XwinController;
 
 public class MyBettingController extends XwinController
 {
-	int ROWSIZE = 20;
+	int ROWSIZE = 5;
 	
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

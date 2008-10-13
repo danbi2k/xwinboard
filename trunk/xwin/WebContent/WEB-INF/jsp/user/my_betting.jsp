@@ -99,7 +99,7 @@
 									<%} %>
 									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
-								<td><nobr>&nbsp;<font color="#ffffff">
+								<td align="center"><nobr>&nbsp;<font color="#ffffff">
 								<%=Code.getValue(betGame.getResult())%>
 								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
 								</font></nobr></td>
