@@ -1,6 +1,5 @@
 package com.xwin.web.controller.game;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +17,6 @@ import com.xwin.domain.game.League;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
-import com.xwin.web.command.AllCartItem;
 import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -28,6 +26,9 @@ public class GameController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
@@ -47,6 +48,9 @@ public class GameController extends XwinController
 	public ModelAndView viewGameResultList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
@@ -92,6 +96,9 @@ public class GameController extends XwinController
 	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String type = request.getParameter("type");
 		
@@ -120,6 +127,9 @@ public class GameController extends XwinController
 	public ModelAndView deleteCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = request.getParameter("type");
 		request.getSession().setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
 		

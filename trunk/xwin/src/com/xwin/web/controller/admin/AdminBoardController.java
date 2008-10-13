@@ -26,6 +26,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView viewBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -54,6 +57,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		BoardItem boardItem = boardDao.selectBoardItem(id, "user");
@@ -67,6 +73,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView viewWriteNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/board/admin_board_write");
 		
 		return mv;
@@ -75,6 +84,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView writeNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		String context = request.getParameter("context");
@@ -100,6 +112,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		boardDao.deleteBoardItem(id);
@@ -111,6 +126,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView writeBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String comment = request.getParameter("comment");
 		
@@ -132,6 +150,9 @@ public static final int ROWSIZE = 20;
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		boardDao.deleteBoardComment(id);

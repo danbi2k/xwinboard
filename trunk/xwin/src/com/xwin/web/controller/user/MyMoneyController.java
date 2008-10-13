@@ -16,6 +16,9 @@ public class MyMoneyController extends XwinController
 	public ModelAndView viewMyMoneyList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		List<Account> accountList = accountDao.selectAccountList(member.getUserId(), null);

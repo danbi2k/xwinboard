@@ -22,6 +22,9 @@ public class AdminController extends XwinController
 	public ModelAndView getIndicator(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		Indicator indicator = new Indicator();
 		indicator.setCenterIndi(boardDao.selectUnAnsweredQna().toString());
 		
@@ -45,6 +48,9 @@ public class AdminController extends XwinController
 	public ModelAndView viewNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/admin/notice");
 		
 		return mv;
@@ -53,6 +59,9 @@ public class AdminController extends XwinController
 	public ModelAndView saveNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String notice = request.getParameter("notice");
 		adminDao.updateAdmin("NOTICE", notice);
 		
@@ -68,6 +77,9 @@ public class AdminController extends XwinController
 	public ModelAndView viewPopup(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/admin/popup");
 		
 		return mv;
@@ -76,6 +88,9 @@ public class AdminController extends XwinController
 	public ModelAndView savePopup(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String popup = request.getParameter("popup");
 		String popupFlag = request.getParameter("popupFlag");
 		
@@ -95,6 +110,9 @@ public class AdminController extends XwinController
 	public ModelAndView viewBankBookList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
 		
 		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
@@ -106,6 +124,9 @@ public class AdminController extends XwinController
 	public ModelAndView saveBankBook(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String bankName = request.getParameter("bankName");
 		String name = request.getParameter("name");
 		String number = request.getParameter("number");
@@ -128,6 +149,9 @@ public class AdminController extends XwinController
 	public ModelAndView deleteBankBook(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String[] id = request.getParameterValues("id");
 		
 		BankBook bankBook = new BankBook();

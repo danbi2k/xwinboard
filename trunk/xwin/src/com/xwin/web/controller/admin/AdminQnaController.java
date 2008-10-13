@@ -21,6 +21,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("boardName", "qna");
 		param.put("ISDELETED", "N");
@@ -35,6 +38,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		BoardItem boardItem = boardDao.selectBoardItem(id, "qna");
@@ -48,6 +54,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView answerQna(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String comment = request.getParameter("comment");
 		
@@ -69,6 +78,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView deleteQnaItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String[] id = request.getParameterValues("id");
 
 		for (int i = 0 ; i < id.length ; i++)
@@ -84,6 +96,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView saveQnaIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String isChecked = request.getParameter("isChecked");
 

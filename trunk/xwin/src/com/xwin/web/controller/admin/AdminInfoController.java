@@ -15,6 +15,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView viewAdminInfo(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/admin_info");
 		return mv;
 	}
@@ -22,6 +25,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView updateAdminInfo(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		admin.setPassword(command.getPassword());

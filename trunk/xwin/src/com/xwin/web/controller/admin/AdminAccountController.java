@@ -28,6 +28,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
 		String status = request.getParameter("status");
@@ -82,6 +85,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = request.getParameter("keyword");
 		String status = request.getParameter("status");
@@ -128,6 +134,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyCalculation(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/account/money_calculation");
 		return mv;
 	}
@@ -136,6 +145,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView acceptMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;
 		String id = request.getParameter("id");
 		
@@ -171,6 +183,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView acceptMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;
 		String id = request.getParameter("id");
 		
@@ -193,6 +208,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView directCharging(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String _money = request.getParameter("money");
@@ -237,6 +255,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView directMinusCharging(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String _money = request.getParameter("money");
@@ -287,6 +308,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView deleteMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String[] id = request.getParameterValues("id");
 		
 		if (id != null) {
@@ -304,6 +328,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView deleteMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String[] id = request.getParameterValues("id");
 		
 		if (id != null) {
@@ -321,6 +348,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView saveMoneyInIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String isChecked = request.getParameter("isChecked");
 		
@@ -340,6 +370,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView saveMoneyOutIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String isChecked = request.getParameter("isChecked");
 		
@@ -359,6 +392,9 @@ public class AdminAccountController extends XwinController
 	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		MoneyIn moneyIn = new MoneyIn();

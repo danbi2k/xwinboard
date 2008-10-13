@@ -25,6 +25,9 @@ public class BoardController extends XwinController
 	public ModelAndView viewUserBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String pageIndex = request.getParameter("pageIndex");
 		String boardName = request.getParameter("boardName");
 		
@@ -36,6 +39,9 @@ public class BoardController extends XwinController
 	public ModelAndView viewQnaBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String pageIndex = request.getParameter("pageIndex");
 		String boardName = request.getParameter("boardName");
 
@@ -76,6 +82,9 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		String boardName = request.getParameter("boardName");
 		String addComment = request.getParameter("addComment");
@@ -93,6 +102,9 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardWriteForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String boardName = request.getParameter("boardName");
 		ModelAndView mv = new ModelAndView("board/boardWrite");
 		
@@ -102,6 +114,9 @@ public class BoardController extends XwinController
 	public ModelAndView writeBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{	
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String boardId = request.getParameter("boardId");
 		String comment = request.getParameter("comment");
 		String boardName = request.getParameter("boardName");
@@ -124,6 +139,9 @@ public class BoardController extends XwinController
 	public ModelAndView writeBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{	
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String title = request.getParameter("title");
 		String context = request.getParameter("context");
 		String boardName = request.getParameter("boardName");
@@ -153,6 +171,9 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		String boardName = request.getParameter("boardName");
 		
@@ -178,6 +199,9 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		
 		BoardComment boardComment = boardDao.selectBoardComment(id);
@@ -202,6 +226,9 @@ public class BoardController extends XwinController
 	public ModelAndView getBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		
 		BoardItem boardItem = boardDao.selectBoardItem(id, "user");

@@ -18,6 +18,9 @@ public class AdminSmsController extends XwinController
 	public ModelAndView viewSendSms(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/admin/sendSms");
 		
 		return mv;
@@ -26,6 +29,9 @@ public class AdminSmsController extends XwinController
 	public ModelAndView sendSms(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String phone = request.getParameter("phone");
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
@@ -42,6 +48,9 @@ public class AdminSmsController extends XwinController
 	public ModelAndView sendSmsAllMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
 		

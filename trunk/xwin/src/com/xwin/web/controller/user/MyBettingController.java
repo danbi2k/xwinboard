@@ -19,11 +19,14 @@ import com.xwin.web.controller.XwinController;
 
 public class MyBettingController extends XwinController
 {
-	int ROWSIZE = 5;
+	int ROWSIZE = 20;
 	
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		ModelAndView mv = null;
 		
 		Member member = (Member) request.getSession().getAttribute("Member");
@@ -56,6 +59,9 @@ public class MyBettingController extends XwinController
 	public ModelAndView viewMyBettingDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String bettingId = request.getParameter("bettingId");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
@@ -70,6 +76,9 @@ public class MyBettingController extends XwinController
 	public ModelAndView getMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		String _pageIndex = request.getParameter("pageIndex");
@@ -93,6 +102,9 @@ public class MyBettingController extends XwinController
 	public ModelAndView getMyBettingDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String bettingId = request.getParameter("bettingId");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		

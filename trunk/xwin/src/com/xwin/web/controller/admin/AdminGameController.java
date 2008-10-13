@@ -32,6 +32,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
@@ -72,6 +75,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewEndGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
@@ -119,6 +125,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewRegisterGameForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = request.getParameter("type");
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
@@ -130,6 +139,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewUpdateGameForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = request.getParameter("type");
 		String id = request.getParameter("id");
 		List<League> leagueList = leagueDao.selectLeagueList();
@@ -144,6 +156,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewReprocessGame(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = request.getParameter("type");
 		String id = request.getParameter("id");
 		Game game = gameDao.selectGame(id);
@@ -156,6 +171,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView registerGame(HttpServletRequest request,
 			HttpServletResponse response, GameCommand command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = (String) request.getParameter("type");
 		
 		Game game = new Game();
@@ -183,6 +201,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView updateGame(HttpServletRequest request,
 			HttpServletResponse response, GameCommand command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;
 		
 		try {
@@ -217,6 +238,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String status = null;//request.getParameter("status");
 		String type = request.getParameter("type");
 		
@@ -231,6 +255,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView runGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;		
 		String id = request.getParameter("id");
 		String type = request.getParameter("type");
@@ -247,6 +274,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView endGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String _homeScore = request.getParameter("homeScore");
 		String _awayScore = request.getParameter("awayScore");
@@ -261,6 +291,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView endGameList(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String _homeScore = request.getParameter("homeScore");
 		String _awayScore = request.getParameter("awayScore");
@@ -389,6 +422,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView cancelGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ResultXml rx = null;		
 		String id = request.getParameter("id");
 		String type = request.getParameter("type");
@@ -483,6 +519,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView readyGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String type = request.getParameter("type");
 		
@@ -500,6 +539,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView changeDisplayStatus(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String displayStatus = request.getParameter("displayStatus");
 		
@@ -518,6 +560,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView reprocessGame(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		String _homeScore = request.getParameter("homeScore");
 		String _awayScore = request.getParameter("awayScore");

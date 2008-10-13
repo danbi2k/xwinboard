@@ -24,6 +24,9 @@ public class AdminMemberController extends XwinController
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
@@ -51,6 +54,9 @@ public class AdminMemberController extends XwinController
 	public ModelAndView viewMemberDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String userId = request.getParameter("userId");
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
@@ -78,6 +84,9 @@ public class AdminMemberController extends XwinController
 	public ModelAndView viewAccessList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
@@ -103,6 +112,9 @@ public class AdminMemberController extends XwinController
 	public ModelAndView updateMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String userId = request.getParameter("userId");
 		String status = request.getParameter("status");
 		String grade = request.getParameter("grade");

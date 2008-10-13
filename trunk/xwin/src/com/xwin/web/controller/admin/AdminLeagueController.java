@@ -23,6 +23,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView viewLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -47,6 +50,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView viewRegisterLeagueForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		ModelAndView mv = new ModelAndView("admin/game/register_league");
 		return mv;
 	}
@@ -54,6 +60,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView viewUpdateLeagueForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		League league = leagueDao.selectLeagueById(id);
 		
@@ -65,6 +74,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView registerLeague(HttpServletRequest request,
 			HttpServletResponse response, LeagueCommand command) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		MultipartFile mf = command.getImage();
 		String fileName = XwinUtil.uploadContent(mf, Code.LEAGUE_IMAGE_PATH);
 		
@@ -82,6 +94,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView updateLeague(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		
@@ -102,6 +117,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView getLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
 		ResultXml rx = new ResultXml(0, null, leagueList);
@@ -113,6 +131,9 @@ public class AdminLeagueController extends XwinController
 	public ModelAndView removeLeague(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		leagueDao.removeLeague(id);

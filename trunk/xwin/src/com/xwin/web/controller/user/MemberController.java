@@ -28,6 +28,9 @@ public class MemberController extends XwinController
 	public ModelAndView viewModifyForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		ModelAndView mv = new ModelAndView("user/modify");
 		
 		return mv;
@@ -83,6 +86,9 @@ public class MemberController extends XwinController
 	public ModelAndView modifyMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		ResultXml rx = null;
 		rx = checkExistNickName(command.getNickName(), member.getNickName());
@@ -197,6 +203,9 @@ public class MemberController extends XwinController
 	public ModelAndView requestSecede(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("Member");
 		
@@ -214,6 +223,9 @@ public class MemberController extends XwinController
 	public ModelAndView removeMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		memberDao.deleteMember(id);
 		

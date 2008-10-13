@@ -84,7 +84,9 @@
 		</font>
 		</td>
 		<td><input type='button' value='충전' onclick='acceptMoneyInRequest(<%=moneyIn.getId()%>)'>
+		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
 		<input type='button' value='취소' onclick='cancelMoneyInRequest(<%=moneyIn.getId()%>)'></td>
+		<%} %>
 	  </tr>
 	<%
 		}

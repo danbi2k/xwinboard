@@ -23,6 +23,9 @@ public class MoneyInController extends XwinController
 	public ModelAndView viewMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		List<BankBook> bankBookList =
 			bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
 		
@@ -34,6 +37,9 @@ public class MoneyInController extends XwinController
 	public ModelAndView viewMoneyInRequestList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		List<MoneyIn> moneyInList =
@@ -47,6 +53,9 @@ public class MoneyInController extends XwinController
 	public ModelAndView moneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member =
 			(Member) request.getSession().getAttribute("Member");
 		String _money = request.getParameter("money");

@@ -17,6 +17,9 @@ public class AdminMainController extends XwinController
 	public ModelAndView viewAdminMain(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		List<Member> memberList = memberDao.selectRecentlyJoinMemberList();
 		List<MoneyIn> moneyInList = moneyInDao.selectRecentlyRequestList();
 		List<MoneyOut> moneyOutList = moneyOutDao.selectRecentlyRequestList();

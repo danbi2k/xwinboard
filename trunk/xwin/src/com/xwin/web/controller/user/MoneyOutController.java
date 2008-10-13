@@ -21,6 +21,9 @@ public class MoneyOutController extends XwinController
 	public ModelAndView viewMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		ModelAndView mv = new ModelAndView("user/money_out_req");
 		return mv;
 	}
@@ -28,6 +31,9 @@ public class MoneyOutController extends XwinController
 	public ModelAndView viewMoneyOutRequestList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
 		List<MoneyOut> moneyOutList =
@@ -41,6 +47,9 @@ public class MoneyOutController extends XwinController
 	public ModelAndView moneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response, MoneyOut moneyOut) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member =
 			(Member) request.getSession().getAttribute("Member");
 		

@@ -33,6 +33,9 @@ public class BettingController extends XwinController
 	public ModelAndView viewBettingCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
 		
 		ModelAndView mv = new ModelAndView("game/betting_cart");
@@ -44,6 +47,9 @@ public class BettingController extends XwinController
 	public ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		ResultXml rx = null;
 		
 		String _type = request.getParameter("type");
@@ -133,6 +139,9 @@ public class BettingController extends XwinController
 	public ModelAndView addAllCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		ResultXml rx = null;
 		
 		String _type = request.getParameter("type");
@@ -199,6 +208,9 @@ public class BettingController extends XwinController
 	public ModelAndView calculateCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		Member member = getLoginMember(request);
 		if (member == null) {
 			return new ModelAndView("dummy");
@@ -239,6 +251,9 @@ public class BettingController extends XwinController
 	public ModelAndView addGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		Map<String, GameCartItem> cartMap = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
@@ -309,6 +324,9 @@ public class BettingController extends XwinController
 	public ModelAndView deleteGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = request.getParameter("type");
 		String gameId = request.getParameter("gameId");
 		
@@ -331,6 +349,9 @@ public class BettingController extends XwinController
 	public ModelAndView emptyGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		session.removeAttribute("cartMap_" + type);

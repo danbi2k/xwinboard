@@ -28,6 +28,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView viewBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String gameType = XwinUtil.arcNvl(request.getParameter("gameType"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String betDate = XwinUtil.arcNvl(request.getParameter("betDate"));
@@ -65,6 +68,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView viewBettingDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		Betting betting = bettingDao.selectBetting(id);
@@ -78,6 +84,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView viewBettingMoneyList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
@@ -125,6 +134,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView viewBettingMoneyDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -141,6 +153,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView calculateBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String id = request.getParameter("id");
 		Betting betting = bettingDao.selectBetting(id);
 		
@@ -154,6 +169,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView cancelBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String message = "";
 		Integer code = 0;
 		
@@ -195,6 +213,9 @@ public class AdminBettingController extends XwinController
 	public ModelAndView getBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String _pageIndex = request.getParameter("pageIndex");
 		Integer pageIndex = null;
 		try {
