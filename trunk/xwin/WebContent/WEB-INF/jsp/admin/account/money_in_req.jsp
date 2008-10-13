@@ -9,6 +9,7 @@
 <%
 	List<MoneyIn> moneyInList = (List<MoneyIn>) request.getAttribute("moneyInOutList");
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
+	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
@@ -18,7 +19,7 @@
 %>
 
 <div class="title">충전요청</div>
-		  
+<font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>		  
 <SCRIPT LANGUAGE="JavaScript">
 	function acceptMoneyInRequest(id) {
 		if(confirm('충전하시겠습니까?')) {

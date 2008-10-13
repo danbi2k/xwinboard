@@ -8,6 +8,7 @@
 <%
 	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyInOutList");
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
+	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
@@ -17,7 +18,7 @@
 %>
 
 <div class="title">환전요청</div>
-		 
+<font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>		 
 <SCRIPT LANGUAGE="JavaScript">
 	function acceptMoneyOutRequest(id) {
 		var d=document.regist;
