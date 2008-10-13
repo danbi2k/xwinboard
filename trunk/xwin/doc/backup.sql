@@ -33,13 +33,15 @@ CREATE TABLE `tbl_access` (
   `DATE` varchar(45) NOT NULL,
   `IP_ADDR` varchar(45) NOT NULL,
   PRIMARY KEY  (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_access`
 --
 
 /*!40000 ALTER TABLE `tbl_access` DISABLE KEYS */;
+INSERT INTO `tbl_access` (`ID`,`USERID`,`NICKNAME`,`DATE`,`IP_ADDR`) VALUES 
+ (149,'xx','대박이','2008-10-13 20:32:23','127.0.0.1');
 /*!40000 ALTER TABLE `tbl_access` ENABLE KEYS */;
 
 
@@ -337,7 +339,7 @@ CREATE TABLE `tbl_member` (
 
 /*!40000 ALTER TABLE `tbl_member` DISABLE KEYS */;
 INSERT INTO `tbl_member` (`ID`,`USERID`,`PASSWORD`,`NICKNAME`,`MOBILE`,`EMAIL`,`PIN`,`BALANCE`,`STATUS`,`GRADE`,`JOIN_DATE`) VALUES 
- (1,'xx','4444','대박이','010-3333-9997','jackpot@hotmail.com','1111',8875080,'US001','UG001','2008-09-29 00:00:00'),
+ (1,'xx','4444','대박이','010-3333-9997','jackpot@hotmail.com','1111',0,'US001','UG001','2008-09-29 00:00:00'),
  (2,'secadmin','3333','관리자','010-4444-4444','admin@admin.com','4444',0,'US001','UG100','2008-09-30 00:00:00');
 /*!40000 ALTER TABLE `tbl_member` ENABLE KEYS */;
 
