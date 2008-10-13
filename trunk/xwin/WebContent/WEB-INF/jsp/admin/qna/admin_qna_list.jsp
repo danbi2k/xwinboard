@@ -35,7 +35,7 @@ if (qnaList != null) {
 	for (BoardItem boardItem : qnaList) {
 %>
 	<tr>
-		<th width=5%><input type="checkbox" name="checkQna" value="<%=boardItem.getId()%>"/></th>
+		<th width=5%><input type="checkbox" name="checkCheck" value="<%=boardItem.getId()%>" onclick="saveQnaIsChecked(this)" <%=boardItem.getIsChecked().equals("Y")?"checked":""%>/></th>
 		<td width=5% align='center'><%=boardItem.getId()%></td>
 		<td width=10% align='center'><%=boardItem.getUserId()%></td>
 		<td width=10% align='center'><%=boardItem.getNickName()%></td>
@@ -54,11 +54,26 @@ if (qnaList != null) {
 <input type="button" onclick="deleteQnaItem()" value="삭제">
 
 <script>
+function saveQnaIsChecked(cobj)
+{
+	var query = "mode=saveQnaIsChecked";
+	query += "&id=" + cobj.value;
+	if (cobj.checked)
+		query += "&isChecked=Y";
+	else
+		query += "&isChecked=N";
+	
+	var http = new JKL.ParseXML("adminQna.aspx", query);
+	var result = http.parse();
+
+	checkIndi();
+}
+
 function deleteQnaItem()
 {
 	var query = "mode=deleteQnaItem";
 	
-	var c = document.qnaList.checkQna;
+	var c = document.qnaList.checkCheck;
 	c = Xwin.ToArray(c);
 	for (var i=0; i < c.length ; i++) {
 		if (c[i].checked)

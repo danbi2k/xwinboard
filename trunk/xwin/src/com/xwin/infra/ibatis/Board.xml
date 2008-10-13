@@ -19,6 +19,8 @@
 		<result property="type" column="TYPE"/>
 		<result property="boardName" column="BOARDNAME"/>
 		<result property="commentCount" column="COMMENT_COUNT"/>
+		<result property="isDeleted" column="ISDELETED"/>
+		<result property="isChecked" column="ISCHECKED"/>
 	</resultMap>
 	
 	<insert id="insertBoardItem" parameterClass="BoardItem">
@@ -32,6 +34,16 @@
 	<delete id="deleteBoardItem" parameterClass="string">
 		UPDATE tbl_board_item SET ISDELETED = 'Y' WHERE ID = #value#
 	</delete>
+	
+	<update id="updateBoardItem" parameterClass="BoardItem">
+		UPDATE tbl_board_item
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="isChecked">
+			ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
+		WHERE id = #id#
+	</update>
 	
 	<select id="selectBoardItem" resultMap="boardItemResultMap"
 		parameterClass="map">
@@ -50,7 +62,7 @@
 	
 	<select id="selectBoardItemList" resultMap="boardItemResultMap" parameterClass="map">
 		SELECT
-			ID, TITLE, USERID, NICKNAME, DATE, READCOUNT, BOARDNAME,
+			ID, TITLE, USERID, NICKNAME, DATE, READCOUNT, BOARDNAME, ISDELETED, ISCHECKED,
 			'' as CONTEXT,
 			TYPE,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
@@ -124,7 +136,6 @@
 	<select id="selectUnAnsweredQna" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_board_item bi
 		WHERE
-		(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = 0 AND
-		bi.BOARDNAME = 'qna' AND bi.ISDELETED = 'N'	
+		bi.BOARDNAME = 'qna' AND bi.ISDELETED = 'N'	AND bi.ISCHECKED = 'N'
 	</select>
 </sqlMap>

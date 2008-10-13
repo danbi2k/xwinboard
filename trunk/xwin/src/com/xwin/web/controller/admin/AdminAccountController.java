@@ -265,28 +265,72 @@ public class AdminAccountController extends XwinController
 		return mv;		
 	}
 	
-	public ModelAndView deleteMoneyIn(HttpServletRequest request,
+	public ModelAndView deleteMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String id = request.getParameter("id");
+		String[] id = request.getParameterValues("id");
 		
-		moneyInDao.deleteMoneyIn(id);
+		if (id != null) {
+			for (int i = 0 ; i < id.length ; i++)
+				moneyInDao.deleteMoneyIn(id[i]);
+		}
 		
-		ResultXml rx = ResultXml.SUCCESS;
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;	
 	}
 	
-	public ModelAndView deleteMoneyOut(HttpServletRequest request,
+	public ModelAndView deleteMoneyOutList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String[] id = request.getParameterValues("id");
+		
+		if (id != null) {
+			for (int i = 0 ; i < id.length ; i++)
+				moneyOutDao.deleteMoneyOut(id[i]);
+		}
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView saveMoneyInIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		String id = request.getParameter("id");
+		String isChecked = request.getParameter("isChecked");
 		
-		moneyInDao.deleteMoneyIn(id);
+		MoneyIn moneyIn = new MoneyIn();
+		moneyIn.setId(id);
+		moneyIn.setIsChecked(isChecked);
 		
-		ResultXml rx = ResultXml.SUCCESS;
+		moneyInDao.updateMoneyIn(moneyIn);
+		
+		ResultXml rx = new ResultXml(0, null, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView saveMoneyOutIsChecked(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		String isChecked = request.getParameter("isChecked");
+		
+		MoneyOut moneyOut = new MoneyOut();
+		moneyOut.setId(id);
+		moneyOut.setIsChecked(isChecked);
+		
+		moneyOutDao.updateMoneyOut(moneyOut);
+		
+		ResultXml rx = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

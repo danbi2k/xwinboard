@@ -80,4 +80,23 @@ public class AdminQnaController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView saveQnaIsChecked(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		String isChecked = request.getParameter("isChecked");
+
+		BoardItem boardItem = new BoardItem();
+		boardItem.setId(id);
+		boardItem.setIsChecked(isChecked);
+		
+		boardDao.updateBoardItem(boardItem);
+		
+		ResultXml rx = new ResultXml(0, null, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

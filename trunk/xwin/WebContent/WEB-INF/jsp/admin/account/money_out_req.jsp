@@ -53,8 +53,10 @@
 		<input type='text' name='toDate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value=''  -->				
 		<input type='submit' value='검 색'>  
 </form>
+<form name="list">
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
+		<th></th>
 		<td width=5%>번호</td>
 		<th>아이디</td>
 		<th>환전요청금액</td>
@@ -63,7 +65,6 @@
 		<th>예금주</td>
 		<th>신청일자</td>
 		<th>상태</td>
-		<th>체크</th>
 		<th>충전</th>
 	</tr>
 	<%
@@ -71,7 +72,8 @@
 		for (MoneyOut moneyOut : moneyOutList) {
 	%>
 	<tr>
-		<td>1</td>
+		<td><input type="checkbox" name="checkDel" value="<%=moneyOut.getId()%>" onclick="saveMoneyOutIsChecked(this)" <%=moneyOut.getIsChecked().equals("Y")?"checked":""%>/></td>
+		<td><%=moneyOut.getId()%></td>
 		<td><B><%=moneyOut.getUserId()%></B></td>
 		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 		<td><%=moneyOut.getBankName()%></td>
@@ -79,7 +81,6 @@
 		<td><%=moneyOut.getName()%></td>
 		<td><%=moneyOut.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyOut.getStatus())%></td>
-		<td><input type='checkbox'></td>
 		<td><input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'></td>
 	</tr>
 <%
@@ -88,7 +89,10 @@
 %>
 
 </table>
-
+</form>
+<BR>
+<input type="button" value="삭제" onclick="deleteCheckedItem()"/>
+<BR>
 <div class="pages">
 <%
 	int pIdx = 0;
@@ -123,6 +127,41 @@
 %>
 </div>
 <script>
+function saveMoneyOutIsChecked(cobj)
+{
+	var query = "mode=saveMoneyOutIsChecked";
+	query += "&id=" + cobj.value;
+	if (cobj.checked)
+		query += "&isChecked=Y";
+	else
+		query += "&isChecked=N";
+	
+	var http = new JKL.ParseXML("adminAccount.aspx", query);
+	var result = http.parse();	
+
+	checkIndi();	
+}
+
+function deleteCheckedItem()
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteMoneyOutList";
+		var c = document.list.checkDel;
+		c = Xwin.ToArray(c);
+		for (var i = 0 ; i < c.length ; i++) {
+			if (c[i].checked) {
+				query += "&id=" + c[i].value;
+			}
+		}
+	
+		var http = new JKL.ParseXML("adminAccount.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	} 
+}
+
 function goPage(index)
 {
 	var frm = document.search;

@@ -49,6 +49,11 @@ public class BoardDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectBoardItemCount", param);
 	}
 	
+	public void updateBoardItem(BoardItem boardItem)
+	{
+		sqlMapClientTemplate.update("updateBoardItem", boardItem);
+	}
+	
 	/**************************************************/
 	
 	public void insertBoardComment(BoardComment boardComment)

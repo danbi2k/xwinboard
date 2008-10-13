@@ -19,6 +19,7 @@ public class BoardItem extends XwinObject
 	private String boardName;
 	private Integer commentCount;
 	private String isDeleted;
+	private String isChecked;
 	
 	private List<BoardComment> boardCommentList;
 	
@@ -99,5 +100,11 @@ public class BoardItem extends XwinObject
 	}
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+	public String getIsChecked() {
+		return isChecked;
+	}
+	public void setIsChecked(String isChecked) {
+		this.isChecked = isChecked;
 	}	
 }
