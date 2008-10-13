@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -39,6 +40,7 @@ public class MyBettingController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
+		param.put("notStatus", Code.BET_STATUS_CANCEL);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		

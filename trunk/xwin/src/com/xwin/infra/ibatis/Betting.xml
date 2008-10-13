@@ -178,6 +178,9 @@ BET_CALC_COMMIT			= "BTC10";
 			<isNotNull prepend="AND" property="notCalcStatus">
 			CALC_STATUS != #notCalcStatus#
 			</isNotNull>
+			<isNotNull prepend="AND" property="notStatus">
+			STATUS != #notStatus#
+			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#
 			</isNotNull>
@@ -227,6 +230,9 @@ BET_CALC_COMMIT			= "BTC10";
 			<isNotNull prepend="AND" property="notCalcStatus">
 			CALC_STATUS != #notCalcStatus#
 			</isNotNull>
+			<isNotNull prepend="AND" property="notStatus">
+			STATUS != #notStatus#
+			</isNotNull>
 			<isNotNull prepend="AND" property="gameType">
 			GAME_TYPE = #gameType#
 			</isNotNull>
@@ -253,5 +259,8 @@ BET_CALC_COMMIT			= "BTC10";
 			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
 			</isNotNull>
 		</dynamic>
+	</select>
+	<select id="selectRunningBettingMoney" resultClass="long">
+		SELECT SUM(money) FROM tbl_betting WHERE STATUS = 'BS001'
 	</select>
 </sqlMap>

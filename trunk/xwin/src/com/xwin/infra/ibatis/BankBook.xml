@@ -37,4 +37,9 @@
 	<select id="selectBankBook" resultMap="bankBookResultMap" parameterClass="string">
 		SELECT * FROM tbl_bankbook WHERE ID = #value#
 	</select>
+	
+	<update id="updateBankBook" parameterClass="BankBook">
+		UPDATE tbl_bankbook SET STATUS = #status#
+		WHERE ID = #id#
+	</update>
 </sqlMap>

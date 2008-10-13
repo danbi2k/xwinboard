@@ -35,9 +35,9 @@
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
 		SELECT g.*, l.NAME as LEAGUE_NAME, l.IMAGE as LEAGUE_IMAGE,
 		
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W') AS WIN_MONEY,
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D') AS DRAW_MONEY,
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L') AS LOSE_MONEY
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
 		FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.ID = #value#
 	</select>
 	
@@ -45,9 +45,9 @@
 		SELECT
 			g.*, l.NAME as LEAGUE_NAME,
 			l.IMAGE as LEAGUE_IMAGE,
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W') AS WIN_MONEY,
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D') AS DRAW_MONEY,
-			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L') AS LOSE_MONEY
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
 		FROM tbl_game g, tbl_league l
 		WHERE g.LEAGUE_ID = l.ID
 		<isNotNull prepend="AND" property="homeTeam">

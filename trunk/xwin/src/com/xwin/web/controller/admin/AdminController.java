@@ -1,6 +1,7 @@
 package com.xwin.web.controller.admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Admin;
+import com.xwin.domain.admin.BankBook;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.Indicator;
@@ -85,6 +87,59 @@ public class AdminController extends XwinController
 		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");		
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView viewBankBookList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
+		
+		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
+		mv.addObject("bankBookList", bankBookList);
+		
+		return mv;
+	}
+	
+	public ModelAndView saveBankBook(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String bankName = request.getParameter("bankName");
+		String name = request.getParameter("name");
+		String number = request.getParameter("number");
+		
+		BankBook bankBook = new BankBook();
+		bankBook.setBankName(bankName);
+		bankBook.setName(name);
+		bankBook.setNumber(number);
+		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
+		
+		bankBookDao.insertBankBook(bankBook);
+		
+		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView deleteBankBook(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String[] id = request.getParameterValues("id");
+		
+		BankBook bankBook = new BankBook();
+		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
+		
+		for (int i = 0 ; i < id.length ; i++) {
+			bankBook.setId(id[i]);
+			bankBookDao.updateBankBook(bankBook);
+		}
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;

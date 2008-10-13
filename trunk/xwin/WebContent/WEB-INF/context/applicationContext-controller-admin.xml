@@ -75,6 +75,7 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:adminDao-ref="adminDao"
+		p:bankBookDao-ref="bankBookDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminBettingController"

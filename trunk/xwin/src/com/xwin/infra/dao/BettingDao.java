@@ -72,6 +72,11 @@ public class BettingDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectCalcRequiredBetting", gameId);
 	}
 	
+	public Long selectRunningBettingMoney()
+	{
+		return (Long) sqlMapClientTemplate.queryForObject("selectRunningBettingMoney");
+	}
+	
 	public void updateBetting(Betting betting)
 	{
 		sqlMapClientTemplate.update("updateBetting", betting);

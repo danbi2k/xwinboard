@@ -78,7 +78,7 @@ public class BettingController extends XwinController
 		else if (cc.getMoney() < 5000) {
 			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
 		}
-		else if (cc.getMoney() >= 1000000) {
+		else if (cc.getMoney() > 1000000) {
 			rx = new ResultXml(-1, "최대 배팅 금액은 1000,000원 입니다", null);
 		}
 		else if (cc.getExpect() > MAX_EXPECT) {

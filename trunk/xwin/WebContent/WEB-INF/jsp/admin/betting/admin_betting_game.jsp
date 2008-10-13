@@ -11,6 +11,7 @@
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	Integer totalCount = (Integer) request.getAttribute("gameCount");
+	Long[] moneySummar = (Long[]) request.getAttribute("moneySummary");
 	
 	String leagueId = XwinUtil.nvl(request.getParameter("leagueId"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
@@ -22,6 +23,9 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
 	String type = request.getParameter("type");
+	
+	if (status.length() == 0)
+			status = Code.GAME_STATUS_RUN;
 %>
 <%@ include file="../admin_header.jsp"%>
 
@@ -53,8 +57,7 @@
 </select>
 경기상태
 <select name='status' onChange='this.form.submit()'>
-	<option value=''>전체</option>
-	<option value='<%=Code.GAME_STATUS_READY%>' <%=status.equals(Code.GAME_STATUS_READY)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_READY)%></option>
+	<!--option value=''>전체</option  -->
 	<option value='<%=Code.GAME_STATUS_RUN%>' <%=status.equals(Code.GAME_STATUS_RUN)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_RUN)%></option>
 	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
 	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
@@ -97,9 +100,9 @@
 		<td><%=game.getGameDateStr()%></td>
 		<td><%=game.getHomeTeam()%></td>
 		<td><%=game.getAwayTeam()%></td>
-		<td><font color='red'><%=XwinUtil.nvl(game.getWinMoney())%></font></td>
-		<td><font color='red'><%=XwinUtil.nvl(game.getDrawMoney())%></font></td>
-		<td><font color='red'><%=XwinUtil.nvl(game.getLoseMoney())%></font></td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getWinMoney()))%></font></td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getDrawMoney()))%></font></td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getLoseMoney()))%></font></td>
 		<td><%=Code.getValue(game.getStatus())%></td>
 	<%
 		}
@@ -140,6 +143,16 @@
 	}
 %>
 </div>
+
+<table class="prettytable">
+<tr>
+<th>유저전체보유액</th>
+<td><font color='red' size=3><B><%=XwinUtil.comma3(moneySummar[0])%> 원</B></font></td>
+<th>유저배팅대기액</th>
+<td><font color='red' size=3><B><%=XwinUtil.comma3(moneySummar[1])%> 원</B></font></td>
+</tr>
+</table>
+
 <script>
 function goPage(index)
 {

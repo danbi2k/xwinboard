@@ -236,7 +236,6 @@
 경기상태
 <select name='status' onChange='this.form.submit()'>
 	<option value=''>전체</option>
-	<option value='<%=Code.GAME_STATUS_READY%>' <%=status.equals(Code.GAME_STATUS_READY)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_READY)%></option>
 	<option value='<%=Code.GAME_STATUS_RUN%>' <%=status.equals(Code.GAME_STATUS_RUN)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_RUN)%></option>
 	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
 	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
@@ -336,36 +335,6 @@
 				</select>
 			</td>
 			<td><B><%=Code.getValue(game.getBetStatus())%></B></td>
-			<!-- td>
-				<!--
-				<%
-					if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
-				%>
-				<img src="images/admin/btn_run.jpg" onclick='runGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
-				%>															
-				<img src="images/admin/btn_end.jpg" onclick='endGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_READY) == false) {
-				%>
-				<img src="images/admin/btn_ready.jpg" onclick='readyGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_CANCEL) == false) {
-				%>
-				<img src="images/admin/btn_cancel.jpg" onclick='cancelGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}										
-				%>
-				-->
-				<!-- input type='button' value='시작' onclick='runGame(<%=game.getId()%>)' style='cursor:hand' -->
-				<!-- input type='button' value='종료' onclick='endGame(<%=game.getId()%>)' style='cursor:hand' -->
-				<!-- input type='button' value='취소' onclick='cancelGame(<%=game.getId()%>)' style='cursor:hand'-->
-				
-			</td -->
 		</tr>
 			<%
 				}

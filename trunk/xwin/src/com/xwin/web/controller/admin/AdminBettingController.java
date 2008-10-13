@@ -87,6 +87,9 @@ public class AdminBettingController extends XwinController
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		if (status == null)
+			status = Code.GAME_STATUS_RUN;
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -109,10 +112,13 @@ public class AdminBettingController extends XwinController
 		Integer gameCount = gameDao.selectGameCount(param);
 		List<Game> gameList = gameDao.selectGameList(param);
 		
+		Long[] moneySummary = getMoneySummary();
+		
 		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_game");
 		mv.addObject("leagueList", leagueList);
 		mv.addObject("gameList", gameList);
 		mv.addObject("gameCount", gameCount);
+		mv.addObject("moneySummary", moneySummary);
 		return mv;
 	}
 	
@@ -202,5 +208,20 @@ public class AdminBettingController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(resultXml));		
 		return mv;
+	}
+	
+	private Long[] getMoneySummary()
+	{
+		Long moneySummary[] = new Long[2];
+		moneySummary[0] = memberDao.selectTotalBalance();
+		moneySummary[1] = bettingDao.selectRunningBettingMoney();
+		
+		if (moneySummary[0] == null)
+			moneySummary[0] = 0L;
+		
+		if (moneySummary[1] == null)
+			moneySummary[1] = 0L;			
+		
+		return moneySummary;
 	}
 }

@@ -1,7 +1,9 @@
 package com.xwin.web.controller.user;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,12 +53,21 @@ public class MoneyInController extends XwinController
 		String _name = request.getParameter("name");
 		String _bankBookId = request.getParameter("bankBookId");
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("status", Code.MONEY_IN_REQUEST);
+		Integer existCnt = moneyInDao.selectMoneyInCount(param);
+		
 		ResultXml rx = null;
 		try {
 			Long money = Long.parseLong(_money);
 			
+			
 			if (_name == null || _name.length() == 0)
 				rx = new ResultXml(-1, "입금자를 입력하세요", null);
+			else if (existCnt > 0) {
+				rx = new ResultXml(-1, "이미 신청하신 충전요청이 있습니다", null);
+			}
 			else {			
 				MoneyIn moneyIn = new MoneyIn();
 				moneyIn.setUserId(member.getUserId());

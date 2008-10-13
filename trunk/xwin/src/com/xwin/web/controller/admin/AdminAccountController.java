@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +44,15 @@ public class AdminAccountController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
-		param.put("status", status);
+		
+		if (status != null && status.equals(Code.MONEY_IN_REQUEST)) {
+			List<String> statusList = new ArrayList(2);
+			statusList.add(Code.MONEY_IN_REQUEST);
+			statusList.add(Code.MONEY_IN_CANCEL);
+			param.put("statusList", statusList);
+		} else {
+			param.put("status", status);
+		}
 		
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
@@ -52,6 +61,9 @@ public class AdminAccountController extends XwinController
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
 		Integer totalSum = moneyInDao.selectMoneyInSum(param);
+		
+		if (totalSum == null)
+			totalSum = 0;
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_IN_REQUEST))
@@ -95,6 +107,10 @@ public class AdminAccountController extends XwinController
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
 		Integer totalSum = moneyOutDao.selectMoneyOutSum(param);
+		
+		if (totalSum == null)
+			totalSum = 0;
+		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_OUT_REQUEST))
 			mv = new ModelAndView("admin/account/money_out_req");
@@ -332,6 +348,24 @@ public class AdminAccountController extends XwinController
 		moneyOut.setIsChecked(isChecked);
 		
 		moneyOutDao.updateMoneyOut(moneyOut);
+		
+		ResultXml rx = new ResultXml(0, null, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		MoneyIn moneyIn = new MoneyIn();
+		moneyIn.setId(id);
+		moneyIn.setStatus(Code.MONEY_IN_CANCEL);
+		
+		moneyInDao.updateMoneyIn(moneyIn);
 		
 		ResultXml rx = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

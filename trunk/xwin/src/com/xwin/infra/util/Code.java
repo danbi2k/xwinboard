@@ -39,12 +39,12 @@ public class Code
 	
 	public static final String MONEY_IN_REQUEST			= "MC001";
 	public static final String MONEY_IN_SUCCESS			= "MC002";
-	public static final String MONEY_IN_FAILURE			= "MC003";
+	public static final String MONEY_IN_CANCEL			= "MC003";
 	public static final String MONEY_IN_DIRECT			= "MC004";
 	
 	public static final String MONEY_OUT_REQUEST	= "ME001";
 	public static final String MONEY_OUT_SUCCESS	= "ME002";
-	public static final String MONEY_OUT_FAILURE	= "ME003";
+	public static final String MONEY_OUT_CANCEL		= "ME003";
 	public static final String MONEY_OUT_DIRECT		= "ME004";
 	
 	public static final String BANKBOOK_STATUS_NORMAL	= "BBS01";
@@ -105,18 +105,18 @@ public class Code
 		
 		put(MONEY_IN_REQUEST, "충전요청");
 		put(MONEY_IN_SUCCESS, "충전성공");
-		put(MONEY_IN_FAILURE, "충전실패");
+		put(MONEY_IN_CANCEL, "충전취소");
 		put(MONEY_IN_DIRECT, "직충전");
 		
 		put(MONEY_OUT_REQUEST, "환전요청");
 		put(MONEY_OUT_SUCCESS, "환전성공");
-		put(MONEY_OUT_FAILURE, "환전실패");
+		put(MONEY_OUT_CANCEL, "환전취소");
 		put(MONEY_OUT_DIRECT, "직환전");
 		
 		put(GAME_STATUS_READY, "경기대기");
 		put(GAME_STATUS_RUN, "경기진행");
 		put(GAME_STATUS_END, "경기종료");
-		put(GAME_STATUS_CANCEL, "경기취소");
+		put(GAME_STATUS_CANCEL, "배팅취소");
 		
 		put(BET_STATUS_RUN, "진행중");
 		put(BET_STATUS_SUCCESS, "당첨");

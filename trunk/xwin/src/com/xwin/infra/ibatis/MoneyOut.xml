@@ -70,6 +70,11 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				STATUS = #statusList[]#
+				</iterate>
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -121,6 +126,11 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				STATUS = #statusList[]#
+				</iterate>
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -167,6 +177,11 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				STATUS = #statusList[]#
+				</iterate>
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#

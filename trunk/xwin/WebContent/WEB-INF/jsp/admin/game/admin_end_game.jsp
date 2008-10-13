@@ -268,36 +268,6 @@
 			</td>
 			<td><%=Code.getValue(game.getResult())%></td>
 			<td><B><%=Code.getValue(game.getStatus())%></B></td>
-			<!-- td>
-				<!--
-				<%
-					if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
-				%>
-				<img src="images/admin/btn_run.jpg" onclick='runGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
-				%>															
-				<img src="images/admin/btn_end.jpg" onclick='endGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_READY) == false) {
-				%>
-				<img src="images/admin/btn_ready.jpg" onclick='readyGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}
-					if (game.getStatus().equals(Code.GAME_STATUS_CANCEL) == false) {
-				%>
-				<img src="images/admin/btn_cancel.jpg" onclick='cancelGame(<%=game.getId()%>)' style='cursor:hand'>
-				<%
-					}										
-				%>
-				-->
-				<!-- input type='button' value='시작' onclick='runGame(<%=game.getId()%>)' style='cursor:hand' -->
-				<!-- input type='button' value='종료' onclick='endGame(<%=game.getId()%>)' style='cursor:hand' -->
-				<!-- input type='button' value='취소' onclick='cancelGame(<%=game.getId()%>)' style='cursor:hand'-->
-				
-			</td -->
 		</tr>
 			<%
 				}

@@ -46,11 +46,16 @@ public class MoneyOutController extends XwinController
 		
 		ResultXml rx = null;
 		String pin = request.getParameter("pin");
-		if (member.getPin().equals(pin) == false) {
+		if ((moneyOut.getMoney() % 10000) > 0) {
+			rx = new ResultXml(-1, "10,000원 단위로 신청하세요", null);
+		}
+		else if (member.getPin().equals(pin) == false) {
 			rx = new ResultXml(-1, "환전비밀번호가 틀렸습니다", null);
-		} else if (member.getBalance() < moneyOut.getMoney()) {
+		}
+		else if (member.getBalance() < moneyOut.getMoney()) {
 			rx = new ResultXml(-1, "잔액이 부족합니다", null);
-		} else {
+		}
+		else {
 			moneyOut.setUserId(member.getUserId());
 			moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
 			moneyOut.setReqDate(new Date());

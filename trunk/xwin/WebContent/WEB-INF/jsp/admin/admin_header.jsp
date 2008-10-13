@@ -55,7 +55,7 @@ function playSound()
 		playIt(player3);
 }
 
-setInterval("playSound()", 3000);
+setInterval("playSound()", 1000);
 </script>
 <div id="wrapper">
 	<div id="header">

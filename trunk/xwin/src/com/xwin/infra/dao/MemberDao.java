@@ -89,4 +89,9 @@ public class MemberDao extends XwinDao
 		
 		return sqlMapClientTemplate.queryForList("selectMemberList", param);
 	}
+	
+	public Long selectTotalBalance()
+	{
+		return (Long) sqlMapClientTemplate.queryForObject("selectTotalBalance");
+	}
 }

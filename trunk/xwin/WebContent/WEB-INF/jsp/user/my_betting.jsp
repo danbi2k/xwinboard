@@ -107,7 +107,7 @@
 								<%
 								if (betGame.getResult() == null) {
 									if (betGame.getStatus().equals(Code.GAME_STATUS_CANCEL))
-										out.print("<font color='#DDDDDD'><B>경기취소</B></font>");
+										out.print("<font color='#DDDDDD'><B>배팅취소</B></font>");
 									else
 										out.print("<font color='#ffffff'><B>진행중</B></font>");
 								} else if (betGame.getResult().equals(betGame.getGuess())) {

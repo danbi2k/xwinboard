@@ -12,8 +12,8 @@
 
 <%@include file="header.jsp"%>
 
-<div id="popup" style="position:absolute;left:150px;top:150px;width:950;z-index:1;visibility:hidden;background-color:#111111">
-<table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
+<div id="popup" style="position:absolute;top:150px;width:100%;z-index:1;visibility:hidden;align=center;">
+<table align="center" width="900px" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"><img src="images/title_left.gif"></td>
 <td width="*" background="images/title_bg.gif"><b style="color:white">긴급공지</td>

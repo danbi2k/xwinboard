@@ -27,4 +27,9 @@ public class BankBookDao extends XwinDao
 	{
 		return (BankBook) sqlMapClientTemplate.queryForObject("selectBankBook", id);		
 	}
+	
+	public void updateBankBook(BankBook bankBook)
+	{
+		sqlMapClientTemplate.update("updateBankBook", bankBook);
+	}
 }

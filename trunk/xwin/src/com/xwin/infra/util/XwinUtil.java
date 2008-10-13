@@ -48,6 +48,14 @@ public class XwinUtil
 		return nf.format(num);
 	}
 	
+	public static String comma3(String num)
+	{
+		if (num == null || num.length() == 0)
+			return num;
+		
+		return comma3(Long.parseLong(num));
+	}
+	
 	public static String getBoardItemDate(Date date)
 	{
 		return boardItemFormat.format(date);
