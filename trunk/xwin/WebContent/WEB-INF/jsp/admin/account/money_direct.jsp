@@ -39,8 +39,10 @@
  	<input type='text' name='toDate' size=10 readonly onClick="popUpCalendar(this,edate,'yyyy-mm-dd');" style="cursor:hand" value='' -->		
  	<input type='submit' value='검 색'>
 </form>
+<form name="list">
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
+		<th></th>
 		<th width=5%>번호</th>
 		<th>아이디(닉네임)</th>
 		<th>금액</th>
@@ -53,6 +55,7 @@
 		for (MoneyInOut moneyInOut : moneyInOutList) {
 	%>
 	<tr align='center' bgcolor='#ffffff'>
+		<th><input type="checkbox" name="checkCheck" value="<%=moneyInOut.getId()%>"/></th>
 		<td width=5%><%=moneyInOut.getId()%></td>
 		<td><B><%=moneyInOut.getUserId()%>(<%=moneyInOut.getNickName()%>)</B></td>
 		<td><%=XwinUtil.comma3(moneyInOut.getMoney())%></td>
@@ -64,7 +67,10 @@
 	}
 	%>
  </table>
-
+</form>
+<BR>
+<input type="button" value="삭제" onclick="deleteCheckedItem()"/>
+<BR>
 <div class="pages">
 <%
 	int pIdx = 0;
@@ -99,6 +105,26 @@
 %>
 </div>
 <script>
+function deleteCheckedItem()
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=<%=status.equals(Code.MONEY_IN_DIRECT)?"deleteMoneyInList":"deleteMoneyOutList"%>";
+		var c = document.list.checkCheck;
+		c = Xwin.ToArray(c);
+		for (var i = 0 ; i < c.length ; i++) {
+			if (c[i].checked) {
+				query += "&id=" + c[i].value;
+			}
+		}
+	
+		var http = new JKL.ParseXML("adminAccount.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	} 
+}
+
 function goPage(index)
 {
 	var frm = document.search;

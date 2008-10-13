@@ -72,7 +72,7 @@
 		for (MoneyOut moneyOut : moneyOutList) {
 	%>
 	<tr>
-		<td><input type="checkbox" name="checkDel" value="<%=moneyOut.getId()%>" onclick="saveMoneyOutIsChecked(this)" <%=moneyOut.getIsChecked().equals("Y")?"checked":""%>/></td>
+		<td><input type="checkbox" name="checkCheck" value="<%=moneyOut.getId()%>" onclick="saveMoneyOutIsChecked(this)" <%=moneyOut.getIsChecked().equals("Y")?"checked":""%>/></td>
 		<td><%=moneyOut.getId()%></td>
 		<td><B><%=moneyOut.getUserId()%></B></td>
 		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
@@ -146,7 +146,7 @@ function deleteCheckedItem()
 {
 	if (confirm("삭제하시겠습니까?")) {
 		var query = "mode=deleteMoneyOutList";
-		var c = document.list.checkDel;
+		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);
 		for (var i = 0 ; i < c.length ; i++) {
 			if (c[i].checked) {
