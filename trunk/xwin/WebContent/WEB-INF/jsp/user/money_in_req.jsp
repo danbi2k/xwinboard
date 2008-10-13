@@ -85,34 +85,34 @@
 	<tr><td>입금예정액</td>
 
 		<td><table width="100%" cellpadding="0" cellspacing="0"><tr>
-			<td width="170"><input class="member" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this);" onblur=""> 원<td>
+			<td width="170"><input class="member" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this); comma3Input(this);" onblur=""> 원<td>
 			<td>
 
 				<table>
 				<tr>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='10000';frm.name.focus();">1만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='20000';frm.name.focus();">2만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='10,000';frm.name.focus();">1만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='20,000';frm.name.focus();">2만원</span></td>
 
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='30000';frm.name.focus();">3만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='50000';frm.name.focus();">5만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='100000';frm.name.focus();">10만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='150000';frm.name.focus();">15만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='200000';frm.name.focus();">20만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='250000';frm.name.focus();">25만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='30,000';frm.name.focus();">3만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='50,000';frm.name.focus();">5만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='100,000';frm.name.focus();">10만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='150,000';frm.name.focus();">15만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='200,000';frm.name.focus();">20만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='250,000';frm.name.focus();">25만원</span></td>
 
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='300000';frm.name.focus();">30만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='300,000';frm.name.focus();">30만원</span></td>
 				</tr>
 				<tr>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='500000';frm.name.focus();">50만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='600000';frm.name.focus();">60만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='700000';frm.name.focus();">70만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='800000';frm.name.focus();">80만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='500,000';frm.name.focus();">50만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='600,000';frm.name.focus();">60만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='700,000';frm.name.focus();">70만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='800,000';frm.name.focus();">80만원</span></td>
 
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='900000';frm.name.focus();">90만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='1000000';frm.name.focus();">100만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='2000000';frm.name.focus();">200만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='3000000';frm.name.focus();">300만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='5000000';frm.name.focus();">500만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='900,000';frm.name.focus();">90만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='1,000,000';frm.name.focus();">100만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='2,000,000';frm.name.focus();">200만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='3,000,000';frm.name.focus();">300만원</span></td>
+				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='5,000,000';frm.name.focus();">500만원</span></td>
 				</tr>
 
 				</table>

@@ -96,7 +96,7 @@ var gameType = '<%=type%>'
 				<TR>
 					<TD>배팅금액</TD>
 					<TD>
-						: <INPUT class=input14 name=BetAmt size=19 value=5000 onkeyup="FnCalcCart()">
+						: <INPUT class=input14 name=BetAmt size=19 value="5,000" onkeyup="FnCalcCart()">
 					</TD>
 					<TD align=middle><IMG style="CURSOR: pointer" onclick="FnBetting()" src="images/btn_bat.gif"></TD>
 				</TR>

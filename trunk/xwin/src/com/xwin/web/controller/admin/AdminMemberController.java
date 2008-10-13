@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -51,11 +52,26 @@ public class AdminMemberController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		String userId = request.getParameter("userId");
-				
-		Member member = memberDao.selectMember(userId, null);
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<Account> accountList = accountDao.selectAccountList(param);
+		Integer accountCount = accountDao.selectAccountCount(param);			
+		Member member = memberDao.selectMember(userId, null);		
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
+		mv.addObject("accountList", accountList);
+		mv.addObject("accountCount", accountCount);
+		
 		return mv;
 	}
 	

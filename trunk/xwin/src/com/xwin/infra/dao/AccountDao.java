@@ -35,4 +35,14 @@ public class AccountDao extends XwinDao
 		
 		return sqlMapClientTemplate.queryForList("selectAccountList", param);		
 	}
+	
+	public List<Account> selectAccountList(Map<String, Object> param)
+	{
+		return sqlMapClientTemplate.queryForList("selectAccountList", param);		
+	}
+	
+	public Integer selectAccountCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectAccountCount", param);		
+	}
 }

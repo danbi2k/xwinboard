@@ -31,11 +31,10 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("allCartList") == null)
-			session.setAttribute("allCartList", new ArrayList<AllCartItem>());
+//		if (session.getAttribute("allCartList") == null)
+//			session.setAttribute("allCartList", new ArrayList<AllCartItem>());
 		
-		if (session.getAttribute("cartMap_" + type) == null)
-			session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		

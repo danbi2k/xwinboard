@@ -40,6 +40,7 @@
 		class="com.xwin.web.controller.admin.AdminMemberController"
 		p:memberDao-ref="memberDao"
 		p:accessDao-ref="accessDao"
+		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"

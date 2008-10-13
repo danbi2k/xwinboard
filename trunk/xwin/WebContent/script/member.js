@@ -123,7 +123,7 @@ function out_pw_set(){
 function FnInMoney_Submit(frm)
 {
 	var query = "mode=moneyInRequest";
-	query += "&money=" + frm.money.value;
+	query += "&money=" + trimComma3(frm.money.value);
 	query += "&name=" + frm.name.value;
 	query += "&bankBookId=" + frm.bankBookId.value;
 	var http = new JKL.ParseXML("moneyIn.aspx", query);
@@ -145,7 +145,7 @@ function FnOutMoney_Submit(frm){
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
 	
 	var query = "mode=moneyOutRequest";
-	query += "&money=" + frm.out_money.value;
+	query += "&money=" + trimComma3(frm.out_money.value);
 	query += "&bankName=" + frm.account_bank.value;
 	query += "&number=" + frm.account_num.value;
 	query += "&name=" + frm.account_name.value;

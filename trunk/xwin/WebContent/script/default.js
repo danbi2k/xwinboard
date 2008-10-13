@@ -1,3 +1,26 @@
+function comma3Input(obj)
+{
+	var num = obj.value;
+	
+	var regexp= RegExp(/,/ig);
+	num = num.replace(regexp, "");
+	
+	var val = comma3(num);
+	
+	if (val == "0")
+		val = "";
+	
+	obj.value = val;
+}
+
+function trimComma3(num)
+{
+	var regexp= RegExp(/,/ig);
+	num = num.replace(regexp, "");
+	
+	return num;
+}
+
 function comma3(num)
 {
 	var str = "" + num;
@@ -12,6 +35,7 @@ function comma3(num)
 	}
 	tmp = tmp.reverse();
 	var ret = tmp.join("");
+	
 	return ret;
 }
 

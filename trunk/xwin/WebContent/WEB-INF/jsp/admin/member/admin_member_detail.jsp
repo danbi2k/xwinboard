@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.xwin.domain.user.*"%>
+<%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
 
 <%
+	int ROWSIZE = 20;
+	int SHOWPAGE = 10;
 	Member member = (Member) request.getAttribute("member");
+	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
+	Integer totalCount = (Integer) request.getAttribute("accountCount");
+	
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
  
 <SCRIPT LANGUAGE="JavaScript">
@@ -129,7 +135,78 @@
 	</tr>
 </table>
 </form>
+
+<form method="get" name="search">
+<input type="hidden" name="mode" value="viewMemberDetail"/>
+<input type="hidden" name="pageIndex"/>
+<input type="hidden" name="userId" value="<%=member.getUserId()%>"/>
+<table class="list">
+<tr>
+	<th width=20%>거래일자</th>
+	<th width=20%>기잔고</th>
+	<th width=20%>입출금</th>
+	<th width=20%>잔액</th>
+	<th width=20%>비고</th>
+</tr>
+<%
+if (accountList != null) {
+	for (Account account : accountList) {
+%>
+<tr>
+	<td align=center><%=account.getDateStr()%></td>
+	<td align=center><%=XwinUtil.comma3(account.getOldBalance())%></td>
+	<td align=center><%=XwinUtil.comma3(account.getMoney())%></td>
+	<td align=center><%=XwinUtil.comma3(account.getBalance())%></td>
+	<td align=center><%=Code.getValue(account.getType())%></td>
+</tr>
+<%
+	}
+}
+%>		
+</table>
+</form>
+
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+	</div>
 <script>
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
+
 function plus_charging()
 {
 	var f = document.charging;

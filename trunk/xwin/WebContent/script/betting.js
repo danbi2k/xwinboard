@@ -18,6 +18,9 @@ function FnGameBet(cobj, id, type, guess)
 	if (money == undefined || money.length == 0)
 		CartFrm.BetAmt.value = money = "0";
 	
+	var regexp= RegExp(/,/ig);
+	money = money.replace(regexp, "");
+	
 	var query = "";
 	var boxes = document.getElementsByName("check"+id);
 	if (cobj.checked) {
@@ -110,6 +113,9 @@ function FnBetting()
 		if (money == undefined || money.length == 0)
 			CartFrm.BetAmt.value = money = "0";
 		
+		var regexp= RegExp(/,/ig);
+		money = money.replace(regexp, "");
+		
 		var query = "mode=betting";
 		query += "&type=" + gameType;
 		query += "&money=" + money;
@@ -128,6 +134,9 @@ function FnAddAllCart()
 		var money = CartFrm.BetAmt.value;
 		if (money == undefined || money.length == 0)
 			CartFrm.BetAmt.value = money = "0";
+		
+		var regexp= RegExp(/,/ig);
+		money = money.replace(regexp, "");
 		
 		var query = "mode=addAllCart";
 		query += "&type=" + gameType;
@@ -159,6 +168,14 @@ function FnCalcCart()
 		CartFrm.BetAmt.value = "";
 		money = "0";
 	}
+	
+	var regexp= RegExp(/,/ig);
+	money = money.replace(regexp, "");
+	
+	var commaMoney = comma3(money);
+	if (commaMoney == "0")
+		commaMoney = "";
+	CartFrm.BetAmt.value = commaMoney;
 			
 	var rateDiv = document.getElementById("rateDiv");
 	var expectDiv = document.getElementById("expectDiv");

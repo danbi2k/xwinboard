@@ -55,5 +55,33 @@
 			</isNotNull>
 		</dynamic>
 	ORDER BY DATE DESC
+	<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+	</isNotNull>
+	</select>
+	
+	<select id="selectAccountCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_account
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
 	</select>
 </sqlMap>
