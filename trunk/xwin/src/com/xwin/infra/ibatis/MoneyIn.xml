@@ -48,7 +48,7 @@
 	</update>
 	
 	<update id="deleteMoneyIn" parameterClass="string">
-		UPDATE tbl_money_in SET ISDELETED = 'Y" WHERE ID = #value#
+		UPDATE tbl_money_in SET ISDELETED = 'Y' WHERE ID = #value#
 	</update>
 	
 	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
