@@ -51,6 +51,7 @@ public class AdminAccountController extends XwinController
 		
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
+		Integer totalSum = moneyInDao.selectMoneyInSum(param);
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_IN_REQUEST))
@@ -61,6 +62,7 @@ public class AdminAccountController extends XwinController
 			mv = new ModelAndView("admin/account/money_direct");
 		mv.addObject("moneyInOutList", moneyInList);
 		mv.addObject("totalCount", moneyInCount);
+		mv.addObject("totalSum", totalSum);
 		
 		return mv;
 	}
@@ -92,7 +94,7 @@ public class AdminAccountController extends XwinController
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
-		
+		Integer totalSum = moneyOutDao.selectMoneyOutSum(param);
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_OUT_REQUEST))
 			mv = new ModelAndView("admin/account/money_out_req");
@@ -102,6 +104,7 @@ public class AdminAccountController extends XwinController
 			mv = new ModelAndView("admin/account/money_direct");
 		mv.addObject("moneyInOutList", moneyOutList);
 		mv.addObject("totalCount", moneyOutCount);
+		mv.addObject("totalSum", totalSum);
 		
 		return mv;
 	}

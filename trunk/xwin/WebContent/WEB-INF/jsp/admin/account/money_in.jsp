@@ -12,6 +12,7 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
+	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	int ROWSIZE = 20;
 	int SHOWPAGE = 10;
@@ -41,6 +42,7 @@
 </SCRIPT>
 
 <div class="title">충전내역</div>
+<font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>
 <form method='post' name='search' action='adminAccount.aspx'>
 	<input type='hidden' name='mode' value='viewMoneyInList'/>
 	<input type='hidden' name='pageIndex'/>

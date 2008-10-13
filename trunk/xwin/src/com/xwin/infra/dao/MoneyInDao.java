@@ -32,6 +32,11 @@ public class MoneyInDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyInCount", param);	
 	}
+	
+	public Integer selectMoneyInSum(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyInSum", param);	
+	}
 
 	public List<MoneyIn> selectMoneyInList(String userId, String status)
 	{
