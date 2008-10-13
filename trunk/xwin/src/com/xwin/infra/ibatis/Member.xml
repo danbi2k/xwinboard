@@ -28,13 +28,27 @@
 	</insert>
 	
 	<insert id="updateMember" parameterClass="Member">
-		UPDATE tbl_member SET
-			PASSWORD = #password#,
-			NICKNAME = #nickName#,
-			MOBILE = #mobile#,
-			EMAIL = #email#
-			STATUS = #status#
-			GRADE = #grade#
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="password">
+				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="," property="password">
+				NICKNAME = #nickName#
+			</isNotNull>	
+			<isNotNull prepend="," property="password">	
+				MOBILE = #mobile#
+			</isNotNull>	
+			<isNotNull prepend="," property="password">
+				EMAIL = #email#
+			</isNotNull>	
+			<isNotNull prepend="," property="password">
+				STATUS = #status#
+			</isNotNull>	
+			<isNotNull prepend="," property="password">
+				GRADE = #grade#
+			</isNotNull>	
+		</dynamic>
 		WHERE USERID = #userId#
 			
 	</insert>
