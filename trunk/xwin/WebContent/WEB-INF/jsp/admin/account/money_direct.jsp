@@ -71,7 +71,7 @@
  </table>
 </form>
 <BR>
-<input type="button" value="삭제" onclick="deleteCheckedItem()"/>
+<!--input type="button" value="삭제" onclick="deleteCheckedItem()"/ -->
 <BR>
 <div class="pages">
 <%

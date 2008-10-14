@@ -31,6 +31,15 @@ function checkIT() {
 		alert(result.resultXml.message);
 	}
 }
+
+function goButton(form)
+{
+	if (event.keyCode == 13) {
+		checkIT();
+	}
+}
+
+
 	
 //-->
 </SCRIPT>
@@ -59,7 +68,7 @@ function checkIT() {
 						<tr>
 							<td>비밀번호</td>
 							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="passwd"></td>
+							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="passwd" onkeydown="goButton()"></td>
 						</tr>
 					</table>
 					</td>

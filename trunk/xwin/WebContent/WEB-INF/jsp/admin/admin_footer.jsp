@@ -35,6 +35,7 @@
 				<ul>
 					<li class="first"><a href="adminBetting.aspx?mode=viewBettingList">사용자배팅현황</a></li>
 					<li><a href="adminBetting.aspx?mode=viewBettingMoneyList">경기별배팅현황</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
 				</ul>
 			</div>
 		</div>

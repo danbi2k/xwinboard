@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.game.Betting;
-import com.xwin.infra.util.Code;
+import com.xwin.domain.statistics.BetMoneyStat;
 
 
 public class BettingDao extends XwinDao
@@ -91,5 +91,20 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateBettingStatusByCount", gameId);
 		sqlMapClientTemplate.update("updateCalcStatusByBetStatus", gameId);
 		//sqlMapClientTemplate.update("updateCalcStatusByBetStatusOnAllFailure", gameId);
+	}
+	
+	public void insertDailyMoneyStatistics()
+	{
+		sqlMapClientTemplate.insert("insertDailyMoneyStatistics");
+	}
+	
+	public List<BetMoneyStat> selectDailyMoneyStatList(Map<String, Object> param)
+	{
+		return (List<BetMoneyStat>) sqlMapClientTemplate.queryForList("selectDailyMoneyStatList", param);
+	}
+	
+	public Integer selectDailyMoneyStatCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyMoneyStatCount", param);
 	}
 }

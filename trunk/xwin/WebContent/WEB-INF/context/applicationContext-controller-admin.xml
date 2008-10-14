@@ -108,4 +108,10 @@
 		p:boardDao-ref="boardDao"
 		p:adminDao-ref="adminDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminStatisticsController"
+		class="com.xwin.web.controller.admin.AdminStatisticsController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 </beans>

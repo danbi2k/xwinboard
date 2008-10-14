@@ -88,6 +88,12 @@ public class XwinUtil
 	public static Date[] getDatePair(String dateStr) throws Exception
 	{
 		Date date = dateFormat.parse(dateStr);
+
+		return getDatePair(date);
+	}
+	
+	public static Date[] getDatePair(Date date) throws Exception
+	{
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal = getOnlyDate(cal);

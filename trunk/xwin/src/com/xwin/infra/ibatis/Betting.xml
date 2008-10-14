@@ -260,7 +260,47 @@ BET_CALC_COMMIT			= "BTC10";
 			</isNotNull>
 		</dynamic>
 	</select>
+	
 	<select id="selectRunningBettingMoney" resultClass="long">
 		SELECT SUM(money) FROM tbl_betting WHERE STATUS = 'BS001'
+	</select>
+	
+	<insert id="insertDailyMoneyStatistics" parameterClass="map">
+	<![CDATA[
+		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY)
+		SELECT A.DATE, A.INMONEY, B.OUTMONEY FROM
+		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
+		FROM tbl_betting
+		WHERE STATUS in ('BS001', 'BS002', 'BS003') AND
+		DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+		GROUP BY date_format(DATE, '%Y%m%d')) as A,
+		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(EXPECT) as OUTMONEY
+		FROM tbl_betting
+		WHERE STATUS in ('BS002') AND
+		DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+		GROUP BY date_format(DATE, '%Y%m%d')) as B
+		WHERE A.DATE = B.DATE
+	]]>	
+	</insert>
+	
+	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
+	
+	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
+		<result property="id" column="ID"/>
+		<result property="date" column="DATE"/>
+		<result property="inMoney" column="INMONEY"/>
+		<result property="outMoney" column="OUTMONEY"/>
+	</resultMap>
+	
+	<select id="selectDailyMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
+		SELECT * FROM tbl_betting_money_stat
+		ORDER BY DATE DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectDailyMoneyStatCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_betting_money_stat
 	</select>
 </sqlMap>

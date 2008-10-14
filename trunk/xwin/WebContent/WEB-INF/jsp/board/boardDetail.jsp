@@ -55,7 +55,7 @@ function img_resize(obj,max_width){
 </table>
 
 <table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #4a4a4a;">
-<tr height="200" valign="top"><td style="padding:13px;" bgcolor="#f5f5f5" style="color:black;">
+<tr height="200" valign="top"><td style="padding:13px;" bgcolor="#4f4f4f" style="color:white;">
 
     <%
     String context = boardItem.getContext();

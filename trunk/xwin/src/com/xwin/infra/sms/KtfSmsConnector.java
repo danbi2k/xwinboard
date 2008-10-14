@@ -117,7 +117,8 @@ public class KtfSmsConnector
 					smsMap.get("in_date"),				
 					smsMap.get("sm"));
 				
-				ktfSmsDao.insertMessage(message);
+				if (message.getMsg().startsWith("[KB]"))
+					ktfSmsDao.insertMessage(message);
 			}	
 		}
 	}
