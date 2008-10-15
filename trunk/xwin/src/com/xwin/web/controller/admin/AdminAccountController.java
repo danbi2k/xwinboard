@@ -214,6 +214,7 @@ public class AdminAccountController extends XwinController
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String _money = request.getParameter("money");
+		String note = request.getParameter("note");
 		
 		Long money = null;
 		try {
@@ -231,6 +232,7 @@ public class AdminAccountController extends XwinController
 			moneyIn.setStatus(Code.MONEY_IN_DIRECT);
 			moneyIn.setUserId(userId);
 			moneyIn.setNickName(member.getNickName());
+			moneyIn.setNote(note);
 			moneyInDao.insertMoneyIn(moneyIn);
 			
 			Account account = new Account();
@@ -241,6 +243,7 @@ public class AdminAccountController extends XwinController
 			account.setMoney(moneyIn.getMoney());
 			account.setBalance(member.getBalance() + moneyIn.getMoney());
 			account.setMoneyInId(moneyIn.getId());
+			account.setNote(note);
 			
 			accountDao.insertAccount(account);
 			
@@ -261,6 +264,7 @@ public class AdminAccountController extends XwinController
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String _money = request.getParameter("money");
+		String note = request.getParameter("note");
 		
 		Long money = null;
 		try {
@@ -282,6 +286,7 @@ public class AdminAccountController extends XwinController
 				moneyOut.setStatus(Code.MONEY_OUT_DIRECT);
 				moneyOut.setUserId(userId);
 				moneyOut.setNickName(member.getNickName());
+				moneyOut.setNote(note);
 				moneyOutDao.insertMoneyOut(moneyOut);
 				
 				Account account = new Account();

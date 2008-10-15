@@ -14,7 +14,7 @@
 		<result property="money" column="MONEY"/>
 		<result property="balance" column="BALANCE"/>
 		<result property="oldBalance" column="OLD_BALANCE"/>
-		<result property="description" column="DESCRIPTION"/>
+		<result property="note" column="NOTE"/>
 		<result property="type" column="TYPE"/>
 		<result property="date" column="DATE"/>
 		<result property="bettingId" column="BETTING_ID"/>
@@ -23,8 +23,8 @@
 	</resultMap>
 	
 	<insert id="insertAccount" parameterClass="Account">
-		INSERT INTO tbl_account(USERID, MONEY, BALANCE, OLD_BALANCE, DESCRIPTION, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
-		VALUES(#userId#, #money#, #balance#, #oldBalance#, #description#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#)
+		INSERT INTO tbl_account(USERID, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
+		VALUES(#userId#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#)
 	</insert>
 	
 	<delete id="deleteAccount" parameterClass="string">

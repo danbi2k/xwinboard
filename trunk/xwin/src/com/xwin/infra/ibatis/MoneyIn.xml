@@ -21,11 +21,12 @@
 		<result property="bankBook" column="BANKBOOK_ID" select="selectBankBook"/>
 		<result property="isChecked" column="ISCHECKED"/>
 		<result property="isDeleted" column="ISDELETED"/>
+		<result property="note" column="NOTE"/>
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#)
+		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE)
+		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#)
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">

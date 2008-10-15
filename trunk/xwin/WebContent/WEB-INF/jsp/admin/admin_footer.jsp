@@ -4,6 +4,9 @@
  				</div>
 			</div>   
 		</div>
+		<div id="function" class="boxed" align="center" bgcolor="white">
+			<input type="button" value="로그아웃" onclick="logOut()"/>
+		</div>
 		<div id="game" class="boxed">
 			<h2 class="heading">경기관리</h2>
 			<div class="content">
@@ -35,7 +38,15 @@
 				<ul>
 					<li class="first"><a href="adminBetting.aspx?mode=viewBettingList">사용자배팅현황</a></li>
 					<li><a href="adminBetting.aspx?mode=viewBettingMoneyList">경기별배팅현황</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="stat" class="boxed">
+			<h2 class="heading">통계보기</h2>
+			<div class="content">
+				<ul>
 					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
 				</ul>
 			</div>
 		</div>
@@ -78,6 +89,13 @@
 	</div>
 </div>
 <script>
+function logOut()
+{
+	if (confirm("로그아웃 하시겠습니까?")) {
+		location.href='adminLogin.aspx?mode=processLogout';
+	}
+}
+
 checkIndi();
 setInterval("checkIndi()", 10000);
 </script>

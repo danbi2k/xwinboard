@@ -50,6 +50,7 @@
 		<th>금액</th>
 		<th>일자</th>
 		<th>상태</th>
+		<th>비고</th>
 	</tr>
 
 	<%
@@ -63,6 +64,7 @@
 		<td><%=XwinUtil.comma3(moneyInOut.getMoney())%></td>
 		<td><%=moneyInOut.getProcDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>
+		<td><%=XwinUtil.nvl(moneyInOut.getNote())%>
 	  </tr>
 	<%
 		}

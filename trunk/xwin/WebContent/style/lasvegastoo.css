@@ -192,13 +192,11 @@ a:hover {
 
 #pages li {
 	display: inline;
+	font: bold 2em µ¸¿ò;
 }
 
 #pages a {
-	padding-left: 2em;
-	text-decoration: none;
-	font: bold 2em Tahoma, Arial, Helvetica, sans-serif;
-	color: red;
+	color: orange;
 }
 
 #pages a:hover {

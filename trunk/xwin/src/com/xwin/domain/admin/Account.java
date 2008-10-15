@@ -13,7 +13,7 @@ public class Account extends XwinObject
 	private Long money;
 	private Long balance;
 	private Long oldBalance;
-	private String description;
+	private String note;
 	private String bettingId;
 	private String moneyInId;
 	private String moneyOutId;
@@ -57,11 +57,11 @@ public class Account extends XwinObject
 	public void setOldBalance(Long oldBalance) {
 		this.oldBalance = oldBalance;
 	}
-	public String getDescription() {
-		return description;
+	public String getNote() {
+		return note;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public String getBettingId() {
 		return bettingId;

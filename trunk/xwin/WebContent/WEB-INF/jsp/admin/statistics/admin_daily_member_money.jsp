@@ -10,8 +10,8 @@
 	int ROWSIZE = 20;
 	int SHOWPAGE = 10;
 	
-	List<BetMoneyStat> betMoneyStatList = (List<BetMoneyStat>) request.getAttribute("betMoneyStatList");
-	Integer totalCount = (Integer) request.getAttribute("betMoneyStatCount");
+	List<MemMoneyStat> memMoneyStatList = (List<MemMoneyStat>) request.getAttribute("memMoneyStatList");
+	Integer totalCount = (Integer) request.getAttribute("memMoneyStatCount");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));	
 %>
 
@@ -19,29 +19,28 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">일일정산내역</div>
+<div class="title">일자별유저보유액</div>
 
 <form method="get" name="list" action="adminStat.aspx">
-<input type="hidden" name="mode" value="viewDailyBettingMoneySummary"/>
+<input type="hidden" name="mode" value="viewDailyMemberMoneySummary"/>
 <input type="hidden" name="pageIndex"/>
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
 		<th>날짜</th>
-		<th>총배팅금액 ①</th>
-		<th>총당첨금액 ②</th>
-		<th>순순익  ① - ②</th>
+		<th>유저보유액 ①</th>
+		<th>배팅금액 ②</th>
+		<th>총액  ① + ②</th>
 	</tr>
 
 	<%
-	if (betMoneyStatList != null) {
-		for (BetMoneyStat betMoneyStat : betMoneyStatList) {
-			Long benefit = betMoneyStat.getInMoney() - betMoneyStat.getOutMoney();
+	if (memMoneyStatList != null) {
+		for (MemMoneyStat memMoneyStat : memMoneyStatList) {
 	%>
 	<tr align='center' bgcolor='#ffffff'>
-		<td><%=XwinUtil.toDateStr(betMoneyStat.getDate(), 2)%></td>
-		<td><%=XwinUtil.comma3(betMoneyStat.getInMoney())%></td>
-		<td><%=XwinUtil.comma3(betMoneyStat.getOutMoney())%></td>
-		<td><B><font color='<%=benefit>0?"blue":"red"%>'><%=benefit%></font></B></td>
+		<td><%=XwinUtil.toDateStr(memMoneyStat.getDate(), 1)%></td>
+		<td><%=XwinUtil.comma3(memMoneyStat.getBalance())%></td>
+		<td><%=XwinUtil.comma3(memMoneyStat.getMoney())%></td>
+		<td><B><font color="red"><%=XwinUtil.comma3(memMoneyStat.getBalance() + memMoneyStat.getMoney())%></font></B></td>
 	  </tr>
 	<%
 		}

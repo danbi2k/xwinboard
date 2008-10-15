@@ -118,18 +118,34 @@
 </form>
 
 <form name="charging">
-<table border=1 id='uploadform'>
+<table id='uploadform' class="list">
+	<tr>
+		<th width="10%">종류</th>
+		<th width="30%">금액</th>
+		<th width="40%">비고</th>
+		<th width="20%">버튼</th>
+	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>직충전</td>
 		<td width=100% bgcolor='#ffffff' align='center'>
-			<input type="text" name="plus" size=30></input>
+			<input type="text" name="plus" size=30 onkeyup="only123(this); comma3Input(this);"/>
+		</td>
+		<td>
+			<input type="text" name="plusNote" size=30></input>
+		</td>
+		<td>
 			<input type="button" onclick="plus_charging()" value="직충전"></input>
 		</td>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>직차감</td>
 		<td width=100% bgcolor='#ffffff' align='center'>
-			<input type="text" name="minus" size=30></input>
+			<input type="text" name="minus" size=30 onkeyup="only123(this); comma3Input(this);"/>
+		</td>			
+		<td>
+			<input type="text" name="minusNote" size=30></input>
+		</td>
+		<td>
 			<input type="button" onclick="minus_charging()" value="직차감"></input>
 		</td>
 	</tr>
@@ -219,6 +235,7 @@ function plus_charging()
 		var query = "mode=directCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.plus.value;
+		query += "&note=" + f.plusNote.value;
 		var http = new JKL.ParseXML("adminAccount.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
@@ -238,6 +255,7 @@ function minus_charging()
 		var query = "mode=directMinusCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.minus.value;
+		query += "&note=" + f.minusNote.value;
 		var http = new JKL.ParseXML("adminAccount.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);

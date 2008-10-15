@@ -16,6 +16,7 @@
 <script LANGUAGE="javascript" src="script/calendar.js"></script>
 <script LANGUAGE="javascript" src="script/main.js"></script>
 <script LANGUAGE="javascript" src="script/xwin.js"></script>
+<script LANGUAGE="javascript" src="script/default.js"></script>
 </head>
 <body>
 <%@ include file="playSound.jsp"%>
@@ -64,9 +65,9 @@ setInterval("playSound()", 1000);
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
-			<li class="active">충전 (<a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a> )</li>
-			<li>환전 ( <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a> )</li>
-			<li>고객센터 ( <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList">0</a> )</li>
+			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
+			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a></li>
+			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList">0</a></li>
 		</ul>
 	</div>
 	<div id="content">

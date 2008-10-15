@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.statistics.BetMoneyStat;
+import com.xwin.domain.statistics.MemMoneyStat;
 
 
 public class BettingDao extends XwinDao
@@ -93,18 +94,33 @@ public class BettingDao extends XwinDao
 		//sqlMapClientTemplate.update("updateCalcStatusByBetStatusOnAllFailure", gameId);
 	}
 	
-	public void insertDailyMoneyStatistics()
+	public void insertDailyBettingMoneyStatistics()
 	{
-		sqlMapClientTemplate.insert("insertDailyMoneyStatistics");
+		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics");
 	}
 	
-	public List<BetMoneyStat> selectDailyMoneyStatList(Map<String, Object> param)
+	public List<BetMoneyStat> selectDailyBettingMoneyStatList(Map<String, Object> param)
 	{
-		return (List<BetMoneyStat>) sqlMapClientTemplate.queryForList("selectDailyMoneyStatList", param);
+		return (List<BetMoneyStat>) sqlMapClientTemplate.queryForList("selectDailyBettingMoneyStatList", param);
 	}
 	
-	public Integer selectDailyMoneyStatCount(Map<String, Object> param)
+	public Integer selectDailyBettingMoneyStatCount(Map<String, Object> param)
 	{
-		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyMoneyStatCount", param);
+		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyBettingMoneyStatCount", param);
+	}
+	
+	public void insertDailyMemberMoneyStatistics()
+	{
+		sqlMapClientTemplate.insert("insertDailyMemberMoneyStatistics");
+	}
+	
+	public List<MemMoneyStat> selectDailyMemberMoneyStatList(Map<String, Object> param)
+	{
+		return (List<MemMoneyStat>) sqlMapClientTemplate.queryForList("selectDailyMemberMoneyStatList", param);
+	}
+	
+	public Integer selectDailyMemberMoneyStatCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyMemberMoneyStatCount", param);
 	}
 }

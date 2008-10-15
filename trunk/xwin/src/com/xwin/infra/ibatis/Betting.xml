@@ -265,7 +265,7 @@ BET_CALC_COMMIT			= "BTC10";
 		SELECT SUM(money) FROM tbl_betting WHERE STATUS = 'BS001'
 	</select>
 	
-	<insert id="insertDailyMoneyStatistics" parameterClass="map">
+	<insert id="insertDailyBettingMoneyStatistics">
 	<![CDATA[
 		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY)
 		SELECT A.DATE, A.INMONEY, B.OUTMONEY FROM
@@ -283,6 +283,17 @@ BET_CALC_COMMIT			= "BTC10";
 	]]>	
 	</insert>
 	
+	<insert id="insertDailyMemberMoneyStatistics">
+		INSERT INTO tbl_member_money_stat(DATE, BALANCE, MONEY)
+		SELECT SYSDATE(), A.BALANCE, B.MONEY FROM
+		(SELECT SUM(BALANCE) as BALANCE
+		FROM tbl_member
+		WHERE STATUS = 'US001') as A,
+		(SELECT IFNULL(SUM(EXPECT), 0) as MONEY
+		FROM tbl_betting
+		WHERE STATUS in ('BS001')) as B
+	</insert>
+	
 	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
 	
 	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
@@ -292,7 +303,7 @@ BET_CALC_COMMIT			= "BTC10";
 		<result property="outMoney" column="OUTMONEY"/>
 	</resultMap>
 	
-	<select id="selectDailyMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
+	<select id="selectDailyBettingMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
 		SELECT * FROM tbl_betting_money_stat
 		ORDER BY DATE DESC
 		<isNotNull prepend="LIMIT" property="fromRow">
@@ -300,7 +311,28 @@ BET_CALC_COMMIT			= "BTC10";
 		</isNotNull>
 	</select>
 	
-	<select id="selectDailyMoneyStatCount" resultClass="integer" parameterClass="map">
+	<select id="selectDailyBettingMoneyStatCount" resultClass="integer" parameterClass="map">
 		SELECT COUNT(*) FROM tbl_betting_money_stat
+	</select>
+	
+	<typeAlias alias="MemMoneyStat" type="com.xwin.domain.statistics.MemMoneyStat" />
+	
+	<resultMap id="memMoneyStatResultMap" class="MemMoneyStat">
+		<result property="id" column="ID"/>
+		<result property="date" column="DATE"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="money" column="MONEY"/>
+	</resultMap>
+	
+	<select id="selectDailyMemberMoneyStatList" resultMap="memMoneyStatResultMap" parameterClass="map">
+		SELECT * FROM tbl_member_money_stat
+		ORDER BY DATE DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectDailyMemberMoneyStatCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_member_money_stat
 	</select>
 </sqlMap>

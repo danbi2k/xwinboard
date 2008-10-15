@@ -21,11 +21,12 @@
 		<result property="procDate" column="PROC_DATE"/>
 		<result property="isChecked" column="ISCHECKED"/>
 		<result property="isDeleted" column="ISDELETED"/>
+		<result property="note" column="NOTE"/>
 	</resultMap>
 	
 	<insert id="insertMoneyOut" parameterClass="MoneyOut">
-		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE, PROC_DATE, NICKNAME)
-		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#, #procDate#, #nickName#)
+		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE, PROC_DATE, NICKNAME, NOTE)
+		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#, #procDate#, #nickName#, #note#)
 	</insert>
 	
 	<update id="updateMoneyOut" parameterClass="MoneyOut">

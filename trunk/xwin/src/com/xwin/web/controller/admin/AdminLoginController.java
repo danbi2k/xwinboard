@@ -2,6 +2,7 @@ package com.xwin.web.controller.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,6 +36,17 @@ public class AdminLoginController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
+		return mv;
+	}
+	
+	public ModelAndView processLogout(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("Admin");		
+		
+		ModelAndView mv = new ModelAndView("redirect:/admin");
 		return mv;
 	}
 }

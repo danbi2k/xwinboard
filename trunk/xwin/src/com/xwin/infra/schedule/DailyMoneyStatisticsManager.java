@@ -1,7 +1,5 @@
 package com.xwin.infra.schedule;
 
-import java.util.Date;
-
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -16,6 +14,7 @@ public class DailyMoneyStatisticsManager extends QuartzJobBean
 	{
 		BettingDao bettingDao = (BettingDao) context.getJobDetail().getJobDataMap().get("bettingDao");
 		
-		bettingDao.insertDailyMoneyStatistics();
+		bettingDao.insertDailyMemberMoneyStatistics();
+		bettingDao.insertDailyBettingMoneyStatistics();
 	}
 }
