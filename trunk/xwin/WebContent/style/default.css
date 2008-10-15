@@ -13,6 +13,7 @@ ul.topmenu li a {
 	font-size:20px;
 	font-weight:900;
 	font-style:'돋움';
+	text-decoration:none;
 	color: #ffffff;
 }
 
@@ -20,6 +21,7 @@ ul.topmenu li a:link {
 	font-size:20px;
 	font-weight:900;
 	font-style:'돋움';
+	text-decoration:none;
 	color: #ffffff;
 }
 
@@ -27,6 +29,7 @@ ul.topmenu li a:visited {
 	font-size:20px;
 	font-weight:900;
 	font-style:'돋움';
+	text-decoration:none;
 	color: #ffffff;
 }
 
@@ -34,6 +37,7 @@ ul.topmenu li a:hover {
 	font-size:20px;
 	font-weight:900;
 	font-style:'돋움';
+	text-decoration:none;
 	color: #orange;
 }
 

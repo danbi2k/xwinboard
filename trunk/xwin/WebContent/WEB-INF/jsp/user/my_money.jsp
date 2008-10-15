@@ -7,18 +7,13 @@
 <%@include file="../header.jsp"%>
 
 <%
+	final Integer ROWSIZE = 15;
+	final Integer SHOWPAGE = 10;
 	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
+	Integer totalCount = (Integer) request.getAttribute("accountCount");
+	
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
-</table>
-
--->
 
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
@@ -54,6 +49,7 @@
 		<th style="color:white" align="center">기잔고</th>
 		<th style="color:white" align="center">입출금</th>
 		<th style="color:white" align="center">잔액</th>
+		<th style="color:white" align="center">종류</th>
 		<th style="color:white" align="center">비고</th>
 	</tr>
 	<%
@@ -66,31 +62,61 @@
 	<td><%=XwinUtil.comma3(account.getMoney())%></td>
 	<td><%=XwinUtil.comma3(account.getBalance())%></td>
 	<td><%=Code.getValue(account.getType())%></td>
+	<td><%=XwinUtil.nvl(account.getNote())%>
 	</tr>
 	<%
 		}
 	} else {
 	%>
-	<tr bgcolor='black'><td colspan='5' height='150' align='center' bgcolor='black'>머니 거래 내역이 없습니다.</td></tr>
+	<tr bgcolor='black'><td colspan='6' height='150' align='center' bgcolor='black'>머니 거래 내역이 없습니다.</td></tr>
 	<%
 	}
 	%>
 	</table>
 
-<table width="850" height="30">
-<tr><td align="center">
-
-    <!-----[ 페이징 ]--------------------------------------------//-->
+	<tr bgcolor='black'>
+	<td colspan='6' height='40' align='center' bgcolor='black'>
+	<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
 	
-    <!-----[ 페이징 ]--------------------------------------------//-->
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+	</td>
+	</tr>
 
 </td></tr>
 </table>
 
-
-
-</td></tr>
-</table>
-
-
+<script>
+function goPage(index)
+{
+	location.href="myMoney.aspx?mode=viewMyMoneyList&pageIndex=" + index;
+}
+</script>
 <%@include file="../footer.jsp"%>

@@ -56,29 +56,19 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="366" align="center"><a href="index.aspx"><img src="images/newtop.jpg" border="0"></a></td>
+<tr><td width="270" align="center"><a href="index.aspx"><img src="images/newtop.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu">
-<li><a href="game.aspx?mode=viewGameList&type=wdl">승무패</a></li>
-<li><a href="game.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
-<li><a href="game.aspx?mode=viewGameResultList">경기결과</a></li>
-<li><a href="aboutHandy.aspx">핸디캡이해</a></li>
-<li><a href="board.aspx?mode=viewUserBoard&boardName=user">게시판</a></li>
-<li><a href="board.aspx?mode=viewQnaBoard&boardName=qna">고객센터</a></li>
+<li><a href="game.aspx?mode=viewGameList&type=wdl"><img src='images/menu_wdl.jpg' border='0'></a></li>
+<li><a href="game.aspx?mode=viewGameList&type=handy"><img src='images/menu_handy.jpg' border='0'></a></li>
+<li><a href="game.aspx?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
+<li><a href="aboutHandy.aspx"><img src='images/menu_abouthandy.jpg' border='0'></a></li>
+<li><a href="board.aspx?mode=viewUserBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>
+<li><a href="board.aspx?mode=viewQnaBoard&boardName=qna"><img src='images/menu_qna.jpg' border='0'></a></li>
 </ul>
 </td>
 </tr>
 </table>
-
-<MAP NAME="map_top_menu">
-	<AREA SHAPE=RECT COORDS="  0,0,100,33" href="game.aspx?mode=viewGameList&type=wdl" onMouseOver="clipthis('top1','top2',  0,0,100,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="102,0,197,33" href="game.aspx?mode=viewGameList&type=handy" onMouseOver="clipthis('top1','top2',102,0,197,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	
-	<AREA SHAPE=RECT COORDS="283,0,387,33" href="game.aspx?mode=viewGameResultList"	 onMouseOver="clipthis('top1','top2',283,0,387,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="389,0,507,33" href="guide.aspx"   onMouseOver="clipthis('top1','top2',389,0,507,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="509,0,613,33" href="rules.aspx"	 onMouseOver="clipthis('top1','top2',509,0,613,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-	<AREA SHAPE=RECT COORDS="615,0,712,33" href="board.aspx?mode=viewUserBoard&boardName=user" onMouseOver="clipthis('top1','top2',615,0,712,33)" onmouseout="top_menu_out();" onfocus="this.blur();">
-</MAP>
 
 <iframe name='hidden_iframe' style='display:none' src='About:Blank'></iframe>
 <table width="960" height="42" background="images/login_bg.jpg" cellpadding="0" cellspacing="0" >
@@ -162,7 +152,7 @@ if (login) {
 
 <%} %>
 </table>
-<img id="mainImage" src="images/bwin.jpg" style="display:none">
+<img id="mainImage" src="images/wall03.jpg" style="display:none">
 <script>
 //FnFlash("main","960","280","images/main.swf","");
 if (document.URL.indexOf("index.aspx") > 0) {

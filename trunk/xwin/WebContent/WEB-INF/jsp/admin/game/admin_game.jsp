@@ -26,12 +26,6 @@
 <%@ include file="../admin_header.jsp"%>
 <SCRIPT LANGUAGE="JavaScript">
 
-	function goPage(pageIndex)
-	{
-		document.search.pageIndex.value = pageIndex;
-		document.search.submit();
-	}
-
 	function readyGame(id)
 	{
 		if (confirm("경기를 대기 하시겠습니까?")) {
@@ -207,9 +201,8 @@
 <br>
 <br>
 <form method='get' name='search'>
-<input type='hidden' name='pageIndex' value='0'/>
-<input type='hidden' name='mode' value='viewGameList'/>
 <input type='hidden' name='pageIndex'/>
+<input type='hidden' name='mode' value='viewGameList'/>
 <input type='hidden' name='type' value='<%=type%>'/>
 
 리그명

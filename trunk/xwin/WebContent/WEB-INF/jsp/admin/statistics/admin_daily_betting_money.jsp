@@ -41,7 +41,7 @@
 		<td><%=XwinUtil.toDateStr(betMoneyStat.getDate(), 2)%></td>
 		<td><%=XwinUtil.comma3(betMoneyStat.getInMoney())%></td>
 		<td><%=XwinUtil.comma3(betMoneyStat.getOutMoney())%></td>
-		<td><B><font color='<%=benefit>0?"blue":"red"%>'><%=benefit%></font></B></td>
+		<td><B><font color='<%=benefit>0?"blue":"red"%>'><%=XwinUtil.comma3(benefit)%></font></B></td>
 	  </tr>
 	<%
 		}

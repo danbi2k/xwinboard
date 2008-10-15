@@ -10,6 +10,7 @@
 
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
+	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -21,18 +22,19 @@
 	<input type='hidden' name='mode' value=''/>
  </form>
 
-<table class="prettytable">
+<h3>문의</h3>
+<table class="list">
 	<tr>
-		<td width="10%">작성자</td>
-		<td width="*"><%=boardItem.getNickName()%></td>
+		<th width="10%" height="30px">작성자</th>
+		<td width="*" style="padding-left:10px;"><%=boardItem.getNickName()%></td>
 	</tr>
 	<tr>
-		<td width="10%">제목</td>
-		<td width="*"><%=boardItem.getTitle()%></td>
+		<th width="10%" height="30px">제목</th>
+		<td width="*" style="padding-left:10px;"><%=boardItem.getTitle()%></td>
 	</tr>
 	<tr>
-		<td width="10%">내용</td>
-		<td width="*">
+		<th width="10%" height="30px">내용</th>
+		<td width="*" style="padding-left:10px;">
 		 <%
 	    String context = boardItem.getContext();
 	    context = StringEscapeUtils.escapeHtml(context);
@@ -43,6 +45,28 @@
 	</tr>					
 </table>
 
+<h3>답변</h3>
+<table class="list">
+<%
+if (boardCommentList != null) {
+	for (BoardComment boardComment : boardCommentList) {
+%>
+<tr>
+	<th width="10%"><%=boardComment.getNickName()%></th>
+	<td width="*" style="padding-left:10px;" height="25px">
+	<%
+		String comment = StringEscapeUtils.escapeHtml(boardComment.getComment());
+		comment = comment.replaceAll("\n", "<BR>");
+		out.print(comment);
+	%>
+	</td>
+	<td width="10%"  align=center><img src="images/btn_coment_del.gif" onclick="deleteBoardComment(<%=boardComment.getId()%>)"></td>
+</tr>
+<%
+	}
+}
+%>
+</table>
 
 <form name="answer">
 <table class="prettytable">
@@ -55,6 +79,19 @@
 <input type='button' value='답변저장' onclick="answerQna()"/>
 
 <script>
+function deleteBoardComment(id)
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteBoardComment";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("adminBoard.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();	
+	}
+}
+
 function answerQna()
 {
 	var query = "mode=answerQna";
@@ -63,7 +100,7 @@ function answerQna()
 	var http = new JKL.ParseXML("adminQna.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	location.href="adminQna.aspx?mode=viewQnaList";
+	location.reload();
 }
 </script>
 

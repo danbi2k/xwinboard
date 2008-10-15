@@ -57,7 +57,7 @@
 <table class="list">
 <tr>
 	<th width="10%">관리자</th>
-	<td width="*"><input type="text" name="comment" width=100% size="90"></td>
+	<td width="*"><textarea name="comment" style='width=100%;height=50px'></textarea></td>
 	<td width="10%"><input type="button" value="댓글입력" onclick="writeBoardComment()"></td>
 </tr>
 <%
@@ -66,7 +66,13 @@ if (boardCommentList != null) {
 %>
 <tr>
 	<th width="10%"><%=boardComment.getNickName()%></th>
-	<td width="*"><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
+	<td width="*">
+	<%
+		String comment = StringEscapeUtils.escapeHtml(boardComment.getComment());
+		comment = comment.replaceAll("\n", "<BR>");
+		out.print(comment);
+	%>
+	</td>
 	<td width="10%"  align=center><img src="images/btn_coment_del.gif" onclick="deleteBoardComment(<%=boardComment.getId()%>)"></td>
 </tr>
 <%
