@@ -35,4 +35,9 @@ public class AccountDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectAccountCount", param);		
 	}
+
+	public void updateAccount(Account account) {
+		sqlMapClientTemplate.update("updateAccount", account);
+		
+	}
 }

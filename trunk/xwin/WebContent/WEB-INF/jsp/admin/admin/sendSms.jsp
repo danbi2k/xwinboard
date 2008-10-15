@@ -47,7 +47,7 @@ var targetCheck = 0;
 	</tr>
 	<tr>
 		<td width="36%">수신번호</td>
-		<td><input type="text" name="phone" size="15" maxlength="15"></td>
+		<td><input type="text" name="phone" size="15" maxlength="15" value="010"></td>
 	</tr>
 	<!--
 	<tr>
@@ -57,7 +57,7 @@ var targetCheck = 0;
 	-->
 	<tr>
 		<td>발신번호</td>
-		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="3"></td>
+		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="010"></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="submit1" value="전송" onClick="onSubmit();">	<input type="reset" name="Submit5" value="취소"></td>

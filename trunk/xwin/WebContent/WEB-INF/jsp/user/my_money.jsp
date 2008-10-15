@@ -40,8 +40,9 @@
 	<col width="100" align="right">
 	<col width="100" align="right">
 	<col width="100" align="right">
-
-	<col width="*" align="left">
+	<col width="*" align="center">
+	<col width="*" align="center">
+	<col width="*" align="center">
 	</colgroup>
 
 	<tr bgcolor="#ce892c">
@@ -51,6 +52,8 @@
 		<th style="color:white" align="center">잔액</th>
 		<th style="color:white" align="center">종류</th>
 		<th style="color:white" align="center">비고</th>
+		<th style="color:white" align="center">삭제</th>
+		
 	</tr>
 	<%
 	if (accountList != null) {
@@ -63,6 +66,7 @@
 	<td><%=XwinUtil.comma3(account.getBalance())%></td>
 	<td><%=Code.getValue(account.getType())%></td>
 	<td><%=XwinUtil.nvl(account.getNote())%>
+	<td><img src="images/btn_coment_del.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></td>
 	</tr>
 	<%
 		}
@@ -117,6 +121,19 @@
 function goPage(index)
 {
 	location.href="myMoney.aspx?mode=viewMyMoneyList&pageIndex=" + index;
+}
+
+function deleteMyMoneyLog(id)
+{
+	if (confirm("머니기록을 삭제하시겠습니까?")) {
+		var query = "mode=deleteMyMoneyLog";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("myMoney.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload(0);
+	}
 }
 </script>
 <%@include file="../footer.jsp"%>

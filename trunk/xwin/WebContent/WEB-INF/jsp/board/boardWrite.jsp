@@ -54,15 +54,15 @@ function check_frm(){
 <input type="hidden" name="boardName" value="<%=boardName%>">
 
 <tr bgcolor="#0a0a0a">
-	<td bgcolor="#525252" style="color:white;"><b>작성자</td>
+	<td bgcolor="#222222" style="color:white;"><b>작성자</td>
     <td align="left"><input type="text" name="name" readonly style="background-color:#0a0a0a;border:0;color:white" value="<%=member.getNickName()%>" style="width:100;"></td>
 <tr bgcolor="#0a0a0a">
-	<td bgcolor="#525252" style="color:white;"><b>제&nbsp;목</td>
-    <td align="left"><input type="text" name="title" class="board" value="" style="width:80%;">
+	<td bgcolor="#222222" style="color:white;"><b>제&nbsp;목</td>
+    <td align="left"><input type="text" name="title" class="board" value="" style="width:100%;background-color:#4f4f4f;color:#FFFFFF">
 	</td></tr>
 <tr bgcolor="#0a0a0a">
-	<td bgcolor="#525252" style="color:white;"><b>내&nbsp;용</td>
-	<td align="left"><textarea name="context" class="board" style="width:100%;height:300;"></textarea></td></tr>
+	<td bgcolor="#222222" style="color:white;"><b>내&nbsp;용</td>
+	<td align="left"><textarea name="context" class="board" style="width:100%;height:300;background-color:#4f4f4f;color:#FFFFFF"></textarea></td></tr>
 </table>
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="margin-top:5;">

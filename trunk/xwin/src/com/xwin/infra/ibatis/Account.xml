@@ -20,6 +20,7 @@
 		<result property="bettingId" column="BETTING_ID"/>
 		<result property="moneyInId" column="MONEYIN_ID"/>
 		<result property="moneyOutId" column="MONEYOUT_ID"/>
+		<result property="isDeleted" column="ISDELETED"/>
 	</resultMap>
 	
 	<insert id="insertAccount" parameterClass="Account">
@@ -30,6 +31,16 @@
 	<delete id="deleteAccount" parameterClass="string">
 		DELETE FROM tbl_account WHERE ID = #value#
 	</delete>
+	
+	<update id="updateAccount" parameterClass="Account">
+		UPDATE tbl_account
+		<dynamic prepend="SET">
+			<isNotNull prepend="AND" property="isDeleted">
+			ISDELETED = #isDeleted#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
 	
 	<select id="selectAccountList" resultMap="accountResultMap" parameterClass="map">
 		SELECT * FROM tbl_account
@@ -42,6 +53,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 				<![CDATA[
@@ -71,6 +85,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 				<![CDATA[

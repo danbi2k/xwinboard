@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class MyMoneyController extends XwinController
@@ -36,6 +38,7 @@ public class MyMoneyController extends XwinController
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("userId", member.getUserId());
+		param.put("isDeleted", "N");
 		
 		List<Account> accountList = accountDao.selectAccountList(param);
 		Integer accountCount = accountDao.selectAccountCount(param);
@@ -43,6 +46,23 @@ public class MyMoneyController extends XwinController
 		ModelAndView mv = new ModelAndView("user/my_money");
 		mv.addObject("accountList", accountList);
 		mv.addObject("accountCount", accountCount);
+		return mv;
+	}
+	
+	public ModelAndView deleteMyMoneyLog(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String id = request.getParameter("id");
+		
+		Account account = new Account();
+		account.setId(id);
+		account.setIsDeleted("Y");
+		accountDao.updateAccount(account);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
 		return mv;
 	}
 }

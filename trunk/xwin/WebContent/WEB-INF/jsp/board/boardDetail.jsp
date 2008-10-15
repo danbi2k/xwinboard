@@ -193,19 +193,19 @@ function comment_submit(){
 	<td width="120" bgcolor="#3a3a3a" align="center"><b style="color:white"><b>Comment</b></td>
 	<td width="*" style="padding-left:15;">
 	작성자 <input type="text" name="name" value="<%=member.getNickName()%>" style="width:90;height:19px;border:1 #efefef solid;background-color:#8a8a8a;" readonly>
-	내용 <input type="text" name="comment" style="width:500;height:19px;border:1 #7f9db9 solid;"></td>
+	내용 <input type="text" name="comment" style="width:500;height:19px;border:1 #7f9db9 solid;background-color:#8a8a8a;"></td>
 	<td width="100">&nbsp;<input type="image" src="images/btn_write.gif"  style="cursor:hand"></td>
 </tr>
 </table>
 </form>
 
-<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" style="background-color:#4f4f4f;">
 <tr align="center">
-    <td colspan="3" bgcolor="#f5f5f5" style="border:1 #c5c5c5 solid;">
+    <td colspan="3" bgcolor="#f5f5f5" style="background-color:#4f4f4f;border-top:1 #c5c5c5 solid;">
 
 
         
-        <table width="97%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:2px;margin-top:12px;margin-bottom:12px;border-top:1 #c5c5c5 dotted">
+        <table width="97%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:2px;margin-top:12px;margin-bottom:12px;">
         <%
         if (boardCommentList != null) {
         	for (BoardComment boardComment : boardCommentList) {
@@ -214,7 +214,7 @@ function comment_submit(){
             <table width="100%" height="25" style="border-bottom:1 #c5c5c5 dotted">
             <tr><td width="90"  style="color:black"><b><%=boardComment.getNickName()%></b></td>
                 <td width="*"   style="color:black"><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
-                <td width="70" title="2008-10-06 오후 5:47:04" align="center" style="color:black"><b><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
+                <td width="70" title="" align="center" style="color:black"><b><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
 				
 					<td width="16" align="center">
 					<%if (boardComment.getUserId().equals(member.getUserId())) {%>

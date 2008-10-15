@@ -55,7 +55,7 @@
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminMember.aspx?mode=viewAdminMember">회원목록</a></li>
-					<li><a href="adminMember.aspx?mode=viewAccessList">접속목록</a></li>
+					<li><a href="adminMember.aspx?mode=viewAccessList">접속기록</a></li>
 				</ul>
 			</div>
 		</div>

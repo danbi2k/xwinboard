@@ -41,36 +41,36 @@
 		for (BoardItem boardItem : boardItemList) {
 			if (boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)) {
 %>
-	<tr height='30' align="center">
+	<tr height='32' align="center">
 		<td>&nbsp;</td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list' align="left">
-			<span style="width:100%;color:orange;height:15;overflow:hidden;">
-				<b><a class="board_list" style="color:orange;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>">
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list' align="left">
+			<span style="width:100%;color:#45BCD7;height:15;overflow:hidden;">
+				<b><a class="board_list" style="color:#45BCD7;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>">
 				<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 				</a></b>
 			</span>
 		</td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><b><%=boardItem.getNickName()%></td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><%=XwinUtil.getBoardNoticeDate(boardItem.getDate())%></td>
-		<td style='border-bottom:1 #c5c5c5 dotted;color:orange' class='board_list'><%=boardItem.getReadCount()%></td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><b><%=boardItem.getNickName()%></td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><%=XwinUtil.getBoardNoticeDate(boardItem.getDate())%></td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><%=boardItem.getReadCount()%></td>
 		<td>&nbsp;</td>
 
 	</tr>
 <%
 			} else {
 %>
-	<tr height='23' align="center">
+	<tr height='32' align="center">
     <td>&nbsp;</td>
-    <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><%=boardItem.getId()%></td>
-    <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list' align="left">
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=boardItem.getId()%></td>
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list' align="left">
 		<span style="width:100%;height:15;overflow:hidden;">
 		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
 		</span>
 	</td>
-    <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><b><%=boardItem.getNickName()%></b></td>
-    <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><b><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></b></td>
-    <td style='border-bottom:1 #c5c5c5 dotted;' class='board_list'><%=boardItem.getReadCount()%></td>
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><b><%=boardItem.getNickName()%></b></td>
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><b><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></b></td>
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=boardItem.getReadCount()%></td>
     <td>&nbsp;</td>
 </tr>
 <%

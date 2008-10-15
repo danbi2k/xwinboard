@@ -19,6 +19,7 @@ public class Account extends XwinObject
 	private String moneyOutId;
 	private String type;
 	private String userId;
+	private String isDeleted;
 	
 	public String getId() {
 		return id;
@@ -92,5 +93,11 @@ public class Account extends XwinObject
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

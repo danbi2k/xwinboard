@@ -21,7 +21,7 @@ function checkform()
 </SCRIPT>
 
 <div class="title">공지사항쓰기</div>
-<form name="notice" action="adminBoard.aspx">
+<form name="notice" action="adminBoard.aspx" method="post">
 <input type="hidden" name="mode" value="writeNotice"/>
 <table class="prettytable">
 	<tr>
