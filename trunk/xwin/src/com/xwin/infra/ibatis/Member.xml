@@ -20,11 +20,12 @@
 		<result property="status" column="STATUS"/>
 		<result property="grade" column="GRADE"/>
 		<result property="joinDate" column="JOIN_DATE"/>
+		<result property="point" column="POINT"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#)
 	</insert>
 	
 	<insert id="updateMember" parameterClass="Member">
@@ -143,9 +144,23 @@
 	
 	<update id="plusMinusBalance" parameterClass="map">
 		UPDATE tbl_member
-		SET BALANCE = BALANCE + #money#
+		SET BALANCE = BALANCE + (#money#)
 		WHERE USERID = #userId#
 	</update>
+	
+	<update id="plusMinusPoint" parameterClass="map">
+		UPDATE tbl_member
+		SET POINT = POINT + (#point#)
+		WHERE USERID = #userId#
+	</update>
+	
+	<select id="confirmGetJoinEvent" parameterClass="string" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_event_join WHERE MOBILE = #value#
+	</select>
+	
+	<insert id="loggingGetEvent" parameterClass="string">
+		INSERT INTO tbl_event_join(MOBILE) VALUES(#value#)
+	</insert>
 	
 	<update id="updateMemberStatus" parameterClass="map">
 		UPDATE tbl_member

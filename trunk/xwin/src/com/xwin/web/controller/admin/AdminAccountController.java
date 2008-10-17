@@ -171,9 +171,13 @@ public class AdminAccountController extends XwinController
 			memberDao.plusMinusBalance(member.getUserId(), moneyIn.getMoney());
 			moneyInDao.updateMoneyIn(moneyIn);
 			
+			//포인트 지급
+			Double point = moneyIn.getMoney() * 0.05;			
+			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			
 			String nickName = member.getNickName();
 			String mobile = member.getMobile().replaceAll("-", "");
-			String message = nickName + " 님께 " + moneyIn.getMoney() + "원이 충전 되었습니다. -bwin-";
+			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -bwin-";
 			sendSmsConnector.sendSms(message, mobile, "0000000000");
 		
 			rx = new ResultXml(0, "충전되었습니다", null);

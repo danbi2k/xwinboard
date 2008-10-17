@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.MemberCommand;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -65,9 +67,22 @@ public class MemberController extends XwinController
 									member.setStatus(Code.USER_STATUS_NORMAL);
 									member.setGrade(Code.USER_GRADE_NORMAL);
 									member.setJoinDate(new Date());
+									
+									String WelcomeMsg = "환영합니다";
+									
+									Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
+									if (cnt == 0) {
+										memberDao.loggingGetEvent(member.getMobile());
+										member.setBalance(5000L);
+										WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
+										
+									} else {
+										member.setBalance(0L);
+									}
+									
 									memberDao.insertMember(member);
 									
-									rx = ResultXml.SUCCESS;
+									rx = new ResultXml(0, WelcomeMsg, null);
 								}
 							}
 						}
@@ -250,6 +265,44 @@ public class MemberController extends XwinController
 			rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);
 		}
 		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView exchangePoint(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		member = memberDao.selectMember(member.getUserId(), null);
+		String message = "";
+		
+		Long point = member.getPoint();
+		Long balance = point - (point % 10000);
+		
+		if (balance < 10000L) {
+			message = "포인트는 10,000원 단위로 충전이 가능합니다";
+		} else {
+			memberDao.plusMinusBalance(member.getUserId(), balance);
+			memberDao.plusMinusPoint(member.getUserId(), balance * -1);
+			
+			Account account = new Account();
+			account.setUserId(member.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_POINTCHARGE);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(balance);
+			account.setBalance(member.getBalance() + balance);
+			accountDao.insertAccount(account);
+			
+			message = XwinUtil.comma3(balance) + "원이 충전되었습니다";
+		}
+		
+		ResultXml rx = new ResultXml(0, message, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

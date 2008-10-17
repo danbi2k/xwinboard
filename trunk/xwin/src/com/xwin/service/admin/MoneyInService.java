@@ -62,6 +62,10 @@ public class MoneyInService extends XwinService
 			moneyIn.setStatus(moneyInStatus);
 			moneyIn.setProcDate(new Date());
 			
+			//포인트 지급
+			Double point = moneyIn.getMoney() * 0.05;			
+			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			
 			accountDao.insertAccount(account);
 			moneyInDao.updateMoneyIn(moneyIn);			
 			memberDao.plusMinusBalance(member.getUserId(), moneyIn.getMoney());

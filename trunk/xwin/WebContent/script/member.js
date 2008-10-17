@@ -18,7 +18,7 @@ function FnMemReg(frm)
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
-		alert("환영합니다");
+		alert(result.resultXml.message);
 		frm.password.value = frm.password1.value;
 		FnLogin_Submit(frm);
 	} else {

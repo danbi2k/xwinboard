@@ -126,6 +126,10 @@ public class BettingController extends XwinController
 			accountDao.insertAccount(account);			
 			memberDao.updateBalance(member.getUserId(), cc.getAfter());
 			
+			Double point = betting.getMoney() * 0.05;
+			
+			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			
 			session.removeAttribute("cartMap_" + _type);
 			
 			rx = new ResultXml(0, "배팅 하셨습니다", null);

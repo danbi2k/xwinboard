@@ -76,6 +76,25 @@ public class MemberDao extends XwinDao
 		
 		sqlMapClientTemplate.update("plusMinusBalance", param);
 	}
+	
+	public void plusMinusPoint(String userId, Long point)
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("point", point);
+		
+		sqlMapClientTemplate.update("plusMinusPoint", param);
+	}
+	
+	public Integer confirmGetJoinEvent(String mobile)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("confirmGetJoinEvent", mobile);
+	}
+	
+	public void loggingGetEvent(String mobile)
+	{
+		sqlMapClientTemplate.insert("loggingGetEvent", mobile);
+	}
 
 	public void updateMemberStatus(String userId, String status)
 	{

@@ -49,6 +49,7 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:memberDao-ref="memberDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminLeagueController"

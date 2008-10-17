@@ -36,6 +36,7 @@
 	<bean id="memberController"
 		class="com.xwin.web.controller.user.MemberController"
 		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		

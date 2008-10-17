@@ -14,6 +14,7 @@ public class Member
 	private String email;
 	private String pin;
 	private Long balance;
+	private Long point;
 	private String status;
 	private String grade;
 	private Date joinDate;
@@ -66,6 +67,12 @@ public class Member
 	}
 	public void setBalance(Long balance) {
 		this.balance = balance;
+	}
+	public Long getPoint() {
+		return point;
+	}
+	public void setPoint(Long point) {
+		this.point = point;
 	}
 	public String getStatus() {
 		return status;
