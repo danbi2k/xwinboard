@@ -17,7 +17,7 @@ import com.xwin.domain.game.BetGame;
 
 public class XwinUtil
 {
-	private static final DecimalFormat float15Format = new DecimalFormat("0.00000000000000");
+	private static final DecimalFormat float16Format = new DecimalFormat("0.0000000000000000");
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
@@ -195,7 +195,7 @@ public class XwinUtil
 //		y /= 100.0;
 //		
 //		return y;
-		String str_x = float15Format.format(x);
+		String str_x = float16Format.format(x);
 		
 		int dot_index = str_x.indexOf(".");
 		String str_cut = str_x.substring(0, dot_index + 3);
