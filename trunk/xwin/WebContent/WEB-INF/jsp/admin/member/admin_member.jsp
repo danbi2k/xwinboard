@@ -15,9 +15,20 @@
 	Integer totalCount = (Integer) request.getAttribute("memberCount");
 	
 	String grade = XwinUtil.nvl(request.getParameter("grade"));
+	String status = XwinUtil.nvl(request.getParameter("status"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	
+	Integer normalCount = (Integer) request.getAttribute("normalCount");
+	Integer secedeReqCount = (Integer) request.getAttribute("secedeReqCount");
+	Integer secedeCount = (Integer) request.getAttribute("secedeCount");
+	
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	
+	int memberIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -58,11 +69,11 @@
 <form method='GET' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value='viewAdminMember'/>
 	<input type='hidden' name='pageIndex'/>
- 	<!--select name='grade' onChange='this.form.submit()'>
- 		<option value='' <%=grade.equals("")?"selected":""%>>전체</option>
-		<option value='<%=Code.USER_GRADE_NORMAL%>' <%=grade.equals(Code.USER_GRADE_NORMAL)?"selected":""%>>일반</option>
-		<option value='<%=Code.USER_GRADE_VIP%>' <%=grade.equals(Code.USER_GRADE_VIP)?"selected":""%>>VIP</option>
- 	</select-->
+ 	<select name='status' onChange='this.form.submit()'>
+		<option value='<%=Code.USER_STATUS_NORMAL%>' <%=status.equals(Code.USER_STATUS_NORMAL)?"selected":""%>>정상</option>
+		<option value='<%=Code.USER_STATUS_SECEDE_REQ%>' <%=status.equals(Code.USER_STATUS_SECEDE_REQ)?"selected":""%>>탈퇴요청</option>
+		<option value='<%=Code.USER_STATUS_SECEDE%>' <%=status.equals(Code.USER_STATUS_SECEDE)?"selected":""%>>탈퇴</option>
+ 	</select>
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
@@ -71,8 +82,12 @@
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
 	<input type='submit' value='검 색'>
+	&nbsp;&nbsp;&nbsp;&nbsp;<font size=3><b>
+	정상 : <%=normalCount%> 명
+	탈퇴요청 : <%=secedeReqCount%> 명
+	탈퇴 : <%=secedeCount%> 명
+	</b></font>
  </form>
-
 <table class="prettytable">
 	<tr>
 		<th width=5%>번호</th>
@@ -82,21 +97,21 @@
 		<th width=10%>보유금액</th>
 		<th width=15%>휴대전화</th>
 		<th width=20%>EMAIL</th>
-		<th width=15%>가입일</th>
+		<th width=15%>상태</th>
 	</tr>
 <%
 if (memberList != null) {
 	for (Member member : memberList) {
 %>
 	<tr>
-		<td width=5%><%=member.getId()%></td>
+		<td width=5%><%=memberIdx--%></td>
 		<td width=10%><%=Code.getValue(member.getGrade())%></td>
 		<td width=10%><a href='adminMember.aspx?mode=viewMemberDetail&userId=<%=member.getUserId()%>'><%=member.getUserId()%></a></td>
 		<td width=15%><%=member.getNickName()%></td>
 		<td width=10%><%=XwinUtil.comma3(member.getBalance())%></td>
 		<td width=15%><%=member.getMobile()%></td>
 		<td width=20%><%=member.getEmail()%></td>
-		<td width=15%><%=member.getJoinDateStr()%></td>
+		<td width=15%><%=Code.getValue(member.getStatus())%></td>
 	</tr>
 <%
  }
@@ -106,9 +121,6 @@ if (memberList != null) {
 
 <div class="pages">
 <%
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;

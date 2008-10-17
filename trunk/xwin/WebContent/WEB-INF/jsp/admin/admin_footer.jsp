@@ -54,7 +54,7 @@
 			<h2 class="heading">회원관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminMember.aspx?mode=viewAdminMember">회원목록</a></li>
+					<li class="first"><a href="adminMember.aspx?mode=viewAdminMember&status=US001">회원목록</a></li>
 					<li><a href="adminMember.aspx?mode=viewAccessList">접속기록</a></li>
 				</ul>
 			</div>

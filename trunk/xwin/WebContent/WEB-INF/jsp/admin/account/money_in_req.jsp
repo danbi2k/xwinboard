@@ -83,8 +83,9 @@
 			<%=Code.getValue(moneyIn.getStatus())%>
 		</font>
 		</td>
-		<td><input type='button' value='충전' onclick='acceptMoneyInRequest(<%=moneyIn.getId()%>)'>
+		<td>
 		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
+		<input type='button' value='충전' onclick='acceptMoneyInRequest(<%=moneyIn.getId()%>)'>		
 		<input type='button' value='취소' onclick='cancelMoneyInRequest(<%=moneyIn.getId()%>)'></td>
 		<%} %>
 	  </tr>

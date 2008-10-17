@@ -82,6 +82,7 @@ public class GameController extends XwinController
 		param.put("status", Code.GAME_STATUS_END);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
+		param.put("ORDERBY", "DESC");
 		
 		List<Game> gameList = gameDao.selectGameList(param);		
 		List<League> leagueList = leagueDao.selectLeagueList();		

@@ -170,6 +170,11 @@ public class AdminAccountController extends XwinController
 			accountDao.insertAccount(account);		
 			memberDao.plusMinusBalance(member.getUserId(), moneyIn.getMoney());
 			moneyInDao.updateMoneyIn(moneyIn);
+			
+			String nickName = member.getNickName();
+			String mobile = member.getMobile().replaceAll("-", "");
+			String message = nickName + " 님께 " + moneyIn.getMoney() + "원이 충전 되었습니다. -bwin-";
+			sendSmsConnector.sendSms(message, mobile, "0000000000");
 		
 			rx = new ResultXml(0, "충전되었습니다", null);
 		} else {
@@ -194,6 +199,13 @@ public class AdminAccountController extends XwinController
 			moneyOut.setStatus(Code.MONEY_OUT_SUCCESS);
 			moneyOut.setProcDate(new Date());
 			moneyOutDao.updateMoneyOut(moneyOut);
+			
+			Member member = memberDao.selectMember(moneyOut.getUserId(), null);
+			
+			String nickName = member.getNickName();
+			String mobile = member.getMobile().replaceAll("-", "");
+			String message = nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다. -bwin-";
+			sendSmsConnector.sendSms(message, mobile, "0000000000");
 		
 			rx = new ResultXml(0, "환전되었습니다", null);
 		} else {
@@ -397,18 +409,21 @@ public class AdminAccountController extends XwinController
 	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
 		
-		String id = request.getParameter("id");
+		ResultXml rx = null;
 		
-		MoneyIn moneyIn = new MoneyIn();
-		moneyIn.setId(id);
-		moneyIn.setStatus(Code.MONEY_IN_CANCEL);
-		
-		moneyInDao.updateMoneyIn(moneyIn);
-		
-		ResultXml rx = new ResultXml(0, null, null);
+		String id = request.getParameter("id");		
+		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
+		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false)
+			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);
+		else {
+			moneyIn.setStatus(Code.MONEY_IN_CANCEL);
+			moneyIn.setProcDate(new Date());
+			moneyInDao.updateMoneyIn(moneyIn);			
+			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

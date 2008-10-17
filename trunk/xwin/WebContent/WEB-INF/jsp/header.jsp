@@ -162,10 +162,10 @@ if (document.URL.indexOf("index.aspx") > 0) {
 </script>
 <table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
 <tr><td width="80" align="center"><b style="color:white">Notice</b></td>
-	<td width="880">&nbsp;
+	<td width="880" height="30"><font size=4"><b>&nbsp;
 	<marquee>
 	<%=Admin.NOTICE%>
-	</marquee>
+	</marquee></b></font>
 	</td>
 </tr>
 </table>

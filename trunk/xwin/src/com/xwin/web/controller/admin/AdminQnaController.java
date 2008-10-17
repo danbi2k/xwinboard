@@ -68,6 +68,11 @@ public class AdminQnaController extends XwinController
 		boardComment.setUserId("secadmin");
 		boardDao.insertBoardComment(boardComment);
 		
+		BoardItem boardItem = new BoardItem();
+		boardItem.setId(id);
+		boardItem.setIsChecked("Y");
+		boardDao.updateBoardItem(boardItem);
+		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

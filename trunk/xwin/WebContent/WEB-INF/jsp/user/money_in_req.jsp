@@ -40,8 +40,8 @@
 
 		2. 입금하실 계좌 번호를 꼭! 확인합니다. <br>
 		3. 인터넷뱅킹, 폰뱅킹, 무통장입금, ATM이체 등의 방법으로 입금을 합니다.<br>
-		4. 입금후 5분~10분 이내에 입금확인 처리가 됩니다.<br>
-		※ 입력하신 정보(입금액/입금자명)와 실제입금금액/입금자명이 동일해야만 처리가 가능합니다.<br>
+		4. 입금자명과 입금액이 동일시 입금후 2~3분이내 자동충전 처리 됩니다.<br>
+		<font color="white"><B>※ 입력하신 정보(입금액/입금자명)와 실제입금금액/입금자명이 동일해야만 처리가 가능합니다.</B></font><br>
 	</td></tr>
 	</table>
 
@@ -85,7 +85,10 @@
 	<tr><td>입금예정액</td>
 
 		<td><table width="100%" cellpadding="0" cellspacing="0"><tr>
-			<td width="170"><input class="member" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this); comma3Input(this);" onblur=""> 원<td>
+			<td width="170">
+				<input class="member" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this); comma3Input(this);" onblur=""> 원<BR>				
+				<font color="orange"><b>※ 직접입력가능</b></font>
+			<td>
 			<td>
 
 				<table>
@@ -116,7 +119,6 @@
 				</tr>
 
 				</table>
-
 			</td></tr>
 			</table>
 		</td></tr>

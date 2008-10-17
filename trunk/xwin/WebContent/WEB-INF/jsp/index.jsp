@@ -107,71 +107,52 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 <tr><td valign="top" align="center">
 
 <table width="100%" style="margin-bottom:5px;backbround-color:black;">
-<tr><td colspan=2>
-<table>
-<tr><td><font color='orange'><B>&nbsp;Soccer</B></font></td></tr>
-<tr><td>
-<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/soccer.jpg" border=0></a>
-</td></tr>
-</table>
-</td></tr>
-<tr><td colspan=2>
-<table>
-<tr><td><font color='orange'><B>&nbsp;Baseball</B></font></td></tr>
-<tr><td>
-<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/mlb.jpg" border=0></a>
-</td></tr>
-</table>
-</td></tr>
 <tr>
-<td>
-<table>
-<tr><td><font color='orange'><B>&nbsp;Basketball</B></font></td></tr>
-<tr><td>
-<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/basketball.jpg" border=0></a>
-</td></tr>
-</table>
-</td>
-<td>
-<table>
-<tr><td><font color='orange'><B>&nbsp;Sports Bet</B></font></td></tr>
-<tr><td>
-<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/volleyball.jpg" border=0></a>
-</td></tr>
-</table>
-</td>
-</tr>
-</table>
-<!--############################################################//-->
-</td><td valign="top">
-<!--############################################################//-->
-
-	<img src="images/main_banner.gif">
-
-<table cellpadding="0" cellspacing="0" style="margin-top:5;">
-<tr><td><img src="images/main_banner_07.gif"></td>
-	<td><img src="images/main_banner_08.gif"></td></tr>
-<tr><td><img src="images/main_banner_09.gif"></td>
-	<td><img src="images/main_banner_10.gif"></td></tr>
-<tr>
-<tr>
-<td>&nbsp;</td>
-</tr>
-<td colspan=2 align='center'><img src="images/livescore.jpg" onclick="window.open('http://www.livescore.com')"></td>
+	<td width=50%>
+		<table>
+			<tr><td><font color='orange'><B>&nbsp;Soccer</B></font></td></tr>
+			<tr><td>
+			<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/soccer2.jpg" border=0></a>
+			</td></tr>
+		</table>
+	</td>
+	<td width=50%>
+		<table>
+		<tr><td><font color='orange'><B>&nbsp;Baseball</B></font></td></tr>
+		<tr><td>
+		<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/mlb.jpg" border=0></a>
+		</td></tr>
+		</table>
+	</td>
 </tr>
 <tr>
-<td>&nbsp;</td>
+	<td width=50%>
+		<table>
+		<tr><td><font color='orange'><B>&nbsp;Basketball</B></font></td></tr>
+		<tr><td>
+		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/basketball.jpg" border=0></a>
+		</td></tr>
+		</table>
+	</td>
+	<td width=50%>
+		<table>
+		<tr><td><font color='orange'><B>&nbsp;Sports Bet</B></font></td></tr>
+		<tr><td>
+		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/sportsbet.jpg" border=0></a>
+		</td></tr>
+		</table>
+	</td>
 </tr>
 <tr>
-	<td><img src="images/afreeca.jpg" onclick="window.open('http://www.afreeca.com')"></td>
-	<td></td>
+	<td width=50% align='center'>
+		<img src="images/main_banner.jpg">
+	</td>
+	<td width=50% align='center'>
+		<img src="images/banner_league.jpg">
+		<a onclick="window.open('http://www.livescore.com')"><img src="images/livescore.jpg"></a>&nbsp;&nbsp;&nbsp;
+		<a onclick="window.open('http://www.afreeca.com')"><img src="images/afreeca.jpg"></a>
+	</td>   
 </tr>
-</table>
-
-<!--############################################################//-->
-
-
-</td></tr>
 </table>
 
 <%@include file="footer.jsp"%>

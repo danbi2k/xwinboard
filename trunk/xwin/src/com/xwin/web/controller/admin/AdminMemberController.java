@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -28,6 +29,7 @@ public class AdminMemberController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -37,17 +39,30 @@ public class AdminMemberController extends XwinController
 			pIdx = Integer.parseInt(pageIndex);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.USER_STATUS_NORMAL);
+		Integer normalCount = memberDao.selectMemberCount(param);
+		param.put("status", Code.USER_STATUS_SECEDE_REQ);		
+		Integer secedeReqCount = memberDao.selectMemberCount(param);
+		param.put("status", Code.USER_STATUS_SECEDE);		
+		Integer secedeCount = memberDao.selectMemberCount(param);
+		
+		param.clear();		
+		
 		param.put("grade", grade);
+		param.put("status", status);
 		if (keyword != null) param.put(search, "%" + keyword + "%");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
 		Integer memberCount = memberDao.selectMemberCount(param);
-		List<Member> memberList = memberDao.selectMemberList(param);		
+		List<Member> memberList = memberDao.selectMemberList(param);
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member");
 		mv.addObject("memberList", memberList);
 		mv.addObject("memberCount", memberCount);
+		mv.addObject("normalCount", normalCount);
+		mv.addObject("secedeReqCount", secedeReqCount);
+		mv.addObject("secedeCount", secedeCount);
 		return mv;
 	}
 	
@@ -105,6 +120,26 @@ public class AdminMemberController extends XwinController
 		ModelAndView mv = new ModelAndView("admin/member/member_access");
 		mv.addObject("accessList", accessList);
 		mv.addObject("accessCount", accessCount);
+		
+		return mv;
+	}
+	
+	public ModelAndView secedeMember(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId");
+		
+		Member member = memberDao.selectMember(userId, null);
+		member.setStatus(Code.USER_STATUS_SECEDE);
+		
+		memberDao.updateMember(member);
+		
+		ResultXml rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
 	}

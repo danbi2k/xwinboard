@@ -46,8 +46,17 @@ var targetCheck = 0;
 		</td>
 	</tr>
 	<tr>
+		<td width="36%">
+		<select name="search">
+			<option value="userId">아이디</option>
+			<option value="nickName">닉네임</option>
+		</select>
+		</td>
+		<td><input type="text" name="keyword" size="15" maxlength="15"><input type="button" onclick="searchPhoneNumber()" value="검색"></td>
+	</tr>
+	<tr>
 		<td width="36%">수신번호</td>
-		<td><input type="text" name="phone" size="15" maxlength="15" value="010"></td>
+		<td><input type="text" name="phone" size="15" maxlength="15" value=""></td>
 	</tr>
 	<!--
 	<tr>
@@ -57,7 +66,7 @@ var targetCheck = 0;
 	-->
 	<tr>
 		<td>발신번호</td>
-		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="010"></td>
+		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value=""></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="submit1" value="전송" onClick="onSubmit();">	<input type="reset" name="Submit5" value="취소"></td>
@@ -68,6 +77,23 @@ var targetCheck = 0;
 
 <script language="Javascript">
 <!--
+	function searchPhoneNumber()
+	{
+		var query = "mode=searchPhoneNumber";
+		query += "&search=" + SMSFORM.search.value;
+		query += "&keyword=" + SMSFORM.keyword.value;
+
+		var http = new JKL.ParseXML("adminSms.aspx", query);
+		var result = http.parse();
+
+		if (result.resultXml.code == 0) {
+			if (result.resultXml.message)
+				SMSFORM.phone.value = result.resultXml.message;
+			else
+				SMSFORM.phone.value = "";
+		}
+	}
+
 	// 문자메시지 바이트수 계산
 	function checkBytes() {
 
