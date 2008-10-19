@@ -2,6 +2,7 @@ package com.xwin.infra.schedule;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,13 @@ public class AutoMoneyInManager extends QuartzJobBean
 					
 					Date theDate = null;
 					try {
-						theDate = smsDateFormat.parse(msg[0].substring(5));
+						theDate = smsDateFormat.parse(msg[0].substring(4));
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(theDate);
+						Calendar now = Calendar.getInstance();
+						cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+						theDate = cal.getTime();
+						
 					} catch (ParseException e) {
 						e.printStackTrace();
 						theDate = new Date();
