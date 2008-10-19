@@ -28,11 +28,21 @@
 	<select id="selectAccessList" resultMap="accessResultMap" parameterClass="map">
 		SELECT * FROM tbl_access
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="AND" property="userId">
-				USERID LIKE #userId#
+			<isNotNull prepend="AND" property="userIdLike">
+				USERID LIKE #userIdLike#
 			</isNotNull>
-			<isNotNull prepend="AND" property="nickName">
-				NICKNAME LIKE #nickName#
+			<isNotNull prepend="AND" property="nickNameLike">
+				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
 			</isNotNull>
 		</dynamic>		
 		ORDER BY DATE DESC
@@ -44,11 +54,21 @@
 	<select id="selectAccessCount" resultClass="integer" parameterClass="map">
 		SELECT COUNT(*) FROM tbl_access
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="AND" property="userId">
-				USERID = #userId#
+			<isNotNull prepend="AND" property="userIdLike">
+				USERID LIKE #userIdLike#
 			</isNotNull>
-			<isNotNull prepend="AND" property="nickName">
-				NICKNAME = #nickName#
+			<isNotNull prepend="AND" property="nickNameLike">
+				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
 			</isNotNull>
 		</dynamic>
 	</select>

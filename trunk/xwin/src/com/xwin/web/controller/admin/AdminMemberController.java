@@ -20,7 +20,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminMemberController extends XwinController
 {
-	public static final int ROWSIZE = 20;
+	public static final int ROWSIZE = 25;
 	
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -105,15 +105,19 @@ public class AdminMemberController extends XwinController
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		if (keyword != null) param.put(search, "%"+keyword+"%");
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		
 		List<Access> accessList = accessDao.selectAccessList(param);
 		Integer accessCount = accessDao.selectAccessCount(param);
@@ -160,6 +164,61 @@ public class AdminMemberController extends XwinController
 		
 		memberDao.updateMember(member);
 		
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changeBankInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String bankName = request.getParameter("bankName");
+		String bankNumber = request.getParameter("bankNumber");
+		String bankOwner = request.getParameter("bankOwner");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setBankName(bankName);
+		member.setBankNumber(bankNumber);
+		member.setBankOwner(bankOwner);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}	
+	
+	public ModelAndView changeDenyrity(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String deny_board = request.getParameter("deny_board");
+		String deny_qna = request.getParameter("deny_qna");
+		String userId = request.getParameter("userId");
+		
+		Integer denyrity = 0;
+		if (deny_board != null)
+			denyrity |= Code.DENY_WRITE_BOARD;
+		if (deny_qna != null)
+			denyrity |= Code.DENY_WRITE_QNA;
+		
+		Member member = new Member();
+		member.setUserId(userId);
+		member.setDenyrity(denyrity);
+		
+		memberDao.updateMember(member);		
+	
 		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

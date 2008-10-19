@@ -7,7 +7,6 @@
 <sqlMapConfig>
 	<sqlMap resource="com/xwin/infra/ibatis/KtfSms.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
-	<sqlMap resource="com/xwin/infra/ibatis/Team.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Game.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Member.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Betting.xml" />
@@ -20,5 +19,6 @@
 	<sqlMap resource="com/xwin/infra/ibatis/Point.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Access.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Admin.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Transaction.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/SmsWait.xml" />
 </sqlMapConfig>

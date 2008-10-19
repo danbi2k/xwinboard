@@ -23,7 +23,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminBettingController extends XwinController
 {
-	public static final int ROWSIZE = 20;
+	public static final int ROWSIZE = 25;
 	
 	public ModelAndView viewBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -33,7 +33,8 @@ public class AdminBettingController extends XwinController
 		
 		String gameType = XwinUtil.arcNvl(request.getParameter("gameType"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
-		String betDate = XwinUtil.arcNvl(request.getParameter("betDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -46,12 +47,9 @@ public class AdminBettingController extends XwinController
 		param.put("gameType", gameType);
 		param.put("status", status);
 
-		if (keyword != null) param.put(search+"LIKE", "%"+keyword+"%");
-		if (betDate != null) {
-			Date[] pair = XwinUtil.getDatePair(betDate);
-			param.put("fromDate", pair[0]);
-			param.put("toDate", pair[1]);
-		}
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -93,7 +91,8 @@ public class AdminBettingController extends XwinController
 		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
-		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		if (status == null)
@@ -108,12 +107,10 @@ public class AdminBettingController extends XwinController
 		param.put("leagueId", leagueId);
 		param.put("status", status);
 		param.put("betStatus", betStatus);
+		param.put("betGameCount", 0);
 		if (keyword != null) param.put(search, "%"+keyword+"%");
-		if (gameDate != null) {
-			Date[] pair = XwinUtil.getDatePair(gameDate);
-			param.put("fromDate", pair[0]);
-			param.put("toDate", pair[1]);
-		}
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -138,14 +135,33 @@ public class AdminBettingController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
+		
 		param.put("gameId", id);
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		param.put("status", status);
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
+		Integer bettingCount = bettingDao.selectBettingCount(param);
 		
 		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_game_detail");
 		mv.addObject("bettingList", bettingList);
+		mv.addObject("bettingCount", bettingCount);
 		
 		return mv;
 	}

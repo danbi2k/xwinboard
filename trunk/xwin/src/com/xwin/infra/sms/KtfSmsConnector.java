@@ -33,7 +33,7 @@ public class KtfSmsConnector
 	/**
 	 * @param args
 	 */
-	private List<Map<String, String>> parseKTF()
+	public List<Map<String, String>> parseKTF()
 	{
 		List<Map<String, String>> mapList = null;
 		try {			

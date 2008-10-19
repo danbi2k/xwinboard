@@ -18,7 +18,9 @@ import com.xwin.infra.dao.LeagueDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.dao.MoneyInDao;
 import com.xwin.infra.dao.MoneyOutDao;
+import com.xwin.infra.dao.PointDao;
 import com.xwin.infra.dao.SmsWaitDao;
+import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.SendSmsConnector;
 import com.xwin.service.admin.BettingService;
 
@@ -34,6 +36,8 @@ public class XwinController extends MultiActionController
 	protected MoneyOutDao moneyOutDao = null;
 	protected BankBookDao bankBookDao = null;
 	protected AccountDao accountDao = null;
+	protected TransactionDao transactionDao = null;
+	protected PointDao pointDao = null;
 	protected AccessDao accessDao = null;
 	protected KtfSmsDao ktfSmsDao = null;
 	protected AdminDao adminDao = null;
@@ -78,9 +82,17 @@ public class XwinController extends MultiActionController
 	public void setAccountDao(AccountDao accountDao) {
 		this.accountDao = accountDao;
 	}
+	public void setTransactionDao(TransactionDao transactionDao) {
+		this.transactionDao = transactionDao;
+	}
+
 	public void setAccessDao(AccessDao accessDao) {
 		this.accessDao = accessDao;
 	}
+	public void setPointDao(PointDao pointDao) {
+		this.pointDao = pointDao;
+	}
+
 	public void setKtfSmsDao(KtfSmsDao ktfSmsDao) {
 		this.ktfSmsDao = ktfSmsDao;
 	}

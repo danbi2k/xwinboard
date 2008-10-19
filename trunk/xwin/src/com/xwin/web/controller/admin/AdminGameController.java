@@ -27,7 +27,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
 {	
-	public static final int ROWSIZE = 20;
+	public static final int ROWSIZE = 25;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -40,7 +40,8 @@ public class AdminGameController extends XwinController
 		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
-		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		int pIdx = 0;
@@ -53,11 +54,8 @@ public class AdminGameController extends XwinController
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("betStatus", betStatus);
 		if (keyword != null) param.put(search, "%"+keyword+"%");
-		if (gameDate != null) {
-			Date[] pair = XwinUtil.getDatePair(gameDate);
-			param.put("fromDate", pair[0]);
-			param.put("toDate", pair[1]);
-		}
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -83,7 +81,8 @@ public class AdminGameController extends XwinController
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
-		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		int pIdx = 0;
@@ -102,11 +101,8 @@ public class AdminGameController extends XwinController
 			param.put("statusList", statusList);
 		}
 		if (keyword != null) param.put(search, "%"+keyword+"%");
-		if (gameDate != null) {
-			Date[] pair = XwinUtil.getDatePair(gameDate);
-			param.put("fromDate", pair[0]);
-			param.put("toDate", pair[1]);
-		}
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("ORDERBY", "DESC");
@@ -395,7 +391,7 @@ public class AdminGameController extends XwinController
 					
 					try {
 						Member member = memberDao.selectMember(betting.getUserId(), null);
-						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS)) {
+						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
 							String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
 									Code.getValue(betting.getStatus()) + " 되었습니다.";
 							if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))

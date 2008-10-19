@@ -82,8 +82,8 @@ public class MoneyOutDao extends XwinDao
 	{
 		Map<String, Object> param = new HashMap<String, Object>(2);
 		param.put("status", Code.MONEY_OUT_REQUEST);
-		param.put("pageIndex", 0);
-		param.put("pageSize", 5);
+		param.put("fromRow", 0);
+		param.put("rowSize", 5);
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyOutList", param);
 	}

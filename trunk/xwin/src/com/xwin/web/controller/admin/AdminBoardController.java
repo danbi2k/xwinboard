@@ -21,7 +21,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminBoardController extends XwinController
 {
-public static final int ROWSIZE = 20;
+public static final int ROWSIZE = 25;
 	
 	public ModelAndView viewBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -32,6 +32,8 @@ public static final int ROWSIZE = 20;
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -39,7 +41,9 @@ public static final int ROWSIZE = 20;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 
-		if (keyword != null) param.put(search+"LIKE", "%"+keyword+"%");
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("boardName", "user");
@@ -109,6 +113,30 @@ public static final int ROWSIZE = 20;
 		return mv;
 	}
 	
+	public ModelAndView updateBoardItem(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		Member admin = (Member) request.getSession().getAttribute("Admin");
+		
+		String context = request.getParameter("context");
+		String title = request.getParameter("title");
+		String id = request.getParameter("id");
+		String boardName = request.getParameter("boardName");
+		
+		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
+		boardItem.setTitle(title);
+		boardItem.setContext(context);
+		
+		boardDao.updateBoardItem(boardItem);
+		
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList");
+		
+		return mv;
+	}
+	
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -146,6 +174,7 @@ public static final int ROWSIZE = 20;
 		
 		return mv;
 	}
+	
 	
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

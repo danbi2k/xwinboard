@@ -19,6 +19,11 @@ public class Member
 	private String grade;
 	private Date joinDate;
 	private String joinDateStr;
+	private String bankName;
+	private String bankNumber;
+	private String bankOwner;
+	private String getSms;
+	private Integer denyrity;
 	
 	public String getId() {
 		return id;
@@ -98,5 +103,35 @@ public class Member
 	}
 	public void setJoinDateStr(String joinDateStr) {
 		this.joinDateStr = joinDateStr;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getBankNumber() {
+		return bankNumber;
+	}
+	public void setBankNumber(String bankNumber) {
+		this.bankNumber = bankNumber;
+	}
+	public String getBankOwner() {
+		return bankOwner;
+	}
+	public void setBankOwner(String bankOwner) {
+		this.bankOwner = bankOwner;
+	}
+	public String getGetSms() {
+		return getSms;
+	}
+	public void setGetSms(String getSms) {
+		this.getSms = getSms;
+	}
+	public Integer getDenyrity() {
+		return denyrity;
+	}
+	public void setDenyrity(Integer denyrity) {
+		this.denyrity = denyrity;
 	}
 }

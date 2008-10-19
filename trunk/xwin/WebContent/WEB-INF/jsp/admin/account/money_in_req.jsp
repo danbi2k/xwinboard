@@ -7,6 +7,9 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
+	int ROWSIZE = 25;
+	int SHOWPAGE = 10;
+
 	List<MoneyIn> moneyInList = (List<MoneyIn>) request.getAttribute("moneyInOutList");
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	Integer totalSum = (Integer) request.getAttribute("totalSum");
@@ -14,8 +17,8 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
-	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
 
 <div class="title">충전요청</div>
@@ -45,6 +48,9 @@
 		<option value='name' <%=search.equals("name")?"selected":""%>>입금자명</option>
  	</selec>
  	<input type='text' name='keyword' value='<%=keyword%>'>
+	<input type='hidden' name="dateType" value='req'>
+	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
 	<!--select name='searchDate'>
  		<option value='procDate' >충전일</option>
  		<option value='reqDate' >신청일</option>

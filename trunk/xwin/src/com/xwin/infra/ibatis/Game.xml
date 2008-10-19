@@ -22,7 +22,6 @@
 		<result property="awayScore" column="AWAY_SCORE"/>
 		<result property="result" column="RESULT"/>
 		<result property="leagueId" column="LEAGUE_ID"/>
-		<result property="handy" column="HANDY"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
 		<result property="leagueImage" column="LEAGUE_IMAGE"/>
 		<result property="betStatus" column="BET_STATUS"/>
@@ -84,6 +83,11 @@
 		<isNotNull prepend="AND" property="toDate">
 			<![CDATA[
 			g.GAME_DATE <= #toDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="betGameCount">
+			<![CDATA[
+			(SELECT COUNT(*) FROM tbl_betting_game bg WHERE g.ID = bg.GAME_ID) > #betGameCount#
 			]]>
 		</isNotNull>
 		ORDER BY GAME_DATE $ORDERBY$

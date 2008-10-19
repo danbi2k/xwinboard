@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
@@ -20,7 +21,7 @@ import com.xwin.web.controller.XwinController;
 
 public class BoardController extends XwinController
 {
-	public static final Integer ROWSIZE = 20;
+	public static final Integer ROWSIZE = 25;
 	
 	public ModelAndView viewUserBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -47,11 +48,8 @@ public class BoardController extends XwinController
 
 		ModelAndView mv = null;
 		Member member = (Member) request.getSession().getAttribute("Member");
-		if (member == null) {
-			mv = new ModelAndView("dummy");
-		} else {
-			mv = viewBoard(pageIndex, boardName, member.getUserId());
-		}
+		
+		mv = viewBoard(pageIndex, boardName, member.getUserId());
 		
 		return mv;
 	}
@@ -102,10 +100,18 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardWriteForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = null;
+		if ((member = (Member) request.getSession().getAttribute("Member")) == null)
 			return new ModelAndView("dummy");
 		
+
+		
 		String boardName = request.getParameter("boardName");
+		
+		member = memberDao.selectMember(member.getUserId(), null);
+		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
+			return new ModelAndView("illegal");
+		
 		ModelAndView mv = new ModelAndView("board/boardWrite");
 		
 		return mv;
@@ -117,11 +123,17 @@ public class BoardController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
+		Member member = null;
+		if ((member = (Member) request.getSession().getAttribute("Member")) == null)
+			return new ModelAndView("dummy");
+		
 		String boardId = request.getParameter("boardId");
 		String comment = request.getParameter("comment");
 		String boardName = request.getParameter("boardName");
 		
-		Member member = (Member) request.getSession().getAttribute("Member");
+		member = memberDao.selectMember(member.getUserId(), null);
+		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
+			return new ModelAndView("illegal");
 		
 		BoardComment boardComment = new BoardComment();
 		boardComment.setBoardId(boardId);
@@ -142,11 +154,17 @@ public class BoardController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
+		Member member = null;
+		if ((member = (Member) request.getSession().getAttribute("Member")) == null)
+			return new ModelAndView("dummy");
+		
 		String title = request.getParameter("title");
 		String context = request.getParameter("context");
 		String boardName = request.getParameter("boardName");
 		
-		Member member = (Member) request.getSession().getAttribute("Member");
+		member = memberDao.selectMember(member.getUserId(), null);
+		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
+			return new ModelAndView("illegal");
 		
 		BoardItem boardItem = new BoardItem();
 		boardItem.setBoardName(boardName);

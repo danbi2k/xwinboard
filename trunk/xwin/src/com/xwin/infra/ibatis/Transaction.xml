@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Transaction">
+
+	<typeAlias alias="Transaction" type="com.xwin.domain.admin.Transaction" />
+	
+	<resultMap id="transactionResultMap" class="Transaction">
+		<result property="id" column="ID"/>
+		<result property="date" column="DATE"/>
+		<result property="type" column="TYPE"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="money" column="MONEY"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="isCharge" column="ISCHARGE"/>
+	</resultMap>
+	
+	<insert id="insertTransaction" parameterClass="Transaction">
+		INSERT INTO tbl_transaction(DATE, TYPE, USERNAME, MONEY, BALANCE)
+		VALUES(#date#, #type#, #userName#, #money#, #balance#)
+	</insert>
+	
+	<delete id="deleteTransaction" parameterClass="string">
+		DELETE FROM tbl_transaction WHERE ID = #value#
+	</delete>
+	
+	<update id="updateTransaction" parameterClass="Transaction">
+		UPDATE tbl_transaction
+		<dynamic prepend="SET">
+			<isNotNull prepend="AND" property="isCharge">
+			ISCHARGE = #isCharge#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+	
+	<select id="selectTransactionList" resultMap="transactionResultMap" parameterClass="map">
+		SELECT * FROM tbl_transaction
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userName">
+				USERNAME = #userName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
+			</isNotNull>
+			<isNotNull prepend="AND" property="balance">
+				BALANCE = #balance#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	ORDER BY DATE DESC
+	<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+	</isNotNull>
+	</select>
+	
+	<select id="selectTransactionCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_transaction
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userName">
+				USERNAME = #userName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
+			</isNotNull>
+			<isNotNull prepend="AND" property="balance">
+				BALANCE = #balance#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

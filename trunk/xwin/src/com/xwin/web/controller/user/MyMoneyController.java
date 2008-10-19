@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -63,6 +64,35 @@ public class MyMoneyController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
+		return mv;
+	}
+	
+	public ModelAndView viewMyPointList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		param.put("userId", member.getUserId());
+		param.put("isDeleted", "N");
+		
+		List<Point> pointList = pointDao.selectPointList(param);
+		Integer pointCount = pointDao.selectPointCount(param);
+		
+		ModelAndView mv = new ModelAndView("user/my_point");
+		mv.addObject("pointList", pointList);
+		mv.addObject("pointCount", pointCount);
 		return mv;
 	}
 }

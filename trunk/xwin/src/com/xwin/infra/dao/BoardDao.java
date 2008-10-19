@@ -90,4 +90,14 @@ public class BoardDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectUnAnsweredQna");
 	}
+	
+	public List<BoardItem> selectRecentlyQna()
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("fromRow", 0);
+		param.put("rowSize", 5);
+		param.put("boardName", "qna");
+		
+		return sqlMapClientTemplate.queryForList("selectBoardList");
+	}
 }

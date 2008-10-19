@@ -149,6 +149,32 @@ public class XwinUtil
 		return date;
 	}
 	
+	public static Date toDateFullTime(String dateStr)
+	{
+		if (dateStr == null)
+			return null;
+		
+		Date date = null;		
+		try {
+			date = dateFormat.parse(dateStr);
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.set(Calendar.HOUR_OF_DAY, 0);
+			cal.set(Calendar.MINUTE, 0);
+			cal.set(Calendar.SECOND, 0);
+			cal.set(Calendar.MILLISECOND, 0);
+			
+			cal.add(Calendar.DATE, 1);
+			cal.add(Calendar.MILLISECOND, -1);
+			
+			return cal.getTime();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return date;
+	}
+	
 	public static String nvl(Object obj)
 	{
 		if (obj == null)
@@ -163,6 +189,14 @@ public class XwinUtil
 			return null;
 		
 		return str;
+	}
+	
+	public static String numNvl(Object obj)
+	{
+		if (obj == null)
+			return "0";
+		
+		return obj.toString();
 	}
 	
 	public static String to2Digit(double x)

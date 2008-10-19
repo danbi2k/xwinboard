@@ -41,6 +41,12 @@
 			<isNotNull prepend="," property="isChecked">
 			ISCHECKED = #isChecked#
 			</isNotNull>
+			<isNotNull prepend="," property="title">
+			TITLE = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="context">
+			CONTEXT = #context#
+			</isNotNull>
 		</dynamic>
 		WHERE id = #id#
 	</update>
@@ -74,6 +80,22 @@
 		<isNotNull prepend="AND" property="userId">
 			bi.USERID = #userId#
 		</isNotNull>
+		<isNotNull prepend="AND" property="userIdLike">
+			bi.USERID LIKE #userIdLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickNameLike">
+			bi.NICKNAME LIKE #nickNameLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			bi.DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			bi.DATE <= #toDate#
+			]]>
+		</isNotNull>
 		<isNotNull prepend="AND" property="commentCount">
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#
 		</isNotNull>
@@ -92,6 +114,22 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="userId">
 			bi.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userIdLike">
+			bi.USERID LIKE #userIdLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickNameLike">
+			bi.NICKNAME LIKE #nickNameLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			bi.DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			bi.DATE <= #toDate#
+			]]>
 		</isNotNull>
 		<isNotNull prepend="AND" property="commentCount">
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) = #commentCount#

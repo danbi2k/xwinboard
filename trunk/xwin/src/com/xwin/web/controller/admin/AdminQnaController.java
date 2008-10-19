@@ -13,24 +13,45 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class AdminQnaController extends XwinController
 {
+	int ROWSIZE = 25;
+	
 	public ModelAndView viewQnaList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("boardName", "qna");
 		param.put("ISDELETED", "N");
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
 		List<BoardItem> qnaList = boardDao.selectBoardItemList(param);
+		Integer qnaCount = boardDao.selectBoardItemCount(param);
 		
 		ModelAndView mv = new ModelAndView("admin/qna/admin_qna_list");
 		mv.addObject("qnaList", qnaList);
+		mv.addObject("qnaCount", qnaCount);
 		
 		return mv;
 	}

@@ -15,7 +15,7 @@
 		p:pointDao-ref="pointDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:memberDao-ref="memberDao"
-		p:ktfSmsDao-ref="ktfSmsDao"
+		p:transactionDao-ref="transactionDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"/>
 		
 	<bean id="bettingService" class="com.xwin.service.admin.BettingService"

@@ -1,9 +1,13 @@
 package com.xwin.service.admin;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Point;
+import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
@@ -25,21 +29,30 @@ public class MoneyInService extends XwinService
 		if (moneyInList != null) {
 			for (MoneyIn moneyIn : moneyInList) {
 				String name = moneyIn.getName();
-				String money = XwinUtil.comma3(moneyIn.getMoney());	
+				Long money = moneyIn.getMoney();	
 				
-				List<KtfSmsMessage> ktfSmsMessageList = ktfSmsDao.searchAssociateWitnMoneyIn(name, money);
+				//List<KtfSmsMessage> ktfSmsMessageList = ktfSmsDao.searchAssociateWitnMoneyIn(name, money);
+				Map<String, Object> param = new HashMap<String, Object>();
+				param.put("isCharge", "N");
+				param.put("userName", name);
+				param.put("money", money);
+				List<Transaction> tranList = transactionDao.selectTransactionList(param);
 				
-				if (ktfSmsMessageList != null && ktfSmsMessageList.size() == 1) {
-					KtfSmsMessage ktfSmsMessage = ktfSmsMessageList.get(0);		
+				if (tranList != null && tranList.size() == 1) {
+					Transaction transaction = tranList.get(0);		
 
 					Member member = memberDao.selectMember(moneyIn.getUserId(), null);
 					int result = processMoneyIn(moneyIn, Code.MONEY_IN_SUCCESS, member);
 					if (result == 0) {
-						ktfSmsDao.updateStatus(ktfSmsMessage.getId(), Code.MONEY_IN_SUCCESS);
+						transaction.setIsCharge("Y");
+						transactionDao.updateTransaction(transaction);
+						
+						/*
 						String nickName = member.getNickName();
 						String mobile = member.getMobile().replaceAll("-", "");
 						String message = nickName + " 님께 " + money + "원이 충전 되었습니다. -bwin-";
 						sendSmsConnector.sendSms(message, mobile, "0000000000");
+						*/
 					}
 				}
 			}
@@ -65,6 +78,17 @@ public class MoneyInService extends XwinService
 			//포인트 지급
 			Double point = moneyIn.getMoney() * 0.05;			
 			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			
+			Point pointLog = new Point();
+			pointLog.setUserId(member.getUserId());
+			pointLog.setType(Code.POINT_TYPE_MONEYIN);
+			pointLog.setDate(new Date());
+			pointLog.setOldBalance(member.getPoint());
+			pointLog.setMoney(point.longValue());
+			pointLog.setBalance(member.getPoint() + point.longValue());
+			pointLog.setMoneyInId(moneyIn.getId());
+			
+			pointDao.insertPoint(pointLog);
 			
 			accountDao.insertAccount(account);
 			moneyInDao.updateMoneyIn(moneyIn);			

@@ -28,7 +28,7 @@ public class Game extends XwinObject
 	private Integer homeScore;
 	private Integer awayScore;
 	
-	private Double handy;
+	private String handyString;
 	
 	private String result;
 	private String type;
@@ -121,6 +121,7 @@ public class Game extends XwinObject
 	public void setDrawRate(Double drawRate) {
 		this.drawRate = drawRate;
 		this.drawRateStr = XwinUtil.to2Digit(drawRate);
+		this.handyString = drawRate >= 0 ? "+"+drawRate : ""+drawRate;
 	}
 
 	public Double getLoseRate() {
@@ -130,14 +131,6 @@ public class Game extends XwinObject
 	public void setLoseRate(Double loseRate) {
 		this.loseRate = loseRate;
 		this.loseRateStr = XwinUtil.to2Digit(loseRate);
-	}
-
-	public Double getHandy() {
-		return handy;
-	}
-
-	public void setHandy(Double handy) {
-		this.handy = handy;
 	}
 
 	public String getType() {
@@ -170,6 +163,14 @@ public class Game extends XwinObject
 
 	public void setLoseRateStr(String loseRateStr) {
 		this.loseRateStr = loseRateStr;
+	}
+
+	public String getHandyString() {
+		return handyString;
+	}
+
+	public void setHandyString(String handyString) {
+		this.handyString = handyString;
 	}
 
 	public Integer getHomeScore() {

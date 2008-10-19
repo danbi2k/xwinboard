@@ -23,7 +23,6 @@
 		<result property="awayScore" column="AWAY_SCORE"/>
 		<result property="result" column="RESULT"/>
 		<result property="leagueId" column="LEAGUE_ID"/>
-		<result property="handy" column="HANDY"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
 		<result property="guess" column="GUESS"/>
 	</resultMap>

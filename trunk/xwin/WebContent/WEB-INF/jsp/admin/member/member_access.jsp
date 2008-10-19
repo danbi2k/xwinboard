@@ -16,6 +16,8 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
 <div class="title">접속목록</div>
 
@@ -27,6 +29,9 @@
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
+	접속일
+	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
 	<input type='submit' value='검 색'>
  </form>
 

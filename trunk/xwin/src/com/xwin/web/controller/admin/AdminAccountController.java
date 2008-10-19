@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.domain.user.MoneyOut;
@@ -23,7 +24,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminAccountController extends XwinController
 {
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	
 	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -32,10 +33,10 @@ public class AdminAccountController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
-		String keyword = request.getParameter("keyword");
-		String status = request.getParameter("status");
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		
-		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
+		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
@@ -57,6 +58,14 @@ public class AdminAccountController extends XwinController
 			param.put("status", status);
 		}
 		
+		if (dateType.equals("req")) {
+			param.put("fromReqDate", XwinUtil.toDate(fromDate));
+			param.put("toReqDate", XwinUtil.toDateFullTime(toDate));
+		} else if (dateType.equals("proc")) {
+			param.put("fromProcDate", XwinUtil.toDate(fromDate));
+			param.put("toProcDate", XwinUtil.toDateFullTime(toDate));
+		}
+			
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("isDeleted", "N");
@@ -89,10 +98,10 @@ public class AdminAccountController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
-		String keyword = request.getParameter("keyword");
-		String status = request.getParameter("status");
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		
-		String searchDate = XwinUtil.arcNvl(request.getParameter("searchDate"));
+		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
@@ -104,7 +113,15 @@ public class AdminAccountController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
-		param.put("status", status);
+		param.put("status", status);		
+		
+		if (dateType.equals("req")) {
+			param.put("fromReqDate", XwinUtil.toDate(fromDate));
+			param.put("toReqDate", XwinUtil.toDateFullTime(toDate));
+		} else if (dateType.equals("proc")) {
+			param.put("fromProcDate", XwinUtil.toDate(fromDate));
+			param.put("toProcDate", XwinUtil.toDateFullTime(toDate));
+		}
 		
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
@@ -175,11 +192,27 @@ public class AdminAccountController extends XwinController
 			Double point = moneyIn.getMoney() * 0.05;			
 			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
 			
+			Point pointLog = new Point();
+			pointLog.setUserId(member.getUserId());
+			pointLog.setType(Code.POINT_TYPE_MONEYIN);
+			pointLog.setDate(new Date());
+			pointLog.setOldBalance(member.getPoint());
+			pointLog.setMoney(point.longValue());
+			pointLog.setBalance(member.getPoint() + point.longValue());
+			pointLog.setMoneyInId(moneyIn.getId());
+			
+			pointDao.insertPoint(pointLog);
+			
+			/*
 			String nickName = member.getNickName();
 			String mobile = member.getMobile().replaceAll("-", "");
 			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -bwin-";
-			sendSmsConnector.sendSms(message, mobile, "0000000000");
-		
+			try {
+				sendSmsConnector.sendSms(message, mobile, "0000000000");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			*/
 			rx = new ResultXml(0, "충전되었습니다", null);
 		} else {
 			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);

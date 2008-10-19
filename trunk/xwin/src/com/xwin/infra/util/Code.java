@@ -9,6 +9,12 @@ public class Code
 	private static final Map<String, String> valueMap = new HashMap<String, String>();
 	private static final Map<String, String> keyMap = new HashMap<String, String>();
 	
+	public static final int DENY_WRITE_BOARD		= 0x001 << 0;
+	public static final int DENY_WRITE_QNA			= 0x001 << 1;	
+	
+	public static final String TRAN_TYPE_MONEYIN		= "TRT01";
+	public static final String TRAN_TYPE_MONEYOUT		= "TRT02";
+			
 	public static final String BET_NOTICE_READY			= "BTN01";
 	public static final String BET_NOTICE_COMMIT		= "BTN02";
 	
@@ -61,6 +67,10 @@ public class Code
 	public static final String ACCOUNT_TYPE_HANDYDRAW	= "AT009";
 	public static final String ACCOUNT_TYPE_POINTCHARGE	= "AT010";
 	
+	public static final String POINT_TYPE_MONEYIN		= "PNT01";
+	public static final String POINT_TYPE_BETTING		= "PNT02";
+	public static final String POINT_TYPE_CASHCHARGE	= "PNT10";
+	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
 	
@@ -75,6 +85,13 @@ public class Code
 	
 	static 
 	{
+		put(TRAN_TYPE_MONEYIN, "입금");
+		put(TRAN_TYPE_MONEYOUT, "출금");
+		
+		put(POINT_TYPE_MONEYIN, "충전포인트지급");
+		put(POINT_TYPE_BETTING, "배팅포인트지급");
+		put(POINT_TYPE_CASHCHARGE, "캐쉬충전차감");
+		
 		put(BET_CALC_DISABLE, "정산불가");
 		put(BET_CALC_ENABLE, "정산가능");
 		put(BET_CALC_COMMIT, "정산완료");
@@ -163,3 +180,4 @@ public class Code
 		return keyMap.get(value);
 	}
 }
+
