@@ -52,8 +52,8 @@
 			</span>
 		</td>
 		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><b><%=boardItem.getNickName()%></td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><%=XwinUtil.getBoardNoticeDate(boardItem.getDate())%></td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><%=boardItem.getReadCount()%></td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'>&nbsp;</td>
+		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'>&nbsp;</td>
 		<td>&nbsp;</td>
 
 	</tr>

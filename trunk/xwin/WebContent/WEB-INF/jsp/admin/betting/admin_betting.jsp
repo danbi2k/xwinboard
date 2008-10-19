@@ -93,7 +93,7 @@ function cancelBetting(id, gameType)
 	<tr>
 	<th width=5%>번호</th>
 		<th>아이디</th>
-		<th>경기시간</th>
+		<th>경기시각</th>
 		<th>홈팀</th>
 		<th>무승부<BR>/핸디캡</th>
 		<th>원정팀</th>

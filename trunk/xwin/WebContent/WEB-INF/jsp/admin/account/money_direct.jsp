@@ -14,7 +14,7 @@
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 %>
 
@@ -46,7 +46,7 @@
 	<tr align="center" bgcolor="#E4E4E4">
 		<th></th>
 		<th width=5%>번호</th>
-		<th>아이디(닉네임)</th>
+		<th>아이디 (닉네임)</th>
 		<th>금액</th>
 		<th>일자</th>
 		<th>상태</th>
@@ -60,7 +60,7 @@
 	<tr align='center' bgcolor='#ffffff'>
 		<th><input type="checkbox" name="checkCheck" value="<%=moneyInOut.getId()%>"/></th>
 		<td width=5%><%=moneyInOut.getId()%></td>
-		<td><B><%=moneyInOut.getUserId()%>(<%=moneyInOut.getNickName()%>)</B></td>
+		<td><B><%=moneyInOut.getUserId()%> (<%=moneyInOut.getNickName()%>)</B></td>
 		<td><%=XwinUtil.comma3(moneyInOut.getMoney())%></td>
 		<td><%=moneyInOut.getProcDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>

@@ -5,7 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
-	final Integer ROWSIZE = 20;
+	final Integer ROWSIZE = 25;
 	final Integer SHOWPAGE = 10;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
@@ -16,7 +16,8 @@
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String status = XwinUtil.nvl(request.getParameter("status"));
-	String gameDate = XwinUtil.nvl(request.getParameter("gameDate"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
@@ -182,9 +183,10 @@
 	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
 	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
  </select>
-
+<BR>
  경기일자
-<input type='text' name='gameDate'value='' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
+<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
 
  <select name='search'>
 	 <option value='homeTeam' <%=search.equals("homeTeam")?"selected":""%>>홈팀명</option>

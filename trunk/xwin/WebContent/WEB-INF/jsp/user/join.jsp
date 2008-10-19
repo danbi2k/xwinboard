@@ -43,12 +43,17 @@ function sendAuthNumber(){
 	}
 	
 	var query = "mode=sendAuthNumber";
-	query += "&phone=" + f.phone1.value + " " + f.phone2.value + " " + f.phone3.value;
+	query += "&phone=" + f.phone1.value + "-" + f.phone2.value + "-" + f.phone3.value;
 	
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();
 
 	alert(result.resultXml.message); 
+}
+
+function setEmail(obj)
+{
+	document.frm_reg.email2.value = obj.value
 }
 </Script>
 
@@ -150,21 +155,51 @@ function sendAuthNumber(){
 			</select> -
 			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
-			<input type="button" value="인증번호전송" onclick="sendAuthNumber()"/>
+			<input type="button" value="인증번호전송" onclick="sendAuthNumber()"/><br>
+			<input type="checkbox" name="smsCheck" checked/>  체크 하시면 경기결과를 문자로 전송해 드립니다.
 			</td></tr>
 	<tr><td>인증번호</td>
 		<td><input class="member" name="phonePin" type="password"></td></tr>
 	<tr><td>이메일</td>
-
 		<td><input class="member" name="email1" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
-			<input class="member" name="email2" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
+			<input class="member" name="email2" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);">
+			<select class="member" onchange="setEmail(this)">
+				<option value=''>직접입력</option>
+				<option value='naver.com'>naver.com</option>
+				<option value='hanmail.net'>hanmail.net</option>
+				<option value='hotmail.com'>hotmail.com</option>
+				<option value='nate.com'>nate.com</option>
+				<option value='yahoo.co.kr'>yahoo.co.kr</option>
+				<option value='empas.com'>empas.com</option>
+				<option value='dreamwiz.com'>dreamwiz.com</option>
+				<option value='freechal.com'>freechal.com</option>
+				<option value='lycos.co.kr'>lycos.co.kr</option>
+				<option value='korea.com'>korea.com</option>
+				<option value='gmail.com'>gmail.com</option>
+				<option value='hanmir.com'>hanmir.com</option>
+				<option value='paran.com'>paran.com</option>
+			</select>
+		</td></tr>
+	
+	<tr><td>환전계좌번호</td>
+		<td>	
+			은행명 :
+			<select class="member" name="bankName">
+			<option value="">--선택--</option>
+				<option value='국민' style=''>국민</option><option value='기업' style=''>기업</option><option value='농협' style=''>농협</option><option value='신한' style=''>신한</option><option value='조흥' style=''>조흥</option><option value='외환' style=''>외환</option><option value='우체국' style=''>우체국</option><option value='SC제일' style=''>SC제일</option><option value='하나' style=''>하나</option><option value='한국시티' style=''>한국시티</option><option value='한미' style=''>한미</option><option value='우리' style=''>우리</option><option value='경남' style=''>경남</option><option value='광주' style=''>광주</option><option value='대구' style=''>대구</option><option value='도이치' style=''>도이치</option><option value='부산' style=''>부산</option><option value='산업' style=''>산업</option><option value='수협' style=''>수협</option><option value='전북' style=''>전북</option><option value='제주' style=''>제주</option><option value='새마을' style=''>새마을</option><option value='신협' style=''>신협</option><option value='HSBC' style=''>HSBC</option><option value='상호저축' style=''>상호저축</option>
+			</select>
+			계좌번호 : <input class="member" name="bankNumber" type="text" size="20" maxlength="20" value="" style='IME-MODE: inactive'>
+			예금주 : <input class="member" name="bankOwner" type="text" size="16" maxlength="16" value="" style='IME-MODE: inactive'><br>
+			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 고객센터를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
+			</td></tr>
+
 	<tr><td valign=top><b><font color=#FF9933>환전비밀번호<br>[사이트 해킹방지용<br> 비밀번호입니다]</font></b></td>
 		<td><input class="member" name="pin" type="password" value=""><br>
 		본 비밀번호는 최초 회원가입시 1회만 입력되며 이후 수정이 불가능합니다.<br>
                 신중하게 입력해주시고 개인 전화번호등 노출이 쉬운번호를 입력하여 피해가<br>
 
                 발생하는경우 책임지지않습니다.<br><b>
-                환전요청시 환전비밀번호가 입력되지않는경우 환전신청이 되지않습니다.</b> </td></tr>
+                환전요청시 환전비밀번호가 입력되지않는경우 환전신청이 되지않습니다.</td></tr>
 	
 	</table>
 

@@ -14,7 +14,7 @@
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 %>
 
@@ -65,7 +65,7 @@
 <form name="list">
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
-		<th></th>
+		
 		<th width=5%>번호</th>
 		<th>아이디(닉네임)</th>
 		<th>입금자</th>
@@ -79,7 +79,7 @@
 		for (MoneyIn moneyIn : moneyInList) {
 	%>
 	<tr align='center' bgcolor='#ffffff'>
-		<th><input type="checkbox" name="checkCheck" value="<%=moneyIn.getId()%>"/></th>
+		
 		<td width=5%><%=moneyIn.getId()%></td>
 		<td><B><%=moneyIn.getUserId()%></td>
 		<td><%=moneyIn.getName()%></td>
@@ -94,7 +94,7 @@
  </table>
 </form>
 <BR>
-<input type="button" value="삭제" onclick="deleteCheckedItem()"/>
+<!--input type="button" value="삭제" onclick="deleteCheckedItem()"/  -->
 <BR>
 
 <div class="pages">

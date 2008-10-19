@@ -13,7 +13,7 @@
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 %>
 		 
@@ -63,9 +63,9 @@
 <form name="list">
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
-		<th></th>
+		
 		<th width=5%>번호</td>
-		<th>아이디</th>
+		<th>아이디 (닉네임)</th>
 		<th>환전요청금액</td>
 		<th>은행명</td>
 		<th>계좌번호</td>
@@ -78,9 +78,9 @@
 		for (MoneyOut moneyOut : moneyOutList) {
 	%>
 	<tr>
-		<th><input type="checkbox" name="checkCheck" value="<%=moneyOut.getId()%>"/></th>
+		
 		<td><%=moneyOut.getId()%></td>
-		<td><B><%=moneyOut.getUserId()%></B></td>
+		<td><%=moneyOut.getUserId()%> (<%=moneyOut.getNickName()%>)</td>
 		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 		<td><%=moneyOut.getBankName()%></td>
 		<td><%=moneyOut.getNumber()%></td>
@@ -96,7 +96,7 @@
 </table>
 </form>
 <BR>
-<input type="button" value="삭제" onclick="deleteCheckedItem()"/>
+<!-- input type="button" value="삭제" onclick="deleteCheckedItem()"/ -->
 <BR>
 <div class="pages">
 <%

@@ -1,5 +1,12 @@
 function FnMemReg(frm)
 {
+	if (frm.bankName != undefined) {
+		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
+			alert("환전계좌정보를 입력해 주십시오");
+			return;
+		}
+	}
+	
 	frm.password.value = frm.password1.value;
 	var query = "mode=registerMember";
 	query += "&userId=" + frm.userId.value;
@@ -13,6 +20,13 @@ function FnMemReg(frm)
 	query += "&email2=" + frm.email2.value;
 	query += "&pin=" + frm.pin.value;
 	query += "&phonePin=" + frm.phonePin.value;
+	query += "&bankName=" + frm.bankName.value;
+	query += "&bankNumber=" + frm.bankNumber.value;
+	query += "&bankOwner=" + frm.bankOwner.value;
+	if (frm.smsCheck.checked)
+		query += "&smsCheck=" + "Y";
+	else
+		query += "&smsCheck=" + "N";
 	
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();
@@ -28,16 +42,28 @@ function FnMemReg(frm)
 
 function FnMemModify(frm)
 {
+	if (frm.bankName != undefined) {
+		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
+			alert("환전계좌정보를 입력해 주십시오");
+			return;
+		}
+	}
 	var query = "mode=modifyMember";
 	query += "&userId=" + frm.userId.value;
 	query += "&password1=" + frm.password1.value;
 	query += "&password2=" + frm.password2.value;
-	query += "&nickName=" + frm.nickName.value;
-	query += "&phone1=" + frm.phone1.value;
-	query += "&phone2=" + frm.phone2.value;
-	query += "&phone3=" + frm.phone3.value;
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
+	if (frm.smsCheck.checked)
+		query += "&smsCheck=" + "Y";
+	else
+		query += "&smsCheck=" + "N";
+	
+	if (frm.bankName != undefined) {
+		query += "&bankName=" + frm.bankName.value;
+		query += "&bankNumber=" + frm.bankNumber.value;
+		query += "&bankOwner=" + frm.bankOwner.value
+	}
 	
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();

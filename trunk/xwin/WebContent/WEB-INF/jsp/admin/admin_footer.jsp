@@ -7,15 +7,14 @@
 		<div id="function" class="boxed" align="center" bgcolor="white">
 			<input type="button" value="로그아웃" onclick="logOut()"/>
 		</div>
-		<div id="game" class="boxed">
-			<h2 class="heading">경기관리</h2>
+		<div id="board" class="boxed">
+			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl">승무패</a></li>
-					<li><a href="adminGame.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
-					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(승무패)</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy">경기결과(핸디캡)</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList">고객센터</a></li>
+					<li><a href="adminBoard.aspx?mode=viewBoardList">게시판</a></li>
+					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
+					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 				</ul>
 			</div>
 		</div>
@@ -41,12 +40,15 @@
 				</ul>
 			</div>
 		</div>
-		<div id="stat" class="boxed">
-			<h2 class="heading">통계보기</h2>
+		<div id="game" class="boxed">
+			<h2 class="heading">경기관리</h2>
 			<div class="content">
 				<ul>
-					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
-					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
+					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl">승무패</a></li>
+					<li><a href="adminGame.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
+					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(승무패)</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy">경기결과(핸디캡)</a></li>
 				</ul>
 			</div>
 		</div>
@@ -59,14 +61,12 @@
 				</ul>
 			</div>
 		</div>
-		<div id="board" class="boxed">
-			<h2 class="heading">게시판관리</h2>
+		<div id="stat" class="boxed">
+			<h2 class="heading">통계보기</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminQna.aspx?mode=viewQnaList">고객센터</a></li>
-					<li><a href="adminBoard.aspx?mode=viewBoardList">게시판</a></li>
-					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
-					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
 				</ul>
 			</div>
 		</div>

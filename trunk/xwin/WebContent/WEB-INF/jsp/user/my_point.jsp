@@ -9,8 +9,8 @@
 <%
 	final Integer ROWSIZE = 15;
 	final Integer SHOWPAGE = 10;
-	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
-	Integer totalCount = (Integer) request.getAttribute("accountCount");
+	List<Point> pointList = (List<Point>) request.getAttribute("pointList");
+	Integer totalCount = (Integer) request.getAttribute("pointCount");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
@@ -18,7 +18,7 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_mymoney.gif"></td><td>머니 입출금 내역 입니다.</td>
+	<tr><td width="100"><img src="images/title_mymoney.gif"></td><td>포인트 입출금 내역 입니다.</td>
 
 	</table>
 </td></tr>
@@ -50,33 +50,33 @@
 	</colgroup>
 
 	<tr bgcolor="#ce892c">
-		<th style="color:white" align="center">거래일자</th>
-		<th style="color:white" align="center">기잔고</th>
-		<th style="color:white" align="center">입출금</th>
-		<th style="color:white" align="center">잔액</th>
+		<th style="color:white" align="center">일자</th>
+		<th style="color:white" align="center">기포인트</th>
+		<th style="color:white" align="center">입출포인트</th>
+		<th style="color:white" align="center">잔여포인트</th>
 		<th style="color:white" align="center">종류</th>
 		<th style="color:white" align="center">비고</th>
-		<th style="color:white" align="center">삭제</th>
+		<!-- th style="color:white" align="center">삭제</th -->
 		
 	</tr>
 	<%
-	if (accountList != null && accountList.size() > 0) {
-		for (Account account : accountList) {
+	if (pointList != null && pointList.size() > 0) {
+		for (Point point : pointList) {
 	%>
 	<tr bgcolor='black'>
-	<td><%=account.getDateStr()%></td>
-	<td><%=XwinUtil.comma3(account.getOldBalance())%></td>
-	<td><%=XwinUtil.comma3(account.getMoney())%></td>
-	<td><%=XwinUtil.comma3(account.getBalance())%></td>
-	<td><%=Code.getValue(account.getType())%></td>
-	<td><%=XwinUtil.nvl(account.getNote())%>
-	<td><img src="images/btn_coment_del.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></td>
+	<td><%=point.getDateStr()%></td>
+	<td><%=XwinUtil.comma3(point.getOldBalance())%></td>
+	<td><%=XwinUtil.comma3(point.getMoney())%></td>
+	<td><%=XwinUtil.comma3(point.getBalance())%></td>
+	<td><%=Code.getValue(point.getType())%></td>
+	<td><%=XwinUtil.nvl(point.getNote())%>
+	<!-- td><img src="images/btn_coment_del.gif" onclick="deleteMyMoneyLog(<%=point.getId()%>)"></td -->
 	</tr>
 	<%
 		}
 	} else {
 	%>
-	<tr bgcolor='black'><td colspan='7' height='150' align='center' bgcolor='black'>머니 거래 내역이 없습니다.</td></tr>
+	<tr bgcolor='black'><td colspan='6' height='150' align='center' bgcolor='black'>포인트  내역이 없습니다.</td></tr>
 	<%
 	}
 	%>
@@ -124,7 +124,7 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.aspx?mode=viewMyMoneyList&pageIndex=" + index;
+	location.href="myMoney.aspx?mode=viewMyPointList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)

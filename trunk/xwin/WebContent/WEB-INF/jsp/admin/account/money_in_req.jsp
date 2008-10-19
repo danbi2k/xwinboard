@@ -14,7 +14,7 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 %>
 
@@ -59,7 +59,7 @@
 	<tr align="center" bgcolor="#E4E4E4">
 		<th></th>
 		<th width=5%>번호</th>
-		<th>아이디(닉네임)</th>
+		<th>아이디 (닉네임)</th>
 		<th>입금자</th>
 		<th>충전요청금액</th>
 		<th>신청일자</th>
@@ -74,7 +74,7 @@
 	<tr align='center' bgcolor='#ffffff'>
 		<th><input type="checkbox" name="checkCheck" value="<%=moneyIn.getId()%>" onclick="saveMoneyInIsChecked(this)" <%=moneyIn.getIsChecked().equals("Y")?"checked":""%>/></th>
 		<td width=5%><%=moneyIn.getId()%></td>
-		<td><%=moneyIn.getUserId()%></td>
+		<td><%=moneyIn.getUserId()%> (<%=moneyIn.getNickName()%>)</td>
 		<td><%=moneyIn.getName()%></td>
 		<td><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 		<td><%=moneyIn.getReqDateStr()%></td>

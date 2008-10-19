@@ -8,7 +8,7 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 	List<Access> accessList = (List<Access>) request.getAttribute("accessList");
 	Integer totalCount = (Integer) request.getAttribute("accessCount");

@@ -60,7 +60,7 @@ setInterval("playSound()", 1000);
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminMain.aspx?mode=viewAdminMain">bwin-kor</a></h1>
+		<h1><a href="adminQna.aspx?mode=viewQnaList">bwin-kor</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>

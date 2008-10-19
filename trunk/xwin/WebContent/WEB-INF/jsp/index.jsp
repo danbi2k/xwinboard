@@ -99,14 +99,14 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 }
 
 </script>
-<table width="960" cellpadding="5">
+<table width="860" cellpadding="5">
 <tr><td valign="top">
 
 <!--############################################################//-->
-<table width="500" height="350" cellpadding="5" style="border:1 solid #909090" bgcolor="#0a0a0a">
+<table width="500" height="350" cellpadding="5" style="border:0 solid #909090" bgcolor="#0a0a0a">
 <tr><td valign="top" align="center">
 
-<table width="100%" style="margin-bottom:5px;backbround-color:black;">
+<table width="100%" style="border:1 margin-bottom:5px;backbround-color:black;">
 <tr>
 	<td width=50%>
 		<table>
@@ -138,7 +138,7 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 		<table>
 		<tr><td><font color='orange'><B>&nbsp;Sports Bet</B></font></td></tr>
 		<tr><td>
-		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/sportsbet.jpg" border=0></a>
+		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/ski.jpg" border=0></a>
 		</td></tr>
 		</table>
 	</td>
@@ -152,6 +152,12 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 		<a onclick="window.open('http://www.livescore.com')"><img src="images/livescore.jpg"></a>&nbsp;&nbsp;&nbsp;
 		<a onclick="window.open('http://www.afreeca.com')"><img src="images/afreeca.jpg"></a>
 	</td>   
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
 </tr>
 </table>
 

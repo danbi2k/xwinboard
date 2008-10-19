@@ -97,6 +97,7 @@ function answerQna()
 	var query = "mode=answerQna";
 	query += "&id=" + <%=boardItem.getId()%>;
 	query += "&comment=" + document.answer.comment.value;
+	alert(query);
 	var http = new JKL.ParseXML("adminQna.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);

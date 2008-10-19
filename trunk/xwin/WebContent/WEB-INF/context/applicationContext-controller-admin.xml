@@ -46,6 +46,7 @@
 	<bean id="adminAccountController"
 		class="com.xwin.web.controller.admin.AdminAccountController"
 		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:memberDao-ref="memberDao"

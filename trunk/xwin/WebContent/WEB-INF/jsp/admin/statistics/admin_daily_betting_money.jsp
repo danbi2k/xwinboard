@@ -7,7 +7,7 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 	
 	List<BetMoneyStat> betMoneyStatList = (List<BetMoneyStat>) request.getAttribute("betMoneyStatList");

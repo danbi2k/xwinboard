@@ -12,6 +12,7 @@
 		
 	<bean id="moneyInService" class="com.xwin.service.admin.MoneyInService"
 		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:memberDao-ref="memberDao"
 		p:ktfSmsDao-ref="ktfSmsDao"

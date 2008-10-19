@@ -16,6 +16,8 @@
 	if (_email != null) {
 		email = _email.split("@"); 
 	} 
+	
+	boolean needBank = member.getBankName() == null || member.getBankName().length() == 0;
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -65,28 +67,32 @@ function SetNICK(nick){
 	<tr><td>비밀번호 변경 확인</td>
 		<td><input class="member" name="password2" type="password"></td></tr>
 	<tr><td>닉네임</td>
-
-		<td><table cellpadding="0" cellspacing="0"><tr>
-			<td><input class="member" name="nickName" type="text" value="<%=member.getNickName()%>"></td>
-			</tr></table>
-		</td></tr>
+		<td><%=member.getNickName()%></td>
 	<tr><td>휴대폰번호</td>
-		<td><select class="member" name="phone1">
-			<option value="010" <%="010".equals(phone[0])?"selected":""%>>010</option>
-			<option value="011" <%="011".equals(phone[0])?"selected":""%>>011</option>
-			<option value="016" <%="016".equals(phone[0])?"selected":""%>>016</option>
-			<option value="017" <%="017".equals(phone[0])?"selected":""%>>017</option>
-			<option value="018" <%="018".equals(phone[0])?"selected":""%>>018</option>
-			<option value="019" <%="019".equals(phone[0])?"selected":""%>>019</option>
-			</select> -
-			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="<%=phone[1]%>" style='IME-MODE: inactive'> -
-			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="<%=phone[2]%>" style='IME-MODE: inactive'>
-
-			</td></tr>
+		<td>
+			<%=member.getMobile()%><br>
+			<input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%>/>  체크 하시면 경기결과를 문자로 전송해 드립니다.			
+		</td></tr>
 	<tr><td>이메일</td>
 		<td><input class="member" name="email1" type="text" value="<%=email[0]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
 			<input class="member" name="email2" type="text" value="<%=email[1]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
 	
+	<%if (needBank) { %>
+	<tr><td>환전계좌번호</td>
+		<td>	
+			은행명 :
+			<select class="member" name="bankName">
+			<option value="">--선택--</option>
+				<option value='국민' style=''>국민</option><option value='기업' style=''>기업</option><option value='농협' style=''>농협</option><option value='신한' style=''>신한</option><option value='조흥' style=''>조흥</option><option value='외환' style=''>외환</option><option value='우체국' style=''>우체국</option><option value='SC제일' style=''>SC제일</option><option value='하나' style=''>하나</option><option value='한국시티' style=''>한국시티</option><option value='한미' style=''>한미</option><option value='우리' style=''>우리</option><option value='경남' style=''>경남</option><option value='광주' style=''>광주</option><option value='대구' style=''>대구</option><option value='도이치' style=''>도이치</option><option value='부산' style=''>부산</option><option value='산업' style=''>산업</option><option value='수협' style=''>수협</option><option value='전북' style=''>전북</option><option value='제주' style=''>제주</option><option value='새마을' style=''>새마을</option><option value='신협' style=''>신협</option><option value='HSBC' style=''>HSBC</option><option value='상호저축' style=''>상호저축</option>
+			</select>
+			계좌번호 : <input class="member" name="bankNumber" type="text" size="20" maxlength="20" value="" style='IME-MODE: inactive'>
+			예금주 : <input class="member" name="bankOwner" type="text" size="16" maxlength="16" value="" style='IME-MODE: inactive'><br>
+			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 고객센터를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
+			</td></tr>
+	<%} else { %>
+	<tr><td>환전계좌번호</td>
+		<td><%=member.getBankName()%> <%=member.getBankNumber()%> <%=member.getBankOwner()%></td>
+	<%} %>
 	</table>
 
 	<table width="800" style="margin-top:10">
@@ -131,5 +137,15 @@ function SetNICK(nick){
 
 </td></tr>
 </table>
+
+<script>
+<%
+if (needBank) {
+%>
+alert("환전계좌를 등록해 주십시오\n환전업무는 등록된 환전계좌로만 가능하며 환전계좌 변경시에는\n고객센터로 문의해주시면 본인인증절차를 거쳐 변경해드립니다");
+<%
+}
+%>
+</script>
 
 <%@include file="../footer.jsp"%>

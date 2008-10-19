@@ -72,6 +72,10 @@
 	<bean id="accountDao"
 		class="com.xwin.infra.dao.AccountDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
+		
+	<bean id="pointDao"
+		class="com.xwin.infra.dao.PointDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 	
 	<bean id="accessDao"
 		class="com.xwin.infra.dao.AccessDao"

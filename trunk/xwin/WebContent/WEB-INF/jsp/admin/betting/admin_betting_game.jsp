@@ -18,11 +18,11 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String status = XwinUtil.nvl(request.getParameter("status"));
 	String betStatus = XwinUtil.nvl(request.getParameter("betStatus"));
-	String gameDate = XwinUtil.nvl(request.getParameter("gameDate"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String type = XwinUtil.nvl(request.getParameter("type"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	
-	String type = request.getParameter("type");
 	
 	if (status.length() == 0)
 			status = Code.GAME_STATUS_RUN;
@@ -38,8 +38,8 @@
 경기종류
 <select name="type" onChange='this.form.submit()'>
 	<option value=''>전체</option>
-	<option value='wdl'>승무패</option>
-	<option value='handy'>핸디캡</option>
+	<option value='wdl' <%=type.equals("wdl")?"selected":""%>>승무패</option>
+	<option value='handy' <%=type.equals("handy")?"selected":""%>>핸디캡</option>
 </select>
 리그명
 <select name='leagueId' onChange='this.form.submit()'>
@@ -62,15 +62,10 @@
 	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
 	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
  </select>
-표시
-<select name='betStatus' onChange='this.form.submit()'>
-	<option value=''>전체</option>
-	<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=betStatus.equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
-	<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>	
- </select>
-
- 경기일자
-<input type='text' name='gameDate'value='' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
+<BR>
+경기일자
+<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this, fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~ 
+<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this, toDate,'yyyy-mm-dd');" style="cursor:hand">
 <input type='submit' value='검 색'>
 </form>
 
@@ -85,7 +80,6 @@
 		<th>배팅액(승)</th>
 		<th>배팅액(무)</th>
 		<th>배팅액(패)</th>
-		<th>경기상태</th>
   	</tr>
 
 	<%
@@ -95,15 +89,14 @@
 	%>
 		<tr>
 		<td width=5%><a href="adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=game.getId()%>"><%=game.getId()%></a></td>
-		<td><%=Code.getValue(game.getType())%></td>
+		<td><font color=<%=game.getType().equals("wdl")?"blue":"green"%>><%=Code.getValue(game.getType())%></font></td>
 		<td><%=game.getLeagueName()%></td>			
 		<td><%=game.getGameDateStr()%></td>
 		<td><%=game.getHomeTeam()%></td>
 		<td><%=game.getAwayTeam()%></td>
-		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getWinMoney()))%></font></td>
-		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getDrawMoney()))%></font></td>
-		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.nvl(game.getLoseMoney()))%></font></td>
-		<td><%=Code.getValue(game.getStatus())%></td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getWinMoney()))%></font> (<%=game.getWinRateStr()%>)</td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getDrawMoney()))%></font> (<%=game.getType().equals("wdl")?game.getDrawRateStr():game.getHandyString()%>)</td>
+		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getLoseMoney()))%></font> (<%=game.getLoseRateStr()%>)</td>
 	<%
 		}
 	}

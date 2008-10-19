@@ -37,6 +37,7 @@
 		class="com.xwin.web.controller.user.MemberController"
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
@@ -53,6 +54,7 @@
 		p:betGameDao-ref="betGameDao"
 		p:gameDao-ref="gameDao"
 		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myBettingController"
@@ -86,6 +88,7 @@
 		class="com.xwin.web.controller.user.MyMoneyController"
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="controllerNameResolver"

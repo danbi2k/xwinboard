@@ -8,12 +8,16 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 	List<BoardItem> boardItemList = (List<BoardItem>) request.getAttribute("boardItemList");
 	Integer totalCount  = (Integer) request.getAttribute("boardItemCount");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String search = XwinUtil.nvl(request.getParameter("search"));
+	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -21,16 +25,24 @@
 
 <div class="title">게시판</div>
 
-<form method='get' name='search' action='adminBoard.aspx'>
-	<input type='hidden' name='mode' value='viewBoardList'/>
-	<input type='hidden' name='pageIndex'/>
- </form>
+<form name='search' method='get' action='adminBoard.aspx'>
+<input type='hidden' name='mode' value='viewBoardList'/>
+<input type='hidden' name='pageIndex'/>
+<select name='search'>
+	<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
+</select>
+<input type='text' name='keyword' value='<%=keyword%>'>
+작성시각
+<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
+<input type='submit' value='검 색'>
+</form> 
 
 <table class="list">
 	<tr>
 		<th width=5%>번호</th>
-		<th width=10%>아이디</th>
-		<th width=10%>닉네임</th>
+		<th width=20%>아이디 (닉네임)</th>
 		<th width=*>제목</th>
 		<th width=15%>작성시각</th>
 	</tr>
@@ -40,8 +52,7 @@ if (boardItemList != null) {
 %>
 	<tr>
 		<td width=5% align=center><%=boardItem.getId()%></td>
-		<td width=10% align=center><%=boardItem.getUserId()%></td>
-		<td width=10% align=center><%=boardItem.getNickName()%></td>
+		<td width=20% align=center><%=boardItem.getUserId()%> (<%=boardItem.getNickName()%>)
 		<td width=*>&nbsp;&nbsp;<a href="adminBoard.aspx?mode=viewBoardDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</a></td>
 		<td width=15% align=center><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
 	</tr>

@@ -5,15 +5,22 @@
 <%@ page import="com.xwin.domain.user.*" %>
 <%@ page import="com.xwin.infra.dao.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
+<%@ page import="java.util.*" %>
 <%
 	Member member = (Member) session.getAttribute("Member");
 	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
+	Boolean isModify = (Boolean) request.getAttribute("isModify");
 	if (isIndex == null)
 		isIndex = false;
+	if (isModify == null)
+		isModify = false;
 	
 	if (member != null) {
 		MemberDao memberDao = (MemberDao) session.getAttribute("MemberDao");
-		member = memberDao.selectMember(member.getUserId(), null);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("status", Code.USER_STATUS_NORMAL);
+		member = memberDao.selectMember(param);
 		session.setAttribute("Member", member);
 	}
 	boolean login = member == null ? false : true;
@@ -25,8 +32,8 @@
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
-    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
-	<!--META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout"-->
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout">
 
     <link rel="stylesheet" href="style/default.css">
 	<script language="JavaScript" src="script/code.js"></script>
@@ -44,10 +51,18 @@
 	if (login == false && isIndex == false) {
 	%>
 	alert("로그인이 필요합니다");
-	location.href = "index.aspx";
+	location.href = "login.aspx?mode=processLogout";
 	<%
 	}
 	%>
+
+	<%
+	if (login && (member.getBankName() == null || member.getBankName().length() == 0) && isModify == false) {
+	%>
+	location.href = "member.aspx?mode=viewModifyForm";
+	<%
+	}
+	%>	
 	</script>
 </head>
 <body style="margin:0">

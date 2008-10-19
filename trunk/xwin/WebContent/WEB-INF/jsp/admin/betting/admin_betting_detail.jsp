@@ -14,7 +14,7 @@
 	<tr>
 	<th width=5%>번호</th>
 		<th>아이디</th>
-		<th>경기시간</th>
+		<th>경기시각</th>
 		<th>홈팀</th>
 		<th>무승부<BR>/핸디캡</th>
 		<th>원정팀</th>
@@ -70,8 +70,8 @@
 	<tr>
 		<td colspan='11'>
 			<B>
-			배팅시각 : <%=betting.getDateStr()%>&nbsp; / &nbsp; 배당률 : x<%=betting.getRateStr()%><br>
-			배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%> 원&nbsp; / &nbsp; 예상금액 : <%=XwinUtil.comma3(betting.getExpect())%> 원
+			배팅시각 : <%=betting.getDateStr()%>&nbsp; / &nbsp;배당률 : x<%=betting.getRateStr()%>&nbsp; / &nbsp;
+			배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%> 원&nbsp; / &nbsp;예상금액 : <%=XwinUtil.comma3(betting.getExpect())%> 원
 			</B>
 		</td>
 	</tr>

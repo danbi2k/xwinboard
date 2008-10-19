@@ -7,7 +7,7 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	final Integer ROWSIZE = 20;
+	final Integer ROWSIZE = 25;
 	final Integer SHOWPAGE = 10;
 	
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
@@ -18,7 +18,8 @@
 	String leagueId = XwinUtil.nvl(request.getParameter("leagueId"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
-	String betDate = XwinUtil.nvl(request.getParameter("betDate"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
@@ -60,13 +61,14 @@ function cancelBetting(id, gameType)
 <option value='<%=Code.BET_STATUS_NOMATCH%>' <%=status.equals(Code.BET_STATUS_NOMATCH)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_NOMATCH)%></option>
 <option value='<%=Code.BET_STATUS_CANCEL%>' <%=status.equals(Code.BET_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>
 </select>
-
+<BR>
  배팅일자
-<input type='text' name='betDate' value='<%=betDate%>' size=10 readonly onClick="popUpCalendar(this, betDate,'yyyy-mm-dd');" style="cursor:hand">
+<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this, fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~ 
+<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this, toDate,'yyyy-mm-dd');" style="cursor:hand">
 
  <select name='search'>
  <option value='userId'>아이디</option>
- <option value='nickName'>닉네임</option>
+<option value='nickName'>닉네임</option>
 </select> 
 <input type='text' name='keyword' value='<%=keyword%>' size=12>
 <input type='submit' value='검 색'>
@@ -75,8 +77,7 @@ function cancelBetting(id, gameType)
 <table class="prettytable">
 	<tr>
 		<th width=5%>번호</th>
-		<th>아이디</th>
-		<th>닉네임</th>
+		<th>아이디 (닉네임)</th>
 		<th>배팅시각</th>
 		<th>배당률</th>
 		<th>배팅금액</th>
@@ -93,8 +94,7 @@ function cancelBetting(id, gameType)
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><a href="adminBetting.aspx?mode=viewBettingDetail&id=<%=betting.getId()%>"><%=betting.getId()%></a></td>								
-		<td><%=betting.getUserId()%></td>
-		<td><%=betting.getNickName()%></td>
+		<td><%=betting.getUserId()%> (<%=betting.getNickName()%>)</td>
 		<td><%=betting.getDateStr()%></td>
 		<td><%=betting.getRateStr()%></td>
 		<td><%=XwinUtil.comma3(betting.getMoney())%></td>

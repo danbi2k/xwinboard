@@ -13,14 +13,12 @@
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 %>
 
-<SCRIPT LANGUAGE="JavaScript">
-</SCRIPT>
-
 <div class="title">게시판</div>
 
-<form method='post' name='search' action='adminMember.aspx'>
-	<input type='hidden' name='mode' value=''/>
- </form>
+<form method='post' name='update' action='adminBoard.aspx'>
+	<input type='hidden' name='mode' value='updateBoardItem'/>
+	<input type="hidden" name="id" value="<%=boardItem.getId()%>"/>
+	<input type="hidden" name="boardName" value="<%=boardItem.getBoardName()%>"/>
 
 <table class="list">
 	<tr>
@@ -29,26 +27,26 @@
 	</tr>
 	<tr>
 		<th width="10%">제목</th>
-		<td width="*"><%=boardItem.getTitle()%></td>
+		<td width="*"><input type="text" name="title" style='width=100%' size='50' value='<%=boardItem.getTitle()%>'></input></td>
 	</tr>
 	<tr>
-		<th width="10%" height="300px">내용</h>
+		<th width="10%">내용</h>
 		<td width="*" valign="top">
-		 <%
+		<textarea name="context" style='width=100%;height=300px'><%
 	    String context = boardItem.getContext();
-	    context = StringEscapeUtils.escapeHtml(context);
-	    context = context.replaceAll("\n", "<br>");
 	    out.print(context);
-	    %>
+	    %></textarea>
 		</td>
 	</tr>					
 </table>
+ </form>
 
 <br>
 <br>
 
 <input type="button" value="리스트" onclick="history.back()"/>
-<input type="button" value="삭제" onclick="deleteBoardItem()"/>
+<input type="button" value="수정" onclick="updateBoardItem()"/>
+<input type="button" value="삭제" onclick="deleteBoardItem()"/
 
 <br>
 <br>
@@ -82,6 +80,15 @@ if (boardCommentList != null) {
 </table>
 </form>
 <script>
+function updateBoardItem()
+{
+	var f = document.update;
+	if (!f.title) {alert("제목을 입력하세요");return false;}
+	if (!f.context) {alert("내용을 입력하세요");return false;}
+
+	f.submit();
+}
+
 function writeBoardComment()
 {
 	var query = "mode=writeBoardComment";

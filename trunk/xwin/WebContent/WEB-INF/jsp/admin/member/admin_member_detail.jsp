@@ -7,7 +7,7 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 20;
+	int ROWSIZE = 25;
 	int SHOWPAGE = 10;
 	Member member = (Member) request.getAttribute("member");
 	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
@@ -78,23 +78,53 @@
  	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getMobile()%></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getMobile()%></td>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>EMAIL</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getEmail()%></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getEmail()%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>출금비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPin()%></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPin()%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>가입일</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>상태</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></a></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>환전계좌번호</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+		은행명 :
+			<select name="bankName">
+			<%
+			String[] bankNameList = new String[]{"국민","기업","농협","신한","조흥","외환","우체국","SC제일","하나","한국시티","한미","우리","경남","광주","대구","도이치","부산","산업","수협","전북","제주","새마을","신협","HSBC","상호저축"};
+			%>
+			<option value="">--선택--</option>
+			<%
+			for (int i = 0 ; i < bankNameList.length ; i++) {
+			%>
+			<option value='<%=bankNameList[i]%>' style='' <%=bankNameList[i].equals(member.getBankName())?"selected":""%>><%=bankNameList[i]%></option>
+			<%
+			}
+			%>
+			</select>
+			계좌번호 : <input name="bankNumber" type="text" size="20" maxlength="20" value="<%=XwinUtil.nvl(member.getBankNumber())%>">
+			예금주 : <input name="bankOwner" type="text" size="16" maxlength="16" value="<%=XwinUtil.nvl(member.getBankOwner())%>"><br>
+			<input type="button" value="변경" onclick="changeBankInfo()"/>
+		</td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>권한</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+		<input type="checkbox" name="deny_board" value="<%=Code.DENY_WRITE_BOARD%>" <%=(member.getDenyrity()&Code.DENY_WRITE_BOARD) > 0 ? "checked":""%>/> 게시판 쓰기 금지 <BR>
+		<input type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> 고객센터 쓰기 금지<BR>
+		<input type="button" value="변경" onclick="changeDenyrity()"/>
+		</td>
  	</tr>
 	<!-- 
 	<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -132,7 +162,7 @@
 		<th width="10%">종류</th>
 		<th width="30%">금액</th>
 		<th width="40%">비고</th>
-		<th width="20%">버튼</th>
+		<th width="20%">기능</th>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>직충전</td>
@@ -225,6 +255,47 @@ if (accountList != null) {
 %>
 	</div>
 <script>
+function changeDenyrity()
+{
+	var frm = document.regist;	
+	var query = "mode=changeDenyrity";
+	if (frm.deny_board.checked)
+		query += "&deny_board=" + frm.deny_board.value;
+	if (frm.deny_qna.checked)
+		query += "&deny_qna=" + frm.deny_qna.value;
+	
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
+}
+
+function changeBankInfo()
+{
+	var frm = document.regist;
+	if (frm.bankName != undefined) {
+		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
+			alert("환전계좌정보를 입력해 주십시오");
+			return;
+		}
+	}
+	
+	var query = "mode=changeBankInfo";
+	query += "&bankName=" + frm.bankName.value;
+	query += "&bankNumber=" + frm.bankNumber.value;
+	query += "&bankOwner=" + frm.bankOwner.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
+}
+
 function secedeMember()
 {
 	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n탈퇴시키시겠습니까?")) {
