@@ -21,7 +21,7 @@
 %>
 <div class="title">접속목록</div>
 
-<form method='GET' action="adminMember.aspx">
+<form method='GET' name="search" action="adminMember.aspx">
 	<input type='hidden' name='mode' value='viewAccessList'/>
 	<input type='hidden' name='pageIndex'/>
 	<select name='search'>
