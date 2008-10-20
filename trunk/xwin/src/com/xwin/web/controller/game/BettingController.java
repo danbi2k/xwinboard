@@ -60,7 +60,9 @@ public class BettingController extends XwinController
 		String _type = request.getParameter("type");
 		String _money = request.getParameter("money");
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("Member");
+		
+		Member sessionMember = (Member) session.getAttribute("Member");		
+		Member member = memberDao.selectMember(sessionMember.getUserId(), null);
 		
 		Map<String, GameCartItem> cartMap =
 			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + _type);
@@ -134,7 +136,7 @@ public class BettingController extends XwinController
 			account.setBettingId(betting.getId());
 			
 			accountDao.insertAccount(account);			
-			memberDao.updateBalance(member.getUserId(), cc.getAfter());
+			memberDao.plusMinusBalance(member.getUserId(), betting.getMoney() * -1);
 			
 			Double point = betting.getMoney() * 0.02;			
 			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
