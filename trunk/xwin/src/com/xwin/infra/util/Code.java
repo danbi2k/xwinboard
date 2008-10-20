@@ -130,7 +130,7 @@ public class Code
 		put(MONEY_OUT_REQUEST, "환전요청");
 		put(MONEY_OUT_SUCCESS, "환전성공");
 		put(MONEY_OUT_CANCEL, "환전취소");
-		put(MONEY_OUT_DIRECT, "직환전");
+		put(MONEY_OUT_DIRECT, "직차감");
 		
 		put(GAME_STATUS_READY, "경기대기");
 		put(GAME_STATUS_RUN, "경기진행");

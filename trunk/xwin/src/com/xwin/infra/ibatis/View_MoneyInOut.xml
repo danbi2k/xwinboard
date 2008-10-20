@@ -4,60 +4,28 @@
 	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
-<sqlMap namespace="MoneyIn">
+<sqlMap namespace="MoneyInOut">
 
-	<typeAlias alias="MoneyIn" type="com.xwin.domain.user.MoneyIn" />
+	<typeAlias alias="MoneyInOut" type="com.xwin.domain.user.MoneyInOut" />
 	
-	<resultMap id="moneyInResultMap" class="MoneyIn">
+	<resultMap id="moneyInOutResultMap" class="MoneyInOut">
 		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
 		<result property="nickName" column="NICKNAME"/>
 		<result property="money" column="MONEY"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="number" column="NUMBER"/>
+		<result property="name" column="NAME"/>
 		<result property="status" column="STATUS"/>
 		<result property="reqDate" column="REQ_DATE"/>
 		<result property="procDate" column="PROC_DATE"/>
-		<result property="name" column="NAME"/>
-		<result property="bankBookId" column="BANKBOOK_ID"/>
-		<result property="bankBook" column="BANKBOOK_ID" select="selectBankBook"/>
 		<result property="isChecked" column="ISCHECKED"/>
 		<result property="isDeleted" column="ISDELETED"/>
 		<result property="note" column="NOTE"/>
 	</resultMap>
 	
-	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#)
-	</insert>
-	
-	<update id="updateMoneyIn" parameterClass="MoneyIn">
-		UPDATE tbl_money_in
-		<dynamic prepend="SET">
-			<isNotNull prepend="," property="status">
-			STATUS = #status#
-			</isNotNull>
-			<isNotNull prepend="," property="procDate">
-			PROC_DATE = #procDate#
-			</isNotNull>
-			<isNotNull prepend="," property="isDeleted">
-			ISDELETED = #isDeleted#
-			</isNotNull>
-			<isNotNull prepend="," property="isChecked">
-			ISCHECKED = #isChecked#
-			</isNotNull>
-		</dynamic>
-		WHERE ID = #id#
-	</update>
-	
-	<update id="deleteMoneyIn" parameterClass="string">
-		UPDATE tbl_money_in SET ISDELETED = 'Y' WHERE ID = #value#
-	</update>
-	
-	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
-		SELECT * FROM tbl_money_in WHERE ID = #value#
-	</select>
-	
-	<select id="selectMoneyInList" resultMap="moneyInResultMap" parameterClass="map">
-		SELECT * FROM tbl_money_in
+	<select id="selectMoneyInOutList" resultMap="moneyInOutResultMap" parameterClass="map">
+		SELECT * FROM view_money_in_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
@@ -72,7 +40,10 @@
 				STATUS = #status#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #notStatus#
+				STATUS != #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS LIKE #statusLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
@@ -109,14 +80,14 @@
 				]]>
 			</isNotNull>
 		</dynamic>
-		ORDER BY ID DESC
+		ORDER BY REQ_DATE DESC
 		<isNotNull property="fromRow">
 		LIMIT #fromRow#, #rowSize#
 		</isNotNull>
 	</select>
 	
-	<select id="selectMoneyInCount" resultClass="integer" parameterClass="map">
-		SELECT COUNT(*) FROM tbl_money_in
+	<select id="selectMoneyInOutCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM view_money_in_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
@@ -131,7 +102,10 @@
 				STATUS = #status#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #notStatus#
+				STATUS != #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS LIKE #statusLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
@@ -170,8 +144,8 @@
 		</dynamic>
 	</select>
 	
-	<select id="selectMoneyInSum" resultClass="integer" parameterClass="map">
-		SELECT SUM(MONEY) FROM tbl_money_in
+	<select id="selectMoneyInOutSum" resultClass="integer" parameterClass="map">
+		SELECT SUM(MONEY) FROM view_money_in_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
@@ -186,7 +160,10 @@
 				STATUS = #status#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #notStatus#
+				STATUS != #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS LIKE #statusLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">

@@ -17,6 +17,13 @@ public class MoneyInOut extends XwinObject
 	private String isChecked;
 	private String isDeleted;
 	private String note;
+	private String name;
+	
+	private Date reqDate;	
+	private String reqDateStr;
+	
+	private String bankName;
+	private String number;
 	
 	public String getId() {
 		return id;
@@ -78,5 +85,36 @@ public class MoneyInOut extends XwinObject
 	}
 	public void setNote(String note) {
 		this.note = note;
-	}	
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getReqDate() {
+		return reqDate;
+	}
+	public void setReqDate(Date reqDate) {
+		this.reqDate = reqDate;
+		this.reqDateStr = XwinUtil.toDateStr(reqDate, 1);
+	}
+	public String getReqDateStr() {
+		return reqDateStr;
+	}
+	public void setReqDateStr(String reqDateStr) {
+		this.reqDateStr = reqDateStr;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 }

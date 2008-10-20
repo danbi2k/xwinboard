@@ -15,6 +15,7 @@ import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
+import com.xwin.domain.user.MoneyInOut;
 import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -143,6 +144,61 @@ public class AdminAccountController extends XwinController
 			mv = new ModelAndView("admin/account/money_direct");
 		mv.addObject("moneyInOutList", moneyOutList);
 		mv.addObject("totalCount", moneyOutCount);
+		mv.addObject("totalSum", totalSum);
+		
+		return mv;
+	}
+	
+	public ModelAndView viewMoneyInOutList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		
+		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
+		param.put("statusLike", "%"+status);		
+		
+		if (dateType.equals("req")) {
+			param.put("fromReqDate", XwinUtil.toDate(fromDate));
+			param.put("toReqDate", XwinUtil.toDateFullTime(toDate));
+		} else if (dateType.equals("proc")) {
+			param.put("fromProcDate", XwinUtil.toDate(fromDate));
+			param.put("toProcDate", XwinUtil.toDateFullTime(toDate));
+		}
+		
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		param.put("isDeleted", "N");
+		
+		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
+		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
+		Integer totalSum = moneyInOutDao.selectMoneyInOutSum(param);
+		
+		if (totalSum == null)
+			totalSum = 0;
+		
+		ModelAndView mv = null;
+		if (status.contains("002"))
+			mv = new ModelAndView("admin/account/money_in_out");
+		else if (status.contains("004"))
+			mv = new ModelAndView("admin/account/money_direct");
+		mv.addObject("moneyInOutList", moneyInOutList);
+		mv.addObject("totalCount", moneyInOutCount);
 		mv.addObject("totalSum", totalSum);
 		
 		return mv;

@@ -49,6 +49,7 @@
 		p:pointDao-ref="pointDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
+		p:moneyInOutDao-ref="moneyInOutDao"
 		p:memberDao-ref="memberDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>

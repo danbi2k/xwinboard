@@ -105,7 +105,7 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="toProcDate">
 				<![CDATA[
-				PROC_DATE <= #procProcDate#
+				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
 		</dynamic>
@@ -164,7 +164,7 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="toProcDate">
 				<![CDATA[
-				PROC_DATE <= #procProcDate#
+				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
 		</dynamic>
@@ -219,7 +219,7 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="toProcDate">
 				<![CDATA[
-				PROC_DATE <= #procProcDate#
+				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
 		</dynamic>

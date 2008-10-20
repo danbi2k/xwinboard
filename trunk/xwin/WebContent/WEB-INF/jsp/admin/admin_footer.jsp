@@ -24,10 +24,8 @@
 				<ul>
 					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">충전요청</a></li>
 					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">환전요청</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC002">충전내역</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME002">환전내역</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC004">직충전내역</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME004">직차감내역</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=002">충환전내역</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=004">직충전차감내역</a></li>
 				</ul>
 			</div>
 		</div>

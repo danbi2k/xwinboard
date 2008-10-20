@@ -49,6 +49,7 @@
  	</selec>
  	<input type='text' name='keyword' value='<%=keyword%>'>
 	<input type='hidden' name="dateType" value='req'>
+	신청일
 	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
 	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
 	<!--select name='searchDate'>

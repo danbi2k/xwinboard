@@ -5,11 +5,7 @@
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
-
 <%
-	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
-	
 	List<MoneyInOut> moneyInOutList = (List<MoneyInOut>) request.getAttribute("moneyInOutList");
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
@@ -19,22 +15,41 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	int ROWSIZE = 25;
+	int SHOWPAGE = 10;
 %>
-
-		  
+		 
 <SCRIPT LANGUAGE="JavaScript">
-</SCRIPT>
+	function checkIT() {
+		var d=document.regist;
+		if(confirm('환전하시겠습니까?')) {			
+			d.action='/admin_mode/calc/exchange.php';
+		}
+		else {
+			return false;
+		}
+	}
 
-<div class="title">직충전차감내역</div>
+	function delIT() {
+		if(confirm('해당 정보를 삭제하시겠습니까?\n\n삭제하셔도 해당 유저의 환전금액이 삭제되지는 않습니다.')) {
+			location='/admin_mode/calc/exchange.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
+		}
+		else {
+			return false;
+		}
+	}
+
+</SCRIPT>
+<div class="title">충환전내역</div>
 <font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>
 <form method='get' name='search' action='adminAccount.aspx'>
 	<input type='hidden' name='mode' value='viewMoneyInOutList'/>
 	<input type='hidden' name='pageIndex'/>
 	상태
 	<select name='status' onchange='this.form.submit()'>
-		<option value='004' <%=status.equals("004")?"selected":""%>>전체</option>
- 		<option value='MC004' <%=status.equals("MC004")?"selected":""%>>직충전</option>
- 		<option value='ME004' <%=status.equals("ME004")?"selected":""%>>직차감</option>
+		<option value='002' <%=status.equals("002")?"selected":""%>>전체</option>
+ 		<option value='MC002' <%=status.equals("MC002")?"selected":""%>>충전</option>
+ 		<option value='ME002' <%=status.equals("ME002")?"selected":""%>>환전</option>
  	</select>
  	<select name='search'>
  		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
@@ -47,36 +62,44 @@
 	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">		
  	<input type='submit' value='검 색'/>
 </form>
+
 <form name="list">
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
-		<th>아이디 (닉네임)</th>
-		<th>금액</th>
-		<th>일자</th>
-		<th>상태</th>
-		<th>비고</th>
-	</tr>
+		
 
+		<th>아이디 (닉네임)</th>
+		<th>환전요청금액</td>
+		<th>은행명</td>
+		<th>계좌번호</td>
+		<th>예금주</td>
+		<th>신청일자</td>
+		<th>상태</td>
+	</tr>
 	<%
 	if (moneyInOutList != null) {
 		for (MoneyInOut moneyInOut : moneyInOutList) {
-			boolean plus = moneyInOut.getStatus().equals("MC004");
+			boolean plus = moneyInOut.getStatus().equals("MC002");
 	%>
-	<tr align='center' bgcolor='#ffffff'>
-		<td><B><%=moneyInOut.getUserId()%> (<%=moneyInOut.getNickName()%>)</B></td>
+	<tr>		
+		
+		<td><%=moneyInOut.getUserId()%> (<%=moneyInOut.getNickName()%>)</td>
 		<td><font color=<%=plus?"blue":"red"%>><%=XwinUtil.comma3(moneyInOut.getMoney())%></font></td>
-		<td><%=moneyInOut.getProcDateStr()%></td>
+		<td><%=moneyInOut.getBankName()%></td>
+		<td><%=moneyInOut.getNumber()%></td>
+		<td><%=moneyInOut.getName()%></td>
+		<td><%=moneyInOut.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>
-		<td><%=XwinUtil.nvl(moneyInOut.getNote())%>
-	  </tr>
-	<%
-		}
+	</tr>
+<%
 	}
-	%>
- </table>
+}
+%>
+
+</table>
 </form>
 <BR>
-<!--input type="button" value="삭제" onclick="deleteCheckedItem()"/ -->
+<!-- input type="button" value="삭제" onclick="deleteCheckedItem()"/ -->
 <BR>
 <div class="pages">
 <%
@@ -115,7 +138,7 @@
 function deleteCheckedItem()
 {
 	if (confirm("삭제하시겠습니까?")) {
-		var query = "mode=<%=status.equals(Code.MONEY_IN_DIRECT)?"deleteMoneyInList":"deleteMoneyOutList"%>";
+		var query = "mode=deleteMoneyOutList";
 		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);
 		for (var i = 0 ; i < c.length ; i++) {
