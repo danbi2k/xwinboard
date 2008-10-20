@@ -80,7 +80,7 @@
 				]]>
 			</isNotNull>
 		</dynamic>
-		ORDER BY REQ_DATE DESC
+		ORDER BY PROC_DATE DESC
 		<isNotNull property="fromRow">
 		LIMIT #fromRow#, #rowSize#
 		</isNotNull>
