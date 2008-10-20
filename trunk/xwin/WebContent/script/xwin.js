@@ -6,6 +6,19 @@ debug = function(str)
 	_debug.innerHTML += str + '<br>'; 
 }
 
+Xwin.Escape = function(str)
+{
+	if (str == undefined)
+		return "";
+	
+	var regexp= RegExp(/%/ig);
+	var retStr = str.replace(regexp, "%25");
+	regexp= RegExp(/&/ig);
+	retStr = retStr.replace(regexp, "%26");
+	
+	return retStr;
+}
+
 Xwin.ToArray = function(data)
 {
 	if (data == undefined)

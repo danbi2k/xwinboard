@@ -225,4 +225,36 @@ public class AdminMemberController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView blockIp(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getParameter("ip");
+		
+		ResultXml rx = null;
+		
+		if (accessDao.selectBlockIpCount(ip) > 0) {
+			rx = new ResultXml(0, "이미 차단된 IP 입니다", null);
+		} else {
+			accessDao.insertBlockIp(ip);		
+			rx = new ResultXml(0, "차단 되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView releaseIp(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getParameter("ip");
+		accessDao.deleteBlockIp(ip);
+		
+		ResultXml rx = new ResultXml(0, "해제 되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

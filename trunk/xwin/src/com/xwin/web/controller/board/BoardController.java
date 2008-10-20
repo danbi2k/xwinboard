@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.domain.user.Member;
@@ -26,6 +27,8 @@ public class BoardController extends XwinController
 	public ModelAndView viewUserBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -40,6 +43,8 @@ public class BoardController extends XwinController
 	public ModelAndView viewQnaBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -80,6 +85,8 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -100,13 +107,16 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardWriteForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		String boardName = request.getParameter("boardName");
+		
+		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
+				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		Member member = null;
 		if ((member = (Member) request.getSession().getAttribute("Member")) == null)
 			return new ModelAndView("dummy");
-		
-
-		
-		String boardName = request.getParameter("boardName");
 		
 		member = memberDao.selectMember(member.getUserId(), null);
 		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
@@ -119,7 +129,14 @@ public class BoardController extends XwinController
 	
 	public ModelAndView writeBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
-	{	
+	{
+		String boardName = request.getParameter("boardName");
+		
+		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
+				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -129,7 +146,6 @@ public class BoardController extends XwinController
 		
 		String boardId = request.getParameter("boardId");
 		String comment = request.getParameter("comment");
-		String boardName = request.getParameter("boardName");
 		
 		member = memberDao.selectMember(member.getUserId(), null);
 		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
@@ -150,7 +166,14 @@ public class BoardController extends XwinController
 	
 	public ModelAndView writeBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
-	{	
+	{
+		String boardName = request.getParameter("boardName");
+		
+		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
+				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -160,7 +183,6 @@ public class BoardController extends XwinController
 		
 		String title = request.getParameter("title");
 		String context = request.getParameter("context");
-		String boardName = request.getParameter("boardName");
 		
 		member = memberDao.selectMember(member.getUserId(), null);
 		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
@@ -189,6 +211,8 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -217,6 +241,8 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -244,6 +270,8 @@ public class BoardController extends XwinController
 	public ModelAndView getBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

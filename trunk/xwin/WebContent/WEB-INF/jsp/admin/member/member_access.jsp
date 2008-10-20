@@ -27,6 +27,7 @@
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
+		<option value='ipAddress' <%=search.equals("ipAddress")?"selected":""%>>아이피</option>
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
 	접속일
@@ -42,6 +43,7 @@
 		<th width=15%>닉네임</th>
 		<th width=*>접속시각</th>
 		<th width=15%>아이피</th>
+		<th>차단</th>
 	</tr>
 <%
 if (accessList != null) {
@@ -51,8 +53,15 @@ if (accessList != null) {
 		<td width=5%><%=access.getId()%></td>
 		<td width=10%><%=access.getUserId()%></td>
 		<td width=10%><%=access.getNickName()%></td>
-		<td width=15%><%=XwinUtil.toDateStr(access.getDate(), 1)%></td>
+		<td width=*><%=XwinUtil.toDateStr(access.getDate(), 1)%></td>
 		<td width=10%><%=access.getIpAddress()%></td>
+		<td width=10%>
+			<%if ("Y".equals(access.getBlock())) { %>
+			<input type="button" onclick="releaseIp('<%=access.getIpAddress()%>')" value="해제"/>
+			<%} else { %>
+			<input type="button" onclick="blockIp('<%=access.getIpAddress()%>')" value="차단"/>
+			<%} %>
+		</td>
 	</tr>
 <%
  }
@@ -94,6 +103,32 @@ if (accessList != null) {
 %>
 </div>
 <script>
+function blockIp(ip)
+{
+	if (confirm(ip + " 를 차단하시겠습니까?")) {
+		var query = "mode=blockIp";
+		query += "&ip=" + ip;
+		var http = new JKL.ParseXML("adminMember.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	}
+}
+
+function releaseIp(ip)
+{
+	if (confirm(ip + " 를 해제하시겠습니까?")) {
+		var query = "mode=releaseIp";
+		query += "&ip=" + ip;
+		var http = new JKL.ParseXML("adminMember.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	}
+}
+
 function goPage(index)
 {
 	var frm = document.search;

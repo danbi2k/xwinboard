@@ -284,14 +284,16 @@ BET_CALC_COMMIT			= "BTC10";
 	</insert>
 	
 	<insert id="insertDailyMemberMoneyStatistics">
+	<![CDATA[
 		INSERT INTO tbl_member_money_stat(DATE, BALANCE, MONEY)
 		SELECT SYSDATE(), A.BALANCE, B.MONEY FROM
 		(SELECT SUM(BALANCE) as BALANCE
 		FROM tbl_member
 		WHERE STATUS = 'US001') as A,
-		(SELECT IFNULL(SUM(EXPECT), 0) as MONEY
+		(SELECT IFNULL(SUM(MONEY), 0) as MONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS001')) as B
+		WHERE STATUS in ('BS001') AND DATE >= CURDATE()-1 AND DATE < CURDATE()+0) as B
+	]]>	
 	</insert>
 	
 	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />

@@ -63,7 +63,7 @@
 			<h2 class="heading">통계보기</h2>
 			<div class="content">
 				<ul>
-					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
+					<li class="first"><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
 					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
 				</ul>
 			</div>
@@ -72,7 +72,8 @@
 			<h2 class="heading">서버관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
+					<li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li>
+					<li><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
 					<li><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
 					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
 					<!--li><a href="#">기본값관리</a></li -->

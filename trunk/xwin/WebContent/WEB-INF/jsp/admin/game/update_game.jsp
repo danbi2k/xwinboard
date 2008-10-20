@@ -44,6 +44,18 @@
 		query += "&awayTeam=" + d.awayTeam.value;
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
+		if (d.winDeny.checked)
+			query += "&winDeny=N";
+		else
+			query += "&winDeny=Y";
+		if (d.drawDeny.checked)
+			query += "&drawDeny=N";
+		else
+			query += "&drawDeny=Y";
+		if (d.loseDeny.checked)
+			query += "&loseDeny=N";
+		else
+			query += "&loseDeny=Y";		
 
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
@@ -132,7 +144,16 @@
 			<%} %>
 			패 <input type='text' name='loseRate' size=5 value='<%=game.getLoseRateStr()%>'>											
 		</td>
-	</tr>		
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">배팅차단</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			승 <input type='checkbox' name='winDeny' value="N" <%=game.getWinDeny().equals("Y")?"":"checked" %>>
+			무 <input type='checkbox' name='drawDeny' value="N" <%=game.getDrawDeny().equals("Y")?"":"checked" %>>
+			패 <input type='checkbox' name='loseDeny' value="N" <%=game.getLoseDeny().equals("Y")?"":"checked" %>>
+			(체크하신 승/무/패 가 배팅이 차단됩니다)											
+		</td>
+	</tr>	
  </table>
 <BR>
 <table width="2%"  border="0" cellspacing="5" cellpadding="0">

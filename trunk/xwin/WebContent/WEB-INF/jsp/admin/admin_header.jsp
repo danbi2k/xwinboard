@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.xwin.domain.user.*" %>
+<%@ page import="com.xwin.domain.admin.*" %>
 <%
 	Member admin = (Member)session.getAttribute("Admin");
 %>

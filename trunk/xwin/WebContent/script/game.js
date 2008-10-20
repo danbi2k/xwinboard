@@ -51,7 +51,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center width=60><nobr>&nbsp;</td>");
 			row.push("<td align=center width=60>&nbsp;</td>");								
 			row.push("<td width=90% align=right><nobr><font color=" + txtcolor + "><B>" + data[i].homeTeam);			
-			if (data[i].betStatus== 'BTS01') {
+			if (data[i].betStatus == 'BTS01' && data[i].winDeny == "Y") {
 				row.push("&nbsp;<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
 			} else {
 				row.push("&nbsp;<input type='checkbox' disabled></b> ");
@@ -68,7 +68,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center ><nobr>");
 			
 			if (data[i].type == 'wdl') {
-				if (data[i].betStatus == 'BTS01') {
+				if (data[i].betStatus == 'BTS01' && data[i].drawDeny == "Y") {
 					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
 				} else {
 					row.push("<input type='checkbox' disabled>");
@@ -88,7 +88,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td width=1% >&nbsp;<font color=" + txtcolor + ">" + data[i].loseRateStr + "</font></td>");
 			row.push("<td width=90% ><nobr>");
 			
-			if (data[i].betStatus == 'BTS01') {
+			if (data[i].betStatus == 'BTS01' && data[i].loseDeny == "Y") {
 				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
 			} else {
 				row.push("<input type='checkbox' disabled>");

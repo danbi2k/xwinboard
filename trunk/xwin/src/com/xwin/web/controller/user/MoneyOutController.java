@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.util.Code;
@@ -21,6 +22,10 @@ public class MoneyOutController extends XwinController
 	public ModelAndView viewMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_EXCHANGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -31,6 +36,10 @@ public class MoneyOutController extends XwinController
 	public ModelAndView viewMoneyOutRequestList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_EXCHANGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -47,6 +56,10 @@ public class MoneyOutController extends XwinController
 	public ModelAndView moneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response, MoneyOut moneyOut) throws Exception
 	{
+		if (Admin.DENY_EXCHANGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -69,6 +82,10 @@ public class MoneyOutController extends XwinController
 			moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
 			moneyOut.setReqDate(new Date());
 			moneyOut.setNickName(member.getNickName());
+			moneyOut.setBankName(member.getBankName());
+			moneyOut.setNumber(member.getBankNumber());
+			moneyOut.setName(member.getBankOwner());
+			
 			moneyOutDao.insertMoneyOut(moneyOut);
 			
 			Account account = new Account();

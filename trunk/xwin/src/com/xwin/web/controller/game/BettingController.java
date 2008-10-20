@@ -34,6 +34,8 @@ public class BettingController extends XwinController
 	public ModelAndView viewBettingCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -48,6 +50,8 @@ public class BettingController extends XwinController
 	public ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -68,8 +72,13 @@ public class BettingController extends XwinController
 		Collection<GameCartItem> cartCol = cartMap.values();
 		for (GameCartItem gci : cartCol) {
 			Game game = gameDao.selectGame(gci.getGameId());
+			String guess = gci.getGuess();
 			if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
-					game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
+					game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false ||
+					(guess.equals("W") && game.getWinDeny().equals("Y") == false) ||
+					(guess.equals("D") && game.getDrawDeny().equals("Y") == false) ||
+					(guess.equals("L") && game.getLoseDeny().equals("Y") == false)
+					) {
 				rx = new ResultXml(-2, "배팅 가능한 상태가 아닌 경기가 포함되어 있습니다", null);
 				
 				ModelAndView mv = new ModelAndView("xmlFacade");
@@ -151,78 +160,11 @@ public class BettingController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView addAllCart(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
-		
-		ResultXml rx = null;
-		
-		String _type = request.getParameter("type");
-		String _money = request.getParameter("money");
-		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("Member");
-		
-		Map<String, GameCartItem> cartMap =
-			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + _type);
-		
-		Long money = Long.parseLong(_money);		
-		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
-		
-		Collection<GameCartItem> cartCol = cartMap.values();
-		
-		for (GameCartItem gci : cartCol) {
-			Game game = gameDao.selectGame(gci.getGameId());
-			if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
-					game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
-				rx = new ResultXml(-2, "배팅 가능한 상태가 아닌 경기가 포함되어 있습니다", null);
-				
-				ModelAndView mv = new ModelAndView("xmlFacade");
-				mv.addObject("resultXml", XmlUtil.toXml(rx));
-				
-				return mv;
-			}
-		}
-		
-		if (cartCol.size() == 0) {
-			rx = new ResultXml(-1, "경기를 선택 하십시오", null);
-		}
-		else if (cc.getMoney() < 5000) {
-			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
-		}
-		else if (cc.getExpect() > MAX_EXPECT) {
-			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
-		}
-		else if (cc.getAfter() < 0) {
-			rx = new ResultXml(-1, "잔액이 부족합니다", null);
-		} else {
-			List<GameCartItem> cartItemList = new ArrayList<GameCartItem>(cartCol.size());
-			cartItemList.addAll(cartCol);
-			
-			AllCartItem allCartItem = new AllCartItem();
-			allCartItem.setMoney(money);
-			allCartItem.setRate(cc.getRate());
-			allCartItem.setExpect(cc.getExpect());
-			allCartItem.setCartItemList(cartItemList);
-			allCartItem.setDate(new Date());
-			
-			List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
-			allCartList.add(allCartItem);
-			
-			session.removeAttribute("cartMap_" + _type);
-			
-			rx = new ResultXml(-1, "장바구니에 넣었습니다", null);
-		}
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		
-		return mv;
-	}
-	
 	public ModelAndView calculateCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -266,6 +208,8 @@ public class BettingController extends XwinController
 	public ModelAndView addGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -306,7 +250,14 @@ public class BettingController extends XwinController
 			cartMap.remove(game.getId());
 			retCode = -2;
 			message = "배팅 가능 상태가 아닙니다";
-		} else if ((XwinUtil.calcExpectMoney(thisRate * cc.getRate(), money) + cc.getExpect()) > MAX_EXPECT) {
+		} else if ((guess.equals("W") && game.getWinDeny().equals("Y") == false) ||
+				(guess.equals("D") && game.getDrawDeny().equals("Y") == false) ||
+				(guess.equals("L") && game.getLoseDeny().equals("Y") == false)) {
+			cartMap.remove(game.getId());
+			retCode = -1;
+			message = "배팅 가능 상태가 아닙니다";
+		}
+		else if ((XwinUtil.calcExpectMoney(thisRate * cc.getRate(), money) + cc.getExpect()) > MAX_EXPECT) {
 			cartMap.remove(game.getId());
 			retCode = -1;
 			message = "배당금이 300만원을 초과 하였습니다";
@@ -339,6 +290,8 @@ public class BettingController extends XwinController
 	public ModelAndView deleteGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -364,6 +317,8 @@ public class BettingController extends XwinController
 	public ModelAndView emptyGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

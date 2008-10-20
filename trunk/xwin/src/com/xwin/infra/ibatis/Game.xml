@@ -29,6 +29,9 @@
 		<result property="drawMoney" column="DRAW_MONEY"/>
 		<result property="loseMoney" column="LOSE_MONEY"/>
 		<result property="displayStatus" column="DP_STATUS"/>
+		<result property="winDeny" column="WIN_DENY"/>
+		<result property="drawDeny" column="DRAW_DENY"/>
+		<result property="loseDeny" column="LOSE_DENY"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -187,6 +190,15 @@
 			</isNotNull>
 			<isNotNull prepend="," property="result">
 			RESULT = #result# 
+			</isNotNull>
+			<isNotNull prepend="," property="winDeny">
+			WIN_DENY = #winDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="drawDeny">
+			DRAW_DENY = #drawDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="loseDeny">
+			LOSE_DENY = #loseDeny# 
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#

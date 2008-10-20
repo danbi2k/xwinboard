@@ -22,7 +22,6 @@
 		<textarea name="text" style='width=100%;height=500px'><%
 	    String context = Admin.NOTICE;
 	    context = StringEscapeUtils.escapeHtml(context);
-	    context = context.replaceAll("\n", "<br>");
 	    out.print(context);
 	    %></textarea>
 		</td>
@@ -35,7 +34,7 @@
 function saveNotice()
 {
 	var query = "mode=saveNotice";
-	query += "&notice=" + document.notice.text.value;
+	query += "&notice=" + Xwin.Escape(document.notice.text.value);
 	var http = new JKL.ParseXML("admin.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);

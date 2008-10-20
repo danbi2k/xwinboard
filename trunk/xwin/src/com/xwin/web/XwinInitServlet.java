@@ -45,6 +45,12 @@ public class XwinInitServlet extends HttpServlet {
 		Admin.NOTICE = adminDao.selectAdmin("NOTICE");
 		Admin.POPUP = adminDao.selectAdmin("POPUP");
 		Admin.POPUPFLAG = adminDao.selectAdmin("POPUPFLAG");
+		
+		Admin.DENY_JOIN = adminDao.selectAdmin("DENY_JOIN");
+		Admin.DENY_BOARD = adminDao.selectAdmin("DENY_BOARD");
+		Admin.DENY_QNA = adminDao.selectAdmin("DENY_QNA");
+		Admin.DENY_CHARGE = adminDao.selectAdmin("DENY_CHARGE");
+		Admin.DENY_EXCHANGE = adminDao.selectAdmin("DENY_EXCHANGE");
 	}
 
 	public void service(ServletRequest arg0, ServletResponse arg1)

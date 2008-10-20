@@ -41,6 +41,10 @@
 
 	<form name="frm" method="post">
 
+	<input type="hidden" name="account_bank" value="<%=member.getBankName()%>"/>
+	<input type="hidden" name="account_num" value="<%=member.getBankNumber()%>"/>
+	<input type="hidden" name="account_name" value="<%=member.getBankOwner()%>"/>
+
 	<table width="800" bgcolor="#333333" cellpadding="10" style="border:1 solid #909090;">
 	<colgroup>
 	<col width="150" align="center">

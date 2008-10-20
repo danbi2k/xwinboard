@@ -21,4 +21,19 @@ public class AccessDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectAccessCount", param);
 	}
+	
+	public void insertBlockIp(String ip)
+	{
+		sqlMapClientTemplate.insert("insertBlockIp", ip);
+	}
+	
+	public Integer selectBlockIpCount(String ip)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectBlockIpCount", ip);
+	}
+
+	public void deleteBlockIp(String ip)
+	{
+		sqlMapClientTemplate.delete("deleteBlockIp", ip);		
+	}
 }

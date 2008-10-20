@@ -217,6 +217,9 @@ public class AdminGameController extends XwinController
 			game.setStatus(Code.GAME_STATUS_RUN);
 			game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
 			game.setType(type);
+			game.setWinDeny(command.getWinDeny());
+			game.setDrawDeny(command.getDrawDeny());
+			game.setLoseDeny(command.getLoseDeny());
 			
 			gameDao.updateGame(game);
 			

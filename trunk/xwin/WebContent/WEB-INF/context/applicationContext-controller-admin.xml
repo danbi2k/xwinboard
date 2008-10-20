@@ -34,6 +34,7 @@
 	<bean id="adminInfoController"
 		class="com.xwin.web.controller.admin.AdminInfoController"
 		p:memberDao-ref="memberDao"
+		p:adminDao-ref="adminDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 	
 	<bean id="adminMemberController"

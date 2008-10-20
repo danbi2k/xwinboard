@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
@@ -25,6 +26,10 @@ public class MemberController extends XwinController
 	public ModelAndView viewJoinForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_JOIN.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		ModelAndView mv = new ModelAndView("user/join");
 		
 		return mv;
@@ -33,6 +38,8 @@ public class MemberController extends XwinController
 	public ModelAndView viewModifyForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -45,6 +52,8 @@ public class MemberController extends XwinController
 	public ModelAndView registerMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
@@ -114,6 +123,8 @@ public class MemberController extends XwinController
 	public ModelAndView modifyMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -231,6 +242,8 @@ public class MemberController extends XwinController
 	public ModelAndView requestSecede(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -251,6 +264,8 @@ public class MemberController extends XwinController
 	public ModelAndView removeMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -296,6 +311,8 @@ public class MemberController extends XwinController
 	public ModelAndView exchangePoint(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");

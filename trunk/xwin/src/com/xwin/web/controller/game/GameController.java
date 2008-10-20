@@ -23,9 +23,13 @@ import com.xwin.web.controller.XwinController;
 
 public class GameController extends XwinController
 {
+	int ROWSIZE = 25;
+	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -48,12 +52,19 @@ public class GameController extends XwinController
 	public ModelAndView viewGameResultList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
 		
 		Date fromDate = null;
 		Date toDate = null;
@@ -83,6 +94,8 @@ public class GameController extends XwinController
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<Game> gameList = gameDao.selectGameList(param);		
 		List<League> leagueList = leagueDao.selectLeagueList();		
@@ -97,6 +110,8 @@ public class GameController extends XwinController
 	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -116,6 +131,7 @@ public class GameController extends XwinController
 		param.put("toDate", cal.getTime());
 		
 		List<Game> gameList = gameDao.selectGameList(param);
+		//Integer gameCount = gameDao.selectGameCount(param);
 		
 		ResultXml resultXml = new ResultXml(0, null, gameList);
 
@@ -128,6 +144,8 @@ public class GameController extends XwinController
 	public ModelAndView deleteCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

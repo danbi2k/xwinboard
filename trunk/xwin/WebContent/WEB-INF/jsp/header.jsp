@@ -121,10 +121,19 @@ if (login) {
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 
-	<td><img src="images/smenu_1.gif" onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest';" style="cursor:hand"></td>
-	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_2.gif" onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequest';" style="cursor:hand"></td>
-	<td><img src="images/smenu_gap.gif"></td>
+	<td>
+		<%if (Admin.DENY_CHARGE.equals("Y")) {%>
+		<img src="images/smenu_1.gif" onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest';" style="cursor:hand">
+		
+	</td>
+	<td><img src="images/smenu_gap.gif">
+	<%} %></td>
+	<td>
+		<%if (Admin.DENY_EXCHANGE.equals("Y")) {%>
+		<img src="images/smenu_2.gif" onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequest';" style="cursor:hand">
+	</td>
+	<td><img src="images/smenu_gap.gif">
+	<%} %></td>
 	<td><img src="images/smenu_3.gif" onclick="location.href='myMoney.aspx?mode=viewMyMoneyList';" style="cursor:hand"></td>
 <!--
 	<td><img src="images/smenu_gap.gif"></td>
@@ -146,7 +155,11 @@ if (login) {
 	<td><input class="member" type="password" name="password"></td>
 
 	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
-	<td><img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
+	<td>
+		<%if (Admin.DENY_JOIN.equals("Y")) {%>
+		<img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';">
+		<%}%>
+	</td>
 	</tr></table>
 
 	</td>
@@ -199,7 +212,7 @@ function exchangePoint(point)
 <table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
 <tr><td width="80" align="center"><b style="color:white">Notice</b></td>
 	<td width="880" height="30"><font size=4"><b>&nbsp;
-	<marquee>
+	<marquee onmouseover='this.stop()' onmouseout='this.start()'>
 	<%=Admin.NOTICE%>
 	</marquee></b></font>
 	</td>

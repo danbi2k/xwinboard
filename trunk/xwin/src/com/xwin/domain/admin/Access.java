@@ -11,6 +11,7 @@ public class Access extends XwinObject
 	String nickName;
 	Date date;
 	String ipAddress;
+	String block;
 	
 	public String getId() {
 		return id;
@@ -41,5 +42,11 @@ public class Access extends XwinObject
 	}
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
+	}
+	public String getBlock() {
+		return block;
+	}
+	public void setBlock(String block) {
+		this.block = block;
 	}
 }

@@ -18,6 +18,12 @@
 	
 	List<BoardItem> boardItemList = (List<BoardItem>) request.getAttribute("boardItemList");
 	Integer totalCount = (Integer) request.getAttribute("boardItemCount");
+	
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	
+	int itemIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
@@ -62,7 +68,7 @@
 %>
 	<tr height='32' align="center">
     <td>&nbsp;</td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=boardItem.getId()%></td>
+    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=itemIdx--%></td>
     <td style='border-bottom:1 #b4b4b4 solid;' class='board_list' align="left">
 		<span style="width:100%;height:15;overflow:hidden;">
 		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
@@ -89,7 +95,9 @@
     <td width="50%" height="30" align="right">
 		
         &nbsp;&nbsp;<br><br>
+		<%if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y")) || boardName.equals("qna") && Admin.DENY_QNA.equals("Y")) {%>
         <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
+		<%} %>
     </td></tr>
 </table>
 
@@ -99,9 +107,6 @@
     <!-----[ 페이징 ]--------------------------------------------/-->
     
    <%
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 	int pageNum = (int) totalCount / ROWSIZE + 1;
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;

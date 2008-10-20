@@ -92,7 +92,7 @@ function updateBoardItem()
 function writeBoardComment()
 {
 	var query = "mode=writeBoardComment";
-	query += "&comment=" + document.cmt.comment.value;
+	query += "&comment=" + Xwin.Escape(document.cmt.comment.value);
 	query += "&id=<%=boardItem.getId()%>";
 	var http = new JKL.ParseXML("adminBoard.aspx", query);
 	var result = http.parse();

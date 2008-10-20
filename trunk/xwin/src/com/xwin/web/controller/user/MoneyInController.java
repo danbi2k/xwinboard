@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
@@ -26,6 +27,10 @@ public class MoneyInController extends XwinController
 	public ModelAndView viewMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_CHARGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -40,6 +45,10 @@ public class MoneyInController extends XwinController
 	public ModelAndView viewMoneyInRequestList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_CHARGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -69,6 +78,10 @@ public class MoneyInController extends XwinController
 	public ModelAndView moneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_CHARGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -117,6 +130,10 @@ public class MoneyInController extends XwinController
 	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (Admin.DENY_CHARGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

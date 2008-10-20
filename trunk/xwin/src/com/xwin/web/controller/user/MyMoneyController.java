@@ -24,6 +24,8 @@ public class MyMoneyController extends XwinController
 	public ModelAndView viewMyMoneyList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -53,6 +55,11 @@ public class MyMoneyController extends XwinController
 	public ModelAndView deleteMyMoneyLog(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
 		String id = request.getParameter("id");
 		
 		Account account = new Account();
@@ -70,6 +77,8 @@ public class MyMoneyController extends XwinController
 	public ModelAndView viewMyPointList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

@@ -38,6 +38,10 @@ public class Game extends XwinObject
 	private Long drawMoney;
 	private Long loseMoney;
 	
+	private String winDeny;
+	private String drawDeny;
+	private String loseDeny;
+	
 	private String displayStatus;
 
 	public String getId() {
@@ -253,5 +257,29 @@ public class Game extends XwinObject
 
 	public void setDisplayStatus(String displayStatus) {
 		this.displayStatus = displayStatus;
+	}
+
+	public String getWinDeny() {
+		return winDeny;
+	}
+
+	public void setWinDeny(String winDeny) {
+		this.winDeny = winDeny;
+	}
+
+	public String getDrawDeny() {
+		return drawDeny;
+	}
+
+	public void setDrawDeny(String drawDeny) {
+		this.drawDeny = drawDeny;
+	}
+
+	public String getLoseDeny() {
+		return loseDeny;
+	}
+
+	public void setLoseDeny(String loseDeny) {
+		this.loseDeny = loseDeny;
 	}
 }

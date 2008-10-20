@@ -15,6 +15,9 @@ public class GameCommand
 	private String leagueId;
 	private Integer homeScore;
 	private Integer awayScore;
+	private String winDeny;
+	private String drawDeny;
+	private String loseDeny;
 	
 	public String getGameId() {
 		return gameId;
@@ -93,5 +96,23 @@ public class GameCommand
 	}
 	public void setAwayScore(Integer awayScore) {
 		this.awayScore = awayScore;
+	}
+	public String getWinDeny() {
+		return winDeny;
+	}
+	public void setWinDeny(String winDeny) {
+		this.winDeny = winDeny;
+	}
+	public String getDrawDeny() {
+		return drawDeny;
+	}
+	public void setDrawDeny(String drawDeny) {
+		this.drawDeny = drawDeny;
+	}
+	public String getLoseDeny() {
+		return loseDeny;
+	}
+	public void setLoseDeny(String loseDeny) {
+		this.loseDeny = loseDeny;
 	}	
 }
