@@ -1,3 +1,5 @@
+var total_rate = 0;
+
 function FnEmptyGameWdlCart(type)
 {
 	var query = "mode=emptyGameCart";
@@ -100,7 +102,9 @@ function FnDrawCart(data, type) {
 	
 	gameCartDiv.innerHTML = row.join("");
 	var multiStr = Xwin.Digit2(multi);
-	rateDiv.value = multi;
+	rateDiv.value = multiStr;
+	total_rate = parseFloat(multiStr);
+	//alert(total_rate);
 	rateDiv.innerHTML = multiStr;
 	
 	FnCalcCart();
@@ -183,19 +187,28 @@ function FnCalcCart()
 	//var balanceDiv = document.getElementById("balanceDiv");
 	
 	var rate = rateDiv.value;
-	var query = "mode=calculateCart";
-	query += "&type=" + gameType;
-	query += "&money=" + money;
-	var http = new JKL.ParseXML("betting.aspx", query);
-	var result = http.parse();
-	if (result.resultXml.code == 0) {
-		var data = result.resultXml.object;
-		expectDiv.innerHTML = comma3(data.expect);
+//	var query = "mode=calculateCart";
+//	query += "&type=" + gameType;
+//	query += "&money=" + money;
+//	var http = new JKL.ParseXML("betting.aspx", query);
+//	var result = http.parse();
+//	if (result.resultXml.code == 0) {
+//		var data = result.resultXml.object;
+		var expect = parseInt(money * total_rate);
+		//alert(expect);
+		if (expect > 3000000) {
+			alert("배당금이 300만원을 초과 하였습니다.");
+			CartFrm.BetAmt.value = "";
+			expectDiv.innerHTML = "0";
+		} else {
+			expectDiv.innerHTML = comma3(expect);
+		}
+		//expectDiv.innerHTML = comma3(data.expect);
 		//afterDiv.innerHTML = comma3(data.after);
 		//balanceDiv.innerHTML = comma3(data.balance);
-	} else {
-		alert(result.resultXml.message);
-		CartFrm.BetAmt.value = "";
-		FnCalcCart();
-	}
+//	} else {
+//		alert(result.resultXml.message);
+//		CartFrm.BetAmt.value = "";
+//		FnCalcCart();
+//	}
 }
