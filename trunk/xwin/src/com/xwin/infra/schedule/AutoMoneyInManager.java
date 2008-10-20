@@ -87,11 +87,11 @@ public class AutoMoneyInManager extends QuartzJobBean
 					transaction.setDate(theDate);
 					transaction.setMoney(money);
 					transaction.setBalance(balance);
+					
+					transactionDao.insertTransaction(transaction);
 				} else if (message.getMsg().startsWith("[KB]") && message.getMsg().indexOf("출금") > 0) {
 					
 				}
-				
-				transactionDao.insertTransaction(transaction);
 			}	
 		}
 		
