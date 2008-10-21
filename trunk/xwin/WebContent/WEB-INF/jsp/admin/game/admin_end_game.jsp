@@ -157,8 +157,7 @@
 <input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'">
 <br>
 <br>
-<form method='get' name='search'>
-<input type='hidden' name='pageIndex' value='0'/>
+<form method='get' name='search' action='adminGame.aspx'>
 <input type='hidden' name='mode' value='viewEndGameList'/>
 <input type='hidden' name='pageIndex'/>
 <input type='hidden' name='type' value='<%=type%>'/>

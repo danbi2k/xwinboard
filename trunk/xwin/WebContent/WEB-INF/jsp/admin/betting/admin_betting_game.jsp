@@ -31,7 +31,7 @@
 
 <div class="title">경기별 배팅 현황</div>
 
-<form method='get' name='search'>
+<form method='get' name='search' action='adminBetting.aspx'>
 <input type='hidden' name='mode' value='viewBettingMoneyList'/>
 <input type='hidden' name='pageIndex'/>
 

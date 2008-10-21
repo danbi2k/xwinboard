@@ -387,35 +387,39 @@ public class AdminGameController extends XwinController
 				}
 			}
 			
-			List<Betting> bettingList = bettingDao.selectCalcRequiredBetting(id);
-			if (bettingList != null) {
-				for (Betting betting : bettingList) {				
-					bettingService.calcuateBettingCommon(betting);
-					
-					try {
-						Member member = memberDao.selectMember(betting.getUserId(), null);
-						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
-							String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
-									Code.getValue(betting.getStatus()) + " 되었습니다.";
-							if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-								message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
-							
-							SmsWait smsWait = new SmsWait();
-							smsWait.setMsg(message);
-							smsWait.setPhone(member.getMobile());
-							smsWait.setCallback("000-000-0000");
-							
-							smsWaitDao.insertSmsWait(smsWait);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
+			CalcBetting(id);
 			
 			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 		}
 		return rx;
+	}
+
+	private void CalcBetting(String id) {
+		List<Betting> bettingList = bettingDao.selectCalcRequiredBetting(id);
+		if (bettingList != null) {
+			for (Betting betting : bettingList) {				
+				bettingService.calcuateBettingCommon(betting);
+				
+				try {
+					Member member = memberDao.selectMember(betting.getUserId(), null);
+					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
+						String message = betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+								Code.getValue(betting.getStatus()) + " 되었습니다.";
+						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
+						
+						SmsWait smsWait = new SmsWait();
+						smsWait.setMsg(message);
+						smsWait.setPhone(member.getMobile());
+						smsWait.setCallback("000-000-0000");
+						
+						smsWaitDao.insertSmsWait(smsWait);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	public ModelAndView cancelGame(HttpServletRequest request,
@@ -475,9 +479,10 @@ public class AdminGameController extends XwinController
 
 		bettingDao.updateBettingStatus(id);
 		
-		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
-		
+		CalcBetting(id);		
 		processNoMatchReturn();
+		
+		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

@@ -139,6 +139,11 @@
 			g.GAME_DATE <= #toDate#
 			]]>
 		</isNotNull>
+		<isNotNull prepend="AND" property="betGameCount">
+			<![CDATA[
+			(SELECT COUNT(*) FROM tbl_betting_game bg WHERE g.ID = bg.GAME_ID) > #betGameCount#
+			]]>
+		</isNotNull>
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">

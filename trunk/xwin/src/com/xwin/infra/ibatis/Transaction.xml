@@ -62,6 +62,9 @@
 				DATE <= #toDate#
 				]]>
 			</isNotNull>
+			<isNotNull prepend="AND" property="isCharge">
+				ISCHARGE = #isCharge#
+			</isNotNull>
 		</dynamic>
 	ORDER BY DATE DESC
 	<isNotNull prepend="LIMIT" property="fromRow">
@@ -93,6 +96,9 @@
 				<![CDATA[
 				DATE <= #toDate#
 				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="isCharge">
+				ISCHARGE = #isCharge#
 			</isNotNull>
 		</dynamic>
 	</select>

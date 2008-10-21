@@ -33,6 +33,7 @@ public class Code
 	public static final String BET_STATUS_NOMATCH		= "BS005";
 	public static final String BET_STATUS_COMMIT		= "BS006";
 	public static final String BET_STATUS_HANDYDRAW		= "BS007";
+	public static final String BET_STATUS_RETURN		= "BS008";
 	
 	public static final String BET_CALC_DISABLE			= "BTC01";
 	public static final String BET_CALC_ENABLE			= "BTC02";
@@ -144,6 +145,7 @@ public class Code
 		put(BET_STATUS_NOMATCH, "경기취소(환불)");
 		put(BET_STATUS_COMMIT, "정산완료");
 		put(BET_STATUS_HANDYDRAW, "무승부(환불)");
+		put(BET_STATUS_RETURN, "경기취소/무승부(환불)");
 
 		put(USER_GRADE_NORMAL, "일반");
 		put(USER_GRADE_VIP, "VIP");
