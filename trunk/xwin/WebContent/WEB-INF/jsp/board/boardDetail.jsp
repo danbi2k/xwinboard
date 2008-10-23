@@ -11,6 +11,7 @@
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 	String boardName = request.getParameter("boardName");
+	String pageIndex = request.getParameter("pageIndex");
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -79,8 +80,9 @@ function img_resize(obj,max_width){
 
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="padding-top:8px">
 <tr><td width="50%" height="30">
+		
+        <a href="board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>"><img src="images/btn_list.gif" border=0></a>
 		<!--
-        <img src="images/btn_list.gif" onclick="list();" style="cursor:hand;">
         &nbsp;&nbsp;
         <img src="images/btn_prev.gif" onclick="pre_go();" style="cursor:hand;">
         <img src="images/btn_next.gif" onclick="next_go();" style="cursor:hand;">

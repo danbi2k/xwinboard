@@ -23,15 +23,24 @@ function checkform()
 <div class="title">공지사항쓰기</div>
 <form name="notice" action="adminBoard.aspx" method="post">
 <input type="hidden" name="mode" value="writeNotice"/>
-<table class="prettytable">
+<table class="list">
 	<tr>
-		<td width="10%">제목</td>
+		<th width="10%">종류</td>
+		<td width="*">
+		<select name="type">			
+			<option value="<%=Code.BOARDITEM_TYPE_NOTICE%>">공지사항</option>
+			<option value="<%=Code.BOARDITEM_TYPE_USER%>">일반글</option>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<th width="10%">제목</td>
 		<td width="*">
 		<input type="text" name="title" style='width=100%' size='50'></input>
 		</td>
 	</tr>
 	<tr>
-		<td width="10%">내용</td>
+		<th width="10%">내용</td>
 		<td width="*">
 		<textarea name="context" style='width=100%;height=500px'></textarea>
 		</td>

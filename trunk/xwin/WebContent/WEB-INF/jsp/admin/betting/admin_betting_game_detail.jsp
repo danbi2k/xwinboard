@@ -76,7 +76,7 @@ if (bettingList != null) {
 		if (count == 0) {
 		%>
 		<td rowspan='<%=betting.getTotalCount()%>'><font color='#000000'><%=betting.getId()%></td>								
-		<td rowspan='<%=betting.getTotalCount()%>'><font color='#000000'><%=betting.getUserId()%> (<%=betting.getNickName()%>)</a></td>
+		<td rowspan='<%=betting.getTotalCount()%>'><font color='#000000'><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=betting.getUserId()%>"><%=betting.getUserId()%></a> (<%=betting.getNickName()%>)</a></td>
 		<%
 		}
 		%>

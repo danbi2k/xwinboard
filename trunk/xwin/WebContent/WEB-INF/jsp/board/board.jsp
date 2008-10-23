@@ -71,7 +71,7 @@
     <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=itemIdx--%></td>
     <td style='border-bottom:1 #b4b4b4 solid;' class='board_list' align="left">
 		<span style="width:100%;height:15;overflow:hidden;">
-		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
+		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
 		</span>
 	</td>
     <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><b><%=boardItem.getNickName()%></b></td>

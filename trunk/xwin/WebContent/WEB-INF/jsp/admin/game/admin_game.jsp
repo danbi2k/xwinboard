@@ -274,7 +274,7 @@
 			}
 			%>
 			<th>패</th>								
-			<th>스코어</th>
+			<th nowrap>스코어</th>
 			<th>결과</th>
 			<th>표시</th>
 			<th>배팅</th>
@@ -307,7 +307,7 @@
 			}
 			%>
 			<td><%=game.getLoseRateStr()%></td>
-			<td>
+			<td nowrap>
 				<%
 				if (game.getStatus().equals(Code.GAME_STATUS_RUN)) {
 				%>

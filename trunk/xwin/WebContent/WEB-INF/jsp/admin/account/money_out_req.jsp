@@ -82,7 +82,7 @@
 	<tr>
 		<td><input type="checkbox" name="checkCheck" value="<%=moneyOut.getId()%>" onclick="saveMoneyOutIsChecked(this)" <%=moneyOut.getIsChecked().equals("Y")?"checked":""%>/></td>
 		<td><%=moneyOut.getId()%></td>
-		<td><B><%=moneyOut.getUserId()%> (<%=moneyOut.getNickName()%>)</B></td>
+		<td><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=moneyOut.getUserId()%>"><%=moneyOut.getUserId()%></a> (<%=moneyOut.getNickName()%>)</B></td>
 		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 		<td><%=moneyOut.getBankName()%></td>
 		<td><%=moneyOut.getNumber()%></td>

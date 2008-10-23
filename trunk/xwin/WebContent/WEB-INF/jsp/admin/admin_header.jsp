@@ -18,6 +18,7 @@
 <script LANGUAGE="javascript" src="script/main.js"></script>
 <script LANGUAGE="javascript" src="script/xwin.js"></script>
 <script LANGUAGE="javascript" src="script/default.js"></script>
+<script LANGUAGE="javascript" src="script/admin.js"></script>
 </head>
 <body>
 <%@ include file="playSound.jsp"%>

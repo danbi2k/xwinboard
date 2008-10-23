@@ -10,7 +10,9 @@
 	
 	String leagueId = XwinUtil.nvl(request.getParameter("leagueId"));
 	String type = XwinUtil.nvl(request.getParameter("type"));
-	String gameDate = XwinUtil.nvl(request.getParameter("gameDate"));
+	String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+	if (gameDate == null)
+		gameDate = XwinUtil.toDateStr(new Date(), 2);
 	
 	Calendar cal = Calendar.getInstance();
 	String[] dateList = new String[7]; 
@@ -139,9 +141,13 @@ if (gameList != null) {
 				</table>
 			</td>
 			<td align=center ><nobr>
+			<%if (game.getStatus().equals(Code.GAME_STATUS_END)) { %>
 			<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
 			&nbsp;
 			<%=Code.getValue(game.getResult())%>
+			<%} else { %>
+			<%=Code.getValue(game.getStatus())%>
+			<%}%>
 			</td>
 		</tr>
 

@@ -95,6 +95,7 @@ public static final int ROWSIZE = 25;
 		
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
+		String type = request.getParameter("type");
 		
 		BoardItem boardItem = new BoardItem();
 		boardItem.setBoardName("user");
@@ -104,7 +105,7 @@ public static final int ROWSIZE = 25;
 		boardItem.setUserId(admin.getUserId());
 		boardItem.setTitle(title);
 		boardItem.setStatus(Code.BOARDITEM_STATUS_NORMAL);
-		boardItem.setType(Code.BOARDITEM_TYPE_NOTICE);
+		boardItem.setType(type);
 		
 		boardDao.insertBoardItem(boardItem);
 		

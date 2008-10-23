@@ -63,7 +63,7 @@
 			boolean plus = moneyInOut.getStatus().equals("MC004");
 	%>
 	<tr align='center' bgcolor='#ffffff'>
-		<td><B><%=moneyInOut.getUserId()%> (<%=moneyInOut.getNickName()%>)</B></td>
+		<td><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=moneyInOut.getUserId()%>"><%=moneyInOut.getUserId()%></a> (<%=moneyInOut.getNickName()%>)</td>
 		<td><font color=<%=plus?"blue":"red"%>><%=XwinUtil.comma3(moneyInOut.getMoney())%></font></td>
 		<td><%=moneyInOut.getProcDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>

@@ -216,7 +216,7 @@ function receiveMemo()
 	var query = "mode=receiveMemo";
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();
-	if (result.resultXml.code == 0) {
+	if (result.resultXml.code == 0 && result.resultXml.object) {
 		var span = document.getElementById("memoContents");
 		var memo = result.resultXml.object.memo;
 		var regexp = new RegExp(/\n/ig);

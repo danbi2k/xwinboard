@@ -1,5 +1,6 @@
 package com.xwin.web.controller.game;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +63,9 @@ public class GameController extends XwinController
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		if (gameDate == null)
+			gameDate = XwinUtil.toDateStr(new Date(), 2);
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -90,12 +94,15 @@ public class GameController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("leagueId", leagueId);
-		param.put("status", Code.GAME_STATUS_END);
+		List<String> statusList = new ArrayList<String>();
+		statusList.add(Code.GAME_STATUS_END);
+		statusList.add(Code.GAME_STATUS_CANCEL);
+		param.put("statusList", statusList);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
-		param.put("fromRow", pIdx * ROWSIZE);
-		param.put("rowSize", ROWSIZE);
+		//param.put("fromRow", pIdx * ROWSIZE);
+		//param.put("rowSize", ROWSIZE);
 		
 		List<Game> gameList = gameDao.selectGameList(param);		
 		List<League> leagueList = leagueDao.selectLeagueList();		
