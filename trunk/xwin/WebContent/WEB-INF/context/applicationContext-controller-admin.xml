@@ -42,6 +42,7 @@
 		p:memberDao-ref="memberDao"
 		p:accessDao-ref="accessDao"
 		p:accountDao-ref="accountDao"
+		p:memoDao-ref="memoDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"

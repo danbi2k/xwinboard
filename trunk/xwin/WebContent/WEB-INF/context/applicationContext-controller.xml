@@ -39,6 +39,7 @@
 		p:pointDao-ref="pointDao"
 		p:accessDao-ref="accessDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:memoDao-ref="memoDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="loginController"

@@ -191,6 +191,16 @@
 </table>
 </form>
 
+<form name="memo">
+<table class="list">
+	<tr>
+		<th width="10%">쪽지</th>
+		<td><textarea name="memo" style='width=100%;height=200px'></textarea></td>
+	</tr>
+</table>
+<input type="button" value="발송" onclick="sendMemo()"/>"
+</form>
+
 <form method="get" name="search">
 <input type="hidden" name="mode" value="viewMemberDetail"/>
 <input type="hidden" name="pageIndex"/>
@@ -255,6 +265,19 @@ if (accountList != null) {
 %>
 	</div>
 <script>
+function sendMemo()
+{
+	var frm = document.memo;
+	var query = "mode=sendMemo";
+	query += "&memo=" + Xwin.Escape(frm.memo.value);
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		frm.memo.value = "";
+}
+
 function changeDenyrity()
 {
 	var frm = document.regist;	

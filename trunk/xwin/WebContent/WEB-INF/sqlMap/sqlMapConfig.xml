@@ -21,5 +21,6 @@
 	<sqlMap resource="com/xwin/infra/ibatis/Admin.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Transaction.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/SmsWait.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Memo.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/View_MoneyInOut.xml"/>
 </sqlMapConfig>

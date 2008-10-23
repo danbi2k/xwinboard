@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.user.Member;
+import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -229,6 +231,9 @@ public class AdminMemberController extends XwinController
 	public ModelAndView blockIp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String ip = request.getParameter("ip");
 		
 		ResultXml rx = null;
@@ -248,10 +253,36 @@ public class AdminMemberController extends XwinController
 	public ModelAndView releaseIp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
 		String ip = request.getParameter("ip");
 		accessDao.deleteBlockIp(ip);
 		
 		ResultXml rx = new ResultXml(0, "해제 되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView sendMemo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId");
+		String memoContent = request.getParameter("memo");
+		
+		Memo memo = new Memo();
+		memo.setUserId(userId);
+		memo.setMemo(memoContent);
+		memo.setDate(new Date());
+		
+		memoDao.insertMemo(memo);
+		
+		ResultXml rx = new ResultXml(0, "발송되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

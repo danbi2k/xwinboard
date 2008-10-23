@@ -84,4 +84,8 @@
 	<bean id="transactionDao"
 		class="com.xwin.infra.dao.TransactionDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="memoDao"
+		class="com.xwin.infra.dao.MemoDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 </beans>

@@ -208,7 +208,43 @@ function exchangePoint(point)
 			location.reload();
 	}
 }
+
+var memoId;
+
+function receiveMemo()
+{
+	var query = "mode=receiveMemo";
+	var http = new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0) {
+		var span = document.getElementById("memoContents");
+		var memo = result.resultXml.object.memo;
+		var regexp = new RegExp(/\n/ig);
+		memo = memo.replace(regexp, "<BR>");
+		span.innerHTML = memo;
+		memoId = result.resultXml.object.id;
+		var memoDiv = document.getElementById("memoDiv");
+		memoDiv.style.visibility = "visible";
+	}
+}
+
+function memoClose()
+{
+	var isReaded = document.getElementById("isReaded");
+	if (isReaded.checked) {
+		var query = "mode=readMemo";
+		query += "&id=" + memoId;
+		var http = new JKL.ParseXML("member.aspx", query);
+		var result = http.parse();
+	}
+	
+	var memoDiv = document.getElementById("memoDiv");
+	memoDiv.style.visibility = "hidden";
+
+	receiveMemo();
+}
 </script>
+
 <table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
 <tr><td width="80" align="center"><b style="color:white">Notice</b></td>
 	<td width="880" height="30"><font size=4"><b>&nbsp;
@@ -218,3 +254,28 @@ function exchangePoint(point)
 	</td>
 </tr>
 </table>
+<div id="memoDiv" style="padding:10 10 10 10;position:absolute;left:50%;top:50%;width:350px;height:350px;z-index:2;margin-left:-175px;margin-top:-175px;visibility:hidden;background-color:#CCCCCC;color:#000000">
+<form>
+<table border=0 style='width:100%;color:#000000'>
+<tr>
+<td align='center' style='color:#000000'><font size=3><B>긴급알림</B></font></td>
+</tr>
+<tr height=100%>
+<td height=280px>
+<span id="memoContents" style='width:100%;height:100%;color:#000000' valign='top'></span>
+</td>
+</tr>
+<tr>
+<td align='right' style='color:#000000'>
+	다시보지않음<input type="checkbox" id="isReaded"/>
+	닫기 <img src="images/btn_coment_del.gif" onclick="memoClose()"/>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<script>
+<%if (login) {%>
+receiveMemo();
+<%}%>
+</script>

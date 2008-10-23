@@ -2,6 +2,7 @@ package com.xwin.web.controller.user;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
+import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -352,6 +354,51 @@ public class MemberController extends XwinController
 		}
 		
 		ResultXml rx = new ResultXml(0, message, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView receiveMemo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("isReaded", "N");
+		
+		List<Memo> memoList = memoDao.selectMemoList(param);
+		Memo memo = null;
+		if (memoList != null && memoList.size() > 0)
+			memo = memoList.get(0);
+		
+		ResultXml rx = new ResultXml(0, null, memo);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView readMemo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		String id = request.getParameter("id");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		param.put("isReaded", "Y");
+		
+		memoDao.updateMemo(param);
+				
+		ResultXml rx = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
