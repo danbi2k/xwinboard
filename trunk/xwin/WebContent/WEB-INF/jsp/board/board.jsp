@@ -107,7 +107,7 @@
     <!-----[ 페이징 ]--------------------------------------------/-->
     
    <%
-	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
 	
@@ -147,7 +147,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewUserBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
+	location.href="board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

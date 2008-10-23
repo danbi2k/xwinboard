@@ -83,7 +83,8 @@
 	<%
 		if (moneyInList != null && moneyInList.size() > 0) {
 			for (MoneyIn moneyIn : moneyInList) {
-				boolean isCancel = moneyIn.getStatus().equals(Code.MONEY_IN_CANCEL); 
+				boolean isCancel = moneyIn.getStatus().equals(Code.MONEY_IN_CANCEL) ||
+					moneyIn.getStatus().equals(Code.MONEY_IN_CANCEL_TIMEOUT); 
 	%>
 		<tr bgcolor='black'>
 			<td><%=moneyIn.getReqDateStr()%></td>

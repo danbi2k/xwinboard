@@ -308,7 +308,7 @@ public class MemberController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView exchangePoint(HttpServletRequest request,
+	public synchronized ModelAndView exchangePoint(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)

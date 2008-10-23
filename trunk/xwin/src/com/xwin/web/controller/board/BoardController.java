@@ -24,7 +24,7 @@ public class BoardController extends XwinController
 {
 	public static final Integer ROWSIZE = 25;
 	
-	public ModelAndView viewUserBoard(HttpServletRequest request,
+	public ModelAndView viewBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
@@ -35,26 +35,13 @@ public class BoardController extends XwinController
 		String pageIndex = request.getParameter("pageIndex");
 		String boardName = request.getParameter("boardName");
 		
-		ModelAndView mv = viewBoard(pageIndex, boardName, null);
+		String userId = null;
+		if (boardName.equals("qna")) {
+			Member member = (Member) request.getSession().getAttribute("Member");
+			userId = member.getUserId();
+		}			
 		
-		return mv;
-	}
-	
-	public ModelAndView viewQnaBoard(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
-		
-		String pageIndex = request.getParameter("pageIndex");
-		String boardName = request.getParameter("boardName");
-
-		ModelAndView mv = null;
-		Member member = (Member) request.getSession().getAttribute("Member");
-		
-		mv = viewBoard(pageIndex, boardName, member.getUserId());
+		ModelAndView mv = viewBoard(pageIndex, boardName, userId);
 		
 		return mv;
 	}

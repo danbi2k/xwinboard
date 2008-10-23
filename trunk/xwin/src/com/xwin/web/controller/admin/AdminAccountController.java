@@ -51,9 +51,10 @@ public class AdminAccountController extends XwinController
 		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
 		
 		if (status != null && status.equals(Code.MONEY_IN_REQUEST)) {
-			List<String> statusList = new ArrayList(2);
+			List<String> statusList = new ArrayList<String>(5);
 			statusList.add(Code.MONEY_IN_REQUEST);
 			statusList.add(Code.MONEY_IN_CANCEL);
+			statusList.add(Code.MONEY_IN_CANCEL_TIMEOUT);
 			param.put("statusList", statusList);
 		} else {
 			param.put("status", status);
@@ -295,10 +296,12 @@ public class AdminAccountController extends XwinController
 			
 			Member member = memberDao.selectMember(moneyOut.getUserId(), null);
 			
-			String nickName = member.getNickName();
-			String mobile = member.getMobile().replaceAll("-", "");
-			String message = nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다. -bwin-";
-			sendSmsConnector.sendSms(message, mobile, "0000000000");
+			if (member.getGetSms().equals("Y")) {
+				String nickName = member.getNickName();
+				String mobile = member.getMobile().replaceAll("-", "");
+				String message = nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다. -bwin-";
+				sendSmsConnector.sendSms(message, mobile, "0000000000");
+			}
 		
 			rx = new ResultXml(0, "환전되었습니다", null);
 		} else {

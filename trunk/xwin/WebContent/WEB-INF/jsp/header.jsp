@@ -78,8 +78,8 @@
 <li><a href="game.aspx?mode=viewGameList&type=handy"><img src='images/menu_handy.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
 <li><a href="aboutHandy.aspx"><img src='images/menu_abouthandy.jpg' border='0'></a></li>
-<li><a href="board.aspx?mode=viewUserBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>
-<li><a href="board.aspx?mode=viewQnaBoard&boardName=qna"><img src='images/menu_qna.jpg' border='0'></a></li>
+<li><a href="board.aspx?mode=viewBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>
+<li><a href="board.aspx?mode=viewBoard&boardName=qna"><img src='images/menu_qna.jpg' border='0'></a></li>
 </ul>
 </td>
 </tr>

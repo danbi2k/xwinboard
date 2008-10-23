@@ -107,7 +107,7 @@ function deleteItem()
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "board.aspx?mode=viewUserBoard&boardName=<%=boardName%>";
+			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardName%>";
 		}
 	}
 }

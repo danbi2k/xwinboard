@@ -48,6 +48,7 @@ public class Code
 	public static final String MONEY_IN_SUCCESS			= "MC002";
 	public static final String MONEY_IN_CANCEL			= "MC003";
 	public static final String MONEY_IN_DIRECT			= "MC004";
+	public static final String MONEY_IN_CANCEL_TIMEOUT	= "MC005";
 	
 	public static final String MONEY_OUT_REQUEST	= "ME001";
 	public static final String MONEY_OUT_SUCCESS	= "ME002";
@@ -127,6 +128,7 @@ public class Code
 		put(MONEY_IN_SUCCESS, "충전성공");
 		put(MONEY_IN_CANCEL, "충전취소");
 		put(MONEY_IN_DIRECT, "직충전");
+		put(MONEY_IN_CANCEL_TIMEOUT, "시간초과");
 		
 		put(MONEY_OUT_REQUEST, "환전요청");
 		put(MONEY_OUT_SUCCESS, "환전성공");

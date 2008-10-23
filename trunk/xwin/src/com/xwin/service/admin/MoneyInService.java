@@ -8,14 +8,14 @@ import java.util.Map;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.admin.Transaction;
-import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.infra.util.Code;
-import com.xwin.infra.util.XwinUtil;
 
 public class MoneyInService extends XwinService
 {
+	private static final long TIMEOUT  = 60 * 60 * 1000;
+	
 	public Integer processMoneyIn(String moneyInId)
 	{
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(moneyInId);		
@@ -28,6 +28,17 @@ public class MoneyInService extends XwinService
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(null, Code.MONEY_IN_REQUEST);
 		if (moneyInList != null) {
 			for (MoneyIn moneyIn : moneyInList) {
+				
+				//타임아웃 지난 입금신청은 자동취소
+				Date now = new Date();
+				long timeDiff = now.getTime() - moneyIn.getReqDate().getTime();
+				if (timeDiff >= TIMEOUT) {
+					moneyIn.setStatus(Code.MONEY_IN_CANCEL_TIMEOUT);
+					moneyIn.setProcDate(now);
+					moneyInDao.updateMoneyIn(moneyIn);
+					continue;
+				}
+				
 				String name = moneyIn.getName();
 				Long money = moneyIn.getMoney();	
 				

@@ -47,7 +47,7 @@ public class BettingController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView betting(HttpServletRequest request,
+	public synchronized ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
