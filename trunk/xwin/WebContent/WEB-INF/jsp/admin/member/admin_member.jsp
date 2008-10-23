@@ -121,7 +121,7 @@ if (memberList != null) {
 
 <div class="pages">
 <%
-	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
 	

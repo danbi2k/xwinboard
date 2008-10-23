@@ -74,7 +74,7 @@ if (accessList != null) {
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
 	
