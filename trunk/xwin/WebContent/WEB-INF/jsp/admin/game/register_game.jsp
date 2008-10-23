@@ -99,29 +99,20 @@
 	</tr>		
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">홈팀</td>
-		<td bgcolor="#FFFFFF" width=35%>팀명 <input type='text' name='homeTeam'></td>
+		<td bgcolor="#FFFFFF" width=35%>팀명 <input type='text' name="homeTeam"/></td>
 	 	<td align="center" bgcolor="E7E7E7" width="15%">원정팀</td>
-		<td bgcolor="#FFFFFF" width="35%">팀명 <input type='text' name='awayTeam'></td>
+		<td bgcolor="#FFFFFF" width="35%">팀명 <input type='text' name="awayTeam"/></td>
 	</tr>	
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
-		<td bgcolor="#FFFFFF"  colspan=3>
-		승 <input type='text' name='winRate' size=5>
+		<td bgcolor="#FFFFFF"  colspan="3">
+		승 <input type='text' name='winRate' size=5/>
 		<%if (type.equals("wdl")) {%>
-		무 <input type='text' name='drawRate' size=5>
+		무 <input type='text' name='drawRate' size=5/>
 		<%} else { %>
-		핸디
-		<select name='drawRate'>
-		<%
-		for (double i = -100 ; i <= 100 ; i+=0.5) {
-		%>
-			<option value="<%=i%>" <%=i==0?"selected":""%>><%=i>0?"+"+i:i%></option>
-		<%
-		}
-		%>	
-		</select>
+		핸디	 <input type='text' name='drawRate' size=5/>
 		<%} %>
-		패 <input type='text' name='loseRate' size=5>											
+		패 <input type='text' name='loseRate' size=5/>											
 		</td>
 	</tr>		
 </table>
