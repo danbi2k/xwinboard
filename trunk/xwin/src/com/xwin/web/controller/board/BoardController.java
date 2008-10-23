@@ -187,10 +187,7 @@ public class BoardController extends XwinController
 		boardDao.insertBoardItem(boardItem);
 	
 		ModelAndView mv = null;
-		if (boardName.equals("user"))
-			mv = new ModelAndView("redirect:/board.aspx?mode=viewUserBoard&boardName=" + boardName);
-		else if (boardName.equals("qna"))
-			mv = new ModelAndView("redirect:/board.aspx?mode=viewQnaBoard&boardName=" + boardName);
+		mv = new ModelAndView("redirect:/board.aspx?mode=viewBoard&boardName=" + boardName);
 		
 		return mv;
 	}
