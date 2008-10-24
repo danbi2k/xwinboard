@@ -132,7 +132,7 @@ function setEmail(obj)
 	</colgroup>
 	<tr><td>회원아이디</td>
 		<td><table cellpadding="0" cellspacing="0"><tr>
-			<td><input class="member" name="userId" type="text" value=""></td>
+			<td><input class="member" name="userId" type="text" value=""> (영문/숫자 조합 가능)</td>
 			</tr></table>
 		</td></tr>
 	<tr><td>비밀번호</td>

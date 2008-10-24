@@ -65,13 +65,8 @@ public class KtfSmsConnector
 				
 				mapList.add(boxMap);
 			}				
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("SMS 서버에 연결하지 못하였습니다");
 		}
 		
