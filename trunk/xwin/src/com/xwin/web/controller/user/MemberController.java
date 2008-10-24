@@ -92,14 +92,14 @@ public class MemberController extends XwinController
 										String WelcomeMsg = "환영합니다";
 										
 										Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-										if (cnt == 0) {
-											memberDao.loggingGetEvent(member.getMobile());
-											member.setBalance(5000L);
-											WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
-											
-										} else {
+//										if (cnt == 0) {
+//											memberDao.loggingGetEvent(member.getMobile());
+//											member.setBalance(5000L);
+//											WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
+//											
+//										} else {
 											member.setBalance(0L);
-										}
+//										}
 										
 										memberDao.insertMember(member);
 										

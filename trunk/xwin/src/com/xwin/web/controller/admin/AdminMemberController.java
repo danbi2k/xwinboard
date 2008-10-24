@@ -150,6 +150,26 @@ public class AdminMemberController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView recorverMember(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId");
+		
+		Member member = memberDao.selectMember(userId, null);
+		member.setStatus(Code.USER_STATUS_NORMAL);
+		
+		memberDao.updateMember(member);
+		
+		ResultXml rx = new ResultXml(0, "복구시켰습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
 	public ModelAndView updateMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{

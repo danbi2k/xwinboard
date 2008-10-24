@@ -17,6 +17,7 @@ import com.xwin.domain.user.Member;
 import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -32,8 +33,8 @@ public class BoardController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
-		String pageIndex = request.getParameter("pageIndex");
-		String boardName = request.getParameter("boardName");
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String boardName = XwinUtil.nvl(request.getParameter("boardName"));
 		
 		String userId = null;
 		if (boardName.equals("qna")) {

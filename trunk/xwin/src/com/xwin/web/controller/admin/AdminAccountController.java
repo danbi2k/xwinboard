@@ -246,19 +246,19 @@ public class AdminAccountController extends XwinController
 			moneyInDao.updateMoneyIn(moneyIn);
 			
 			//포인트 지급
-			Double point = moneyIn.getMoney() * 0.05;			
-			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
-			
-			Point pointLog = new Point();
-			pointLog.setUserId(member.getUserId());
-			pointLog.setType(Code.POINT_TYPE_MONEYIN);
-			pointLog.setDate(new Date());
-			pointLog.setOldBalance(member.getPoint());
-			pointLog.setMoney(point.longValue());
-			pointLog.setBalance(member.getPoint() + point.longValue());
-			pointLog.setMoneyInId(moneyIn.getId());
-			
-			pointDao.insertPoint(pointLog);
+//			Double point = moneyIn.getMoney() * 0.05;			
+//			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+//			
+//			Point pointLog = new Point();
+//			pointLog.setUserId(member.getUserId());
+//			pointLog.setType(Code.POINT_TYPE_MONEYIN);
+//			pointLog.setDate(new Date());
+//			pointLog.setOldBalance(member.getPoint());
+//			pointLog.setMoney(point.longValue());
+//			pointLog.setBalance(member.getPoint() + point.longValue());
+//			pointLog.setMoneyInId(moneyIn.getId());
+//			
+//			pointDao.insertPoint(pointLog);
 			
 			/*
 			String nickName = member.getNickName();

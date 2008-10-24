@@ -147,8 +147,12 @@
 <BR>													
 <table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=100% bgcolor='#ffffff' align='left'>	
+		<td width=100% bgcolor='#ffffff' align='left'>
+			<%if (member.getStatus().equals(Code.USER_STATUS_NORMAL)) { %>
 			<input type="button" value="회원탈퇴" onclick="secedeMember()"/>
+			<%} else { %>
+			<input type="button" value="회원복구" onclick="recorverMember()"/>
+			<%} %>
 			<!-- img src='images/admin/but_modify.gif' border=0 onclick="checkIT()" -->
 			<!-- img src='images/admin/but_cancel.gif' border=0 onClick="history.back()" style="cursor:hand" -->
 		</td>
@@ -323,6 +327,19 @@ function secedeMember()
 {
 	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n탈퇴시키시겠습니까?")) {
 		var query = "mode=secedeMember";
+		query += "&userId=<%=member.getUserId()%>";
+		var http = new JKL.ParseXML("adminMember.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.href = "adminMember.aspx?mode=viewAdminMember&status=US001";
+	}	
+}
+
+function recorverMember()
+{
+	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n복구시키시겠습니까?")) {
+		var query = "mode=recorverMember";
 		query += "&userId=<%=member.getUserId()%>";
 		var http = new JKL.ParseXML("adminMember.aspx", query);
 		var result = http.parse();

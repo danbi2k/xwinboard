@@ -113,6 +113,7 @@ public class AdminBettingController extends XwinController
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("ORDERBY", "DESC");
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Integer gameCount = gameDao.selectGameCount(param);

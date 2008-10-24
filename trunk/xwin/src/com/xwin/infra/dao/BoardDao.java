@@ -31,10 +31,11 @@ public class BoardDao extends XwinDao
 		BoardItem boardItem = 
 			(BoardItem) sqlMapClientTemplate.queryForObject("selectBoardItem", param);
 		
+		if (boardItem != null) {
 		List<BoardComment> boardCommentList = 
-			selectBoardCommentList(boardItem.getId());
-		
-		boardItem.setBoardCommentList(boardCommentList);
+			selectBoardCommentList(boardItem.getId());				
+			boardItem.setBoardCommentList(boardCommentList);
+		}
 		
 		return boardItem;
 	}
