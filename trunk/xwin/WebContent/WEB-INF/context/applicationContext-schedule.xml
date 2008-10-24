@@ -89,7 +89,7 @@
 			<list>
 				<ref bean="gameBetStatusTrigger"/>
 				<!--ref bean="autoMoneyInTrigger"/-->
-				<ref bean="sendSmsTrigger"/>
+				<!--ref bean="sendSmsTrigger"/ -->
 				<ref bean="betMoneyStatTrigger"/>
 			</list>
 		</property>

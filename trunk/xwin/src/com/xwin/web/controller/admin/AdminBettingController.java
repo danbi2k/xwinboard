@@ -23,7 +23,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminBettingController extends XwinController
 {
-	public static final int ROWSIZE = 25;
+	public static final int ROWSIZE = 40;
 	
 	public ModelAndView viewBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -113,7 +113,10 @@ public class AdminBettingController extends XwinController
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
-		param.put("ORDERBY", "DESC");
+		if (status != null && status.equals(Code.GAME_STATUS_RUN))
+			param.put("ORDERBY", "ASC");
+		else
+			param.put("ORDERBY", "DESC");
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Integer gameCount = gameDao.selectGameCount(param);

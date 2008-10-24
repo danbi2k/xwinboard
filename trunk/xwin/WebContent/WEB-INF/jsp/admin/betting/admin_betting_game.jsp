@@ -5,7 +5,7 @@
 <%@ page import="java.util.*"%>
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
-	final Integer ROWSIZE = 10;
+	final Integer ROWSIZE = 40;
 	final Integer SHOWPAGE = 10;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");

@@ -46,7 +46,7 @@
 
 <input type="button" value="리스트" onclick="history.back()"/>
 <input type="button" value="수정" onclick="updateBoardItem()"/>
-<input type="button" value="삭제" onclick="deleteBoardItem()"/
+<input type="button" value="삭제" onclick="deleteBoardItem()"/>
 
 <br>
 <br>

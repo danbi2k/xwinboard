@@ -106,7 +106,7 @@ if (memberList != null) {
 	<tr>
 		<td width=5%><%=memberIdx--%></td>
 		<td width=10%><%=Code.getValue(member.getGrade())%></td>
-		<td width=20%><a href='adminMember.aspx?mode=viewMemberDetail&userId=<%=member.getUserId()%>'><%=member.getUserId()%></a></td>
+		<td width=20%><a href='javascript:goDetail("<%=member.getUserId()%>")'><%=member.getUserId()%></a></td>
 		<td width=15%><%=member.getNickName()%></td>
 		<td width=10%><%=XwinUtil.comma3(member.getBalance())%></td>
 		<td width=15%><%=member.getMobile()%></td>
@@ -150,6 +150,12 @@ if (memberList != null) {
 %>
 </div>
 <script>
+function goDetail(id)
+{
+	var encoded = encodeURIComponent(id);
+	location.href = "adminMember.aspx?mode=viewMemberDetail&userId=" + encoded;
+}
+
 function goPage(index)
 {
 	var frm = document.search;

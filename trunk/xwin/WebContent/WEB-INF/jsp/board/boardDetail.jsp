@@ -11,7 +11,9 @@
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 	String boardName = request.getParameter("boardName");
-	String pageIndex = request.getParameter("pageIndex");
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	if (pageIndex == null)
+		pageIndex = "0";
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">

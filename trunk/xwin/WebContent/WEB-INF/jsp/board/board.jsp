@@ -22,6 +22,8 @@
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
+	else 
+		pageIndex = "0";
 	
 	int itemIdx = totalCount - (pIdx * ROWSIZE);
 %>
