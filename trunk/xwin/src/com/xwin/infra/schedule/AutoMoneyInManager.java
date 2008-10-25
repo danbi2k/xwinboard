@@ -13,6 +13,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.KtfSmsMessage;
+import com.xwin.infra.dao.KtfSmsDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.KtfSmsConnector;
 import com.xwin.infra.util.Code;
@@ -25,6 +26,7 @@ public class AutoMoneyInManager extends QuartzJobBean
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException
 	{
+		KtfSmsDao ktfSmsDao = (KtfSmsDao) context.getJobDetail().getJobDataMap().get("ktfSmsDao");
 		TransactionDao transactionDao = (TransactionDao) context.getJobDetail().getJobDataMap().get("transactionDao");
 		KtfSmsConnector ktfSmsConnector = (KtfSmsConnector) context.getJobDetail().getJobDataMap().get("ktfSmsConnector");
 		MoneyInService moneyInService = (MoneyInService) context.getJobDetail().getJobDataMap().get("moneyInService");
@@ -91,6 +93,8 @@ public class AutoMoneyInManager extends QuartzJobBean
 					transactionDao.insertTransaction(transaction);
 				} else if (message.getMsg().startsWith("[KB]") && message.getMsg().indexOf("출금") > 0) {
 					
+				} else {
+					ktfSmsDao.insertMessage(message);
 				}
 			}	
 		}

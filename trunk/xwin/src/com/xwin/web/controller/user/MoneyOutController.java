@@ -53,7 +53,7 @@ public class MoneyOutController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView moneyOutRequest(HttpServletRequest request,
+	public synchronized ModelAndView moneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response, MoneyOut moneyOut) throws Exception
 	{
 		if (Admin.DENY_EXCHANGE.equals("Y") == false)
@@ -65,6 +65,8 @@ public class MoneyOutController extends XwinController
 		
 		Member member =
 			(Member) request.getSession().getAttribute("Member");
+		
+		member = memberDao.selectMember(member.getUserId(), null);
 		
 		ResultXml rx = null;
 		String pin = request.getParameter("pin");
