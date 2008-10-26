@@ -4,6 +4,7 @@ public class BetGame extends Game
 {
 	private String bettingId;
 	private String guess;
+	private Double guessRate;
 	private String hit;
 	
 	public String getBettingId() {
@@ -23,5 +24,11 @@ public class BetGame extends Game
 	}
 	public void setHit(String hit) {
 		this.hit = hit;
+	}
+	public Double getGuessRate() {
+		return guessRate;
+	}
+	public void setGuessRate(Double guessRate) {
+		this.guessRate = guessRate;
 	}
 }

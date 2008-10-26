@@ -89,7 +89,8 @@
 		<td><%=moneyOut.getName()%></td>
 		<td><%=moneyOut.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyOut.getStatus())%></td>
-		<td><input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'></td>
+		<td><input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'>	
+		<input type='button' value='취소' onclick='cancelMoneyOutRequest(<%=moneyOut.getId()%>)'></td>
 	</tr>
 <%
 	}
@@ -135,6 +136,24 @@
 %>
 </div>
 <script>
+function cancelMoneyOutRequest(id)
+{
+	if (confirm("환전 요청을 취소하시겠습니까?")) {
+		var query = "mode=cancelMoneyOutRequest";
+		query += "&id=" + id;
+		
+		var http = new JKL.ParseXML("adminAccount.aspx", query);
+		var result = http.parse();
+	
+		if (result.resultXml.code == 0) {
+			alert("환전이 취소되었습니다");
+			location.reload();
+		}
+	
+		checkIndi();
+	}	
+}
+
 function saveMoneyOutIsChecked(cobj)
 {
 	var query = "mode=saveMoneyOutIsChecked";

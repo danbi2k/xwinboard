@@ -1,7 +1,9 @@
 package com.xwin.web.controller.user;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +47,11 @@ public class MoneyOutController extends XwinController
 		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
-		List<MoneyOut> moneyOutList =
-			moneyOutDao.selectMoneyOutList(member.getUserId(), Code.MONEY_OUT_REQUEST);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("notStatus", Code.MONEY_OUT_DIRECT);
+		
+		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		
 		ModelAndView mv = new ModelAndView("user/money_out_req_list");
 		mv.addObject("moneyOutList", moneyOutList);

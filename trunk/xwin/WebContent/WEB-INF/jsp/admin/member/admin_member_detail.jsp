@@ -148,7 +148,7 @@
 <table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='left'>
-			<%if (member.getStatus().equals(Code.USER_STATUS_NORMAL)) { %>
+			<%if (member.getStatus().equals(Code.USER_STATUS_SECEDE) == false) { %>
 			<input type="button" value="회원탈퇴" onclick="secedeMember()"/>
 			<%} else { %>
 			<input type="button" value="회원복구" onclick="recorverMember()"/>

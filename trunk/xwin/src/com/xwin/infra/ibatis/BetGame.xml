@@ -25,16 +25,17 @@
 		<result property="leagueId" column="LEAGUE_ID"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
 		<result property="guess" column="GUESS"/>
+		<result property="guessRate" column="GUESS_RATE"/>
 	</resultMap>
 	
 	<insert id="insertBetGame" parameterClass="BetGame">
-		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS)
-		VALUES(#bettingId#, #id#, #guess#)
+		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS, GUESS_RATE)
+		VALUES(#bettingId#, #id#, #guess#, #guessRate#)
 	</insert>
 	
 	<select id="selectBetGameList" resultMap="betGameResultMap"
 		parameterClass="string">
-		SELECT g.*, l.NAME as LEAGUE_NAME, b.BETTING_ID, b.GUESS
+		SELECT g.*, l.NAME as LEAGUE_NAME, b.BETTING_ID, b.GUESS, b.GUESS_RATE
 		FROM tbl_game g, tbl_league l, tbl_betting_game b
 		WHERE
 		g.LEAGUE_ID = l.ID AND

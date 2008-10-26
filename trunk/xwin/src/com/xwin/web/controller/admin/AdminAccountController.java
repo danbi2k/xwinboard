@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Point;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.domain.user.MoneyInOut;
@@ -505,7 +504,7 @@ public class AdminAccountController extends XwinController
 	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Member") == null)
+		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("dummy");
 		
 		ResultXml rx = null;
@@ -519,6 +518,45 @@ public class AdminAccountController extends XwinController
 			moneyIn.setProcDate(new Date());
 			moneyInDao.updateMoneyIn(moneyIn);			
 			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView cancelMoneyOutRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = null;
+		
+		String id = request.getParameter("id");
+		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);		
+		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST) == false)
+			rx = new ResultXml(0, "환전요청 상태가 아닙니다", null);
+		else {
+			Member member = memberDao.selectMember(moneyOut.getUserId(), null);
+			
+			moneyOut.setStatus(Code.MONEY_OUT_CANCEL);
+			moneyOut.setProcDate(new Date());
+			moneyOutDao.updateMoneyOut(moneyOut);			
+			rx = new ResultXml(0, "환전 신청이 취소되었습니다", null);
+			
+			Account account = new Account();
+			account.setUserId(moneyOut.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_MONEYOUT_CANCEL);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(moneyOut.getMoney());
+			account.setBalance(member.getBalance() + moneyOut.getMoney());
+			account.setMoneyOutId(moneyOut.getId());
+			
+			accountDao.insertAccount(account);
+			
+			memberDao.plusMinusBalance(member.getUserId(), moneyOut.getMoney());
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

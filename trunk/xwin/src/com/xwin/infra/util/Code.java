@@ -68,6 +68,7 @@ public class Code
 	public static final String ACCOUNT_TYPE_MONEYOUT_DIRECT		= "AT008";
 	public static final String ACCOUNT_TYPE_HANDYDRAW	= "AT009";
 	public static final String ACCOUNT_TYPE_POINTCHARGE	= "AT010";
+	public static final String ACCOUNT_TYPE_MONEYOUT_CANCEL	= "AT011";
 	
 	public static final String POINT_TYPE_MONEYIN		= "PNT01";
 	public static final String POINT_TYPE_BETTING		= "PNT02";
@@ -120,6 +121,7 @@ public class Code
 		put(ACCOUNT_TYPE_MONEYOUT_DIRECT, "직차감");
 		put(ACCOUNT_TYPE_HANDYDRAW, "무승부(환불)");
 		put(ACCOUNT_TYPE_POINTCHARGE, "포인트충전");
+		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환전취소(환불)");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
 		put(BANKBOOK_STATUS_UNUSED, "사용중지");

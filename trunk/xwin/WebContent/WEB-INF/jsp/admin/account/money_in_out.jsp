@@ -74,7 +74,8 @@
 		<th>은행명</td>
 		<th>계좌번호</td>
 		<th>예금주</td>
-		<th>신청일자</td>
+		<th>신청일</td>
+		<th>처리일</td>
 		<th>상태</td>
 	</tr>
 	<%
@@ -90,6 +91,7 @@
 		<td><%=moneyInOut.getNumber()%></td>
 		<td><%=moneyInOut.getName()%></td>
 		<td><%=moneyInOut.getReqDateStr()%></td>
+		<td><%=moneyInOut.getProcDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>
 	</tr>
 <%

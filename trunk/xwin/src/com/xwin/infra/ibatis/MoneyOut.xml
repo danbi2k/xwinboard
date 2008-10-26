@@ -72,7 +72,7 @@
 				STATUS = #status#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #status#
+				STATUS != #notStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
@@ -130,8 +130,8 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #status#
+			<isNotNull prepend="AND" property="c">
+				STATUS != #notStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
@@ -186,7 +186,7 @@
 				STATUS = #status#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notStatus">
-				STATUS != #status#
+				STATUS != #notStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusList">
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
