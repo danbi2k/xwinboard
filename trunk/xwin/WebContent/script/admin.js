@@ -1,4 +1,5 @@
-function goUser(userId)
+function goMemberDetail(id)
 {
-	location.href = 'adminMember.aspx?mode=viewMemberDetail&userId=' + id;
+	var encoded = encodeURIComponent(id);
+	location.href = "adminMember.aspx?mode=viewMemberDetail&userId=" + encoded;
 }

@@ -94,7 +94,7 @@ function cancelBetting(id, gameType)
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><a href="adminBetting.aspx?mode=viewBettingDetail&id=<%=betting.getId()%>"><%=betting.getId()%></a></td>								
-		<td><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=betting.getUserId()%>"><%=betting.getUserId()%></a> (<%=betting.getNickName()%>)</td>
+		<td><a href='javascript:goMemberDetail("<%=betting.getUserId()%>")'><%=betting.getUserId()%></a> (<%=betting.getNickName()%>)</td>
 		<td><%=betting.getDateStr()%></td>
 		<td><%=betting.getRateStr()%></td>
 		<td><%=XwinUtil.comma3(betting.getMoney())%></td>

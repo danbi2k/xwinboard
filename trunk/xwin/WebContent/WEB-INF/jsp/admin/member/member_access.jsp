@@ -51,7 +51,7 @@ if (accessList != null) {
 %>
 	<tr>
 		<td width=5%><%=access.getId()%></td>
-		<td width=10%><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=access.getUserId()%>"><%=access.getUserId()%></a></td>
+		<td width=10%><a href='javascript:goMemberDetail("<%=access.getUserId()%>")'><%=access.getUserId()%></a></td>
 		<td width=10%><%=access.getNickName()%></td>
 		<td width=*><%=XwinUtil.toDateStr(access.getDate(), 1)%></td>
 		<td width=10%><%=access.getIpAddress()%></td>

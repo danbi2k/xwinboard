@@ -81,7 +81,7 @@
 	<tr align='center' bgcolor='#ffffff'>
 		<th><input type="checkbox" name="checkCheck" value="<%=moneyIn.getId()%>" onclick="saveMoneyInIsChecked(this)" <%=moneyIn.getIsChecked().equals("Y")?"checked":""%>/></th>
 		<td width=5%><%=moneyIn.getId()%></td>
-		<td><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=moneyIn.getUserId()%>"><%=moneyIn.getUserId()%></a> (<%=moneyIn.getNickName()%>)</td>
+		<td><a href='javascript:goMemberDetail("<%=moneyIn.getUserId()%>")'><%=moneyIn.getUserId()%></a> (<%=moneyIn.getNickName()%>)</td>
 		<td><%=moneyIn.getName()%></td>
 		<td><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 		<td><%=moneyIn.getReqDateStr()%></td>

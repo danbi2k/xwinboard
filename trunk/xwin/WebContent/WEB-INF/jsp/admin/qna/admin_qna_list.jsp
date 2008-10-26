@@ -56,7 +56,7 @@ if (qnaList != null) {
 	<tr>
 		<th width=5%><input type="checkbox" name="checkCheck" value="<%=boardItem.getId()%>" onclick="saveQnaIsChecked(this)" <%=boardItem.getIsChecked().equals("Y")?"checked":""%>/></th>
 		<td width=5% align='center'><%=boardItem.getId()%></td>
-		<td width=20% align='left'>&nbsp;<a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=boardItem.getUserId()%>"><%=boardItem.getUserId()%></a> (<%=boardItem.getNickName()%>)
+		<td width=20% align='left'>&nbsp;<a href='javascript:goMemberDetail("<%=boardItem.getUserId()%>")'><%=boardItem.getUserId()%></a> (<%=boardItem.getNickName()%>)
 		<td width=*>&nbsp;&nbsp;<a href="adminQna.aspx?mode=viewQnaDetail&id=<%=boardItem.getId()%>">
 			<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 		</a></td>

@@ -85,7 +85,7 @@
 	%>
 	<tr>		
 		
-		<td><a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=moneyInOut.getUserId()%>"><%=moneyInOut.getUserId()%></a> (<%=moneyInOut.getNickName()%>)</td>
+		<td><a href='javascript:goMemberDetail("<%=moneyInOut.getUserId()%>")'><%=moneyInOut.getUserId()%></a> (<%=moneyInOut.getNickName()%>)</td>
 		<td><font color=<%=plus?"blue":"red"%>><%=XwinUtil.comma3(moneyInOut.getMoney())%></font></td>
 		<td><%=moneyInOut.getBankName()%></td>
 		<td><%=moneyInOut.getNumber()%></td>

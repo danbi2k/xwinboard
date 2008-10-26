@@ -55,7 +55,7 @@ if (boardItemList != null) {
 		<%if (boardItem.getUserId().equals("secadmin")) { %>
 		<td width=20% align=left>&nbsp;<%=boardItem.getUserId()%> (<%=boardItem.getNickName()%>)
 		<%} else { %>
-		<td width=20% align=left>&nbsp;<a href="adminMember.aspx?mode=viewMemberDetail&userId=<%=boardItem.getUserId()%>"><%=boardItem.getUserId()%> (<%=boardItem.getNickName()%>)
+		<td width=20% align=left>&nbsp;<a href='javascript:goMemberDetail("<%=boardItem.getUserId()%>")'><%=boardItem.getUserId()%> (<%=boardItem.getNickName()%>)
 		<%} %>
 		<td width=*>&nbsp;&nbsp;<a href="adminBoard.aspx?mode=viewBoardDetail&id=<%=boardItem.getId()%>"><%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</a></td>
 		<td width=15% align=center><%=XwinUtil.toDateStr(boardItem.getDate(), 1)%></td>
