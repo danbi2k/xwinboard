@@ -6,7 +6,7 @@
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
 	final Integer ROWSIZE = 25;
-	final Integer SHOWPAGE = 10;
+	final Integer SHOWPAGE = 20;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
@@ -30,63 +30,6 @@
 	{
 		document.search.pageIndex.value = pageIndex;
 		document.search.submit();
-	}
-
-	function readyGame(id)
-	{
-		if (confirm("경기를 대기 하시겠습니까?")) {
-			var query = "mode=readyGame";
-			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-			if (result.resultXml.code == 0) {
-				location.reload();
-			}
-		}
-	}
-	
-	function runGame(id, oselect)
-	{
-		if (confirm("경기를 진행 하시겠습니까?")) {	
-			var query = "mode=runGame";
-			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-			if (result.resultXml.code == 0)
-				location.reload();
-		}
-	}
-	
-	function endGame(id)
-	{
-		var homeScore = document.getElementById("homeScore_"+id).value;
-		var awayScore = document.getElementById("awayScore_"+id).value;
-
-		if (homeScore == '' || awayScore == '') {
-			alert("스코어를 입력하세요");
-			return;
-		}
-
-		if (confirm("입력하신 스코어는 " + homeScore + " : " + awayScore + " 입니다.\n경기를 종료 하시겠습니까?")) {
-			var query = "mode=endGame";
-			query += "&homeScore=" + homeScore;
-			query += "&awayScore=" + awayScore;
-			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-			if (result.resultXml.code == 0) {
-				location.reload();
-			}
-		}
 	}
 
 	function cancelGame(id)

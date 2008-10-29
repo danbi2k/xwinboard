@@ -7,8 +7,9 @@
  <%@ include file="../admin_header.jsp"%>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
-	Game game = (Game) request.getAttribute("game");
+	Game game = (Game) request.getAttribute("game");	
 	String type = request.getParameter("type");	
+	String pageIndex = request.getParameter("pageIndex");
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
@@ -60,13 +61,13 @@
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
-		if (result.resulXml.code == 0) {
-			location.href = "adminGame.aspx?mode=viewGameList&type=wdl";
+		if (result.resultXml.code == 0) {
+			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&pageIndex=<%=pageIndex%>";
 		}
 	}
 </SCRIPT>
 
-<form method='post' name='registerGame' onSubmit="return checkIT()">
+<form method='post' name='registerGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
@@ -146,10 +147,11 @@
 		</td>
 	</tr>	
  </table>
+</form>
 <BR>
 <table width="2%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
-	     <td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
+	     <td><input type='image' src="images/admin/but_input.gif" border="0" onclick="checkIT()"></td>                               
 	     <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
 	</tr>
 </table>

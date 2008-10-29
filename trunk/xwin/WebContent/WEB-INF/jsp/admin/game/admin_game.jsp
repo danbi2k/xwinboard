@@ -18,45 +18,16 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));
 	String betStatus = XwinUtil.nvl(request.getParameter("betStatus"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
-	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));	
+	String type = request.getParameter("type");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	
-	String type = request.getParameter("type");
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
 %>
 <%@ include file="../admin_header.jsp"%>
 <SCRIPT LANGUAGE="JavaScript">
-
-	function readyGame(id)
-	{
-		if (confirm("경기를 대기 하시겠습니까?")) {
-			var query = "mode=readyGame";
-			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-			if (result.resultXml.code == 0) {
-				location.reload();
-			}
-		}
-	}
-	
-	function runGame(id, oselect)
-	{
-		if (confirm("경기를 진행 하시겠습니까?")) {	
-			var query = "mode=runGame";
-			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
-			
-			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			alert(result.resultXml.message);
-			if (result.resultXml.code == 0)
-				location.reload();
-		}
-	}
 
 	function calcResult(id)
 	{
@@ -288,7 +259,7 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkGame" value="<%=game.getId()%>"></th>
-			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>"><%=game.getId()%></a></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>
@@ -340,9 +311,6 @@
 	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'>
 <div class="pages">
 <%
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;

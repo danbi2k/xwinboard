@@ -9,7 +9,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	
 	List<BoardItem> qnaList = (List<BoardItem>) request.getAttribute("qnaList");
 	Integer totalCount = (Integer) request.getAttribute("qnaCount");

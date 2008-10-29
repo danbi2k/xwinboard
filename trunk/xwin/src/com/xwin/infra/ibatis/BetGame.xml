@@ -13,9 +13,6 @@
 		<result property="bettingId" column="BETTING_ID"/>
 		<result property="homeTeam" column="HOME_TEAM"/>
 		<result property="awayTeam" column="AWAY_TEAM"/>
-		<result property="winRate" column="WIN_RATE"/>
-		<result property="drawRate" column="DRAW_RATE"/>
-		<result property="loseRate" column="LOSE_RATE"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameDate" column="GAME_DATE"/>
 		<result property="type" column="TYPE"/>
@@ -25,21 +22,55 @@
 		<result property="leagueId" column="LEAGUE_ID"/>
 		<result property="leagueName" column="LEAGUE_NAME"/>
 		<result property="guess" column="GUESS"/>
-		<result property="guessRate" column="GUESS_RATE"/>
+		<result property="winRate" column="WIN_RATE"/>
+		<result property="drawRate" column="DRAW_RATE"/>
+		<result property="loseRate" column="LOSE_RATE"/>
+		<result property="resultStatus" column="RESULT_STATUS"/>
+		<result property="selRate" column="SEL_RATE"/>
 	</resultMap>
 	
 	<insert id="insertBetGame" parameterClass="BetGame">
-		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS, GUESS_RATE)
-		VALUES(#bettingId#, #id#, #guess#, #guessRate#)
+		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS, WIN_RATE, DRAW_RATE, LOSE_RATE, SEL_RATE)
+		VALUES(#bettingId#, #id#, #guess#, #winRate#, #drawRate#, #loseRate#, #selRate#)
 	</insert>
 	
+	<update id="updateBetGame" parameterClass="BetGame">
+		UPDATE tbl_betting_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="result">
+				RESULT = #result#
+			</isNotNull>
+			<isNotNull prepend="," property="resultStatus">
+				RESULT_STATUS = #resultStatus#
+			</isNotNull>
+		</dynamic>
+		WHERE BETTING_ID = #bettingId# AND GAME_ID = #id#
+	</update>
+	
 	<select id="selectBetGameList" resultMap="betGameResultMap"
+		parameterClass="map">
+		SELECT g.ID, g.HOME_TEAM, g.AWAY_TEAM, g.STATUS, g.GAME_DATE, g.TYPE, g.HOME_SCORE, g.AWAY_SCORE,
+			g.LEAGUE_ID, l.NAME as LEAGUE_NAME, b.*
+		FROM tbl_game g, tbl_league l, tbl_betting_game b
+		WHERE
+		g.LEAGUE_ID = l.ID AND
+		g.ID = b.GAME_ID
+		<isNotNull prepend="AND" property="bettingId">
+			b.BETTING_ID = #bettingId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="gameId">
+			b.GAME_ID = #gameId#
+		</isNotNull>	 
+	</select>
+	
+	<select id="selectBetGameListByBettingId" resultMap="betGameResultMap"
 		parameterClass="string">
-		SELECT g.*, l.NAME as LEAGUE_NAME, b.BETTING_ID, b.GUESS, b.GUESS_RATE
+		SELECT g.ID, g.HOME_TEAM, g.AWAY_TEAM, g.STATUS, g.GAME_DATE, g.TYPE, g.HOME_SCORE, g.AWAY_SCORE,
+			g.LEAGUE_ID, l.NAME as LEAGUE_NAME, b.*
 		FROM tbl_game g, tbl_league l, tbl_betting_game b
 		WHERE
 		g.LEAGUE_ID = l.ID AND
 		g.ID = b.GAME_ID AND
-		b.BETTING_ID = #value#		 
+		b.BETTING_ID = #value#
 	</select>
 </sqlMap>

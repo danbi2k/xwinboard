@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Point;
 import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
@@ -14,7 +13,7 @@ import com.xwin.infra.util.Code;
 
 public class MoneyInService extends XwinService
 {
-	private static final long TIMEOUT  = 60 * 60 * 1000;
+	private static final long TIMEOUT  = 90 * 60 * 1000;
 	
 	public Integer processMoneyIn(String moneyInId)
 	{

@@ -78,18 +78,23 @@ function FnDrawCart(data, type) {
 			row.push(data[i].awayTeam);
 			row.push("</font></td>");
 			row.push("<td>");
-			if (data[i].guess == 'W')
+			var rate;
+			if (data[i].guess == 'W') {
 				row.push('승');
-			if (data[i].guess == 'D')
+				rate = data[i].winRate;
+			} if (data[i].guess == 'D') {
 				row.push('무');
-			if (data[i].guess == 'L')
+				rate = data[i].drawRate;
+			} if (data[i].guess == 'L') {
 				row.push('패');
+				rate = data[i].loseRate;
+			}
 			row.push("</td>");
 			row.push("<td>");
-			row.push(data[i].rate);
+			row.push(rate);
 			row.push("</td></tr>");
 			
-			multi *= data[i].rate;
+			multi *= rate;
 		}
 	} else {
 		multi = 0.00;

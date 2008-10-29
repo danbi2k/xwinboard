@@ -15,7 +15,7 @@
 	Integer totalSum = (Integer) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 %>
 
 		  

@@ -8,7 +8,7 @@
 
 <%
 	final Integer ROWSIZE = 40;
-	final Integer SHOWPAGE = 10;
+	final Integer SHOWPAGE = 20;
 	
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
@@ -24,21 +24,6 @@
 %>
 		 
 <script>
-function calculateBetting(id, gameType)
-{
-	if (confirm("정산하시겠습니까?")) {
-		var query = "mode=calculateBetting";
-		query += "&id=" + id;
-		query += "&gameType=" + gameType;
-		var http = new JKL.ParseXML("adminBetting.aspx", query);
-		var result = http.parse();
-		alert(result.resultXml.message)
-		if (result.resultXml.code == 0) {
-			location.reload(0);
-		}
-	}
-}
-
 function cancelBetting(id, gameType)
 {
 	if (confirm("취소하시겠습니까?")) {

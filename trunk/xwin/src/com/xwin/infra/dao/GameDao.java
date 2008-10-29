@@ -45,18 +45,6 @@ public class GameDao extends XwinDao
 		sqlMapClientTemplate.update("updateGame", game);
 	}
 	
-	public void updateGameScoreNull(String id, String homeScore, String awayScore, String result, String status)
-	{
-		Map<String, String> param = new HashMap<String, String>(5);
-		param.put("id", id);
-		param.put("homeScore", homeScore);
-		param.put("awayScore", awayScore);
-		param.put("result", result);
-		param.put("statue", status);
-		
-		sqlMapClientTemplate.update("updateGameScoreNull", param);
-	}
-	
 	public void deleteGame(String id)
 	{
 		sqlMapClientTemplate.delete("deleteGameById", id);

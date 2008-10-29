@@ -42,16 +42,28 @@
 		query += "&awayTeam=" + d.awayTeam.value;
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
-
+		if (d.winDeny.checked)
+			query += "&winDeny=N";
+		else
+			query += "&winDeny=Y";
+		if (d.drawDeny.checked)
+			query += "&drawDeny=N";
+		else
+			query += "&drawDeny=Y";
+		if (d.loseDeny.checked)
+			query += "&loseDeny=N";
+		else
+			query += "&loseDeny=Y";	
+		
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
-		if (result.resulXml.code == 0) {
+		if (result.resultXml.code == 0) {
 			location.reload();
 		}
 	}
 </SCRIPT>
-<form method='post' name='registerGame' onSubmit="return checkIT()">
+<form method='post' name='registerGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
@@ -114,12 +126,21 @@
 		<%} %>
 		패 <input type='text' name='loseRate' size=5/>											
 		</td>
-	</tr>		
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">배팅차단</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			승 <input type='checkbox' name='winDeny' value="N">
+			무 <input type='checkbox' name='drawDeny' value="N">
+			패 <input type='checkbox' name='loseDeny' value="N">
+			(체크하신 승/무/패 가 배팅이 차단됩니다)											
+		</td>
+	</tr>
 </table>
-				
+</form>				
 <table width="2%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
-		<td><input type='image' src="images/admin/but_input.gif" border="0"></td>                               
+		<td><input type='image' src="images/admin/but_input.gif" border="0" onclick="checkIT()"></td>                               
 		<td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
 	</tr>
 </table>

@@ -147,8 +147,8 @@
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">
-		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS)
-			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#)
+		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS, WIN_DENY, DRAW_DENY, LOSE_DENY)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#, #winDeny#, #drawDeny#, #loseDeny#)
 	</insert>
 	
 	<update id="updateGame" parameterClass="Game">

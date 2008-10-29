@@ -17,9 +17,6 @@ public class Betting
 	private Long expect;
 	private String status;
 	private String calcStatus;
-	private Integer totalCount;
-	private Integer successCount;
-	private Integer failureCount;
 	
 	private String gameType;
 	private String nickName;
@@ -87,24 +84,6 @@ public class Betting
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public Integer getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(Integer totalCount) {
-		this.totalCount = totalCount;
-	}
-	public Integer getSuccessCount() {
-		return successCount;
-	}
-	public void setSuccessCount(Integer successCount) {
-		this.successCount = successCount;
-	}
-	public Integer getFailureCount() {
-		return failureCount;
-	}
-	public void setFailureCount(Integer failureCount) {
-		this.failureCount = failureCount;
 	}
 	public String getGameType() {
 		return gameType;

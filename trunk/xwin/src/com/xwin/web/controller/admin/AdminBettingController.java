@@ -170,22 +170,6 @@ public class AdminBettingController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView calculateBetting(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
-		
-		String id = request.getParameter("id");
-		Betting betting = bettingDao.selectBetting(id);
-		
-		ResultXml rx = bettingService.calcuateBettingCommon(betting);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		
-		return mv;
-	}
-	
 	public ModelAndView cancelBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{

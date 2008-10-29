@@ -8,7 +8,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	Integer totalCount = (Integer) request.getAttribute("leagueCount");
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));

@@ -83,16 +83,6 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateBetting", betting);
 	}
 	
-	public void updateBettingStatus(String gameId)
-	{
-		sqlMapClientTemplate.update("updateGameCountCancel", gameId);
-		sqlMapClientTemplate.update("updateGameCountSuccess", gameId);
-		sqlMapClientTemplate.update("updateGameCountFailure", gameId);
-		sqlMapClientTemplate.update("updateGameCountHandyDraw", gameId);
-		sqlMapClientTemplate.update("updateBettingStatusByCount", gameId);
-		sqlMapClientTemplate.update("updateCalcStatusByBetStatus", gameId);
-	}
-	
 	public void insertDailyBettingMoneyStatistics()
 	{
 		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics");

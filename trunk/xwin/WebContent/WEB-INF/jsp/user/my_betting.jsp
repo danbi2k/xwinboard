@@ -71,14 +71,14 @@
 								<td align="center"><nobr><font color="#ffffff"><%=betting.getDateStr() %></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=betGame.getGameDateStr()%></font></nobr></td>
 								<td align="right"><nobr>
-									<%if (betGame.getResult() == null) { %>
+									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#ffffff">
-									<%} else if (betGame.getResult().equals(betGame.getGuess())) { %>
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
 									<font color="#FFC602">
-									<%} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {%>
-									<font color="#FF0000">
-									<%} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
-									<font color="#DDDDDD">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
+									<font color="#DD0000">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
+									<font color="#DDDDDD"><STRIKE>
 									<%} %>
 									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font>
 									</nobr></td>
@@ -87,15 +87,14 @@
 								</font></nobr></td>
 								
 								<td><nobr>&nbsp;
-								<font color="#ffffff">
-								<%if (betGame.getResult() == null) { %>
+									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#ffffff">
-									<%} else if (betGame.getResult().equals(betGame.getGuess())) { %>
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
 									<font color="#FFC602">
-									<%} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {%>
-									<font color="#FF0000">
-									<%} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {%>
-									<font color="#DDDDDD">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
+									<font color="#DD0000">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
+									<font color="#DDDDDD"><STRIKE>
 									<%} %>
 									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
 								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
@@ -104,21 +103,16 @@
 								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
 								</font></nobr></td>
 								<td align="center"><nobr>
-								<%
-								if (betGame.getResult() == null) {
-									if (betGame.getStatus().equals(Code.GAME_STATUS_CANCEL))
-										out.print("<font color='#DDDDDD'><B>배팅취소</B></font>");
-									else
-										out.print("<font color='#ffffff'><B>진행중</B></font>");
-								} else if (betGame.getResult().equals(betGame.getGuess())) {
-									out.print("<font color='#FFC602'><B>적중</B></font>");
-								} else if (betGame.getType().equals("wdl") || (betGame.getType().equals("handy") && (betGame.getResult().equals("D") == false))) {
-									out.print("<font color='#FF0000'><B>미적중</B></font>");
-								} else if (betGame.getType().equals("handy") && (betGame.getResult().equals("D"))) {
-									out.print("<font color='#DDDDDD'><B>무승부</B></font>");
-								}
-								%>
-								</nobr></td>
+									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
+									<font color="#ffffff">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
+									<font color="#FFC602">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
+									<font color="#DD0000">
+									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
+									<font color="#DDDDDD">
+									<%} %>
+									<%=Code.getValue(betGame.getResultStatus())%></font></nobr></td>
 								
 							</tr>
 <%

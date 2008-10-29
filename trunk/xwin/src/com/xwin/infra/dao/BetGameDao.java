@@ -1,6 +1,5 @@
 package com.xwin.infra.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +12,12 @@ public class BetGameDao extends XwinDao
 		sqlMapClientTemplate.insert("insertBetGame", betGame);
 	}
 	
-	public List<BetGame> selectBetGameList(String bettingId)
+	public List<BetGame> selectBetGameList(Map<String, Object> param)
 	{
-		return sqlMapClientTemplate.queryForList("selectBetGameList", bettingId);
+		return sqlMapClientTemplate.queryForList("selectBetGameList", param);
+	}
+
+	public void updateBetGame(BetGame betGame) {
+		sqlMapClientTemplate.update("updateBetGame", betGame);
 	}
 }

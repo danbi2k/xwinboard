@@ -9,7 +9,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	List<Access> accessList = (List<Access>) request.getAttribute("accessList");
 	Integer totalCount = (Integer) request.getAttribute("accessCount");
 

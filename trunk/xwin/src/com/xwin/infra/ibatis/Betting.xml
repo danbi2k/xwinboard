@@ -19,15 +19,12 @@
 		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameType" column="GAME_TYPE"/>
-		<result property="totalCount" column="TOTAL_COUNT"/>
-		<result property="successCount" column="SUCCESS_COUNT"/>
-		<result property="failureCount" column="FAILURE_COUNT"/>
-		<result property="betGameList" column="ID" select="selectBetGameList"/>
+		<result property="betGameList" column="ID" select="selectBetGameListByBettingId"/>
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, TOTAL_COUNT)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #totalCount#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -52,105 +49,6 @@
 		WHERE ID = #id#
 	</update>
 	
-	<update id="updateGameCountSuccess" parameterClass="string">
-		UPDATE tbl_betting b SET SUCCESS_COUNT =
-		(
-		SELECT COUNT(*)
-		FROM tbl_betting_game bg, tbl_game g
-		WHERE
-		bg.GAME_ID = g.ID AND
-		bg.GUESS = g.RESULT AND
-		bg.BETTING_ID = b.ID AND
-		g.STATUS = 'GS004'
-		)
-		WHERE b.CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
-	</update>
-	
-	<update id="updateGameCountFailure" parameterClass="string">
-		UPDATE tbl_betting b SET FAILURE_COUNT =
-		(
-		SELECT COUNT(*)
-		FROM tbl_betting_game bg, tbl_game g
-		WHERE
-		bg.GAME_ID = g.ID AND
-		((bg.GUESS != g.RESULT AND g.TYPE='wdl') OR (bg.GUESS != g.RESULT AND g.RESULT != 'D' AND g.TYPE='handy')) AND
-		bg.BETTING_ID = b.ID AND
-		g.STATUS = 'GS004'
-		)
-		WHERE b.CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
-	</update>
-	
-	<update id="updateGameCountHandyDraw" parameterClass="string">
-		UPDATE tbl_betting b SET HANDYDRAW_COUNT =
-		(
-		SELECT COUNT(*)
-		FROM tbl_betting_game bg, tbl_game g
-		WHERE
-		bg.GAME_ID = g.ID AND
-		(bg.GUESS != g.RESULT AND g.RESULT = 'D' AND g.TYPE='handy') AND
-		bg.BETTING_ID = b.ID AND
-		g.STATUS = 'GS004'
-		)
-		WHERE b.CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
-	</update>
-	
-	<update id="updateGameCountCancel" parameterClass="string">
-		UPDATE tbl_betting b SET NOMATCH_COUNT =
-		(
-		SELECT COUNT(*)
-		FROM tbl_betting_game bg, tbl_game g
-		WHERE
-		bg.GAME_ID = g.ID AND
-		bg.BETTING_ID = b.ID AND
-		g.STATUS = 'GS005'
-		)
-		WHERE b.CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#) 
-	</update>
-	
-	<update id="updateBettingStatusByCount">
-		UPDATE tbl_betting b SET STATUS =
-		(CASE
-		WHEN FAILURE_COUNT > 0 THEN 'BS003'
-		WHEN TOTAL_COUNT = NOMATCH_COUNT THEN 'BS005'
-		WHEN TOTAL_COUNT = HANDYDRAW_COUNT THEN 'BS007'
-		WHEN TOTAL_COUNT = (NOMATCH_COUNT + HANDYDRAW_COUNT) THEN 'BS008'
-		WHEN TOTAL_COUNT = (SUCCESS_COUNT + NOMATCH_COUNT + HANDYDRAW_COUNT) THEN 'BS002'
-		ELSE 'BS001'
-		END)
-		WHERE STATUS != 'BS004' AND CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
-	</update>
-	
-	<update id="updateCalcStatusByBetStatus">
-		UPDATE tbl_betting b SET CALC_STATUS = 'BTC02'
-		WHERE STATUS in ('BS005', 'BS002', 'BS007', 'BS008') AND CALC_STATUS != 'BTC10'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)
-	</update>
-	
-	<select id="selectCalcRequiredBetting" resultMap="bettingResultMap">
-		SELECT * FROM tbl_betting b
-		WHERE
-		CALC_STATUS = 'BTC02'
-		AND b.ID in (SELECT BETTING_ID FROM tbl_betting_game bg2 WHERE bg2.GAME_ID = #value#)		
-	</select>
-
-<!--
-BET_STATUS_RUN			= "BS001";
-BET_STATUS_SUCCESS		= "BS002";
-BET_STATUS_FAILURE		= "BS003";
-BET_STATUS_CANCEL		= "BS004";
-BET_STATUS_NOMATCH		= "BS005";
-BET_STATUS_HANDYDRAW	= "BS007";
-	
-BET_CALC_DIABLE			= "BTC01";
-BET_CALC_ENABLE			= "BTC02";
-BET_CALC_COMMIT			= "BTC10"; 
- -->
- 
 	<delete id="deleteBetting" parameterClass="string">
 		DELETE FROM tbl_betting WHERE ID = #value#
 	</delete>

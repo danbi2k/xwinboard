@@ -48,6 +48,9 @@ public class LoginController extends XwinController
 				rx.setMessage("탈퇴한 사용자 입니다");
 			} else {
 				rx.setCode(0);
+				HttpSession session = request.getSession();		
+				session.setAttribute("Member", member);
+				session.setAttribute("MemberDao", memberDao);
 			}
 			
 			if (member != null) {
@@ -59,9 +62,6 @@ public class LoginController extends XwinController
 				
 				accessDao.insertAccess(access);
 			}
-			HttpSession session = request.getSession();		
-			session.setAttribute("Member", member);
-			session.setAttribute("MemberDao", memberDao);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

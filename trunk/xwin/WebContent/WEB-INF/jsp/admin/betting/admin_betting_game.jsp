@@ -6,7 +6,7 @@
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
 	final Integer ROWSIZE = 40;
-	final Integer SHOWPAGE = 10;
+	final Integer SHOWPAGE = 20;
 
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");

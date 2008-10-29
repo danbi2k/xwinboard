@@ -401,8 +401,8 @@ public class AdminAccountController extends XwinController
 				account.setType(Code.ACCOUNT_TYPE_MONEYOUT_DIRECT);
 				account.setDate(new Date());
 				account.setOldBalance(member.getBalance());
-				account.setMoney(moneyOut.getMoney());
-				account.setBalance(member.getBalance() + moneyOut.getMoney());
+				account.setMoney(moneyOut.getMoney() * -1);
+				account.setBalance(member.getBalance() - moneyOut.getMoney());
 				account.setMoneyInId(moneyOut.getId());
 				
 				accountDao.insertAccount(account);

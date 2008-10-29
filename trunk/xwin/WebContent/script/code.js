@@ -11,9 +11,10 @@ CODE_TABLE["BS001"] = "진행중";
 CODE_TABLE["BS002"] = "당첨";
 CODE_TABLE["BS003"] = "미당첨";
 CODE_TABLE["BS004"] = "취소<br>(환불)";
-CODE_TABLE["BS005"] = "경기취소<br>(환불)";
+CODE_TABLE["BS005"] = "배팅취소<br>(환불)";
 CODE_TABLE["BS006"] = "정산완료";
 CODE_TABLE["BS007"] = "무승부<br>(환불)";
+CODE_TABLE["BS008"] = "배팅취소<br>(환불)";
 
 CODE_TABLE["W"] = "승";
 CODE_TABLE["D"] = "무";

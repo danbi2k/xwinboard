@@ -57,6 +57,7 @@
 		p:accountDao-ref="accountDao"
 		p:pointDao-ref="pointDao"
 		p:accessDao-ref="accessDao"
+		p:bettingService-ref="bettingService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myBettingController"

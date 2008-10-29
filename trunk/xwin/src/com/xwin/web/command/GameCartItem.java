@@ -6,7 +6,10 @@ public class GameCartItem
 	private String homeTeam;
 	private String awayTeam;
 	private String guess;
-	private String rate;
+	private Double winRate;
+	private Double drawRate;
+	private Double loseRate;
+	private Double selRate;
 	private String league;
 	
 	public String getGameId() {
@@ -33,16 +36,34 @@ public class GameCartItem
 	public void setGuess(String guess) {
 		this.guess = guess;
 	}
-	public String getRate() {
-		return rate;
-	}
-	public void setRate(String rate) {
-		this.rate = rate;
-	}
 	public String getLeague() {
 		return league;
 	}
 	public void setLeague(String league) {
 		this.league = league;
+	}
+	public Double getWinRate() {
+		return winRate;
+	}
+	public void setWinRate(Double winRate) {
+		this.winRate = winRate;
+	}
+	public Double getDrawRate() {
+		return drawRate;
+	}
+	public void setDrawRate(Double drawRate) {
+		this.drawRate = drawRate;
+	}
+	public Double getLoseRate() {
+		return loseRate;
+	}
+	public void setLoseRate(Double loseRate) {
+		this.loseRate = loseRate;
+	}
+	public Double getSelRate() {
+		return selRate;
+	}
+	public void setSelRate(Double selRate) {
+		this.selRate = selRate;
 	}	
 }

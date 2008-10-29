@@ -9,7 +9,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	
 	List<Member> memberList = (List<Member>) request.getAttribute("memberList");
 	Integer totalCount = (Integer) request.getAttribute("memberCount");

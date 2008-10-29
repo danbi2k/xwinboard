@@ -8,7 +8,7 @@
 
 <%
 	int ROWSIZE = 40;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");

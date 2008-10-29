@@ -8,7 +8,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 	
 	List<MemMoneyStat> memMoneyStatList = (List<MemMoneyStat>) request.getAttribute("memMoneyStatList");
 	Integer totalCount = (Integer) request.getAttribute("memMoneyStatCount");

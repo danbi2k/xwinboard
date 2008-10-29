@@ -110,7 +110,6 @@ public class BettingController extends XwinController
 			betting.setRate(cc.getRate());
 			betting.setExpect(cc.getExpect());
 			betting.setStatus(Code.BET_STATUS_RUN);
-			betting.setTotalCount(cartMap.size());
 			betting.setDate(new Date());
 			betting.setGameType(_type);
 			betting.setNickName(member.getNickName());
@@ -122,6 +121,10 @@ public class BettingController extends XwinController
 				betGame.setBettingId(bettingId);
 				betGame.setId(gci.getGameId());
 				betGame.setGuess(gci.getGuess());
+				betGame.setWinRate(gci.getWinRate());
+				betGame.setDrawRate(gci.getDrawRate());
+				betGame.setLoseRate(gci.getLoseRate());
+				betGame.setSelRate(gci.getSelRate());
 				
 				betGameDao.insertBetGame(betGame);
 			}
@@ -232,7 +235,7 @@ public class BettingController extends XwinController
 		
 		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());		
 		Game game = gameDao.selectGame(gameId);
-		Double thisRate = 0.0;
+		Double thisRate = null;
 		if (guess.equals("W"))
 			thisRate = game.getWinRate();
 		else if (guess.equals("D"))
@@ -268,12 +271,10 @@ public class BettingController extends XwinController
 			gci.setGameId(gameId);
 			gci.setHomeTeam(game.getHomeTeam());
 			gci.setAwayTeam(game.getAwayTeam());
-			if (guess.equals("W"))
-				gci.setRate(game.getWinRateStr());
-			else if (guess.equals("D"))
-				gci.setRate(game.getDrawRateStr());
-			else if (guess.equals("L"))
-				gci.setRate(game.getLoseRateStr());
+			gci.setWinRate(game.getWinRate());
+			gci.setDrawRate(game.getDrawRate());
+			gci.setLoseRate(game.getLoseRate());
+			gci.setSelRate(thisRate);
 			gci.setGuess(guess);
 			gci.setLeague(game.getLeagueName());
 			
@@ -341,7 +342,14 @@ public class BettingController extends XwinController
 		if (cartColl != null && cartColl.size() > 0) {
 			totalRate = 1.0;
 			for (GameCartItem gci : cartColl) {
-				Double rate = Double.parseDouble(gci.getRate());
+				Double rate = null;
+				if (gci.getGuess().equals("W"))
+					rate = gci.getWinRate();
+				else if (gci.getGuess().equals("D"))
+					rate = gci.getDrawRate();
+				else if (gci.getGuess().equals("L"))
+					rate = gci.getLoseRate();
+				
 				totalRate *= rate;
 			}
 		}

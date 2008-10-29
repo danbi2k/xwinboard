@@ -23,6 +23,7 @@
 		p:betGameDao-ref="betGameDao"
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"/>	
 		
 	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector"/>

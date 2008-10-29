@@ -8,7 +8,7 @@
 
 <%
 	int ROWSIZE = 25;
-	int SHOWPAGE = 10;
+	int SHOWPAGE = 20;
 
 	List<MoneyIn> moneyInList = (List<MoneyIn>) request.getAttribute("moneyInOutList");
 	Integer totalCount = (Integer) request.getAttribute("totalCount");

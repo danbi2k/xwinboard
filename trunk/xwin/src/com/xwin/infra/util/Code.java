@@ -30,10 +30,16 @@ public class Code
 	public static final String BET_STATUS_SUCCESS		= "BS002";
 	public static final String BET_STATUS_FAILURE		= "BS003";
 	public static final String BET_STATUS_CANCEL		= "BS004";
-	public static final String BET_STATUS_NOMATCH		= "BS005";
-	public static final String BET_STATUS_COMMIT		= "BS006";
-	public static final String BET_STATUS_HANDYDRAW		= "BS007";
+//	public static final String BET_STATUS_NOMATCH		= "BS005";
+//	public static final String BET_STATUS_COMMIT		= "BS006";
+//	public static final String BET_STATUS_HANDYDRAW		= "BS007";
 	public static final String BET_STATUS_RETURN		= "BS008";
+	
+	public static final String RESULT_STATUS_RUN		= "RS001";
+	public static final String RESULT_STATUS_SUCCESS	= "RS002";
+	public static final String RESULT_STATUS_FAILURE	= "RS003";
+	public static final String RESULT_STATUS_DRAW		= "RS004";
+	public static final String RESULT_STATUS_CANCEL		= "RS005";
 	
 	public static final String BET_CALC_DISABLE			= "BTC01";
 	public static final String BET_CALC_ENABLE			= "BTC02";
@@ -69,6 +75,7 @@ public class Code
 	public static final String ACCOUNT_TYPE_HANDYDRAW	= "AT009";
 	public static final String ACCOUNT_TYPE_POINTCHARGE	= "AT010";
 	public static final String ACCOUNT_TYPE_MONEYOUT_CANCEL	= "AT011";
+	public static final String ACCOUNT_TYPE_BETTING_RETURN = "AT012";
 	
 	public static final String POINT_TYPE_MONEYIN		= "PNT01";
 	public static final String POINT_TYPE_BETTING		= "PNT02";
@@ -122,6 +129,7 @@ public class Code
 		put(ACCOUNT_TYPE_HANDYDRAW, "무승부(환불)");
 		put(ACCOUNT_TYPE_POINTCHARGE, "포인트충전");
 		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환전취소(환불)");
+		put(ACCOUNT_TYPE_BETTING_RETURN, "배팅취소(환불)");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
 		put(BANKBOOK_STATUS_UNUSED, "사용중지");
@@ -140,16 +148,22 @@ public class Code
 		put(GAME_STATUS_READY, "경기대기");
 		put(GAME_STATUS_RUN, "경기진행");
 		put(GAME_STATUS_END, "경기종료");
-		put(GAME_STATUS_CANCEL, "배팅취소");
+		put(GAME_STATUS_CANCEL, "경기취소");
 		
 		put(BET_STATUS_RUN, "진행중");
 		put(BET_STATUS_SUCCESS, "당첨");
 		put(BET_STATUS_FAILURE, "미당첨");
 		put(BET_STATUS_CANCEL, "배팅취소(환불)");
-		put(BET_STATUS_NOMATCH, "경기취소(환불)");
-		put(BET_STATUS_COMMIT, "정산완료");
-		put(BET_STATUS_HANDYDRAW, "무승부(환불)");
-		put(BET_STATUS_RETURN, "경기취소/무승부(환불)");
+//		put(BET_STATUS_NOMATCH, "경기취소(환불)");
+//		put(BET_STATUS_COMMIT, "정산완료");
+//		put(BET_STATUS_HANDYDRAW, "무승부(환불)");
+		put(BET_STATUS_RETURN, "배팅취소(환불)");
+		
+		put(RESULT_STATUS_DRAW, "무승부");
+		put(RESULT_STATUS_FAILURE, "미적중");
+		put(RESULT_STATUS_SUCCESS, "적중");
+		put(RESULT_STATUS_RUN, "진행중");
+		put(RESULT_STATUS_CANCEL, "경기취소");
 
 		put(USER_GRADE_NORMAL, "일반");
 		put(USER_GRADE_VIP, "VIP");

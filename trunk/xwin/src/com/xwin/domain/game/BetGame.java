@@ -4,8 +4,8 @@ public class BetGame extends Game
 {
 	private String bettingId;
 	private String guess;
-	private Double guessRate;
-	private String hit;
+	private String resultStatus;
+	private Double selRate;
 	
 	public String getBettingId() {
 		return bettingId;
@@ -19,16 +19,16 @@ public class BetGame extends Game
 	public void setGuess(String guess) {
 		this.guess = guess;
 	}
-	public String getHit() {
-		return hit;
+	public String getResultStatus() {
+		return resultStatus;
 	}
-	public void setHit(String hit) {
-		this.hit = hit;
+	public void setResultStatus(String resultStatus) {
+		this.resultStatus = resultStatus;
 	}
-	public Double getGuessRate() {
-		return guessRate;
+	public Double getSelRate() {
+		return selRate;
 	}
-	public void setGuessRate(Double guessRate) {
-		this.guessRate = guessRate;
+	public void setSelRate(Double selRate) {
+		this.selRate = selRate;
 	}
 }
