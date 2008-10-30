@@ -91,6 +91,9 @@ public class BettingService extends XwinService
 				if (failureCount > 0) {
 					betting.setStatus(Code.BET_STATUS_FAILURE);
 					calcEnable = true;
+				} else if (totalCount == (cancelCount)) {
+					betting.setStatus(Code.BET_STATUS_CANCEL);
+					calcEnable = true;
 				} else if (totalCount == (cancelCount + drawCount)) {
 					betting.setStatus(Code.BET_STATUS_RETURN);
 					calcEnable = true;
