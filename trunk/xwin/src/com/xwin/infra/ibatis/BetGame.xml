@@ -30,8 +30,8 @@
 	</resultMap>
 	
 	<insert id="insertBetGame" parameterClass="BetGame">
-		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS, WIN_RATE, DRAW_RATE, LOSE_RATE, SEL_RATE)
-		VALUES(#bettingId#, #id#, #guess#, #winRate#, #drawRate#, #loseRate#, #selRate#)
+		INSERT INTO tbl_betting_game(BETTING_ID, GAME_ID, GUESS, WIN_RATE, DRAW_RATE, LOSE_RATE, SEL_RATE, RESULT_STATUS)
+		VALUES(#bettingId#, #id#, #guess#, #winRate#, #drawRate#, #loseRate#, #selRate#, #resultStatus#)
 	</insert>
 	
 	<update id="updateBetGame" parameterClass="BetGame">

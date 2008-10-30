@@ -30,14 +30,15 @@
 			List<BetGame> betGameList = betting.getBetGameList();
 			if (betGameList != null) {
 				int count = 0;
+				int betGameCount = betGameList.size();
 				for (BetGame betGame : betGameList) {								
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<%
 		if (count == 0) {
 		%>
-		<td rowspan='<%=betting.getTotalCount()%>'><font color='#000000'><%=betting.getId()%></td>								
-		<td rowspan='<%=betting.getTotalCount()%>'><font color='#000000'><%=betting.getUserId()%></a></td>
+		<td rowspan='<%=betGameCount%>'><font color='#000000'><%=betting.getId()%></td>								
+		<td rowspan='<%=betGameCount%>'><font color='#000000'><%=betting.getUserId()%></a></td>
 		<%
 		}
 		%>
@@ -47,12 +48,12 @@
 		<td><font color='#000000'><%=betGame.getAwayTeam()%> (<%=betGame.getLoseRateStr()%>)</td>
 		<td><font color='#000000'><%=Code.getValue(betGame.getGuess())%></td>
 		<td><font color='#000000'><B></b><%=Code.getValue(betGame.getResult())%><BR></td>
-		<td><%=XwinUtil.judgeBetGame(betGame)%></td>
+		<td><%=Code.getValue(betGame.getResultStatus())%></td>
 		<%
 		if (count++ == 0) {
 		%>
-		<td rowspan='<%=betting.getTotalCount()%>'><%=Code.getValue(betting.getStatus())%></td>
-		<td rowspan='<%=betting.getTotalCount()%>'>
+		<td rowspan='<%=betGameCount%>'><%=Code.getValue(betting.getStatus())%></td>
+		<td rowspan='<%=betGameCount%>'>
 		<%if (betting.getStatus().equals(Code.BET_STATUS_RUN)) { %>
 			<input type="button" value="배팅취소" onclick="cancelBetting(<%=betting.getId()%>)"/>
 		<%} else { %>

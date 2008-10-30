@@ -125,6 +125,7 @@ public class BettingController extends XwinController
 				betGame.setDrawRate(gci.getDrawRate());
 				betGame.setLoseRate(gci.getLoseRate());
 				betGame.setSelRate(gci.getSelRate());
+				betGame.setResultStatus(Code.RESULT_STATUS_RUN);
 				
 				betGameDao.insertBetGame(betGame);
 			}

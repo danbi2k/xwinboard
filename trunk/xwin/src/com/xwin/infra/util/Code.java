@@ -157,7 +157,7 @@ public class Code
 //		put(BET_STATUS_NOMATCH, "경기취소(환불)");
 //		put(BET_STATUS_COMMIT, "정산완료");
 //		put(BET_STATUS_HANDYDRAW, "무승부(환불)");
-		put(BET_STATUS_RETURN, "배팅취소(환불)");
+		put(BET_STATUS_RETURN, "무승부(환불)");
 		
 		put(RESULT_STATUS_DRAW, "무승부");
 		put(RESULT_STATUS_FAILURE, "미적중");

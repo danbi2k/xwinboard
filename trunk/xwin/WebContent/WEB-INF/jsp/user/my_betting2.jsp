@@ -40,9 +40,8 @@
 				<option value='<%=Code.BET_STATUS_RUN%>' <%=status.equals(Code.BET_STATUS_RUN)?"selected":""%> style='color:#b0b0b0;'><%=Code.getValue(Code.BET_STATUS_RUN)%></option>
 				<option value='<%=Code.BET_STATUS_SUCCESS%>' <%=status.equals(Code.BET_STATUS_SUCCESS)?"selected":""%> style='color:orange;'><%=Code.getValue(Code.BET_STATUS_SUCCESS)%></option>
 				<option value='<%=Code.BET_STATUS_FAILURE%>' <%=status.equals(Code.BET_STATUS_FAILURE)?"selected":""%> style='color:#505050;'><%=Code.getValue(Code.BET_STATUS_FAILURE)%></option>
-				<option value='<%=Code.BET_STATUS_HANDYDRAW%>' <%=status.equals(Code.BET_STATUS_HANDYDRAW)?"selected":""%> style='color:#a47842;'><%=Code.getValue(Code.BET_STATUS_HANDYDRAW)%></option>
 				<option value='<%=Code.BET_STATUS_CANCEL%>' <%=status.equals(Code.BET_STATUS_CANCEL)?"selected":""%> style='color:#a47842;'><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>
-				<option value='<%=Code.BET_STATUS_NOMATCH%>' <%=status.equals(Code.BET_STATUS_NOMATCH)?"selected":""%> style=''><%=Code.getValue(Code.BET_STATUS_NOMATCH)%></option></select></td>
+				<option value='<%=Code.BET_STATUS_RETURN%>' <%=status.equals(Code.BET_STATUS_RETURN)?"selected":""%> style=''><%=Code.getValue(Code.BET_STATUS_RETURN)%></option></select></td>
 			<td><img src="images/btn_reload.gif" onclick="location.href=location.href;" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 
 		</tr></table>
