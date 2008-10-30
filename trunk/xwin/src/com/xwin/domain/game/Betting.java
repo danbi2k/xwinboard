@@ -21,6 +21,8 @@ public class Betting
 	private String gameType;
 	private String nickName;
 	
+	private String isDeleted;
+	
 	private List<BetGame> betGameList;
 	
 	public String getId() {
@@ -102,5 +104,11 @@ public class Betting
 	}
 	public void setCalcStatus(String calcStatus) {
 		this.calcStatus = calcStatus;
+	}
+	public String getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(String isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 }

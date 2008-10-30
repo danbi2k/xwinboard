@@ -19,6 +19,7 @@
 		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="status" column="STATUS"/>
 		<result property="gameType" column="GAME_TYPE"/>
+		<result property="isDeleted" column="ISDELETED"/>
 		<result property="betGameList" column="ID" select="selectBetGameListByBettingId"/>
 	</resultMap>
 	
@@ -44,6 +45,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="calcStatus">
 			CALC_STATUS = #calcStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="isDeleted">
+			ISDELETED = #isDeleted#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
@@ -78,6 +82,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="userId">
 			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+			ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 			USERID LIKE #userIdLike#
@@ -130,6 +137,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="userId">
 			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+			ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 			USERID LIKE #userIdLike#

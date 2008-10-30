@@ -19,7 +19,7 @@ import com.xwin.web.controller.XwinController;
 
 public class MyBettingController extends XwinController
 {
-	int ROWSIZE = 5;
+	int ROWSIZE = 10;
 	
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -46,6 +46,7 @@ public class MyBettingController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
 		param.put("notStatus", Code.BET_STATUS_CANCEL);
+		param.put("isDeleted", "N");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -58,13 +59,15 @@ public class MyBettingController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView viewMyBettingDetail(HttpServletRequest request,
+	public ModelAndView deleteMyBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
+		
+		ResultXml rx = null;
 		
 		String bettingId = request.getParameter("bettingId");
 		Member member = (Member) request.getSession().getAttribute("Member");
@@ -72,56 +75,20 @@ public class MyBettingController extends XwinController
 		Betting betting =
 			bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
 		
-		ModelAndView mv = new ModelAndView("user/my_betting_detail");
-		mv.addObject("betting", betting);
-		return mv;
-	}
-	
-	public ModelAndView getMyBettingList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
-		
-		Member member = (Member) request.getSession().getAttribute("Member");
-		
-		String _pageIndex = request.getParameter("pageIndex");
-		String status = XwinUtil.arcNvl(request.getParameter("status"));
-		String gameType = XwinUtil.arcNvl(request.getParameter("gameType"));
-		Integer pageIndex = null;
-		try {
-			pageIndex = Integer.parseInt(_pageIndex);
-		} catch (Exception e) {
-			pageIndex = 0;
+		if (betting != null) {
+			if (betting.getStatus().equals(Code.BET_STATUS_RUN)) {
+				rx = new ResultXml(0, "진행중인 배팅은 삭제하실수 없습니다", betting);
+			} else {
+				betting.setIsDeleted("Y");
+				bettingDao.updateBetting(betting);
+				rx = new ResultXml(0, "배팅 기록이 삭제되었습니다", betting);
+			}
+		} else {
+			rx = new ResultXml(0, "유효하지 않은 배팅 입니다", betting);
 		}
-		List<Betting> bettingList =
-			bettingDao.selectBettingListByUserId(member.getUserId(), status, gameType, pageIndex);
 		
-		ResultXml resultXml = new ResultXml(0, null, bettingList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(resultXml));		
-		return mv;
-	}
-	
-	public ModelAndView getMyBettingDetail(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
-		
-		String bettingId = request.getParameter("bettingId");
-		Member member = (Member) request.getSession().getAttribute("Member");
-		
-		Betting betting =
-			bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
-		
-		ResultXml resultXml = new ResultXml(0, null, betting);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(resultXml));		
+		mv.addObject("resultXml", XmlUtil.toXml(rx));		
 		return mv;
 	}
 }

@@ -3,7 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 <%
-	int ROWSIZE = 5;
+	int ROWSIZE = 10;
 	int SHOWPAGE = 10;
 	String status = XwinUtil.nvl(request.getParameter("status"));
 	String gameType = XwinUtil.nvl(request.getParameter("gameType"));
@@ -59,12 +59,15 @@
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>배팅팀</nobr></b></font></td>
 								<td align="center" width="95"><font color="#ffffff"><b><nobr>경기결과</nobr></b></font></td>
 								<td align="center" width="80"><font color="#ffffff"><b><nobr>적중유무</nobr></b></font></td>
+								<td align="center" width="80"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
 								
 							</tr>
 							
 <%
 	List<BetGame> betGameList = betting.getBetGameList();
 	if (betGameList != null) {
+		int betGameCount = betGameList.size();
+		int count = 0;
 		for (BetGame betGame : betGameList) {
 %>
 							<tr bgcolor="#000000" height="25">
@@ -113,10 +116,26 @@
 									<font color="#DDDDDD">
 									<%} %>
 									<%=Code.getValue(betGame.getResultStatus())%></font></nobr></td>
+								<%
+								if (count == 0) {
+								%>
+								<td align="center" rowspan="<%=betGameCount%>">
+									<%
+									if (betting.getStatus().equals(Code.BET_STATUS_RUN) == false) {
+									%>
+									<img src="images/btn_coment_del.gif" onclick="deleteMyBetting(<%=betting.getId()%>)">
+									<%
+									}
+									%>
+								</td>
+								<%
+								count++;
+								}
+								%>
 								
 							</tr>
 <%
-		}
+		}	
 	}		
 %>				
 					
@@ -190,6 +209,19 @@
 <br>
 <br>
 <script>
+function deleteMyBetting(id)
+{
+	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
+		var query = "mode=deleteMyBetting";
+		query += "&bettingId=" + id;
+		var http = new JKL.ParseXML("myBet.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	}
+}
+
 function goPage(pageIndex)
 {
 	location.href = "myBet.aspx?mode=viewMyBettingList&pageIndex=" + pageIndex;
