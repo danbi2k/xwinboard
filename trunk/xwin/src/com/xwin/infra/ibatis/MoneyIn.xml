@@ -22,6 +22,7 @@
 		<result property="isChecked" column="ISCHECKED"/>
 		<result property="isDeleted" column="ISDELETED"/>
 		<result property="note" column="NOTE"/>
+		<result property="isRemoved" column="ISREMOVED"/>
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
@@ -43,6 +44,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="isChecked">
 			ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="," property="isRemoved">
+			ISREMOVED = #isRemoved#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
@@ -87,6 +91,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
@@ -147,6 +154,9 @@
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
 			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
+			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
 				REQ_DATE >= #fromReqDate#
@@ -201,6 +211,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[

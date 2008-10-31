@@ -68,6 +68,7 @@
 	<col width="80" align="center">
 	<col width="100" align="center">
 	<col width="20" align="center">
+	<col width="20" align="center">
 	</colgroup>
 
 	<tr bgcolor="#ce892c">
@@ -78,6 +79,7 @@
 		<th style="color:white">상태</th>
 		<th style="color:white">처리일시</th>
 		<th style="color:white">취소</th>
+		<th style="color:white">삭제</th>
 	</tr>
 
 	<%
@@ -99,7 +101,12 @@
 			<td><%=moneyIn.getProcDateStr()%></td>
 			<td>
 				<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
-				<img src="images/btn_coment_del.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)">
+				<img src="images/btn_cancel.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
+				<%}%>
+			</td>
+			<td>
+				<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false) { %>
+				<img src="images/btn_coment_del.gif" onclick="removeMoneyInRequestLog(<%=moneyIn.getId()%>)" title="충전기록삭제">
 				<%} %>
 			</td>
 		</tr>
@@ -172,6 +179,19 @@ function cancelMoneyInRequest(id)
 {
 	if (confirm("충전 신청을 취소 하시겠습니까?")) {
 		var query = "mode=cancelMoneyInRequest";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("moneyIn.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload(0);
+	}
+}
+
+function removeMoneyInRequestLog(id)
+{
+	if (confirm("충전  기록을 삭제 하시겠습니까?")) {
+		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("moneyIn.aspx", query);
 		var result = http.parse();

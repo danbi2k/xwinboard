@@ -41,6 +41,9 @@
 			<isNotNull prepend="," property="isDeleted">
 			ISDELETED = #isDeleted#
 			</isNotNull>
+			<isNotNull prepend="," property="isRemoved">
+			ISREMOVED = #isRemoved#
+			</isNotNull>
 			<isNotNull prepend="," property="isChecked">
 			ISCHECKED = #isChecked#
 			</isNotNull>
@@ -87,6 +90,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[
@@ -143,6 +149,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isChecked">
 				ISCHECKED = #isChecked#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
@@ -201,6 +210,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromReqDate">
 				<![CDATA[

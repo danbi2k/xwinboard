@@ -16,6 +16,7 @@ public class MoneyInOut extends XwinObject
 	private String procDateStr;
 	private String isChecked;
 	private String isDeleted;
+	private String isRemoved;
 	private String note;
 	private String name;
 	
@@ -76,6 +77,12 @@ public class MoneyInOut extends XwinObject
 	}
 	public String getIsDeleted() {
 		return isDeleted;
+	}
+	public String getIsRemoved() {
+		return isRemoved;
+	}
+	public void setIsRemoved(String isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;

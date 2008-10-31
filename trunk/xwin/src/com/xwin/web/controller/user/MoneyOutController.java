@@ -16,11 +16,14 @@ import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class MoneyOutController extends XwinController
 {
+	int ROWSIZE = 15;
+	
 	public ModelAndView viewMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -47,14 +50,26 @@ public class MoneyOutController extends XwinController
 		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
 		param.put("notStatus", Code.MONEY_OUT_DIRECT);
+		param.put("isRemoved", "N");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
+		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
 		
 		ModelAndView mv = new ModelAndView("user/money_out_req_list");
 		mv.addObject("moneyOutList", moneyOutList);
+		mv.addObject("moneyOutCount", moneyOutCount);
+		
 		return mv;
 	}
 	
@@ -115,5 +130,32 @@ public class MoneyOutController extends XwinController
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
+	}
+	
+	public ModelAndView removeMoneyOutRequestLog(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (Admin.DENY_EXCHANGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = null;
+		
+		String id = request.getParameter("id");		
+		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);		
+		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST))
+			rx = new ResultXml(0, "삭제 가능 상태가 아닙니다", null);
+		else {
+			moneyOut.setIsRemoved("Y");
+			moneyOutDao.updateMoneyOut(moneyOut);			
+			rx = new ResultXml(0, "환전 기록이 삭제되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
 	}
 }

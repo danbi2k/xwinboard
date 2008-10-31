@@ -63,6 +63,7 @@ public class MoneyInController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
 		param.put("notStatus", Code.MONEY_IN_DIRECT);
+		param.put("isRemoved", "N");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -148,6 +149,33 @@ public class MoneyInController extends XwinController
 			moneyIn.setProcDate(new Date());
 			moneyInDao.updateMoneyIn(moneyIn);			
 			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView removeMoneyInRequestLog(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (Admin.DENY_CHARGE.equals("Y") == false)
+			return new ModelAndView("illegal");
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = null;
+		
+		String id = request.getParameter("id");		
+		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
+		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST))
+			rx = new ResultXml(0, "삭제 가능 상태가 아닙니다", null);
+		else {
+			moneyIn.setIsRemoved("Y");
+			moneyInDao.updateMoneyIn(moneyIn);			
+			rx = new ResultXml(0, "충전기록이 삭제되었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

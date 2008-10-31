@@ -7,7 +7,12 @@
 <%@include file="../header.jsp"%>
 
 <%
+	final Integer ROWSIZE = 15;
+	final Integer SHOWPAGE = 10;
 	List<MoneyOut> moneyOutList = (List<MoneyOut>)request.getAttribute("moneyOutList");
+	Integer totalCount = (Integer)request.getAttribute("moneyOutCount");
+	
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -50,6 +55,7 @@
 	<col width="80" align="right">
 	<col width="80" align="center">
 	<col width="100" align="center">
+	<col width="20" align="center">
 	</colgroup>
 
 	<tr bgcolor="#ce892c">
@@ -58,6 +64,7 @@
 		<th style="color:white" align="center">환전액</th>
 		<th style="color:white">상태</th>
 		<th style="color:white">처리일시</th>
+		<th style="color:white">삭제</th>
 	</tr>
 
 	<%
@@ -70,6 +77,12 @@
 			<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 			<td><%=Code.getValue(moneyOut.getStatus())%></td>
 			<td><%=moneyOut.getProcDateStr()%></td>
+			<td>
+				<%if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST)) { %>
+				<%} else {%>
+				<img src="images/btn_coment_del.gif" onclick="removeMoneyOutRequestLog(<%=moneyOut.getId()%>)" title="환전기록삭제">
+				<%} %>
+			</td>
 		</tr>
 	<%	
 			}
@@ -80,9 +93,64 @@
 		}
 	%>
 	</table>
-
+	<table width=100%>
+	<tr bgcolor='black'>
+	<td colspan='6' height='40' align='center' bgcolor='black'>
+	<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+	</td>
+	</tr>
+	</table>
 </td></tr>
 </table>
 
+<script>
+function goPage(index)
+{
+	location.href="moneyOut.aspx?mode=viewMoneyOutRequestList&pageIndex=" + index;
+}
+
+function removeMoneyOutRequestLog(id)
+{
+	if (confirm("환전 기록을 삭제 하시겠습니까?")) {
+		var query = "mode=removeMoneyOutRequestLog";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("moneyOut.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload(0);
+	}
+}
+</script>
 
 <%@include file="../footer.jsp"%>

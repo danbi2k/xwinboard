@@ -30,6 +30,7 @@
 		<tr><td>
 			<a href="myMoney.aspx?mode=viewMyMoneyList"><img src="images/tab_money.gif" style="cursor:hand;" border=0></a>
 			</td>
+		<td>&nbsp;</td>
 		<td>
 			<a href="myMoney.aspx?mode=viewMyPointList"><img src="images/tab_point.gif" style="cursor:hand;" border=0></a>
 			</td>	
