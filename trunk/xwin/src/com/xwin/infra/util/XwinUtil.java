@@ -181,8 +181,11 @@ public class XwinUtil
 		return obj.toString();
 	}
 	
-	public static String to2Digit(double x)
+	public static String to2Digit(Double x)
 	{
+		if (x == null)
+			return null;
+		
 		String ret = decimalFormat.format(doubleCut(x));
 		return ret;
 	}

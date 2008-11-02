@@ -166,6 +166,8 @@ function FnInMoneyCancle(idx){
 	}
 }
 function FnOutMoney_Submit(frm){
+	if(!frm.out_money.value) {alert("금액을 입력하세요"); frm.out_money.focus(); return; }
+	if(!frm.pin.value) {alert("환전비밀번호를 입력하세요"); frm.pin.focus(); return; }
 	if(frm.account_bank.value==""){ alert("환전받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
 	if(frm.account_num.value.length<7){ alert("환전받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }

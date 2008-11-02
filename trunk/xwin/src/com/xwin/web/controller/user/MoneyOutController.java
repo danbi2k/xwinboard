@@ -90,7 +90,10 @@ public class MoneyOutController extends XwinController
 		
 		ResultXml rx = null;
 		String pin = request.getParameter("pin");
-		if ((moneyOut.getMoney() % 10000) > 0) {
+		
+		if (moneyOut.getMoney() <= 0)
+			rx = new ResultXml(-1, "0 보다 큰 값을 입력하세요", null);
+		else if ((moneyOut.getMoney() % 10000) > 0) {
 			rx = new ResultXml(-1, "10,000원 단위로 신청하세요", null);
 		}
 		else if (member.getPin().equals(pin) == false) {

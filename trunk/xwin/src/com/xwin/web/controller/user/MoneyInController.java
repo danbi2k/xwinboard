@@ -101,8 +101,9 @@ public class MoneyInController extends XwinController
 		try {
 			Long money = Long.parseLong(_money);
 			
-			
-			if (_name == null || _name.length() == 0)
+			if (money <= 0)
+				rx = new ResultXml(-1, "0 보다 큰 값을 입력하세요", null);
+			else if (_name == null || _name.length() == 0)
 				rx = new ResultXml(-1, "입금자를 입력하세요", null);
 			else if (existCnt > 0) {
 				rx = new ResultXml(-1, "이미 신청하신 충전요청이 있습니다", null);
