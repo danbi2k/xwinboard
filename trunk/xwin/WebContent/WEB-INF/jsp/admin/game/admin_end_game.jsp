@@ -22,6 +22,7 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
 	String type = request.getParameter("type");
+	String grade = request.getParameter("grade");
 %>
 <%@ include file="../admin_header.jsp"%>
 <SCRIPT LANGUAGE="JavaScript">
@@ -97,13 +98,14 @@
 </SCRIPT>
 
 <div class="title"><%=type.equals("wdl")?"승무패":"핸디캡"%></div>
-<input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'">
+<input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>&grade=<%=grade%>'">
 <br>
 <br>
 <form method='get' name='search' action='adminGame.aspx'>
 <input type='hidden' name='mode' value='viewEndGameList'/>
 <input type='hidden' name='pageIndex'/>
 <input type='hidden' name='type' value='<%=type%>'/>
+<input type='hidden' name='grade' value='<%=grade%>'/>
 
 리그명
 <select name='leagueId' onChange='this.form.submit()'>

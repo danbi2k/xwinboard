@@ -11,6 +11,7 @@ public class MunjaBadaConnector implements SendSmsConnector
 	private final String USERID = "vegas5004";
 	private final String PASSWD = "5004369";
 	private final String URL = "http://www.munjabada.co.kr/Remote/RemoteSms.php";
+	private final String RETURN_URL = "kingbet-kor.com/munja.aspx";
 	
 	public void sendSms(String message, String phone, String callback) throws Exception
 	{
@@ -20,6 +21,7 @@ public class MunjaBadaConnector implements SendSmsConnector
 		
 		method.setParameter("remote_id", USERID);
 		method.setParameter("remote_pass", PASSWD);
+		method.setParameter("remote_returnurl", RETURN_URL);
 		method.setParameter("remote_num", "1");
 		method.setParameter("remote_phone", phone.replaceAll("-", ""));
 		method.setParameter("remote_callback", callback);

@@ -72,6 +72,15 @@
 		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.comma3(member.getBalance())%> 원
 	</td>
 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>등급</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<select name="grade" onchange="changeGrade()">
+				<option value="<%=Code.USER_GRADE_NORMAL%>" <%=member.getGrade().equals(Code.USER_GRADE_NORMAL)?"selected":""%>><%=Code.getValue(Code.USER_GRADE_NORMAL)%></option>
+				<option value="<%=Code.USER_GRADE_VIP%>" <%=member.getGrade().equals(Code.USER_GRADE_VIP)?"selected":""%>><%=Code.getValue(Code.USER_GRADE_VIP)%></option>
+			</select>			
+		</td>
+	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPassword()%></td>
@@ -280,6 +289,20 @@ function sendMemo()
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0)
 		frm.memo.value = "";
+}
+
+function changeGrade()
+{
+	var frm = document.regist;	
+	var query = "mode=changeGrade";
+	query += "&grade=" + regist.grade.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
 }
 
 function changeDenyrity()

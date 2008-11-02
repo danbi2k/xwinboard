@@ -21,11 +21,12 @@
 		<result property="commentCount" column="COMMENT_COUNT"/>
 		<result property="isDeleted" column="ISDELETED"/>
 		<result property="isChecked" column="ISCHECKED"/>
+		<result property="grade" column="GRADE"/>
 	</resultMap>
 	
 	<insert id="insertBoardItem" parameterClass="BoardItem">
-		INSERT INTO tbl_board_item(TITLE, USERID, NICKNAME, DATE, CONTEXT, TYPE, BOARDNAME, STATUS)
-			VALUES(#title#, #userId#, #nickName#, #date#, #context#, #type#, #boardName#, #status#)
+		INSERT INTO tbl_board_item(TITLE, USERID, NICKNAME, DATE, CONTEXT, TYPE, BOARDNAME, STATUS, GRADE)
+			VALUES(#title#, #userId#, #nickName#, #date#, #context#, #type#, #boardName#, #status#, #grade#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>	
@@ -63,6 +64,9 @@
 			<isNotNull prepend="AND" property="boardName">
 				bi.boardName = #boardName#
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				bi.GRADE = #grade#
+			</isNotNull>
 		</dynamic>
 	</select>
 	
@@ -70,7 +74,7 @@
 		SELECT
 			ID, TITLE, USERID, NICKNAME, DATE, READCOUNT, BOARDNAME, ISDELETED, ISCHECKED,
 			'' as CONTEXT,
-			TYPE,
+			TYPE, GRADE,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
 		WHERE bi.ISDELETED = 'N'		
@@ -79,6 +83,9 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="userId">
 			bi.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			bi.GRADE = #grade#
 		</isNotNull>
 		<isNotNull prepend="AND" property="userIdLike">
 			bi.USERID LIKE #userIdLike#
@@ -114,6 +121,9 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="userId">
 			bi.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			bi.GRADE = #grade#
 		</isNotNull>
 		<isNotNull prepend="AND" property="userIdLike">
 			bi.USERID LIKE #userIdLike#
@@ -171,9 +181,9 @@
 		UPDATE tbl_board_item SET READCOUNT = READCOUNT + 1 WHERE ID = #value#
 	</update>
 	
-	<select id="selectUnAnsweredQna" resultClass="integer">
+	<select id="selectUnAnsweredQna" resultClass="integer" parameterClass="string">
 		SELECT COUNT(*) FROM tbl_board_item bi
 		WHERE
-		bi.BOARDNAME = 'qna' AND bi.ISDELETED = 'N'	AND bi.ISCHECKED = 'N'
+		bi.BOARDNAME = 'qna' AND bi.ISDELETED = 'N'	AND bi.ISCHECKED = 'N' AND bi.grade = #value#
 	</select>
 </sqlMap>

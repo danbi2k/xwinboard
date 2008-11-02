@@ -22,11 +22,12 @@ public class BoardDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteBoardItem", id);
 	}
 	
-	public BoardItem selectBoardItem(String id, String boardName)
+	public BoardItem selectBoardItem(String id, String boardName, String grade)
 	{
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("id", id);
 		param.put("boardName", boardName);
+		param.put("grade", grade);
 		
 		BoardItem boardItem = 
 			(BoardItem) sqlMapClientTemplate.queryForObject("selectBoardItem", param);
@@ -87,9 +88,9 @@ public class BoardDao extends XwinDao
 		sqlMapClientTemplate.update("plusBoardItemReadCout", boardId);
 	}
 	
-	public Integer selectUnAnsweredQna()
+	public Integer selectUnAnsweredQna(String grade)
 	{
-		return (Integer) sqlMapClientTemplate.queryForObject("selectUnAnsweredQna");
+		return (Integer) sqlMapClientTemplate.queryForObject("selectUnAnsweredQna", grade);
 	}
 	
 	public List<BoardItem> selectRecentlyQna()

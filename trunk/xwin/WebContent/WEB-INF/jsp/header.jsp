@@ -7,6 +7,7 @@
 <%@ page import="com.xwin.infra.util.*" %>
 <%@ page import="java.util.*" %>
 <%
+	String SERVER = (String) request.getAttribute("SERVER");
 	Member member = (Member) session.getAttribute("Member");
 	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
 	Boolean isModify = (Boolean) request.getAttribute("isModify");
@@ -27,7 +28,7 @@
 %>
 <html>
 <head>
-<title>bwin-Kor</title>
+<title>KingBet</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -71,7 +72,7 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="270" align="center"><a href="index.aspx"><img src="images/newtop.jpg" border="0"></a></td>
+<tr><td width="270" align="center"><a href="index.aspx"><img src="images/kingbet-<%=SERVER%>.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu">
 <li><a href="game.aspx?mode=viewGameList&type=wdl"><img src='images/menu_wdl.jpg' border='0'></a></li>

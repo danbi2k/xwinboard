@@ -7,7 +7,8 @@
  <%@ include file="../admin_header.jsp"%>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
-	String type = request.getParameter("type");	
+	String type = request.getParameter("type");
+	String grade = request.getParameter("grade");	
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
@@ -33,6 +34,7 @@
 
 		var query = "mode=registerGame";
 		query += "&type=<%=type%>";
+		query += "&grade=<%=grade%>";
 		query += "&leagueId=" + d.leagueId.value;
 		query += "&gameDate=" + d.gameDate.value;
 		query += "&gameHour=" + d.gameHour.value;
@@ -63,6 +65,7 @@
 		}
 	}
 </SCRIPT>
+<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기등록":"이벤트경기등록"):"핸디캡경기등록"%></div>
 <form method='post' name='registerGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">

@@ -35,6 +35,8 @@ public static final int ROWSIZE = 25;
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -46,6 +48,7 @@ public static final int ROWSIZE = 25;
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("grade", grade);
 		param.put("boardName", "user");
 		
 		List<BoardItem> boardItemList = boardDao.selectBoardItemList(param);
@@ -65,8 +68,9 @@ public static final int ROWSIZE = 25;
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
+		String grade = request.getParameter("grade");
 		
-		BoardItem boardItem = boardDao.selectBoardItem(id, "user");
+		BoardItem boardItem = boardDao.selectBoardItem(id, "user", grade);
 		
 		ModelAndView mv = new ModelAndView("admin/board/admin_board_detail");
 		mv.addObject("boardItem", boardItem);
@@ -96,6 +100,7 @@ public static final int ROWSIZE = 25;
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
 		String type = request.getParameter("type");
+		String grade = request.getParameter("grade");
 		
 		BoardItem boardItem = new BoardItem();
 		boardItem.setBoardName("user");
@@ -106,10 +111,11 @@ public static final int ROWSIZE = 25;
 		boardItem.setTitle(title);
 		boardItem.setStatus(Code.BOARDITEM_STATUS_NORMAL);
 		boardItem.setType(type);
+		boardItem.setGrade(grade);
 		
 		boardDao.insertBoardItem(boardItem);
 		
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList");
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList&grade=" + grade);
 		
 		return mv;
 	}
@@ -126,14 +132,14 @@ public static final int ROWSIZE = 25;
 		String title = request.getParameter("title");
 		String id = request.getParameter("id");
 		String boardName = request.getParameter("boardName");
+		String grade = request.getParameter("grade");
 		
-		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
+		BoardItem boardItem = boardDao.selectBoardItem(id, boardName, grade);
 		boardItem.setTitle(title);
 		boardItem.setContext(context);
 		
 		boardDao.updateBoardItem(boardItem);
-		
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList");
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardDetail&id=" + boardItem.getId());
 		
 		return mv;
 	}
@@ -145,10 +151,12 @@ public static final int ROWSIZE = 25;
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
+		String grade = request.getParameter("grade");
 		
+		boardDao.deleteBoardCommentList(id);
 		boardDao.deleteBoardItem(id);
 		
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList");
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList&grade=" + grade);
 		return mv;
 	}
 	

@@ -18,6 +18,7 @@ public class GameCommand
 	private String winDeny;
 	private String drawDeny;
 	private String loseDeny;
+	private String grade;
 	
 	public String getGameId() {
 		return gameId;
@@ -114,5 +115,11 @@ public class GameCommand
 	}
 	public void setLoseDeny(String loseDeny) {
 		this.loseDeny = loseDeny;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}	
 }

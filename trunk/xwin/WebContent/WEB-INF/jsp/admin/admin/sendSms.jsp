@@ -17,7 +17,7 @@ var targetCheck = 0;
 <form name="SMSFORM" method="post">
 <table>
 	<tr>
-		<td colspan="2">문자전송</td>
+		<td colspan="2">문자전송 (<%=XwinUtil.comma3(Admin.SMS_REMAIN)%>)</td>
 	</tr>
 	<tr>
 		<td colspan="2">

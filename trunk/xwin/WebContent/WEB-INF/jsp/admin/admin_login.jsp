@@ -26,7 +26,7 @@ function checkIT() {
 	var http = new JKL.ParseXML("adminLogin.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
-		location.href='adminQna.aspx?mode=viewQnaList';
+		location.href='adminQna.aspx?mode=viewQnaList&grade=1';
 	} else {
 		alert(result.resultXml.message);
 	}
@@ -77,7 +77,7 @@ function goButton(form)
 			</table>
 			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
 				<tr>
-					<td align="center">Copyright 2008 bwin-Kor All right 
+					<td align="center">Copyright 2008 KingBet All right 
 					reserved.</td>
 				</tr>
 			</table>

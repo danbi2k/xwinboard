@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.infra.util.*" %>
 
  				</div>
 			</div>   
@@ -11,8 +12,10 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminQna.aspx?mode=viewQnaList">고객센터</a></li>
-					<li><a href="adminBoard.aspx?mode=viewBoardList">게시판</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터</a></li>
+					<li><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터 (VIP)</a></li>
+					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판</a></li>
+					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
 					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 				</ul>
@@ -42,11 +45,13 @@
 			<h2 class="heading">경기관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl">승무패</a></li>
-					<li><a href="adminGame.aspx?mode=viewGameList&type=handy">핸디캡</a></li>
-					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
+					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">승무패</a></li>
+					<li><a href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">핸디캡</a></li>
+					<li><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">이벤트</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(승무패)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy">경기결과(핸디캡)</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(이벤트)</a></li>
+					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
 				</ul>
 			</div>
 		</div>
@@ -84,7 +89,7 @@
 	</div>
 	<div id="footer">
 		<BR><BR><BR>
-		<!-- p>Copyright &copy; 2008 Bwin-Kor.</strong></a></p -->
+		<!-- p>Copyright &copy; 2008 KingBet</strong></a></p -->
 	</div>
 </div>
 <script>

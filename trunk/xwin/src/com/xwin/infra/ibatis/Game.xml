@@ -32,6 +32,7 @@
 		<result property="winDeny" column="WIN_DENY"/>
 		<result property="drawDeny" column="DRAW_DENY"/>
 		<result property="loseDeny" column="LOSE_DENY"/>
+		<result property="grade" column="GRADE"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -66,6 +67,14 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			g.GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="gradeLess">
+			<![CDATA[
+			g.GRADE <= #gradeLess#
+			]]>
 		</isNotNull>
 		<isNotNull prepend="AND" property="displayStatus">
 			g.DP_STATUS = #displayStatus#
@@ -118,6 +127,14 @@
 		<isNotNull prepend="AND" property="status">
 			g.STATUS = #status#
 		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			g.GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="gradeLess">
+			<![CDATA[
+			g.GRADE <= #gradeLess#
+			]]>
+		</isNotNull>
 		<isNotNull prepend="AND" property="displayStatus">
 			g.DP_STATUS = #displayStatus#
 		</isNotNull>
@@ -147,8 +164,8 @@
 	</select>
 	
 	<insert id="insertGame" parameterClass="Game">
-		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS, WIN_DENY, DRAW_DENY, LOSE_DENY)
-			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#, #winDeny#, #drawDeny#, #loseDeny#)
+		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS, WIN_DENY, DRAW_DENY, LOSE_DENY, GRADE)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#, #winDeny#, #drawDeny#, #loseDeny#, #grade#)
 	</insert>
 	
 	<update id="updateGame" parameterClass="Game">
@@ -181,6 +198,9 @@
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+			</isNotNull>
 			<isNotNull prepend="," property="displayStatus">
 			DP_STATUS = #displayStatus#
 			</isNotNull>
@@ -209,23 +229,6 @@
 		WHERE ID = #id#
 	</update>
 	
-	<update id="updateGameScoreNull" parameterClass="map">
-		UPDATE tbl_game SET
-			HOME_SCORE = #homeScore#,
-			AWAY_SCORE = #awayScore#,
-			RESULT = #result#,
-			STATUS = #statue#
-		WHERE ID = #id#		
-	</update>
-	
-	<update id="updateGameRateNull" parameterClass="game">
-		UPDATE tbl_game SET
-			WIN_RATE = #winRate#
-			DRAW_RATE = #drawRate#
-			Lose_Rate = #loseRate# 
-		WHERE ID = #id#		
-	</update>
-	
 	<update id="batchGameBetStatus" parameterClass="date">
 		<![CDATA[
 		UPDATE tbl_game
@@ -247,10 +250,4 @@
 			STATUS = 'GS002'
 		]]>			
 	</update>
-	
-	<select id="selectGameWithBetMoney" resultMap="GameResultMap">
-		SELECT
-			ID, LEAGUE_ID, HOMETEAM, AWAYTEAM, GAME_DATE,
-			(SELECT COUNT(*)
-	</select>
 </sqlMap>

@@ -39,19 +39,19 @@
 			<isNotNull prepend="," property="password">
 				PASSWORD = #password#
 			</isNotNull>
-			<isNotNull prepend="," property="password">
+			<isNotNull prepend="," property="nickName">
 				NICKNAME = #nickName#
 			</isNotNull>	
-			<isNotNull prepend="," property="password">	
+			<isNotNull prepend="," property="mobile">	
 				MOBILE = #mobile#
 			</isNotNull>	
-			<isNotNull prepend="," property="password">
+			<isNotNull prepend="," property="email">
 				EMAIL = #email#
 			</isNotNull>	
-			<isNotNull prepend="," property="password">
+			<isNotNull prepend="," property="status">
 				STATUS = #status#
 			</isNotNull>	
-			<isNotNull prepend="," property="password">
+			<isNotNull prepend="," property="grade">
 				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="," property="bankName">

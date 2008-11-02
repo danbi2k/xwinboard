@@ -11,12 +11,14 @@
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
+	
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">고객센터</div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터" %></div>
 
 <form method='post' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value=''/>

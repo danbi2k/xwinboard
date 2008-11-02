@@ -43,6 +43,8 @@ public class Game extends XwinObject
 	private String loseDeny;
 	
 	private String displayStatus;
+	
+	private String grade;
 
 	public String getId() {
 		return id;
@@ -281,5 +283,13 @@ public class Game extends XwinObject
 
 	public void setLoseDeny(String loseDeny) {
 		this.loseDeny = loseDeny;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 }

@@ -9,6 +9,10 @@
 
 <%@ include file="../admin_header.jsp"%>
 
+<%
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
+%>
+
 <SCRIPT LANGUAGE="JavaScript">
 function checkform()
 {
@@ -23,6 +27,7 @@ function checkform()
 <div class="title">공지사항쓰기</div>
 <form name="notice" action="adminBoard.aspx" method="post">
 <input type="hidden" name="mode" value="writeNotice"/>
+<input type="hidden" name="grade" value="<%=grade%>"/>
 <table class="list">
 	<tr>
 		<th width="10%">종류</td>

@@ -18,12 +18,13 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">게시판</div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판" %></div>
 
 <form name='search' method='get' action='adminBoard.aspx'>
 <input type='hidden' name='mode' value='viewBoardList'/>
@@ -100,7 +101,7 @@ if (boardItemList != null) {
 %>
 </div>
 
-<input type="button" value="쓰기" onclick="location.href='adminBoard.aspx?mode=viewWriteNotice'"/>
+<input type="button" value="쓰기" onclick="location.href='adminBoard.aspx?mode=viewWriteNotice&grade=<%=grade%>'"/>
 <script>
 function goPage(index)
 {

@@ -18,9 +18,9 @@ public class Code
 	public static final String BET_NOTICE_READY			= "BTN01";
 	public static final String BET_NOTICE_COMMIT		= "BTN02";
 	
-	public static final String USER_GRADE_NORMAL		= "UG001";
-	public static final String USER_GRADE_VIP			= "UG002";
-	public static final String USER_GRADE_ADMIN			= "UG100";
+	public static final String USER_GRADE_NORMAL		= "1";
+	public static final String USER_GRADE_VIP			= "10";
+	public static final String USER_GRADE_ADMIN			= "100";
 	
 	public static final String USER_STATUS_NORMAL	 	= "US001";
 	public static final String USER_STATUS_SECEDE_REQ 	= "US002";

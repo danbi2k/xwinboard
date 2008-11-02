@@ -8,7 +8,8 @@
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	Game game = (Game) request.getAttribute("game");	
-	String type = request.getParameter("type");	
+	String type = request.getParameter("type");
+	String grade = request.getParameter("grade");	
 	String pageIndex = request.getParameter("pageIndex");
 %>
 <SCRIPT LANGUAGE="JavaScript">
@@ -62,11 +63,11 @@
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&pageIndex=<%=pageIndex%>";
+			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=game.getGrade()%>&pageIndex=<%=pageIndex%>";
 		}
 	}
 </SCRIPT>
-
+<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
 <form method='post' name='registerGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">

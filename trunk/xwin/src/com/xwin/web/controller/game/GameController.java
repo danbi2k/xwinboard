@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -37,9 +38,6 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
-//		if (session.getAttribute("allCartList") == null)
-//			session.setAttribute("allCartList", new ArrayList<AllCartItem>());
-		
 		session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
@@ -55,7 +53,8 @@ public class GameController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
@@ -101,6 +100,7 @@ public class GameController extends XwinController
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
+		param.put("gradeLess", member.getGrade());
 		//param.put("fromRow", pIdx * ROWSIZE);
 		//param.put("rowSize", ROWSIZE);
 		
@@ -119,7 +119,8 @@ public class GameController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
@@ -136,6 +137,7 @@ public class GameController extends XwinController
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("toDate", cal.getTime());
+		param.put("gradeLess", member.getGrade());
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		//Integer gameCount = gameDao.selectGameCount(param);

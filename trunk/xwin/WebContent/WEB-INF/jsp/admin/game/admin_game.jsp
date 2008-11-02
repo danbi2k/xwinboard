@@ -20,6 +20,7 @@
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));	
 	String type = request.getParameter("type");
+	String grade = request.getParameter("grade");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	int pIdx = 0;
@@ -168,14 +169,15 @@
 	}
 </SCRIPT>
 
-<div class="title"><%=type.equals("wdl")?"승무패":"핸디캡"%></div>
-<input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>'">
+<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패":"이벤트"):"핸디캡"%></div>
+<input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>&grade=<%=grade%>'">
 <br>
 <br>
 <form method='get' name='search'>
 <input type='hidden' name='pageIndex'/>
 <input type='hidden' name='mode' value='viewGameList'/>
 <input type='hidden' name='type' value='<%=type%>'/>
+<input type='hidden' name='grade' value='<%=grade%>'/>
 
 리그명
 <select name='leagueId' onChange='this.form.submit()'>
@@ -259,7 +261,7 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkGame" value="<%=game.getId()%>"></th>
-			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=game.getType()%>&grade=<%=game.getGrade()%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>

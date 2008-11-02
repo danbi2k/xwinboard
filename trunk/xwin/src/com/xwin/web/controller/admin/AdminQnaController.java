@@ -33,6 +33,8 @@ public class AdminQnaController extends XwinController
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -43,6 +45,7 @@ public class AdminQnaController extends XwinController
 		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		param.put("grade", grade);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -63,8 +66,8 @@ public class AdminQnaController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
-		
-		BoardItem boardItem = boardDao.selectBoardItem(id, "qna");
+		String grade = request.getParameter("grade");
+		BoardItem boardItem = boardDao.selectBoardItem(id, "qna", grade);
 		
 		ModelAndView mv = new ModelAndView("admin/qna/admin_qna_detail");
 		mv.addObject("boardItem", boardItem);

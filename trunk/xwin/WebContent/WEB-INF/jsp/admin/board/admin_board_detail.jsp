@@ -11,9 +11,10 @@
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
 
-<div class="title">게시판</div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판" %></div>
 
 <form method='post' name='update' action='adminBoard.aspx'>
 	<input type='hidden' name='mode' value='updateBoardItem'/>
@@ -117,7 +118,7 @@ function deleteBoardComment(id)
 function deleteBoardItem()
 {
 	if (confirm("삭제하시겠습니까?")) {
-		location.href='adminBoard.aspx?mode=deleteBoardItem&id=<%=boardItem.getId()%>';
+		location.href='adminBoard.aspx?mode=deleteBoardItem&id=<%=boardItem.getId()%>&grade=<%=boardItem.getGrade()%>';
 	}
 }
 </script>

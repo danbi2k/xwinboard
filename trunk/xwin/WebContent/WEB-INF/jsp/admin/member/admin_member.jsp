@@ -65,10 +65,19 @@
 </SCRIPT>
 
 <div class="title">회원목록</div>
-
+<font size=3><b>
+	정상 : <%=normalCount%> 명
+	탈퇴요청 : <%=secedeReqCount%> 명
+	탈퇴 : <%=secedeCount%> 명
+	</b></font>
 <form method='GET' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value='viewAdminMember'/>
 	<input type='hidden' name='pageIndex'/>
+	<select name='grade' onChange='this.form.submit()'>
+		<option value=''>전체</option>
+		<option value='<%=Code.USER_GRADE_NORMAL%>' <%=grade.equals(Code.USER_GRADE_NORMAL)?"selected":""%>>일반</option>
+		<option value='<%=Code.USER_GRADE_VIP%>' <%=grade.equals(Code.USER_GRADE_VIP)?"selected":""%>>VIP</option>
+ 	</select>
  	<select name='status' onChange='this.form.submit()'>
 		<option value='<%=Code.USER_STATUS_NORMAL%>' <%=status.equals(Code.USER_STATUS_NORMAL)?"selected":""%>>정상</option>
 		<option value='<%=Code.USER_STATUS_SECEDE_REQ%>' <%=status.equals(Code.USER_STATUS_SECEDE_REQ)?"selected":""%>>탈퇴요청</option>
@@ -82,11 +91,6 @@
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
 	<input type='submit' value='검 색'>
-	&nbsp;&nbsp;&nbsp;&nbsp;<font size=3><b>
-	정상 : <%=normalCount%> 명
-	탈퇴요청 : <%=secedeReqCount%> 명
-	탈퇴 : <%=secedeCount%> 명
-	</b></font>
  </form>
 <table class="prettytable">
 	<tr>

@@ -12,6 +12,11 @@
 	
 	<bean id="testController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/test"/>
+	
+	<bean id="munjaBadaResponse"
+		class="com.xwin.web.controller.infra.MunjaBadaResponse"
+		p:adminDao-ref="adminDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminLoginController"
 		class="com.xwin.web.controller.admin.AdminLoginController"

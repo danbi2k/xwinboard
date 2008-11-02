@@ -38,6 +38,8 @@ public class AdminGameController extends XwinController
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -52,6 +54,7 @@ public class AdminGameController extends XwinController
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("grade", grade);
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Integer gameCount = gameDao.selectGameCount(param);
@@ -79,6 +82,8 @@ public class AdminGameController extends XwinController
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
+		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
@@ -100,6 +105,7 @@ public class AdminGameController extends XwinController
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("ORDERBY", "DESC");
+		param.put("grade", grade);
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Integer gameCount = gameDao.selectGameCount(param);
@@ -179,6 +185,8 @@ public class AdminGameController extends XwinController
 		game.setWinDeny(command.getWinDeny());
 		game.setDrawDeny(command.getDrawDeny());
 		game.setLoseDeny(command.getLoseDeny());
+		
+		game.setGrade(command.getGrade());
 		
 		gameDao.insertGame(game);
 		

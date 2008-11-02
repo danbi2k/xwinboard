@@ -5,6 +5,7 @@ public class Indicator
 	private String chargingIndi;
 	private String exchangeIndi;
 	private String centerIndi;
+	private String vipIndi;
 	
 	public String getChargingIndi() {
 		return chargingIndi;
@@ -23,5 +24,11 @@ public class Indicator
 	}
 	public void setCenterIndi(String centerIndi) {
 		this.centerIndi = centerIndi;
+	}
+	public String getVipIndi() {
+		return vipIndi;
+	}
+	public void setVipIndi(String vipIndi) {
+		this.vipIndi = vipIndi;
 	}
 }

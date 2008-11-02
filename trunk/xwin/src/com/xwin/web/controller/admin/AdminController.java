@@ -26,7 +26,8 @@ public class AdminController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		Indicator indicator = new Indicator();
-		indicator.setCenterIndi(boardDao.selectUnAnsweredQna().toString());
+		indicator.setCenterIndi(boardDao.selectUnAnsweredQna(Code.USER_GRADE_NORMAL).toString());
+		indicator.setVipIndi(boardDao.selectUnAnsweredQna(Code.USER_GRADE_VIP).toString());
 		
 		Map<String, Object> param = new HashMap<String, Object>(1);
 		param.put("status", Code.MONEY_IN_REQUEST);

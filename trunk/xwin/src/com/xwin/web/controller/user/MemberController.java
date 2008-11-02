@@ -297,7 +297,7 @@ public class MemberController extends XwinController
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
-				sendSmsConnector.sendSms("Bwin-Kor 가입 인증번호  [ " + phonePin + " ]", phone, "00000000000");
+				sendSmsConnector.sendSms("KingBet 가입 인증번호  [ " + phonePin + " ]", phone, "00000000000");
 				rx = new ResultXml(0, "인증번호를 발송하였습니다", null);
 			} catch (Exception e) {
 				rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);

@@ -92,7 +92,7 @@ function img_resize(obj,max_width){
     </td>
     <td width="50%" height="30" align="right">
 		<%if (boardItem.getUserId().equals(member.getUserId())) {%>
-		<a href="" onclick="deleteItem()"><img src="images/btn_del.gif" border="0"></a>
+		<img src="images/btn_del.gif" border="0" onclick="deleteItem()"></a>
 		<%} %>
         &nbsp;&nbsp;
         <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
@@ -111,7 +111,7 @@ function deleteItem()
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardName%>";
+			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>";
 		}
 	}
 }

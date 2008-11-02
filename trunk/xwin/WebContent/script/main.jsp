@@ -10,7 +10,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Bwin-Kor Admin</title>
+<title>KingBet Admin</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="script/lasvegastoo.css" rel="stylesheet" type="text/css" />
@@ -18,7 +18,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 <body>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="#">Bwin-Kor</a></h1>
+		<h1><a href="#">KingBet</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>

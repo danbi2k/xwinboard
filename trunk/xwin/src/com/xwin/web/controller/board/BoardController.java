@@ -30,24 +30,27 @@ public class BoardController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		String boardName = XwinUtil.nvl(request.getParameter("boardName"));
 		
 		String userId = null;
+		String grade = null;
 		if (boardName.equals("qna")) {
-			Member member = (Member) request.getSession().getAttribute("Member");
 			userId = member.getUserId();
-		}			
+		} else {
+			grade = member.getGrade();
+		}
 		
-		ModelAndView mv = viewBoard(pageIndex, boardName, userId);
+		ModelAndView mv = viewBoard(pageIndex, boardName, userId, grade);
 		
 		return mv;
 	}
 
-	private ModelAndView viewBoard(String pageIndex, String boardName, String userId)
+	private ModelAndView viewBoard(String pageIndex, String boardName, String userId, String grade)
 	{
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -58,6 +61,7 @@ public class BoardController extends XwinController
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("boardName", boardName);
+		param.put("grade", grade);
 		param.put("userId", userId);
 		
 		List<BoardItem> boardItemList = boardDao.selectBoardItemList(param);
@@ -75,7 +79,8 @@ public class BoardController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String id = request.getParameter("id");
@@ -84,7 +89,7 @@ public class BoardController extends XwinController
 		
 		if (addComment == null)
 			boardDao.plusBoardItemReadCout(id);
-		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
+		BoardItem boardItem = boardDao.selectBoardItem(id, boardName, member.getGrade());
 		
 		ModelAndView mv = new ModelAndView("board/boardDetail");
 		mv.addObject("boardItem", boardItem);
@@ -185,6 +190,7 @@ public class BoardController extends XwinController
 		boardItem.setStatus(Code.BOARDITEM_STATUS_NORMAL);
 		boardItem.setTitle(title);
 		boardItem.setType(Code.BOARDITEM_TYPE_USER);
+		boardItem.setGrade(member.getGrade());
 		boardDao.insertBoardItem(boardItem);
 	
 		ModelAndView mv = null;
@@ -198,18 +204,18 @@ public class BoardController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String id = request.getParameter("id");
 		String boardName = request.getParameter("boardName");
 		
-		BoardItem boardItem = boardDao.selectBoardItem(id, boardName);
-		Member member = (Member) request.getSession().getAttribute("Member");
+		BoardItem boardItem = boardDao.selectBoardItem(id, boardName, member.getGrade());
 		
 		ResultXml rx = null;
 		if (boardItem.getUserId().equals(member.getUserId())) {
-			//boardDao.deleteBoardCommentList(id);
+			boardDao.deleteBoardCommentList(id);
 			boardDao.deleteBoardItem(id);
 			
 			rx = new ResultXml(0, "삭제되었습니다", null);
@@ -257,12 +263,13 @@ public class BoardController extends XwinController
 	{
 		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String id = request.getParameter("id");
 		
-		BoardItem boardItem = boardDao.selectBoardItem(id, "user");
+		BoardItem boardItem = boardDao.selectBoardItem(id, "user", member.getGrade());
 		
 		ResultXml rx = new ResultXml(0, null, boardItem);
 		ModelAndView mv = new ModelAndView("xmlFacade");

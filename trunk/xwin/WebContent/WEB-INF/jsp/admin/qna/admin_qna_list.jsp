@@ -19,12 +19,14 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
 
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">고객센터</div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터" %></div>
 
 <form name='search' method='get' action='adminQna.aspx'>
 <input type='hidden' name='mode' value='viewQnaList'/>

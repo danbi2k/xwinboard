@@ -247,7 +247,7 @@ public class BettingService extends XwinService
 				try {
 					Member member = memberDao.selectMember(betting.getUserId(), null);
 					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
-						String message = "[bwin-kor] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+						String message = "[KingBet] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
 								Code.getValue(betting.getStatus()) + " 되었습니다.";
 						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
 							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());

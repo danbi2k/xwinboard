@@ -11,4 +11,6 @@ public class Admin
 	public static String DENY_QNA = "";
 	public static String DENY_CHARGE = "";
 	public static String DENY_EXCHANGE = "";
+	
+	public static String SMS_REMAIN = "";
 }

@@ -51,6 +51,8 @@ public class XwinInitServlet extends HttpServlet {
 		Admin.DENY_QNA = adminDao.selectAdmin("DENY_QNA");
 		Admin.DENY_CHARGE = adminDao.selectAdmin("DENY_CHARGE");
 		Admin.DENY_EXCHANGE = adminDao.selectAdmin("DENY_EXCHANGE");
+		
+		Admin.SMS_REMAIN = adminDao.selectAdmin("SMS_REMAIN");
 	}
 
 	public void service(ServletRequest arg0, ServletResponse arg1)

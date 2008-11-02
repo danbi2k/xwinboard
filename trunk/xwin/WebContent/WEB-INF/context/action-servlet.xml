@@ -19,7 +19,7 @@
 				<prop key="/myMoney.aspx">myMoneyController</prop>
 				
 				<prop key="/test.aspx">testController</prop>
-				
+				<prop key="/munja.aspx">munjaBadaResponse</prop>
 				
 				<prop key="/adminIndex.aspx">adminIndexController</prop>
 				<prop key="/adminLogin.aspx">adminLoginController</prop>
