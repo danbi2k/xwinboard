@@ -12,11 +12,6 @@ public class IndexController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		ModelAndView mv = new ModelAndView("index");
-		String localName = request.getLocalName();
-		if (localName.contains("vip"))
-			mv.addObject("SERVER", "vip");
-		else
-			mv.addObject("SERVER", "kor");
 		
 		return mv;
 	}

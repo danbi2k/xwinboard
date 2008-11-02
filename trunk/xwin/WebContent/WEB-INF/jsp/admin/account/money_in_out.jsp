@@ -70,10 +70,10 @@
 		
 
 		<th>아이디 (닉네임)</th>
+		<th>예금주</td>
 		<th>요청금액</td>
 		<th>은행명</td>
 		<th>계좌번호</td>
-		<th>예금주</td>
 		<th>신청일</td>
 		<th>처리일</td>
 		<th>상태</td>
@@ -86,10 +86,10 @@
 	<tr>		
 		
 		<td><a href='javascript:goMemberDetail("<%=moneyInOut.getUserId()%>")'><%=moneyInOut.getUserId()%></a> (<%=moneyInOut.getNickName()%>)</td>
+		<td><%=moneyInOut.getName()%></td>
 		<td><font color=<%=plus?"blue":"red"%>><%=XwinUtil.comma3(moneyInOut.getMoney())%></font></td>
 		<td><%=moneyInOut.getBankName()%></td>
 		<td><%=moneyInOut.getNumber()%></td>
-		<td><%=moneyInOut.getName()%></td>
 		<td><%=moneyInOut.getReqDateStr()%></td>
 		<td><%=moneyInOut.getProcDateStr()%></td>
 		<td><%=Code.getValue(moneyInOut.getStatus())%></td>

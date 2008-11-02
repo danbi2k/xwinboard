@@ -23,6 +23,8 @@ public class LoginController extends XwinController
 		ResultXml rx = new ResultXml();
 		
 		Integer blockIp = accessDao.selectBlockIpCount(request.getRemoteAddr());
+		String url = request.getRequestURL().toString();
+		
 		if (blockIp > 0) {
 			rx.setCode(-1);
 			rx.setMessage("차단된 IP 주소 입니다");
@@ -32,11 +34,15 @@ public class LoginController extends XwinController
 			
 			Member member = memberDao.selectMember(userId, null);
 			
-			
-			
 			if (member == null) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 사용자 입니다");
+			} else if (url.contains("bet-kor") && member.getGrade().equals(Code.USER_GRADE_VIP)) {
+				rx.setCode(-2);
+				rx.setMessage("VIP회원 이십니다. VIP사이트를 이용해주세요");				
+			} else if (url.contains("bet-vip") && member.getGrade().equals(Code.USER_GRADE_NORMAL)) {
+				rx.setCode(-3);
+				rx.setMessage("일반회원 이십니다. KOR사이트를 이용해주세요");				
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
 				rx.setMessage("비밀번호를 잘못 입력하셨습니다");

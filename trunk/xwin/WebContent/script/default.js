@@ -79,6 +79,12 @@ function FnLogin_Submit(frm){
 	
 	if (result.resultXml.code < 0) {
 		alert(result.resultXml.message);
+		
+		if (result.resultXml.code == -2)
+			location.href = "http://kingbet-vip.com";
+		else if (result.resultXml.code == -3)
+			location.href = "http://kingbet-kor.com";
+		
 		return;
 	}
 	

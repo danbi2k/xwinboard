@@ -7,7 +7,11 @@
 <%@ page import="com.xwin.infra.util.*" %>
 <%@ page import="java.util.*" %>
 <%
-	String SERVER = (String) request.getAttribute("SERVER");
+	String url = request.getRequestURL().toString().toLowerCase();
+	String SERVER = "kor";
+	if (url.contains("ngbet-vip"))
+		SERVER = "vip";
+	
 	Member member = (Member) session.getAttribute("Member");
 	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
 	Boolean isModify = (Boolean) request.getAttribute("isModify");
@@ -157,7 +161,7 @@ if (login) {
 
 	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
 	<td>
-		<%if (Admin.DENY_JOIN.equals("Y")) {%>
+		<%if (Admin.DENY_JOIN.equals("Y") && SERVER.equals("kor")) {%>
 		<img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';">
 		<%}%>
 	</td>
