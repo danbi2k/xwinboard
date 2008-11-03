@@ -127,6 +127,14 @@ if (login) {
 	<tr>
 
 	<td>
+		<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
+		<img src='images/star.gif' width='20' height='20'/>
+		<img src="images/smenu_event.gif" onclick="location.href='game.aspx?mode=viewGameList&type=wdl&grade=10';" style="cursor:hand">
+		<img src='images/star.gif' width='20' height='20'/>		
+	</td>
+	<%} %>
+
+	<td>
 		<%if (Admin.DENY_CHARGE.equals("Y")) {%>
 		<img src="images/smenu_1.gif" onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest';" style="cursor:hand">
 		

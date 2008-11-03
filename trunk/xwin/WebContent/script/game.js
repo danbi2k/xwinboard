@@ -1,4 +1,4 @@
-function FnGetGameList(type, leagueId, status, grade)
+function FnGetGameList(type, leagueId, grade, status)
 {
 	var query = "mode=getGameList";
 	if (leagueId != undefined)
