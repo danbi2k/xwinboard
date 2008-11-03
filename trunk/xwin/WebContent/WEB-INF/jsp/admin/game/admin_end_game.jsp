@@ -178,7 +178,7 @@
 				
 		%>
  		<tr>
-			<td width=5%><a href="adminGame.aspx?mode=viewReprocessGame&id=<%=game.getId()%>&type=<%=type%>"><%=game.getId()%></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewReprocessGame&id=<%=game.getId()%>&type=<%=game.getType()%>&grade=<%=game.getGrade()%>"><%=game.getId()%></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>

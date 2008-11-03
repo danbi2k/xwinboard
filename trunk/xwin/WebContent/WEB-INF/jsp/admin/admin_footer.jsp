@@ -48,10 +48,8 @@
 				<ul>
 					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">승무패</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">핸디캡</a></li>
-					<li><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">이벤트</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(승무패)</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy">경기결과(핸디캡)</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl">경기결과(이벤트)</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(승무패)</a></li>
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(핸디캡)</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
 				</ul>
 			</div>
