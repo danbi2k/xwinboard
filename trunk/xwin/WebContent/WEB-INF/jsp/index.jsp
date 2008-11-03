@@ -93,7 +93,7 @@ function getCookie( name )
 var POPUPFLAG = "<%=Admin.POPUPFLAG%>";
 var COOKIEFLAG = getCookie("COOKIEFLAG");
 
-if (POPUPFLAG == "Y" && COOKIEFLAG == "")
+if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
 {
 	popupopen();
 }
@@ -138,7 +138,7 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "")
 		<table>
 		<tr><td><font color='orange'><B>&nbsp;Sports Bet</B></font></td></tr>
 		<tr><td>
-		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/ski.jpg" border=0></a>
+		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/hockey.jpg" border=0></a>
 		</td></tr>
 		</table>
 	</td>

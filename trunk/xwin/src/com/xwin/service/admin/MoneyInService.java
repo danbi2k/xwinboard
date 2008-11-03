@@ -136,7 +136,7 @@ public class MoneyInService extends XwinService
 	private boolean isValidTransaction(Transaction transaction)
 	{
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.HOUR, TIMEOUT * -1);
+		cal.add(Calendar.MILLISECOND, TIMEOUT * -1);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("name", transaction.getUserName());

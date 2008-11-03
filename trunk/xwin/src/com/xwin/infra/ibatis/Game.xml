@@ -198,7 +198,7 @@
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="grade">
+			<isNotNull prepend="," property="grade">
 			GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="," property="displayStatus">
