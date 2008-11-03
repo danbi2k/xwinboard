@@ -47,52 +47,106 @@ public class AutoMoneyInManager extends QuartzJobBean
 				Transaction transaction = new Transaction();
 				
 				if (message.getMsg().startsWith("[KB]") && message.getMsg().indexOf("입금") > 0) {
-					
-					String[] msg = message.getMsg().split("\n");
-					
-					Date theDate = null;
 					try {
-						theDate = smsDateFormat.parse(msg[0].substring(4));
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(theDate);
-						Calendar now = Calendar.getInstance();
-						cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
-						theDate = cal.getTime();
+						String[] msg = message.getMsg().split("\n");
 						
-					} catch (ParseException e) {
-						e.printStackTrace();
-						theDate = new Date();
-					}
-		
-					String userName = msg[2].trim();
+						Date theDate = null;
+						try {
+							theDate = smsDateFormat.parse(msg[0].substring(4));
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(theDate);
+							Calendar now = Calendar.getInstance();
+							cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+							theDate = cal.getTime();
+							
+						} catch (ParseException e) {
+							e.printStackTrace();
+							theDate = new Date();
+						}
+			
+						String userName = msg[2].trim();
+						
+						Long money = null;
+						if (msg[3].startsWith("입금")) {
+							String moneyStr = msg[3].replaceAll("입금", "");
+							moneyStr = moneyStr.replaceAll(",", "");
+							moneyStr = moneyStr.trim();
+							
+							money = Long.parseLong(moneyStr);
+						}
+						
+						Long balance = null;
+						if (msg[4].startsWith("잔액")) {
+							String balanceStr = msg[4].replaceAll("잔액", "");
+							balanceStr = balanceStr.replaceAll(",", "");
+							balanceStr = balanceStr.trim();
+							
+							balance = Long.parseLong(balanceStr);
+						}				
+	
+						transaction.setType(Code.TRAN_TYPE_MONEYIN);
+						transaction.setUserName(userName);
+						transaction.setDate(theDate);
+						transaction.setMoney(money);
+						transaction.setBalance(balance);
+						transaction.setMsgSeq(message.getMsgSeq());
+						transaction.setInDate(message.getInDate());
+						transaction.setIsCharge("N");
 					
-					Long money = null;
-					if (msg[3].startsWith("입금")) {
-						String moneyStr = msg[3].replaceAll("입금", "");
-						moneyStr = moneyStr.replaceAll(",", "");
+						transactionDao.insertTransaction(transaction);
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("트랜젝션을 넣지 못했습니다");
+					}
+				} else if (message.getMsg().startsWith("[KB]") && message.getMsg().indexOf("출금") > 0) {
+					try {
+						String[] msg = message.getMsg().split("\n");
+						
+						Date theDate = null;
+						try {
+							theDate = smsDateFormat.parse(msg[0].substring(4));
+							Calendar cal = Calendar.getInstance();
+							cal.setTime(theDate);
+							Calendar now = Calendar.getInstance();
+							cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+							theDate = cal.getTime();
+							
+						} catch (ParseException e) {
+							e.printStackTrace();
+							theDate = new Date();
+						}
+			
+						String userName = msg[2].trim();
+						
+						Long money = null;
+						String moneyStr = msg[4].replaceAll(",", "");
 						moneyStr = moneyStr.trim();
 						
 						money = Long.parseLong(moneyStr);
-					}
-					
-					Long balance = null;
-					if (msg[4].startsWith("잔액")) {
-						String balanceStr = msg[4].replaceAll("잔액", "");
-						balanceStr = balanceStr.replaceAll(",", "");
-						balanceStr = balanceStr.trim();
 						
-						balance = Long.parseLong(balanceStr);
-					}				
-
-					transaction.setType(Code.TRAN_TYPE_MONEYIN);
-					transaction.setUserName(userName);
-					transaction.setDate(theDate);
-					transaction.setMoney(money);
-					transaction.setBalance(balance);
+						Long balance = null;
+						if (msg[5].startsWith("잔액")) {
+							String balanceStr = msg[5].replaceAll("잔액", "");
+							balanceStr = balanceStr.replaceAll(",", "");
+							balanceStr = balanceStr.trim();
+							
+							balance = Long.parseLong(balanceStr);
+						}				
+	
+						transaction.setType(Code.TRAN_TYPE_MONEYOUT);
+						transaction.setUserName(userName);
+						transaction.setDate(theDate);
+						transaction.setMoney(money * -1);
+						transaction.setBalance(balance);
+						transaction.setMsgSeq(message.getMsgSeq());
+						transaction.setInDate(message.getInDate());
+						transaction.setIsCharge("-");
 					
-					transactionDao.insertTransaction(transaction);
-				} else if (message.getMsg().startsWith("[KB]") && message.getMsg().indexOf("출금") > 0) {
-					
+						transactionDao.insertTransaction(transaction);
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("트랜젝션을 넣지 못했습니다");
+					}
 				} else {
 					ktfSmsDao.insertMessage(message);
 				}

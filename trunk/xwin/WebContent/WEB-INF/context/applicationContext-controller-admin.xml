@@ -123,5 +123,13 @@
 		class="com.xwin.web.controller.admin.AdminStatisticsController"
 		p:memberDao-ref="memberDao"
 		p:bettingDao-ref="bettingDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>	
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminTransactionController"
+		class="com.xwin.web.controller.admin.AdminTransactionController"
+		p:memberDao-ref="memberDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:moneyOutDao-ref="moneyOutDao"
+		p:transactionDao-ref="transactionDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 </beans>

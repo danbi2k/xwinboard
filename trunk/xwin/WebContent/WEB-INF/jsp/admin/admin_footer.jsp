@@ -29,6 +29,7 @@
 					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">환전요청</a></li>
 					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=002">충환전내역</a></li>
 					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=004">직충전차감내역</a></li>
+					<li><a href="adminTran.aspx?mode=viewTransactionList">입출금내역</a></li>
 				</ul>
 			</div>
 		</div>

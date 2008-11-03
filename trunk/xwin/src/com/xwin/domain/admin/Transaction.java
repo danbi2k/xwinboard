@@ -13,6 +13,11 @@ public class Transaction extends XwinObject
 	private Long money;
 	private Long balance;
 	private String isCharge;
+	private String msgSeq;
+	private String inDate;
+	private String moneyInId;
+	private String moneyOutId;
+	private String note;
 	
 	public String getId() {
 		return id;
@@ -55,5 +60,35 @@ public class Transaction extends XwinObject
 	}
 	public void setIsCharge(String isCharge) {
 		this.isCharge = isCharge;
+	}
+	public String getMsgSeq() {
+		return msgSeq;
+	}
+	public void setMsgSeq(String msgSeq) {
+		this.msgSeq = msgSeq;
+	}
+	public String getInDate() {
+		return inDate;
+	}
+	public void setInDate(String inDate) {
+		this.inDate = inDate;
+	}
+	public String getMoneyInId() {
+		return moneyInId;
+	}
+	public void setMoneyInId(String moneyInId) {
+		this.moneyInId = moneyInId;
+	}
+	public String getMoneyOutId() {
+		return moneyOutId;
+	}
+	public void setMoneyOutId(String moneyOutId) {
+		this.moneyOutId = moneyOutId;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 }

@@ -21,6 +21,11 @@ public class TransactionDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectTransactionCount", param);		
 	}
+	
+	public Integer selectTransactionSum(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectTransactionSum", param);		
+	}
 
 	public void updateTransaction(Transaction transaction) {
 		sqlMapClientTemplate.update("updateTransaction", transaction);

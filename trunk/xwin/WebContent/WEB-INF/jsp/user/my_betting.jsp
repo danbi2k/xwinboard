@@ -115,7 +115,7 @@
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
 									<font color="#DDDDDD">
 									<%} %>
-									<%=Code.getValue(betGame.getResultStatus())%></font></nobr></td>
+									<B><%=Code.getValue(betGame.getResultStatus())%></B></font></nobr></td>
 								<%
 								if (count == 0) {
 								%>

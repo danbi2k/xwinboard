@@ -83,6 +83,12 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -145,6 +151,12 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -202,6 +214,12 @@
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
 				STATUS = #statusList[]#
 				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#

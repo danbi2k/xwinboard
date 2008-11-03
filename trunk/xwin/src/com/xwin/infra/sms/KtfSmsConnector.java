@@ -40,7 +40,7 @@ public class KtfSmsConnector
 		try {			
 			DocumentBuilder getBuilder = docBuilderFact.newDocumentBuilder();
 			HttpClient hc = new HttpClient();
-			hc.getHttpConnectionManager().getParams().setSoTimeout(2000);
+			hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
 			
 			HttpMethod method = new GetMethod(getUri);
 			hc.executeMethod(method);

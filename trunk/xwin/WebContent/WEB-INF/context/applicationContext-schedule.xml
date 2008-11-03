@@ -72,7 +72,7 @@
 	<bean id="autoMoneyInTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="autoMoneyInJob"/>
 		<property name="startDelay" value="20000"/>
-		<property name="repeatInterval" value="5000"/>
+		<property name="repeatInterval" value="30000"/>
 	</bean>
 	
 	<bean id="sendSmsTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
@@ -91,7 +91,7 @@
 		<property name="triggers">
 			<list>
 				<ref bean="gameBetStatusTrigger"/>
-				<!-- ref bean="autoMoneyInTrigger"/ -->
+				<ref bean="autoMoneyInTrigger"/>
 				<!-- ref bean="sendSmsTrigger"/ -->
 				<ref bean="betMoneyStatTrigger"/>
 			</list>
