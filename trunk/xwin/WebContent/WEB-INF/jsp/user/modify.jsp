@@ -62,17 +62,28 @@ function SetNICK(nick){
 
 	<tr><td>회원아이디</td>
 		<td><%=member.getUserId()%></td></tr>
-	<tr><td>비밀번호 변경</td>
+	<tr><td>새 비밀번호</td>
 		<td><input class="member" name="password1" type="password"></td></tr>
-	<tr><td>비밀번호 변경 확인</td>
+	<tr><td>새 비밀번호 확인</td>
 		<td><input class="member" name="password2" type="password"></td></tr>
 	<tr><td>닉네임</td>
 		<td><%=member.getNickName()%></td>
 	<tr><td>휴대폰번호</td>
-		<td>
-			<%=member.getMobile()%><br>
-			<input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%>/>  체크 하시면 경기결과를 문자로 전송해 드립니다.			
-		</td></tr>
+		<td><select class="member" name="phone1">
+			<option value="010" <%="010".equals(phone[0])?"selected":""%>>010</option>
+			<option value="011" <%="011".equals(phone[0])?"selected":""%>>011</option>
+			<option value="016" <%="016".equals(phone[0])?"selected":""%>>016</option>
+			<option value="017" <%="017".equals(phone[0])?"selected":""%>>017</option>
+			<option value="018" <%="018".equals(phone[0])?"selected":""%>>018</option>
+			<option value="019" <%="019".equals(phone[0])?"selected":""%>>019</option>
+			</select> -
+			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="<%=phone[1]%>" style='IME-MODE: inactive'> -
+			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="<%=phone[2]%>" style='IME-MODE: inactive'>
+			<input type="button" value="인증번호전송" onclick="sendAuthNumber()"/><br>
+			<input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%>/>  체크 하시면 경기결과를 문자로 전송해 드립니다.	
+			</td></tr>
+	<tr><td>인증번호</td>
+		<td><input class="member" name="phonePin" type="password"></td></tr>
 	<tr><td>이메일</td>
 		<td><input class="member" name="email1" type="text" value="<%=email[0]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
 			<input class="member" name="email2" type="text" value="<%=email[1]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
@@ -146,6 +157,27 @@ alert("환전계좌를 등록해 주십시오\n환전업무는 등록된 환전�
 <%
 }
 %>
+
+function sendAuthNumber(){
+	var f = document.frm_mem;
+	if (!f.phone2.value && f.phone2.value.length < 3) {
+		alert("전화번호를 확인하시고 다시 넣어주세요");
+		return;
+	}
+
+	if (!f.phone3.value && f.phone3.value.length < 4) {
+		alert("전화번호를 확인하시고 다시 넣어주세요");
+		return;
+	}
+	
+	var query = "mode=sendAuthNumber";
+	query += "&phone=" + f.phone1.value + "-" + f.phone2.value + "-" + f.phone3.value;
+	
+	var http = new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+
+	alert(result.resultXml.message); 
+}
 </script>
 
 <%@include file="../footer.jsp"%>

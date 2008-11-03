@@ -54,6 +54,11 @@ function FnMemModify(frm)
 	query += "&password2=" + frm.password2.value;
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
+	query += "&phone1=" + frm.phone1.value;
+	query += "&phone2=" + frm.phone2.value;
+	query += "&phone3=" + frm.phone3.value;
+	query += "&phonePin=" + frm.phonePin.value;
+	
 	if (frm.smsCheck.checked)
 		query += "&smsCheck=" + "Y";
 	else

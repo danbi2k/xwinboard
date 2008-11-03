@@ -131,26 +131,38 @@ public class MemberController extends XwinController
 			return new ModelAndView("dummy");
 		
 		Member member = (Member) request.getSession().getAttribute("Member");
+		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
+		String phonePin = (String) request.getSession().getAttribute(mobile);
+		request.getSession().removeAttribute(mobile);
+		
 		ResultXml rx = null;
-		rx = checkPassword(command.getPassword1(), command.getPassword2());
-		if (rx.getCode() == 0) {
-			rx = checkEmail(command.getEmail1(), command.getEmail2());
-			if (rx.getCode() == 0) {
-				member.setPassword(command.getPassword1());
-				member.setGetSms(command.getSmsCheck());
-				//member.setNickName(command.getNickName());
-				//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
-				member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-				if ((member.getBankName() == null || member.getBankName().length() == 0) && command.getBankName() != null) {
-					member.setBankName(command.getBankName());
-					member.setBankNumber(command.getBankNumber());
-					member.setBankOwner(command.getBankOwner());
+		if (phonePin != null) {
+			if (phonePin.equals(command.getPhonePin())) {
+				rx = checkPassword(command.getPassword1(), command.getPassword2());
+				if (rx.getCode() == 0) {
+					rx = checkEmail(command.getEmail1(), command.getEmail2());
+					if (rx.getCode() == 0) {
+						member.setPassword(command.getPassword1());
+						member.setGetSms(command.getSmsCheck());
+						//member.setNickName(command.getNickName());
+						member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
+						member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+						if ((member.getBankName() == null || member.getBankName().length() == 0) && command.getBankName() != null) {
+							member.setBankName(command.getBankName());
+							member.setBankNumber(command.getBankNumber());
+							member.setBankOwner(command.getBankOwner());
+						}
+						
+						memberDao.updateMember(member);
+							
+						rx = ResultXml.SUCCESS;
+					}			
 				}
-				
-				memberDao.updateMember(member);
-					
-				rx = ResultXml.SUCCESS;
-			}			
+			} else {
+				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);
+			}
+		} else {
+			rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -287,9 +299,10 @@ public class MemberController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("mobile", phone);
-		Integer count = memberDao.selectMemberCount(param);		
+		Integer count = memberDao.selectMemberCount(param);
+		Member member = (Member) request.getSession().getAttribute("Member");
 		
-		if (count > 0) {
+		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
 			rx = new ResultXml(0, "이미 가입된 휴대전화 입니다", null);
 		}
 		else {
