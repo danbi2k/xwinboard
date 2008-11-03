@@ -8,6 +8,7 @@
 
 <%
 	String type = request.getParameter("type");
+	String grade = request.getParameter("grade");
 %>
 <script>
 var gameType = '<%=type%>'
@@ -42,7 +43,7 @@ var gameType = '<%=type%>'
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td>리그선택 : 
-	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('wdl', this.value);">
+	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('<%=type%>', this.value, '<%=grade%>');">
 		<option value="">--전체--</option>
 		<%
 		if (leagueList != null && leagueList.size() > 0) {
@@ -120,7 +121,7 @@ var gameType = '<%=type%>'
 <script>
 function reload()
 {
-	FnGetGameList('<%=type%>', CartFrm.leagueId.value);	
+	FnGetGameList('<%=type%>', CartFrm.leagueId.value, '<%=grade%>');	
 }
 
 reload();

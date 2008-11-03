@@ -100,7 +100,7 @@
 	<select id="selectMemberList" resultMap="memberResultMap"
 		parameterClass="map">
 		SELECT * FROM tbl_member
-		WHERE GRADE != 'UG100'
+		WHERE GRADE != '100'
 		<isNotNull prepend="AND" property="grade">
 			GRADE = #grade#
 		</isNotNull>
@@ -128,7 +128,7 @@
 	<select id="selectMemberCount" resultClass="integer"
 		parameterClass="map">
 		SELECT COUNT(*) FROM tbl_member
-		WHERE GRADE != 'UG100'
+		WHERE GRADE != '100'
 		<isNotNull prepend="AND" property="grade">
 			GRADE = #grade#
 		</isNotNull>

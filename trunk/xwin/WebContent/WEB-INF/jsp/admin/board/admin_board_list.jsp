@@ -28,6 +28,7 @@
 
 <form name='search' method='get' action='adminBoard.aspx'>
 <input type='hidden' name='mode' value='viewBoardList'/>
+<input type='hidden' name='grade' value='<%=grade%>'/>
 <input type='hidden' name='pageIndex'/>
 <select name='search'>
 	<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>

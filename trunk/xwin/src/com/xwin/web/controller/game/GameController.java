@@ -125,6 +125,7 @@ public class GameController extends XwinController
 		
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String type = request.getParameter("type");
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
 		
 		Calendar cal = Calendar.getInstance();
 		cal = XwinUtil.getOnlyDate(cal);
@@ -137,7 +138,7 @@ public class GameController extends XwinController
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("toDate", cal.getTime());
-		param.put("gradeLess", member.getGrade());
+		param.put("grade", grade);
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		//Integer gameCount = gameDao.selectGameCount(param);

@@ -79,8 +79,8 @@
 <tr><td width="270" align="center"><a href="index.aspx"><img src="images/kingbet-<%=SERVER%>.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu">
-<li><a href="game.aspx?mode=viewGameList&type=wdl"><img src='images/menu_wdl.jpg' border='0'></a></li>
-<li><a href="game.aspx?mode=viewGameList&type=handy"><img src='images/menu_handy.jpg' border='0'></a></li>
+<li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
+<li><a href="game.aspx?mode=viewGameList&type=handy&grade=1"><img src='images/menu_handy.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
 <li><a href="aboutHandy.aspx"><img src='images/menu_abouthandy.jpg' border='0'></a></li>
 <li><a href="board.aspx?mode=viewBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>

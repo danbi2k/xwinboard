@@ -142,7 +142,12 @@ public class BettingController extends XwinController
 			accountDao.insertAccount(account);			
 			memberDao.plusMinusBalance(member.getUserId(), betting.getMoney() * -1);
 			
-			Double point = betting.getMoney() * 0.02;			
+			Double point = 0.0;
+			if (member.getGrade().equals(Code.USER_GRADE_NORMAL))
+				point = betting.getMoney() * 0.02;
+			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
+				point = betting.getMoney() * 0.03;
+			
 			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
 			
 			Point pointLog = new Point();

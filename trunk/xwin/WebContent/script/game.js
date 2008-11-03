@@ -1,4 +1,4 @@
-function FnGetGameList(type, leagueId, status)
+function FnGetGameList(type, leagueId, status, grade)
 {
 	var query = "mode=getGameList";
 	if (leagueId != undefined)
@@ -7,6 +7,8 @@ function FnGetGameList(type, leagueId, status)
 		query += "&type=" + type;
 	if (status != undefined)
 		query += "&status=" + status;
+	if (grade != undefined)
+		query += "&grade=" + grade;
 	
 	var http = new JKL.ParseXML("game.aspx", query);
 	var result = http.parse();
