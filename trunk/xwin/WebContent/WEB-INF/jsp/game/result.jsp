@@ -107,7 +107,7 @@ if (gameList != null) {
 %>																								
 		<tr height=25 bgcolor=000000>
 			<td align=center  ><nobr><%=game.getGameDateStr()%></td>
-			<td align=center ><nobr><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle>
+			<td align=left ><nobr>&nbsp;<img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>" align=absmiddle>
 			<font color="#ffffff"><%=game.getLeagueName()%></font></td>
 			<td align=right >
 				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
