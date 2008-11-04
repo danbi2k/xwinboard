@@ -1,6 +1,6 @@
 var total_rate = 0;
 
-function FnEmptyGameWdlCart(type)
+function FnEmptyGameCart(type)
 {
 	var query = "mode=emptyGameCart";
 	query += "&type=" + type;
@@ -10,6 +10,53 @@ function FnEmptyGameWdlCart(type)
 	
 	if (result.resultXml.code == 0) {
 		document.location.reload();
+	}
+}
+
+function FnDrawCartCheck(type)
+{
+	var query = "mode=getGameCart";
+	query += "&type=" + type;
+	
+	var http = new JKL.ParseXML("betting.aspx", query);
+	var result = http.parse();
+	
+	if (result.resultXml.code == 0) {
+		var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+		for (i in data) {
+			var id = "check" + data[i].gameId +	data[i].guess;
+			var obj = document.getElementById(id);
+			if (obj)
+				obj.checked = true;
+		}
+	}
+}
+
+function FnDeleteGameCart(id, type, guess)
+{
+	var money = CartFrm.BetAmt.value;
+	if (money == undefined || money.length == 0)
+		CartFrm.BetAmt.value = money = "0";
+	
+	var regexp= RegExp(/,/ig);
+	money = money.replace(regexp, "");
+	
+	var query = "";
+	query = "mode=deleteGameCart";
+	query += "&gameId=" + id;
+	query += "&type=" + type;
+	
+	var http = new JKL.ParseXML("betting.aspx", query);
+	var result = http.parse();
+	
+	if (result.resultXml.code == 0) {
+		var id = "check" + id +	guess;
+		var obj = document.getElementById(id);
+		if (obj)
+			obj.checked = false;
+		
+		var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+		FnDrawCart(data, type);
 	}
 }
 
@@ -92,7 +139,9 @@ function FnDrawCart(data, type) {
 			row.push("</td>");
 			row.push("<td>");
 			row.push(rate);
-			row.push("</td></tr>");
+			row.push("</td>");
+			row.push("<td><img src='images/btn_coment_del.gif' onclick='FnDeleteGameCart(" + data[i].gameId + ",\"" + type + "\",\"" + data[i].guess + "\")'/></td>")
+			row.push("</tr>");
 			
 			multi *= rate;
 		}
@@ -106,6 +155,7 @@ function FnDrawCart(data, type) {
 	var rateDiv = document.getElementById("rateDiv");
 	
 	gameCartDiv.innerHTML = row.join("");
+	//alert(gameCartDiv.innerHTML);
 	var multiStr = Xwin.Digit2(multi);
 	rateDiv.value = multiStr;
 	total_rate = parseFloat(multiStr);

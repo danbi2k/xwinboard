@@ -323,6 +323,30 @@ public class BettingController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView getGameCart(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		String type = request.getParameter("type");
+		
+		HttpSession session = request.getSession();
+		Map<String, GameCartItem> cartMap = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
+		
+		List<GameCartItem> cartList = new ArrayList<GameCartItem>(cartMap.size());
+		cartList.addAll(cartMap.values());
+		
+		ResultXml rx = new ResultXml(0, null, cartList);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
 	public ModelAndView emptyGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{

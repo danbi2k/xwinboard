@@ -56,7 +56,7 @@ var gameType = '<%=type%>'
 		%>
 	</select></td>
 
-			<td><img src="images/btn_reload.gif" onclick="FnEmptyGameWdlCart('wdl')" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><img src="images/btn_reload.gif" onclick="FnEmptyGameCart('wdl')" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 		</tr></table>
 	</td>
 	</table>

@@ -15,10 +15,11 @@ function FnGetGameList(type, leagueId, grade, status)
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.game);
-		FnDrawGameList2(data, type);
+		FnDrawGameList(data, type);
+		FnDrawCartCheck(type);
 	}
 }
-function FnDrawGameList2(data,type)
+function FnDrawGameList(data,type)
 {
 	var row = [];
 	row.push("<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424142>");
@@ -54,7 +55,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center width=60>&nbsp;</td>");								
 			row.push("<td width=90% align=right><nobr><font color=" + txtcolor + "><B>" + data[i].homeTeam);			
 			if (data[i].betStatus == 'BTS01' && data[i].winDeny == "Y") {
-				row.push("&nbsp;<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
+				row.push("&nbsp;<input type='checkbox' name='check" + data[i].id + "' id='check" + data[i].id + "W' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
 			} else {
 				row.push("&nbsp;<input type='checkbox' disabled></b> ");
 			}
@@ -71,7 +72,7 @@ function FnDrawGameList2(data,type)
 			
 			if (data[i].type == 'wdl') {
 				if (data[i].betStatus == 'BTS01' && data[i].drawDeny == "Y") {
-					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
+					row.push("<input type='checkbox' name='check" + data[i].id + "' id='check" + data[i].id + "D' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
 				} else {
 					row.push("<input type='checkbox' disabled>");
 				}
@@ -91,7 +92,7 @@ function FnDrawGameList2(data,type)
 			row.push("<td width=90% ><nobr>");
 			
 			if (data[i].betStatus == 'BTS01' && data[i].loseDeny == "Y") {
-				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
+				row.push("<input type='checkbox' name='check" + data[i].id + "' id='check" + data[i].id + "L' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
 			} else {
 				row.push("<input type='checkbox' disabled>");
 			}
@@ -104,71 +105,6 @@ function FnDrawGameList2(data,type)
 			row.push("<td align=center ><nobr><font color='" + datecolor + "'>" + C(data[i].betStatus) + "</td>");
 			row.push("</tr>");
 		}
-	}
-	
-	row.push("</table>");
-	var tbodyString = row.join("");
-	var gameListDiv = document.getElementById("gameListDiv");
-	gameListDiv.innerHTML = tbodyString;
-}
-
-function FnDrawGameList(data, type)
-{
-	var row = [];
-	row.push("<table width='900' bgcolor='#9A9492' cellspacing='1' cellpadding='3'>");
-	row.push("<colgroup>");
-	row.push("<col bgcolor='#0a0a0a' align='center' width='100'>");
-	row.push("<col bgcolor='#0a0a0a' width='*'>");
-	row.push("<col bgcolor='#0a0a0a' width='180' align='right'>");
-	row.push("<col bgcolor='#0a0a0a' width='80'  align='center' >");
-	row.push("<col bgcolor='#0a0a0a' width='180'>");
-	row.push("<col bgcolor='#0a0a0a' width='50'  align='center'>");
-	row.push("</colgroup>");
-	
-	if (data.length > 0) {
-		for (var i in data) {
-			row.push("<tr height='34'>");
-			row.push("<td>" + data[i].gameDateStr + "</td>");
-			row.push("<td>");
-			row.push("<table cellpadding='0' cellspacing='2'><tr><td><img src='images/league/" + data[i].leagueImage + "' style='display:none' onload=\"this.style.display=''\"></td>");
-			row.push("<td>&nbsp;" + data[i].leagueName + "</tr>");
-			row.push("</table>");
-			row.push("</td>");
-			row.push("<td>" + data[i].homeTeam);
-			if (data[i].betStatus == 'BTS01') {
-				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
-			} else {
-				row.push("<b>□</b> ");
-			}
-			row.push(data[i].winRateStr);
-			row.push("<span style='width:8;'>&nbsp;</span>");
-			row.push("</td>");
-			row.push("<td>");
-			if (data[i].type == 'wdl') {
-				if (data[i].drawRate > 0 && data[i].betStatus == 'BTS01') {
-					row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
-				} else {
-					row.push("<b>□</b> ");
-				}
-				row.push(data[i].drawRateStr);
-			} else {
-				row.push(data[i].drawRate);
-			}
-			row.push("</td>");
-			row.push("<td><span style='width:8;'>&nbsp;</span>");
-			row.push(data[i].loseRateStr);
-			if (data[i].betStatus == 'BTS01') {
-				row.push("<input type='checkbox' name='check" + data[i].id + "' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'L');\">");
-			} else {
-				row.push("<b>□</b> ");
-			}
-			row.push(data[i].awayTeam );
-			row.push("</td>");
-			row.push("<td><font color='darkorange'>" + C(data[i].betStatus) + "</td>");
-			row.push("</tr>");
-		}
-	} else {
-		row.push("<tr><td colspan='6' align='center' height='100'>등록된 경기가 없습니다.</td></tr>");
 	}
 	
 	row.push("</table>");
