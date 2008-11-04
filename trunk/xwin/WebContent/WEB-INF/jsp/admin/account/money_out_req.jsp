@@ -66,11 +66,11 @@
 	<tr align="center" bgcolor="#E4E4E4">
 		<th></th>
 		<td width=5%>번호</td>
-		<th>아이디 (닉네임)</td>
+		<th>예금주</td>
 		<th>환전요청금액</td>
 		<th>은행명</td>
 		<th>계좌번호</td>
-		<th>예금주</td>
+		<th>아이디 (닉네임)</td>
 		<th>신청일자</td>
 		<th>상태</td>
 		<th>충전</th>
@@ -82,11 +82,11 @@
 	<tr>
 		<td><input type="checkbox" name="checkCheck" value="<%=moneyOut.getId()%>" onclick="saveMoneyOutIsChecked(this)" <%=moneyOut.getIsChecked().equals("Y")?"checked":""%>/></td>
 		<td><%=moneyOut.getId()%></td>
-		<td><a href='javascript:goMemberDetail("<%=moneyOut.getUserId()%>")'><%=moneyOut.getUserId()%></a> (<%=moneyOut.getNickName()%>)</B></td>
+		<td><%=moneyOut.getName()%></td>
 		<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
 		<td><%=moneyOut.getBankName()%></td>
 		<td><%=moneyOut.getNumber()%></td>
-		<td><%=moneyOut.getName()%></td>
+		<td><a href='javascript:goMemberDetail("<%=moneyOut.getUserId()%>")'><%=moneyOut.getUserId()%></a> (<%=moneyOut.getNickName()%>)</B></td>
 		<td><%=moneyOut.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyOut.getStatus())%></td>
 		<td><input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'>	
