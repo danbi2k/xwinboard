@@ -79,6 +79,12 @@
 			<isNotNull prepend="AND" property="isCharge">
 				ISCHARGE = #isCharge#
 			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNull">
+				NOTE IS NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNotNull">
+				NOTE IS NOT NULL
+			</isNotNull>
 		</dynamic>
 	ORDER BY DATE DESC
 	<isNotNull prepend="LIMIT" property="fromRow">
@@ -114,6 +120,12 @@
 			<isNotNull prepend="AND" property="isCharge">
 				ISCHARGE = #isCharge#
 			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNull">
+				NOTE IS NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNotNull">
+				NOTE IS NOT NULL
+			</isNotNull>
 		</dynamic>
 	</select>
 	
@@ -144,6 +156,12 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isCharge">
 				ISCHARGE = #isCharge#
+			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNull">
+				NOTE IS NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="noteIsNotNull">
+				NOTE IS NOT NULL
 			</isNotNull>
 		</dynamic>
 	</select>

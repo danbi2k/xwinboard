@@ -19,6 +19,7 @@
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String note = XwinUtil.nvl(request.getParameter("note"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
@@ -43,6 +44,13 @@
  		<option value='N' <%=isCharge.equals("N")?"selected":""%>>충전대기</option>
 		<option value='N' <%=isCharge.equals("C")?"selected":""%>>대기취소</option>
  	</select>
+	비고
+	<select name='note' onchange='this.form.submit()'>
+		<option value=''>전체</option>
+ 		<option value='Y' <%=note.equals("Y")?"selected":""%>>있음</option>
+ 		<option value='N' <%=note.equals("N")?"selected":""%>>없음</option>
+ 	</select>
+	<BR>
  	<select name='search'>
  		<option value='money' <%=search.equals("money")?"selected":""%>>금액</option>
 		<option value='userName' <%=search.equals("userName")?"selected":""%>>예금주</option>

@@ -52,9 +52,9 @@
  		<option value='ME002' <%=status.equals("ME002")?"selected":""%>>환전</option>
  	</select>
  	<select name='search'>
+		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
  		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
-		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
  	</select>
  	<input type='text' name='keyword' value='<%=keyword%>'>
 	일자

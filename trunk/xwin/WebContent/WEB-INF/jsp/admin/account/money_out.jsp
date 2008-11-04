@@ -45,9 +45,9 @@
 	<input type='hidden' name='pageIndex'/>
 	<input type='hidden' name='status' value='<%=status%>'/>
 	<select name='search'>
+		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
-		<option value='name' <%=search.equals("name")?"selected":""%>>예금주명</option>
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
 	<!-- select name='searchDate'>

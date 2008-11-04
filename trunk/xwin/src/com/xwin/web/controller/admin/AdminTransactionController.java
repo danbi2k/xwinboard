@@ -32,6 +32,7 @@ public class AdminTransactionController extends XwinController
 
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		String note = XwinUtil.arcNvl(request.getParameter("note"));
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
@@ -49,6 +50,12 @@ public class AdminTransactionController extends XwinController
 		
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		
+		if (note != null && note.equals("Y"))
+			param.put("noteIsNotNull", "");
+		else if (note != null && note.equals("N"))
+			param.put("noteIsNull", "");
+			
 		
 		List<Transaction> transactionList = transactionDao.selectTransactionList(param);
 		Integer transactionCount = transactionDao.selectTransactionCount(param);
