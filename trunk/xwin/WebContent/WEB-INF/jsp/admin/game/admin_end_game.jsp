@@ -97,7 +97,7 @@
 	}
 </SCRIPT>
 
-<div class="title"><%=type.equals("wdl")?"승무패":"핸디캡"%></div>
+<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패":"이벤트"):"핸디캡"%></div>
 <input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>&grade=<%=grade%>'">
 <br>
 <br>
