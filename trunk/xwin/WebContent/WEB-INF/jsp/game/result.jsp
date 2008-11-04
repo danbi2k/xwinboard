@@ -120,7 +120,7 @@ if (gameList != null) {
 				</table>
 			</td>
 			<td align=center align=center><nobr>
-				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=424142>
+				<table border=0 width=100% cellpadding=1 cellspacing=0 bgcolor=000000>
 					<tr>
 						<%if (game.getType().equals("wdl")){%>
 						<td align=center ><nobr><%=game.getDrawRateStr()%></td>

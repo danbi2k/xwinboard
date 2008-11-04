@@ -145,7 +145,7 @@ public class MemberController extends XwinController
 						member.setPassword(command.getPassword1());
 						member.setGetSms(command.getSmsCheck());
 						//member.setNickName(command.getNickName());
-						member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
+						//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
 						member.setEmail(command.getEmail1() + "@" + command.getEmail2());
 						if ((member.getBankName() == null || member.getBankName().length() == 0) && command.getBankName() != null) {
 							member.setBankName(command.getBankName());

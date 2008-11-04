@@ -49,7 +49,9 @@ function SetNICK(nick){
 
 	<form name="frm_mem">
 	<input type="hidden" name="userId"  value="<%=member.getUserId()%>">
-
+	<input type="hidden" name="phone1" value="<%=phone[0]%>"/>
+	<input type="hidden" name="phone2" value="<%=phone[1]%>"/>
+	<input type="hidden" name="phone3" value="<%=phone[2]%>"/>
 	<table width="800" style="margin-top:10">
 	<tr><td><b>회원 정보 수정</b></td></tr>
 	</table>
@@ -69,16 +71,7 @@ function SetNICK(nick){
 	<tr><td>닉네임</td>
 		<td><%=member.getNickName()%></td>
 	<tr><td>휴대폰번호</td>
-		<td><select class="member" name="phone1">
-			<option value="010" <%="010".equals(phone[0])?"selected":""%>>010</option>
-			<option value="011" <%="011".equals(phone[0])?"selected":""%>>011</option>
-			<option value="016" <%="016".equals(phone[0])?"selected":""%>>016</option>
-			<option value="017" <%="017".equals(phone[0])?"selected":""%>>017</option>
-			<option value="018" <%="018".equals(phone[0])?"selected":""%>>018</option>
-			<option value="019" <%="019".equals(phone[0])?"selected":""%>>019</option>
-			</select> -
-			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="<%=phone[1]%>" style='IME-MODE: inactive'> -
-			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="<%=phone[2]%>" style='IME-MODE: inactive'>
+		<td><%=member.getMobile()%>
 			<input type="button" value="인증번호전송" onclick="sendAuthNumber()"/><br>
 			<input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%>/>  체크 하시면 경기결과를 문자로 전송해 드립니다.	
 			</td></tr>
