@@ -22,7 +22,7 @@ public class BettingService extends XwinService
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
-		param.put("notCalcStatus", Code.BET_CALC_COMMIT);
+		//param.put("notCalcStatus", Code.BET_CALC_COMMIT);
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		
 		if (bettingList != null) {

@@ -22,7 +22,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminMemberController extends XwinController
 {
-	public static final int ROWSIZE = 25;
+	public static final int ROWSIZE = 30;
 	
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -109,6 +109,7 @@ public class AdminMemberController extends XwinController
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		String block = XwinUtil.arcNvl(request.getParameter("block"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -120,6 +121,8 @@ public class AdminMemberController extends XwinController
 		param.put("rowSize", ROWSIZE);
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		if (block != null && block.length() > 0)
+			param.put(block, "");
 		
 		List<Access> accessList = accessDao.selectAccessList(param);
 		Integer accessCount = accessDao.selectAccessCount(param);
@@ -230,6 +233,50 @@ public class AdminMemberController extends XwinController
 		
 		Member member = new Member();
 		member.setGrade(grade);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changeEmail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String email = request.getParameter("email");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setEmail(email);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changeMobile(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String mobile = request.getParameter("mobile");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setMobile(mobile);
 		member.setUserId(userId);
 		
 		memberDao.updateMember(member);		

@@ -7,13 +7,23 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	Member member = (Member) request.getAttribute("member");
 	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
 	Integer totalCount = (Integer) request.getAttribute("accountCount");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	
+	String phone[] = null;
+	if (member.getMobile() != null) {
+		phone = member.getMobile().split("-");		
+	}
+	
+	String email[] = null;
+	if (member.getEmail() != null) {
+		email = member.getEmail().split("@");		
+	}
 %>
  
 <SCRIPT LANGUAGE="JavaScript">
@@ -87,11 +97,27 @@
  	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getMobile()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<select class="member" name="phone1">
+			<option value="010" <%="010".equals(phone[0])?"selected":""%>>010</option>
+			<option value="011" <%="011".equals(phone[0])?"selected":""%>>011</option>
+			<option value="016" <%="016".equals(phone[0])?"selected":""%>>016</option>
+			<option value="017" <%="017".equals(phone[0])?"selected":""%>>017</option>
+			<option value="018" <%="018".equals(phone[0])?"selected":""%>>018</option>
+			<option value="019" <%="019".equals(phone[0])?"selected":""%>>019</option>
+			</select> -
+			<input name="phone2" type="text" size="4" maxlength="4" value="<%=phone[1]%>"> -
+			<input name="phone3" type="text" size="4" maxlength="4" value="<%=phone[2]%>">		
+			<input type="button" value="변경" onclick="changeMobile()"/>
+		</td>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>EMAIL</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getEmail()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<input name="email1" type="text" value="<%=email[0]%>"> @
+			<input name="email2" type="text" value="<%=email[1]%>">
+			<input type="button" value="변경" onclick="changeEmail()"/>
+		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>출금비밀번호</td>
@@ -278,6 +304,7 @@ if (accountList != null) {
 %>
 	</div>
 <script>
+
 function sendMemo()
 {
 	var frm = document.memo;
@@ -296,6 +323,34 @@ function changeGrade()
 	var frm = document.regist;	
 	var query = "mode=changeGrade";
 	query += "&grade=" + regist.grade.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
+}
+
+function changeEmail()
+{
+	var frm = document.regist;	
+	var query = "mode=changeEmail";
+	query += "&email=" + regist.email1.value + "@" + regist.email2.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
+}
+
+function changeMobile()
+{
+	var frm = document.regist;	
+	var query = "mode=changeMobile";
+	query += "&mobile=" + regist.phone1.value + "-" + regist.phone2.value + "-" + regist.phone3.value;
 	query += "&userId=<%=member.getUserId()%>";
 
 	var http = new JKL.ParseXML("adminMember.aspx", query);

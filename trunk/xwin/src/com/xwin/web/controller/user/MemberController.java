@@ -140,13 +140,13 @@ public class MemberController extends XwinController
 			if (phonePin.equals(command.getPhonePin())) {
 				rx = checkPassword(command.getPassword1(), command.getPassword2());
 				if (rx.getCode() == 0) {
-					rx = checkEmail(command.getEmail1(), command.getEmail2());
-					if (rx.getCode() == 0) {
+					//rx = checkEmail(command.getEmail1(), command.getEmail2());
+					//if (rx.getCode() == 0) {
 						member.setPassword(command.getPassword1());
 						member.setGetSms(command.getSmsCheck());
 						//member.setNickName(command.getNickName());
 						//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
-						member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+						//member.setEmail(command.getEmail1() + "@" + command.getEmail2());
 						if ((member.getBankName() == null || member.getBankName().length() == 0) && command.getBankName() != null) {
 							member.setBankName(command.getBankName());
 							member.setBankNumber(command.getBankNumber());
@@ -156,7 +156,7 @@ public class MemberController extends XwinController
 						memberDao.updateMember(member);
 							
 						rx = ResultXml.SUCCESS;
-					}			
+					//}			
 				}
 			} else {
 				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);

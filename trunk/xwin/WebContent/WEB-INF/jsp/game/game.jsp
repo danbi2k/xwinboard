@@ -125,7 +125,7 @@ function reload()
 }
 
 reload();
-setInterval("reload()", 60000);
+setInterval("reload()", 180000);
 FnDrawCart();
 </script>
 <!-- ---------------------------------------------------------------------- -->

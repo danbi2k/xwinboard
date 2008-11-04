@@ -24,7 +24,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminAccountController extends XwinController
 {
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	
 	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

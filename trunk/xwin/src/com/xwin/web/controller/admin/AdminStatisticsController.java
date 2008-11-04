@@ -16,7 +16,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminStatisticsController extends XwinController
 {
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	
 	public ModelAndView viewDailyBettingMoneySummary(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

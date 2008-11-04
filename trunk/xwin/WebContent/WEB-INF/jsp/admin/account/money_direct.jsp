@@ -7,7 +7,7 @@
  <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	
 	List<MoneyInOut> moneyInOutList = (List<MoneyInOut>) request.getAttribute("moneyInOutList");

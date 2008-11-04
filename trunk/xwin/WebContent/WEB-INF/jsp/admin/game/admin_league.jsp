@@ -7,7 +7,7 @@
 
 
 <%
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	Integer totalCount = (Integer) request.getAttribute("leagueCount");

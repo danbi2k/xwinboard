@@ -19,7 +19,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminQnaController extends XwinController
 {
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	
 	public ModelAndView viewQnaList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

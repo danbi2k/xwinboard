@@ -23,7 +23,7 @@ import com.xwin.web.controller.XwinController;
 
 public class BoardController extends XwinController
 {
-	public static final Integer ROWSIZE = 25;
+	public static final Integer ROWSIZE = 30;
 	
 	public ModelAndView viewBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

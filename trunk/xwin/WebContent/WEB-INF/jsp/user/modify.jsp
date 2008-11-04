@@ -48,10 +48,12 @@ function SetNICK(nick){
 <tr><td valign="top" align="center">
 
 	<form name="frm_mem">
-	<input type="hidden" name="userId"  value="<%=member.getUserId()%>">
+	<input type="hidden" name="userId" value="<%=member.getUserId()%>">
 	<input type="hidden" name="phone1" value="<%=phone[0]%>"/>
 	<input type="hidden" name="phone2" value="<%=phone[1]%>"/>
 	<input type="hidden" name="phone3" value="<%=phone[2]%>"/>
+	<input type="hidden" name="email1" value="<%=email[0]%>"/>
+	<input type="hidden" name="email2" value="<%=email[1]%>">
 	<table width="800" style="margin-top:10">
 	<tr><td><b>회원 정보 수정</b></td></tr>
 	</table>
@@ -78,8 +80,7 @@ function SetNICK(nick){
 	<tr><td>인증번호</td>
 		<td><input class="member" name="phonePin" type="password"></td></tr>
 	<tr><td>이메일</td>
-		<td><input class="member" name="email1" type="text" value="<%=email[0]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
-			<input class="member" name="email2" type="text" value="<%=email[1]%>" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"></td></tr>
+		<td><%=member.getEmail()%></td></tr>
 	
 	<%if (needBank) { %>
 	<tr><td>환전계좌번호</td>

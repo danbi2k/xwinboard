@@ -17,7 +17,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminTransactionController extends XwinController
 {
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	
 	public ModelAndView viewTransactionList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

@@ -8,7 +8,7 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	
 	List<BoardItem> qnaList = (List<BoardItem>) request.getAttribute("qnaList");

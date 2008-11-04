@@ -8,7 +8,7 @@
 <%@ include file="../admin_header.jsp"%>
 
 <%
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	List<Access> accessList = (List<Access>) request.getAttribute("accessList");
 	Integer totalCount = (Integer) request.getAttribute("accessCount");
@@ -18,12 +18,19 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String block = XwinUtil.nvl(request.getParameter("block"));
 %>
 <div class="title">접속목록</div>
 
 <form method='GET' name="search" action="adminMember.aspx">
 	<input type='hidden' name='mode' value='viewAccessList'/>
 	<input type='hidden' name='pageIndex'/>
+	<select name='block' onchange='this.form.submit()'>
+		<option value=''>전체</option>
+		<option value='block' <%=block.equals("block")?"selected":""%>>해제</option>
+		<option value='noBlock' <%=block.equals("noBlock")?"selected":""%>>차단</option>
+	</select>
+	검색
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>

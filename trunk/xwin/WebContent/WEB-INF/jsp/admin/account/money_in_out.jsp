@@ -15,7 +15,7 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
-	int ROWSIZE = 25;
+	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 %>
 		 

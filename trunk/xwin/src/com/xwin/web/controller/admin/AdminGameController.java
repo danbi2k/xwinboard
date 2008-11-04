@@ -21,7 +21,7 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminGameController extends XwinController
 {	
-	public static final int ROWSIZE = 25;
+	public static final int ROWSIZE = 30;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
