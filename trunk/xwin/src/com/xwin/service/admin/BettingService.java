@@ -22,7 +22,7 @@ public class BettingService extends XwinService
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
-		//param.put("notCalcStatus", Code.BET_CALC_COMMIT);
+		param.put("notCalcStatus", Code.BET_CALC_COMMIT);
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		
 		if (bettingList != null) {
@@ -83,29 +83,24 @@ public class BettingService extends XwinService
 					}
 				}
 				
-				Integer totalCount = betGameList.size();		
-				boolean calcEnable = false;
+				Integer totalCount = betGameList.size();
 				
 				List<Betting> notiTargetBetting = new ArrayList<Betting>();
 				
 				if (failureCount > 0) {
 					betting.setStatus(Code.BET_STATUS_FAILURE);
-					calcEnable = true;
 				} else if (totalCount == (cancelCount)) {
 					betting.setStatus(Code.BET_STATUS_CANCEL);
-					calcEnable = true;
 				} else if (totalCount == (cancelCount + drawCount)) {
 					betting.setStatus(Code.BET_STATUS_RETURN);
-					calcEnable = true;
 				} else if (totalCount == (successCount + cancelCount + drawCount)) {
 					betting.setStatus(Code.BET_STATUS_SUCCESS);
-					calcEnable = true;
 					notiTargetBetting.add(betting);
 				}
 				
-				if (calcEnable) {
-					String calcStatus = calcuateBetting(betting);
-					betting.setCalcStatus(calcStatus);
+				if (totalCount == (cancelCount + successCount + failureCount + drawCount)) {
+					calcuateBetting(betting);
+					betting.setCalcStatus(Code.BET_CALC_COMMIT);
 				}
 				
 				Double cutRate = XwinUtil.doubleCut(totalRate); 
@@ -117,16 +112,14 @@ public class BettingService extends XwinService
 		}
 	}
 	
-	public String calcuateBetting(Betting betting) {
+	public void calcuateBetting(Betting betting) {
 		String status = betting.getStatus();
 		String userId = betting.getUserId();
-		String calcStatus = betting.getCalcStatus();
 		
 		Member member = memberDao.selectMember(userId, null);		 
 		
 		// 1. 미적중의 경우
 		if (status.equals(Code.BET_STATUS_FAILURE)) {
-			calcStatus = Code.BET_CALC_COMMIT;
 		}
 		
 		// 2. 환불의 경우
@@ -142,8 +135,6 @@ public class BettingService extends XwinService
 			accountDao.insertAccount(account);
 			
 			memberDao.plusMinusBalance(userId, betting.getMoney());
-			
-			calcStatus = Code.BET_CALC_COMMIT;
 		}
 		
 		// 3. 적중의 경우
@@ -159,11 +150,7 @@ public class BettingService extends XwinService
 			accountDao.insertAccount(account);
 			
 			memberDao.plusMinusBalance(userId, betting.getExpect());
-			
-			calcStatus = Code.BET_CALC_COMMIT;
 		}
-		
-		return calcStatus;
 	}
 
 	public String judgeGameScore(Game game) {

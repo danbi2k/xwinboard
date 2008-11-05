@@ -13,4 +13,6 @@ public class Admin
 	public static String DENY_EXCHANGE = "";
 	
 	public static String SMS_REMAIN = "";
+	
+	public static String EX_PLAY = "on";
 }

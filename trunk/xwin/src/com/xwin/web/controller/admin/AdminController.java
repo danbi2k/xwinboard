@@ -173,4 +173,19 @@ public class AdminController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView changeExPlay(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String exPlay = request.getParameter("exPlay");
+		Admin.EX_PLAY = exPlay;
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(ResultXml.SUCCESS));
+		
+		return mv;
+	}
 }

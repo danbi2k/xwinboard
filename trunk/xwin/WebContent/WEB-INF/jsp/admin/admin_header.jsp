@@ -31,6 +31,7 @@ if (admin == null) {
 %>
 
 var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
+var exchangePlay = <%=Admin.EX_PLAY.equals("on")?"true":"false"%>;
 
 function checkIndi()
 {
@@ -43,6 +44,10 @@ function checkIndi()
 	var query = "mode=getIndicator";
 	var http = new JKL.ParseXML("admin.aspx", query);
 	var result = http.parse();
+	if (result == undefined) {
+		location.href = 'admin';
+		return;
+	}
 	if (result.resultXml.object) {
 		var data = result.resultXml.object;
 	
@@ -56,9 +61,9 @@ function checkIndi()
 
 function playSound()
 {
-	if (chargingVal > 0)
-		playIt(player1);
-	if (exchangeVal > 0)
+	//if (chargingVal > 0)
+	//	playIt(player1);
+	if (exchangePlay && exchangeVal > 0)
 		playIt(player2);
 	if (centerVal > 0)
 		playIt(player3);
@@ -66,6 +71,22 @@ function playSound()
 		playIt(player3);
 	if (hackVal > 0)
 		playIt(player4);
+}
+
+function changeExPlay()
+{ 
+	exchangePlay = !exchangePlay;
+	var exPlay = document.getElementById("exPlay");
+	if (exchangePlay) {
+		exPlay.innerHTML = "on";
+	} else {
+		exPlay.innerHTML = "off";
+	}
+
+	var query = "mode=changeExPlay";
+	query += "&exPlay=" + exPlay.innerHTML;
+	var http = new JKL.ParseXML("admin.aspx", query);
+	http.parse();
 }
 
 setInterval("playSound()", 3000);
@@ -78,7 +99,7 @@ setInterval("playSound()", 3000);
 		<h2>Pages</h2>
 		<ul>
 			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
-			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a></li>
+			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=Admin.EX_PLAY%></span></li>
 			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
 			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>

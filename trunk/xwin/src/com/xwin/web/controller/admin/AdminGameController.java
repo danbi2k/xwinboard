@@ -1,6 +1,7 @@
 package com.xwin.web.controller.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.xwin.web.controller.XwinController;
 public class AdminGameController extends XwinController
 {	
 	public static final int ROWSIZE = 30;
+	public static final long FIVEMINUTE = 5 * 60 * 1000;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -215,9 +217,15 @@ public class AdminGameController extends XwinController
 			game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
 			game.setWinRate(command.getWinRate());
 			game.setDrawRate(command.getDrawRate());
-			game.setLoseRate(command.getLoseRate());				
-			game.setStatus(Code.GAME_STATUS_RUN);
-			game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+			game.setLoseRate(command.getLoseRate());
+			
+			//game.setStatus(Code.GAME_STATUS_RUN);
+			Date now = new Date();
+			long timeDiff = game.getGameDate().getTime() - now.getTime();
+			if (timeDiff >= FIVEMINUTE) {
+				game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+			}
+			
 			game.setType(type);
 			game.setWinDeny(command.getWinDeny());
 			game.setDrawDeny(command.getDrawDeny());
