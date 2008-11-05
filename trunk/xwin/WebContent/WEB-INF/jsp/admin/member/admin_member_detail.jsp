@@ -13,6 +13,9 @@
 	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
 	Integer totalCount = (Integer) request.getAttribute("accountCount");
 	
+	Integer chargeSum = (Integer) request.getAttribute("chargeSum");
+	Integer exchangeSum = (Integer) request.getAttribute("exchangeSum");
+	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
 	String phone[] = null;
@@ -65,7 +68,8 @@
 </SCRIPT>
 
 <div class="title">회원정보</div>
-
+<BR>
+<span style='font-size:18'>충전 : <%=XwinUtil.comma3(chargeSum)%> 환전 : <%=XwinUtil.comma3(exchangeSum)%> 합계 : <%=XwinUtil.comma3(chargeSum - exchangeSum)%></span>
 <form method=post name='regist'>
 <input type='hidden' name='mode' value='updateMember'/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">

@@ -84,7 +84,7 @@ public class AdminTransactionController extends XwinController
 		Transaction tran = new Transaction();
 		tran.setId(id);
 		tran.setIsCharge("C");
-		tran.setNote("관리자취소");
+		tran.setNote("관리자충전");
 		
 		transactionDao.updateTransaction(tran);
 		

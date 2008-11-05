@@ -25,6 +25,12 @@ public class XwinUtil
 	private static final SimpleDateFormat boardNoticeFormat = new SimpleDateFormat("MM/dd");
 	private static final SimpleDateFormat boardItemFormat = new SimpleDateFormat("MM/dd HH:mm");
 	
+	public static String comma3(Integer num)
+	{
+		NumberFormat nf = NumberFormat.getInstance();
+		return nf.format(num);
+	}
+	
 	public static String comma3(Long num)
 	{
 		NumberFormat nf = NumberFormat.getInstance();
@@ -179,6 +185,14 @@ public class XwinUtil
 			return "0";
 		
 		return obj.toString();
+	}
+	
+	public static Integer ntz(Integer obj)
+	{
+		if (obj == null)
+			return 0;
+		
+		return obj;
 	}
 	
 	public static String to2Digit(Double x)

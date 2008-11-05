@@ -48,6 +48,8 @@
 		p:accessDao-ref="accessDao"
 		p:accountDao-ref="accountDao"
 		p:memoDao-ref="memoDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:moneyOutDao-ref="moneyOutDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"

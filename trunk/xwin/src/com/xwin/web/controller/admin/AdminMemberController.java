@@ -88,12 +88,24 @@ public class AdminMemberController extends XwinController
 		
 		List<Account> accountList = accountDao.selectAccountList(param);
 		Integer accountCount = accountDao.selectAccountCount(param);			
-		Member member = memberDao.selectMember(userId, null);		
+		Member member = memberDao.selectMember(userId, null);
+		
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("status", Code.MONEY_IN_SUCCESS);		
+		Integer chargeSum = XwinUtil.ntz(moneyInDao.selectMoneyInSum(param));
+		
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("status", Code.MONEY_OUT_SUCCESS);		
+		Integer exchangeSum = XwinUtil.ntz(moneyOutDao.selectMoneyOutSum(param));
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
 		mv.addObject("accountList", accountList);
 		mv.addObject("accountCount", accountCount);
+		mv.addObject("chargeSum", chargeSum);
+		mv.addObject("exchangeSum", exchangeSum);
 		
 		return mv;
 	}
