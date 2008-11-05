@@ -30,7 +30,7 @@ if (admin == null) {
 }
 %>
 
-var chargingVal, exchangeVal, centerVal, vipVal;
+var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
 
 function checkIndi()
 {
@@ -38,6 +38,7 @@ function checkIndi()
 	var exchangeIndi = document.getElementById("exchangeIndi");
 	var centerIndi = document.getElementById("centerIndi");
 	var vipIndi = document.getElementById("vipIndi");
+	var hackingIndi = document.getElementById("hackingIndi");
 
 	var query = "mode=getIndicator";
 	var http = new JKL.ParseXML("admin.aspx", query);
@@ -49,6 +50,7 @@ function checkIndi()
 		exchangeVal = exchangeIndi.innerHTML = (data.exchangeIndi);
 		centerVal = centerIndi.innerHTML = (data.centerIndi);
 		vipVal = vipIndi.innerHTML = (data.vipIndi);
+		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
 	}
 }
 
@@ -62,6 +64,8 @@ function playSound()
 		playIt(player3);
 	if (centerVal+vipVal > 0)
 		playIt(player3);
+	if (hackVal > 0)
+		playIt(player4);
 }
 
 setInterval("playSound()", 3000);
@@ -77,6 +81,7 @@ setInterval("playSound()", 3000);
 			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a></li>
 			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
 			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
+			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 		</ul>
 	</div>
 	<div id="content">

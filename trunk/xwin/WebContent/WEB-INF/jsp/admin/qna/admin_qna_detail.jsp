@@ -96,6 +96,10 @@ function deleteBoardComment(id)
 
 function answerQna()
 {
+	if (havingSqlKeyword(document.answer.comment.value)) {
+		alert("내용에 사용할수 없는 문자열이 있습니다"); document.answer.comment.focus(); return false;
+	}
+	
 	var query = "mode=answerQna";
 	query += "&id=" + <%=boardItem.getId()%>;
 	query += "&comment=" + Xwin.Escape(document.answer.comment.value);

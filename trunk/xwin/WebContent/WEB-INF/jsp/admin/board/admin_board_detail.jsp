@@ -92,6 +92,10 @@ function updateBoardItem()
 
 function writeBoardComment()
 {
+	if (havingSqlKeyword(document.cmt.comment.value)) {
+		alert("내용에 사용할수 없는 문자열이 있습니다"); document.cmt.comment.focus(); return false;
+	}
+	
 	var query = "mode=writeBoardComment";
 	query += "&comment=" + Xwin.Escape(document.cmt.comment.value);
 	query += "&id=<%=boardItem.getId()%>";

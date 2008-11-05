@@ -11,8 +11,16 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
+	<filter>
+		<filter-name>Param Filter</filter-name>
+		<filter-class>com.xwin.web.XwinHackFilter</filter-class>
+	</filter>
 	<filter-mapping>
 		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>*.aspx</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Param Filter</filter-name>
 		<url-pattern>*.aspx</url-pattern>
 	</filter-mapping>
 	<context-param>

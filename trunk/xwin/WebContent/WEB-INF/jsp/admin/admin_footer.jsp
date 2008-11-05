@@ -82,6 +82,7 @@
 					<li><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
 					<li><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
 					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
+					<li><a href="adminLog.aspx?mode=viewHackingLog">해킹탐지</a></li>
 					<!--li><a href="#">기본값관리</a></li -->
 					<!--li><a href="#">아이피차단</a></li  -->
 				</ul>

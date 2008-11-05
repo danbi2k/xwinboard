@@ -38,6 +38,10 @@ public class AdminController extends XwinController
 		param.put("status", Code.MONEY_OUT_REQUEST);
 		param.put("isChecked", "N");
 		indicator.setExchangeIndi(moneyOutDao.selectMoneyOutCount(param).toString());
+		
+		param = new HashMap<String, Object>(1);
+		param.put("isChecked", "N");
+		indicator.setHackingIndi(hackingLogDao.selectHackingLogCount(param).toString());
 
 		ResultXml rx = new ResultXml(0, null, indicator);
 		ModelAndView mv = new ModelAndView("xmlFacade");

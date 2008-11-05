@@ -158,6 +158,8 @@ function del(no){
 
 <script>
 function comment_add(){
+	if (havingSqlKeyword(comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
+	if (havingSqlKeyword(comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
 	
     if(comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
     if(comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
@@ -188,7 +190,7 @@ function comment_submit(){
 </script>
 
 
-<form name="comment_frm" method="post" onsubmit="comment_add();return false;">
+<form name="comment_frm" method="post">
 <input type="hidden" name="mode" value="writeBoardComment">
 <input type="hidden" name="boardId" value="<%=boardItem.getId()%>">
 <input type="hidden" name="boardName" value="<%=boardName%>">
@@ -198,7 +200,7 @@ function comment_submit(){
 	<td width="*" style="padding-left:15;">
 	작성자 <input type="text" name="name" value="<%=member.getNickName()%>" style="width:90;height:19px;border:1 #efefef solid;background-color:#8a8a8a;" readonly>
 	내용 <input type="text" name="comment" style="width:500;height:19px;border:1 #7f9db9 solid;background-color:#8a8a8a;"></td>
-	<td width="100">&nbsp;<input type="image" src="images/btn_write.gif"  style="cursor:hand"></td>
+	<td width="100">&nbsp;<img src="images/btn_write.gif"  style="cursor:hand" onclick="comment_add()"></td>
 </tr>
 </table>
 </form>

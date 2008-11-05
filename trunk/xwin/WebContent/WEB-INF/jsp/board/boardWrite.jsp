@@ -36,9 +36,13 @@ function list(){
     location.href="/board/board.asp?idx=board";
 }
 function check_frm(){
+	if (havingSqlKeyword(frm.title.value)) { alert("제목에 사용할수 없는 문자열이 있습니다"); frm.title.focus(); return false; }
+	if (havingSqlKeyword(frm.name.value)) { alert("작성자에 사용할수 없는 문자열이 있습니다"); frm.name.focus(); return false; }
+	if (havingSqlKeyword(frm.context.value)) { alert("내용에 사용할수 없는 문자열이 있습니다"); frm.context.focus(); return false; }
+	
     if(frm.title.value   ==""){ alert("제목을 입력하세요!");   frm.title.focus();    return false; }
     if(frm.name.value    ==""){ alert("작성자를 입력하세요!"); frm.name.focus();     return false; }
-    if(frm.contents.value==""){ alert("내용을 입력하세요!");   frm.contents.focus(); return false; }
+    if(frm.context.value==""){ alert("내용을 입력하세요!");   frm.context.focus(); return false; }
     return true;
 }
 </script>

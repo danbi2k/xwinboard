@@ -17,6 +17,10 @@
 function checkform()
 {
 	var f = document.notice;
+
+	if (havingSqlKeyword(f.title.value)) { alert("제목에 사용할수 없는 문자열이 있습니다"); f.title.focus(); return false; }
+	if (havingSqlKeyword(f.context.value)) { alert("내용에 사용할수 없는 문자열이 있습니다"); f.context.focus(); return false; }
+	
 	if (!f.title) {alert("제목을 입력하세요");return false;}
 	if (!f.context) {alert("내용을 입력하세요");return false;}
 

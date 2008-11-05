@@ -88,4 +88,8 @@
 	<bean id="memoDao"
 		class="com.xwin.infra.dao.MemoDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="hackingLogDao"
+		class="com.xwin.infra.dao.HackingLogDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 </beans>

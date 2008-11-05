@@ -36,6 +36,7 @@
 				<prop key="/adminBoard.aspx">adminBoardController</prop>
 				<prop key="/adminStat.aspx">adminStatisticsController</prop>
 				<prop key="/adminTran.aspx">adminTransactionController</prop>
+				<prop key="/adminLog.aspx">adminLogController</prop>
 				
 				<prop key="/guide.aspx">guideController</prop>
 				<prop key="/provision.aspx">provisionController</prop>

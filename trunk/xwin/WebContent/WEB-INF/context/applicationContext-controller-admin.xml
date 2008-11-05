@@ -87,6 +87,7 @@
 		p:moneyOutDao-ref="moneyOutDao"
 		p:adminDao-ref="adminDao"
 		p:bankBookDao-ref="bankBookDao"
+		p:hackingLogDao-ref="hackingLogDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminBettingController"
@@ -131,5 +132,10 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:transactionDao-ref="transactionDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminLogController"
+		class="com.xwin.web.controller.admin.AdminLogController"
+		p:hackingLogDao-ref="hackingLogDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 </beans>

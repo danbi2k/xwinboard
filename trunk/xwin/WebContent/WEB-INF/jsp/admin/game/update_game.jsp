@@ -68,6 +68,8 @@
 	}
 </SCRIPT>
 <div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
+
+※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">

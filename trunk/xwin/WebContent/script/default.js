@@ -1,3 +1,18 @@
+function havingSqlKeyword(str)
+{
+	var lower = str.toLowerCase();
+	if (lower.indexOf("select") >= 0 ||
+		lower.indexOf("update") >= 0 ||
+		lower.indexOf("delete") >= 0 ||
+		lower.indexOf("create") >= 0 ||
+		lower.indexOf("alter") >= 0 ||
+		lower.indexOf("tbl_") >= 0) {		
+		return true;
+	}
+	
+	return false;
+}
+
 function comma3Input(obj)
 {
 	var num = obj.value;

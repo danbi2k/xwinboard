@@ -86,3 +86,21 @@ function stopIt(player){
   <embed type="application/x-mplayer2" pluginspage = "http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/" src="sound/3.wav" name="MediaPlayer1" width=480 height=360 displaysize=0 showcontrols=0 autostart=0>
   </embed> 
 </object>
+
+<object id="player4" width="0" height="0" classid="CLSID:22D6f312-B0F6-11D0-94AB-0080C74C7E95" standby="Loading Microsoft?Windows?Media Player components..." type="application/x-oleobject">
+  <param name="transparentAtStart" value="True">
+  <param name="transparentAtStop" value="True">
+  <param name="AnimationAtStart" value="False">
+  <param name="AutoStart" value="false">
+  <param name="AutoRewind" value="true">
+  <param name="DisplaySize" value="0">
+  <param name="AutoSize" value="false">
+  <param name="ShowDisplay" value="false">
+  <param name="ShowStatusBar" value="false">
+  <param name="ShowControls" value="false">
+  <param name="EnableContextMenu" value="False">
+  <param name="FileName" value="sound/4.wav">
+  <param name="Volume" value="0">
+  <embed type="application/x-mplayer2" pluginspage = "http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/" src="sound/3.wav" name="MediaPlayer1" width=480 height=360 displaysize=0 showcontrols=0 autostart=0>
+  </embed> 
+</object>

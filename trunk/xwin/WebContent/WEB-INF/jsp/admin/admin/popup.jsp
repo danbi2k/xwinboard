@@ -33,6 +33,10 @@
 <script>
 function savePopup()
 {
+	if (havingSqlKeyword(document.notice.text.value)) {
+		alert("내용에 사용할수 없는 문자열이 있습니다"); document.notice.text.focus(); return false;
+	}
+	
 	var query = "mode=savePopup";
 	alert(Xwin.Escape(document.notice.text.value));
 	query += "&popup=" + Xwin.Escape(document.notice.text.value);

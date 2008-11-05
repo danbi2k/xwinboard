@@ -7,6 +7,21 @@ function FnMemReg(frm)
 		}
 	}
 	
+	if (havingSqlKeyword(frm.userId.value)) {
+		alert("아이디에 사용할수 없는 문자열이 있습니다");
+		return;
+	}
+	
+	if (havingSqlKeyword(frm.password1.value)) {
+		alert("패스워드에 사용할수 없는 문자열이 있습니다");
+		return;
+	}
+	
+	if (havingSqlKeyword(frm.nickName.value)) {
+		alert("닉네임에 사용할수 없는 문자열이 있습니다");
+		return;
+	}
+	
 	frm.password.value = frm.password1.value;
 	var query = "mode=registerMember";
 	query += "&userId=" + frm.userId.value;

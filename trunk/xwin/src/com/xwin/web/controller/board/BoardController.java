@@ -39,11 +39,10 @@ public class BoardController extends XwinController
 		
 		String userId = null;
 		String grade = null;
-		if (boardName.equals("qna")) {
+		if (boardName.equals("qna"))
 			userId = member.getUserId();
-		} else {
-			grade = member.getGrade();
-		}
+		
+		grade = member.getGrade();
 		
 		ModelAndView mv = viewBoard(pageIndex, boardName, userId, grade);
 		

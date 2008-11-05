@@ -130,7 +130,7 @@ public class BettingService extends XwinService
 		}
 		
 		// 2. 환불의 경우
-		else if (status.equals(Code.BET_STATUS_RETURN)) {
+		else if (status.equals(Code.BET_STATUS_RETURN) || status.equals(Code.BET_STATUS_CANCEL)) {
 			Account account = new Account();
 			account.setUserId(userId);
 			account.setType(Code.ACCOUNT_TYPE_BETTING_RETURN);		
