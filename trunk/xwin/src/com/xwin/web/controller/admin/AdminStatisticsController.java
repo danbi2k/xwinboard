@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.statistics.BetMoneyStat;
 import com.xwin.domain.statistics.MemMoneyStat;
+import com.xwin.domain.statistics.MoneyOutStat;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.controller.XwinController;
 
@@ -66,6 +67,32 @@ public class AdminStatisticsController extends XwinController
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_daily_member_money");
 		mv.addObject("memMoneyStatList", memMoneyStatList);
 		mv.addObject("memMoneyStatCount", memMoneyStatCount);
+		
+		return mv;
+	}
+	
+	public ModelAndView viewMoneyOutStat(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+			
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<MoneyOutStat> moneyOutList = moneyOutDao.selectMoneyOutGroupByBankList(param);
+		Integer moneyOutCount = moneyOutDao.selectMoneyOutGroupByBankCount(param);
+		
+		ModelAndView mv = new ModelAndView("admin/statistics/admin_money_out_stat");
+		mv.addObject("moneyOutList", moneyOutList);
+		mv.addObject("moneyOutCount", moneyOutCount);
 		
 		return mv;
 	}

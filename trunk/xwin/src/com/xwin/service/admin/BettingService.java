@@ -98,14 +98,15 @@ public class BettingService extends XwinService
 					notiTargetBetting.add(betting);
 				}
 				
+				Double cutRate = XwinUtil.doubleCut(totalRate); 
+				betting.setRate(cutRate);
+				betting.setExpect(XwinUtil.calcExpectMoney(cutRate, betting.getMoney()));
+				
 				if (totalCount == (cancelCount + successCount + failureCount + drawCount)) {
 					calcuateBetting(betting);
 					betting.setCalcStatus(Code.BET_CALC_COMMIT);
 				}
 				
-				Double cutRate = XwinUtil.doubleCut(totalRate); 
-				betting.setRate(cutRate);
-				betting.setExpect(XwinUtil.calcExpectMoney(cutRate, betting.getMoney()));
 				bettingDao.updateBetting(betting);
 				notifyGameResult(notiTargetBetting);
 			}

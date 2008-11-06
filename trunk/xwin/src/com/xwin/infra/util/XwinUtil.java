@@ -290,4 +290,15 @@ public class XwinUtil
 		
 		return fileName;
 	}
+
+	public static String bankTrim(String bankNumber) {
+		if (bankNumber == null)
+			return null;
+		
+		String retNumber = bankNumber.replaceAll(" ", "");
+		retNumber = retNumber.replaceAll("-", "");
+		retNumber = retNumber.trim();
+		
+		return retNumber;
+	}
 }

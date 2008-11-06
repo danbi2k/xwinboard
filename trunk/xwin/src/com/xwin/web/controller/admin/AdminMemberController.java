@@ -236,7 +236,7 @@ public class AdminMemberController extends XwinController
 		
 		member = new Member();
 		member.setBankName(bankName);
-		member.setBankNumber(bankNumber);
+		member.setBankNumber(XwinUtil.bankTrim(bankNumber));
 		member.setBankOwner(bankOwner);
 		member.setUserId(userId);
 		member.setBankDate(new Date());

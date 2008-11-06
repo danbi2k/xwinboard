@@ -49,7 +49,7 @@ function checkIndi()
 	var http = new JKL.ParseXML("admin.aspx", query);
 	var result = http.parse();
 	if (result == undefined) {
-		location.href = 'admin';
+		//location.href = 'admin';
 		return;
 	}
 	if (result.resultXml.object) {

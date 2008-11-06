@@ -123,7 +123,7 @@
 		<isNotNull prepend="AND" property="email">
 			EMAIL LIKE #email#
 		</isNotNull>
-		ORDER BY ID DESC
+		ORDER BY BALANCE DESC
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
 		</isNotNull>

@@ -481,7 +481,7 @@ function plus_charging()
 		var query = "mode=directCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.plus.value;
-		query += "&note=" + f.plusNote.value;
+		query += "&note=" + Xwin.Escape(f.plusNote.value);
 		var http = new JKL.ParseXML("adminAccount.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
@@ -501,7 +501,7 @@ function minus_charging()
 		var query = "mode=directMinusCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.minus.value;
-		query += "&note=" + f.minusNote.value;
+		query += "&note=" + Xwin.Escape(f.minusNote.value);
 		var http = new JKL.ParseXML("adminAccount.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);

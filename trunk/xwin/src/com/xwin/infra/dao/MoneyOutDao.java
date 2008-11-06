@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.xwin.domain.statistics.MoneyOutStat;
 import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.util.Code;
 
@@ -86,5 +87,15 @@ public class MoneyOutDao extends XwinDao
 		param.put("rowSize", 5);
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyOutList", param);
+	}
+	
+	public List<MoneyOutStat> selectMoneyOutGroupByBankList(Map<String, Object> param)
+	{
+		return sqlMapClientTemplate.queryForList("selectMoneyOutGroupByBankList", param);
+	}
+	
+	public Integer selectMoneyOutGroupByBankCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyOutGroupByBankCount", param);
 	}
 }

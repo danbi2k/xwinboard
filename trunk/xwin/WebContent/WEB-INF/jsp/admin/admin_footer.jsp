@@ -71,6 +71,7 @@
 				<ul>
 					<li class="first"><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
 					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
+					<li><a href="adminStat.aspx?mode=viewMoneyOutStat">환전계좌내역</a></li>
 				</ul>
 			</div>
 		</div>

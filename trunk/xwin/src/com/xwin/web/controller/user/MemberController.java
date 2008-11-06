@@ -85,7 +85,7 @@ public class MemberController extends XwinController
 										member.setGrade(Code.USER_GRADE_NORMAL);
 										member.setJoinDate(new Date());
 										member.setBankName(command.getBankName());
-										member.setBankNumber(command.getBankNumber());
+										member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
 										member.setBankOwner(command.getBankOwner());
 										member.setBankDate(new Date());
 										member.setGetSms(command.getSmsCheck());

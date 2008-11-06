@@ -82,6 +82,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="number">
+				NUMBER = #number#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -144,6 +147,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="number">
+				NUMBER = #number#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -202,6 +208,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="number">
+				NUMBER = #number#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#
 			</isNotNull>
@@ -235,5 +244,30 @@
 				]]>
 			</isNotNull>
 		</dynamic>
+	</select>
+	
+	<typeAlias alias="MoneyOutStat" type="com.xwin.domain.statistics.MoneyOutStat" />
+	
+	<resultMap id="moneyOutStatResultMap" class="MoneyOutStat">
+		<result property="bankName" column="BANKNAME"/>
+		<result property="name" column="NAME"/>
+		<result property="number" column="NUMBER"/>
+		<result property="outCount" column="OUT_COUNT"/>
+		<result property="outSum" column="OUT_SUM"/>
+	</resultMap>
+	
+	<select id="selectMoneyOutGroupByBankList" resultMap="moneyOutStatResultMap" parameterClass="map">
+		SELECT BANKNAME, NAME, NUMBER, COUNT(*) AS OUT_COUNT, SUM(MONEY) AS OUT_SUM FROM tbl_money_out t
+		WHERE STATUS = 'ME002'
+		GROUP BY NUMBER, NAME, BANKNAME
+		ORDER BY OUT_SUM DESC
+		<isNotNull property="fromRow">
+		LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectMoneyOutGroupByBankCount" resultClass="integer">
+		SELECT COUNT(distinct NUMBER, NAME, BANKNAME) FROM tbl_money_out t
+		WHERE STATUS = 'ME002'
 	</select>
 </sqlMap>

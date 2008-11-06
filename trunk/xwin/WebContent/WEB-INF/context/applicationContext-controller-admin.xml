@@ -127,6 +127,7 @@
 		class="com.xwin.web.controller.admin.AdminStatisticsController"
 		p:memberDao-ref="memberDao"
 		p:bettingDao-ref="bettingDao"
+		p:moneyOutDao-ref="moneyOutDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminTransactionController"
