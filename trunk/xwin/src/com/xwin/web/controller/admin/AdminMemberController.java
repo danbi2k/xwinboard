@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -88,7 +89,9 @@ public class AdminMemberController extends XwinController
 		
 		List<Account> accountList = accountDao.selectAccountList(param);
 		Integer accountCount = accountDao.selectAccountCount(param);			
+
 		Member member = memberDao.selectMember(userId, null);
+		List<BankBook> bankBookList = bankBookDao.selectMemberBankBookList(userId);
 		
 		param = new HashMap<String, Object>();
 		param.put("userId", userId);
@@ -104,6 +107,7 @@ public class AdminMemberController extends XwinController
 		mv.addObject("member", member);
 		mv.addObject("accountList", accountList);
 		mv.addObject("accountCount", accountCount);
+		mv.addObject("bankBookList", bankBookList);
 		mv.addObject("chargeSum", chargeSum);
 		mv.addObject("exchangeSum", exchangeSum);
 		
@@ -219,11 +223,23 @@ public class AdminMemberController extends XwinController
 		String bankOwner = request.getParameter("bankOwner");
 		String userId = request.getParameter("userId");
 		
-		Member member = new Member();
+		Member member = memberDao.selectMember(userId, null);
+		
+		BankBook bankBook = new BankBook();
+		bankBook.setBankName(member.getBankName());
+		bankBook.setNumber(member.getBankNumber());
+		bankBook.setName(member.getBankOwner());
+		bankBook.setStatus(userId);
+		bankBook.setDate(member.getBankDate());
+		
+		bankBookDao.insertMemberBankBook(bankBook);
+		
+		member = new Member();
 		member.setBankName(bankName);
 		member.setBankNumber(bankNumber);
 		member.setBankOwner(bankOwner);
 		member.setUserId(userId);
+		member.setBankDate(new Date());
 		
 		memberDao.updateMember(member);		
 	

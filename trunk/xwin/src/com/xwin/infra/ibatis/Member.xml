@@ -24,13 +24,14 @@
 		<result property="bankName" column="BANKNAME"/>
 		<result property="bankNumber" column="BANKNUMBER"/>
 		<result property="bankOwner" column="BANKOWNER"/>
+		<result property="bankDate" column="BANKDATE"/>
 		<result property="getSms" column="GET_SMS"/>
 		<result property="denyrity" column="DENYRITY"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, GET_SMS)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #getSms#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#)
 	</insert>
 	
 	<update id="updateMember" parameterClass="Member">
@@ -62,6 +63,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="bankOwner">
 				BANKOWNER = #bankOwner#
+			</isNotNull>
+			<isNotNull prepend="," property="bankDate">
+				BANKDATE = #bankDate#
 			</isNotNull>
 			<isNotNull prepend="," property="getSms">
 				GET_SMS = #getSms#

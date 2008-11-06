@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.Indicator;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -180,11 +182,20 @@ public class AdminController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
-		String exPlay = request.getParameter("exPlay");
-		Admin.EX_PLAY = exPlay;
+		String exPlay = XwinUtil.arcNvl(request.getParameter("exPlay"));
+		HttpSession session = request.getSession();
 		
+		String EX_PLAY = "on";
+		if (exPlay == null)
+			EX_PLAY = (String) session.getAttribute("EX_PLAY");
+		else {
+			EX_PLAY = exPlay;
+			session.setAttribute("EX_PLAY", exPlay);
+		}
+		
+		ResultXml rx = new ResultXml(0, EX_PLAY, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(ResultXml.SUCCESS));
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
 	}

@@ -87,6 +87,7 @@ public class MemberController extends XwinController
 										member.setBankName(command.getBankName());
 										member.setBankNumber(command.getBankNumber());
 										member.setBankOwner(command.getBankOwner());
+										member.setBankDate(new Date());
 										member.setGetSms(command.getSmsCheck());
 										
 										String WelcomeMsg = "환영합니다";

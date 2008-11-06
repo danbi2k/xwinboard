@@ -1,5 +1,7 @@
 package com.xwin.domain.admin;
 
+import java.util.Date;
+
 import com.xwin.domain.XwinObject;
 
 public class BankBook extends XwinObject
@@ -9,6 +11,7 @@ public class BankBook extends XwinObject
 	private String number;
 	private String name;
 	private String status;
+	private Date date;
 	
 	public String getId() {
 		return id;
@@ -39,5 +42,11 @@ public class BankBook extends XwinObject
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}	
 }

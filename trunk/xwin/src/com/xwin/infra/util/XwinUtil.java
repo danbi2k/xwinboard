@@ -13,8 +13,6 @@ import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.xwin.domain.game.BetGame;
-
 public class XwinUtil
 {
 	private static final DecimalFormat float16Format = new DecimalFormat("0.0000000000000000");

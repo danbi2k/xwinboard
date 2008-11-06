@@ -22,6 +22,7 @@ public class Member
 	private String bankName;
 	private String bankNumber;
 	private String bankOwner;
+	private Date bankDate;
 	private String getSms;
 	private Integer denyrity;
 	
@@ -121,6 +122,12 @@ public class Member
 	}
 	public void setBankOwner(String bankOwner) {
 		this.bankOwner = bankOwner;
+	}
+	public Date getBankDate() {
+		return bankDate;
+	}
+	public void setBankDate(Date bankDate) {
+		this.bankDate = bankDate;
 	}
 	public String getGetSms() {
 		return getSms;

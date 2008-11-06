@@ -5,6 +5,10 @@
 <%@ page import="com.xwin.domain.admin.*" %>
 <%
 	Member admin = (Member)session.getAttribute("Admin");
+	String EX_PLAY = (String)session.getAttribute("EX_PLAY");
+	
+	if (EX_PLAY == null)
+		EX_PLAY = "on";
 %>
 <html>
 <head>
@@ -31,7 +35,7 @@ if (admin == null) {
 %>
 
 var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
-var exchangePlay = <%=Admin.EX_PLAY.equals("on")?"true":"false"%>;
+var exchangePlay = <%=EX_PLAY.equals("on")?"true":"false"%>;
 
 function checkIndi()
 {
@@ -99,7 +103,7 @@ setInterval("playSound()", 3000);
 		<h2>Pages</h2>
 		<ul>
 			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
-			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=Admin.EX_PLAY%></span></li>
+			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
 			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
 			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>

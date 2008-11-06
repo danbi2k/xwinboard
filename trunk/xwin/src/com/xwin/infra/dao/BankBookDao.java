@@ -32,4 +32,20 @@ public class BankBookDao extends XwinDao
 	{
 		sqlMapClientTemplate.update("updateBankBook", bankBook);
 	}
+	
+	// MEMBER BANK BOOK //
+	
+	public void insertMemberBankBook(BankBook bankBook)
+	{
+		sqlMapClientTemplate.insert("insertMemberBankBook", bankBook);
+	}
+	
+
+	public List<BankBook> selectMemberBankBookList(String userId)
+	{
+		Map<String, Object> param = new HashMap<String, Object>(1);
+		param.put("status", userId);
+		
+		return sqlMapClientTemplate.queryForList("selectMemberBankBookList", param);		
+	}
 }

@@ -15,6 +15,7 @@
 	
 	Integer chargeSum = (Integer) request.getAttribute("chargeSum");
 	Integer exchangeSum = (Integer) request.getAttribute("exchangeSum");
+	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
@@ -154,7 +155,37 @@
 			</select>
 			계좌번호 : <input name="bankNumber" type="text" size="20" maxlength="20" value="<%=XwinUtil.nvl(member.getBankNumber())%>">
 			예금주 : <input name="bankOwner" type="text" size="16" maxlength="16" value="<%=XwinUtil.nvl(member.getBankOwner())%>"><br>
+			등록일 : <%=XwinUtil.toDateStr(member.getBankDate(), 1)%>
 			<input type="button" value="변경" onclick="changeBankInfo()"/>
+		</td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>이전 계좌 번호</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+		<table class="prettytable">
+		<%
+		if (bankBookList != null && bankBookList.size() > 0) {
+		%>
+		<tr>
+			<th>은행명</th>
+			<th>계좌번호</th>
+			<th>예금주</th>
+			<th>등록일</th>
+		</tr>
+		<%
+			for (BankBook bankBook : bankBookList) {
+		%>
+		<tr>
+			<td><%=bankBook.getBankName()%></td>
+			<td><%=bankBook.getNumber()%></td>
+			<td><%=bankBook.getName()%></td>
+			<td><%=XwinUtil.toDateStr(bankBook.getDate(), 1)%></td>
+		</tr>
+		<%
+			}
+		}
+		%>		
+		</table>
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>

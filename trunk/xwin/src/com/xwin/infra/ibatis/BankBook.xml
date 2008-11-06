@@ -14,6 +14,7 @@
 		<result property="number" column="NUMBER"/>
 		<result property="name" column="NAME"/>
 		<result property="status" column="STATUS"/>
+		<result property="date" column="DATE"/>
 	</resultMap>
 	
 	<insert id="insertBankBook" parameterClass="BankBook">
@@ -42,4 +43,20 @@
 		UPDATE tbl_bankbook SET STATUS = #status#
 		WHERE ID = #id#
 	</update>
+	
+	<!--  MEMBER BANKBOOK  -->
+	<insert id="insertMemberBankBook" parameterClass="BankBook">
+		INSERT INTO tbl_member_bankbook(BANKNAME, NUMBER, NAME, STATUS, DATE)
+		VALUES(#bankName#, #number#, #name#, #status#, #date#)
+	</insert>
+	
+	<select id="selectMemberBankBookList" resultMap="bankBookResultMap" parameterClass="map">
+		SELECT * FROM tbl_member_bankbook
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+		</dynamic>
+		ORDER BY DATE DESC
+	</select>
 </sqlMap>
