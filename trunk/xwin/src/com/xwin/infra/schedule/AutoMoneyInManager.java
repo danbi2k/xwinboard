@@ -22,6 +22,9 @@ import com.xwin.service.admin.MoneyInService;
 public class AutoMoneyInManager extends QuartzJobBean
 {
 	private static final SimpleDateFormat smsDateFormat = new SimpleDateFormat("MM/dd HH:mm");
+	private static final String[] bankList = {"국민","기업","농협","신한","조흥","외환","우체국",
+		"SC제일","하나","한국시티","한미","우리","경남","광주","대구","도이치","부산",
+		"산업","	수협","전북","제주","새마을","신협","	HSBC","상호저축"};
 	
 	private KtfSmsDao ktfSmsDao = null;
 	private TransactionDao transactionDao = null;
@@ -62,7 +65,6 @@ public class AutoMoneyInManager extends QuartzJobBean
 		try {
 			moneyInService.processMoneyInAuto();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -210,6 +212,14 @@ public class AutoMoneyInManager extends QuartzJobBean
 				money = Long.parseLong(moneyStr);
 				
 				String userName = msg[1].trim();
+				int len = userName.length();
+				if (len > 3) {
+					for (int i = 0 ; i < bankList.length ; i++) {
+						userName = userName.replaceAll(bankList[i], "");
+						if (userName.length() != len)
+							break;
+					}
+				}
 				
 				Long balance = null;
 				if (msg[2].startsWith("잔액")) {
