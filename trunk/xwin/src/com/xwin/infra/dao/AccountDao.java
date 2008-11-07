@@ -9,6 +9,7 @@ import com.xwin.domain.admin.Account;
 
 public class AccountDao extends XwinDao
 {
+	private static final long serialVersionUID = 4325322876673524306L;
 
 	public void insertAccount(Account account) {
 		sqlMapClientTemplate.insert("insertAccount", account);

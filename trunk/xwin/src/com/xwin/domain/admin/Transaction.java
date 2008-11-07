@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class Transaction extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5323063324662410398L;
+	
 	private String id;
 	private Date date;
 	private String type;

@@ -7,6 +7,11 @@ import com.xwin.infra.util.XwinUtil;
 
 public class Account extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5081362723678068270L;
+	
 	private String id;
 	private Date date;
 	private String dateStr;

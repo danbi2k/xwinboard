@@ -7,6 +7,8 @@ import com.xwin.domain.log.HackingLog;
 
 public class HackingLogDao extends XwinDao
 {
+	private static final long serialVersionUID = -4959827720682654481L;
+
 	public void insertHackingLog(HackingLog hackingLog)
 	{
 		sqlMapClientTemplate.insert("insertHackingLog", hackingLog);

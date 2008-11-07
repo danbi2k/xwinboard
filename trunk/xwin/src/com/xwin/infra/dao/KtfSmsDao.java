@@ -8,6 +8,8 @@ import com.xwin.domain.comm.KtfSmsMessage;
 
 public class KtfSmsDao extends XwinDao
 {
+	private static final long serialVersionUID = 2217634749532579292L;
+
 	public void insertMessage(KtfSmsMessage message)
 	{
 		sqlMapClientTemplate.insert("insertMessage", message);

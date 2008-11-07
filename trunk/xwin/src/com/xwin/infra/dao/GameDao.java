@@ -9,6 +9,8 @@ import com.xwin.domain.game.Game;
 
 public class GameDao extends XwinDao
 {	
+	private static final long serialVersionUID = -3976382573760343144L;
+
 	public void insertGame(Game gameWdl)
 	{
 		sqlMapClientTemplate.insert("insertGame", gameWdl);

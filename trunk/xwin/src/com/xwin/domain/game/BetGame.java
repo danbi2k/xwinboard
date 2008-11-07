@@ -2,6 +2,11 @@ package com.xwin.domain.game;
 
 public class BetGame extends Game
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1777475423478694754L;
+	
 	private String bettingId;
 	private String guess;
 	private String resultStatus;

@@ -6,6 +6,8 @@ import com.xwin.domain.comm.SmsWait;
 
 public class SmsWaitDao extends XwinDao
 {
+	private static final long serialVersionUID = -5525460032190355900L;
+
 	public void insertSmsWait(SmsWait smsWait)
 	{
 		sqlMapClientTemplate.insert("insertSmsWait", smsWait);

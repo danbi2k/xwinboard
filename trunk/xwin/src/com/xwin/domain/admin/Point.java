@@ -7,6 +7,11 @@ import com.xwin.infra.util.XwinUtil;
 
 public class Point extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3279955002473927997L;
+	
 	private String id;
 	private Date date;
 	private String dateStr;

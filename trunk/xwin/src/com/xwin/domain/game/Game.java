@@ -7,6 +7,11 @@ import com.xwin.infra.util.XwinUtil;
 
 public class Game extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8674211645565328924L;
+	
 	private String id;
 	private String homeTeam;
 	private String awayTeam;

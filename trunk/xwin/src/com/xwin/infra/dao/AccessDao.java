@@ -7,6 +7,8 @@ import com.xwin.domain.admin.Access;
 
 public class AccessDao extends XwinDao
 {
+	private static final long serialVersionUID = 8870829519677473986L;
+
 	public void insertAccess(Access access)
 	{
 		sqlMapClientTemplate.insert("insertAccess", access);

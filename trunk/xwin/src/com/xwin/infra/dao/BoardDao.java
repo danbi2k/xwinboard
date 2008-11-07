@@ -9,6 +9,8 @@ import com.xwin.domain.board.BoardItem;
 
 public class BoardDao extends XwinDao
 {
+	private static final long serialVersionUID = -2410471303804000934L;
+
 	public String insertBoardItem(BoardItem boardItem)
 	{
 		String boardId = (String)

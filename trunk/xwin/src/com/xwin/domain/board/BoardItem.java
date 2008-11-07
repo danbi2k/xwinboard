@@ -7,6 +7,11 @@ import com.xwin.domain.XwinObject;
 
 public class BoardItem extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3341431255378033828L;
+	
 	private String id;
 	private String title;
 	private String userId;

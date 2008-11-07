@@ -8,6 +8,8 @@ import com.xwin.domain.game.League;
 
 public class LeagueDao extends XwinDao
 {
+	private static final long serialVersionUID = -7992667764345839658L;
+
 	public void insertLeague(League league)
 	{
 		sqlMapClientTemplate.insert("insertLeague", league);

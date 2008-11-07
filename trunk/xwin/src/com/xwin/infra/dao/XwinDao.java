@@ -1,8 +1,10 @@
 package com.xwin.infra.dao;
 
+import java.io.Serializable;
+
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-public class XwinDao
+public class XwinDao implements Serializable
 {
 	protected SqlMapClientTemplate sqlMapClientTemplate;
 	

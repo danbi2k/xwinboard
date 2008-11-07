@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class BetMoneyStat extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3566937395975534945L;
+	
 	private String id;
 	private Date date;
 	private Long inMoney;

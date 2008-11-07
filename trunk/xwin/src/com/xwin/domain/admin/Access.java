@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class Access extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -304777905486581506L;
+	
 	String id;
 	String userId;
 	String nickName;

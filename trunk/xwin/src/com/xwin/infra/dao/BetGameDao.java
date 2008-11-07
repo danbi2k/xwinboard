@@ -7,6 +7,8 @@ import com.xwin.domain.game.BetGame;
 
 public class BetGameDao extends XwinDao
 {
+	private static final long serialVersionUID = 8967198207731265382L;
+
 	public void insertBetGame(BetGame betGame)
 	{
 		sqlMapClientTemplate.insert("insertBetGame", betGame);

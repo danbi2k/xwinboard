@@ -7,6 +7,11 @@ import com.xwin.infra.util.XwinUtil;
 
 public class Memo extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4910333581088467953L;
+	
 	private String id;
 	private String userId;
 	private String memo;

@@ -4,6 +4,11 @@ import com.xwin.domain.admin.BankBook;
 
 public class MoneyIn extends MoneyInOut
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3190890850152657381L;
+	
 	private String bankBookId;
 	private BankBook bankBook;
 	

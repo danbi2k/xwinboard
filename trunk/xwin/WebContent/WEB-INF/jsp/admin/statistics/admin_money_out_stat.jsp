@@ -12,7 +12,11 @@
 	
 	List<MoneyOutStat> moneyOutList = (List<MoneyOutStat>) request.getAttribute("moneyOutList");
 	Integer totalCount = (Integer) request.getAttribute("moneyOutCount");
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));	
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String search = XwinUtil.nvl(request.getParameter("search"));
+	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
 
 		  
@@ -22,8 +26,19 @@
 <div class="title">환전계좌내역</div>
 
 <form method="get" name="list" action="adminStat.aspx">
-<input type="hidden" name="mode" value="viewMoneyOutStat"/>
-<input type="hidden" name="pageIndex"/>
+	<input type="hidden" name="mode" value="viewMoneyOutStat"/>
+	<input type="hidden" name="pageIndex"/>
+	<select name='search'>
+		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
+ 		<option value='number' <%=search.equals("number")?"selected":""%>>계좌번호</option>
+ 	</select>
+ 	<input type='text' name='keyword' value='<%=keyword%>'>
+	처리일자
+	<input type='hidden' name='dateType' value='proc'/>
+	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">		
+ 	<input type='submit' value='검 색'/>
+</form>
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
 		<th>은행명</th>
@@ -39,7 +54,7 @@
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><%=moneyOutStat.getBankName()%></td>
-		<td><%=moneyOutStat.getNumber()%></td>
+		<td><a href='adminStat.aspx?mode=viewMoneyOutList&bankNumber=<%=moneyOutStat.getNumber()%>'><%=moneyOutStat.getNumber()%></a></td>
 		<td><%=moneyOutStat.getName()%></td>
 		<td><%=XwinUtil.comma3(moneyOutStat.getOutSum())%></td>
 		<td><%=moneyOutStat.getOutCount()%></td>
@@ -48,8 +63,7 @@
 		}
 	}
 	%>
- </table>
-</form>
+</table>
 <BR>
 <BR>
 <div class="pages">

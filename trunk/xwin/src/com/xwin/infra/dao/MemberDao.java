@@ -1,13 +1,19 @@
 package com.xwin.infra.dao;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.user.Member;
 
-public class MemberDao extends XwinDao
+public class MemberDao extends XwinDao implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1108876346856028351L;
+
 	public void insertMember(Member member)
 	{
 		sqlMapClientTemplate.insert("insertMember", member);

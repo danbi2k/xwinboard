@@ -4,6 +4,11 @@ import com.xwin.domain.XwinObject;
 
 public class League extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1832783201799460053L;
+	
 	private String id;
 	private String name;
 	private String type;

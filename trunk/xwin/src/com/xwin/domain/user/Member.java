@@ -2,10 +2,16 @@ package com.xwin.domain.user;
 
 import java.util.Date;
 
+import com.xwin.domain.XwinObject;
 import com.xwin.infra.util.XwinUtil;
 
-public class Member
+public class Member extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -114855944700551224L;
+	
 	private String id;
 	private String userId;
 	private String nickName;

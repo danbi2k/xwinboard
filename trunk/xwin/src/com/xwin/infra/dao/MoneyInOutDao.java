@@ -7,6 +7,7 @@ import com.xwin.domain.user.MoneyInOut;
 
 public class MoneyInOutDao extends XwinDao
 {
+	private static final long serialVersionUID = -5745196251550891927L;
 
 	public List<MoneyInOut> selectMoneyInOutList(Map<String, Object> param)
 	{

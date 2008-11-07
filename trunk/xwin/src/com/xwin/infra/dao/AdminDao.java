@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class AdminDao extends XwinDao
 {
+	private static final long serialVersionUID = 1860408668674867985L;
+
 	public void updateAdmin(String constant, String variable)
 	{
 		Map<String, String> param = new HashMap<String, String>(1);

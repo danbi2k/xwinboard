@@ -3,10 +3,16 @@ package com.xwin.domain.game;
 import java.util.Date;
 import java.util.List;
 
+import com.xwin.domain.XwinObject;
 import com.xwin.infra.util.XwinUtil;
 
-public class Betting
+public class Betting extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2323671094519748848L;
+	
 	private String id;
 	private String userId;
 	private Date date;

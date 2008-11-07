@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class BankBook extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1061993953513699804L;
+	
 	private String id;
 	private String bankName;
 	private String number;

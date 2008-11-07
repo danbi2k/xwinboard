@@ -81,7 +81,7 @@
 	<tr align='center' bgcolor='#ffffff'>
 		
 		<td width=5%><%=moneyIn.getId()%></td>
-		<td><B><%=moneyIn.getUserId()%></td>
+		<td><B><%=moneyIn.getUserId()%></B></td>
 		<td><%=moneyIn.getName()%></td>
 		<td><%=XwinUtil.comma3(moneyIn.getMoney())%></td>
 		<td><%=moneyIn.getReqDateStr()%></td>

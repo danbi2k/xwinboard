@@ -7,6 +7,11 @@ import com.xwin.infra.util.XwinUtil;
 
 public class MoneyInOut extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6144413903942277380L;
+	
 	private String id;
 	private String userId;
 	private String nickName;

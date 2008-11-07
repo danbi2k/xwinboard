@@ -10,6 +10,7 @@ import com.xwin.infra.util.Code;
 
 public class MoneyInDao extends XwinDao
 {
+	private static final long serialVersionUID = 8438847028858747367L;
 
 	public void insertMoneyIn(MoneyIn moneyIn) {
 		sqlMapClientTemplate.insert("insertMoneyIn", moneyIn);

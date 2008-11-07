@@ -9,6 +9,7 @@ import com.xwin.domain.admin.Point;
 
 public class PointDao extends XwinDao
 {
+	private static final long serialVersionUID = 3873316071419831797L;
 
 	public void insertPoint(Point point) {
 		sqlMapClientTemplate.insert("insertPoint", point);

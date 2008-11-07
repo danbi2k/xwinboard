@@ -4,6 +4,11 @@ import com.xwin.domain.XwinObject;
 
 public class SmsWait extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5073399954072846627L;
+	
 	private String id;
 	private String msg;
 	private String phone;

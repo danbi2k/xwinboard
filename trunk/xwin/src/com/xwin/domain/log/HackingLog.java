@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class HackingLog extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1716526527838644409L;
+	
 	private String id;
 	private String userId;
 	private String nickName;

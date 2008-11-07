@@ -7,6 +7,8 @@ import com.xwin.domain.user.Memo;
 
 public class MemoDao extends XwinDao
 {
+	private static final long serialVersionUID = 1339959949042008484L;
+
 	public void insertMemo(Memo memo)
 	{
 		sqlMapClientTemplate.insert("insertMemo", memo);

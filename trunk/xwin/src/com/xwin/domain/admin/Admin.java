@@ -1,7 +1,14 @@
 package com.xwin.domain.admin;
 
-public class Admin
+import com.xwin.domain.XwinObject;
+
+public class Admin extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3608655007121299776L;
+	
 	public static String NOTICE = "";
 	public static String POPUP = "";
 	public static String POPUPFLAG = "";

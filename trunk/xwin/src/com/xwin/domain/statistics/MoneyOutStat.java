@@ -4,6 +4,8 @@ import com.xwin.domain.XwinObject;
 
 public class MoneyOutStat extends XwinObject
 {
+	private static final long serialVersionUID = 7555296810210046178L;
+	
 	private String bankName;
 	private String number;
 	private String name;

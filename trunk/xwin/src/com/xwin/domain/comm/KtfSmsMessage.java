@@ -1,7 +1,14 @@
 package com.xwin.domain.comm;
 
-public class KtfSmsMessage
+import com.xwin.domain.XwinObject;
+
+public class KtfSmsMessage extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7976983867334263338L;
+	
 	private String id;
 	private String msgSeq;
 	private String inDate;

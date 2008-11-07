@@ -8,6 +8,8 @@ import com.xwin.domain.admin.BankBook;
 
 public class BankBookDao extends XwinDao
 {
+	private static final long serialVersionUID = 6698304840950398336L;
+
 
 	public void insertBankBook(BankBook bankBook)
 	{

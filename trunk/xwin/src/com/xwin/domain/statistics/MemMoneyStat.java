@@ -6,6 +6,11 @@ import com.xwin.domain.XwinObject;
 
 public class MemMoneyStat extends XwinObject
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2976175783683152815L;
+	
 	private String id;
 	private Date date;
 	private Long balance;

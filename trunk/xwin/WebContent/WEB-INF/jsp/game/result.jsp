@@ -92,12 +92,12 @@
 
 	<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424242>
 		<tr bgcolor=212021 height=27>
-			<td  width=270 align=center ><nobr><font color=FFFFFF><b>경기일시</td>
-			<td  width=200 align=center ><nobr><font color=FFFFFF><b>리그</td>
-			<td  width=500 align=center ><nobr><font color=FFFFFF><b>(승)홈 팀</td>
-			<td  width=130 align=center ><nobr><font color=FFFFFF><b>무/핸디캡</td>
-			<td  width=500 align=center ><nobr><font color=FFFFFF><b>(패)원정팀</td>
-			<td  width=210 align=center ><nobr><font color=FFFFFF><b>경기결과</td>
+			<th  width=270 align=center ><nobr><font color=FFFFFF>경기일시</th>
+			<th  width=200 align=center ><nobr><font color=FFFFFF>리그</th>
+			<th  width=500 align=center ><nobr><font color=FFFFFF>(승)홈 팀</th>
+			<th  width=130 align=center ><nobr><font color=FFFFFF>무/핸디캡</th>
+			<th  width=500 align=center ><nobr><font color=FFFFFF>(패)원정팀</th>
+			<th  width=210 align=center ><nobr><font color=FFFFFF>경기결과</th>
 		</tr>
 
 <%

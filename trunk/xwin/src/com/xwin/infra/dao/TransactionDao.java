@@ -7,6 +7,7 @@ import com.xwin.domain.admin.Transaction;
 
 public class TransactionDao extends XwinDao
 {
+	private static final long serialVersionUID = 6418102061799972887L;
 
 	public void insertTransaction(Transaction transaction) {
 		sqlMapClientTemplate.insert("insertTransaction", transaction);

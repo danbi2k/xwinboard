@@ -11,6 +11,8 @@ import com.xwin.domain.statistics.MemMoneyStat;
 
 public class BettingDao extends XwinDao
 {
+	private static final long serialVersionUID = -6273683992929534485L;
+
 	private static final Integer pageSize = 100;
 	
 	public String insertBetting(Betting betting)
