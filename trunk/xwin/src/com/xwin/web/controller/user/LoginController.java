@@ -34,13 +34,17 @@ public class LoginController extends XwinController
 			
 			Member member = memberDao.selectMember(userId, null);
 			
+			String server = "kor";
+			if (url.contains("ngbet-vip.com"))
+				server = "vip";
+			
 			if (member == null) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 사용자 입니다");
-			} else if (url.contains("bet-kor") && member.getGrade().equals(Code.USER_GRADE_VIP)) {
+			} else if (server.equals("kor") && member.getGrade().equals(Code.USER_GRADE_VIP)) {
 				rx.setCode(-2);
 				rx.setMessage("VIP회원 이십니다. VIP사이트를 이용해주세요");				
-			} else if (url.contains("bet-vip") && member.getGrade().equals(Code.USER_GRADE_NORMAL)) {
+			} else if (server.equals("vip") && member.getGrade().equals(Code.USER_GRADE_NORMAL)) {
 				rx.setCode(-3);
 				rx.setMessage("일반회원 이십니다. KOR사이트를 이용해주세요");				
 			} else if (comparePassword(member.getPassword(), password) == false) {
