@@ -56,7 +56,6 @@ public class LoginController extends XwinController
 				rx.setCode(0);
 				HttpSession session = request.getSession();		
 				session.setAttribute("Member", member);
-				session.setAttribute("MemberDao", memberDao);
 			}
 			
 			if (member != null) {

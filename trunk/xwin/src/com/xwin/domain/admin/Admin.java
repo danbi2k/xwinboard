@@ -1,13 +1,14 @@
 package com.xwin.domain.admin;
 
 import com.xwin.domain.XwinObject;
+import com.xwin.domain.user.Member;
+import com.xwin.infra.dao.MemberDao;
 
 public class Admin extends XwinObject
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3608655007121299776L;
+	
+	public static MemberDao memberDao = null;
 	
 	public static String NOTICE = "";
 	public static String POPUP = "";
@@ -20,4 +21,8 @@ public class Admin extends XwinObject
 	public static String DENY_EXCHANGE = "";
 	
 	public static String SMS_REMAIN = "";
+	
+	public static Member getDbMember(String userId) {
+		return memberDao.selectMember(userId, null);
+	}
 }

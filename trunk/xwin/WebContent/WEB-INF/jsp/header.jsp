@@ -20,12 +20,8 @@
 	if (isModify == null)
 		isModify = false;
 	
-	if (member != null) {
-		MemberDao memberDao = (MemberDao) session.getAttribute("MemberDao");
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId", member.getUserId());
-		param.put("status", Code.USER_STATUS_NORMAL);
-		member = memberDao.selectMember(param);
+	if (member != null) {		
+		member = Admin.memberDao.selectMember(member.getUserId(), null);
 		session.setAttribute("Member", member);
 	}
 	boolean login = member == null ? false : true;

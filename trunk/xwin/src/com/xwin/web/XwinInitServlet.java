@@ -14,6 +14,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.xwin.domain.admin.Admin;
 import com.xwin.infra.dao.AdminDao;
+import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.Code;
 
 public class XwinInitServlet extends HttpServlet {
@@ -53,6 +54,9 @@ public class XwinInitServlet extends HttpServlet {
 		Admin.DENY_EXCHANGE = adminDao.selectAdmin("DENY_EXCHANGE");
 		
 		Admin.SMS_REMAIN = adminDao.selectAdmin("SMS_REMAIN");
+		
+		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
+		Admin.memberDao = memberDao;
 	}
 
 	public void service(ServletRequest arg0, ServletResponse arg1)
