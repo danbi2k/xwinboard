@@ -29,8 +29,8 @@ public class MoneyOutController extends XwinController
 	{
 		if (Admin.DENY_EXCHANGE.equals("Y") == false)
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -43,8 +43,8 @@ public class MoneyOutController extends XwinController
 	{
 		if (Admin.DENY_EXCHANGE.equals("Y") == false)
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -78,8 +78,8 @@ public class MoneyOutController extends XwinController
 	{
 		if (Admin.DENY_EXCHANGE.equals("Y") == false)
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -140,8 +140,8 @@ public class MoneyOutController extends XwinController
 	{
 		if (Admin.DENY_EXCHANGE.equals("Y") == false)
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

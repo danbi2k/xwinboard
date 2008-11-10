@@ -28,8 +28,8 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoard(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");
@@ -76,8 +76,8 @@ public class BoardController extends XwinController
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");
@@ -104,8 +104,8 @@ public class BoardController extends XwinController
 		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
 				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = null;
 		if ((member = (Member) request.getSession().getAttribute("Member")) == null)
 			return new ModelAndView("dummy");
@@ -127,8 +127,8 @@ public class BoardController extends XwinController
 		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
 				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -164,8 +164,8 @@ public class BoardController extends XwinController
 		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
 				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
 			return new ModelAndView("illegal");
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -201,8 +201,8 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");
@@ -231,8 +231,8 @@ public class BoardController extends XwinController
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -260,8 +260,8 @@ public class BoardController extends XwinController
 	public ModelAndView getBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");

@@ -24,8 +24,8 @@ public class MyBettingController extends XwinController
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -62,8 +62,8 @@ public class MyBettingController extends XwinController
 	public ModelAndView deleteMyBetting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

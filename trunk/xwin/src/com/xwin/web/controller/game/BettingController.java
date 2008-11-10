@@ -34,8 +34,8 @@ public class BettingController extends XwinController
 	public ModelAndView viewBettingCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -50,8 +50,8 @@ public class BettingController extends XwinController
 	public synchronized ModelAndView betting(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -174,8 +174,8 @@ public class BettingController extends XwinController
 	public ModelAndView calculateCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -219,8 +219,8 @@ public class BettingController extends XwinController
 	public ModelAndView addGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -299,8 +299,8 @@ public class BettingController extends XwinController
 	public ModelAndView deleteGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -326,8 +326,8 @@ public class BettingController extends XwinController
 	public ModelAndView getGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -350,8 +350,8 @@ public class BettingController extends XwinController
 	public ModelAndView emptyGameCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		

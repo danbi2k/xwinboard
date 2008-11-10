@@ -30,8 +30,8 @@ public class GameController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
@@ -51,8 +51,8 @@ public class GameController extends XwinController
 	public ModelAndView viewGameResultList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");
@@ -117,8 +117,8 @@ public class GameController extends XwinController
 	public ModelAndView getGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		Member member = (Member) request.getSession().getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("dummy");
@@ -157,8 +157,8 @@ public class GameController extends XwinController
 	public ModelAndView deleteCart(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			return new ModelAndView("block");
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
