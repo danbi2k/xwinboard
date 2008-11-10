@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class CartCalc
+import com.xwin.domain.XwinObject;
+
+public class CartCalc extends XwinObject
 {
+	private static final long serialVersionUID = 4538168542784029622L;
+	
 	private Long money;
 	private Double rate;
 	private Long expect;

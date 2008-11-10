@@ -29,6 +29,13 @@
 		<result property="denyrity" column="DENYRITY"/>
 	</resultMap>
 	
+	<resultMap id="memberStatResultMap" class="Member" extends="memberResultMap">
+		<result property="moneyInSum" column="MONEYIN_SUM"/>
+		<result property="moneyOutSum" column="MONEYOUT_SUM"/>
+		<result property="bettingSum" column="BETTING_SUM"/>
+		<result property="profit" column="PROFIT"/>
+	</resultMap>
+	
 	<insert id="insertMember" parameterClass="Member">
 		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS)
 			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#)
@@ -194,4 +201,35 @@
 		SET STATUS = #status#
 		WHERE USERID = #userId#
 	</update>
+	
+	<select id="selectMemberStatList" resultMap="memberStatResultMap"
+		parameterClass="map">
+		SELECT
+		*,
+		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT
+		FROM view_member_stat
+		WHERE GRADE != '100'
+		<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			USERID LIKE #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickName">
+			NICKNAME LIKE #nickName#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="mobile">
+			MOBILE LIKE #mobile#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="email">
+			EMAIL LIKE #email#
+		</isNotNull>
+		ORDER BY PROFIT $ORDERBY$, BALANCE DESC
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
 </sqlMap>

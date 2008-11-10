@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class GameCommand
+import com.xwin.domain.XwinObject;
+
+public class GameCommand extends XwinObject
 {
+	private static final long serialVersionUID = -787424143742458070L;
+	
 	private String gameId;
 	private String homeTeam;
 	private String awayTeam;

@@ -9,7 +9,7 @@
 <%
 	String url = request.getRequestURL().toString().toLowerCase();
 	String SERVER = "kor";
-	if (url.contains("ngbet-vip"))
+	if (url.contains("-vip"))
 		SERVER = "vip";
 	
 	Member member = (Member) session.getAttribute("Member");
@@ -20,7 +20,10 @@
 	if (isModify == null)
 		isModify = false;
 	
-	if (member != null) {		
+	if (member != null) {
+		if (member.getGrade().equals(Code.USER_GRADE_VIP))
+			SERVER = "vip";
+		
 		member = Admin.memberDao.selectMember(member.getUserId(), null);
 		session.setAttribute("Member", member);
 	}

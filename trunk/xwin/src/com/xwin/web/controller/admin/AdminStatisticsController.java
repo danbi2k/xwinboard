@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.statistics.BetMoneyStat;
 import com.xwin.domain.statistics.MemMoneyStat;
 import com.xwin.domain.statistics.MoneyOutStat;
+import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
@@ -151,6 +152,44 @@ public class AdminStatisticsController extends XwinController
 		mv.addObject("moneyOutList", moneyOutList);
 		mv.addObject("totalCount", moneyOutCount);
 		mv.addObject("totalSum", totalSum);
+		
+		return mv;
+	}
+	
+	public ModelAndView viewMemberStat(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String orderBy = XwinUtil.arcNvl(request.getParameter("orderBy"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("grade", grade);
+		if (keyword != null) param.put(search, "%" + keyword + "%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		if (orderBy == null)
+			orderBy = "DESC";
+		param.put("ORDERBY", orderBy);
+		
+		
+		Integer memberCount = memberDao.selectMemberCount(param);
+		List<Member> memberList = memberDao.selectMemberStatList(param);
+		
+		ModelAndView mv = new ModelAndView("admin/statistics/admin_member_stat");
+		mv.addObject("memberList", memberList);
+		mv.addObject("memberCount", memberCount);
 		
 		return mv;
 	}

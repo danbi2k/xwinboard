@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class GameCartItem
+import com.xwin.domain.XwinObject;
+
+public class GameCartItem extends XwinObject
 {
+	private static final long serialVersionUID = 5384098081793435381L;
+	
 	private String gameId;
 	private String homeTeam;
 	private String awayTeam;

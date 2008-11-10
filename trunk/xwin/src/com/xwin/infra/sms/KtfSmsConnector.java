@@ -26,8 +26,12 @@ public class KtfSmsConnector
 	private static final DocumentBuilderFactory docBuilderFact = DocumentBuilderFactory.newInstance();
 //	private static final String getUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&MagicN_Id=Y29vbGlvbg==&ALevel=1&boxType=1&pagesize=2000&curpage=1";
 //	private static final String delUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&IsALL=N&boxType=1&ALevel=1&targetMsg=";
-	private static final String getUri = "http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1";
-	private static final String delUri = "http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg=";
+	private static final String[] getUri = {
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1"
+	};
+	private static final String[] delUri = {
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg="
+	};
 	
 	private KtfSmsDao ktfSmsDao = null;
 	
@@ -42,34 +46,36 @@ public class KtfSmsConnector
 			HttpClient hc = new HttpClient();
 			hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
 			
-			HttpMethod method = new GetMethod(getUri);
-			hc.executeMethod(method);
-			InputStream is = method.getResponseBodyAsStream();
-			
-			Document doc = getBuilder.parse(is);
-			
-			Element elem = doc.getDocumentElement();
-			
-			NodeList nodeList = elem.getElementsByTagName("boxlist");
-			int node_length = nodeList.getLength();
-			
-			mapList = new ArrayList<Map<String, String>>(node_length);
-			for (int i = 0 ; i < node_length ; i++)
-			{
-				Node node = nodeList.item(i);
-				NodeList boxlist = node.getChildNodes();
-				int boxlist_length = boxlist.getLength();
-				Map<String, String> boxMap = new HashMap<String, String>();
-				for (int j = 0 ; j < boxlist_length ; j++) {
-					Node boxnode = boxlist.item(j);
-					if (boxnode.getFirstChild() != null) {
-						boxMap.put(boxnode.getNodeName(), boxnode.getFirstChild().getNodeValue());
+			for (int x = 0 ; x < getUri.length ; x++) {
+				HttpMethod method = new GetMethod(getUri[x]);
+				hc.executeMethod(method);
+				InputStream is = method.getResponseBodyAsStream();
+				
+				Document doc = getBuilder.parse(is);
+				
+				Element elem = doc.getDocumentElement();
+				
+				NodeList nodeList = elem.getElementsByTagName("boxlist");
+				int node_length = nodeList.getLength();
+				
+				mapList = new ArrayList<Map<String, String>>(node_length);
+				for (int i = 0 ; i < node_length ; i++)
+				{
+					Node node = nodeList.item(i);
+					NodeList boxlist = node.getChildNodes();
+					int boxlist_length = boxlist.getLength();
+					Map<String, String> boxMap = new HashMap<String, String>();
+					for (int j = 0 ; j < boxlist_length ; j++) {
+						Node boxnode = boxlist.item(j);
+						if (boxnode.getFirstChild() != null) {
+							boxMap.put(boxnode.getNodeName(), boxnode.getFirstChild().getNodeValue());
+						}
 					}
+	
+					deleteSms(boxMap.get("msg_seq"), boxMap.get("in_date"), boxMap.get("sm"), x);				
+					mapList.add(boxMap);
 				}
-
-				deleteSms(boxMap.get("msg_seq"), boxMap.get("in_date"), boxMap.get("sm"));				
-				mapList.add(boxMap);
-			}				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("SMS 서버에 연결하지 못하였습니다");
@@ -82,12 +88,12 @@ public class KtfSmsConnector
 		this.ktfSmsDao = ktfSmsDao;
 	}
 
-	public boolean deleteSms(String msgSeq, String inDate, String sm)
+	public boolean deleteSms(String msgSeq, String inDate, String sm, int x)
 	{
 		try {
 			DocumentBuilder actBuilder = docBuilderFact.newDocumentBuilder();
 			String delParam = msgSeq + "|" + inDate + "|" + sm; 
-			actBuilder.parse(delUri + delParam);
+			actBuilder.parse(delUri[x] + delParam);
 			
 //			HttpClient hc = new HttpClient();
 //			HttpMethod method = new GetMethod(delUri + delParam);

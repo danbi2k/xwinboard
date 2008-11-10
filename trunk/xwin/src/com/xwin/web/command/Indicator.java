@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class Indicator
+import com.xwin.domain.XwinObject;
+
+public class Indicator extends XwinObject
 {
+	private static final long serialVersionUID = 342941896703700802L;
+	
 	private String chargingIndi;
 	private String exchangeIndi;
 	private String centerIndi;

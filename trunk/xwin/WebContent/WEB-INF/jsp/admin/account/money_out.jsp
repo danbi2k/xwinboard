@@ -9,7 +9,7 @@
 	int ROWSIZE = 30;
 	int SHOWPAGE = 20;
 	
-	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyInOutList");
+	List<MoneyOut> moneyOutList = (List<MoneyOut>) request.getAttribute("moneyOutList");
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));

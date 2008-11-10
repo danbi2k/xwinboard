@@ -3,8 +3,12 @@ package com.xwin.web.command;
 import java.util.Date;
 import java.util.List;
 
-public class AllCartItem
+import com.xwin.domain.XwinObject;
+
+public class AllCartItem extends XwinObject
 {
+	private static final long serialVersionUID = 377226270291912817L;
+	
 	private Long money;
 	private Double rate;
 	private Long expect;

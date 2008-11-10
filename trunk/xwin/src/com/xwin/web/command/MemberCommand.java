@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class MemberCommand
+import com.xwin.domain.XwinObject;
+
+public class MemberCommand extends XwinObject
 {
+	private static final long serialVersionUID = -9024700845464615238L;
+	
 	private String userId;
 	private String nickName;
 	private String phone1;

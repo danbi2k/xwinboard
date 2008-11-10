@@ -31,6 +31,9 @@ public class XwinUtil
 	
 	public static String comma3(Long num)
 	{
+		if (num == null)
+			return "0";
+		
 		NumberFormat nf = NumberFormat.getInstance();
 		return nf.format(num);
 	}

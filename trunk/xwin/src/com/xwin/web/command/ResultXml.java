@@ -1,7 +1,11 @@
 package com.xwin.web.command;
 
-public class ResultXml
+import com.xwin.domain.XwinObject;
+
+public class ResultXml extends XwinObject
 {
+	private static final long serialVersionUID = 667972321386597867L;
+
 	public static final ResultXml SUCCESS = new ResultXml(0, null, null);
 	
 	private Integer code;
