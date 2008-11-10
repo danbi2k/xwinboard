@@ -24,6 +24,9 @@
 			</isNotNull>
 		</dynamic>
 		ORDER BY NAME DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
 	</select>
 	
 	<select id="selectLeagueCount" resultClass="integer"

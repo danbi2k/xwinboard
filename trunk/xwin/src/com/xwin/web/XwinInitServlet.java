@@ -36,7 +36,8 @@ public class XwinInitServlet extends HttpServlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {
 		ServletContext ctx = servletConfig.getServletContext();
-		String imagePath = ctx.getRealPath("images/league");
+		//String imagePath = ctx.getRealPath("images/league");
+		String imagePath = "D:/Apache2.2/htdocs/images/league";
 		Code.LEAGUE_IMAGE_PATH = imagePath;
 
 		WebApplicationContext wac = 

@@ -20,6 +20,8 @@ import com.xwin.web.controller.XwinController;
 
 public class AdminLeagueController extends XwinController
 {	
+	public static final int ROWSIZE = 30;
+	
 	public ModelAndView viewLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -36,6 +38,8 @@ public class AdminLeagueController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (keyword != null) param.put(search, "%" + keyword + "%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<League> leagueList = leagueDao.selectLeagueList(param);
 		Integer leagueCount = leagueDao.selectLeagueCount(param);

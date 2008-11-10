@@ -89,7 +89,7 @@
 	%>
 		<tr>
 		<td width=5%><a href="adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=game.getId()%>"><%=game.getId()%></a></td>
-		<td><font color=<%=game.getType().equals("wdl")?"blue":"green"%>><%=Code.getValue(game.getType())%></font></td>
+		<td nowrap><font color=<%=game.getType().equals("wdl")?"blue":"green"%>><%=Code.getValue(game.getType())%></font></td>
 		<td><%=game.getLeagueName()%></td>			
 		<td><%=game.getGameDateStr()%></td>
 		<td><%=game.getHomeTeam()%></td>
