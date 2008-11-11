@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -57,7 +58,9 @@ public class AdminSmsController extends XwinController
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
 		
-		List<Member> memberList = memberDao.selectMemberList(null);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.USER_STATUS_NORMAL);
+		List<Member> memberList = memberDao.selectMemberList(param);
 		if (memberList != null) {
 			List<String> phoneList = new ArrayList<String>(memberList.size());
 			for (Member member : memberList) {
