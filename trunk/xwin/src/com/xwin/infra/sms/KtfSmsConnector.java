@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -16,6 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXParseException;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.infra.dao.KtfSmsDao;
@@ -27,10 +29,12 @@ public class KtfSmsConnector
 //	private static final String getUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&MagicN_Id=Y29vbGlvbg==&ALevel=1&boxType=1&pagesize=2000&curpage=1";
 //	private static final String delUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&IsALL=N&boxType=1&ALevel=1&targetMsg=";
 	private static final String[] getUri = {
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1"
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1",
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081111202652&ClientIP=121.161.223.133&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=100&curpage=1"
 	};
 	private static final String[] delUri = {
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg="
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg=",
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01043047455&LogTime=20081111202652&ClientIP=121.161.223.133&IsALL=N&boxType=1&ALevel=1&targetMsg="
 	};
 	
 	private KtfSmsDao ktfSmsDao = null;
@@ -41,12 +45,20 @@ public class KtfSmsConnector
 	public List<Map<String, String>> parseKTF()
 	{
 		List<Map<String, String>> mapList = null;
-		try {			
-			DocumentBuilder getBuilder = docBuilderFact.newDocumentBuilder();
-			HttpClient hc = new HttpClient();
-			hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
 			
-			for (int x = 0 ; x < getUri.length ; x++) {
+		DocumentBuilder getBuilder = null;
+		try {
+			getBuilder = docBuilderFact.newDocumentBuilder();
+		} catch (ParserConfigurationException e1) {
+			e1.printStackTrace();
+		}
+		
+		HttpClient hc = new HttpClient();
+		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
+			
+		for (int x = 0 ; x < getUri.length ; x++) {
+			try {
+				System.out.print(x);
 				HttpMethod method = new GetMethod(getUri[x]);
 				hc.executeMethod(method);
 				InputStream is = method.getResponseBodyAsStream();
@@ -75,11 +87,14 @@ public class KtfSmsConnector
 					deleteSms(boxMap.get("msg_seq"), boxMap.get("in_date"), boxMap.get("sm"), x);				
 					mapList.add(boxMap);
 				}
+			} catch (SAXParseException e) {
+				System.out.println("잘못된 xml 입니다");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("SMS 서버에 연결하지 못하였습니다");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("SMS 서버에 연결하지 못하였습니다");
 		}
+		
 		
 		return mapList;
 	}
@@ -94,6 +109,7 @@ public class KtfSmsConnector
 			DocumentBuilder actBuilder = docBuilderFact.newDocumentBuilder();
 			String delParam = msgSeq + "|" + inDate + "|" + sm; 
 			actBuilder.parse(delUri[x] + delParam);
+//			System.out.println(delUri[x] + delParam);
 			
 //			HttpClient hc = new HttpClient();
 //			HttpMethod method = new GetMethod(delUri + delParam);

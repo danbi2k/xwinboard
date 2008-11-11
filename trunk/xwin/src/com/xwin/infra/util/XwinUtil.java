@@ -59,7 +59,7 @@ public class XwinUtil
 	public static Long calcExpectMoney(Double rate, Long money)
 	{
 		Double cutRate = doubleCut(rate);
-		Double _expect = Math.floor(cutRate * money);
+		Double _expect = Math.ceil(cutRate * money);
 		Long expect = _expect.longValue();
 		
 		return expect;
