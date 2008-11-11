@@ -67,11 +67,6 @@ public class AdminSmsController extends XwinController
 				phoneList.add(member.getMobile().replaceAll("-", ""));
 			}
 			
-//			List<String> phoneList = new ArrayList<String>(3);
-//			phoneList.add("01040139992");
-//			phoneList.add("0162611848");
-//			phoneList.add("01020699997");
-			
 			sendSmsConnector.sendSmsList(message, phoneList, callback);
 			
 		}		
