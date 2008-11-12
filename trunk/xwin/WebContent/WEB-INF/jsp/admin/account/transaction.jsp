@@ -92,8 +92,10 @@
 		</td>
 		<td>
 			<%if (transaction.getIsCharge().equals("N")) { %>
-				<input type="button" value="대기취소" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
-			<%} %>
+				<input type="button" value="관리자충전" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
+			<%} else if (transaction.getIsCharge().equals("C") && transaction.getNote() != null && transaction.getNote().startsWith("동명")) {%>
+				<input type="button" value="동명/동액" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
+			<%}%>
 		</td>
 		<td><%=XwinUtil.nvl(transaction.getNote())%></td>
 	</tr>
@@ -143,7 +145,7 @@
 <script>
 function cancelIsCharge(id)
 {
-	if (confirm("대기취소하시겠습니까?")) {
+	if (confirm("관리자충전 하시겠습니까?")) {
 		var query = "mode=cancelIsCharge";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminTran.aspx", query);

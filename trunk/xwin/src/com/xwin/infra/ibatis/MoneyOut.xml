@@ -262,6 +262,12 @@
 	<select id="selectMoneyOutGroupByBankList" resultMap="moneyOutStatResultMap" parameterClass="map">
 		SELECT BANKNAME, NAME, NUMBER, COUNT(*) AS OUT_COUNT, SUM(MONEY) AS OUT_SUM FROM tbl_money_out t
 		WHERE STATUS = 'ME002'
+		<isNotNull prepend="AND" property="nameLike">
+			NAME LIKE #nameLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="numberLike">
+			NUMBER LIKE #numberLike#
+		</isNotNull>
 		GROUP BY NUMBER, NAME, BANKNAME
 		ORDER BY OUT_SUM DESC
 		<isNotNull property="fromRow">

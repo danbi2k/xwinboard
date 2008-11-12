@@ -83,12 +83,16 @@ public class AdminStatisticsController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 			
 		Map<String, Object> param = new HashMap<String, Object>();
+		if (keyword != null)
+			param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		

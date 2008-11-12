@@ -32,11 +32,7 @@
 		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
  		<option value='number' <%=search.equals("number")?"selected":""%>>계좌번호</option>
  	</select>
- 	<input type='text' name='keyword' value='<%=keyword%>'>
-	처리일자
-	<input type='hidden' name='dateType' value='proc'/>
-	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
-	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">		
+ 	<input type='text' name='keyword' value='<%=keyword%>'>		
  	<input type='submit' value='검 색'/>
 </form>
 <table class="prettytable">

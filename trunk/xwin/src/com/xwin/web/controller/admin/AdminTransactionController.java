@@ -89,7 +89,7 @@ public class AdminTransactionController extends XwinController
 		transactionDao.updateTransaction(tran);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		ResultXml rx = new ResultXml(0, "대기취소되었습니다", null);
+		ResultXml rx = new ResultXml(0, "관리자충전 되었습니다", null);
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
