@@ -42,7 +42,7 @@
 		<option value=''>전체</option>
  		<option value='Y' <%=isCharge.equals("Y")?"selected":""%>>충전완료</option>
  		<option value='N' <%=isCharge.equals("N")?"selected":""%>>충전대기</option>
-		<option value='N' <%=isCharge.equals("C")?"selected":""%>>대기취소</option>
+		<option value='C' <%=isCharge.equals("C")?"selected":""%>>대기취소</option>
  	</select>
 	비고
 	<select name='note' onchange='this.form.submit()'>

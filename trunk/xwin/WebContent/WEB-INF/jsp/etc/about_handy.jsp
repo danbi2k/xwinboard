@@ -36,7 +36,7 @@
 	<td style="padding:8px 0 0 14px">
 		<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
-		<td><img src="/images/common/icon_title.gif" width="13" height="13"></td>
+		<td></td>
 		<td class="txt2" style="padding:0 0 0 2px"><strong>핸디캡 이해</strong></td>
 		</tr>
 		</table>

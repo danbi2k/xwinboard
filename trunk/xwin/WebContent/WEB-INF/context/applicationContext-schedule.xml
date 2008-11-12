@@ -90,10 +90,10 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
 		<property name="triggers">
 			<list>
-				<ref bean="gameBetStatusTrigger"/>
+				<!-- ref bean="gameBetStatusTrigger"/ -->
 				<!-- ref bean="autoMoneyInTrigger"/ -->
 				<!-- ref bean="sendSmsTrigger"/ -->
-				<ref bean="betMoneyStatTrigger"/>
+				<!-- ref bean="betMoneyStatTrigger"/ -->
 			</list>
 		</property>
 		<property name="quartzProperties">

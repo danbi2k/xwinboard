@@ -41,7 +41,8 @@
 <tr><td valign="top" align="center" height="300">
 
 
-<link rel='stylesheet' href='common/board.css'><script language='JavaScript' src='common/board.js'></script><br><table align='center' width='95%' cellpadding='0' cellspacing='0' style='margin-top:7px;'><tr align='center'><td width='10'><img src='images/title_left.gif'></td><td width='50'  background='images/title_bg.gif'>번호</td><td width='*'   background='images/title_bg.gif'>제목</td><td width='100' background='images/title_bg.gif'>작성자</td><td width='100' background='images/title_bg.gif'>작성일</td><td width='50'  background='images/title_bg.gif'>조회수</td><td width='10'><img src='images/title_right.gif'></td></tr>
+<link rel='stylesheet' href='board.css'>
+<script language='JavaScript' src='board.js'></script><br><table align='center' width='95%' cellpadding='0' cellspacing='0' style='margin-top:7px;'><tr align='center'><td width='10'><img src='images/title_left.gif'></td><td width='50'  background='images/title_bg.gif'>번호</td><td width='*'   background='images/title_bg.gif'>제목</td><td width='100' background='images/title_bg.gif'>작성자</td><td width='100' background='images/title_bg.gif'>작성일</td><td width='50'  background='images/title_bg.gif'>조회수</td><td width='10'><img src='images/title_right.gif'></td></tr>
 	
 
 <%
