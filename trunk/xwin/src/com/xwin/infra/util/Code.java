@@ -6,6 +6,7 @@ import java.util.Map;
 public class Code
 {	
 	public static String LEAGUE_IMAGE_PATH	= "";
+	
 	private static final Map<String, String> valueMap = new HashMap<String, String>();
 	private static final Map<String, String> keyMap = new HashMap<String, String>();
 	
