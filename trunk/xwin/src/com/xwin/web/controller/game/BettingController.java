@@ -164,6 +164,8 @@ public class BettingController extends XwinController
 			session.removeAttribute("cartMap_" + _type);
 			
 			rx = new ResultXml(0, "배팅 하셨습니다", null);
+			Member betMember = (Member) session.getAttribute("Member");
+			betMember.setBettingDate(new Date());
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

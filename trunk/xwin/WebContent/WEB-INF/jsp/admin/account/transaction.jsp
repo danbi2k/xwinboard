@@ -95,6 +95,8 @@
 				<input type="button" value="관리자충전" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
 			<%} else if (transaction.getIsCharge().equals("C") && transaction.getNote() != null && transaction.getNote().startsWith("동명")) {%>
 				<input type="button" value="동명/동액" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
+			<%} else if (transaction.getIsCharge().equals("C") && transaction.getNote() != null && transaction.getNote().startsWith("시간")) {%>
+				<input type="button" value="시간초과" onclick="cancelIsCharge(<%=transaction.getId()%>)"/>
 			<%}%>
 		</td>
 		<td><%=XwinUtil.nvl(transaction.getNote())%></td>

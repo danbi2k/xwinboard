@@ -197,4 +197,15 @@ public class AdminStatisticsController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView viewMemberLogin(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ModelAndView mv = new ModelAndView("admin/statistics/admin_member_login");
+		
+		return mv;
+	}
 }

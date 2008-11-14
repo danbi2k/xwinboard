@@ -18,6 +18,9 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String orderCol = XwinUtil.nvl(request.getParameter("orderCol"));
+	String orderBy = XwinUtil.nvl(request.getParameter("orderBy"));
+	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
 	Integer normalCount = (Integer) request.getAttribute("normalCount");
@@ -82,6 +85,14 @@
 		<option value='<%=Code.USER_STATUS_NORMAL%>' <%=status.equals(Code.USER_STATUS_NORMAL)?"selected":""%>>정상</option>
 		<option value='<%=Code.USER_STATUS_SECEDE_REQ%>' <%=status.equals(Code.USER_STATUS_SECEDE_REQ)?"selected":""%>>탈퇴요청</option>
 		<option value='<%=Code.USER_STATUS_SECEDE%>' <%=status.equals(Code.USER_STATUS_SECEDE)?"selected":""%>>탈퇴</option>
+ 	</select>
+	<select name='orderCol' onChange='this.form.submit()'>
+		<option value='BALANCE' <%=orderCol.equals("BALANCE")?"selected":""%>>보유금액순</option>
+		<option value='ID' <%=orderCol.equals("ID")?"selected":""%>>가입일순</option>
+ 	</select>
+	<select name='orderBy' onChange='this.form.submit()'>
+		<option value='ASC' <%=orderBy.equals("ASC")?"selected":""%>>정순</option>
+		<option value='DESC' <%=orderBy.equals("DESC")?"selected":""%>>역순</option>
  	</select>
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>

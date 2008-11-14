@@ -24,8 +24,10 @@
 		if (member.getGrade().equals(Code.USER_GRADE_VIP))
 			SERVER = "vip";
 		
-		member = Admin.memberDao.selectMember(member.getUserId(), null);
-		session.setAttribute("Member", member);
+		Member dbMember = Admin.memberDao.selectMember(member.getUserId(), null);
+		dbMember.setBettingDate(member.getBettingDate());
+		dbMember.setLoginDate(member.getLoginDate());
+		session.setAttribute("Member", dbMember);
 	}
 	boolean login = member == null ? false : true;
 %>

@@ -1,5 +1,10 @@
 package com.xwin.domain.admin;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import com.xwin.domain.XwinObject;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.MemberDao;
@@ -25,4 +30,6 @@ public class Admin extends XwinObject
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}
+	
+	public static Map<String, HttpSession> loginMap = new HashMap<String, HttpSession>();
 }

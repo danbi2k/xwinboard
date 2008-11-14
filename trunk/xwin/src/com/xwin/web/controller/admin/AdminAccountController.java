@@ -95,6 +95,8 @@ public class AdminAccountController extends XwinController
 	public ModelAndView viewMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		int ROWSIZE = 50;
+		
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		

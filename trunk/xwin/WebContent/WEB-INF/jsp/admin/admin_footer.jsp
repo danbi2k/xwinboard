@@ -73,6 +73,7 @@
 					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
 					<li><a href="adminStat.aspx?mode=viewMoneyOutStat">환전계좌내역</a></li>
 					<li><a href="adminStat.aspx?mode=viewMemberStat">회원현황</a></li>
+					<li><a href="adminStat.aspx?mode=viewMemberLogin">로그인현황</a></li>
 				</ul>
 			</div>
 		</div>
@@ -104,8 +105,14 @@ function logOut()
 	}
 }
 
+function reload()
+{
+	location.reload();
+}
+
 checkIndi();
 setInterval("checkIndi()", 10000);
+setInterval("reload()", 600000);
 </script>
 </body>
 </html>

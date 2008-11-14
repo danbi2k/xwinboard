@@ -31,6 +31,9 @@ public class Member extends XwinObject
 	private Date bankDate;
 	private String getSms;
 	private Integer denyrity;
+	private Date loginDate;
+	private Date bettingDate;
+	
 	private Long moneyInSum;
 	private Long moneyOutSum;
 	private Long bettingSum;
@@ -150,6 +153,18 @@ public class Member extends XwinObject
 	}
 	public void setDenyrity(Integer denyrity) {
 		this.denyrity = denyrity;
+	}
+	public Date getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
+	}
+	public Date getBettingDate() {
+		return bettingDate;
+	}
+	public void setBettingDate(Date bettingDate) {
+		this.bettingDate = bettingDate;
 	}
 	public Long getMoneyInSum() {
 		return moneyInSum;

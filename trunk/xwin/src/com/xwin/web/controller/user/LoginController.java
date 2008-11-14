@@ -58,7 +58,8 @@ public class LoginController extends XwinController
 				rx.setMessage("탈퇴한 사용자 입니다");
 			} else {
 				rx.setCode(0);
-				HttpSession session = request.getSession();		
+				HttpSession session = request.getSession();
+				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
 			}
 			

@@ -35,11 +35,19 @@ public class AdminMemberController extends XwinController
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String orderCol = XwinUtil.arcNvl(request.getParameter("orderCol"));
+		String orderBy = XwinUtil.arcNvl(request.getParameter("orderBy"));
+		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
+		
+		if (orderCol == null)
+			orderCol = "BALANCE";
+		if (orderBy == null)
+			orderBy = "DESC";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.USER_STATUS_NORMAL);
@@ -53,7 +61,11 @@ public class AdminMemberController extends XwinController
 		
 		param.put("grade", grade);
 		param.put("status", status);
-		if (keyword != null) param.put(search, "%" + keyword + "%");
+		param.put("orderCol", orderCol);
+		param.put("orderBy", orderBy);
+		
+		if (keyword != null)
+			param.put(search, "%" + keyword + "%");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		

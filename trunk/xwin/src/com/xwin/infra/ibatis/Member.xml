@@ -27,6 +27,7 @@
 		<result property="bankDate" column="BANKDATE"/>
 		<result property="getSms" column="GET_SMS"/>
 		<result property="denyrity" column="DENYRITY"/>
+		<result property="bettingDate" column="BETTING_DATE"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member" extends="memberResultMap">
@@ -130,7 +131,7 @@
 		<isNotNull prepend="AND" property="email">
 			EMAIL LIKE #email#
 		</isNotNull>
-		ORDER BY BALANCE DESC
+		ORDER BY $orderCol$ $orderBy$
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
 		</isNotNull>
