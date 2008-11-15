@@ -7,11 +7,6 @@
 <%@ page import="com.xwin.infra.util.*" %>
 <%@ page import="java.util.*" %>
 <%
-	String url = request.getRequestURL().toString().toLowerCase();
-	String SERVER = "kor";
-	if (url.contains("-vip"))
-		SERVER = "vip";
-	
 	Member member = (Member) session.getAttribute("Member");
 	Boolean isIndex = (Boolean) request.getAttribute("isIndex");
 	Boolean isModify = (Boolean) request.getAttribute("isModify");
@@ -21,9 +16,6 @@
 		isModify = false;
 	
 	if (member != null) {
-		if (member.getGrade().equals(Code.USER_GRADE_VIP))
-			SERVER = "vip";
-		
 		Member dbMember = Admin.memberDao.selectMember(member.getUserId(), null);
 		dbMember.setBettingDate(member.getBettingDate());
 		dbMember.setLoginDate(member.getLoginDate());
@@ -77,7 +69,7 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="270" align="center"><a href="index.aspx"><img src="images/kingbet-<%=SERVER%>.jpg" border="0"></a></td>
+<tr><td width="270" align="center"><a href="index.aspx"><img src="images/kingbet-vip.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu">
 <li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
@@ -170,7 +162,7 @@ if (login) {
 
 	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
 	<td>
-		<%if (Admin.DENY_JOIN.equals("Y") && SERVER.equals("kor")) {%>
+		<%if (Admin.DENY_JOIN.equals("Y")) {%>
 		<img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';">
 		<%}%>
 	</td>

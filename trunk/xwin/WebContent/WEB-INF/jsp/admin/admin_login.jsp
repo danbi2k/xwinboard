@@ -26,7 +26,7 @@ function checkIT() {
 	var http = new JKL.ParseXML("adminLogin.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
-		location.href='adminQna.aspx?mode=viewQnaList&grade=1';
+		location.href='adminQna.aspx?mode=viewQnaList&grade=10';
 	} else {
 		alert(result.resultXml.message);
 	}
