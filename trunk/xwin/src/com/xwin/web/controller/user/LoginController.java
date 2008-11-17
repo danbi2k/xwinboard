@@ -1,5 +1,7 @@
 package com.xwin.web.controller.user;
 
+import org.apache.log4j.Logger;
+
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,12 @@ import com.xwin.web.controller.XwinController;
 
 public class LoginController extends XwinController
 {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(LoginController.class);
+
 	public ModelAndView processLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
@@ -58,6 +66,12 @@ public class LoginController extends XwinController
 				HttpSession session = request.getSession();
 				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
+				
+				if (logger.isInfoEnabled()) {
+					logger
+							.info("processLogin(HttpServletRequest, HttpServletResponse) - member="
+									+ member);
+				}
 			}
 			
 			if (member != null) {

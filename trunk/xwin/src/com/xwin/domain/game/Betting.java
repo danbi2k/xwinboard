@@ -117,4 +117,25 @@ public class Betting extends XwinObject
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("\nid= " + id);
+		sb.append("\nuserId= " + userId);
+		sb.append("\nnickName= " + nickName);
+		sb.append("\ndateStr= " + dateStr);
+		sb.append("\nrateStr= " + rateStr);
+		sb.append("\nmoney= " + money);
+		sb.append("\nexpect= " + expect);
+		sb.append("**********");
+		if (betGameList != null) {
+			for (BetGame betGame : betGameList) {
+				sb.append(betGame.toString());
+			}
+		}
+		
+		return sb.toString();
+	}
 }

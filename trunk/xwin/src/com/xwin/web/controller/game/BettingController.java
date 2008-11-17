@@ -1,5 +1,7 @@
 package com.xwin.web.controller.game;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -29,6 +31,12 @@ import com.xwin.web.controller.XwinController;
 
 public class BettingController extends XwinController
 {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = Logger
+			.getLogger(BettingController.class);
+
 	private static final long MAX_EXPECT = 3000000;
 	
 	public ModelAndView viewBettingCart(HttpServletRequest request,
@@ -169,7 +177,13 @@ public class BettingController extends XwinController
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		
+
+		if (logger.isInfoEnabled()) {
+			logger
+					.info("betting(HttpServletRequest, HttpServletResponse) - betting=\n"
+							+ betting);
+		}
+
 		return mv;
 	}
 	
