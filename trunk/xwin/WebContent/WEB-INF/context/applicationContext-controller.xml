@@ -21,6 +21,9 @@
 	
 	<bean id="aboutHandyController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/about_handy"/>
+		
+	<bean id="mainController"  class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="main"/>
 	
 	<bean id="indexController" class="com.xwin.web.controller.IndexController"
 		p:gameDao-ref="gameDao"
