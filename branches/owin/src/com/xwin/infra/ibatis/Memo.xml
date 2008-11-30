@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Memo">
+
+	<typeAlias alias="Memo" type="com.xwin.domain.user.Memo" />
+	
+	<resultMap id="memoResultMap" class="Memo">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="memo" column="MEMO"/>
+		<result property="date" column="DATE"/>
+		<result property="isReaded" column="ISREADED"/>
+		<result property="isDeleted" column="ISDELETED"/>
+	</resultMap>
+	
+	<insert id="insertMemo" parameterClass="Memo">
+		INSERT INTO tbl_member_memo(USERID, MEMO, DATE)
+		VALUES(#userId#, #memo#, #date#)
+	</insert>
+	
+	<delete id="deleteMemo" parameterClass="string">
+		DELETE FROM tbl_member_memo WHERE ID = #value#
+	</delete>
+	
+	<select id="selectMemoList" resultMap="memoResultMap" parameterClass="map">
+		SELECT * FROM tbl_member_memo
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isReaded">
+				ISREADED = #isReaded#
+			</isNotNull>
+		</dynamic>		
+		ORDER BY DATE ASC
+	</select>
+	
+	<update id="updateMemo" parameterClass="map">
+		UPDATE tbl_member_memo
+		<dynamic prepend="SET">
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isReaded">
+				ISREADED = #isReaded#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+</sqlMap>

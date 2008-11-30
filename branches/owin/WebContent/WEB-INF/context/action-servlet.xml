@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/main.aspx">mainController</prop>
+				<prop key="/index.aspx">indexController</prop>			
+				<prop key="/login.aspx">loginController</prop>
+				<prop key="/member.aspx">memberController</prop>
+				<prop key="/admin.aspx">adminController</prop>
+				<prop key="/game.aspx">gameController</prop>
+				<prop key="/betting.aspx">bettingController</prop>
+				<prop key="/board.aspx">boardController</prop>
+				<prop key="/moneyIn.aspx">moneyInController</prop>
+				<prop key="/moneyOut.aspx">moneyOutController</prop>
+				<prop key="/myBet.aspx">myBettingController</prop>
+				<prop key="/myMoney.aspx">myMoneyController</prop>
+				
+				<prop key="/test.aspx">testController</prop>
+				<prop key="/munja.aspx">munjaBadaResponse</prop>
+				
+				<prop key="/adminIndex.aspx">adminIndexController</prop>
+				<prop key="/adminLogin.aspx">adminLoginController</prop>
+				<prop key="/adminMain.aspx">adminMainController</prop>
+				<prop key="/adminInfo.aspx">adminInfoController</prop>
+				<prop key="/adminMember.aspx">adminMemberController</prop>
+				<prop key="/adminAccount.aspx">adminAccountController</prop>
+				<prop key="/adminLeague.aspx">adminLeagueController</prop>
+				<prop key="/adminGame.aspx">adminGameController</prop>
+				<prop key="/admin.aspx">adminController</prop>
+				<prop key="/adminBetting.aspx">adminBettingController</prop>
+				<prop key="/adminSms.aspx">adminSmsController</prop>
+				<prop key="/adminQna.aspx">adminQnaController</prop>
+				<prop key="/adminBoard.aspx">adminBoardController</prop>
+				<prop key="/adminStat.aspx">adminStatisticsController</prop>
+				<prop key="/adminTran.aspx">adminTransactionController</prop>
+				<prop key="/adminLog.aspx">adminLogController</prop>
+				
+				<prop key="/guide.aspx">guideController</prop>
+				<prop key="/provision.aspx">provisionController</prop>
+				<prop key="/rules.aspx">rulesController</prop>
+				<prop key="/aboutHandy.aspx">aboutHandyController</prop>
+				<prop key="/livescore.aspx">liveScoreController</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>

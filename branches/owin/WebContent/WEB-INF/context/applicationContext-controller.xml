@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="liveScoreController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/livescore"/>
+		
+	<bean id="guideController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/guide"/>
+		
+	<bean id="provisionController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/provision"/>
+		
+	<bean id="rulesController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/rules"/>
+	
+	<bean id="aboutHandyController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="etc/about_handy"/>
+		
+	<bean id="mainController"  class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="main"/>
+	
+	<bean id="indexController" class="com.xwin.web.controller.IndexController"
+		p:gameDao-ref="gameDao"
+		p:accessDao-ref="accessDao"/>
+	
+	<bean id="gameController" class="com.xwin.web.controller.game.GameController"
+		p:gameDao-ref="gameDao"
+		p:leagueDao-ref="leagueDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+		
+	<bean id="memberController"
+		class="com.xwin.web.controller.user.MemberController"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
+		p:accessDao-ref="accessDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:memoDao-ref="memoDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="loginController"
+		class="com.xwin.web.controller.user.LoginController"
+		p:memberDao-ref="memberDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="bettingController"
+		class="com.xwin.web.controller.game.BettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:gameDao-ref="gameDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
+		p:accessDao-ref="accessDao"
+		p:bettingService-ref="bettingService"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="myBettingController"
+		class="com.xwin.web.controller.user.MyBettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+		
+	<bean id="boardController"
+		class="com.xwin.web.controller.board.BoardController"
+		p:memberDao-ref="memberDao"
+		p:boardDao-ref="boardDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="moneyInController"
+		class="com.xwin.web.controller.user.MoneyInController"
+		p:memberDao-ref="memberDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:bankBookDao-ref="bankBookDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="moneyOutController"
+		class="com.xwin.web.controller.user.MoneyOutController"
+		p:memberDao-ref="memberDao"
+		p:moneyOutDao-ref="moneyOutDao"
+		p:accountDao-ref="accountDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="myMoneyController"
+		class="com.xwin.web.controller.user.MyMoneyController"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="controllerNameResolver"
+		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
+		p:paramName="mode"/>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</beans>
