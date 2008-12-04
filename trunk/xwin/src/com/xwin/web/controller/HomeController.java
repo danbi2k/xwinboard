@@ -5,13 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public class IndexController extends XwinController
+import com.xwin.domain.user.Member;
+
+public class HomeController extends XwinController
 {
 
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("user_login");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		ModelAndView mv = new ModelAndView("home");
 		
 		return mv;
 	}

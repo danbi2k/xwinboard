@@ -25,7 +25,7 @@
 %>
 <html>
 <head>
-<title>KingBet</title>
+<title>No1Bet</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -69,7 +69,7 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="270" align="center"><a href="index.aspx"><img src="images/kingbet-vip.jpg" border="0"></a></td>
+<tr><td width="270" align="center"><a href="home.aspx"><img src="images/no1bet.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu">
 <li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
@@ -192,7 +192,7 @@ if (login) {
 <img id="mainImage" src="images/wall04.jpg" style="display:none">
 <script>
 //FnFlash("main","960","280","images/main.swf","");
-if (document.URL.indexOf("index.aspx") > 0) {
+if (document.URL.indexOf("home.aspx") > 0) {
 	var mainImage = document.getElementById("mainImage");
 	mainImage.style.display = "block";
 }

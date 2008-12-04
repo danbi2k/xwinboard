@@ -7,6 +7,7 @@
 		<property name="mappings">
 			<props>
 				<prop key="/main.aspx">mainController</prop>
+				<prop key="/home.aspx">homeController</prop>
 				<prop key="/index.aspx">indexController</prop>			
 				<prop key="/login.aspx">loginController</prop>
 				<prop key="/member.aspx">memberController</prop>

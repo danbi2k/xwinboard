@@ -9,7 +9,7 @@
 <body>
 <script>
 alert("접근 권한이 없습니다");
-location.href = "index.aspx";
+location.href = "main.aspx";
 </script>
 </body>
 </html>

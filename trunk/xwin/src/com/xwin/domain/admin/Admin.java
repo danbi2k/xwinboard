@@ -27,6 +27,8 @@ public class Admin extends XwinObject
 	
 	public static String SMS_REMAIN = "";
 	
+	public static String ADMIN_EMAIL = "";
+	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}

@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>KingBet Admin</title>
+<title>No1Bet Admin</title>
 <meta name="keywords" content="" />
 <meta name="description" content=""/>
 <link href="style/lasvegastoo.css" rel="stylesheet" type="text/css" />
@@ -97,7 +97,7 @@ setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10">KingBet</a></h1>
+		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10">No1Bet</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>

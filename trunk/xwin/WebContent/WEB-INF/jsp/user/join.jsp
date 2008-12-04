@@ -74,7 +74,7 @@ function setEmail(obj)
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
 	<tr><td style="line-height:20px;">
 <span style="width:100%;height:240;OVERFLOW:auto">
-<b style='color:white'>1.</b> KingBet(이하 회사)는 회원님이 계정을 가지고 있을 때 아래의 내용에 동의 한다고 가정합니다.<br>
+<b style='color:white'>1.</b> No1Bet(이하 회사)는 회원님이 계정을 가지고 있을 때 아래의 내용에 동의 한다고 가정합니다.<br>
 
     회원 가입을 통해 고객은 이용약관에 대해 완전히 이해하고 동의하는 것으로 간주됩니다.<br>
     약관및 규정은 꼼꼼히 읽어 보시기를 권장 합니다.<br>
