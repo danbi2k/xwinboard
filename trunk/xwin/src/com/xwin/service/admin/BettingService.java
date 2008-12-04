@@ -104,6 +104,7 @@ public class BettingService extends XwinService
 				
 				if (totalCount == (cancelCount + successCount + failureCount + drawCount)) {
 					calcuateBetting(betting);
+					betting.setEndDate(new Date());
 					betting.setCalcStatus(Code.BET_CALC_COMMIT);
 				}
 				

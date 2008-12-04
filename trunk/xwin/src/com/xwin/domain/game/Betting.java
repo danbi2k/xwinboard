@@ -29,6 +29,8 @@ public class Betting extends XwinObject
 	
 	private String isDeleted;
 	
+	private Date endDate;
+	
 	private List<BetGame> betGameList;
 	
 	public String getId() {
@@ -118,6 +120,12 @@ public class Betting extends XwinObject
 		this.isDeleted = isDeleted;
 	}
 	
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

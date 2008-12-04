@@ -36,7 +36,9 @@ public class AdminInfoController extends XwinController
 		admin.setMobile(command.getMobile());
 		admin.setEmail(command.getEmail());
 		
-		memberDao.updateMember(admin);		
+		memberDao.updateMember(admin);
+		
+		Admin.ADMIN_EMAIL = admin.getEmail();
 		
 		ResultXml rx = new ResultXml(0, "관리자 정보가 변경 되었습니다", null);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
