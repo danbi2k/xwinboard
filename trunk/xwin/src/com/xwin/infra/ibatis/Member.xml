@@ -40,8 +40,8 @@
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#)
 	</insert>
 	
 	<update id="updateMember" parameterClass="Member">
@@ -82,6 +82,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="denyrity">
 				DENYRITY = #denyrity#
+			</isNotNull>
+			<isNotNull prepend="," property="introLetter">
+				INTRO_LETTER = #introLetter#
 			</isNotNull>
 		</dynamic>
 		WHERE USERID = #userId#

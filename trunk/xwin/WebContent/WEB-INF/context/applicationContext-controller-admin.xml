@@ -61,7 +61,7 @@
 		p:moneyOutDao-ref="moneyOutDao"
 		p:moneyInOutDao-ref="moneyInOutDao"
 		p:memberDao-ref="memberDao"
-		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminLeagueController"
@@ -76,7 +76,6 @@
 		p:betGameDao-ref="betGameDao"
 		p:leagueDao-ref="leagueDao"
 		p:memberDao-ref="memberDao"
-		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:bettingService-ref="bettingService"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
@@ -107,7 +106,7 @@
 	<bean id="adminSmsController"
 		class="com.xwin.web.controller.admin.AdminSmsController"
 		p:memberDao-ref="memberDao"
-		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminQnaController"

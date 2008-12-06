@@ -156,16 +156,23 @@ public class BettingController extends XwinController
 			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
 				point = betting.getMoney() * 0.03;
 			
-			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			String receiveId = null;
+			if (member.getIntroducerId() == null)
+				receiveId = member.getUserId();
+			else
+				receiveId = member.getIntroducerId();
+				
+			memberDao.plusMinusPoint(receiveId, point.longValue());
 			
 			Point pointLog = new Point();
-			pointLog.setUserId(member.getUserId());
+			pointLog.setUserId(receiveId);
 			pointLog.setType(Code.POINT_TYPE_BETTING);
 			pointLog.setDate(new Date());
 			pointLog.setOldBalance(member.getPoint());
 			pointLog.setMoney(point.longValue());
 			pointLog.setBalance(member.getPoint() + point.longValue());
 			pointLog.setBettingId(betting.getId());
+			pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
 			
 			pointDao.insertPoint(pointLog);
 			

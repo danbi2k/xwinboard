@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.domain.user.MoneyInOut;
@@ -300,8 +301,14 @@ public class AdminAccountController extends XwinController
 			if (member.getGetSms().equals("Y")) {
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
-				String message = nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다. -KingBet-";
-				sendSmsConnector.sendSms(message, mobile, "0000000000");
+				String message = nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다. -no1bet-";
+				
+				SmsWait smsWait = new SmsWait();
+				smsWait.setMsg(message);
+				smsWait.setPhone(mobile);
+				smsWait.setCallback("0000000000");
+				
+				smsWaitDao.insertSmsWait(smsWait);
 			}
 		
 			rx = new ResultXml(0, "환전되었습니다", null);

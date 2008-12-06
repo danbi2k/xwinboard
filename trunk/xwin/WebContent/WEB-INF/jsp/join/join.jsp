@@ -14,8 +14,10 @@
 </table>
 
 -->
+<script>
+var topmenu = document.getElementById("topmenu");
+topmenu.style.visibility = "hidden";
 
-<Script>
 function SetID(id){
 	var frm = document.all.frm_reg;
 	frm.id.value = id;

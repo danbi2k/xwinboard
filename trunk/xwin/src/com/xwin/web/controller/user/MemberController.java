@@ -12,8 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
+import com.xwin.domain.comm.SmsWait;
+import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -25,18 +26,6 @@ import com.xwin.web.controller.XwinController;
 
 public class MemberController extends XwinController
 {
-	public ModelAndView viewJoinForm(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (Admin.DENY_JOIN.equals("Y") == false)
-			return new ModelAndView("illegal");
-		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");
-		ModelAndView mv = new ModelAndView("user/join");
-		
-		return mv;
-	}
-	
 	public ModelAndView viewModifyForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -56,6 +45,10 @@ public class MemberController extends XwinController
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
+		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+		if (invitation == null)
+			return new ModelAndView("dummy");
+		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
@@ -89,6 +82,7 @@ public class MemberController extends XwinController
 										member.setBankOwner(command.getBankOwner());
 										member.setBankDate(new Date());
 										member.setGetSms(command.getSmsCheck());
+										member.setIntroducerId(invitation.getUserId());
 										
 										String WelcomeMsg = "환영합니다";
 										
@@ -103,6 +97,10 @@ public class MemberController extends XwinController
 //										}
 										
 										memberDao.insertMember(member);
+										
+
+										invitation.setJoinId(member.getUserId());
+										invitationDao.updateInvitation(invitation);
 										
 										rx = new ResultXml(0, WelcomeMsg, null);
 									}
@@ -311,7 +309,12 @@ public class MemberController extends XwinController
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
-				sendSmsConnector.sendSms("KingBet 가입 인증번호  [ " + phonePin + " ]", phone, "00000000000");
+				SmsWait smsWait = new SmsWait();
+				smsWait.setMsg("no1bet.net 가입 인증번호  [ " + phonePin + " ]");
+				smsWait.setPhone(phone);
+				smsWait.setCallback("0000000000");
+				
+				smsWaitDao.insertSmsWait(smsWait);
 				rx = new ResultXml(0, "인증번호를 발송하였습니다", null);
 			} catch (Exception e) {
 				rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);

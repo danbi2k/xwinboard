@@ -54,8 +54,8 @@
 		<th style="color:white" align="center">기포인트</th>
 		<th style="color:white" align="center">입출포인트</th>
 		<th style="color:white" align="center">잔여포인트</th>
-		<th style="color:white" align="center">종류</th>
-		<th style="color:white" align="center">비고</th>
+		<!-- th style="color:white" align="center">종류</th -->
+		<th style="color:white" align="center">배팅한사용자</th>
 		<!-- th style="color:white" align="center">삭제</th -->
 		
 	</tr>
@@ -68,7 +68,7 @@
 	<td><%=XwinUtil.comma3(point.getOldBalance())%></td>
 	<td><%=XwinUtil.comma3(point.getMoney())%></td>
 	<td><%=XwinUtil.comma3(point.getBalance())%></td>
-	<td><%=Code.getValue(point.getType())%></td>
+	<!-- td><%=Code.getValue(point.getType())%></td -->
 	<td><%=XwinUtil.nvl(point.getNote())%>
 	<!-- td><img src="images/btn_coment_del.gif" onclick="deleteMyMoneyLog(<%=point.getId()%>)"></td -->
 	</tr>

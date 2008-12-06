@@ -22,4 +22,9 @@ public class SmsWaitDao extends XwinDao
 	{
 		return sqlMapClientTemplate.queryForList("selectSmsWaitList");
 	}
+	
+	public void deleteSmsWaitList(String id)
+	{
+		sqlMapClientTemplate.delete("deleteSmsWaitList", id);
+	}
 }

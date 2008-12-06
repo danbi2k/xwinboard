@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Transaction;
+import com.xwin.domain.comm.SmsWait;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -33,6 +34,22 @@ public class ExternalController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(ResultXml.SUCCESS));
+		
+		return mv;
+	}
+	
+	public ModelAndView getSmsWaitList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		List<SmsWait> smsWaitList = smsWaitDao.selectSmsWaitList();
+		
+		if (smsWaitList != null && smsWaitList.size() > 0) {
+			SmsWait smsWait = smsWaitList.get(0);
+			smsWaitDao.deleteSmsWaitList(smsWait.getId());
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(smsWaitList));
 		
 		return mv;
 	}

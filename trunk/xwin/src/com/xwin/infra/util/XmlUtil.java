@@ -33,6 +33,7 @@ public class XmlUtil
 		xstream.alias("resultXml", ResultXml.class);
 		xstream.alias("indicator", Indicator.class);
 		xstream.alias("transaction", Transaction.class);
+		xstream.alias("smsWait", Transaction.class);
 	}
 	
 	public static String toXml(Object object)

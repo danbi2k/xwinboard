@@ -12,14 +12,14 @@
 <!--
 function checkIT() {
 	var d=document.regist;
-	if(!d.userId.value) { alert('아이디를 입력하세요'); d.userId.focus(); return false; }
-	if(!d.password.value) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
+	if(!d.inviteKey.value) { alert('초대장을 입력하세요'); d.inviteKey.focus(); return false; }
+	if(!d.userId.value) { alert('추천인ID를 입력하세요'); d.userId.focus(); return false; }
 	
-	var query = "mode=processLogin";
+	var query = "mode=processJoinLogin";
+	query += "&inviteKey=" + d.inviteKey.value;
 	query += "&userId=" + d.userId.value;
-	query += "&password=" + d.password.value;
 	
-	var http = new JKL.ParseXML("login.aspx", query);
+	var http = new JKL.ParseXML("join.aspx", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
@@ -27,7 +27,7 @@ function checkIT() {
 		return;
 	}
 	
-	location.href = "home.aspx";
+	location.href = "join.aspx?mode=viewJoinForm";
 }
 
 function goButton(form)
@@ -42,7 +42,7 @@ function goButton(form)
 //-->
 </SCRIPT>
 
-<body onLoad="document.regist.userId.focus()" bgcolor="#333333">
+<body onLoad="document.regist.inviteKey.focus()" bgcolor="#446677">
 	<form method='post' name='regist'">
 	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
 		<tr>
@@ -50,24 +50,23 @@ function goButton(form)
 			<table style="BORDER-RIGHT: #000000 5px solid; BORDER-TOP: #000000 5px solid; BORDER-LEFT: #000000 5px solid; BORDER-BOTTOM: #000000 5px solid" height="250" cellSpacing="0" cellPadding="0" width="480" bgColor="#d9d8d6" id="table2">
 				<tr>
 					<td style="PADDING-LEFT: 20px; FONT: bold 20pt verdana; COLOR: #ffffff" bgColor="#000000" height="70" align="center">
-					로그인</td>
+					초대장등록</td>
 				</tr>
 				<tr>
 					<td valign="center" align="middle">
 					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
 						<tr>
-							<td>아이디</td>
+							<td>초대장</td>
 							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="1" maxLength="20" name="userId" value=""></td>
+							<input class="input" style="WIDTH: 120px" tabIndex="1" name="inviteKey" value=""></td>
 							<td style="PADDING-LEFT: 5px" rowSpan="2">							
 							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
 						</tr>
 						<tr>
-							<td>비밀번호</td>
+							<td>추천인ID</td>
 							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
+							<input class="input" style="WIDTH: 120px" tabIndex="2" type="text" maxLength="20"  value="" name="userId" onkeydown="goButton()"></td>
 						</tr>
-						<tr><td></td></tr>
 					</table>
 					</td>
 				</tr>
@@ -75,10 +74,6 @@ function goButton(form)
 			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
 				<tr>
 					<td align="center"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
-
-				</tr>
-				<tr>
-					<td align="center"><font color="#ffffff"><a href="join.aspx?mode=viewJoinLoginForm">초대장등록</a></font></td>
 				</tr>
 			</table>
 			</td>
@@ -90,7 +85,7 @@ function goButton(form)
 
 <SCRIPT LANGUAGE="JavaScript">
 <!--
-if((regist.userId.value != "") && (regist.password.value != "")){
+if((regist.inviteKey.value != "") && (regist.userId.value != "")){
 		document.getElementById("login_bttn").click();
 }
 //-->

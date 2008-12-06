@@ -16,13 +16,13 @@ BODY {
  	color: #3D3D3D;
 	line-height: 18px;
 		
-	scrollbar-3dlight-color:#595959;
-	scrollbar-arrow-color:#7F7F7F;
-	scrollbar-base-color:#CFCFCF;
+	scrollbar-3dlight-color:#FFFFFF;
+	scrollbar-arrow-color:#FFFFFF;
+	scrollbar-base-color:#FFFFFF;
 	scrollbar-darkshadow-color:#FFFFFF;
-	scrollbar-face-color:#DFDFDF;
-	scrollbar-highlight-color:#FFFFF;
-	scrollbar-shadow-color:#595959		
+	scrollbar-face-color:#FFFFFF;
+	scrollbar-highlight-color:#FFFFFF;
+	scrollbar-shadow-color:#FFFFFF		
  }
  
  TD, TH, DIV {
@@ -37,10 +37,10 @@ BODY {
 	color: #3D3D3D;
  }
 	
-A:link {color:#3D3D3D;;text-decoration:none} 
-A:visited {color:#3D3D3D;;text-decoration:none} 
-A:active {color:#3D3D3D;} 
-A:hover {color:#0C75E0;text-decoration:none} 
+A:link {color:#FFFFFF;;text-decoration:none} 
+A:visited {color:#FFFFFF;;text-decoration:none} 
+A:active {color:#FFFFFF;} 
+A:hover {color:#FFFFFF;text-decoration:none} 
  
 .box {font-size: 9pt; border:1 solid #CDCDCD;background-color:white;  } 
 .nonbox {font-size: 9pt; border:0 solid #999999;background-color:white;  } 

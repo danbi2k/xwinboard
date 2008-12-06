@@ -26,6 +26,12 @@
 	
 	<select id="selectSmsWaitList" resultMap="smsWaitResultMap" parameterClass="map">
 		SELECT * FROM tbl_sms_wait
-		ORDER BY ID ASC
+		ORDER BY ID DESC
 	</select>
+	
+	<delete id="deleteSmsWaitList" parameterClass="string">
+		<![CDATA[
+			DELETE FROM tbl_sms_wait WHERE ID <= #value#
+		]]>
+	</delete>
 </sqlMap>

@@ -71,7 +71,7 @@
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
 <tr><td width="270" align="center"><a href="home.aspx"><img src="images/no1bet.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
-<ul class="topmenu">
+<ul class="topmenu" id="topmenu">
 <li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameList&type=handy&grade=1"><img src='images/menu_handy.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
@@ -118,7 +118,9 @@ if (login) {
 
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-
+	<td>
+		<a href="introduce.aspx?mode=viewIntroduceForm"></a>
+	</td>
 	<td>
 		<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 		
@@ -151,42 +153,6 @@ if (login) {
 </td></tr>
 
 <% } else { %>
-	<form name="login_frm" onsubmit="FnLogin_Submit(login_frm);return false;">
-	<tr><td align="left">
-	<table cellpadding="0" cellspacing="0"><tr>
-	<td><img src="images/login_img.gif" hspace="10"></td>
-	<td><img src="images/login_id.gif"></td>
-	<td><input class="member" type="text" name="userId" style="margin:0 0 0 5;"></td>
-	<td><img src="images/login_pw.gif" hspace="3"></td>
-	<td><input class="member" type="password" name="password"></td>
-
-	<td><input type="image" src="images/btn_login.gif" style="cursor:hand;" style="margin:0 0 0 5;"></td>
-	<td>
-		<%if (Admin.DENY_JOIN.equals("Y")) {%>
-		<img src="images/btn_join.gif" hspace="5" onclick="location.href='member.aspx?mode=viewJoinForm';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';">
-		<%}%>
-	</td>
-	</tr></table>
-
-	</td>
-	<td width="*" align="right">
-
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-	<td><img src="images/smenu_1.gif"></td>
-
-	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_2.gif"></td>
-	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_3.gif"></td>
-	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_4.gif"></td>
-	</tr>
-	</table>
-
-</td></tr>
-</form>
-
 <%} %>
 </table>
 <img id="mainImage" src="images/wall04.jpg" style="display:none">

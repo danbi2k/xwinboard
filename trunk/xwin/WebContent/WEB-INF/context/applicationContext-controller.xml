@@ -31,6 +31,10 @@
 		p:gameDao-ref="gameDao"
 		p:accessDao-ref="accessDao"/>
 	
+	<bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
+		p:invitationDao-ref="invitationDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
 	<bean id="gameController" class="com.xwin.web.controller.game.GameController"
 		p:gameDao-ref="gameDao"
 		p:leagueDao-ref="leagueDao"
@@ -45,6 +49,7 @@
 		p:accessDao-ref="accessDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:memoDao-ref="memoDao"
+		p:invitationDao-ref="invitationDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="loginController"
@@ -105,12 +110,16 @@
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="introduceController"
-		class="com.xwin.web.controller.user.IntroduceController"
+		class="com.xwin.web.controller.join.IntroduceController"
+		p:invitationDao-ref="invitationDao"
+		p:smsWaitDao-ref="smsWaitDao"
+		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="externalController"
 		class="com.xwin.web.controller.external.ExternalController"
 		p:transactionDao-ref="transactionDao"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="controllerNameResolver"

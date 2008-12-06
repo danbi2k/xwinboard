@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -40,7 +41,12 @@ public class AdminSmsController extends XwinController
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
 		
-		sendSmsConnector.sendSms(message, phone, callback);		
+		SmsWait smsWait = new SmsWait();
+		smsWait.setMsg(message);
+		smsWait.setPhone(phone);
+		smsWait.setCallback(callback);
+		
+		smsWaitDao.insertSmsWait(smsWait);		
 		
 		ResultXml rx = new ResultXml(0, "전송되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

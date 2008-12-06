@@ -14,6 +14,7 @@ import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.BoardDao;
 import com.xwin.infra.dao.GameDao;
 import com.xwin.infra.dao.HackingLogDao;
+import com.xwin.infra.dao.InvitationDao;
 import com.xwin.infra.dao.KtfSmsDao;
 import com.xwin.infra.dao.LeagueDao;
 import com.xwin.infra.dao.MemberDao;
@@ -48,6 +49,7 @@ public class XwinController extends MultiActionController
 	protected SmsWaitDao smsWaitDao = null;
 	protected MemoDao memoDao = null;
 	protected HackingLogDao hackingLogDao = null;
+	protected InvitationDao invitationDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected BettingService bettingService = null;
@@ -125,5 +127,9 @@ public class XwinController extends MultiActionController
 
 	public void setHackingLogDao(HackingLogDao hackingLogDao) {
 		this.hackingLogDao = hackingLogDao;
+	}
+
+	public void setInvitationDao(InvitationDao invitationDao) {
+		this.invitationDao = invitationDao;
 	}
 }
