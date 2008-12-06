@@ -11,7 +11,7 @@ public class MunjaBadaConnector implements SendSmsConnector
 	private final String USERID = "vegas5004";
 	private final String PASSWD = "5004369";
 	private final String URL = "http://www.munjabada.co.kr/Remote/RemoteSms.php";
-	private final String RETURN_URL = "kingbet-kor.com/munja.aspx";
+	private final String RETURN_URL = "bethit.net:10180/munja.aspx";
 	
 	public void sendSms(String message, String phone, String callback) throws Exception
 	{

@@ -265,7 +265,7 @@ public class AdminAccountController extends XwinController
 			/*
 			String nickName = member.getNickName();
 			String mobile = member.getMobile().replaceAll("-", "");
-			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -KingBet-";
+			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -No1Bet-";
 			try {
 				sendSmsConnector.sendSms(message, mobile, "0000000000");
 			} catch (Exception e) {

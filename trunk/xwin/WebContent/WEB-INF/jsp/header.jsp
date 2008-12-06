@@ -75,9 +75,10 @@
 <li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameList&type=handy&grade=1"><img src='images/menu_handy.jpg' border='0'></a></li>
 <li><a href="game.aspx?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
-<li><a href="aboutHandy.aspx"><img src='images/menu_abouthandy.jpg' border='0'></a></li>
+<!-- li><a href="aboutHandy.aspx"><img src='images/menu_abouthandy.jpg' border='0'></a></li -->
 <li><a href="board.aspx?mode=viewBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>
 <li><a href="board.aspx?mode=viewBoard&boardName=qna"><img src='images/menu_qna.jpg' border='0'></a></li>
+<li><a href="introduce.aspx?mode=viewIntroduceForm"><img src='images/menu_intro.jpg' border='0'></a></li>
 </ul>
 </td>
 </tr>
@@ -118,9 +119,6 @@ if (login) {
 
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-	<td>
-		<a href="introduce.aspx?mode=viewIntroduceForm"></a>
-	</td>
 	<td>
 		<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 		

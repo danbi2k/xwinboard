@@ -16,8 +16,8 @@ import com.xwin.infra.util.XmlUtil;
 
 public class SendSmsManager extends QuartzJobBean
 {
-	//private static final String SERVER_URL = "http://bethit.net:10180/external.aspx?mode=getSmsWaitList";
-	private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
+	private static final String SERVER_URL = "http://bethit.net:10180/external.aspx?mode=getSmsWaitList";
+	//private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
 	
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException

@@ -64,7 +64,7 @@ public class IntroduceController extends XwinController
 			//smsWait.setMsg(inviteKey + " " + userId);
 			//smsWaitDao.insertSmsWait(smsWait);
 			
-			smsWait.setMsg(inviteKey + " " + userId);
+			smsWait.setMsg("[초대] http://no1bet.net" + "\n추천인ID : " + userId + "\n초대장 : " + inviteKey);
 			smsWaitDao.insertSmsWait(smsWait);		
 			
 			member.setIntroLetter(member.getIntroLetter()-1);

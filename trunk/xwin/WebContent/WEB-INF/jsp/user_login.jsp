@@ -78,7 +78,7 @@ function goButton(form)
 
 				</tr>
 				<tr>
-					<td align="center"><font color="#ffffff"><a href="join.aspx?mode=viewJoinLoginForm">초대장등록</a></font></td>
+					<td align="center"><font size="3" color="#ffffff"><B><a href="join.aspx?mode=viewJoinLoginForm">[초대장등록]</a></B></font></td>
 				</tr>
 			</table>
 			</td>
