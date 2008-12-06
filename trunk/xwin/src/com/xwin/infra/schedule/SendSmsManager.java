@@ -37,6 +37,7 @@ public class SendSmsManager extends QuartzJobBean
 		try {	
 			hc.executeMethod(post);
 			smsWaitXml = post.getResponseBodyAsString();
+			System.out.println(smsWaitXml);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
