@@ -3,7 +3,9 @@ package com.xwin.infra.schedule;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -29,10 +31,12 @@ public class SendSmsManager extends QuartzJobBean
 		HttpClient hc = new HttpClient();
 		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
 		
-		GetMethod get = new GetMethod(SERVER_URL);
-		try {
-			hc.executeMethod(get);
-			smsWaitXml = get.getResponseBodyAsString(); 
+		PostMethod post = new PostMethod(SERVER_URL);		
+		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+		
+		try {	
+			hc.executeMethod(post);
+			smsWaitXml = post.getResponseBodyAsString();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
