@@ -104,6 +104,15 @@
 		p:accessDao-ref="accessDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
+	<bean id="introduceController"
+		class="com.xwin.web.controller.user.IntroduceController"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="externalController"
+		class="com.xwin.web.controller.external.ExternalController"
+		p:transactionDao-ref="transactionDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"
 		p:paramName="mode"/>

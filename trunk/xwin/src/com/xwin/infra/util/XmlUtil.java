@@ -1,6 +1,8 @@
 package com.xwin.infra.util;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.domain.game.BetGame;
@@ -15,7 +17,7 @@ import com.xwin.web.command.ResultXml;
 
 public class XmlUtil
 {
-	private static XStream xstream = new XStream();
+	private static XStream xstream = new XStream(new DomDriver());
 	
 	static {
 		xstream.alias("list", java.util.List.class);
@@ -30,6 +32,7 @@ public class XmlUtil
 		xstream.alias("cartCalc", CartCalc.class);
 		xstream.alias("resultXml", ResultXml.class);
 		xstream.alias("indicator", Indicator.class);
+		xstream.alias("transaction", Transaction.class);
 	}
 	
 	public static String toXml(Object object)

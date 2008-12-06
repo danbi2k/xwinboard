@@ -28,6 +28,8 @@
 		<result property="getSms" column="GET_SMS"/>
 		<result property="denyrity" column="DENYRITY"/>
 		<result property="bettingDate" column="BETTING_DATE"/>
+		<result property="introducerId" column="INTRODUCER_ID"/>
+		<result property="introLetter" column="INTRO_LETTER"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member" extends="memberResultMap">

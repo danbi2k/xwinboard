@@ -19,6 +19,8 @@
 				<prop key="/moneyOut.aspx">moneyOutController</prop>
 				<prop key="/myBet.aspx">myBettingController</prop>
 				<prop key="/myMoney.aspx">myMoneyController</prop>
+				<prop key="/introduce.aspx">introduceController</prop>
+				<prop key="/external.aspx">externalController</prop>
 				
 				<prop key="/test.aspx">testController</prop>
 				<prop key="/munja.aspx">munjaBadaResponse</prop>

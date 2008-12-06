@@ -26,8 +26,8 @@ import com.xwin.infra.dao.KtfSmsDao;
 public class KtfSmsConnector
 {
 	private static final DocumentBuilderFactory docBuilderFact = DocumentBuilderFactory.newInstance();
-//	private static final String getUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&MagicN_Id=Y29vbGlvbg==&ALevel=1&boxType=1&pagesize=2000&curpage=1";
-//	private static final String delUri = "http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081107103112&ClientIP=10.21.49.124&IsALL=N&boxType=1&ALevel=1&targetMsg=";
+//	private static final String[] getUri = {"http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029017589&LogTime=20081206143116&ClientIP=192.168.10.111&MagicN_Id=Y29vbGlvbg==&ALevel=1&boxType=1&pagesize=2000&curpage=1"};
+//	private static final String[] delUri = {"http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081206143116&ClientIP=192.168.10.111&IsALL=N&boxType=1&ALevel=1&targetMsg="};
 	private static final String[] getUri = {
 		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1",
 		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081111202652&ClientIP=121.161.223.133&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=100&curpage=1"
@@ -58,7 +58,6 @@ public class KtfSmsConnector
 			
 		for (int x = 0 ; x < getUri.length ; x++) {
 			try {
-				System.out.print(x);
 				HttpMethod method = new GetMethod(getUri[x]);
 				hc.executeMethod(method);
 				InputStream is = method.getResponseBodyAsStream();
