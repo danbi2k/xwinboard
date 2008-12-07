@@ -194,6 +194,12 @@
 		WHERE USERID = #userId#
 	</update>
 	
+	<update id="plusMinusIntroLetter" parameterClass="map">
+		UPDATE tbl_member
+		SET INTRO_LETTER = INTRO_LETTER + (#introLetter#)
+		WHERE USERID = #userId#
+	</update>
+	
 	<select id="confirmGetJoinEvent" parameterClass="string" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_event_join WHERE MOBILE = #value#
 	</select>
@@ -212,7 +218,9 @@
 		parameterClass="map">
 		SELECT
 		*,
-		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT
+		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT,
+	    '' as INTRODUCER_ID,
+	    0 as INTRO_LETTER
 		FROM view_member_stat
 		WHERE GRADE != '100'
 		<isNotNull prepend="AND" property="grade">

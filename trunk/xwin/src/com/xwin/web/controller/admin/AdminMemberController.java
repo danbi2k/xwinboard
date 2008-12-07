@@ -89,6 +89,10 @@ public class AdminMemberController extends XwinController
 		
 		String userId = request.getParameter("userId");
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
+		String money = XwinUtil.arcNvl(request.getParameter("money"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -98,7 +102,10 @@ public class AdminMemberController extends XwinController
 		param.put("userId", userId);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
-		
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		param.put("type", type);
+		param.put("money", money);
 		List<Account> accountList = accountDao.selectAccountList(param);
 		Integer accountCount = accountDao.selectAccountCount(param);			
 
@@ -412,6 +419,39 @@ public class AdminMemberController extends XwinController
 		memoDao.insertMemo(memo);
 		
 		ResultXml rx = new ResultXml(0, "발송되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView giveIntroLetter(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId");
+		String number = request.getParameter("number");
+		
+		Integer introLetter = 0;
+		try {
+			introLetter = Integer.parseInt(number);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ResultXml rx = null;
+		
+		memberDao.plusMinusIntroLeter(userId, introLetter);
+		
+		if (introLetter == 0)		
+			rx = new ResultXml(0, "잘못 입력하셨습니다", null);
+		else if (introLetter > 0)
+			rx = new ResultXml(0, "지급 되었습니다", null);
+		else
+			rx = new ResultXml(0, "차감 되었습니다", null);
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

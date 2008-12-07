@@ -18,6 +18,10 @@
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String type = XwinUtil.nvl(request.getParameter("type"));
+	String money = XwinUtil.nvl(request.getParameter("money"));
 	
 	String phone[] = null;
 	if (member.getMobile() != null) {
@@ -135,6 +139,15 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>상태</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>초대장</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<%=member.getIntroLetter()%> 장
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
+			<input type="button" value="초대장지급" onclick="giveIntroLetter()"/>
+		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>환전계좌번호</td>
@@ -275,10 +288,27 @@
 <input type="button" value="발송" onclick="sendMemo()"/>"
 </form>
 
+<a name="result"></a>
+
 <form method="get" name="search">
 <input type="hidden" name="mode" value="viewMemberDetail"/>
 <input type="hidden" name="pageIndex"/>
 <input type="hidden" name="userId" value="<%=member.getUserId()%>"/>
+종류
+	<select name='type' onchange='this.form.submit()'>
+		<option value='' <%=type.equals("")?"selected":""%>>전체</option>
+ 		<option value='AT001' <%=type.equals("AT001")?"selected":""%>><%=Code.getValue("AT001")%></option>
+ 		<option value='AT002' <%=type.equals("AT002")?"selected":""%>><%=Code.getValue("AT002")%></option>
+		<option value='AT003' <%=type.equals("AT003")?"selected":""%>><%=Code.getValue("AT003")%></option>
+		<option value='AT004' <%=type.equals("AT004")?"selected":""%>><%=Code.getValue("AT004")%></option>
+		<option value='AT010' <%=type.equals("AT005")?"selected":""%>><%=Code.getValue("AT010")%></option>
+ 	</select>
+금액
+ 	<input type='text' name='money' value='<%=money%>'>
+일자
+	<input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
+	<input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">		
+ 	<input type='submit' value='검 색'/>
 <table class="list">
 <tr>
 	<th width=20%>거래일자</th>
@@ -339,6 +369,17 @@ if (accountList != null) {
 %>
 	</div>
 <script>
+function giveIntroLetter()
+{
+	var query = "mode=giveIntroLetter";
+	query += "&userId=<%=member.getUserId()%>";
+	query += "&number=" + document.regist.introLetter.value;
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		location.reload();	
+}
 
 function sendMemo()
 {

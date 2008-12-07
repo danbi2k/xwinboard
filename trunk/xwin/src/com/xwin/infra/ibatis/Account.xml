@@ -57,6 +57,9 @@
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
 			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
+			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 				<![CDATA[
 				DATE >= #fromDate#
@@ -88,6 +91,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="money">
+				MONEY = #money#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 				<![CDATA[
