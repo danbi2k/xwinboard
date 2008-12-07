@@ -1,13 +1,11 @@
 package com.xwin.web.controller.join;
 
 import java.util.Date;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.comm.SmsWait;
@@ -46,7 +44,7 @@ public class IntroduceController extends XwinController
 		} else {		
 			String mobile = request.getParameter("mobile");
 			
-			String inviteKey = RandomStringUtils.randomAlphanumeric(10).toUpperCase();
+			String inviteKey = RandomStringUtils.randomAlphanumeric(5).toUpperCase();
 			String userId = member.getUserId();
 			
 			Invitation invitation = new Invitation();

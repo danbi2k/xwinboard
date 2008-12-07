@@ -50,6 +50,7 @@
 		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:memoDao-ref="memoDao"
 		p:invitationDao-ref="invitationDao"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="loginController"
