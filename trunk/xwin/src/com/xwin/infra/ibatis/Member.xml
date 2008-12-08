@@ -30,9 +30,32 @@
 		<result property="bettingDate" column="BETTING_DATE"/>
 		<result property="introducerId" column="INTRODUCER_ID"/>
 		<result property="introLetter" column="INTRO_LETTER"/>
+		<result property="introduceCount" column="INTRO_COUNT"/>
+		<result property="introduceBettingCount" column="INTRO_BET_COUNT"/>
+		<result property="introduceBettingMoney" column="INTRO_BET_MONEY"/>
+		<result property="introduceBettingPoint" column="INTRO_BET_POINT"/>
 	</resultMap>
 	
-	<resultMap id="memberStatResultMap" class="Member" extends="memberResultMap">
+	<resultMap id="memberStatResultMap" class="Member">
+	<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="pin" column="PIN"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="status" column="STATUS"/>
+		<result property="grade" column="GRADE"/>
+		<result property="joinDate" column="JOIN_DATE"/>
+		<result property="point" column="POINT"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="bankNumber" column="BANKNUMBER"/>
+		<result property="bankOwner" column="BANKOWNER"/>
+		<result property="bankDate" column="BANKDATE"/>
+		<result property="getSms" column="GET_SMS"/>
+		<result property="denyrity" column="DENYRITY"/>
+		<result property="bettingDate" column="BETTING_DATE"/>
 		<result property="moneyInSum" column="MONEYIN_SUM"/>
 		<result property="moneyOutSum" column="MONEYOUT_SUM"/>
 		<result property="bettingSum" column="BETTING_SUM"/>
@@ -86,9 +109,27 @@
 			<isNotNull prepend="," property="introLetter">
 				INTRO_LETTER = #introLetter#
 			</isNotNull>
+			<isNotNull prepend="," property="introduceCount">
+				INTRO_COUNT = INTRO_COUNT + (#introduceCount#)
+			</isNotNull>
 		</dynamic>
-		WHERE USERID = #userId#
-			
+		WHERE USERID = #userId#			
+	</update>
+	
+	<update id="updateMemberIntroduce" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="introduceBettingCount">
+				INTRO_BET_COUNT = INTRO_BET_COUNT + (#introduceBettingCount#)
+			</isNotNull>
+			<isNotNull prepend="," property="introduceBettingMoney">
+				INTRO_BET_MONEY = INTRO_BET_MONEY + (#introduceBettingMoney#)
+			</isNotNull>
+			<isNotNull prepend="," property="introduceBettingPoint">
+				INTRO_BET_POINT = INTRO_BET_POINT + (#introduceBettingPoint#)
+			</isNotNull>
+		</dynamic>
+		WHERE USERID = #userId#			
 	</update>
 	
 	<delete id="deleteMember" parameterClass="java.lang.String">
@@ -218,9 +259,7 @@
 		parameterClass="map">
 		SELECT
 		*,
-		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT,
-	    '' as INTRODUCER_ID,
-	    0 as INTRO_LETTER
+		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT
 		FROM view_member_stat
 		WHERE GRADE != '100'
 		<isNotNull prepend="AND" property="grade">

@@ -36,7 +36,7 @@ public class JoinController extends XwinController
 			
 			rx = ResultXml.SUCCESS;
 		} else {
-			rx = new ResultXml(-1, "사용할수 없는 초대장 입니다", null);
+			rx = new ResultXml(-1, "사용할수 없는 추천장 입니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

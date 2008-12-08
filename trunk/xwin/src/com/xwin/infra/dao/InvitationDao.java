@@ -29,8 +29,13 @@ public class InvitationDao extends XwinDao
 		return( Invitation) sqlMapClientTemplate.queryForObject("selectInvitation", param);
 	}
 	
-	public List<Invitation> selectInvitationList(String userId)
+	public List<Invitation> selectInvitationList(Map<String, Object> param)
 	{
-		return sqlMapClientTemplate.queryForList("selectInvitation", userId);
+		return sqlMapClientTemplate.queryForList("selectInvitationList", param);
+	}
+	
+	public Integer selectInvitationCount(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectInvitationCount", param);
 	}
 }

@@ -21,11 +21,12 @@
 		<result property="moneyInId" column="MONEYIN_ID"/>
 		<result property="moneyOutId" column="MONEYOUT_ID"/>
 		<result property="isDeleted" column="ISDELETED"/>
+		<result property="bettingUserId" column="BETTING_USERID"/>
 	</resultMap>
 	
 	<insert id="insertPoint" parameterClass="Point">
-		INSERT INTO tbl_point(USERID, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID)
-		VALUES(#userId#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#)
+		INSERT INTO tbl_point(USERID, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID, BETTING_USERID)
+		VALUES(#userId#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#, #bettingUserId#)
 	</insert>
 	
 	<delete id="deletePoint" parameterClass="string">
@@ -56,6 +57,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="bettingUserId">
+				BETTING_USERID = #bettingUserId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 				<![CDATA[

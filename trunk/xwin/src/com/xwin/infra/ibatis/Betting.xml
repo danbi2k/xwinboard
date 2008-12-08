@@ -25,8 +25,8 @@
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -90,6 +90,9 @@
 			<isNotNull prepend="AND" property="isDeleted">
 			ISDELETED = #isDeleted#
 			</isNotNull>
+			<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 			USERID LIKE #userIdLike#
 			</isNotNull>
@@ -144,6 +147,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 			ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 			USERID LIKE #userIdLike#

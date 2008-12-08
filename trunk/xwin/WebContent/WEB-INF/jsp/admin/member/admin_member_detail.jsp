@@ -141,12 +141,12 @@
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>초대장</td>
+		<td width=20%>추천장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<%=member.getIntroLetter()%> 장
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
-			<input type="button" value="초대장지급" onclick="giveIntroLetter()"/>
+			<input type="button" value="추천장지급" onclick="giveIntroLetter()"/>
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>

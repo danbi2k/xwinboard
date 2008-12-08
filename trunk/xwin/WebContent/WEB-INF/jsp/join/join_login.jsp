@@ -12,7 +12,7 @@
 <!--
 function checkIT() {
 	var d=document.regist;
-	if(!d.inviteKey.value) { alert('초대장을 입력하세요'); d.inviteKey.focus(); return false; }
+	if(!d.inviteKey.value) { alert('추천장을 입력하세요'); d.inviteKey.focus(); return false; }
 	if(!d.userId.value) { alert('추천인ID를 입력하세요'); d.userId.focus(); return false; }
 	
 	var query = "mode=processJoinLogin";
@@ -50,13 +50,13 @@ function goButton(form)
 			<table style="BORDER-RIGHT: #000000 5px solid; BORDER-TOP: #000000 5px solid; BORDER-LEFT: #000000 5px solid; BORDER-BOTTOM: #000000 5px solid" height="250" cellSpacing="0" cellPadding="0" width="480" bgColor="#d9d8d6" id="table2">
 				<tr>
 					<td style="PADDING-LEFT: 20px; FONT: bold 20pt verdana; COLOR: #ffffff" bgColor="#000000" height="70" align="center">
-					초대장등록</td>
+					추천장등록</td>
 				</tr>
 				<tr>
 					<td valign="center" align="middle">
 					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
 						<tr>
-							<td>초대장</td>
+							<td>추천장</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="1" name="inviteKey" value=""></td>
 							<td style="PADDING-LEFT: 5px" rowSpan="2">							

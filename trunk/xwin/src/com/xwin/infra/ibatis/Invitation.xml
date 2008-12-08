@@ -39,11 +39,30 @@
 			INVITEKEY = #inviteKey#
 	</select>
 	
-	<select id="selectInvitationList" resultMap="invitationResultMap" parameterClass="string">
+	<select id="selectInvitationList" resultMap="invitationResultMap" parameterClass="map">
 		SELECT * FROM tbl_invitation
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinId">
+				JOINID IS NOT NULL
+			</isNotNull>
+		</dynamic>
+		ORDER BY ID DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectInvitationCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_invitation
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinId">
+				JOINID IS NOT NULL
 			</isNotNull>
 		</dynamic>
 	</select>

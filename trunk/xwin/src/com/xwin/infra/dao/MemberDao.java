@@ -29,6 +29,11 @@ public class MemberDao extends XwinDao implements Serializable
 		sqlMapClientTemplate.insert("updateMember", member);
 	}
 	
+	public void updateMemberIntroduce(Member member)
+	{
+		sqlMapClientTemplate.insert("updateMemberIntroduce", member);
+	}
+	
 	public Member selectMember(String userId, String grade)
 	{
 		Map<String, String> param = new HashMap<String, String>(2);

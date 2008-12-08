@@ -36,6 +36,11 @@ public class Member extends XwinObject
 	private String introducerId;
 	private Integer introLetter;
 	
+	private Integer introduceCount;
+	private Integer introduceBettingCount;
+	private Long introduceBettingMoney;
+	private Long introduceBettingPoint;
+	
 	private Long moneyInSum;
 	private Long moneyOutSum;
 	private Long bettingSum;
@@ -155,6 +160,30 @@ public class Member extends XwinObject
 	}
 	public void setIntroLetter(Integer introLetter) {
 		this.introLetter = introLetter;
+	}
+	public Integer getIntroduceCount() {
+		return introduceCount;
+	}
+	public void setIntroduceCount(Integer introduceCount) {
+		this.introduceCount = introduceCount;
+	}
+	public Integer getIntroduceBettingCount() {
+		return introduceBettingCount;
+	}
+	public void setIntroduceBettingCount(Integer introduceBettingCount) {
+		this.introduceBettingCount = introduceBettingCount;
+	}
+	public Long getIntroduceBettingMoney() {
+		return introduceBettingMoney;
+	}
+	public void setIntroduceBettingMoney(Long introduceBettingMoney) {
+		this.introduceBettingMoney = introduceBettingMoney;
+	}
+	public Long getIntroduceBettingPoint() {
+		return introduceBettingPoint;
+	}
+	public void setIntroduceBettingPoint(Long introduceBettingPoint) {
+		this.introduceBettingPoint = introduceBettingPoint;
 	}
 	public String getGetSms() {
 		return getSms;

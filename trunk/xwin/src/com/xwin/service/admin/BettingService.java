@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
@@ -114,14 +115,18 @@ public class BettingService extends XwinService
 		}
 	}
 	
-	public void calcuateBetting(Betting betting) {
+	public void calcuateBetting(Betting betting)
+	{
 		String status = betting.getStatus();
 		String userId = betting.getUserId();
 		
-		Member member = memberDao.selectMember(userId, null);		 
+		Member member = memberDao.selectMember(userId, null);
+		
+		boolean afterProcess = false; // 포인트 지급, 추천인 정보 갱신
 		
 		// 1. 미적중의 경우
 		if (status.equals(Code.BET_STATUS_FAILURE)) {
+			afterProcess = true;
 		}
 		
 		// 2. 환불의 경우
@@ -140,7 +145,9 @@ public class BettingService extends XwinService
 		}
 		
 		// 3. 적중의 경우
-		else if (status.equals(Code.BET_STATUS_SUCCESS)) {			
+		else if (status.equals(Code.BET_STATUS_SUCCESS)) {
+			afterProcess = true;
+			
 			Account account = new Account();
 			account.setUserId(userId);
 			account.setType(Code.ACCOUNT_TYPE_JACKPOT);
@@ -152,6 +159,47 @@ public class BettingService extends XwinService
 			accountDao.insertAccount(account);
 			
 			memberDao.plusMinusBalance(userId, betting.getExpect());
+		}
+		
+		if (afterProcess) {
+			// 포인트지급
+			Double point = 0.0;
+			if (member.getGrade().equals(Code.USER_GRADE_NORMAL))
+				point = betting.getMoney() * 0.02;
+			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
+				point = betting.getMoney() * 0.03;
+			
+			String receiveId = null;
+			if (member.getIntroducerId() == null)
+				receiveId = member.getUserId();
+			else
+				receiveId = member.getIntroducerId();
+				
+			memberDao.plusMinusPoint(receiveId, point.longValue());
+			
+			Point pointLog = new Point();
+			pointLog.setUserId(receiveId);
+			pointLog.setType(Code.POINT_TYPE_BETTING);
+			pointLog.setDate(new Date());
+			pointLog.setOldBalance(member.getPoint());
+			pointLog.setMoney(point.longValue());
+			pointLog.setBalance(member.getPoint() + point.longValue());
+			pointLog.setBettingId(betting.getId());
+			pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
+			pointLog.setBettingUserId(member.getUserId());
+			
+			pointDao.insertPoint(pointLog);
+			
+			//추천인 정보 갱신
+			if (member.getIntroducerId() != null) {
+				Member introducer = new Member();
+				introducer.setUserId(member.getIntroducerId());
+				introducer.setIntroduceBettingCount(1);
+				introducer.setIntroduceBettingMoney(betting.getMoney());
+				introducer.setIntroduceBettingPoint(point.longValue());
+				
+				memberDao.updateMemberIntroduce(member);
+			}		
 		}
 	}
 

@@ -121,6 +121,7 @@ public class BettingController extends XwinController
 			betting.setDate(new Date());
 			betting.setGameType(_type);
 			betting.setNickName(member.getNickName());
+			betting.setIntroducerId(member.getIntroducerId());
 			
 			String bettingId = bettingDao.insertBetting(betting);
 			
@@ -150,31 +151,32 @@ public class BettingController extends XwinController
 			accountDao.insertAccount(account);			
 			memberDao.plusMinusBalance(member.getUserId(), betting.getMoney() * -1);
 			
-			Double point = 0.0;
-			if (member.getGrade().equals(Code.USER_GRADE_NORMAL))
-				point = betting.getMoney() * 0.02;
-			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
-				point = betting.getMoney() * 0.03;
-			
-			String receiveId = null;
-			if (member.getIntroducerId() == null)
-				receiveId = member.getUserId();
-			else
-				receiveId = member.getIntroducerId();
-				
-			memberDao.plusMinusPoint(receiveId, point.longValue());
-			
-			Point pointLog = new Point();
-			pointLog.setUserId(receiveId);
-			pointLog.setType(Code.POINT_TYPE_BETTING);
-			pointLog.setDate(new Date());
-			pointLog.setOldBalance(member.getPoint());
-			pointLog.setMoney(point.longValue());
-			pointLog.setBalance(member.getPoint() + point.longValue());
-			pointLog.setBettingId(betting.getId());
-			pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
-			
-			pointDao.insertPoint(pointLog);
+//			Double point = 0.0;
+//			if (member.getGrade().equals(Code.USER_GRADE_NORMAL))
+//				point = betting.getMoney() * 0.02;
+//			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
+//				point = betting.getMoney() * 0.03;
+//			
+//			String receiveId = null;
+//			if (member.getIntroducerId() == null)
+//				receiveId = member.getUserId();
+//			else
+//				receiveId = member.getIntroducerId();
+//				
+//			memberDao.plusMinusPoint(receiveId, point.longValue());
+//			
+//			Point pointLog = new Point();
+//			pointLog.setUserId(receiveId);
+//			pointLog.setType(Code.POINT_TYPE_BETTING);
+//			pointLog.setDate(new Date());
+//			pointLog.setOldBalance(member.getPoint());
+//			pointLog.setMoney(point.longValue());
+//			pointLog.setBalance(member.getPoint() + point.longValue());
+//			pointLog.setBettingId(betting.getId());
+//			pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
+//			pointLog.setBettingUserId(member.getUserId());
+//			
+//			pointDao.insertPoint(pointLog);
 			
 			session.removeAttribute("cartMap_" + _type);
 			

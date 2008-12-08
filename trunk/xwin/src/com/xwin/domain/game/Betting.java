@@ -33,6 +33,8 @@ public class Betting extends XwinObject
 	
 	private List<BetGame> betGameList;
 	
+	private String introducerId;
+	
 	public String getId() {
 		return id;
 	}
@@ -125,6 +127,12 @@ public class Betting extends XwinObject
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public String getIntroducerId() {
+		return introducerId;
+	}
+	public void setIntroducerId(String introducerId) {
+		this.introducerId = introducerId;
 	}
 	public String toString()
 	{

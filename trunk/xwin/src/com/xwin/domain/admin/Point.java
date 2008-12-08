@@ -25,6 +25,7 @@ public class Point extends XwinObject
 	private String type;
 	private String userId;
 	private String isDeleted;
+	private String bettingUserId;
 	
 	public String getId() {
 		return id;
@@ -104,5 +105,11 @@ public class Point extends XwinObject
 	}
 	public void setIsDeleted(String isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+	public String getBettingUserId() {
+		return bettingUserId;
+	}
+	public void setBettingUserId(String bettingUserId) {
+		this.bettingUserId = bettingUserId;
 	}
 }

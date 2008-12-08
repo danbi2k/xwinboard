@@ -161,24 +161,6 @@ if (document.URL.indexOf("home.aspx") > 0) {
 	mainImage.style.display = "block";
 }
 
-function exchangePoint(point)
-{
-	var balance = point - (point % 10000);
-	if (balance < 10000) {
-		alert("포인트는 10,000원 단위로 충전이 가능합니다");
-		return;
-	}
-
-	if (confirm("포인트 " + comma3(balance) + "원 을 머니로 충전하시겠습니까?")) {
-		var query = "mode=exchangePoint";
-		var http = new JKL.ParseXML("member.aspx", query);
-		var result = http.parse();
-		alert(result.resultXml.message);
-		if (result.resultXml.code == 0)
-			location.reload();
-	}
-}
-
 var memoId;
 
 function receiveMemo()
