@@ -16,25 +16,39 @@ import com.xwin.domain.game.Betting;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class IntroduceController extends XwinController
 {
+	public static final int ROWSIZE = 15;
+	
 	public ModelAndView viewIntroduceForm(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
-		
+		Member member = (Member) request.getSession().getAttribute("Member");		
 		if (member == null)
 			return new ModelAndView("dummy");
 		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("introducerId", member.getUserId());
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
-				
+		Integer bettingCount = bettingDao.selectBettingCount(param);
+		
 		ModelAndView mv = new ModelAndView("join/introduce");
 		mv.addObject("bettingList", bettingList);
+		mv.addObject("bettingCount", bettingCount);
+		
 		return mv;
 	}
 	
@@ -70,7 +84,7 @@ public class IntroduceController extends XwinController
 			//smsWait.setMsg(inviteKey + " " + userId);
 			//smsWaitDao.insertSmsWait(smsWait);
 			
-			smsWait.setMsg("[추천] http://no1bet.net" + "\n추천인ID : " + userId + "\n추천장 : " + inviteKey);
+			smsWait.setMsg("[추천] http://no1bet.net" + "\n소개인ID : " + userId + "\n추천장 : " + inviteKey);
 			smsWaitDao.insertSmsWait(smsWait);		
 			
 			member.setIntroLetter(member.getIntroLetter()-1);

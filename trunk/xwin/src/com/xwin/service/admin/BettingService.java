@@ -122,7 +122,7 @@ public class BettingService extends XwinService
 		
 		Member member = memberDao.selectMember(userId, null);
 		
-		boolean afterProcess = false; // 포인트 지급, 추천인 정보 갱신
+		boolean afterProcess = false; // 포인트 지급, 소개인 정보 갱신
 		
 		// 1. 미적중의 경우
 		if (status.equals(Code.BET_STATUS_FAILURE)) {
@@ -192,7 +192,7 @@ public class BettingService extends XwinService
 			
 			pointDao.insertPoint(pointLog);
 			
-			//추천인 정보 갱신
+			//소개인 정보 갱신
 			if (member.getIntroducerId() != null) {
 				Member introducer = new Member();
 				introducer.setUserId(member.getIntroducerId());

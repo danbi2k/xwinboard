@@ -77,6 +77,7 @@ function goButton(form)
 					<td align="center"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
 
 				</tr>
+				<tr><td height="15"></td></tr>
 				<tr>
 					<td align="center"><font size="3" color="#ffffff"><B><a href="join.aspx?mode=viewJoinLoginForm">[추천장등록]</a></B></font></td>
 				</tr>

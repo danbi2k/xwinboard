@@ -13,7 +13,7 @@
 function checkIT() {
 	var d=document.regist;
 	if(!d.inviteKey.value) { alert('추천장을 입력하세요'); d.inviteKey.focus(); return false; }
-	if(!d.userId.value) { alert('추천인ID를 입력하세요'); d.userId.focus(); return false; }
+	if(!d.userId.value) { alert('소개인ID를 입력하세요'); d.userId.focus(); return false; }
 	
 	var query = "mode=processJoinLogin";
 	query += "&inviteKey=" + d.inviteKey.value;
@@ -63,7 +63,7 @@ function goButton(form)
 							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
 						</tr>
 						<tr>
-							<td>추천인ID</td>
+							<td>소개인ID</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="2" type="text" maxLength="20"  value="" name="userId" onkeydown="goButton()"></td>
 						</tr>
