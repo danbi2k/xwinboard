@@ -366,7 +366,7 @@ public class MemberController extends XwinController
 			pointLog.setUserId(member.getUserId());
 			pointLog.setType(Code.POINT_TYPE_CASHCHARGE);
 			pointLog.setDate(new Date());
-			pointLog.setOldBalance(balance);
+			pointLog.setOldBalance(point);
 			pointLog.setMoney(balance * -1);
 			pointLog.setBalance(member.getPoint() - balance);
 			
