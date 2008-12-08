@@ -24,6 +24,7 @@
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
 		p:smsWaitDao-ref="smsWaitDao"
+		p:pointDao-ref="pointDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"/>
 		
 	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>	

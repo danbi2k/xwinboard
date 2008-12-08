@@ -20,6 +20,8 @@
 		dbMember.setBettingDate(member.getBettingDate());
 		dbMember.setLoginDate(member.getLoginDate());
 		session.setAttribute("Member", dbMember);
+		
+		member = dbMember;
 	}
 	boolean login = member == null ? false : true;
 %>

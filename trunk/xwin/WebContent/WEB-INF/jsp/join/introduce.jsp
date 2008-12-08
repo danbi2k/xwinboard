@@ -42,7 +42,7 @@
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
 	<tr>
 		<td>총추천인</td>
-		<td><a onclick="openIntroduceList()"><%=member.getIntroduceCount()%> 명</a></td>
+		<td><a href="javascript:openIntroduceList()"><%=member.getIntroduceCount()%> 명</a></td>
 		<td>총추천인배팅횟수</td>
 		<td><%=member.getIntroduceBettingCount()%> 번</td>
 		<td>총추천인배팅금액</td>
@@ -52,7 +52,7 @@
 		<td>총추천인포인트</td>
 		<td><%=XwinUtil.comma3(member.getIntroduceBettingPoint())%> 원</td>
 		<td>현보유포인트</td>
-		<td><%=XwinUtil.comma3(member.getPoint())%> 원</td>
+		<td><a href="myMoney.aspx?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
 		<td colspan="2"><input type="button" value="머니전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
 	</tr>
 	</table>
@@ -103,7 +103,7 @@
 <script>
 function openIntroduceList()
 {
-	alert("준비중");	
+	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0, width=600, height=500");
 }
 
 function introduce()

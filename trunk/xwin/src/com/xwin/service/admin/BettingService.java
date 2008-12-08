@@ -169,21 +169,23 @@ public class BettingService extends XwinService
 			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
 				point = betting.getMoney() * 0.03;
 			
-			String receiveId = null;
-			if (member.getIntroducerId() == null)
-				receiveId = member.getUserId();
-			else
-				receiveId = member.getIntroducerId();
+			Member receiver = null;
+			if (member.getIntroducerId() == null) {
+				receiver = member;
+			}
+			else {
+				receiver = memberDao.selectMember(member.getIntroducerId(), null);
+			}
 				
-			memberDao.plusMinusPoint(receiveId, point.longValue());
+			memberDao.plusMinusPoint(receiver.getUserId(), point.longValue());
 			
 			Point pointLog = new Point();
-			pointLog.setUserId(receiveId);
+			pointLog.setUserId(receiver.getUserId());
 			pointLog.setType(Code.POINT_TYPE_BETTING);
 			pointLog.setDate(new Date());
-			pointLog.setOldBalance(member.getPoint());
+			pointLog.setOldBalance(receiver.getPoint());
 			pointLog.setMoney(point.longValue());
-			pointLog.setBalance(member.getPoint() + point.longValue());
+			pointLog.setBalance(receiver.getPoint() + point.longValue());
 			pointLog.setBettingId(betting.getId());
 			pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
 			pointLog.setBettingUserId(member.getUserId());
@@ -198,7 +200,7 @@ public class BettingService extends XwinService
 				introducer.setIntroduceBettingMoney(betting.getMoney());
 				introducer.setIntroduceBettingPoint(point.longValue());
 				
-				memberDao.updateMemberIntroduce(member);
+				memberDao.updateMemberIntroduce(introducer);
 			}		
 		}
 	}

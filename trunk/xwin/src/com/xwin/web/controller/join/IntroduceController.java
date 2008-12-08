@@ -2,6 +2,7 @@ package com.xwin.web.controller.join;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,7 @@ public class IntroduceController extends XwinController
 	public ModelAndView introduce(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
-		
+		Member member = (Member) request.getSession().getAttribute("Member");		
 		if (member == null)
 			return new ModelAndView("dummy");
 		
@@ -80,6 +80,25 @@ public class IntroduceController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));		
+		return mv;
+	}
+	
+	public ModelAndView introduceDetail(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("joinId", "");
+		
+		List<Invitation> invitationList = invitationDao.selectInvitationList(param);
+		
+		ModelAndView mv = new ModelAndView("join/introduceDetail");
+		mv.addObject("invitationList", invitationList);	
+		
 		return mv;
 	}
 }

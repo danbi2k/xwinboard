@@ -103,8 +103,8 @@ public class MemberController extends XwinController
 										invitationDao.updateInvitation(invitation);
 										
 										Member introducer = new Member();
-										member.setUserId(invitation.getUserId());
-										member.setIntroduceCount(1);
+										introducer.setUserId(invitation.getUserId());
+										introducer.setIntroduceCount(1);
 										memberDao.updateMember(introducer);
 										
 										rx = new ResultXml(0, WelcomeMsg, null);
