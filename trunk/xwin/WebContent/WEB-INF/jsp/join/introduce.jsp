@@ -12,8 +12,6 @@
 </td></tr>
 <tr><td valign="top" align="center">
 
-	<form name="intro">
-	<input name="password" type="hidden" value=""/>
 	<table width="800" style="margin-top:10">
 	<tr><td><b>추천장이용약관</b></td></tr>
 	</table>
@@ -35,28 +33,7 @@
 	<tr></tr>
 	</table>
 
-	<table width="800" style="margin-top:10">
-	<tr><td><b>추천내역보기</b>&nbsp;&nbsp;&nbsp;※ 총추천인을 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다.</td></tr>
-	</table>
-
-	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
-	<tr>
-		<td>총추천인</td>
-		<td><a href="javascript:openIntroduceList()"><%=member.getIntroduceCount()%> 명</a></td>
-		<td>총추천인배팅횟수</td>
-		<td><%=member.getIntroduceBettingCount()%> 번</td>
-		<td>총추천인배팅금액</td>
-		<td><%=XwinUtil.comma3(member.getIntroduceBettingMoney())%> 원</td>
-	</tr>
-	<tr>
-		<td>총추천인포인트</td>
-		<td><%=XwinUtil.comma3(member.getIntroduceBettingPoint())%> 원</td>
-		<td>현보유포인트</td>
-		<td><a href="myMoney.aspx?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
-		<td colspan="2"><input type="button" value="머니전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
-	</tr>
-	</table>
-
+	<form name="intro">
 	<table width="800" style="margin-top:10">
 	<tr><td><b>추천정보입력</b></td></tr>
 	</table>
@@ -95,6 +72,27 @@
 
 	</form>
 
+	<table width="800" style="margin-top:10">
+	<tr><td><b>추천내역보기</b><!--&nbsp;&nbsp;&nbsp;※ 총추천인을 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다. --></td></tr>
+	</table>
+
+	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
+	<tr>
+		<td>총추천인</td>
+		<td><a href="javascript:openIntroduceList()"><%=member.getIntroduceCount()%> 명</a></td>
+		<td>총추천인배팅횟수</td>
+		<td><%=member.getIntroduceBettingCount()%> 번</td>
+		<td>총추천인배팅금액</td>
+		<td><%=XwinUtil.comma3(member.getIntroduceBettingMoney())%> 원</td>
+	</tr>
+	<tr>
+		<td>총추천인포인트</td>
+		<td><%=XwinUtil.comma3(member.getIntroduceBettingPoint())%> 원</td>
+		<td>현보유포인트</td>
+		<td><a href="myMoney.aspx?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
+		<td colspan="2"><input type="button" value="머니전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
+	</tr>
+	</table>
 	<br><br>
 
 </td></tr>
@@ -103,6 +101,8 @@
 <script>
 function openIntroduceList()
 {
+	alert('준비중');
+	return;
 	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0, width=600, height=500");
 }
 

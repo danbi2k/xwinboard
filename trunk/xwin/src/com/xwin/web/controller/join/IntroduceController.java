@@ -12,6 +12,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.comm.SmsWait;
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
@@ -29,11 +30,11 @@ public class IntroduceController extends XwinController
 			return new ModelAndView("dummy");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId", member);
-		param.put("joinId", "");
-		//invitationDao.selectInvitationCount(param);
-		
-		ModelAndView mv = new ModelAndView("join/introduce");		
+		param.put("introducerId", member.getUserId());
+		List<Betting> bettingList = bettingDao.selectBettingList(param);
+				
+		ModelAndView mv = new ModelAndView("join/introduce");
+		mv.addObject("bettingList", bettingList);
 		return mv;
 	}
 	

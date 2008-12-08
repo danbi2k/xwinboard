@@ -115,6 +115,7 @@
 		p:invitationDao-ref="invitationDao"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="externalController"
