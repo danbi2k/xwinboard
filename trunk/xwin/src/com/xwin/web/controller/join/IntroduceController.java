@@ -1,5 +1,6 @@
 package com.xwin.web.controller.join;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -23,6 +25,12 @@ import com.xwin.web.controller.XwinController;
 public class IntroduceController extends XwinController
 {
 	public static final int ROWSIZE = 15;
+	public static final List<String> statusList = new ArrayList<String>(2);
+	
+	static {
+		statusList.add(Code.BET_STATUS_SUCCESS);
+		statusList.add(Code.BET_STATUS_FAILURE);
+	}
 	
 	public ModelAndView viewIntroduceForm(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
@@ -41,6 +49,7 @@ public class IntroduceController extends XwinController
 		param.put("introducerId", member.getUserId());
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("statusList", statusList);
 		
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		Integer bettingCount = bettingDao.selectBettingCount(param);
