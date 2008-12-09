@@ -48,7 +48,7 @@
 
 	<form name="intro">
 	<table width="800" style="margin-top:10">
-	<tr><td><b>추천정보입력</b></td></tr>
+	<tr><td><b>추천정보입력</b>&nbsp;&nbsp;&nbsp;※ 추전장이 필요하신 회원님은 고객센터로 문의하십시오</td></tr>
 	</table>
 
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
