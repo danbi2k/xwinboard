@@ -115,10 +115,10 @@ public class IntroduceController extends XwinController
 			return new ModelAndView("dummy");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId", member.getUserId());
-		param.put("joinId", "");
-		
-		List<Invitation> invitationList = invitationDao.selectInvitationList(param);
+		param.put("introducerId", member.getUserId());
+		param.put("orderCol", "ID");
+		param.put("orderBy", "DESC");
+		List<Member> invitationList = memberDao.selectMemberList(param);	
 		
 		ModelAndView mv = new ModelAndView("join/introduceDetail");
 		mv.addObject("invitationList", invitationList);	

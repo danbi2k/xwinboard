@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="com.xwin.domain.join.*"%>
 <%@ page import="java.util.*"%>
 
  <%@ include file="../admin_header.jsp"%>
@@ -16,6 +17,9 @@
 	Integer chargeSum = (Integer) request.getAttribute("chargeSum");
 	Integer exchangeSum = (Integer) request.getAttribute("exchangeSum");
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
+	
+	Integer childCount = (Integer) request.getAttribute("childCount");
+	List<Member> childList = (List<Member>) request.getAttribute("childList");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
@@ -147,6 +151,39 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
 			<input type="button" value="추천장지급" onclick="giveIntroLetter()"/>
+		</td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>추천해준회원</td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getIntroducerId())%></td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>추천한회원</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+		<table class="prettytable">
+		<%
+		if (childList != null) {
+		%>
+		<tr>
+			<th>아이디</th>
+			<th>닉네임</th>
+			<th>가입일</th>
+			<th>상태</th>
+		</tr>
+		<%
+			for (Member child : childList) {
+		%>
+			<tr>
+			<td><a href='javascript:goMemberDetail("<%=child.getUserId()%>")'><%=child.getUserId()%></a>	</td>
+			<td><%=child.getNickName()%></td>
+			<td><%=XwinUtil.toDateStr(child.getJoinDate(), 1)%></td>
+			<td><%=Code.getValue(child.getStatus())%></td>
+			</tr>
+		<%
+			}
+		}
+		%>
+		</table>
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -285,7 +322,7 @@
 		<td><textarea name="memo" style='width=100%;height=200px'></textarea></td>
 	</tr>
 </table>
-<input type="button" value="발송" onclick="sendMemo()"/>"
+<input type="button" value="발송" onclick="sendMemo()"/>
 </form>
 
 <a name="result"></a>

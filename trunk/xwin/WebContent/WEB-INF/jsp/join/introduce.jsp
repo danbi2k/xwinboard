@@ -86,7 +86,7 @@
 	</form>
 
 	<table width="800" style="margin-top:10">
-	<tr><td><b>추천내역보기</b><!--&nbsp;&nbsp;&nbsp;※ 총추천인을 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다. --></td></tr>
+	<tr><td><b>추천내역보기</b>&nbsp;&nbsp;&nbsp;※ 총추천인을 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다.</td></tr>
 	</table>
 
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
@@ -197,9 +197,7 @@
 <script>
 function openIntroduceList()
 {
-	alert('준비중');
-	return;
-	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0, width=600, height=500");
+	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
 }
 
 function introduce()

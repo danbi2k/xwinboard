@@ -177,6 +177,9 @@
 		<isNotNull prepend="AND" property="email">
 			EMAIL LIKE #email#
 		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+		</isNotNull>
 		ORDER BY $orderCol$ $orderBy$
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
@@ -204,6 +207,9 @@
 		</isNotNull>			
 		<isNotNull prepend="AND" property="email">
 			EMAIL LIKE #email#
+		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
 		</isNotNull>
 	</select>
 	

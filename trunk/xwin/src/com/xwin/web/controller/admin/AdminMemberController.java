@@ -121,6 +121,14 @@ public class AdminMemberController extends XwinController
 		param.put("userId", userId);
 		param.put("status", Code.MONEY_OUT_SUCCESS);		
 		Integer exchangeSum = XwinUtil.ntz(moneyOutDao.selectMoneyOutSum(param));
+	
+		param = new HashMap<String, Object>();		
+		param.put("introducerId", member.getUserId());
+		param.put("orderCol", "ID");
+		param.put("orderBy", "DESC");
+		
+		List<Member> childList = memberDao.selectMemberList(param);
+		Integer childCount = memberDao.selectMemberCount(param);
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
@@ -129,6 +137,8 @@ public class AdminMemberController extends XwinController
 		mv.addObject("bankBookList", bankBookList);
 		mv.addObject("chargeSum", chargeSum);
 		mv.addObject("exchangeSum", exchangeSum);
+		mv.addObject("childList", childList);
+		mv.addObject("childCount", childCount);
 		
 		return mv;
 	}
