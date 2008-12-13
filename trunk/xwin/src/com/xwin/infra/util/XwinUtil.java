@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class XwinUtil
 {
 	private static final DecimalFormat float16Format = new DecimalFormat("0.0000000000000000");
-	private static final DecimalFormat decimalFormat = new DecimalFormat("0.0#");
+	private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
