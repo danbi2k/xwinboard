@@ -38,7 +38,8 @@ public class BettingService extends XwinService
 				Double totalRate = 0.0;
 				
 				if (betGameList != null) {
-					for (BetGame betGame : betGameList) {						
+					for (BetGame betGame : betGameList) {
+						betting.setGameGrade(betGame.getGrade());
 						Double thisRate = betGame.getSelRate();
 						
 						if (betGame.getStatus().equals(Code.GAME_STATUS_END)) {
@@ -162,7 +163,7 @@ public class BettingService extends XwinService
 			
 			memberDao.plusMinusBalance(userId, betting.getExpect());
 			
-			if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl")) {
+			if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
 				if (betting.getSuccessCount() >= Admin.WDL_BONUS_LIMIT) {
 					Double wdl_bonus_rate = Admin.WDL_BONUS_RATE.doubleValue() * 0.01;
 					Long wdl_bonus_money = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
@@ -179,7 +180,7 @@ public class BettingService extends XwinService
 					
 					memberDao.plusMinusBalance(userId, wdl_bonus_money);
 				}
-			} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy")) {
+			} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
 				if (betting.getSuccessCount() >= Admin.HANDY_BONUS_LIMIT) {
 					Double handy_bonus_rate = Admin.HANDY_BONUS_RATE.doubleValue() * 0.01;
 					Long handy_bonus_money = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());

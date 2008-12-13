@@ -134,7 +134,6 @@
 		<th style="color:white" align="center">배팅금액</th>
 		<th style="color:white" align="center">배당율</th>
 		<th style="color:white" align="center">예상금액</th>
-		<th style="color:white" align="center">적중유무</th>		
 	</tr>
 	<%
 	if (bettingList != null && bettingList.size() > 0) {
@@ -147,7 +146,6 @@
 		<td><%=XwinUtil.comma3(betting.getMoney())%></td>
 		<td><%=betting.getRateStr()%></td>
 		<td><%=XwinUtil.comma3(betting.getExpect())%></td>
-		<td><%=Code.getValue(betting.getStatus())%>
 	</tr>
 	<%
 		}

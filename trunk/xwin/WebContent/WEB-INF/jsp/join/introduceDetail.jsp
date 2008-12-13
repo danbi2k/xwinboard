@@ -23,7 +23,6 @@
 			<th>아이디</th>
 			<th>닉네임</th>
 			<th>가입일</th>
-			<th>상태</th>
 		</tr>
 	<%
 	if (invitationList != null) {
@@ -34,7 +33,6 @@
 			<td><%=member.getUserId()%></td>
 			<td><%=member.getNickName()%></td>
 			<td><%=XwinUtil.toDateStr(member.getJoinDate(), 1)%></td>
-			<td><%=Code.getValue(member.getStatus())%></td>
 		</tr>
 	<%
 		}
