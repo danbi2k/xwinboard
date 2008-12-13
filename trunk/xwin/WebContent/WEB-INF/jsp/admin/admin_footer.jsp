@@ -82,6 +82,7 @@
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li>
+					<li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li>
 					<li><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
 					<li><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
 					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>

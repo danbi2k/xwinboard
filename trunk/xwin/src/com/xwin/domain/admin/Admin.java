@@ -28,6 +28,13 @@ public class Admin extends XwinObject
 	public static String SMS_REMAIN = "";
 	
 	public static String ADMIN_EMAIL = "";
+
+	public static boolean HANDY_BONUS_USE = false;
+	public static Integer HANDY_BONUS_LIMIT = 100;
+	public static Integer HANDY_BONUS_RATE = 0;
+	public static boolean WDL_BONUS_USE = false;
+	public static Integer WDL_BONUS_LIMIT = 100;
+	public static Integer WDL_BONUS_RATE = 0;
 	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);

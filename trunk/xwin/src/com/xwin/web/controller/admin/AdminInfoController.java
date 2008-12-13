@@ -19,7 +19,7 @@ public class AdminInfoController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
-		ModelAndView mv = new ModelAndView("admin/admin_info");
+		ModelAndView mv = new ModelAndView("admin/admin/admin_info");
 		return mv;
 	}
 	
@@ -52,7 +52,7 @@ public class AdminInfoController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
-		ModelAndView mv = new ModelAndView("admin/admin_security");
+		ModelAndView mv = new ModelAndView("admin/admin/admin_security");
 		return mv;
 	}
 	
@@ -83,6 +83,59 @@ public class AdminInfoController extends XwinController
 		
 		
 		ResultXml rx = new ResultXml(0, "변경 되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView viewBonus(HttpServletRequest request, 
+			HttpServletResponse response, Member command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ModelAndView mv = new ModelAndView("admin/admin/admin_bonus");
+		return mv;
+	}
+	
+	public ModelAndView changeBonus(HttpServletRequest request, 
+			HttpServletResponse response, Member command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String HANDY_BONUS_USE = request.getParameter("HANDY_BONUS_USE");
+		String HANDY_BONUS_LIMIT = request.getParameter("HANDY_BONUS_LIMIT");
+		String HANDY_BONUS_RATE = request.getParameter("HANDY_BONUS_RATE");
+
+		String WDL_BONUS_USE = request.getParameter("WDL_BONUS_USE");
+		String WDL_BONUS_LIMIT = request.getParameter("WDL_BONUS_LIMIT");
+		String WDL_BONUS_RATE = request.getParameter("WDL_BONUS_RATE");
+		
+		ResultXml rx = null;
+		
+		try {
+			Admin.HANDY_BONUS_USE = HANDY_BONUS_USE.equals("Y");
+			Admin.HANDY_BONUS_LIMIT = Integer.parseInt(HANDY_BONUS_LIMIT.trim());
+			Admin.HANDY_BONUS_RATE = Integer.parseInt(HANDY_BONUS_RATE.trim());
+			
+			Admin.WDL_BONUS_USE = WDL_BONUS_USE.equals("Y");
+			Admin.WDL_BONUS_LIMIT = Integer.parseInt(WDL_BONUS_LIMIT.trim());
+			Admin.WDL_BONUS_RATE = Integer.parseInt(WDL_BONUS_RATE.trim());
+			
+			adminDao.updateAdmin("HANDY_BONUS_USE", HANDY_BONUS_USE);
+			adminDao.updateAdmin("HANDY_BONUS_LIMIT", HANDY_BONUS_LIMIT);
+			adminDao.updateAdmin("HANDY_BONUS_RATE", HANDY_BONUS_RATE);
+			
+			adminDao.updateAdmin("WDL_BONUS_USE", WDL_BONUS_USE);
+			adminDao.updateAdmin("WDL_BONUS_LIMIT", WDL_BONUS_LIMIT);
+			adminDao.updateAdmin("WDL_BONUS_RATE", WDL_BONUS_RATE);
+			
+			rx = new ResultXml(0, "변경 되었습니다", null);
+		} catch (Exception e) {
+			rx = new ResultXml(0, "숫자를 입력하세요", null);
+		}		
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

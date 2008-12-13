@@ -18,7 +18,9 @@ import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.Code;
 
-public class XwinInitServlet extends HttpServlet {
+public class XwinInitServlet extends HttpServlet
+{
+	private static final long serialVersionUID = -4949465242872613328L;
 
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -56,6 +58,13 @@ public class XwinInitServlet extends HttpServlet {
 		Admin.DENY_EXCHANGE = adminDao.selectAdmin("DENY_EXCHANGE");
 		
 		Admin.SMS_REMAIN = adminDao.selectAdmin("SMS_REMAIN");
+		
+		Admin.HANDY_BONUS_USE = adminDao.selectAdmin("HANDY_BONUS_USE").equals("Y");
+		Admin.HANDY_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("HANDY_BONUS_LIMIT").trim());
+		Admin.HANDY_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("HANDY_BONUS_RATE").trim());
+		Admin.WDL_BONUS_USE = adminDao.selectAdmin("WDL_BONUS_USE").equals("Y");
+		Admin.WDL_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_LIMIT").trim());
+		Admin.WDL_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_RATE").trim());
 		
 		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
 		Admin.memberDao = memberDao;

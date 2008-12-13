@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
@@ -104,6 +105,7 @@ public class BettingService extends XwinService
 				betting.setExpect(XwinUtil.calcExpectMoney(cutRate, betting.getMoney()));
 				
 				if (totalCount == (cancelCount + successCount + failureCount + drawCount)) {
+					betting.setSuccessCount(successCount);
 					calcuateBetting(betting);
 					betting.setEndDate(new Date());
 					betting.setCalcStatus(Code.BET_CALC_COMMIT);
@@ -159,6 +161,42 @@ public class BettingService extends XwinService
 			accountDao.insertAccount(account);
 			
 			memberDao.plusMinusBalance(userId, betting.getExpect());
+			
+			if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl")) {
+				if (betting.getSuccessCount() >= Admin.WDL_BONUS_LIMIT) {
+					Double wdl_bonus_rate = Admin.WDL_BONUS_RATE.doubleValue() * 0.01;
+					Long wdl_bonus_money = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
+					
+					account.setUserId(userId);
+					account.setType(Code.ACCOUNT_TYPE_BONUS);
+					account.setDate(new Date());
+					account.setOldBalance(member.getBalance());
+					account.setMoney(wdl_bonus_money);
+					account.setBalance(member.getBalance() + wdl_bonus_money);
+					account.setBettingId(betting.getId());
+					account.setNote("승무패 " + Admin.WDL_BONUS_LIMIT + "폴더 이상 " + Admin.WDL_BONUS_RATE + "%");
+					accountDao.insertAccount(account);
+					
+					memberDao.plusMinusBalance(userId, wdl_bonus_money);
+				}
+			} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy")) {
+				if (betting.getSuccessCount() >= Admin.HANDY_BONUS_LIMIT) {
+					Double handy_bonus_rate = Admin.HANDY_BONUS_RATE.doubleValue() * 0.01;
+					Long handy_bonus_money = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());
+					
+					account.setUserId(userId);
+					account.setType(Code.ACCOUNT_TYPE_BONUS);
+					account.setDate(new Date());
+					account.setOldBalance(member.getBalance());
+					account.setMoney(handy_bonus_money);
+					account.setBalance(member.getBalance() + handy_bonus_money);
+					account.setBettingId(betting.getId());
+					account.setNote("핸디캡 " + Admin.HANDY_BONUS_LIMIT + "폴더 이상 " + Admin.HANDY_BONUS_RATE + "%");
+					accountDao.insertAccount(account);
+					
+					memberDao.plusMinusBalance(userId, handy_bonus_money);
+				}
+			}
 		}
 		
 		if (afterProcess) {

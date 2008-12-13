@@ -22,18 +22,15 @@ public class Betting extends XwinObject
 	private Long money;
 	private Long expect;
 	private String status;
-	private String calcStatus;
-	
+	private String calcStatus;	
+	private String introducerId;	
 	private String gameType;
-	private String nickName;
-	
+	private String nickName;	
+	private Date endDate;	
 	private String isDeleted;
-	
-	private Date endDate;
+	private Integer successCount;
 	
 	private List<BetGame> betGameList;
-	
-	private String introducerId;
 	
 	public String getId() {
 		return id;
@@ -133,6 +130,12 @@ public class Betting extends XwinObject
 	}
 	public void setIntroducerId(String introducerId) {
 		this.introducerId = introducerId;
+	}
+	public Integer getSuccessCount() {
+		return successCount;
+	}
+	public void setSuccessCount(Integer successCount) {
+		this.successCount = successCount;
 	}
 	public String toString()
 	{

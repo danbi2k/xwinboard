@@ -1,31 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="admin_header.jsp" %>
-<SCRIPT LANGUAGE="JavaScript">
-<!--
-		function checkIT() {
-		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
+<%@ include file="../admin_header.jsp" %>
 
-		var query = "mode=updateAdminInfo";
-		query += "&nickName=" + d.name.value;
-		query += "&password=" + d.passwd.value;
-		query += "&mobile=" + d.phone.value;
-		query += "&email=" + d.email.value;
-
-		var http = new JKL.ParseXML("adminInfo.aspx", query);
-		var result = http.parse();
-		alert(result.resultXml.message);
-		if (result.resultXml.code == 0) {
-		}
-		else {
-		}
-	}
-//-->
-</SCRIPT>
-
-<div class="title">보안정보</div>
+<div class="title">보안설정</div>
 <h3>※ 체크하신 항목이 사용 금지 됩니다.</h3>
 <br>
 <form method=post name='security'>
@@ -80,4 +58,4 @@ function changeSecurity()
 }
 </script>
 
- <%@ include file="admin_footer.jsp"%>
+ <%@ include file="../admin_footer.jsp"%>
