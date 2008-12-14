@@ -301,9 +301,12 @@ public class AdminGameController extends XwinController
 			
 			gameDao.updateGame(game);
 			
-			bettingService.judgeGameResult(game);
-			
-			rx = new ResultXml(0, "경기가 종료 되었습니다", null);
+			try {
+				bettingService.judgeGameResult(game);				
+				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
+			} catch (Exception e) {
+				rx = new ResultXml(0, "경기 처리중 오류가 발생하였습니다!!", null);
+			}
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -344,12 +347,14 @@ public class AdminGameController extends XwinController
 			
 			gameDao.updateGame(game);
 			
-			bettingService.judgeGameResult(game);
-			
-			rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
+			try {
+				bettingService.judgeGameResult(game);				
+				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
+			} catch (Exception e) {
+				rx = new ResultXml(0, "경기 재처리중 오류가 발생하였습니다!!", null);
+			}
 		}
 		
-		rx.setMessage("경기가 재처리 되었습니다");
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
