@@ -115,12 +115,12 @@ public class AdminMemberController extends XwinController
 		param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("status", Code.MONEY_IN_SUCCESS);		
-		Integer chargeSum = XwinUtil.ntz(moneyInDao.selectMoneyInSum(param));
+		Long chargeSum = XwinUtil.ntz(moneyInDao.selectMoneyInSum(param));
 		
 		param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("status", Code.MONEY_OUT_SUCCESS);		
-		Integer exchangeSum = XwinUtil.ntz(moneyOutDao.selectMoneyOutSum(param));
+		Long exchangeSum = XwinUtil.ntz(moneyOutDao.selectMoneyOutSum(param));
 	
 		param = new HashMap<String, Object>();		
 		param.put("introducerId", member.getUserId());

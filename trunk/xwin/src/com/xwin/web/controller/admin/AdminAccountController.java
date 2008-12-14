@@ -74,10 +74,10 @@ public class AdminAccountController extends XwinController
 		
 		List<MoneyIn> moneyInList = moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
-		Integer totalSum = moneyInDao.selectMoneyInSum(param);
+		Long totalSum = moneyInDao.selectMoneyInSum(param);
 		
 		if (totalSum == null)
-			totalSum = 0;
+			totalSum = 0L;
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_IN_REQUEST))
@@ -133,10 +133,10 @@ public class AdminAccountController extends XwinController
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
-		Integer totalSum = moneyOutDao.selectMoneyOutSum(param);
+		Long totalSum = moneyOutDao.selectMoneyOutSum(param);
 		
 		if (totalSum == null)
-			totalSum = 0;
+			totalSum = 0L;
 		
 		ModelAndView mv = null;
 		if (status.equals(Code.MONEY_OUT_REQUEST))
@@ -190,10 +190,10 @@ public class AdminAccountController extends XwinController
 		
 		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
 		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
-		Integer totalSum = moneyInOutDao.selectMoneyInOutSum(param);
+		Long totalSum = moneyInOutDao.selectMoneyInOutSum(param);
 		
 		if (totalSum == null)
-			totalSum = 0;
+			totalSum = 0L;
 		
 		ModelAndView mv = null;
 		if (status.contains("002"))

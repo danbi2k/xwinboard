@@ -14,7 +14,7 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
-	Integer totalSum = (Integer) request.getAttribute("totalSum");
+	Long totalSum = (Long) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));

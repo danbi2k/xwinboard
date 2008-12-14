@@ -147,10 +147,10 @@ public class AdminStatisticsController extends XwinController
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		Integer moneyOutCount = moneyOutDao.selectMoneyOutCount(param);
-		Integer totalSum = moneyOutDao.selectMoneyOutSum(param);
+		Long totalSum = moneyOutDao.selectMoneyOutSum(param);
 		
 		if (totalSum == null)
-			totalSum = 0;
+			totalSum = 0L;
 		
 		ModelAndView mv = new ModelAndView("admin/account/money_out");
 		mv.addObject("moneyOutList", moneyOutList);

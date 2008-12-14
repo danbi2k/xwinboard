@@ -25,6 +25,9 @@ public class XwinUtil
 	
 	public static String comma3(Integer num)
 	{
+		if (num == null)
+			return "0";
+		
 		NumberFormat nf = NumberFormat.getInstance();
 		return nf.format(num);
 	}
@@ -192,6 +195,14 @@ public class XwinUtil
 	{
 		if (obj == null)
 			return 0;
+		
+		return obj;
+	}
+	
+	public static Long ntz(Long obj)
+	{
+		if (obj == null)
+			return 0L;
 		
 		return obj;
 	}

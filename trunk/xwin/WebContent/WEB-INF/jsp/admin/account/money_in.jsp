@@ -12,7 +12,7 @@
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
-	Integer totalSum = (Integer) request.getAttribute("totalSum");
+	Long totalSum = (Long) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	int ROWSIZE = 30;
 	int SHOWPAGE = 20;

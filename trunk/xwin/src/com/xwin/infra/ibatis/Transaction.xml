@@ -129,7 +129,7 @@
 		</dynamic>
 	</select>
 	
-	<select id="selectTransactionSum" resultClass="integer" parameterClass="map">
+	<select id="selectTransactionSum" resultClass="long" parameterClass="map">
 		SELECT SUM(MONEY) FROM tbl_transaction
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userName">

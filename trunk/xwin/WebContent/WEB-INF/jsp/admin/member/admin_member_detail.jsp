@@ -14,8 +14,8 @@
 	List<Account> accountList = (List<Account>) request.getAttribute("accountList");
 	Integer totalCount = (Integer) request.getAttribute("accountCount");
 	
-	Integer chargeSum = (Integer) request.getAttribute("chargeSum");
-	Integer exchangeSum = (Integer) request.getAttribute("exchangeSum");
+	Long chargeSum = (Long) request.getAttribute("chargeSum");
+	Long exchangeSum = (Long) request.getAttribute("exchangeSum");
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
 	
 	Integer childCount = (Integer) request.getAttribute("childCount");

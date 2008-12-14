@@ -59,10 +59,10 @@ public class AdminTransactionController extends XwinController
 		
 		List<Transaction> transactionList = transactionDao.selectTransactionList(param);
 		Integer transactionCount = transactionDao.selectTransactionCount(param);
-		Integer totalSum = transactionDao.selectTransactionSum(param);
+		Long totalSum = transactionDao.selectTransactionSum(param);
 		
 		if (totalSum == null)
-			totalSum = 0;
+			totalSum = 0L;
 		
 		ModelAndView mv = new ModelAndView("admin/account/transaction");
 		

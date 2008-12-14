@@ -11,7 +11,7 @@
 	
 	List<Transaction> transactionList = (List<Transaction>) request.getAttribute("transactionList");
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
-	Integer totalSum = (Integer) request.getAttribute("totalSum");
+	Long totalSum = (Long) request.getAttribute("totalSum");
 	
 	String type = XwinUtil.nvl(request.getParameter("type"));
 	String isCharge = XwinUtil.nvl(request.getParameter("isCharge"));	

@@ -144,7 +144,7 @@
 		</dynamic>
 	</select>
 	
-	<select id="selectMoneyInOutSum" resultClass="integer" parameterClass="map">
+	<select id="selectMoneyInOutSum" resultClass="long" parameterClass="map">
 		SELECT SUM(MONEY) FROM view_money_in_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
