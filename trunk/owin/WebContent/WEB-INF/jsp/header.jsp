@@ -35,7 +35,8 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.php?mode=processLogout">
 
-    <link rel="stylesheet" href="style/default.css">
+    <link href="style/style.css" rel="stylesheet" type="text/css">
+	<link href="style/default.css" rel="stylesheet" type="text/css">
 	<script language="JavaScript" src="script/code.js"></script>
     <script language="JavaScript" src="script/default.js"></script>
 	<script language="JavaScript" src="script/game.js"></script>
