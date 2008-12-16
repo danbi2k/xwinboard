@@ -97,8 +97,8 @@
 								<td>
 									<table border="0" cellpadding="0" cellspacing="0" width=100%>
 										<tr>		
-											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/Cash.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬충전]</td>
-											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/ReCash.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬환전]</td>
+											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='moneyIn.php?mode=viewMoneyInRequest'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬충전]</td>
+											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='moneyOut.php?mode=viewMoneyOutRequest'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬환전]</td>
 										</tr>
 									</table>
 								</td>

@@ -11,144 +11,197 @@
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
 %>
 
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
-</table>
-
--->
-
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_inmoney.gif"></td><td>입금계좌를 통해 머니를 충전합니다.</td></td>
-
-	</table>
-</td></tr>
-<tr><td valign="top" align="center" height="300">
-
-	<table width="800" style="margin-top:10">
-	<tr><td><b>머니 충전 방법</b></td></tr>
-	</table>
-	<table width="800" bgcolor="#333333" cellpadding="10" style="border:1 solid #909090;">
-	<tr><td style="line-height:20px;">
-		1. 입금하실 금액과 입금자명을 입력하고 [머니충전] 신청을 합니다.<br>
-
-		2. 입금하실 계좌 번호를 꼭! 확인합니다. <br>
-		3. 인터넷뱅킹, 폰뱅킹, 무통장입금, ATM이체 등의 방법으로 입금을 합니다.<br>
-		4. 입금자명과 입금액이 동일시 입금후 2~3분이내 자동충전 처리 됩니다.<br>
-		5. 신청하신후 1시간 이내에 입금되지 않은 신청은 자동취소 처리 됩니다.<br>
-		<font color="white"><B>※ 입력하신 정보(입금액/입금자명)와 실제입금금액/입금자명이 동일해야만 처리가 가능합니다.</B></font><br>
-	</td></tr>
-	</table>
-
-	<table width="800" cellpadding="0" cellspacing="0" style="margin-top:15">
-	<tr><td>
-		<table  cellpadding="0" cellspacing="0" >
-		<tr><td><img src="images/tab_inmoney.gif"		onclick="location.href='moneyIn.php?mode=viewMoneyInRequest'" style="cursor:hand;"></td>
-			<td><img src="images/tab_inmoney_list.gif" onclick="location.href='moneyIn.php?mode=viewMoneyInRequestList'" style="cursor:hand;filter:gray();" hspace="3"></td>
-		</tr></table>
-	</td></tr>
-	</table>
-
+<script>
+	function input_price(event) {
+		var obj=getSrcElement(event);
+		frms.cash.value=MoneyFormat(obj.value);
+	}
 	
-	
-	<form name="frm" method="post">
+</script>
+	<tr>
+        <td >
+            <table border="0" cellpadding="0" cellspacing="0" width=100%>
+                <tr>
+                    <td width=40 >&nbsp;</td>
+					<td valign=top >
+						<table width=100% border="0" cellpadding="0" cellspacing="0" >
+							
+							<tr>
+								<td  >
+									<table width=100% border="0" cellpadding="0" cellspacing="0" >
+										<tr>
+											<td valign=top >
+												<table width=100% border="0" cellpadding="0" cellspacing="0" >
+													<tr>
+														<td valign=top>
+															<table border="0" cellpadding="0" cellspacing="0" width=99%>
+																<tr><td height=10></td></tr>
+																<tr>
+																    <td ><img src=images/title_cashrequest.gif ></td>
+																</tr>
+																<tr><td height=10></td></tr>
+																<tr>
+																	<td>
+																		<table border="0" cellpadding="0" cellspacing="0" >
+																			<tr>
+																				<td><input type=button class="btn11" value="캐쉬충전 요청"  id=button1 name=button1>&nbsp;</td>
+																				<td><input type=button class="btn13" value="캐쉬충전 내역" onclick="location.href='CashList.asp';"  id=button2 name=button2></td>
+																				<td><input type=button class="btn13" value="포인트->캐쉬전환" style="width:120"></td>
+																			</tr>
+																			
+																		</table>
+																	</td>
+																</tr>
+																<tr>
+																    <td >
+																		
+<table border="0" cellpadding="10" cellspacing="6" width=100% bgcolor=212021>
+																			<tr>
+																				<td bgcolor=000000>																		
+																		
+																		<table width="100%" cellpadding="4" cellspacing="1" border="0" >
+																		<form name=frms action="cash_Prc.asp" method=post onsubmit="return DefaultFormValidation(this);"  >
+																		<input type="hidden" name="flag" value="0">
+																			<tr><td colspan=3 height=1 bgcolor=383838></td></tr>
+																			<tr  >
+																				<td width=150 bgcolor="484848" align=right><font color=FFFFFF><b>결제방법</td>
+																				<td width=600>
+																				① 입금하실 계좌에 PC 뱅킹, 폰뱅킹, 무통장 입금, ATM등의 방법으로 금액 중 하나를 선택하여 입금합니다. <br>
+																				② 입금하신 금액과 동일한 금액에 체크하세요. <br>
+																				③ 입금자명에는 입금하신 분의 성함을 넣어 주세요. <br>
+																				④ 확인 버튼을 클릭하시면 충전이 완료됩니다.
+																				</td>
+																			</tr>
+																			<tr><td colspan=3 height=1 bgcolor=383838></td></tr>
+																			<tr  >
+																				<td bgcolor="484848" align=right><font color=FFFFFF><b>입금 하실 계좌</td>
+																				<td >
+																				▶&nbsp;계좌번호&nbsp;:&nbsp;842401-01-460725<br>
+																				▶&nbsp;입금은행&nbsp;:&nbsp;국민은행<br>
+																				▶&nbsp;예금주&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;한&nbsp;유&nbsp;진<br><br>
 
-	<table width="800" bgcolor="#333333" cellpadding="10" style="border:1 solid #909090;">
-	<colgroup>
-	<col width="100" align="center">
-	<col width="700">
-	</colgroup>
-	<tr><td>아이디</td>
-		<td><%=member.getUserId()%></td></tr>
 
-	<tr><td>입금계좌</td>
-		<td>
-			
-				<select name="bankBookId" style="font-size:18px;font-weight:bold;color:orange;background-color:black;">
-				
-				<%
-				if (bankBookList != null) {
-					for (BankBook bankBook : bankBookList) {
-				%>
-				<option value="<%=bankBook.getId()%>">[<%=bankBook.getBankName()%>] <%=bankBook.getNumber()%> (<%=bankBook.getName()%>)　　</option>				<%
-					}
-				}
-				%>				
-				</select> <font color="orange">☜ 계좌번호 꼭 확인하세요!
-			
-		</td></tr>
-	<tr><td>입금예정액</td>
+																				▶&nbsp;계좌번호&nbsp;:&nbsp;842401-01-460725<br>
+																				▶&nbsp;입금은행&nbsp;:&nbsp;국민은행<br>
+																				▶&nbsp;예금주&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;한&nbsp;유&nbsp;진<br><br>
 
-		<td><table width="100%" cellpadding="0" cellspacing="0"><tr>
-			<td width="170">
-				<input class="member" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onkeyup="only123(this); comma3Input(this);" onblur=""> 원<BR>				
-				<font color="orange"><b>※ 직접입력가능</b></font>
-			<td>
-			<td>
 
-				<table>
-				<tr>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='10,000';frm.name.focus();">1만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='20,000';frm.name.focus();">2만원</span></td>
-
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='30,000';frm.name.focus();">3만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:black;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='50,000';frm.name.focus();">5만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='100,000';frm.name.focus();">10만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='150,000';frm.name.focus();">15만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='200,000';frm.name.focus();">20만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='250,000';frm.name.focus();">25만원</span></td>
-
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='300,000';frm.name.focus();">30만원</span></td>
-				</tr>
-				<tr>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='500,000';frm.name.focus();">50만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='600,000';frm.name.focus();">60만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='700,000';frm.name.focus();">70만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='800,000';frm.name.focus();">80만원</span></td>
-
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:white;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='900,000';frm.name.focus();">90만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='1,000,000';frm.name.focus();">100만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='2,000,000';frm.name.focus();">200만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='3,000,000';frm.name.focus();">300만원</span></td>
-				<td><span style="width:48;height:16;background:url('images/btn_money_bg.gif');color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onclick="frm.money.value='5,000,000';frm.name.focus();">500만원</span></td>
-				</tr>
-
-				</table>
-			</td></tr>
+																				▶&nbsp;계좌번호&nbsp;:&nbsp;842401-01-460725<br>
+																				▶&nbsp;입금은행&nbsp;:&nbsp;국민은행<br>
+																				▶&nbsp;예금주&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;한&nbsp;유&nbsp;진
+																				</td>
+																			</tr>
+																			<tr><td colspan=3 height=1 bgcolor=383838></td></tr>
+																			<tr  >
+																				<td bgcolor="484848" align=right><font color=FFFFFF><b>충전 금액 선택</td>
+																				<td >
+																				<table id="table1" border="0" cellpadding="0" cellspacing="0" width="100%">
+																						<tbody><tr>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="10000" name="price" checked="checked" type="radio"> 
+																							10,000 원&nbsp;</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="30000" name="price" type="radio"> 
+																							30,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="50000" name="price" type="radio"> 
+																							50,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="100000" name="price" type="radio"> 
+																							100,000 원</td>
+																						</tr>
+																						<tr>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="300000" name="price" type="radio"> 
+																							300,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="500000" name="price" type="radio"> 
+																							500,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="700000" name="price" type="radio"> 
+																							700,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="1000000" name="price" type="radio"> 
+																							1,000,000 원</td>
+																						</tr>
+																						<tr>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="3000000" name="price" type="radio"> 
+																							3,000,000 원 </td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="5000000" name="price" type="radio"> 
+																							5,000,000 원 </td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="10000000" name="price" type="radio"> 
+																							10,000,000 원 </td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="20000000" name="price" type="radio"> 
+																							20,000,000 원</td>
+																						</tr>
+																						<tr>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="30000000" name="price" type="radio"> 
+																							30,000,000 원 </td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="50000000" name="price" type="radio"> 
+																							50,000,000 원 </td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="70000000" name="price" type="radio"> 
+																							70,000,000 원</td>
+																							<td>
+																							<input class="radio" onclick="input_price(event)" value="90000000" name="price" type="radio"> 
+																							90,000,000 원</td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																			<tr><td colspan=3 height=1 bgcolor=383838></td></tr>
+																			<tr  >
+																				<td bgcolor="484848" align=right><font color=FFFFFF><b>충전 금액</td>
+																				<td >
+																					<input name="cash" size="17" type="text" value="10,000" onkeyup="if(event.keyCode>40 || event.keyCode<33)this.value=MoneyFormat(this.value)" Information="Required" title="충전금액" class=input11>&nbsp;<font color="#FFC602">","와 숫자만 입력 하세요
+																				</td>
+																			</tr>
+																			<tr><td colspan=3 height=1 bgcolor=383838></td></tr>
+																			<tr  >
+																				<td bgcolor="484848" align=right><font color=FFFFFF><b>입금자 이름</td>
+																				<td >
+																				<input name="Depos" size="17" type="text" Information="Required" title="입금자 이름" class=input11>&nbsp;<font color="#FFC602">※ 입금자 이름이 틀리면 입금 확인을 할수 가 없으니 주의하세요</font>
+																				</td>
+																			</tr>
+																			
+																		</table>
+																		
+																		</td>
+																		</tr>
+																		</table>
+																    </td>
+																</tr>
+																<tr><td height=15></td></tr>
+																<tr>
+																	<td align=center>
+																		<input type=submit class="btn6" value="확 인" onclick="frmsSubmit();"  id=button3 name=button3>
+																		<input type=button class="btn7" value="취 소" onclick="location.href='/';" id=button1 name=button1>
+																		
+																	</td>
+																</tr>
+																</form>
+															</table>
+																    														
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>							
 			</table>
-		</td></tr>
-	<tr><td>입금자</td>
-		<td><input class="member" name="name" maxlength="7" type="text" value=""><font color="orange"> ☜ 이체시 '보내는분'과 동일해야 합니다.</td></tr>
-	
-	</table>
-
-	<table width="800" style="margin-top:10">
-	<tr><td align="center">	
-
-		
-		<img src="images/btn_inmoney.gif" onclick="FnInMoney_Submit(frm);" style="cursor:hand">
-		
-
-		<img src="images/btn_cancle.gif" onclick="location.href='/';" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5">
-
-	</td></tr>
-	</table>
-
-	</form>
-
-	
-
-
-	<br><br>
-
-
-</td></tr>
-</table>
+		</td>
+	</tr>
+	<tr><td height=20></td></tr>
 
 <%@include file="../footer.jsp"%>

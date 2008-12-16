@@ -1,4 +1,4 @@
-// setFlash(ÆÄÀÏ°æ·Î, °¡·Î, ¼¼·Î, ¾ÆÀÌµğ, ¹è°æ»ö, º¯¼ö, À©µµ¿ì¸ğµå)
+// setFlash(íŒŒì¼ê²½ë¡œ, ê°€ë¡œ, ì„¸ë¡œ, ì•„ì´ë””, ë°°ê²½ìƒ‰, ë³€ìˆ˜, ìœˆë„ìš°ëª¨ë“œ)
 function setFlash(url,w,h,id,bg,vars,win){
 	var flashStr=
 	"<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0' width='"+w+"' height='"+h+"' id='"+id+"' align='middle'>"+
