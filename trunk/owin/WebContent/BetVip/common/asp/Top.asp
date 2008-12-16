@@ -110,9 +110,9 @@ window.status='KOR-OKBET.COM'
         <td >
             <table border="0" cellpadding="0" cellspacing="0" width=100%>
                 <tr>
-                    <td ><a name='' onMouseDown="document.location='/'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=/images/top011.jpg></a></td>
+                    <td ><a name='' onMouseDown="document.location='/'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/top011.jpg></a></td>
                     <td><script language='JavaScript'><!--
-                    setFlash('/images/menu.swf', '650', '73');//-->
+                    setFlash('images/menu.swf', '650', '73');//-->
                     </script></td>
 				</tr>
 			</table>
@@ -123,7 +123,7 @@ window.status='KOR-OKBET.COM'
         <td  bgcolor="212021">
             <table border="0" cellpadding="0" cellspacing="0"  >
                 <tr>
-                    <td ><img src=/images/top02.jpg></td>
+                    <td ><img src=images/top02.jpg></td>
                     <td >
 						<% If isNone(Session("UId")) Then %>
 						<script language='javascript'>
@@ -151,8 +151,8 @@ window.status='KOR-OKBET.COM'
 								
 								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=D2D2D2><b>PWD : </td>
 								<td>&nbsp;<input type=password size=15 tabindex=2 class=input14 name="fpwd" Information="Required" MaxBytes="15" title="비밀번호" ></td>
-								<td >&nbsp;&nbsp;<input tabindex=3 type=image src=/images/btn_login.gif align=absmiddle></td>
-								<td >&nbsp;&nbsp;<a href="/member/regist.asp" ><img src=/images/btn_reg.gif align=absmiddle ></td>
+								<td >&nbsp;&nbsp;<input tabindex=3 type=image src=images/btn_login.gif align=absmiddle></td>
+								<td >&nbsp;&nbsp;<a href="/member/regist.asp" ><img src=images/btn_reg.gif align=absmiddle ></td>
 								<td width=200>&nbsp;</td>
 								<td>
 									<table border="0" cellpadding="0" cellspacing="0" width=100%>
@@ -176,9 +176,9 @@ window.status='KOR-OKBET.COM'
 								<td><nobr><font color=FFFFFF><b><%=Session("UName")%></b>님 환영합니다.</td>
 								<td ><nobr>&nbsp;&nbsp;<b>내 베팅머니 &nbsp;[ <font color=FFC700><%=formatnumber(Session("UPoint"),[])%></font> C ]&nbsp;&nbsp;</td>
 								<td ><nobr>&nbsp;&nbsp;<b>내 포인트 &nbsp;[ <font color=FFC700><%=formatnumber(Session("APoint"),[])%></font> P ]</td>
-								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/modify.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=/images/btn_modify.gif align=absmiddle ></td>
-								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/logout.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=/images/btn_logout.gif align=absmiddle ></td>
-								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/MybetList.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=/images/btn_betinfo.gif align=absmiddle ></td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/modify.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_modify.gif align=absmiddle ></td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/logout.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_logout.gif align=absmiddle ></td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/MybetList.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_betinfo.gif align=absmiddle ></td>
 								
 								<td width=50>&nbsp;</td>
 								
@@ -209,8 +209,8 @@ window.status='KOR-OKBET.COM'
         
             <table border="0" cellpadding="0" cellspacing="0"  >
                 <tr>
-                    <td ><img src=/images/top02.gif></td>
-                    <td width=903 valign=bottom style="margin-right:10pt" background=/images/top03.gif>
+                    <td ><img src=images/top02.gif></td>
+                    <td width=903 valign=bottom style="margin-right:10pt" background=images/top03.gif>
 						<marquee id=cnj direction="left" height="27" scrollamount="10" onmouseover="cnj.stop()" onmouseout="cnj.start()">
 						<table border="0" cellpadding="0" cellspacing="0" height="36" width=90%>
 							<tr>
@@ -231,7 +231,7 @@ window.status='KOR-OKBET.COM'
 						</marquee >
 					
                     </td>
-                    <td ><img src=/images/top04.gif></td>
+                    <td ><img src=images/top04.gif></td>
 				</tr>
 			</table>
 			

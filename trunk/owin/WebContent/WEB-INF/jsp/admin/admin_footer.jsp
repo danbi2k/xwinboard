@@ -95,7 +95,7 @@
 	</div>
 	<div id="footer">
 		<BR><BR><BR>
-		<!-- p>Copyright &copy; 2008 No1Bet</strong></a></p -->
+		<!-- p>Copyright &copy; 2008 OkBet</strong></a></p -->
 	</div>
 </div>
 <script>

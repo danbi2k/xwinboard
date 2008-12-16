@@ -82,7 +82,7 @@ public class MoneyInService extends XwinService
 							/*
 							String nickName = member.getNickName();
 							String mobile = member.getMobile().replaceAll("-", "");
-							String message = nickName + " 님께 " + money + "원이 충전 되었습니다. -No1Bet-";
+							String message = nickName + " 님께 " + money + "원이 충전 되었습니다. -OkBet-";
 							sendSmsConnector.sendSms(message, mobile, "0000000000");
 							*/
 						}

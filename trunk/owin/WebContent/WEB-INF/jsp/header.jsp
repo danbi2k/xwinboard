@@ -27,7 +27,7 @@
 %>
 <html>
 <head>
-<title>No1Bet</title>
+<title>OkBet</title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
@@ -47,6 +47,8 @@
 	<script language="JavaScript" src="script/jkl-parsexml.js"></script>
 	<script language="JavaScript" src="script/xwin.js"></script>
 	<script language="JavaScript" src="script/utf8.js"></script>
+	<script language="JavaScript" src="script/swf.js"></script>
+	<script language="JavaScript" src="script/common.js"></script>
 	<script language="JavaScript">
 	<%
 	if (login == false && isIndex == false) {
@@ -56,181 +58,82 @@
 	<%
 	}
 	%>
-
-	<%
-	if (login && (member.getBankName() == null || member.getBankName().length() == 0) && isModify == false) {
-	%>
-	location.href = "member.php?mode=viewModifyForm";
-	<%
-	}
-	%>	
 	</script>
 </head>
-<body style="margin:0">
-
-<a name="top"></a>
 
 
-<table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="270" align="center"><a href="home.php"><img src="images/no1bet.jpg" border="0"></a></td>
-<td width="*" valign="bottom" style="padding:0 0 10 0;">
-<ul class="topmenu" id="topmenu">
-<li><a href="game.php?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
-<li><a href="game.php?mode=viewGameList&type=handy&grade=1"><img src='images/menu_handy.jpg' border='0'></a></li>
-<li><a href="game.php?mode=viewGameResultList"><img src='images/menu_result.jpg' border='0'></a></li>
-<!-- li><a href="aboutHandy.php"><img src='images/menu_abouthandy.jpg' border='0'></a></li -->
-<li><a href="board.php?mode=viewBoard&boardName=user"><img src='images/menu_board.jpg' border='0'></a></li>
-<li><a href="board.php?mode=viewBoard&boardName=qna"><img src='images/menu_qna.jpg' border='0'></a></li>
-<li><a href="introduce.php?mode=viewIntroduceForm"><img src='images/menu_intro.jpg' border='0'></a></li>
-</ul>
-</td>
-</tr>
-</table>
-
-<iframe name='hidden_iframe' style='display:none' src='About:Blank'></iframe>
-<table width="960" height="42" background="images/login_bg.jpg" cellpadding="0" cellspacing="0" >
-
-<%
-if (login) {
-%>
-<tr><td>
-
-	<table>
-	<tr>
-	<td><img src="images/login_img2.gif" hspace="10"></td>
-	<td align="center"><b><%=member.getNickName()%></b></td>
-
-	<td style="padding-right:10;padding-left:10;">
-		<table cellpadding="0" cellspacing="0">
-		<tr><td><img src="images/money_1.gif"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=XwinUtil.comma3(member.getBalance())%></td>
-			<td><img src="images/money_3.gif"></td>
-			<td>&nbsp;<img src="images/point.jpg"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;" onclick="exchangePoint(<%=member.getPoint()%>)"><%=XwinUtil.comma3(member.getPoint())%></td>
-			<td><img src="images/money_3.gif"></td>
-		</tr>
-		</table>
-	</td>	
-	<td><img src="images/btn_logout.gif" onclick="FnLogout();" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
-
-	<td><img src="images/btn_meminfo.gif" onclick="location.href='member.php?mode=viewModifyForm'" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';"></td>
-	<td><img src="images/btn_mybet.gif" onclick="location.href='myBet.php?mode=viewMyBettingList'" style="cursor:hand;"></td>
+<BODY style="margin:0" bgcolor=000000 >
+<table border="0" cellpadding="0" cellspacing="0" width=1003 align=center>
+    <tr>
+        <td >
+            <table border="0" cellpadding="0" cellspacing="0" width=100%>
+                <tr>
+                    <td ><a name='' onMouseDown="document.location='/'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/top011.jpg></a></td>
+                    <td><script language='JavaScript'><!--
+                    setFlash('images/menu.swf', '650', '73');//-->
+                    </script></td>
+				</tr>
+			</table>
+		</td>
 	</tr>
-	</table>
-
-</td><td align="right">
-
-	<table cellpadding="0" cellspacing="0">
+	<tr><td height=2 bgcolor="424142"></td></tr>
 	<tr>
-	<td>
-		<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
-		
-		<img src="images/smenu_event.gif" onclick="location.href='game.php?mode=viewGameList&type=wdl&grade=10';" style="cursor:hand">
-	
-	</td>
-	<%} %>
-
-	<td>
-		<%if (Admin.DENY_CHARGE.equals("Y")) {%>
-		<img src="images/smenu_1.gif" onclick="location.href='moneyIn.php?mode=viewMoneyInRequest';" style="cursor:hand">
-		
-	</td>
-	<td><img src="images/smenu_gap.gif">
-	<%} %></td>
-	<td>
-		<%if (Admin.DENY_EXCHANGE.equals("Y")) {%>
-		<img src="images/smenu_2.gif" onclick="location.href='moneyOut.php?mode=viewMoneyOutRequest';" style="cursor:hand">
-	</td>
-	<td><img src="images/smenu_gap.gif">
-	<%} %></td>
-	<td><img src="images/smenu_3.gif" onclick="location.href='myMoney.php?mode=viewMyMoneyList';" style="cursor:hand"></td>
-<!--
-	<td><img src="images/smenu_gap.gif"></td>
-	<td><img src="images/smenu_5.gif"></td>
-//-->
+        <td  bgcolor="212021">
+            <table border="0" cellpadding="0" cellspacing="0"  >
+                <tr>
+                    <td ><img src=images/top02.jpg></td>
+                    <td >
+						<table border="0" cellpadding="0" cellspacing="0" height="27" width=100%>
+							<tr>
+								<td><nobr><font color=FFFFFF><b><%=member.getNickName()%></b>님 환영합니다.</td>
+								<td ><nobr>&nbsp;&nbsp;<b>내 베팅머니 &nbsp;[ <font color=FFC700><%=XwinUtil.comma3(member.getBalance())%></font> C ]&nbsp;&nbsp;</td>
+								<td ><nobr>&nbsp;&nbsp;<b>내 포인트 &nbsp;[ <font color=FFC700><%=XwinUtil.comma3(member.getPoint())%></font> P ]</td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/modify.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_modify.gif align=absmiddle ></td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/logout.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_logout.gif align=absmiddle ></td>
+								<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/MybetList.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/btn_betinfo.gif align=absmiddle ></td>
+								
+								<td width=50>&nbsp;</td>
+								
+								<td>
+									<table border="0" cellpadding="0" cellspacing="0" width=100%>
+										<tr>		
+											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/Cash.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬충전]</td>
+											<td ><nobr>&nbsp;&nbsp;<a name='' onMouseDown="document.location='/member/ReCash.asp'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><font color=FFC602><b>[캐쉬환전]</td>
+										</tr>
+									</table>
+								</td>
+								
+							</tr>
+						</table>
+                    </td>
+				</tr>
+			</table>
+			
+		</td>
 	</tr>
-	</table>
+	<tr><td height=1 bgcolor="424142"></td></tr>
+	<tr><td height=15 ></td></tr>
 
-</td></tr>
+	<tr>
+        <td >
+        
+        
+            <table border="0" cellpadding="0" cellspacing="0"  >
+                <tr>
+                    <td ><img src=images/top02.gif></td>
+                    <td width=903 valign=bottom style="margin-right:10pt" background=images/top03.gif>
+						<marquee id=cnj direction="left" height="27" scrollamount="10" onmouseover="cnj.stop()" onmouseout="cnj.start()">
+						<table border="0" cellpadding="0" cellspacing="0" height="36" width=90%>
+							<tr>
+							</tr>
+						</table>
+						</marquee >
+					
+                    </td>
+                    <td ><img src=images/top04.gif></td>
+				</tr>
+			</table>
+			
+		</td>
+	</tr>
 
-<% } else { %>
-<%} %>
-</table>
-<img id="mainImage" src="images/wall04.jpg" style="display:none">
-<script>
-//FnFlash("main","960","280","images/main.swf","");
-if (document.URL.indexOf("home.php") > 0) {
-	var mainImage = document.getElementById("mainImage");
-	mainImage.style.display = "block";
-}
-
-var memoId;
-
-function receiveMemo()
-{
-	var query = "mode=receiveMemo";
-	var http = new JKL.ParseXML("member.php", query);
-	var result = http.parse();
-	if (result.resultXml.code == 0 && result.resultXml.object) {
-		var span = document.getElementById("memoContents");
-		var memo = result.resultXml.object.memo;
-		var regexp = new RegExp(/\n/ig);
-		memo = memo.replace(regexp, "<BR>");
-		span.innerHTML = memo;
-		memoId = result.resultXml.object.id;
-		var memoDiv = document.getElementById("memoDiv");
-		memoDiv.style.visibility = "visible";
-	}
-}
-
-function memoClose()
-{
-	var isReaded = document.getElementById("isReaded");
-	if (isReaded.checked) {
-		var query = "mode=readMemo";
-		query += "&id=" + memoId;
-		var http = new JKL.ParseXML("member.php", query);
-		var result = http.parse();
-	}
-	
-	var memoDiv = document.getElementById("memoDiv");
-	memoDiv.style.visibility = "hidden";
-
-	receiveMemo();
-}
-</script>
-
-<table width="960" height="25" style="border:1 solid #909090;margin-bottom:5px;" background="images/dot_02.gif">
-<tr><td width="80" align="center"><b style="color:white">Notice</b></td>
-	<td width="880" height="30"><font size=4"><b>&nbsp;
-	<marquee onmouseover='this.stop()' onmouseout='this.start()'>
-	<%=Admin.NOTICE%>
-	</marquee></b></font>
-	</td>
-</tr>
-</table>
-<div id="memoDiv" style="padding:10 10 10 10;position:absolute;left:50%;top:50%;width:350px;height:350px;z-index:2;margin-left:-175px;margin-top:-175px;visibility:hidden;background-color:#CCCCCC;color:#000000">
-<form>
-<table border=0 style='width:100%;color:#000000'>
-<tr>
-<td align='center' style='color:#000000'><font size=3><B>긴급알림</B></font></td>
-</tr>
-<tr height=100%>
-<td height=280px>
-<span id="memoContents" style='width:100%;height:100%;color:#000000' valign='top'></span>
-</td>
-</tr>
-<tr>
-<td align='right' style='color:#000000'>
-	다시보지않음<input type="checkbox" id="isReaded"/>
-	닫기 <img src="images/btn_coment_del.gif" onclick="memoClose()"/>
-</td>
-</tr>
-</table>
-</form>
-</div>
-<script>
-<%if (login) {%>
-receiveMemo();
-<%}%>
-</script>

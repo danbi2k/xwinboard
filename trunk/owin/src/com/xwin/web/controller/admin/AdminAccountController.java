@@ -265,7 +265,7 @@ public class AdminAccountController extends XwinController
 			/*
 			String nickName = member.getNickName();
 			String mobile = member.getMobile().replaceAll("-", "");
-			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -No1Bet-";
+			String message = nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다. -OkBet-";
 			try {
 				sendSmsConnector.sendSms(message, mobile, "0000000000");
 			} catch (Exception e) {
@@ -301,7 +301,7 @@ public class AdminAccountController extends XwinController
 			if (member.getGetSms().equals("Y")) {
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
-				String message = "[No1Bet] " + nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다.";
+				String message = "[OkBet] " + nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다.";
 				
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);

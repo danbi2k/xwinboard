@@ -315,7 +315,7 @@ public class MemberController extends XwinController
 			
 			try {
 				SmsWait smsWait = new SmsWait();
-				smsWait.setMsg("[No1Bet] 가입 인증번호  [ " + phonePin + " ]");
+				smsWait.setMsg("[OkBet] 가입 인증번호  [ " + phonePin + " ]");
 				smsWait.setPhone(phone);
 				smsWait.setCallback("0000000000");
 				
