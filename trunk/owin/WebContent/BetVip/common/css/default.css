@@ -1,0 +1,27 @@
+.default {
+	font-size: 9pt;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a {
+	font-size: 9pt;
+	color: #666666;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 9pt;
+	color: #666666;
+	text-decoration: none;
+}
+
+
+.a1 {
+	font-size: 9pt;
+	color: #E10000;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 9pt;
+	color: #E10000;
+	text-decoration: none;
+}

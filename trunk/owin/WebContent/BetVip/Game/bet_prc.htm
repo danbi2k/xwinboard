@@ -1,0 +1,130 @@
+<!--	#include virtual=/common/asp/connect.asp		-->
+<!--	#include virtual=/common/asp/config.asp			-->
+<!--	#include virtual=/common/asp/MemberClass.asp	-->
+<!--	#include virtual=/common/asp/BbsTransaction.asp	-->
+<!--	#include virtual=/common/asp/UtilityClass.asp	-->
+
+<%
+	Dim arrName(40), arrValue(40)
+	betmoney	= Request("betmoney")
+	mode		= Request("mode")
+	If isNone(Session("UId")) Then Call descment("","/","")
+	NowPt	= UsePoints("", Session("UId"), 2)
+	If Not isInt(betmoney) Then Call descment("","/","")
+	If Int(betmoney) > reInt(NowPt,0) Then Call descment("","/","")
+
+	
+	betcontent		= Request("betcontent")
+	AContent		= split(betcontent,chr(13) & chr(10))
+	BContent		= split(AContent(0),chr(9))
+	Sect			= Request("Sect")
+	
+	
+	'========================================================================================================
+	For i=0 To Ubound(AContent)
+	
+		If Not isNone(AContent(i)) Then	
+
+			For b=0 To Ubound(BContent)
+				Set objRs = RunSQLReturnRs("SELECT Status FROM Game_TB WHERE Idx='"& BContent(0) &"'")
+				If objRs.EOF Then
+					 Call CloseDB() : Call descment("존제하지 않는 게임입니다.","/Game/List.asp","")
+				Else
+					If objRs(0) = 0 Then Call CloseDB() : Call descment("이미 마감된 게임에 베팅 하셨습니다.","/Game/List.asp?Sect="& Sect,"")
+				End If
+				
+			Next	
+	
+		End If
+	
+	Next
+
+	'========================================================================================================
+	For i=0 To Ubound(AContent)
+	
+		If Not isNone(AContent(i)) Then	
+
+			BContent		= split(AContent(i),chr(9))
+			Set objRs = RunSQLReturnRs("SELECT * FROM Game_TB WHERE Idx='"& BContent(0) &"'")
+			If Not objRs.EOF or Not objRs.BOF Then
+				
+				allAllot	= 0
+				hAllot		= objRs("hAllot")
+				HcapAllotl	= objRs("HcapAllotl")
+				vAllot		= objRs("vAllot")
+				If BContent(1) = 1 Then
+					
+				Call CloseDB()
+			End If
+	
+		End If
+	
+	Next
+	'========================================================================================================
+		
+	Set objRss = RunSQLReturnRs("SELECT isNull(MAX(gCnt),0)+1 FROM BetGame_TB ")
+			MaxGcnt = objRss(0)
+	objRss.Close
+	
+	'========================================================================================================
+	For i=0 To Ubound(AContent)
+	
+		If Not isNone(AContent(i)) Then	
+			BContent		= split(AContent(i),chr(9))
+			Set objRs = RunSQLReturnRs("SELECT * FROM Game_TB WHERE Idx='"& BContent(0) &"'")
+			If objRs.EOF Then
+				 Call CloseDB() : Call descment("존제하지 않는 게임입니다.","/Game/List.asp?Sect="& Sect,"")
+			Else
+				
+				arrName(0)	= "Sect"		: arrValue(0)	= objRs("Sect")
+				arrName(1)	= "gName"		: arrValue(1)	= objRs("gName")
+				arrName(2)	= "gIdx"		: arrValue(2)	= BContent(0)
+				arrName(3)	= "Id"			: arrValue(3)	= Session("UId")
+				arrName(4)	= "gsDate"		: arrValue(4)	= objRs("gsDate")
+				arrName(5)	= "League"		: arrValue(5)	= objRs("League")
+				arrName(6)	= "hTname"		: arrValue(6)	= objRs("hTname")
+				arrName(7)	= "hAllot"		: arrValue(7)	= objRs("hAllot")
+				arrName(8)	= "hCap"		: arrValue(8)	= objRs("hCap")
+				arrName(9)	= "HcapAllotl"	: arrValue(9)	= objRs("HcapAllotl")
+				arrName(10)	= "vTname"		: arrValue(10)	= objRs("vTname")
+				arrName(11)	= "vAllot"		: arrValue(11)	= objRs("vAllot")
+				arrName(12)	= "bMoney"		: arrValue(12)	= betmoney
+				arrName(13)	= "gCnt"		: arrValue(13)	= MaxGcnt
+				arrName(14)	= "gbTem"		: arrValue(14)	= BContent(1)
+					
+				SQL = insertDB("BetGame_TB", arrName, arrValue)
+'				Response.Write SQL&"<BR><BR>"
+				RunSQL(SQL)
+				Call MileageChange(Session("UId"),arrValue(12),1)
+				Call CloseDB()
+			End If
+				
+		
+		End If
+		
+	Next
+'	Response.End
+	Call descment("베팅 결과는 바이베팅 에서 확인 하실 수 있습니다.","/Game/List.asp?Sect="& Sect,"")
+		
+		
+'	Response.Write "<BR><BR>"
+'	Response.Write betcontent&"<font color=red>:원소스</font><BR><BR>"
+'	Response.Write AContent(0)&"<font color=red>:구분1</font><BR>"
+'	Response.Write AContent(1)&"<font color=red>:구분2</font><BR><BR><BR>"
+	
+	
+'	Response.Write BContent(0)&"<font color=red>:Idx</font><BR>"
+'	Response.Write BContent(1)&"<font color=red>:베팅한 팀</font><BR>"
+'	Response.Write BContent(2)&"<font color=red>:승(팀이름)</font><BR>"
+'	Response.Write BContent(3)&"<font color=red>:패(팀이름)</font><BR>"
+'	Response.Write BContent(4)&"<font color=red>:승(배당율)</font><BR>"
+'	Response.Write BContent(5)&"<font color=red>:패(배당율)</font><BR>"
+'	Response.Write BContent(6)&"<font color=red>:세부7</font><BR>"
+'	Response.Write BContent(7)&"<font color=red>:패(배당율???)</font><BR>"
+'	Response.Write BContent(8)&"<font color=red>:핸드캡배당율</font><BR>"
+
+'	Response.End
+
+
+
+%>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/main.php">mainController</prop>
+				<prop key="/home.php">homeController</prop>
+				<prop key="/index.php">indexController</prop>			
+				<prop key="/login.php">loginController</prop>
+				<prop key="/member.php">memberController</prop>
+				<prop key="/admin.php">adminController</prop>
+				<prop key="/game.php">gameController</prop>
+				<prop key="/betting.php">bettingController</prop>
+				<prop key="/board.php">boardController</prop>
+				<prop key="/moneyIn.php">moneyInController</prop>
+				<prop key="/moneyOut.php">moneyOutController</prop>
+				<prop key="/myBet.php">myBettingController</prop>
+				<prop key="/myMoney.php">myMoneyController</prop>
+				<prop key="/introduce.php">introduceController</prop>
+				<prop key="/external.php">externalController</prop>
+				<prop key="/join.php">joinController</prop>
+				
+				<prop key="/test.php">testController</prop>
+				<prop key="/munja.php">munjaBadaResponse</prop>
+				
+				<prop key="/adminIndex.php">adminIndexController</prop>
+				<prop key="/adminLogin.php">adminLoginController</prop>
+				<prop key="/adminMain.php">adminMainController</prop>
+				<prop key="/adminInfo.php">adminInfoController</prop>
+				<prop key="/adminMember.php">adminMemberController</prop>
+				<prop key="/adminAccount.php">adminAccountController</prop>
+				<prop key="/adminLeague.php">adminLeagueController</prop>
+				<prop key="/adminGame.php">adminGameController</prop>
+				<prop key="/admin.php">adminController</prop>
+				<prop key="/adminBetting.php">adminBettingController</prop>
+				<prop key="/adminSms.php">adminSmsController</prop>
+				<prop key="/adminQna.php">adminQnaController</prop>
+				<prop key="/adminBoard.php">adminBoardController</prop>
+				<prop key="/adminStat.php">adminStatisticsController</prop>
+				<prop key="/adminTran.php">adminTransactionController</prop>
+				<prop key="/adminLog.php">adminLogController</prop>
+				
+				<prop key="/guide.php">guideController</prop>
+				<prop key="/provision.php">provisionController</prop>
+				<prop key="/rules.php">rulesController</prop>
+				<prop key="/aboutHandy.php">aboutHandyController</prop>
+				<prop key="/livescore.php">liveScoreController</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>

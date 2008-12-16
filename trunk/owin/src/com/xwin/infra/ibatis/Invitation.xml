@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Invitation">
+
+	<typeAlias alias="Invitation" type="com.xwin.domain.join.Invitation" />
+	
+	<resultMap id="invitationResultMap" class="Invitation">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="inviteKey" column="INVITEKEY"/>
+		<result property="sendDate" column="SEND_DATE"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="joinId" column="JOINID"/>
+	</resultMap>
+	
+	<insert id="insertInvitation" parameterClass="Invitation">
+		INSERT INTO tbl_invitation(USERID, INVITEKEY, SEND_DATE, MOBILE)
+		VALUES(#userId#, #inviteKey#, #sendDate#, #mobile#)
+	</insert>
+	
+	<update id="updateInvitation" parameterClass="Invitation">
+		UPDATE tbl_invitation
+		<dynamic prepend="SET">
+			<isNotNull prepend="AND" property="joinId">
+			JOINID = #joinId#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+	
+	<select id="selectInvitation" resultMap="invitationResultMap" parameterClass="map">
+		SELECT * FROM tbl_invitation
+		WHERE
+			USERID = #userId# AND
+			INVITEKEY = #inviteKey#
+	</select>
+	
+	<select id="selectInvitationList" resultMap="invitationResultMap" parameterClass="map">
+		SELECT * FROM tbl_invitation
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinId">
+				JOINID IS NOT NULL
+			</isNotNull>
+		</dynamic>
+		ORDER BY ID DESC
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectInvitationCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_invitation
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinId">
+				JOINID IS NOT NULL
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>
