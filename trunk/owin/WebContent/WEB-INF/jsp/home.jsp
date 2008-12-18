@@ -94,22 +94,21 @@ PopCookieWindow.opener = self;
 											<td  width=600 align=center ><nobr><font color=FFFFFF><b>(패)원정팀</td>
 											<!--<td  width=60 align=center ><nobr><font color=FFFFFF><b>상태</td>-->
 										</tr>
-																	
+										<%
+										if (gameList != null) {
+											for (Game game : gameList) {
+										%>																	
 										<tr height=25>
-											<td align=center bgcolor=000000 ><nobr></td>
-											<td align=center bgcolor=000000 ><nobr></td>
-											<td align=right bgcolor=000000 ><nobr>
+											<td align=center bgcolor=000000><nobr><%=XwinUtil.toDateStr(game.getGameDate(), 1)%></td>
+											<td align=center bgcolor=000000><nobr><%=game.getLeagueName()%></td>
+											<td align=right bgcolor=000000><nobr>
 												<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>
 													<tr>
-														<td align=center width=60><nobr>&nbsp;<img src=images/icon_event.gif align=absmiddle hspace=1 ></td>
-														<td align=center width=60><nobr>&nbsp;<img src=images/icon_close.gif align=absmiddle hspace=1 alt="" style="cursor:hand"></td>
-														<td align=right width=90%><nobr>
-															&nbsp;
-															
-															<td width=10>&nbsp;
-															<td width=10>
-															<img width=22 height=14 src="/flag/'" align=absmiddle>
-														</td>
+														<td align=center width=60><nobr></nobr></td>
+														<td align=center width=60><nobr>&nbsp;</nobr></td>
+														<td align=right width=90%><nobr>&nbsp;<%=game.getHomeTeam()%>;</nobr></td>															
+														<td width=10>&nbsp;<%=game.getWinRateStr()%></td>
+														<td width=10><img width=22 height=14 src="/flag/'" align=absmiddle></td>
 													</tr>
 												</table>
 											</td>
@@ -117,6 +116,7 @@ PopCookieWindow.opener = self;
 												<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>
 													<tr>
 														<td align=center><nobr>
+														<%=game.getDrawRateStr()%>
 														</td>
 													</tr>
 												</table>
@@ -125,14 +125,16 @@ PopCookieWindow.opener = self;
 												<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>
 													<tr>
 														<td width=10><img width=22 height=14 src="/flag/"></td>
-														<td width=30>&nbsp;<%="vAllot"%>&nbsp;</td>
-														<td><nobr><%="vTname"%>&nbsp;</td>
+														<td width=30>&nbsp;<%=game.getLoseRateStr()%>&nbsp;</td>
+														<td><nobr><%=game.getAwayTeam()%>&nbsp;</td>
 													</tr>
 												</table>
 											</td>
 										</tr>
-																			
-																									
+										<%
+											}
+										}
+										%>														
 									</table>
 									
 								</td>			

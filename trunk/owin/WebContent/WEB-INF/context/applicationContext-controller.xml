@@ -25,11 +25,11 @@
 	<bean id="mainController"  class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="main"/>
 		
-	<bean id="homeController"  class="com.xwin.web.controller.HomeController"/>
-	
-	<bean id="indexController" class="com.xwin.web.controller.IndexController"
+	<bean id="homeController"  class="com.xwin.web.controller.HomeController"
 		p:gameDao-ref="gameDao"
 		p:accessDao-ref="accessDao"/>
+	
+	<bean id="indexController" class="com.xwin.web.controller.IndexController"/>
 	
 	<bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
 		p:invitationDao-ref="invitationDao"

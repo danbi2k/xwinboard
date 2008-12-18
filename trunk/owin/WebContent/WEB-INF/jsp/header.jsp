@@ -68,7 +68,7 @@
         <td >
             <table border="0" cellpadding="0" cellspacing="0" width=100%>
                 <tr>
-                    <td ><a name='' onMouseDown="document.location='/'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/top011.jpg></a></td>
+                    <td ><a name='' onMouseDown="document.location='home.php'" onMouseOver="this.style.color='#506CC8';this.style.fontWeight='bold';window.status='KOR-OKBET.COM' ;return true" onMouseOut="this.style.color='';this.style.fontWeight='normal'" style='cursor:hand' onfocus='this.blur()'><img src=images/top011.jpg></a></td>
                     <td><script language='JavaScript'><!--
                     setFlash('images/menu.swf', '650', '73');//-->
                     </script></td>

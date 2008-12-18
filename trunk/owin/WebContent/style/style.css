@@ -2,12 +2,12 @@ body {
 	margin-left: 20px;
 	margin-top: 0px;
 	margin-right: 0px;
-	font-family: µ∏øÚ;
+	font-family: ÎèãÏõÄ;
 	color: #FFFFFF;
 }
 table, td, div, form, center, pre, blockquote
 { 
-	FONT-FAMILY: µ∏øÚ; FONT-SIZE: 12px;
+	FONT-FAMILY: ÎèãÏõÄ; FONT-SIZE: 12px;
 	line-height: 18px;
 	color: #FFFFFF;
 }
@@ -45,34 +45,34 @@ table, td, div, form, center, pre, blockquote
 .btn13 	{ BACKGROUND-COLOR:#4A494A; BORDER-RIGHT: #A5AAA5 1px solid; BORDER-TOP: #A5AAA5 1px solid; BORDER-LEFT: #A5AAA5 1px solid; BORDER-BOTTOM: #A5AAA5 1px solid; FONT-WEIGHT:BOLD; CURSOR:hand; FONT-SIZE:12px; COLOR: #FFFFFF; HEIGHT:30; WIDTH:100;}
 
 
-.input 	{ BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #999999 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 12px; BORDER-LEFT: #999999 1px solid; COLOR: #666666; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #F2F8FB}
+.input 	{ BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #999999 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 12px; BORDER-LEFT: #999999 1px solid; COLOR: #666666; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #F2F8FB}
 
-.input1	{ BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #999999 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 12px; BORDER-LEFT: #999999 1px solid; COLOR: #666666; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #ffffff}
+.input1	{ BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #999999 1px solid; PADDING-LEFT: 3px; FONT-SIZE: 12px; BORDER-LEFT: #999999 1px solid; COLOR: #666666; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #ffffff}
 
-.input2	{ BORDER-RIGHT: #BDBEBD 1px solid; BORDER-TOP: #BDBEBD 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BDBEBD 1px solid; COLOR: #585858; BORDER-BOTTOM: #BDBEBD 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #F7F7F7}
+.input2	{ BORDER-RIGHT: #BDBEBD 1px solid; BORDER-TOP: #BDBEBD 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BDBEBD 1px solid; COLOR: #585858; BORDER-BOTTOM: #BDBEBD 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #F7F7F7}
 
-.input3	{ BORDER-RIGHT: #cfcfcf 1px solid; BORDER-TOP: #cfcfcf 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #cfcfcf 1px solid; COLOR: #585858; BORDER-BOTTOM: #cfcfcf 1px solid; FONT-FAMILY: "µ∏øÚ"; HEIGHT: 18px; BACKGROUND-COLOR: #f0f0f0}
+.input3	{ BORDER-RIGHT: #cfcfcf 1px solid; BORDER-TOP: #cfcfcf 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #cfcfcf 1px solid; COLOR: #585858; BORDER-BOTTOM: #cfcfcf 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; HEIGHT: 18px; BACKGROUND-COLOR: #f0f0f0}
 
-.input4	{ BORDER-RIGHT: #cfcfcf 1px solid; BORDER-TOP: #cfcfcf 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #cfcfcf 1px solid; COLOR: #585858; BORDER-BOTTOM: #cfcfcf 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #f0f0f0}
+.input4	{ BORDER-RIGHT: #cfcfcf 1px solid; BORDER-TOP: #cfcfcf 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #cfcfcf 1px solid; COLOR: #585858; BORDER-BOTTOM: #cfcfcf 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #f0f0f0}
 
-.input5	{ BORDER-RIGHT: #BABABA 1px solid; BORDER-TOP: #BABABA 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BABABA 1px solid; COLOR: #000000; BORDER-BOTTOM: #BABABA 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #FFFFFF}
+.input5	{ BORDER-RIGHT: #BABABA 1px solid; BORDER-TOP: #BABABA 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BABABA 1px solid; COLOR: #000000; BORDER-BOTTOM: #BABABA 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #FFFFFF}
 
-.input6	{ BORDER-RIGHT: #BDBEBD 1px solid; BORDER-TOP: #BDBEBD 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BDBEBD 1px solid; COLOR: #000000; BORDER-BOTTOM: #BDBEBD 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #F7F7F7}
+.input6	{ BORDER-RIGHT: #BDBEBD 1px solid; BORDER-TOP: #BDBEBD 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #BDBEBD 1px solid; COLOR: #000000; BORDER-BOTTOM: #BDBEBD 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #F7F7F7}
 
-.input7	{ FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #F7F7F7}
+.input7	{ FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #F7F7F7}
 
-.input8	{ BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #000000 1px solid; COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #FFFFFF}
+.input8	{ BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #000000 1px solid; COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #FFFFFF}
 
-.input9	{ BORDER-RIGHT: #EFEFEF 1px solid; BORDER-TOP: #EFEFEF 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #EFEFEF 1px solid; COLOR: #000000; BORDER-BOTTOM: #5F9F27 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #FFFFFF}
+.input9	{ BORDER-RIGHT: #EFEFEF 1px solid; BORDER-TOP: #EFEFEF 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #EFEFEF 1px solid; COLOR: #000000; BORDER-BOTTOM: #5F9F27 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #FFFFFF}
 
-.input10 { BORDER-RIGHT: #C57373 1px solid; BORDER-TOP: #C57373 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #C57373 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #C57373 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #5A0808}
+.input10 { BORDER-RIGHT: #C57373 1px solid; BORDER-TOP: #C57373 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #C57373 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #C57373 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #5A0808}
 
-.input11 { BORDER-RIGHT: #484848 1px solid; BORDER-TOP: #484848 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #484848 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #484848 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #333333}
+.input11 { BORDER-RIGHT: #484848 1px solid; BORDER-TOP: #484848 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #484848 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #484848 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #333333}
 
-.input14 { BORDER-RIGHT: #484848 1px solid; BORDER-TOP: #484848 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #484848 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #484848 1px solid; FONT-FAMILY: "µ∏øÚ"; BACKGROUND-COLOR: #333333; HEIGHT:22}
+.input14 { BORDER-RIGHT: #484848 1px solid; BORDER-TOP: #484848 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #484848 1px solid; COLOR: #FFFFFF; BORDER-BOTTOM: #484848 1px solid; FONT-FAMILY: "ÎèãÏõÄ"; BACKGROUND-COLOR: #333333; HEIGHT:22}
 
 
-.select	{font-family: "µ∏øÚ";BACKGROUND: #CEC5DE; FONT:9pt; COLOR:#000000;}
+.select	{font-family: "ÎèãÏõÄ";BACKGROUND: #CEC5DE; FONT:9pt; COLOR:#000000;}
 
 .select1 {border:1px solid #455F83;background-color:#000000;COLOR:#FFFFFF; border-color:#484848}
 
