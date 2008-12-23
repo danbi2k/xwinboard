@@ -57,6 +57,8 @@ public class TransactionManager extends QuartzJobBean
 					transaction = kbBankProcess(message);
 				else if (message.getMsg().startsWith("우리은행"))
 					transaction = wooriBankProcess(message);
+				else if (message.getMsg().startsWith("신한"))
+					transaction = shinhanBankProcess(message);
 				else {
 					ktfSmsDao.insertMessage(message);
 				}
@@ -74,6 +76,55 @@ public class TransactionManager extends QuartzJobBean
 		}
 	}
 	
+	private Transaction shinhanBankProcess(KtfSmsMessage message) {
+		Transaction transaction = new Transaction();
+		
+		if (message.getMsg().indexOf("입금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\\s+");
+				
+				Date theDate = null;
+				try {
+					String strDate = msg[1] + " " + msg[2].substring(0, 5);
+					theDate = smsDateFormat.parse(strDate);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+				
+				Long money = null;
+				if (msg[3].endsWith("잔액")) {
+					String moneyStr = msg[3].replaceAll("잔액", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				Long balance = null;
+				if (msg[4].startsWith("잔액")) {
+					String balanceStr = msg[4].replaceAll("잔액", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+			}
+		}
+		
+		return null;
+	}
+
 	private Transaction kbBankProcess(KtfSmsMessage message) {		
 		Transaction transaction = new Transaction();
 		

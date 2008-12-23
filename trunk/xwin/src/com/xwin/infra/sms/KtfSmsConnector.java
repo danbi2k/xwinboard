@@ -30,11 +30,11 @@ public class KtfSmsConnector
 //	private static final String[] delUri = {"http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081206143116&ClientIP=192.168.10.111&IsALL=N&boxType=1&ALevel=1&targetMsg="};
 	private static final String[] getUri = {
 		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1",
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081111202652&ClientIP=121.161.223.133&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=100&curpage=1"
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=100&curpage=1"
 	};
 	private static final String[] delUri = {
 		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg=",
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01043047455&LogTime=20081111202652&ClientIP=121.161.223.133&IsALL=N&boxType=1&ALevel=1&targetMsg="
+		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&IsALL=N&boxType=1&ALevel=1&targetMsg="
 	};
 	
 	private KtfSmsDao ktfSmsDao = null;
