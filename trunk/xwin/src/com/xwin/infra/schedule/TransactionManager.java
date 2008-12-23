@@ -108,13 +108,102 @@ public class TransactionManager extends QuartzJobBean
 				}
 				
 				Long balance = null;
-				if (msg[4].startsWith("잔액")) {
-					String balanceStr = msg[4].replaceAll("잔액", "");
-					balanceStr = balanceStr.replaceAll(",", "");
-					balanceStr = balanceStr.trim();
-					
-					balance = Long.parseLong(balanceStr);
+				String xtr = msg[4].replaceAll(",", "");
+				int x = 0;
+				char[] xchar = xtr.toCharArray();
+				for (x = 0 ; x < xchar.length ; x++) {
+					if (xchar[x] < '0' || xchar[x] > '9')
+						break;
 				}
+				String userName = xtr.substring(x).trim();
+				int colon = userName.indexOf(":");
+				if (colon >= 0) {
+					userName = userName.substring(colon+1);
+				}
+				if (msg.length > 5)
+					userName += msg[5];
+				
+				String balanceStr = xtr.substring(0, x);
+				balanceStr = balanceStr.trim();
+				
+				balance = Long.parseLong(balanceStr);						
+
+				transaction.setType(Code.TRAN_TYPE_MONEYIN);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("N");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+			}
+		} else if (message.getMsg().indexOf("지급") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\\s+");
+				
+				Date theDate = null;
+				try {
+					String strDate = msg[1] + " " + msg[2].substring(0, 5);
+					theDate = smsDateFormat.parse(strDate);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+				
+				Long money = null;
+				if (msg[3].endsWith("잔액")) {
+					String moneyStr = msg[3].replaceAll("잔액", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				Long balance = null;
+				String balanceStr = "0";
+				String userName = "-";
+				int pos = msg[4].lastIndexOf(",");
+				if (pos > 0) {
+					try {
+						balanceStr = msg[4].substring(0, pos+4);
+						userName = msg[4].substring(pos+4);
+					} catch (Exception e) {
+						System.out.println(message.getMsg());
+						e.printStackTrace();
+					}
+				}
+				balanceStr = balanceStr.replaceAll(",", "");
+				balanceStr = balanceStr.trim();				
+				balance = Long.parseLong(balanceStr);	
+
+				transaction.setType(Code.TRAN_TYPE_MONEYOUT);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money * -1);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("-");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+					
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
@@ -372,5 +461,16 @@ public class TransactionManager extends QuartzJobBean
 		}
 		
 		return null;
+	}
+	
+	public static void main(String args[]) {
+		KtfSmsMessage message = new KtfSmsMessage();
+		//message.setMsg("신한 12/23 16:32[110-257-306***]입금      19,000잔액   6,121,400안민강");
+		//message.setMsg("신한 12/23 16:31[110-257-306***]지급         100잔액   6,102,40002480104300750");
+		//message.setMsg("신한 12/23 18:22[110-257-306***]입금     100,000잔액  21,840,368 이훈희");
+		message.setMsg("신한 12/23 17:01[110-257-306***]입금     250,000잔액  14,326,400제주:진경훈");
+		
+		TransactionManager tm = new TransactionManager();
+		tm.shinhanBankProcess(message);
 	}
 }
