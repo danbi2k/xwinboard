@@ -35,6 +35,7 @@ public class Member extends XwinObject
 	private Date bettingDate;
 	private String introducerId;
 	private Integer introLetter;
+	private String note;
 	
 	private Integer introduceCount;
 	private Integer introduceBettingCount;
@@ -160,6 +161,12 @@ public class Member extends XwinObject
 	}
 	public void setIntroLetter(Integer introLetter) {
 		this.introLetter = introLetter;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public Integer getIntroduceCount() {
 		return introduceCount;

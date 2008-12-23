@@ -467,4 +467,57 @@ public class AdminMemberController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView changeNickName(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String nickName = request.getParameter("nickName").trim();
+		String orgNickName = request.getParameter("orgNickName").trim();
+		String userId = request.getParameter("userId");
+		
+		ResultXml rx = null;
+		
+		if (nickName == null || nickName.length() < 2)
+			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
+		else if (nickName.equals(orgNickName))
+			rx = new ResultXml(0, "같은 닉네임 입니다", null);
+		else if (memberDao.countMemberByNickName(nickName) > 0)			
+			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
+		else {
+			Member member = new Member();
+			member.setNickName(nickName);
+			member.setUserId(userId);
+			memberDao.updateMember(member);
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView saveNote(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String note = request.getParameter("note");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setNote(note);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

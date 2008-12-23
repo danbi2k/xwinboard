@@ -170,36 +170,38 @@ public class BettingService extends XwinService
 				if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
 					if (betting.getSuccessCount() >= Admin.WDL_BONUS_LIMIT) {
 						Double wdl_bonus_rate = Admin.WDL_BONUS_RATE.doubleValue() * 0.01;
-						Long wdl_bonus_money = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
+						Long wdl_bonus_point = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
 						
-						account.setUserId(userId);
-						account.setType(Code.ACCOUNT_TYPE_BONUS);
-						account.setDate(new Date());
-						account.setOldBalance(member.getBalance());
-						account.setMoney(wdl_bonus_money);
-						account.setBalance(member.getBalance() + wdl_bonus_money);
-						account.setBettingId(betting.getId());
-						account.setNote("승무패 " + Admin.WDL_BONUS_LIMIT + "폴더 이상 " + Admin.WDL_BONUS_RATE + "%");
-						accountDao.insertAccount(account);
+						Point pointLog = new Point();
+						pointLog.setUserId(userId);
+						pointLog.setType(Code.POINT_TYPE_BONUS);
+						pointLog.setDate(new Date());
+						pointLog.setOldBalance(member.getPoint());
+						pointLog.setMoney(wdl_bonus_point);
+						pointLog.setBalance(member.getPoint() + wdl_bonus_point);
+						pointLog.setBettingId(betting.getId());
+						pointLog.setNote("승무패 " + Admin.WDL_BONUS_LIMIT + "폴더 이상 " + Admin.WDL_BONUS_RATE + "%");
+						pointDao.insertPoint(pointLog);
 						
-						memberDao.plusMinusBalance(userId, wdl_bonus_money);
+						memberDao.plusMinusPoint(userId, wdl_bonus_point);
 					}
 				} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
 					if (betting.getSuccessCount() >= Admin.HANDY_BONUS_LIMIT) {
 						Double handy_bonus_rate = Admin.HANDY_BONUS_RATE.doubleValue() * 0.01;
-						Long handy_bonus_money = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());
+						Long handy_bonus_point = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());
 						
-						account.setUserId(userId);
-						account.setType(Code.ACCOUNT_TYPE_BONUS);
-						account.setDate(new Date());
-						account.setOldBalance(member.getBalance());
-						account.setMoney(handy_bonus_money);
-						account.setBalance(member.getBalance() + handy_bonus_money);
-						account.setBettingId(betting.getId());
-						account.setNote("핸디캡 " + Admin.HANDY_BONUS_LIMIT + "폴더 이상 " + Admin.HANDY_BONUS_RATE + "%");
-						accountDao.insertAccount(account);
+						Point pointLog = new Point();
+						pointLog.setUserId(userId);
+						pointLog.setType(Code.POINT_TYPE_BONUS);
+						pointLog.setDate(new Date());
+						pointLog.setOldBalance(member.getPoint());
+						pointLog.setMoney(handy_bonus_point);
+						pointLog.setBalance(member.getPoint() + handy_bonus_point);
+						pointLog.setBettingId(betting.getId());
+						pointLog.setNote("핸디캡 " + Admin.HANDY_BONUS_LIMIT + "폴더 이상 " + Admin.HANDY_BONUS_RATE + "%");
+						pointDao.insertPoint(pointLog);
 						
-						memberDao.plusMinusBalance(userId, handy_bonus_money);
+						memberDao.plusMinusPoint(userId, handy_bonus_point);
 					}
 				}
 			} catch (Exception e) {

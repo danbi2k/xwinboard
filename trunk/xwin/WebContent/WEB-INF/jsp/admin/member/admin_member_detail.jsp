@@ -84,11 +84,16 @@
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>회원아이디</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getUserId()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<a href='adminBetting.aspx?mode=viewBettingList&focusSearch=userId&keyword=<%=member.getUserId()%>'><%=member.getUserId()%></a>
+		</td>
 	</tr>
    	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>닉네임</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getNickName()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<input name="nickName" type="text" value="<%=member.getNickName()%>"/>
+			<input type="button" value="변경" onclick="changeNickName()"/>
+		</td>
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>보유금액</td>
@@ -325,6 +330,16 @@
 <input type="button" value="발송" onclick="sendMemo()"/>
 </form>
 
+<form name="note">
+<table class="list">
+	<tr>
+		<th width="10%">메모</th>
+		<td><textarea name="note" style='width=100%;height=200px'><%=XwinUtil.nvl(member.getNote())%></textarea></td>
+	</tr>
+</table>
+<input type="button" value="저장" onclick="saveNote()"/>
+</form>
+<BR>
 <a name="result"></a>
 
 <form method="get" name="search">
@@ -431,6 +446,19 @@ function sendMemo()
 		frm.memo.value = "";
 }
 
+function saveNote()
+{
+	var frm = document.note;
+	var query = "mode=saveNote";
+	query += "&note=" + Xwin.Escape(frm.note.value);
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		location.reload();
+}
+
 function changeGrade()
 {
 	var frm = document.regist;	
@@ -464,6 +492,21 @@ function changeMobile()
 	var frm = document.regist;	
 	var query = "mode=changeMobile";
 	query += "&mobile=" + regist.phone1.value + "-" + regist.phone2.value + "-" + regist.phone3.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.message)
+		location.reload();
+}
+
+function changeNickName()
+{
+	var frm = document.regist;	
+	var query = "mode=changeNickName";
+	query += "&nickName=" + regist.nickName.value;
+	query += "&orgNickName=<%=member.getNickName()%>";
 	query += "&userId=<%=member.getUserId()%>";
 
 	var http = new JKL.ParseXML("adminMember.aspx", query);

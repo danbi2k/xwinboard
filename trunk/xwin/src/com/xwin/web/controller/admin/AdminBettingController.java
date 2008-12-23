@@ -36,6 +36,7 @@ public class AdminBettingController extends XwinController
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String focusSearch = XwinUtil.arcNvl(request.getParameter("focusSearch"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
@@ -47,7 +48,10 @@ public class AdminBettingController extends XwinController
 		param.put("gameType", gameType);
 		param.put("status", status);
 
-		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		if (focusSearch != null)
+			param.put(focusSearch, keyword);
+		else if (keyword != null)
+			param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);

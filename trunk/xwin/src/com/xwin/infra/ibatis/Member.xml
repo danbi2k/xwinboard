@@ -34,6 +34,7 @@
 		<result property="introduceBettingCount" column="INTRO_BET_COUNT"/>
 		<result property="introduceBettingMoney" column="INTRO_BET_MONEY"/>
 		<result property="introduceBettingPoint" column="INTRO_BET_POINT"/>
+		<result property="note" column="NOTE"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
@@ -105,6 +106,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="denyrity">
 				DENYRITY = #denyrity#
+			</isNotNull>
+			<isNotNull prepend="," property="note">
+				NOTE = #note#
 			</isNotNull>
 			<isNotNull prepend="," property="introLetter">
 				INTRO_LETTER = #introLetter#
