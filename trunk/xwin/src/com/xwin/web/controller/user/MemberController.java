@@ -102,9 +102,8 @@ public class MemberController extends XwinController
 										invitation.setJoinId(member.getUserId());
 										invitationDao.updateInvitation(invitation);
 										
-										Member introducer = new Member();
-										introducer.setUserId(invitation.getUserId());
-										introducer.setIntroduceCount(1);
+										Member introducer = memberDao.selectMember(invitation.getUserId(), null);
+										introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
 										memberDao.updateMember(introducer);
 										
 										rx = new ResultXml(0, WelcomeMsg, null);

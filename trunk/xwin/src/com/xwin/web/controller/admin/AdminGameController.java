@@ -305,6 +305,7 @@ public class AdminGameController extends XwinController
 				bettingService.judgeGameResult(game);				
 				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 			} catch (Exception e) {
+				e.printStackTrace();
 				rx = new ResultXml(0, "경기 처리중 오류가 발생하였습니다!!", null);
 			}
 		}
@@ -351,6 +352,7 @@ public class AdminGameController extends XwinController
 				bettingService.judgeGameResult(game);				
 				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
 			} catch (Exception e) {
+				e.printStackTrace();
 				rx = new ResultXml(0, "경기 재처리중 오류가 발생하였습니다!!", null);
 			}
 		}
