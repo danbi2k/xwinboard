@@ -12,7 +12,7 @@
 
 <%@include file="header.jsp"%>
 
-<div id="popup" style="position:absolute;left:50%;top:150px;width:950px;z-index:1;margin-left:-470px;-visibility:hidden;background-color:#111111">
+<div id="popup" style="position:absolute;left:50%;top:410px;width:950px;z-index:1;margin-left:-470px;-visibility:hidden;background-color:#111111">
 <table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"><img src="images/title_left.gif"></td>
@@ -118,9 +118,9 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
 	</td>
 	<td width=50%>
 		<table>
-		<tr><td><font color='orange'><B>&nbsp;Baseball</B></font></td></tr>
+		<tr><td><font color='orange'><B>&nbsp;Ice Hockey</B></font></td></tr>
 		<tr><td>
-		<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/mlb.jpg" border=0></a>
+		<a href="game.aspx?mode=viewGameList&type=wdl"><img src="images/hockey.jpg" border=0></a>
 		</td></tr>
 		</table>
 	</td>
@@ -138,7 +138,7 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
 		<table>
 		<tr><td><font color='orange'><B>&nbsp;Sports Bet</B></font></td></tr>
 		<tr><td>
-		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/hockey.jpg" border=0></a>
+		<a href="game.aspx?mode=viewGameList&type=handy"><img src="images/ski.jpg" border=0></a>
 		</td></tr>
 		</table>
 	</td>
