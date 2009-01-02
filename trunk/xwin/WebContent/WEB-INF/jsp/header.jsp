@@ -155,10 +155,7 @@ if (login) {
 <% } else { %>
 <%} %>
 </table>
-<!--img id="mainImage" src="images/wall04.jpg" style="display:none"-->
-<div id="mainImage" style="display:none">
-<embed src="images/greeting_2009.swf" style="width:960;height=280;"/>
-</div>
+<img id="mainImage" src="images/wall04.jpg" style="display:none">
 <script>
 //FnFlash("main","960","280","images/main.swf","");
 if (document.URL.indexOf("home.aspx") > 0) {

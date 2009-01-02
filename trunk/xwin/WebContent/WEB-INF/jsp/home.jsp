@@ -12,7 +12,7 @@
 
 <%@include file="header.jsp"%>
 
-<div id="popup" style="position:absolute;left:50%;top:410px;width:950px;z-index:1;margin-left:-470px;-visibility:hidden;background-color:#111111">
+<div id="popup" style="position:absolute;left:50%;top:130px;width:950px;z-index:1;margin-left:-470px;-visibility:hidden;background-color:#111111">
 <table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"><img src="images/title_left.gif"></td>
