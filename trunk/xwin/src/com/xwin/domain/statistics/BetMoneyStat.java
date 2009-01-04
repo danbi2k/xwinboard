@@ -15,6 +15,8 @@ public class BetMoneyStat extends XwinObject
 	private Date date;
 	private Long inMoney;
 	private Long outMoney;
+	private Long bettingPoint;
+	private Long bonusPoint;
 	
 	public String getId() {
 		return id;
@@ -39,5 +41,17 @@ public class BetMoneyStat extends XwinObject
 	}
 	public void setOutMoney(Long outMoney) {
 		this.outMoney = outMoney;
+	}
+	public Long getBettingPoint() {
+		return bettingPoint;
+	}
+	public void setBettingPoint(Long bettingPoint) {
+		this.bettingPoint = bettingPoint;
+	}
+	public Long getBonusPoint() {
+		return bonusPoint;
+	}
+	public void setBonusPoint(Long bonusPoint) {
+		this.bonusPoint = bonusPoint;
 	}
 }

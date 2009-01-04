@@ -29,18 +29,22 @@
 		<th>날짜</th>
 		<th>총배팅금액 ①</th>
 		<th>총당첨금액 ②</th>
-		<th>순순익  ① - ②</th>
+		<th>총배팅포인트 ③</th>
+		<th>총보너스포인트 ④</th>
+		<th>순순익  ①-(②+③+④)</th>
 	</tr>
 
 	<%
-	if (betMoneyStatList != null) {
-		for (BetMoneyStat betMoneyStat : betMoneyStatList) {
-			Long benefit = betMoneyStat.getInMoney() - betMoneyStat.getOutMoney();
+		if (betMoneyStatList != null) {
+			for (BetMoneyStat betMoneyStat : betMoneyStatList) {
+		Long benefit = betMoneyStat.getInMoney() - (betMoneyStat.getOutMoney() + betMoneyStat.getBettingPoint() + betMoneyStat.getBonusPoint());
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><%=XwinUtil.toDateStr(betMoneyStat.getDate(), 2)%></td>
 		<td><%=XwinUtil.comma3(betMoneyStat.getInMoney())%></td>
 		<td><%=XwinUtil.comma3(betMoneyStat.getOutMoney())%></td>
+		<td><%=XwinUtil.comma3(betMoneyStat.getBettingPoint())%></td>
+		<td><%=XwinUtil.comma3(betMoneyStat.getBonusPoint())%></td>
 		<td><B><font color='<%=benefit>0?"blue":"red"%>'><%=XwinUtil.comma3(benefit)%></font></B></td>
 	  </tr>
 	<%
