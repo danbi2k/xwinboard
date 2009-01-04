@@ -35,6 +35,8 @@
 		<result property="introduceBettingMoney" column="INTRO_BET_MONEY"/>
 		<result property="introduceBettingPoint" column="INTRO_BET_POINT"/>
 		<result property="note" column="NOTE"/>
+		<result property="boardDenyDate" column="BOARD_DENY_DATE"/>
+		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
@@ -120,6 +122,28 @@
 		WHERE USERID = #userId#			
 	</update>
 	
+	<update id="updateMemberDenyrity" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="boardDenyDate">
+				BOARD_DENY_DATE = #boardDenyDate#
+			</isNotNull>
+			<isNull prepend="," property="boardDenyDate">
+				BOARD_DENY_DATE = null
+			</isNull>
+			<isNotNull prepend="," property="qnaDenyDate">
+				QNA_DENY_DATE = #qnaDenyDate#
+			</isNotNull>
+			<isNull prepend="," property="qnaDenyDate">
+				QNA_DENY_DATE = null
+			</isNull>
+			<isNotNull prepend="," property="denyrity">
+				DENYRITY = #denyrity#
+			</isNotNull>		
+		</dynamic>
+		WHERE USERID = #userId#
+	</update>
+	
 	<update id="updateMemberIntroduce" parameterClass="Member">
 		UPDATE tbl_member
 		<dynamic prepend="SET">
@@ -184,7 +208,12 @@
 		<isNotNull prepend="AND" property="introducerId">
 			INTRODUCER_ID = #introducerId#
 		</isNotNull>
-		ORDER BY $orderCol$ $orderBy$
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
+		</isNotNull>
+		<isNotNull property="orderCol">
+			ORDER BY $orderCol$ $orderBy$
+		</isNotNull>
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
 		</isNotNull>
@@ -214,6 +243,9 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="introducerId">
 			INTRODUCER_ID = #introducerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
 		</isNotNull>
 	</select>
 	

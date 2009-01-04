@@ -28,7 +28,7 @@
 <html>
 <head>
 <title>No1Bet</title>
-    <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=Euc-Kr">
+    <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=UTF-8">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">

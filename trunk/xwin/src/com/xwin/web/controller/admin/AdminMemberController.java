@@ -353,19 +353,26 @@ public class AdminMemberController extends XwinController
 		
 		String deny_board = request.getParameter("deny_board");
 		String deny_qna = request.getParameter("deny_qna");
+		String _board_deny_date = request.getParameter("board_deny_date");
+		String _qna_deny_date = request.getParameter("qna_deny_date");
 		String userId = request.getParameter("userId");
 		
-		Integer denyrity = 0;
-		if (deny_board != null)
-			denyrity |= Code.DENY_WRITE_BOARD;
-		if (deny_qna != null)
-			denyrity |= Code.DENY_WRITE_QNA;
-		
 		Member member = new Member();
-		member.setUserId(userId);
-		member.setDenyrity(denyrity);
+		Integer denyrity = 0;
+		if (deny_board != null) {
+			denyrity |= Code.DENY_WRITE_BOARD;
+			Date board_deny_date = XwinUtil.toDate(_board_deny_date);
+			member.setBoardDenyDate(board_deny_date);
+		}
+		if (deny_qna != null) {
+			denyrity |= Code.DENY_WRITE_QNA;
+			Date qna_deny_date = XwinUtil.toDate(_qna_deny_date);
+			member.setQnaDenyDate(qna_deny_date);
+		}
 		
-		memberDao.updateMember(member);		
+		member.setUserId(userId);
+		member.setDenyrity(denyrity);		
+		memberDao.updateMemberDenyrity(member);		
 	
 		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

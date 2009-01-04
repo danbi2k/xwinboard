@@ -47,6 +47,9 @@ public class Member extends XwinObject
 	private Long bettingSum;
 	private Long profit;
 	
+	private Date boardDenyDate;
+	private Date qnaDenyDate;
+	
 	public String getId() {
 		return id;
 	}
@@ -239,5 +242,17 @@ public class Member extends XwinObject
 	}
 	public void setProfit(Long profit) {
 		this.profit = profit;
+	}
+	public Date getBoardDenyDate() {
+		return boardDenyDate;
+	}
+	public void setBoardDenyDate(Date boardDenyDate) {
+		this.boardDenyDate = boardDenyDate;
+	}
+	public Date getQnaDenyDate() {
+		return qnaDenyDate;
+	}
+	public void setQnaDenyDate(Date qnaDenyDate) {
+		this.qnaDenyDate = qnaDenyDate;
 	}
 }

@@ -246,9 +246,27 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>권한</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-		<input type="checkbox" name="deny_board" value="<%=Code.DENY_WRITE_BOARD%>" <%=(member.getDenyrity()&Code.DENY_WRITE_BOARD) > 0 ? "checked":""%>/> 게시판 쓰기 금지 <BR>
-		<input type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> 고객센터 쓰기 금지<BR>
-		<input type="button" value="변경" onclick="changeDenyrity()"/>
+		<table width=100%>
+		<tr>
+		<td><input onclick="resetBoardDenyDate(this)" type="checkbox" name="deny_board" value="<%=Code.DENY_WRITE_BOARD%>" <%=(member.getDenyrity()&Code.DENY_WRITE_BOARD) > 0 ? "checked":""%>/> 게시판 쓰기 금지</td>
+		<td>
+			<span onclick="setBoardDenyDate(5)">5일</span>&nbsp;&nbsp;
+			<span onclick="setBoardDenyDate(10)">10일</span>&nbsp;&nbsp;
+			<span onclick="setBoardDenyDate(15)">15일</span>&nbsp;&nbsp;
+		</td>
+		<td>금지해제일 : <input type='text' name='board_deny_date' value='<%=XwinUtil.toDateStr(member.getBoardDenyDate(), 2)%>' size=10 readonly onClick="popUpCalendar(this,board_deny_date,'yyyy-mm-dd');" style="cursor:hand"></td>
+		</tr>
+		<tr>
+		<td><input onclick="resetQnaDenyDate(this)" type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> 고객센터 쓰기 금지</td>
+		<td>
+			<span onclick="setQnaDenyDate(5)">5일</span>&nbsp;&nbsp;
+			<span onclick="setQnaDenyDate(10)">10일</span>&nbsp;&nbsp;
+			<span onclick="setQnaDenyDate(15)">15일</span>&nbsp;&nbsp;
+		</td>
+		<td>금지해제일 : <input type='text' name='qna_deny_date' value='<%=XwinUtil.toDateStr(member.getQnaDenyDate(), 2)%>' size=10 readonly onClick="popUpCalendar(this,qna_deny_date,'yyyy-mm-dd');" style="cursor:hand"></td>
+		</tr>		
+		</table>
+		<input type="button" value="변경" onclick="changeDenyrity()"/> ※ 금지 해제일을 넣지 않으면 수동으로 금지 해제 하셔야 합니다.
 		</td>
  	</tr>
 	<!-- 
@@ -520,10 +538,14 @@ function changeDenyrity()
 {
 	var frm = document.regist;	
 	var query = "mode=changeDenyrity";
-	if (frm.deny_board.checked)
+	if (frm.deny_board.checked) {
 		query += "&deny_board=" + frm.deny_board.value;
-	if (frm.deny_qna.checked)
+		query += "&board_deny_date=" + frm.board_deny_date.value;
+	}
+	if (frm.deny_qna.checked) {
 		query += "&deny_qna=" + frm.deny_qna.value;
+		query += "&qna_deny_date=" + frm.qna_deny_date.value;
+	}
 	
 	query += "&userId=<%=member.getUserId()%>";
 
@@ -581,6 +603,38 @@ function recorverMember()
 		if (result.resultXml.code == 0)
 			location.href = "adminMember.aspx?mode=viewAdminMember&status=US001";
 	}	
+}
+
+function resetBoardDenyDate(tobj)
+{
+	var frm = document.regist;
+	if (tobj.checked == false)
+		frm.board_deny_date.value = "";
+}
+
+function resetQnaDenyDate(tobj)
+{
+	var frm = document.regist;
+	if (tobj.checked == false)
+		frm.qna_deny_date.value = "";
+}
+
+function setBoardDenyDate(duration)
+{
+	var frm = document.regist;
+	var today = new Date();
+	var endDate = new Date();
+	endDate.setDate(today.getDate() + duration);
+	document.regist.board_deny_date.value = (endDate.getYear()) + "-" + (endDate.getMonth()+1) + "-" + endDate.getDate();
+}
+
+function setQnaDenyDate(duration)
+{
+	var frm = document.regist;
+	var today = new Date();
+	var endDate = new Date();
+	endDate.setDate(today.getDate() + duration);
+	document.regist.qna_deny_date.value = (endDate.getYear()) + "-" + (endDate.getMonth()+1) + "-" + endDate.getDate();
 }
 
 function goPage(index)
