@@ -122,6 +122,7 @@
 		class="com.xwin.web.controller.external.ExternalController"
 		p:transactionDao-ref="transactionDao"
 		p:smsWaitDao-ref="smsWaitDao"
+		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="controllerNameResolver"

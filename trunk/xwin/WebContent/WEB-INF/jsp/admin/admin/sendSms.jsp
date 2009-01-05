@@ -66,7 +66,7 @@ var targetCheck = 0;
 	-->
 	<tr>
 		<td>발신번호</td>
-		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value=""></td>
+		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="0000000000"></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="submit1" value="전송" onClick="onSubmit();">	<input type="reset" name="Submit5" value="취소"></td>
