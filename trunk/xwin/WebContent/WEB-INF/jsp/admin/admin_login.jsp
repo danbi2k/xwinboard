@@ -64,8 +64,8 @@ function goButton(form)
 							<td>아이디</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="1" maxLength="20" name="userid" value=""></td>
-							<td style="PADDING-LEFT: 5px" rowSpan="2">							
-							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
+							<td style="PADDING-LEFT: 5px" rowSpan="3">							
+							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:61px" ID="login_bttn"></td>
 						</tr>
 						<tr>
 							<td>비밀번호</td>
