@@ -20,10 +20,11 @@ public class AdminLoginController extends XwinController
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
+		String pin = request.getParameter("pin");
 		
 		Member admin = memberDao.selectMember(userId, Code.USER_GRADE_ADMIN);
 		
-		if (admin!= null && admin.getPassword().equals(password)) {
+		if (admin!= null && admin.getPassword().equals(password) && admin.getPin().equals(pin)) {
 			request.getSession().setAttribute("Admin", admin);
 			rx = ResultXml.SUCCESS;
 		} else {

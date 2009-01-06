@@ -14,10 +14,12 @@ function checkIT() {
 	var d=document.regist;
 	if(!d.userId.value) { alert('아이디를 입력하세요'); d.userId.focus(); return false; }
 	if(!d.password.value) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
+	if(!d.pin.value) { alert('환전비밀번호를 입력하세요'); d.pin.focus(); return false; }
 	
 	var query = "mode=processLogin";
 	query += "&userId=" + d.userId.value;
 	query += "&password=" + d.password.value;
+	query += "&pin=" + d.pin.value;
 	
 	var http = new JKL.ParseXML("login.aspx", query);
 	var result = http.parse();
@@ -66,6 +68,11 @@ function goButton(form)
 							<td>비밀번호</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
+						</tr>
+						<tr>
+							<td>환전비밀번호</td>
+							<td style="PADDING-LEFT: 5px">
+							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
 						</tr>
 						<tr><td></td></tr>
 					</table>

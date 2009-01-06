@@ -527,4 +527,108 @@ public class AdminMemberController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView changePassword(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String password = request.getParameter("password").trim();
+		String userId = request.getParameter("userId").trim();
+		
+		ResultXml rx = null;
+		
+		if (password == null || password.length() < 4)
+			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력 하세요", null);
+		else {
+			Member member = new Member();
+			member.setPassword(password);
+			member.setUserId(userId);
+			memberDao.updateMember(member);
+			
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changePin(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String pin = request.getParameter("pin").trim();
+		String userId = request.getParameter("userId").trim();
+		
+		ResultXml rx = null;
+		
+		if (pin == null || pin.length() < 4)
+			rx = new ResultXml(-1, "환전비밀번호를 4자 이상 입력 하세요", null);
+		else {
+			Member member = new Member();
+			member.setPin(pin);
+			member.setUserId(userId);
+			memberDao.updateMember(member);
+			
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changeGetSms(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String getSms = request.getParameter("getSms").trim();
+		String userId = request.getParameter("userId").trim();
+		
+		ResultXml rx = null;
+		
+		Member member = new Member();
+		member.setGetSms(getSms);
+		member.setUserId(userId);
+		memberDao.updateMember(member);
+		
+		rx = new ResultXml(0, "변경되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changePasswordExpire(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String passwordExpire = request.getParameter("passwordExpire").trim();
+		String userId = request.getParameter("userId").trim();
+		
+		ResultXml rx = null;
+		
+		Member member = new Member();
+		member.setPasswordExpire(passwordExpire);
+		member.setUserId(userId);
+		memberDao.updateMember(member);
+		
+		rx = new ResultXml(0, "변경되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

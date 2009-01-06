@@ -45,6 +45,8 @@ public class BoardController extends XwinController
 		grade = member.getGrade();
 		
 		ModelAndView mv = viewBoard(pageIndex, boardName, userId, grade);
+		if (boardName.equals("qna"))
+			mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
 	}
@@ -92,6 +94,8 @@ public class BoardController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("board/boardDetail");
 		mv.addObject("boardItem", boardItem);
+		if (boardName.equals("qna"))
+			mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
 	}
@@ -115,6 +119,8 @@ public class BoardController extends XwinController
 			return new ModelAndView("illegal");
 		
 		ModelAndView mv = new ModelAndView("board/boardWrite");
+		if (boardName.equals("qna"))
+			mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
 	}
@@ -152,6 +158,8 @@ public class BoardController extends XwinController
 		boardDao.insertBoardComment(boardComment);
 		
 		ModelAndView mv = new ModelAndView("redirect:/board.aspx?mode=viewBoardDetail&boardName="+boardName+"&addComment=true&id=" + boardId);
+		if (boardName.equals("qna"))
+			mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
 	}
@@ -194,6 +202,8 @@ public class BoardController extends XwinController
 	
 		ModelAndView mv = null;
 		mv = new ModelAndView("redirect:/board.aspx?mode=viewBoard&boardName=" + boardName);
+		if (boardName.equals("qna"))
+			mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
 	}

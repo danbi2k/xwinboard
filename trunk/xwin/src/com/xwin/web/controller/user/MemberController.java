@@ -143,10 +143,12 @@ public class MemberController extends XwinController
 			if (phonePin.equals(command.getPhonePin())) {
 				rx = checkPassword(command.getPassword1(), command.getPassword2());
 				if (rx.getCode() == 0) {
-					//rx = checkEmail(command.getEmail1(), command.getEmail2());
-					//if (rx.getCode() == 0) {
+					rx = checkPin(command.getPin());
+					if (rx.getCode() == 0) {
 						member.setPassword(command.getPassword1());
+						member.setPin(command.getPin());
 						member.setGetSms(command.getSmsCheck());
+						member.setPasswordExpire("N");
 						//member.setNickName(command.getNickName());
 						//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
 						//member.setEmail(command.getEmail1() + "@" + command.getEmail2());
@@ -159,7 +161,7 @@ public class MemberController extends XwinController
 						memberDao.updateMember(member);
 							
 						rx = ResultXml.SUCCESS;
-					//}			
+					} 		
 				}
 			} else {
 				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);
@@ -205,7 +207,7 @@ public class MemberController extends XwinController
 		ResultXml rx = null;
 		
 		if ((pin == null || pin.length() < 4))
-			rx = new ResultXml(-1, "출금비밀번호는 4자 이상 입력하세요", null);
+			rx = new ResultXml(-1, "환전비밀번호는 4자 이상 입력하세요", null);
 		else
 			rx = ResultXml.SUCCESS;
 		

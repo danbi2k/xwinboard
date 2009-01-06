@@ -50,6 +50,8 @@ public class Member extends XwinObject
 	private Date boardDenyDate;
 	private Date qnaDenyDate;
 	
+	private String passwordExpire;
+	
 	public String getId() {
 		return id;
 	}
@@ -254,5 +256,11 @@ public class Member extends XwinObject
 	}
 	public void setQnaDenyDate(Date qnaDenyDate) {
 		this.qnaDenyDate = qnaDenyDate;
+	}
+	public String getPasswordExpire() {
+		return passwordExpire;
+	}
+	public void setPasswordExpire(String passwordExpire) {
+		this.passwordExpire = passwordExpire;
 	}
 }

@@ -67,6 +67,7 @@ function FnMemModify(frm)
 	query += "&userId=" + frm.userId.value;
 	query += "&password1=" + frm.password1.value;
 	query += "&password2=" + frm.password2.value;
+	query += "&pin=" + frm.pin.value;
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
 	query += "&phone1=" + frm.phone1.value;
@@ -90,7 +91,7 @@ function FnMemModify(frm)
 	
 	if (result.resultXml.code == 0) {
 		alert("수정되었습니다");
-		location.href ="index.aspx";
+		location.href ="home.aspx";
 	} else {
 		alert(result.resultXml.message);
 	}	

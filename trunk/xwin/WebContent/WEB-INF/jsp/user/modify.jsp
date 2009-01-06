@@ -18,6 +18,7 @@
 	} 
 	
 	boolean needBank = member.getBankName() == null || member.getBankName().length() == 0;
+	boolean needExpire = member.getPasswordExpire().equals("Y");
 %>
 <!--
 <table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
@@ -98,6 +99,10 @@ function SetNICK(nick){
 	<tr><td>환전계좌번호</td>
 		<td><%=member.getBankName()%> <%=member.getBankNumber()%> <%=member.getBankOwner()%></td>
 	<%} %>
+	</tr>
+	<tr><td valign=top><b><font color=#FF9933>새 환전비밀번호<br>[사이트 해킹방지용<br> 비밀번호입니다]</font></b></td>
+		<td><input class="member" name="pin" type="password" value=""/>
+	</tr>
 	</table>
 
 	<table width="800" style="margin-top:10">
@@ -148,6 +153,14 @@ function SetNICK(nick){
 if (needBank) {
 %>
 alert("환전계좌를 등록해 주십시오\n환전업무는 등록된 환전계좌로만 가능하며 환전계좌 변경시에는\n고객센터로 문의해주시면 본인인증절차를 거쳐 변경해드립니다");
+<%
+}
+%>
+
+<%
+if (needExpire) {
+%>
+alert("비밀번호가 만료되었습니다\n비밀번호를 변경해 주십시오\n");
 <%
 }
 %>

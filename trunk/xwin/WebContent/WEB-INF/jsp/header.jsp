@@ -62,6 +62,14 @@
 	location.href = "member.aspx?mode=viewModifyForm";
 	<%
 	}
+	%>
+
+	<%
+	if (login && (member.getPasswordExpire().equals("Y")) && isModify == false) {
+	%>
+	location.href = "member.aspx?mode=viewModifyForm";
+	<%
+	}
 	%>	
 	</script>
 </head>
@@ -97,15 +105,15 @@ if (login) {
 	<table>
 	<tr>
 	<td><img src="images/login_img2.gif" hspace="10"></td>
-	<td align="center"><b><%=member.getNickName()%></b></td>
+	<td align="center" nowrap><b><%=member.getNickName()%></b></td>
 
 	<td style="padding-right:10;padding-left:10;">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td><img src="images/money_1.gif"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;"><%=XwinUtil.comma3(member.getBalance())%></td>
+			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;" nowrap><%=XwinUtil.comma3(member.getBalance())%></td>
 			<td><img src="images/money_3.gif"></td>
 			<td>&nbsp;<img src="images/point.jpg"></td>
-			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;" onclick="exchangePoint(<%=member.getPoint()%>)"><%=XwinUtil.comma3(member.getPoint())%></td>
+			<td background="images/money_2.gif" width="40" align="right" style="padding-left:5;color:orange;padding-top:3;" onclick="exchangePoint(<%=member.getPoint()%>)" nowrap><%=XwinUtil.comma3(member.getPoint())%></td>
 			<td><img src="images/money_3.gif"></td>
 		</tr>
 		</table>

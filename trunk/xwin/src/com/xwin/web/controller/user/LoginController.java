@@ -39,6 +39,7 @@ public class LoginController extends XwinController
 		} else {		
 			String userId = request.getParameter("userId");
 			String password = request.getParameter("password");
+			String pin = request.getParameter("pin");
 			
 			Member member = memberDao.selectMember(userId, null);
 			
@@ -55,6 +56,9 @@ public class LoginController extends XwinController
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
 				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
+			} else if (comparePassword(member.getPin(), pin) == false) {
+				rx.setCode(-1);
+				rx.setMessage("환전비밀번호를 잘못 입력하셨습니다");
 			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
 				rx.setCode(-1);
 				rx.setMessage("탈퇴 요청 중입니다");
@@ -66,12 +70,6 @@ public class LoginController extends XwinController
 				HttpSession session = request.getSession();
 				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
-				
-				if (logger.isInfoEnabled()) {
-					logger
-							.info("processLogin(HttpServletRequest, HttpServletResponse) - member="
-									+ member);
-				}
 			}
 			
 			if (member != null) {

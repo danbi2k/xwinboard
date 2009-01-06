@@ -37,6 +37,7 @@
 		<result property="note" column="NOTE"/>
 		<result property="boardDenyDate" column="BOARD_DENY_DATE"/>
 		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
+		<result property="passwordExpire" column="PASSWORD_EXPIRE"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
@@ -75,6 +76,9 @@
 		<dynamic prepend="SET">
 			<isNotNull prepend="," property="password">
 				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="," property="pin">
+				PIN = #pin#
 			</isNotNull>
 			<isNotNull prepend="," property="nickName">
 				NICKNAME = #nickName#
@@ -117,6 +121,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="introduceCount">
 				INTRO_COUNT = #introduceCount#
+			</isNotNull>
+			<isNotNull prepend="," property="passwordExpire">
+				PASSWORD_EXPIRE = #passwordExpire#
 			</isNotNull>
 		</dynamic>
 		WHERE USERID = #userId#			

@@ -6,11 +6,12 @@
 <!--
 		function checkIT() {
 		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
+		if(!d.password.value) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
 
 		var query = "mode=updateAdminInfo";
 		query += "&nickName=" + d.name.value;
-		query += "&password=" + d.passwd.value;
+		query += "&password=" + d.password.value;
+		query += "&pin=" + d.pin.value;
 		query += "&mobile=" + d.phone.value;
 		query += "&email=" + d.email.value;
 
@@ -18,6 +19,7 @@
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
+			location.reload();
 		}
 		else {
 		}
@@ -38,8 +40,12 @@
 		</tr>	
 	     <tr align="center" bgcolor="#E4E4E4" height=20>
 			<td width=20%>비밀번호</td>
-			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='passwd' value='<%=admin.getPassword()%>'></td>
-		</tr>		
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='password' value='<%=admin.getPassword()%>'></td>
+		</tr>
+		 <tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>PIN</td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='pin' value='<%=admin.getPin()%>'></td>
+		</tr>			
 		<tr align="center" bgcolor="#E4E4E4" height=20>
 			<td width=20%>전화번호</td>
 			<td width=80% bgcolor='#ffffff' align='left'><input type='text' size='40' name='phone' value='<%=admin.getMobile()%>'></td>

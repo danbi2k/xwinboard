@@ -111,7 +111,10 @@
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPassword()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<input name="password" type="text" value="<%=member.getPassword()%>"/>
+			<input type="button" value="변경" onclick="changePassword()"/>
+		</td>
  	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
@@ -127,6 +130,8 @@
 			<input name="phone2" type="text" size="4" maxlength="4" value="<%=phone[1]%>"> -
 			<input name="phone3" type="text" size="4" maxlength="4" value="<%=phone[2]%>">		
 			<input type="button" value="변경" onclick="changeMobile()"/>
+			<BR>
+			SMS수신 <input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%> onclick="changeGetSms()"/>
 		</td>
 	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -138,8 +143,11 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>출금비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getPin()%></td>
+		<td width=20%>환전비밀번호</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<input name="pin" type="text" value="<%=member.getPin()%>"/>
+			<input type="button" value="변경" onclick="changePin()"/>
+		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>가입일</td>
@@ -247,6 +255,9 @@
 		<td width=20%>권한</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 		<table width=100%>
+		<tr>
+		<td colspan="3"><input type="checkbox" name="expireCheck" <%=member.getPasswordExpire().equals("Y")?"checked":""%> onclick="changePasswordExpire()"/> 비밀번호의무변경</td>
+		</tr>
 		<tr>
 		<td><input onclick="resetBoardDenyDate(this)" type="checkbox" name="deny_board" value="<%=Code.DENY_WRITE_BOARD%>" <%=(member.getDenyrity()&Code.DENY_WRITE_BOARD) > 0 ? "checked":""%>/> 게시판 쓰기 금지</td>
 		<td>
@@ -487,7 +498,7 @@ function changeGrade()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
 }
 
@@ -501,7 +512,7 @@ function changeEmail()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
 }
 
@@ -515,7 +526,7 @@ function changeMobile()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
 }
 
@@ -530,7 +541,7 @@ function changeNickName()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
 }
 
@@ -552,7 +563,7 @@ function changeDenyrity()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
 }
 
@@ -575,8 +586,84 @@ function changeBankInfo()
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
-	if (result.resultXml.message)
+	if (result.resultXml.code == 0)
 		location.reload();
+}
+
+function changePassword()
+{
+	var frm = document.regist;
+	if (frm.password != undefined) {
+		if (!frm.password.value) {
+			alert("비밀번호를 입력해 주십시오");
+			return;
+		}
+	}
+	
+	var query = "mode=changePassword";
+	query += "&password=" + frm.password.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		location.reload();
+}
+
+function changePin()
+{
+	var frm = document.regist;
+	if (frm.pin!= undefined) {
+		if (!frm.pin.value) {
+			alert("환전비밀번호를 입력해 주십시오");
+			return;
+		}
+	}
+	
+	var query = "mode=changePin";
+	query += "&pin=" + frm.pin.value;
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	if (result.resultXml.code == 0)
+		location.reload();
+}
+
+function changeGetSms()
+{
+	var frm = document.regist;
+		
+	var query = "mode=changeGetSms";
+	if (frm.smsCheck.checked)
+		query += "&getSms=Y";
+	else
+		query += "&getSms=N";
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	location.reload();
+}
+
+function changePasswordExpire()
+{
+	var frm = document.regist;
+		
+	var query = "mode=changePasswordExpire";
+	if (frm.expireCheck.checked)
+		query += "&passwordExpire=Y";
+	else
+		query += "&passwordExpire=N";
+	query += "&userId=<%=member.getUserId()%>";
+
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	alert(result.resultXml.message);
+	location.reload();
 }
 
 function secedeMember()

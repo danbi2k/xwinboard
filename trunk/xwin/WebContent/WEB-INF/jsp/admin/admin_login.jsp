@@ -17,11 +17,13 @@ function checkIT() {
 	
 	var d=document.regist;
 	if(!d.userid.value.trim()) { alert('아이디를 입력하세요'); d.userid.focus(); return false; }
-	if(!d.passwd.value.trim()) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
+	if(!d.password.value.trim()) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
+	if(!d.pin.value.trim()) { alert('PIN을 입력하세요'); d.pin.focus(); return false; }
 	
 	var query = "mode=processLogin";
 	query += "&userId=" + d.userid.value;
-	query += "&password=" + d.passwd.value;
+	query += "&password=" + d.password.value;
+	query += "&pin=" + d.pin.value;
 
 	var http = new JKL.ParseXML("adminLogin.aspx", query);
 	var result = http.parse();
@@ -68,7 +70,12 @@ function goButton(form)
 						<tr>
 							<td>비밀번호</td>
 							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="passwd" onkeydown="goButton()"></td>
+							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
+						</tr>
+						<tr>
+							<td>PIN</td>
+							<td style="PADDING-LEFT: 5px">
+							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
 						</tr>
 					</table>
 					</td>
@@ -92,7 +99,7 @@ function goButton(form)
 
 <SCRIPT LANGUAGE="JavaScript">
 <!--
-if((regist.userid.value != "") && (regist.passwd.value != "")){
+if((regist.userid.value != "") && (regist.password.value != "")){
 		document.getElementById("login_bttn").click();
 }
 //-->
