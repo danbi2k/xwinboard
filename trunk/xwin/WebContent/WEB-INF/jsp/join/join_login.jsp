@@ -60,7 +60,7 @@ function goButton(form)
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="1" name="inviteKey" value=""></td>
 							<td style="PADDING-LEFT: 5px" rowSpan="2">							
-							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
+							<img src="images/admin/btn_login2.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
 						</tr>
 						<tr>
 							<td>소개인ID</td>
