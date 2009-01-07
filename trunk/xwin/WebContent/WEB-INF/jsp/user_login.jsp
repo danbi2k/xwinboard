@@ -44,16 +44,14 @@ function goButton(form)
 //-->
 </SCRIPT>
 
-<body onLoad="document.regist.userId.focus()" bgcolor="#333333">
+<body onLoad="document.regist.userId.focus()" bgcolor="#000000">
+<img src="images/genesis.jpg" style="position:absolute;left:50%;top:70px;width:950px;margin-left:-470px;">
+<div style="position:absolute;left:50%;top:300px;width:950px;z-index:1;margin-left:-470px;">
 	<form method='post' name='regist'">
 	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
 		<tr>
 			<td align="center" valign="top"  style="padding-top:100px">
-			<table style="BORDER-RIGHT: #000000 5px solid; BORDER-TOP: #000000 5px solid; BORDER-LEFT: #000000 5px solid; BORDER-BOTTOM: #000000 5px solid" height="250" cellSpacing="0" cellPadding="0" width="480" bgColor="#d9d8d6" id="table2">
-				<tr>
-					<td style="PADDING-LEFT: 20px; FONT: bold 20pt verdana; COLOR: #ffffff" bgColor="#000000" height="70" align="center">
-					로그인</td>
-				</tr>
+			<table style="BORDER-RIGHT: #000000 2px solid; BORDER-TOP: #000000 2px solid; BORDER-LEFT: #000000 2px solid; BORDER-BOTTOM: #000000 2px solid" cellSpacing="0" height="80" cellPadding="0" width="280" bgColor="#d9d8d6" id="table2">
 				<tr>
 					<td valign="center" align="middle">
 					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
@@ -81,7 +79,7 @@ function goButton(form)
 			</table>
 			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
 				<tr>
-					<td align="center"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
+					<td align="center" height="30"><!-- font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font --></td>
 
 				</tr>
 				<tr><td height="15"></td></tr>
@@ -93,6 +91,7 @@ function goButton(form)
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>
 
