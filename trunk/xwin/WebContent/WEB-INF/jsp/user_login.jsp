@@ -46,7 +46,7 @@ function goButton(form)
 
 <body onLoad="document.regist.userId.focus()" bgcolor="#000000">
 <img src="images/genesis.jpg" style="position:absolute;left:50%;top:70px;width:950px;margin-left:-470px;">
-<div style="position:absolute;left:50%;top:300px;width:950px;z-index:1;margin-left:-470px;">
+<div style="position:absolute;left:50%;top:400px;width:950px;z-index:1;margin-left:-470px;">
 	<form method='post' name='regist'">
 	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
 		<tr>
@@ -68,7 +68,7 @@ function goButton(form)
 							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
 						</tr>
 						<tr>
-							<td>환전비밀번호</td>
+							<td>PIN번호</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
 						</tr>
@@ -79,7 +79,7 @@ function goButton(form)
 			</table>
 			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
 				<tr>
-					<td align="center" height="30"><!-- font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font --></td>
+					<td align="center" height="30"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
 
 				</tr>
 				<tr><td height="15"></td></tr>

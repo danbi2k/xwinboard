@@ -58,7 +58,7 @@ public class LoginController extends XwinController
 				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
 			} else if (comparePassword(member.getPin(), pin) == false) {
 				rx.setCode(-1);
-				rx.setMessage("환전비밀번호를 잘못 입력하셨습니다");
+				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
 			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
 				rx.setCode(-1);
 				rx.setMessage("탈퇴 요청 중입니다");

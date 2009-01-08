@@ -73,7 +73,7 @@ public class AdminInfoController extends XwinController
 		adminDao.updateAdmin("DENY_BOARD", DENY_BOARD);
 		adminDao.updateAdmin("DENY_QNA", DENY_QNA);
 		adminDao.updateAdmin("DENY_CHARGE", DENY_CHARGE);
-		adminDao.updateAdmin("DENY_EXCHAnGE", DENY_EXCHANGE);
+		adminDao.updateAdmin("DENY_EXCHANGE", DENY_EXCHANGE);
 		
 		Admin.DENY_JOIN = DENY_JOIN;
 		Admin.DENY_BOARD = DENY_BOARD;
