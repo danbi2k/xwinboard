@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
+import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.game.League;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
-import com.xwin.web.command.GameCartItem;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -38,7 +38,7 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		session.setAttribute("gameFolder_" + type, new GameFolder());
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
@@ -154,7 +154,7 @@ public class GameController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView deleteCart(HttpServletRequest request,
+	public ModelAndView deleteFolder(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
@@ -163,7 +163,7 @@ public class GameController extends XwinController
 			return new ModelAndView("dummy");
 		
 		String type = request.getParameter("type");
-		request.getSession().setAttribute("cartMap_" + type, new HashMap<String, GameCartItem>());
+		request.getSession().setAttribute("gameFolder_" + type, new GameFolder());
 		
 		ResultXml resultXml = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

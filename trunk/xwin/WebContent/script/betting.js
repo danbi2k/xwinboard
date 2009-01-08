@@ -22,7 +22,7 @@ function FnDrawCartCheck(type)
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
-		var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 		for (i in data) {
 			var id = "check" + data[i].gameId +	data[i].guess;
 			var obj = document.getElementById(id);
@@ -55,7 +55,7 @@ function FnDeleteGameCart(id, type, guess)
 		if (obj)
 			obj.checked = false;
 		
-		var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 		FnDrawCart(data, type);
 	}
 }
@@ -93,7 +93,7 @@ function FnGameBet(cobj, id, type, guess)
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
-		var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 		FnDrawCart(data, type);
 	} else {
 		alert(result.resultXml.message);
@@ -101,7 +101,7 @@ function FnGameBet(cobj, id, type, guess)
 			cobj.checked = false;
 		}
 		if (result.resultXml.code == -1) {
-			var data = Xwin.ToArray(result.resultXml.object.gameCartItem);
+			var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 			FnDrawCart(data, type);
 		} else {
 			location.reload();
@@ -189,7 +189,7 @@ function FnBetting()
 
 function FnDeleteCart(type)
 {
-	var query = "mode=deleteCart";
+	var query = "mode=deleteFolder";
 	query += "&type=" + type;
 	var http = new JKL.ParseXML("game.aspx", query);
 	var result = http.parse();

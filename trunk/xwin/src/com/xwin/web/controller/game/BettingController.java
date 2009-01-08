@@ -1,31 +1,28 @@
 package com.xwin.web.controller.game;
 
-import org.apache.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Point;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
+import com.xwin.domain.game.GameFolder;
+import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
-import com.xwin.web.command.AllCartItem;
-import com.xwin.web.command.CartCalc;
-import com.xwin.web.command.GameCartItem;
+import com.xwin.web.command.FolderCalc;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -47,10 +44,10 @@ public class BettingController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
-		List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
+		//List<AllCartItem> allCartList = (List<AllCartItem>) request.getSession().getAttribute("allCartList");
 		
 		ModelAndView mv = new ModelAndView("game/betting_cart");
-		mv.addObject(allCartList);
+		//mv.addObject(allCartList);
 		
 		return mv;
 	}
@@ -72,15 +69,15 @@ public class BettingController extends XwinController
 		Member sessionMember = (Member) session.getAttribute("Member");		
 		Member member = memberDao.selectMember(sessionMember.getUserId(), null);
 		
-		Map<String, GameCartItem> cartMap =
-			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + _type);
+		GameFolder gameFolder =
+			(GameFolder)session.getAttribute("gameFolder_" + _type);
 		
 		Betting betting = new Betting();
 		Long money = Long.parseLong(_money);		
-		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
+		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
 		
-		Collection<GameCartItem> cartCol = cartMap.values();
-		for (GameCartItem gci : cartCol) {
+		Collection<GameFolderItem> folderCol = gameFolder.values();
+		for (GameFolderItem gci : folderCol) {
 			Game game = gameDao.selectGame(gci.getGameId());
 			String guess = gci.getGuess();
 			if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
@@ -98,25 +95,25 @@ public class BettingController extends XwinController
 			}
 		}
 		
-		if (cartCol.size() == 0) {
+		if (folderCol.size() == 0) {
 			rx = new ResultXml(-1, "경기를 선택 하십시오", null);
 		}
-		else if (cc.getMoney() < 5000) {
+		else if (fc.getMoney() < 5000) {
 			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
 		}
-		else if (cc.getMoney() > 1000000) {
+		else if (fc.getMoney() > 1000000) {
 			rx = new ResultXml(-1, "최대 배팅 금액은 1000,000원 입니다", null);
 		}
-		else if (cc.getExpect() > MAX_EXPECT) {
+		else if (fc.getExpect() > MAX_EXPECT) {
 			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
 		}
-		else if (cc.getAfter() < 0) {
+		else if (fc.getAfter() < 0) {
 			rx = new ResultXml(-1, "잔액이 부족합니다", null);
 		} else {
 			betting.setUserId(member.getUserId());
-			betting.setMoney(cc.getMoney());
-			betting.setRate(cc.getRate());
-			betting.setExpect(cc.getExpect());
+			betting.setMoney(fc.getMoney());
+			betting.setRate(fc.getRate());
+			betting.setExpect(fc.getExpect());
 			betting.setStatus(Code.BET_STATUS_RUN);
 			betting.setDate(new Date());
 			betting.setGameType(_type);
@@ -125,7 +122,7 @@ public class BettingController extends XwinController
 			
 			String bettingId = bettingDao.insertBetting(betting);
 			
-			for (GameCartItem gci : cartCol) {
+			for (GameFolderItem gci : folderCol) {
 				BetGame betGame = new BetGame();
 				betGame.setBettingId(bettingId);
 				betGame.setId(gci.getGameId());
@@ -178,7 +175,7 @@ public class BettingController extends XwinController
 //			
 //			pointDao.insertPoint(pointLog);
 			
-			session.removeAttribute("cartMap_" + _type);
+			session.removeAttribute("gameFolder_" + _type);
 			
 			rx = new ResultXml(0, "배팅 하셨습니다", null);
 			Member betMember = (Member) session.getAttribute("Member");
@@ -213,8 +210,8 @@ public class BettingController extends XwinController
 		String _money = request.getParameter("money");		
 		HttpSession session = request.getSession();
 		
-		Map<String, GameCartItem> cartMap =
-			(Map<String, GameCartItem>)session.getAttribute("cartMap_" + type);
+		GameFolder gameFolder =
+			(GameFolder)session.getAttribute("gameFolder_" + type);
 		
 		Long money = null;
 		ResultXml rx = null;
@@ -226,12 +223,12 @@ public class BettingController extends XwinController
 		}
 		
 		if (money != null) {
-			CartCalc cc = getCartCalc(cartMap, money, member.getBalance());
+			FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
 			
-			if (cc.getExpect() > MAX_EXPECT) {
-				rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", cc);
+			if (fc.getExpect() > MAX_EXPECT) {
+				rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", fc);
 			} else {
-				rx = new ResultXml(0, null, cc);
+				rx = new ResultXml(0, null, fc);
 			}
 		}
 		
@@ -251,7 +248,7 @@ public class BettingController extends XwinController
 		
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
-		Map<String, GameCartItem> cartMap = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
+		GameFolder gameFolder = (GameFolder) session.getAttribute("gameFolder_" + type);
 		Member member = (Member) session.getAttribute("Member");
 		
 		
@@ -264,7 +261,7 @@ public class BettingController extends XwinController
 		if (_money != null)
 			money = Long.parseLong(_money);
 		
-		CartCalc cc = getCartCalc(cartMap, money, member.getBalance());		
+		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());		
 		Game game = gameDao.selectGame(gameId);
 		Double thisRate = null;
 		if (guess.equals("W"))
@@ -277,28 +274,28 @@ public class BettingController extends XwinController
 		int retCode = 0;
 		String message = null;
 		
-		if (cartMap.size() >= 10 && cartMap.containsKey(gameId) == false) {
-			cartMap.remove(game.getId());
+		if (gameFolder.size() >= 10 && gameFolder.containsKey(gameId) == false) {
+			gameFolder.remove(game.getId());
 			retCode = -1;
 			message = "게임은 10개까지 선택 하실 수 있습니다";
 		} else if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
 				game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
-			cartMap.remove(game.getId());
+			gameFolder.remove(game.getId());
 			retCode = -2;
 			message = "배팅 가능 상태가 아닙니다";
 		} else if ((guess.equals("W") && game.getWinDeny().equals("Y") == false) ||
 				(guess.equals("D") && game.getDrawDeny().equals("Y") == false) ||
 				(guess.equals("L") && game.getLoseDeny().equals("Y") == false)) {
-			cartMap.remove(game.getId());
+			gameFolder.remove(game.getId());
 			retCode = -1;
 			message = "배팅 가능 상태가 아닙니다";
 		}
-		else if ((XwinUtil.calcExpectMoney(thisRate * cc.getRate(), money) + cc.getExpect()) > MAX_EXPECT) {
-			cartMap.remove(game.getId());
+		else if ((XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money) + fc.getExpect()) > MAX_EXPECT) {
+			gameFolder.remove(game.getId());
 			retCode = -1;
 			message = "배당금이 300만원을 초과 하였습니다";
 		} else {
-			GameCartItem gci = new GameCartItem();
+			GameFolderItem gci = new GameFolderItem();
 			gci.setGameId(gameId);
 			gci.setHomeTeam(game.getHomeTeam());
 			gci.setAwayTeam(game.getAwayTeam());
@@ -309,11 +306,11 @@ public class BettingController extends XwinController
 			gci.setGuess(guess);
 			gci.setLeague(game.getLeagueName());
 			
-			cartMap.put(gameId, gci);
+			gameFolder.put(gameId, gci);
 		}
 		
-		List<GameCartItem> itemList = new ArrayList<GameCartItem>(cartMap.size());
-		itemList.addAll(cartMap.values());
+		List<GameFolderItem> itemList = new ArrayList<GameFolderItem>(gameFolder.size());
+		itemList.addAll(gameFolder.values());
 		ResultXml rx = new ResultXml(retCode, message, itemList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -333,12 +330,12 @@ public class BettingController extends XwinController
 		String gameId = request.getParameter("gameId");
 		
 		HttpSession session = request.getSession();
-		Map<String, GameCartItem> cartMap = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
+		GameFolder gameFolder = (GameFolder) session.getAttribute("gameFolder_" + type);
 		
-		cartMap.remove(gameId);
+		gameFolder.remove(gameId);
 		
-		List<GameCartItem> cartList = new ArrayList<GameCartItem>(cartMap.size());
-		cartList.addAll(cartMap.values());
+		List<GameFolderItem> cartList = new ArrayList<GameFolderItem>(gameFolder.size());
+		cartList.addAll(gameFolder.values());
 		
 		ResultXml rx = new ResultXml(0, null, cartList);
 		
@@ -359,10 +356,10 @@ public class BettingController extends XwinController
 		String type = request.getParameter("type");
 		
 		HttpSession session = request.getSession();
-		Map<String, GameCartItem> cartMap = (Map<String, GameCartItem>) session.getAttribute("cartMap_" + type);
+		GameFolder gameFolder = (GameFolder) session.getAttribute("gameFolder_" + type);
 		
-		List<GameCartItem> cartList = new ArrayList<GameCartItem>(cartMap.size());
-		cartList.addAll(cartMap.values());
+		List<GameFolderItem> cartList = new ArrayList<GameFolderItem>(gameFolder.size());
+		cartList.addAll(gameFolder.values());
 		
 		ResultXml rx = new ResultXml(0, null, cartList);
 		
@@ -382,21 +379,21 @@ public class BettingController extends XwinController
 		
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
-		session.removeAttribute("cartMap_" + type);
+		session.removeAttribute("gameFolder_" + type);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(new ResultXml(0, null, null)));
 		return mv;
 	}
 	
-	private CartCalc getCartCalc(Map<String, GameCartItem> cartMap, Long money, Long memberBalance)
+	private FolderCalc getFolderCalc(GameFolder gameFolder, Long money, Long memberBalance)
 	{
 		Double totalRate = 0.0;
 		
-		Collection<GameCartItem> cartColl = cartMap.values();
-		if (cartColl != null && cartColl.size() > 0) {
+		Collection<GameFolderItem> folderColl = gameFolder.values();
+		if (folderColl != null && folderColl.size() > 0) {
 			totalRate = 1.0;
-			for (GameCartItem gci : cartColl) {
+			for (GameFolderItem gci : folderColl) {
 				Double rate = null;
 				if (gci.getGuess().equals("W"))
 					rate = gci.getWinRate();
@@ -417,14 +414,14 @@ public class BettingController extends XwinController
 		else
 			after = balance;
 		
-		CartCalc cc = new CartCalc();
+		FolderCalc fc = new FolderCalc();
 		
-		cc.setRate(cutRate);
-		cc.setBalance(balance);
-		cc.setMoney(money);
-		cc.setAfter(after);
-		cc.setExpect(expect);
+		fc.setRate(cutRate);
+		fc.setBalance(balance);
+		fc.setMoney(money);
+		fc.setAfter(after);
+		fc.setExpect(expect);
 		
-		return cc;
+		return fc;
 	}
 }

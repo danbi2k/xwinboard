@@ -2,7 +2,7 @@ package com.xwin.web.command;
 
 import com.xwin.domain.XwinObject;
 
-public class CartCalc extends XwinObject
+public class FolderCalc extends XwinObject
 {
 	private static final long serialVersionUID = 4538168542784029622L;
 	
@@ -12,9 +12,9 @@ public class CartCalc extends XwinObject
 	private Long balance;
 	private Long after;
 	
-	public CartCalc() {}
+	public FolderCalc() {}
 		
-	public CartCalc(Long after, Long balance, Long money, Long expect,
+	public FolderCalc(Long after, Long balance, Long money, Long expect,
 			Double rate) {
 		this.after = after;
 		this.balance = balance;

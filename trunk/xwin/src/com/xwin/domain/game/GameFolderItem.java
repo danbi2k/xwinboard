@@ -1,8 +1,8 @@
-package com.xwin.web.command;
+package com.xwin.domain.game;
 
 import com.xwin.domain.XwinObject;
 
-public class GameCartItem extends XwinObject
+public class GameFolderItem extends XwinObject
 {
 	private static final long serialVersionUID = 5384098081793435381L;
 	

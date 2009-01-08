@@ -8,10 +8,10 @@ import com.xwin.domain.board.BoardItem;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
+import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.game.League;
 import com.xwin.domain.user.MoneyIn;
-import com.xwin.web.command.CartCalc;
-import com.xwin.web.command.GameCartItem;
+import com.xwin.web.command.FolderCalc;
 import com.xwin.web.command.Indicator;
 import com.xwin.web.command.ResultXml;
 
@@ -26,10 +26,10 @@ public class XmlUtil
 		xstream.alias("betGame", BetGame.class);
 		xstream.alias("betting", Betting.class);
 		xstream.alias("account", MoneyIn.class);
-		xstream.alias("gameCartItem", GameCartItem.class);
+		xstream.alias("gameFolderItem", GameFolderItem.class);
 		xstream.alias("boardItem", BoardItem.class);
 		xstream.alias("boardComment", BoardComment.class);
-		xstream.alias("cartCalc", CartCalc.class);
+		xstream.alias("folderCalc", FolderCalc.class);
 		xstream.alias("resultXml", ResultXml.class);
 		xstream.alias("indicator", Indicator.class);
 		xstream.alias("transaction", Transaction.class);
