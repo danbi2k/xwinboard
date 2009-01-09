@@ -325,7 +325,7 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>직충전</td>
 		<td width=100% bgcolor='#ffffff' align='center'>
-			<input type="text" name="plus" size=30 onkeyup="only123(this); comma3Input(this);"/>
+			<input type="text" name="plus" size=30 />
 		</td>
 		<td>
 			<input type="text" name="plusNote" size=30></input>
@@ -337,7 +337,7 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=100% bgcolor='#ffffff' align='center'>직차감</td>
 		<td width=100% bgcolor='#ffffff' align='center'>
-			<input type="text" name="minus" size=30 onkeyup="only123(this); comma3Input(this);"/>
+			<input type="text" name="minus" size=30 />
 		</td>			
 		<td>
 			<input type="text" name="minusNote" size=30></input>
