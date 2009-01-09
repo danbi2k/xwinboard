@@ -129,6 +129,16 @@
 		WHERE USERID = #userId#			
 	</update>
 	
+	<update id="updateMemberPasswordExpire" parameterClass="Member">
+		UPDATE tbl_member SET
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="passwordExpire">
+				PASSWORD_EXPIRE = #passwordExpire#
+			</isNotNull>
+		</dynamic>
+		WHERE STATUS = #status#
+	</update>
+	
 	<update id="updateMemberDenyrity" parameterClass="Member">
 		UPDATE tbl_member
 		<dynamic prepend="SET">
@@ -218,6 +228,9 @@
 		<isNotNull prepend="AND" property="denyrity">
 			DENYRITY > 0
 		</isNotNull>
+		<isNotNull prepend="AND" property="passwordExpire">
+			PASSWORD_EXPIRE = #passwordExpire#
+		</isNotNull>
 		<isNotNull property="orderCol">
 			ORDER BY $orderCol$ $orderBy$
 		</isNotNull>
@@ -247,6 +260,15 @@
 		</isNotNull>			
 		<isNotNull prepend="AND" property="email">
 			EMAIL LIKE #email#
+		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
+		</isNotNull>
+		<isNotNull prepend="AND" property="passwordExpire">
+			PASSWORD_EXPIRE = #passwordExpire#
 		</isNotNull>
 		<isNotNull prepend="AND" property="introducerId">
 			INTRODUCER_ID = #introducerId#

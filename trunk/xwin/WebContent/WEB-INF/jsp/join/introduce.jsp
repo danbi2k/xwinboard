@@ -32,7 +32,7 @@
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
 	<tr><td style="line-height:20px;">
 <span style="width:100%;height:140;OVERFLOW:auto">
-<b style='color:white'>1.</b> No1Bet(이하 회사)은 안전한 신규회원 모집을 위해 '추천장' 시스템을 적용하고 있습니다.<br>
+<b style='color:white'>1.</b> Bravo(이하 회사)은 안전한 신규회원 모집을 위해 '추천장' 시스템을 적용하고 있습니다.<br>
 <b style='color:white'>2.</b> 회원님은 가까운 지인의 핸드폰으로 추천장을 문자로 발송하여 신규회원 가입을 권유 할 수 있습니다.<br>
 <b style='color:white'>3.</b> 회원님은 본인이 추천한 회원이 배팅을 하였을 경우 배팅금액의 3%를 포인트로 적립 받습니다.<br>
 <b style='color:white'>4.</b> 포인트는 배팅이 결과처리 된 후에 자동 적립 됩니다. (취소된 배팅은 적립되지 않습니다)<br>

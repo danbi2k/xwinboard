@@ -71,6 +71,18 @@
 		p:bettingService-ref="bettingService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
+	<bean id="bettingCartController"
+		class="com.xwin.web.controller.game.BettingCartController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:gameDao-ref="gameDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
+		p:accessDao-ref="accessDao"
+		p:bettingService-ref="bettingService"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
+		
 	<bean id="myBettingController"
 		class="com.xwin.web.controller.user.MyBettingController"
 		p:memberDao-ref="memberDao"

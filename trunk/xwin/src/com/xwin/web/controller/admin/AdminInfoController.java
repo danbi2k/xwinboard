@@ -1,5 +1,8 @@
 package com.xwin.web.controller.admin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -53,7 +57,18 @@ public class AdminInfoController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("passwordExpire", "Y");
+		param.put("satus", Code.USER_STATUS_NORMAL);
+		Integer remainCount = memberDao.selectMemberCount(param);
+		
+		param.put("passwordExpire", "C");
+		Integer changeCount = memberDao.selectMemberCount(param);
+		
 		ModelAndView mv = new ModelAndView("admin/admin/admin_security");
+		mv.addObject("remainCount", remainCount);
+		mv.addObject("changeCount", changeCount);
+		
 		return mv;
 	}
 	
@@ -84,6 +99,24 @@ public class AdminInfoController extends XwinController
 		
 		
 		ResultXml rx = new ResultXml(0, "변경 되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView requestChangePassword(HttpServletRequest request, 
+			HttpServletResponse response, Member command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		Member member = new Member();
+		member.setPasswordExpire("Y");
+		member.setStatus(Code.USER_STATUS_NORMAL);
+		
+		memberDao.updateMemberPasswordExpire(member);
+		
+		ResultXml rx = new ResultXml(0, "요청 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

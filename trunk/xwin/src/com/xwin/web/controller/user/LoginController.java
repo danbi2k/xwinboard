@@ -1,16 +1,16 @@
 package com.xwin.web.controller.user;
 
-import org.apache.log4j.Logger;
-
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
+import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -70,6 +70,7 @@ public class LoginController extends XwinController
 				HttpSession session = request.getSession();
 				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
+				session.setAttribute("BettingCart", new BettingCart());
 			}
 			
 			if (member != null) {

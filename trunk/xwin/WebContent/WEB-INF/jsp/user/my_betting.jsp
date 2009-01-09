@@ -34,9 +34,10 @@
 	<td width="100"><img src="images/title_mybet.gif"></td>
 	<td>배팅 내역 및 결과입니다.</td>
 </tr>
-<tr>
-<td colspan=2>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+</table>
+</td><tr>
+<tr><td valign="top" align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="900">
 
 <%
 	if (bettingList != null) {
@@ -144,7 +145,7 @@
 				</tr>
 				<tr><td height="3"></td></tr>
 				<tr>
-					<td align="center">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%> /
+					<td align="center">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%>원 / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%>원 /
 					적중금액 :
 					<%
 					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))

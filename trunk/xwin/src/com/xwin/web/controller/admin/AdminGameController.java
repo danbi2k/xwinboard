@@ -259,7 +259,7 @@ public class AdminGameController extends XwinController
 		
 		gameDao.updateGame(game);
 		
-		bettingService.judgeGameResult(game);		
+		processService.judgeGameResult(game);		
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
 		
@@ -296,13 +296,13 @@ public class AdminGameController extends XwinController
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
-			game.setResult(bettingService.judgeGameScore(game));
+			game.setResult(processService.judgeGameScore(game));
 			game.setStatus(Code.GAME_STATUS_END);
 			
 			gameDao.updateGame(game);
 			
 			try {
-				bettingService.judgeGameResult(game);				
+				processService.judgeGameResult(game);				
 				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -343,13 +343,13 @@ public class AdminGameController extends XwinController
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
-			game.setResult(bettingService.judgeGameScore(game));
+			game.setResult(processService.judgeGameScore(game));
 			game.setStatus(Code.GAME_STATUS_END);
 			
 			gameDao.updateGame(game);
 			
 			try {
-				bettingService.judgeGameResult(game);				
+				processService.judgeGameResult(game);				
 				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();

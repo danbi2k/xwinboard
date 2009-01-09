@@ -16,7 +16,7 @@ function FnGetGameList(type, leagueId, grade, status)
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.game);
 		FnDrawGameList(data, type);
-		FnDrawCartCheck(type);
+		FnDrawFolderCheck(type);
 	}
 }
 function FnDrawGameList(data,type)

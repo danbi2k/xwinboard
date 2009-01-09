@@ -18,7 +18,7 @@
 		p:transactionDao-ref="transactionDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"/>
 		
-	<bean id="bettingService" class="com.xwin.service.admin.BettingService"
+	<bean id="processService" class="com.xwin.service.admin.ProcessService"
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
 		p:memberDao-ref="memberDao"
@@ -26,6 +26,14 @@
 		p:smsWaitDao-ref="smsWaitDao"
 		p:pointDao-ref="pointDao"
 		p:sendSmsConnector-ref="munjaBadaConnector"/>
+		
+	<bean id="bettingService" class="com.xwin.service.game.BettingService"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:gameDao-ref="gameDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"/>	
 		
 	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>	
 		

@@ -76,7 +76,7 @@
 		p:betGameDao-ref="betGameDao"
 		p:leagueDao-ref="leagueDao"
 		p:memberDao-ref="memberDao"
-		p:bettingService-ref="bettingService"
+		p:processService-ref="processService"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
@@ -98,7 +98,7 @@
 		p:betGameDao-ref="betGameDao"
 		p:memberDao-ref="memberDao"
 		p:accountDao-ref="accountDao"
-		p:bettingService-ref="bettingService"
+		p:processService-ref="processService"
 		p:leagueDao-ref="leagueDao"
 		p:gameDao-ref="gameDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>

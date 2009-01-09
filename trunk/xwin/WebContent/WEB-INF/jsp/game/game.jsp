@@ -34,7 +34,7 @@ var gameType = '<%=type%>'
 </table>
 
 -->
-<form name="CartFrm" method="post">
+<form name="FolderFrm" method="post">
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
@@ -56,7 +56,7 @@ var gameType = '<%=type%>'
 		%>
 	</select></td>
 
-			<td><img src="images/btn_reload.gif" onclick="FnEmptyGameCart('wdl')" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
+			<td><img src="images/btn_reload.gif" onclick="FnEmptyGameFolder('wdl')" style="cursor:hand;filter:gray();" onmouseover="this.style.filter='';" onmouseout="this.style.filter='gray()';" hspace="5"></td>
 		</tr></table>
 	</td>
 	</table>
@@ -75,8 +75,8 @@ var gameType = '<%=type%>'
 					<TR>
 						<TD>
 							<IMG src="images/icon02.gif" align=absMiddle><B>선택하신 경기&nbsp;
-							<IMG style="CURSOR: pointer;display:none" onclick="location.href='betting.aspx?mode=viewBettingCart'" src="images/sub02.gif" align=absMiddle> 
-							<IMG style="CURSOR: pointer" onclick=FnDeleteCart('<%=type%>') src="images/sub03.gif" align=absMiddle></B>
+							<IMG style="CURSOR: pointer;" onclick="location.href='bettingCart.aspx?mode=viewBettingCart'" src="images/sub02.gif" align=absMiddle> 
+							<IMG style="CURSOR: pointer" onclick=FnDeleteFolder('<%=type%>') src="images/sub03.gif" align=absMiddle></B>
 						</TD>
 					</TR>
 					</TBODY>
@@ -86,7 +86,7 @@ var gameType = '<%=type%>'
 </TBODY>
 </TABLE>
 <br>
-<div id="gameCartDiv"></div>
+<div id="gameFolderDiv"></div>
 <br>	
 <TABLE cellSpacing=5 cellPadding=5 width="960" bgColor=#212021 border=0>
 <TBODY>
@@ -97,14 +97,14 @@ var gameType = '<%=type%>'
 				<TR>
 					<TD>배팅금액</TD>
 					<TD>
-						: <INPUT class=input14 name=BetAmt size=19 value="5,000" onkeyup="FnCalcCart()">
+						: <INPUT class=input14 name=BetAmt size=19 value="5,000" onkeyup="FnCalcFolder()">
 					</TD>
 					<TD align=middle><IMG style="CURSOR: pointer" onclick="FnBetting()" src="images/btn_bat.gif"></TD>
 				</TR>
 				<TR>
 					<TD align=middle>예상배당율</TD>
 					<TD>: <B><SPAN id=rateDiv value=0>0.00</SPAN></B></TD>
-					<TD align=middle><IMG style="CURSOR: pointer;display:none" onclick="FnAddAllCart()" src="images/btn_in.gif"></TD>
+					<TD align=middle><IMG style="CURSOR: pointer;" onclick="FnAddBettingCart()" src="images/btn_in.gif"></TD>
 				</TR>
 				<TR>
 					<TD>예상적중금</TD>
@@ -121,12 +121,12 @@ var gameType = '<%=type%>'
 <script>
 function reload()
 {
-	FnGetGameList('<%=type%>', CartFrm.leagueId.value, '<%=grade%>');	
+	FnGetGameList('<%=type%>', FolderFrm.leagueId.value, '<%=grade%>');	
 }
 
 reload();
 setInterval("reload()", 180000);
-FnDrawCart();
+FnDrawFolder();
 </script>
 <!-- ---------------------------------------------------------------------- -->
 </td></tr>

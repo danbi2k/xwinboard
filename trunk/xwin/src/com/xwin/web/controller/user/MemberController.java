@@ -148,7 +148,7 @@ public class MemberController extends XwinController
 						member.setPassword(command.getPassword1());
 						member.setPin(command.getPin());
 						member.setGetSms(command.getSmsCheck());
-						member.setPasswordExpire("N");
+						member.setPasswordExpire("C");
 						//member.setNickName(command.getNickName());
 						//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
 						//member.setEmail(command.getEmail1() + "@" + command.getEmail2());
@@ -316,7 +316,7 @@ public class MemberController extends XwinController
 			
 			try {
 				SmsWait smsWait = new SmsWait();
-				smsWait.setMsg("[No1Bet] 가입 인증번호  [ " + phonePin + " ]");
+				smsWait.setMsg("[Bravo] 가입 인증번호  [ " + phonePin + " ]");
 				smsWait.setPhone(phone);
 				smsWait.setCallback("0000000000");
 				

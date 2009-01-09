@@ -38,7 +38,7 @@ public class GameController extends XwinController
 		String type = request.getParameter("type");
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("gameFolder_" + type, new GameFolder());
+		session.setAttribute("gameFolder_" + type, new GameFolder(type));
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		
@@ -163,7 +163,7 @@ public class GameController extends XwinController
 			return new ModelAndView("dummy");
 		
 		String type = request.getParameter("type");
-		request.getSession().setAttribute("gameFolder_" + type, new GameFolder());
+		request.getSession().setAttribute("gameFolder_" + type, new GameFolder(type));
 		
 		ResultXml resultXml = new ResultXml(0, null, null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

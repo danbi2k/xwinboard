@@ -41,9 +41,12 @@ function SetNICK(nick){
 
 <table width="960" height="400" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-
-	<tr><td width="100"><img src="images/title_memberinfo.gif"></td><td>회원정보를 수정합니다.</td>
+	
+<table width="900" style="border-bottom:1 solid #909090;">
+	<tr>
+		<td width="100"><img src="images/title_memberinfo.gif"></td>
+		<td>회원정보를 수정합니다.</td>
+	</tr>
 	</table>
 </td></tr>
 <tr><td valign="top" align="center">

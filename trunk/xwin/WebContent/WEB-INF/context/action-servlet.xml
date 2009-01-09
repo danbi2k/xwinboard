@@ -14,6 +14,7 @@
 				<prop key="/admin.aspx">adminController</prop>
 				<prop key="/game.aspx">gameController</prop>
 				<prop key="/betting.aspx">bettingController</prop>
+				<prop key="/bettingCart.aspx">bettingCartController</prop>
 				<prop key="/board.aspx">boardController</prop>
 				<prop key="/moneyIn.aspx">moneyInController</prop>
 				<prop key="/moneyOut.aspx">moneyOutController</prop>

@@ -1,8 +1,8 @@
 var total_rate = 0;
 
-function FnEmptyGameCart(type)
+function FnEmptyGameFolder(type)
 {
-	var query = "mode=emptyGameCart";
+	var query = "mode=emptyGameFolder";
 	query += "&type=" + type;
 	
 	var http = new JKL.ParseXML("betting.aspx", query);
@@ -13,9 +13,9 @@ function FnEmptyGameCart(type)
 	}
 }
 
-function FnDrawCartCheck(type)
+function FnDrawFolderCheck(type)
 {
-	var query = "mode=getGameCart";
+	var query = "mode=getGameFolder";
 	query += "&type=" + type;
 	
 	var http = new JKL.ParseXML("betting.aspx", query);
@@ -24,7 +24,7 @@ function FnDrawCartCheck(type)
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 		for (i in data) {
-			var id = "check" + data[i].gameId +	data[i].guess;
+			var id = "check" + data[i].id +	data[i].guess;
 			var obj = document.getElementById(id);
 			if (obj)
 				obj.checked = true;
@@ -32,17 +32,17 @@ function FnDrawCartCheck(type)
 	}
 }
 
-function FnDeleteGameCart(id, type, guess)
+function FnDeleteGameFolder(id, type, guess)
 {
-	var money = CartFrm.BetAmt.value;
+	var money = FolderFrm.BetAmt.value;
 	if (money == undefined || money.length == 0)
-		CartFrm.BetAmt.value = money = "0";
+		FolderFrm.BetAmt.value = money = "0";
 	
 	var regexp= RegExp(/,/ig);
 	money = money.replace(regexp, "");
 	
 	var query = "";
-	query = "mode=deleteGameCart";
+	query = "mode=deleteGameFolder";
 	query += "&gameId=" + id;
 	query += "&type=" + type;
 	
@@ -56,16 +56,16 @@ function FnDeleteGameCart(id, type, guess)
 			obj.checked = false;
 		
 		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
-		FnDrawCart(data, type);
+		FnDrawFolder(data, type);
 	}
 }
 
 
 function FnGameBet(cobj, id, type, guess)
 {
-	var money = CartFrm.BetAmt.value;
+	var money = FolderFrm.BetAmt.value;
 	if (money == undefined || money.length == 0)
-		CartFrm.BetAmt.value = money = "0";
+		FolderFrm.BetAmt.value = money = "0";
 	
 	var regexp= RegExp(/,/ig);
 	money = money.replace(regexp, "");
@@ -78,13 +78,13 @@ function FnGameBet(cobj, id, type, guess)
 				boxes[i].checked = false;
 			}
 		}
-		query = "mode=addGameCart";
+		query = "mode=addGameFolder";
 		query += "&gameId=" + id;
 		query += "&guess=" + guess;
 		query += "&type=" + type;
 		query += "&money=" + money;
 	} else {
-		query = "mode=deleteGameCart";
+		query = "mode=deleteGameFolder";
 		query += "&gameId=" + id;
 		query += "&type=" + type;
 	}
@@ -94,7 +94,7 @@ function FnGameBet(cobj, id, type, guess)
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
-		FnDrawCart(data, type);
+		FnDrawFolder(data, type);
 	} else {
 		alert(result.resultXml.message);
 		if (cobj.checked) {
@@ -102,14 +102,14 @@ function FnGameBet(cobj, id, type, guess)
 		}
 		if (result.resultXml.code == -1) {
 			var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
-			FnDrawCart(data, type);
+			FnDrawFolder(data, type);
 		} else {
 			location.reload();
 		}
 	}
 }
 
-function FnDrawCart(data, type) {	
+function FnDrawFolder(data, type) {	
 	var row = [];
 	var rate = "0.0";
 	var multi = 1.0;
@@ -140,7 +140,7 @@ function FnDrawCart(data, type) {
 			row.push("<td>");
 			row.push(rate);
 			row.push("</td>");
-			row.push("<td><img src='images/btn_coment_del.gif' onclick='FnDeleteGameCart(" + data[i].gameId + ",\"" + type + "\",\"" + data[i].guess + "\")'/></td>")
+			row.push("<td><img src='images/btn_coment_del.gif' onclick='FnDeleteGameFolder(" + data[i].id + ",\"" + type + "\",\"" + data[i].guess + "\")'/></td>")
 			row.push("</tr>");
 			
 			multi *= rate;
@@ -151,26 +151,26 @@ function FnDrawCart(data, type) {
 	
 	row.push("</table>");
 		
-	var gameCartDiv = document.getElementById("gameCartDiv");
+	var gameFolderDiv = document.getElementById("gameFolderDiv");
 	var rateDiv = document.getElementById("rateDiv");
 	
-	gameCartDiv.innerHTML = row.join("");
-	//alert(gameCartDiv.innerHTML);
+	gameFolderDiv.innerHTML = row.join("");
+	//alert(gameFolderDiv.innerHTML);
 	var multiStr = Xwin.Digit2(multi);
 	rateDiv.value = multiStr;
 	total_rate = parseFloat(multiStr);
 	//alert(total_rate);
 	rateDiv.innerHTML = multiStr;
 	
-	FnCalcCart();
+	FnCalcFolder();
 }
 
 function FnBetting()
 {
 	if (confirm("배팅하시겠습니까?")) {
-		var money = CartFrm.BetAmt.value;
+		var money = FolderFrm.BetAmt.value;
 		if (money == undefined || money.length == 0)
-			CartFrm.BetAmt.value = money = "0";
+			FolderFrm.BetAmt.value = money = "0";
 		
 		var regexp= RegExp(/,/ig);
 		money = money.replace(regexp, "");
@@ -178,6 +178,7 @@ function FnBetting()
 		var query = "mode=betting";
 		query += "&type=" + gameType;
 		query += "&money=" + money;
+		query += "&action=betting";
 		var http = new JKL.ParseXML("betting.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
@@ -187,7 +188,30 @@ function FnBetting()
 	}
 }
 
-function FnDeleteCart(type)
+function FnAddBettingCart()
+{
+	if (confirm("배팅카트에 추가 하시겠습니까?")) {
+		var money = FolderFrm.BetAmt.value;
+		if (money == undefined || money.length == 0)
+			FolderFrm.BetAmt.value = money = "0";
+		
+		var regexp= RegExp(/,/ig);
+		money = money.replace(regexp, "");
+		
+		var query = "mode=betting";
+		query += "&type=" + gameType;
+		query += "&money=" + money;
+		query += "&action=cart";
+		var http = new JKL.ParseXML("betting.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0 || result.resultXml.code == -2) {			
+			document.location.reload();
+		}
+	}
+}
+
+function FnDeleteFolder(type)
 {
 	var query = "mode=deleteFolder";
 	query += "&type=" + type;
@@ -195,14 +219,14 @@ function FnDeleteCart(type)
 	var result = http.parse();
 	
 	reload();
-	FnDrawCart();
+	FnDrawFolder();
 }
 
-function FnCalcCart()
+function FnCalcFolder()
 {
-	var money = CartFrm.BetAmt.value;
+	var money = FolderFrm.BetAmt.value;
 	if (money == undefined || money.length == 0) {
-		CartFrm.BetAmt.value = "";
+		FolderFrm.BetAmt.value = "";
 		money = "0";
 	}
 	
@@ -212,7 +236,7 @@ function FnCalcCart()
 	var commaMoney = comma3(money);
 	if (commaMoney == "0")
 		commaMoney = "";
-	CartFrm.BetAmt.value = commaMoney;
+	FolderFrm.BetAmt.value = commaMoney;
 			
 	var rateDiv = document.getElementById("rateDiv");
 	var expectDiv = document.getElementById("expectDiv");
@@ -231,7 +255,7 @@ function FnCalcCart()
 		//alert(expect);
 		if (expect > 3000000) {
 			alert("배당금이 300만원을 초과 하였습니다.");
-			CartFrm.BetAmt.value = "";
+			FolderFrm.BetAmt.value = "";
 			expectDiv.innerHTML = "0";
 		} else {
 			expectDiv.innerHTML = comma3(expect);
@@ -241,7 +265,7 @@ function FnCalcCart()
 		//balanceDiv.innerHTML = comma3(data.balance);
 //	} else {
 //		alert(result.resultXml.message);
-//		CartFrm.BetAmt.value = "";
-//		FnCalcCart();
+//		FolderFrm.BetAmt.value = "";
+//		FnCalcFolder();
 //	}
 }

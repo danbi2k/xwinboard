@@ -1,6 +1,5 @@
 package com.xwin.service.admin;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +17,7 @@ import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 
-public class BettingService extends XwinService
+public class ProcessService extends XwinService
 {	
 	public void judgeGameResult(Game game)
 	{
@@ -211,7 +210,7 @@ public class BettingService extends XwinService
 			// 문자발송
 			try {
 				if (member.getGetSms().equals("Y")) {
-					String message = "[No1Bet] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
+					String message = "[Bravo] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
 					
 					SmsWait smsWait = new SmsWait();
 					smsWait.setMsg(message);
@@ -354,7 +353,7 @@ public class BettingService extends XwinService
 				try {
 					Member member = memberDao.selectMember(betting.getUserId(), null);
 					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
-						String message = "[No1Bet] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
+						String message = "[Bravo] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
 								Code.getValue(betting.getStatus()) + " 되었습니다.";
 						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
 							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());

@@ -211,7 +211,7 @@
                                 정해진 범위 안에서 이용해주기 바라며, <BR>회사는 서로 신뢰하고 동반자로서의 관계를 
                                 유지하기 위해 항상 최선을 다 할 것입니다. <BR><BR></TD></TR>
                                 <TR>
-                                <TD align=right><B>No1Bet 임직원일동 2008년11월 
+                                <TD align=right><B>Bravo 임직원일동 2008년11월 
                                 </B></TD></TR></TBODY></TABLE>
 
 	<br>
