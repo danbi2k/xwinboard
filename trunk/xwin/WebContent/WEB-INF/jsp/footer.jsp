@@ -7,7 +7,7 @@
 	<table width="960" cellpadding="0" cellspacing="0" border="0">
 	<td><img src="images/tail_logo.gif"></td>
 
-	<td align="left" valign="bottom"><img src="images/tail_copyright.jpg"></td>
+	<td align="left" valign="bottom"><!-- img src="images/tail_copyright.jpg" --></td>
     <td align="right">
 
 	<table cellpadding="0" cellspacing="0">

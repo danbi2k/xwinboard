@@ -163,7 +163,7 @@ if (login) {
 <% } else { %>
 <%} %>
 </table>
-<img id="mainImage" src="images/wall04.jpg" style="display:none">
+<img id="mainImage" src="images/wall05.jpg" style="display:none">
 <script>
 //FnFlash("main","960","280","images/main.swf","");
 if (document.URL.indexOf("home.aspx") > 0) {
