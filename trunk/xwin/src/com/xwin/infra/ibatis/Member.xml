@@ -130,7 +130,7 @@
 	</update>
 	
 	<update id="updateMemberPasswordExpire" parameterClass="Member">
-		UPDATE tbl_member SET
+		UPDATE tbl_member
 		<dynamic prepend="SET">
 			<isNotNull prepend="," property="passwordExpire">
 				PASSWORD_EXPIRE = #passwordExpire#

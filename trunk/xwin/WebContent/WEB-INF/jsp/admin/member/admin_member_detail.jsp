@@ -657,7 +657,7 @@ function changePasswordExpire()
 	if (frm.expireCheck.checked)
 		query += "&passwordExpire=Y";
 	else
-		query += "&passwordExpire=N";
+		query += "&passwordExpire=C";
 	query += "&userId=<%=member.getUserId()%>";
 
 	var http = new JKL.ParseXML("adminMember.aspx", query);
