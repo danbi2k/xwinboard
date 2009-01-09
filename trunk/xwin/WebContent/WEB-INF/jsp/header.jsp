@@ -79,7 +79,7 @@
 
 
 <table width="960" height="76" cellpadding="0" cellspacing="0" background="images/top_bg.jpg">
-<tr><td width="270" align="center"><a href="home.aspx"><img src="images/no1bet.jpg" border="0"></a></td>
+<tr><td width="270" align="center"><a href="home.aspx"><img src="images/bravo.jpg" border="0"></a></td>
 <td width="*" valign="bottom" style="padding:0 0 10 0;">
 <ul class="topmenu" id="topmenu">
 <li><a href="game.aspx?mode=viewGameList&type=wdl&grade=1"><img src='images/menu_wdl.jpg' border='0'></a></li>
