@@ -42,10 +42,10 @@ public class BettingCartController extends XwinController
 			return new ModelAndView("dummy");
 		
 		String _folderIndex = request.getParameter("folderIndex");
-		Integer folderIndex = Integer.parseInt(_folderIndex);
+		int folderIndex = Integer.parseInt(_folderIndex);
 		
 		BettingCart bettingCart = (BettingCart) request.getSession().getAttribute("BettingCart");
-		bettingCart.remove(folderIndex);
+		bettingCart.removeIndex(folderIndex);
 		
 		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

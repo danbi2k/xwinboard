@@ -26,6 +26,11 @@ public class BettingCart extends XwinObject
 		gameFolderList.remove(o);
 	}
 	
+	public void removeIndex(int index)
+	{
+		gameFolderList.remove(index);
+	}
+	
 	public void clear()
 	{
 		gameFolderList.clear();
