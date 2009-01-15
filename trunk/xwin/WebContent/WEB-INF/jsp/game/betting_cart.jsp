@@ -75,13 +75,17 @@
 								<td><nobr>&nbsp;
 									<font color="#ffffff">
 										<%=folderItem.getLoseRateStr()%>&nbsp;<%=folderItem.getAwayTeam()%>
-									</font></nobr></td>
-								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(folderItem.getGuess())%></font></nobr></td>
+									</font>
+									</nobr></td>
+								<td align="center">
+									<nobr><font color="#ffffff"><%=Code.getValue(folderItem.getGuess())%></font></nobr>
+									<img src="images/bet_delete.gif" onclick="deleteGameInGameFolder(<%=folderCount%>, <%=folderItem.getId()%>)"/>
+								</td>
 								<%
 								if (count == 0) {
 								%>
 								<td align="center" rowspan="<%=itemCount%>">
-									<img src="images/btn_coment_del.gif" onclick="deleteGameFolder(<%=folderCount++%>)">
+									<img src="images/btn_coment_del.gif" onclick="deleteGameFolder(<%=folderCount%>)">
 								</td>
 								<%
 								count++;
@@ -90,7 +94,8 @@
 								
 							</tr>
 <%
-		}	
+		}
+		folderCount++;
 	}		
 %>				
 					
@@ -136,6 +141,20 @@
 </tr>
 </table>
 <script>
+function deleteGameInGameFolder(index, gameId)
+{
+	if (confirm("경기를 삭제하시겠습니까?")) {
+		var query = "mode=deleteGameInGameFolder";
+		query += "&folderIndex=" + index;
+		query += "&gameId=" + gameId;
+		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0)
+			location.reload();
+	}
+}
+
 function deleteGameFolder(id)
 {
 	if (confirm("배팅카트에서 삭제하시겠습니까?")) {

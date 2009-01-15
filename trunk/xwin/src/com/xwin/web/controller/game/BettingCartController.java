@@ -54,6 +54,32 @@ public class BettingCartController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView deleteGameInGameFolder(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		String _folderIndex = request.getParameter("folderIndex");
+		String _gameId = request.getParameter("gameId");
+		int folderIndex = Integer.parseInt(_folderIndex);
+		
+		BettingCart bettingCart = (BettingCart) request.getSession().getAttribute("BettingCart");
+		GameFolder gameFolder = bettingCart.get(folderIndex);
+		gameFolder.remove(_gameId);
+		gameFolder.calculate();
+		if (gameFolder.size() == 0)
+			bettingCart.removeIndex(folderIndex);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
 	public ModelAndView deleteAllGameFolder(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
