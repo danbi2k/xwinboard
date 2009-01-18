@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.game.*" %>
+<%@ page import="com.xwin.domain.join.*" %>
 
 <%@include file="../header.jsp"%>
 
@@ -9,6 +10,7 @@
 	int SHOWPAGE = 10;
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
+	Integer noJoinCount = (Integer) request.getAttribute("noJoinCount");
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	int pIdx = 0;
@@ -48,7 +50,9 @@
 
 	<form name="intro">
 	<table width="800" style="margin-top:10">
-	<tr><td><b>추천정보입력</b>&nbsp;&nbsp;&nbsp;※ 추전장이 필요하신 회원님은 고객센터로 문의하십시오</td></tr>
+	<tr><td><b>추천정보입력</b></td>
+		<td>※ 추천장이 필요하신 회원님은 고객센터로 문의하십시오.<BR>
+			※ 발송이 되었지만 가입하지 않은 추천장은 미가입 추천장 수를 확인하십시오.</td></tr>
 	</table>
 
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
@@ -57,24 +61,41 @@
 	<col width="650">
 
 	</colgroup>
-	<tr><td>남은 추천장 수</td>
-		<td><table cellpadding="0" cellspacing="0"><tr>
-			<td><%=member.getIntroLetter()%> 장</td>
-			</tr></table>
-		</td></tr>
-	<tr><td>추천할 휴대폰번호</td>
-		<td><select class="member" name="phone1">
-			<option value="010" >010</option>
-			<option value="011" >011</option>
-			<option value="016" >016</option>
-			<option value="017" >017</option>
-			<option value="018" >018</option>
-			<option value="019" >019</option>
-			</select> -
-			<input class="member" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
-			<input class="member" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
-			추천장을 발송할 휴대폰 번호를 입력하십시오
-			</td></tr>
+	<tr>
+		<td colspan=2>
+		<table cellpadding="0" cellspacing="0" width=100%>
+			<tr>
+				<td>남은 추천장 수</td>
+				<td><%=member.getIntroLetter()%> 장</td>					
+				<td width=25%>&nbsp;</td>
+				<td>미가입 추천장 수</td>
+				<td><a href="javascript:openNoJoinList()"><%=noJoinCount%> 장</a></td>
+				<td width=25%>&nbsp;</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+		<table cellpadding="0" cellspacing="0" width=100%>
+			<tr>
+				<td>추천할 휴대폰번호</td>
+				<td><select class="member" name="phone1">
+					<option value="010" >010</option>
+					<option value="011" >011</option>
+					<option value="016" >016</option>
+					<option value="017" >017</option>
+					<option value="018" >018</option>
+					<option value="019" >019</option>
+					</select> -
+					<input class="member" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
+					<input class="member" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
+					추천장을 발송할 휴대폰 번호를 입력하십시오
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
 	</table>
 
 	<table width="800" style="margin-top:10">
@@ -86,7 +107,7 @@
 	</form>
 
 	<table width="800" style="margin-top:10">
-	<tr><td><b>추천내역보기</b>&nbsp;&nbsp;&nbsp;※ 총추천인을 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다.</td></tr>
+	<tr><td><b>추천내역보기</b>&nbsp;&nbsp;&nbsp;※ 총추천인수를 클릭하시면 회원님께 추천받으신분들 목록이 나옵니다.</td></tr>
 	</table>
 
 	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
@@ -196,6 +217,11 @@
 function openIntroduceList()
 {
 	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
+}
+
+function openNoJoinList()
+{
+	window.open("introduce.aspx?mode=noJoinDetail","미가입추천장내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
 }
 
 function introduce()

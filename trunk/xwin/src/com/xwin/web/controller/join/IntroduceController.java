@@ -54,9 +54,15 @@ public class IntroduceController extends XwinController
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		Integer bettingCount = bettingDao.selectBettingCount(param);
 		
+		param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("joinIdNull", "");
+		Integer noJoinCount = invitationDao.selectInvitationCount(param);
+		
 		ModelAndView mv = new ModelAndView("join/introduce");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
+		mv.addObject("noJoinCount", noJoinCount);
 		
 		return mv;
 	}
@@ -122,6 +128,24 @@ public class IntroduceController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("join/introduceDetail");
 		mv.addObject("invitationList", invitationList);	
+		
+		return mv;
+	}
+	
+	public ModelAndView noJoinDetail(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("joinIdNull", "");
+		List<Invitation> noJoinList = invitationDao.selectInvitationList(param);
+		
+		ModelAndView mv = new ModelAndView("join/noJoinDetail");
+		mv.addObject("noJoinList", noJoinList);	
 		
 		return mv;
 	}

@@ -45,8 +45,11 @@
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
-			<isNotNull prepend="AND" property="joinId">
+			<isNotNull prepend="AND" property="joinIdNotNull">
 				JOINID IS NOT NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinIdNull">
+				JOINID IS NULL
 			</isNotNull>
 		</dynamic>
 		ORDER BY ID DESC
@@ -61,8 +64,11 @@
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
-			<isNotNull prepend="AND" property="joinId">
+			<isNotNull prepend="AND" property="joinIdNotNull">
 				JOINID IS NOT NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="joinIdNull">
+				JOINID IS NULL
 			</isNotNull>
 		</dynamic>
 	</select>

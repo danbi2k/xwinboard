@@ -52,6 +52,8 @@ function FnMemReg(frm)
 		FnLogin_Submit(frm);
 	} else {
 		alert(result.resultXml.message);
+		if (result.resultXml.code == -2)
+			location.href = "index.aspx";
 	}
 }
 
