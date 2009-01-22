@@ -51,6 +51,7 @@
 		p:bankBookDao-ref="bankBookDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
+		p:invitationDao-ref="invitationDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"

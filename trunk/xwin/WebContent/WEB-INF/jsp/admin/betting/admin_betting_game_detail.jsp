@@ -22,6 +22,7 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	String guess = XwinUtil.nvl(request.getParameter("guess"));
 %>
 <div class="title">경기별 배팅 현황</div>
 <font size="5" color="red">총배팅액 : <%=XwinUtil.comma3(new Long(bettingMoneySumTotal))%> 총당첨액: <%=XwinUtil.comma3(new Long(bettingMoneySumSuccess))%></font>	
@@ -39,6 +40,14 @@
 <option value='<%=Code.BET_STATUS_RETURN%>' <%=status.equals(Code.BET_STATUS_RETURN)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_RETURN)%></option>
 <option value='<%=Code.BET_STATUS_CANCEL%>' <%=status.equals(Code.BET_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>
 </select>
+배팅
+<select name='guess' onChange='this.form.submit()'>
+<option value=''>전체</option>
+<option value='W' <%=guess.equals("W")?"selected":""%>>승</option>
+<option value='D' <%=guess.equals("D")?"selected":""%>>무</option>
+<option value='L' <%=guess.equals("L")?"selected":""%>>패</option>
+</select>
+<BR>
 <select name='search'>
 	<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>

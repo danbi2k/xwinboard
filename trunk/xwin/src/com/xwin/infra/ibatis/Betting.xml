@@ -114,8 +114,15 @@
 			DATE <= #toDate#
 			]]>
 			</isNotNull>
-			<isNotNull prepend="AND" property="gameId">
-			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			<isNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+				</isNotNull>
+			</isNull>
+			<isNotNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId# AND bg.GUESS = #guess#)
+				</isNotNull>
 			</isNotNull>
 		</dynamic>
 		ORDER BY DATE DESC
@@ -177,8 +184,15 @@
 			DATE <= #toDate#
 			]]>
 			</isNotNull>
-			<isNotNull prepend="AND" property="gameId">
-			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			<isNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+				</isNotNull>
+			</isNull>
+			<isNotNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId# AND bg.GUESS = #guess#)
+				</isNotNull>
 			</isNotNull>
 		</dynamic>
 	</select>
@@ -236,8 +250,15 @@
 			DATE <= #toDate#
 			]]>
 			</isNotNull>
-			<isNotNull prepend="AND" property="gameId">
-			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			<isNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+				</isNotNull>
+			</isNull>
+			<isNotNull property="guess">
+				<isNotNull prepend="AND" property="gameId">
+				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId# AND bg.GUESS = #guess#)
+				</isNotNull>
 			</isNotNull>
 		</dynamic>
 	</select>

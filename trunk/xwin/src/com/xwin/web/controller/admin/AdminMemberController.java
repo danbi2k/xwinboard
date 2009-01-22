@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.BankBook;
+import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -130,6 +131,10 @@ public class AdminMemberController extends XwinController
 		List<Member> childList = memberDao.selectMemberList(param);
 		Integer childCount = memberDao.selectMemberCount(param);
 		
+		param.put("userId", userId);
+		param.put("joinIdNull", "");
+		List<Invitation> noJoinList = invitationDao.selectInvitationList(param);
+		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
 		mv.addObject("accountList", accountList);
@@ -139,6 +144,7 @@ public class AdminMemberController extends XwinController
 		mv.addObject("exchangeSum", exchangeSum);
 		mv.addObject("childList", childList);
 		mv.addObject("childCount", childCount);
+		mv.addObject("noJoinList", noJoinList);
 		
 		return mv;
 	}

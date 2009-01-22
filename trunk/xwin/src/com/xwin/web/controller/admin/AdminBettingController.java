@@ -149,6 +149,7 @@ public class AdminBettingController extends XwinController
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		String guess = XwinUtil.arcNvl(request.getParameter("guess"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -163,6 +164,7 @@ public class AdminBettingController extends XwinController
 		Integer bettingMoneySumSuccess = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
 		
 		param.put("status", status);
+		param.put("guess", guess);
 		
 		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromDate", XwinUtil.toDate(fromDate));

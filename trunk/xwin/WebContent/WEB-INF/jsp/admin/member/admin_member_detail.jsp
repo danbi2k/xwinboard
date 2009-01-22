@@ -21,6 +21,8 @@
 	Integer childCount = (Integer) request.getAttribute("childCount");
 	List<Member> childList = (List<Member>) request.getAttribute("childList");
 	
+	List<Invitation> noJoinList = (List<Invitation>) request.getAttribute("noJoinList");
+	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
@@ -164,6 +166,33 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
 			<input type="button" value="추천장지급" onclick="giveIntroLetter()"/>
+		</td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>미사용추천장</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+		<table class="prettytable">
+		<%
+		if (noJoinList != null) {
+		%>
+		<tr>
+			<th>추천장</th>
+			<th>휴대폰</th>
+			<th>발송일</th>
+		</tr>
+		<%
+			for (Invitation invitation : noJoinList) {
+		%>
+			<tr>
+			<td><%=invitation.getInviteKey()%></a>	</td>
+			<td><%=invitation.getMobile()%></td>
+			<td><%=XwinUtil.toDateStr(invitation.getSendDate(), 1)%></td>
+			</tr>
+		<%
+			}
+		}
+		%>
+		</table>
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
