@@ -50,6 +50,11 @@ public class BettingDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingCount", param);
 	}
 	
+	public Integer selectBettingMoneySum(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingMoneySum", param);
+	}
+	
 	public List<Betting> selectBettingListByUserId(String userId, String status, String gameType, Integer pageIndex)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(5);

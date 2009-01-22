@@ -156,9 +156,15 @@ public class AdminBettingController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		
-		param.put("gameId", id);
-		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		param.put("gameId", id);		
+		Integer bettingMoneySumTotal = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		
+		param.put("status", Code.BET_STATUS_SUCCESS);
+		Integer bettingMoneySumSuccess = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		
 		param.put("status", status);
+		
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
@@ -170,6 +176,8 @@ public class AdminBettingController extends XwinController
 		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_game_detail");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
+		mv.addObject("bettingMoneySumTotal", bettingMoneySumTotal);
+		mv.addObject("bettingMoneySumSuccess", bettingMoneySumSuccess);
 		
 		return mv;
 	}

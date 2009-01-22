@@ -12,6 +12,8 @@
 	
 	List<Betting> bettingList = (List<Betting>) request.getAttribute("bettingList");
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
+	Integer bettingMoneySumTotal = (Integer) request.getAttribute("bettingMoneySumTotal");
+	Integer bettingMoneySumSuccess = (Integer) request.getAttribute("bettingMoneySumSuccess");
 	
 	String id = request.getParameter("id");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -21,7 +23,9 @@
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
-<div class="title">경기별 배팅 현황</div>		
+<div class="title">경기별 배팅 현황</div>
+<font size="5" color="red">총배팅액 : <%=XwinUtil.comma3(new Long(bettingMoneySumTotal))%> 총당첨액: <%=XwinUtil.comma3(new Long(bettingMoneySumSuccess))%></font>	
+
 <form name='search' method='get' action='adminBetting.aspx'>
 <input type='hidden' name='mode' value='viewBettingMoneyDetail'/>
 <input type="hidden" name="id" value="<%=id%>"/>
