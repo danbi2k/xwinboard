@@ -1,5 +1,6 @@
 package com.xwin.infra.schedule;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.xwin.domain.user.Member;
+import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.AccessUtil;
@@ -22,6 +24,7 @@ public class DailyBatchManager extends QuartzJobBean
 			throws JobExecutionException
 	{
 		BettingDao bettingDao = (BettingDao) context.getJobDetail().getJobDataMap().get("bettingDao");
+		BetGameDao betGameDao = (BetGameDao) context.getJobDetail().getJobDataMap().get("betGameDao");
 		MemberDao memberDao = (MemberDao) context.getJobDetail().getJobDataMap().get("memberDao");
 		
 		
@@ -62,6 +65,17 @@ public class DailyBatchManager extends QuartzJobBean
 					memberDao.updateMemberDenyrity(member);
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//데이터 삭제
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -6);
+			Date beforeDate = cal.getTime();
+			betGameDao.deleteBetGameByDate(beforeDate);
+			bettingDao.deleteBettingByDate(beforeDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

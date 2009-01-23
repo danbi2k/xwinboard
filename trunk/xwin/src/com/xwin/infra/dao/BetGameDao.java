@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,9 @@ public class BetGameDao extends XwinDao
 
 	public void updateBetGame(BetGame betGame) {
 		sqlMapClientTemplate.update("updateBetGame", betGame);
+	}
+	
+	public void deleteBetGameByDate(Date date) {
+		sqlMapClientTemplate.delete("deleteBetGameByDate", date);
 	}
 }

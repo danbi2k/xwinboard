@@ -61,6 +61,12 @@
 		DELETE FROM tbl_betting WHERE ID = #value#
 	</delete>
 	
+	<delete id="deleteBettingByDate" parameterClass="Date">
+		<![CDATA[
+		DELETE FROM tbl_betting WHERE DATE < #value#
+		]]>
+	</delete>
+	
 	<select id="selectBettingList" resultMap="bettingResultMap"
 		parameterClass="map">
 		SELECT b.*
@@ -197,68 +203,27 @@
 		</dynamic>
 	</select>
 	
+	<select id="selectBettingExpectSum" resultClass="integer"
+		parameterClass="map">
+		SELECT SUM(EXPECT)
+		FROM tbl_betting b
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="gameId">
+			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			</isNotNull>
+		</dynamic>
+	</select>
+	
 	<select id="selectBettingMoneySum" resultClass="integer"
 		parameterClass="map">
 		SELECT SUM(MONEY)
 		FROM tbl_betting b
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="AND" property="bettingId">
-			ID = #id#
-			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-			STATUS = #status#
-			</isNotNull>
-			<isNotNull prepend="AND" property="statusList">
-				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
-					STATUS = #statusList[]#
-				</iterate>
-			</isNotNull>
-			<isNotNull prepend="AND" property="calcStatus">
-			CALC_STATUS = #calcStatus#
-			</isNotNull>
-			<isNotNull prepend="AND" property="notCalcStatus">
-			CALC_STATUS != #notCalcStatus#
-			</isNotNull>
-			<isNotNull prepend="AND" property="notStatus">
-			STATUS != #notStatus#
-			</isNotNull>
-			<isNotNull prepend="AND" property="gameType">
-			GAME_TYPE = #gameType#
-			</isNotNull>
-			<isNotNull prepend="AND" property="userId">
-			USERID = #userId#
-			</isNotNull>
-			<isNotNull prepend="AND" property="isDeleted">
-			ISDELETED = #isDeleted#
-			</isNotNull>
-			<isNotNull prepend="AND" property="introducerId">
-			INTRODUCER_ID = #introducerId#
-			</isNotNull>
-			<isNotNull prepend="AND" property="userIdLike">
-			USERID LIKE #userIdLike#
-			</isNotNull>
-			<isNotNull prepend="AND" property="nickNameLike">
-			NICKNAME LIKE #nickNameLike#
-			</isNotNull>
-			<isNotNull prepend="AND" property="fromDate">
-			<![CDATA[
-			DATE >= #fromDate#
-			]]>
-			</isNotNull>
-			<isNotNull prepend="AND" property="toDate">
-			<![CDATA[
-			DATE <= #toDate#
-			]]>
-			</isNotNull>
-			<isNull property="guess">
-				<isNotNull prepend="AND" property="gameId">
-				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
-				</isNotNull>
-			</isNull>
-			<isNotNull property="guess">
-				<isNotNull prepend="AND" property="gameId">
-				b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId# AND bg.GUESS = #guess#)
-				</isNotNull>
+			<isNotNull prepend="AND" property="gameId">
+			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
 			</isNotNull>
 		</dynamic>
 	</select>

@@ -48,6 +48,12 @@
 		WHERE BETTING_ID = #bettingId# AND GAME_ID = #id#
 	</update>
 	
+	<delete id="deleteBetGameByDate" parameterClass="Date">
+		<![CDATA[
+		DELETE FROM tbl_betting_game WHERE BETTING_ID IN (SELECT ID FROM tbl_betting WHERE DATE < #value#)
+		]]>
+	</delete>
+	
 	<select id="selectBetGameList" resultMap="betGameResultMap"
 		parameterClass="map">
 		SELECT g.ID, g.HOME_TEAM, g.AWAY_TEAM, g.STATUS, g.GAME_DATE, g.TYPE, g.HOME_SCORE, g.AWAY_SCORE, g.GRADE,

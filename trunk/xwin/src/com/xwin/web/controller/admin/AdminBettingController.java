@@ -155,14 +155,17 @@ public class AdminBettingController extends XwinController
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
-		Map<String, Object> param = new HashMap<String, Object>();
-		
-		param.put("gameId", id);		
+		Map<String, Object> param = new HashMap<String, Object>();		
+		param.put("gameId", id);
 		Integer bettingMoneySumTotal = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
 		
+		param = new HashMap<String, Object>();
+		param.put("gameId", id);
 		param.put("status", Code.BET_STATUS_SUCCESS);
-		Integer bettingMoneySumSuccess = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		Integer bettingMoneySumSuccess = XwinUtil.ntz(bettingDao.selectBettingExpectSum(param));
 		
+		param = new HashMap<String, Object>();
+		param.put("gameId", id);
 		param.put("status", status);
 		param.put("guess", guess);
 		

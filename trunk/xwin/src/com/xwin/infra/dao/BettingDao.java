@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,11 @@ public class BettingDao extends XwinDao
 	public void deleteBetting(String id)
 	{
 		sqlMapClientTemplate.delete("deleteBetting", id);
+	}
+	
+	public void deleteBettingByDate(Date date)
+	{
+		sqlMapClientTemplate.delete("deleteBettingByDate", date);
 	}
 	
 	public Betting selectBetting(String id)
@@ -53,6 +59,11 @@ public class BettingDao extends XwinDao
 	public Integer selectBettingMoneySum(Map<String, Object> param)
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingMoneySum", param);
+	}
+	
+	public Integer selectBettingExpectSum(Map<String, Object> param)
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectBettingExpectSum", param);
 	}
 	
 	public List<Betting> selectBettingListByUserId(String userId, String status, String gameType, Integer pageIndex)
