@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Point">
+
+	<typeAlias alias="Point" type="com.xwin.domain.admin.Point" />
+	
+	<resultMap id="pointResultMap" class="Point">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="money" column="MONEY"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="oldBalance" column="OLD_BALANCE"/>
+		<result property="note" column="NOTE"/>
+		<result property="type" column="TYPE"/>
+		<result property="date" column="DATE"/>
+		<result property="bettingId" column="BETTING_ID"/>
+		<result property="moneyInId" column="MONEYIN_ID"/>
+		<result property="moneyOutId" column="MONEYOUT_ID"/>
+		<result property="isDeleted" column="ISDELETED"/>
+		<result property="bettingUserId" column="BETTING_USERID"/>
+	</resultMap>
+	
+	<insert id="insertPoint" parameterClass="Point">
+		INSERT INTO tbl_point(USERID, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID, BETTING_USERID)
+		VALUES(#userId#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#, #bettingUserId#)
+	</insert>
+	
+	<delete id="deletePoint" parameterClass="string">
+		DELETE FROM tbl_point WHERE ID = #value#
+	</delete>
+	
+	<update id="updatePoint" parameterClass="Point">
+		UPDATE tbl_point
+		<dynamic prepend="SET">
+			<isNotNull prepend="AND" property="isDeleted">
+			ISDELETED = #isDeleted#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+	
+	<select id="selectPointList" resultMap="pointResultMap" parameterClass="map">
+		SELECT * FROM tbl_point
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="bettingUserId">
+				BETTING_USERID = #bettingUserId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	ORDER BY DATE DESC
+	<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+	</isNotNull>
+	</select>
+	
+	<select id="selectPointCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_point
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="name">
+				NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

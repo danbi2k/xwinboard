@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Game">
+
+	<typeAlias alias="Game" type="com.xwin.domain.game.Game" />
+	
+	<resultMap id="GameResultMap" class="Game">
+		<result property="id" column="ID"/>
+		<result property="homeTeam" column="HOME_TEAM"/>
+		<result property="awayTeam" column="AWAY_TEAM"/>
+		<result property="winRate" column="WIN_RATE"/>
+		<result property="drawRate" column="DRAW_RATE"/>
+		<result property="loseRate" column="LOSE_RATE"/>
+		<result property="status" column="STATUS"/>
+		<result property="gameDate" column="GAME_DATE"/>
+		<result property="type" column="TYPE"/>
+		<result property="homeScore" column="HOME_SCORE"/>
+		<result property="awayScore" column="AWAY_SCORE"/>
+		<result property="result" column="RESULT"/>
+		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="leagueName" column="LEAGUE_NAME"/>
+		<result property="leagueImage" column="LEAGUE_IMAGE"/>
+		<result property="betStatus" column="BET_STATUS"/>
+		<result property="winMoney" column="WIN_MONEY"/>
+		<result property="drawMoney" column="DRAW_MONEY"/>
+		<result property="loseMoney" column="LOSE_MONEY"/>
+		<result property="displayStatus" column="DP_STATUS"/>
+		<result property="winDeny" column="WIN_DENY"/>
+		<result property="drawDeny" column="DRAW_DENY"/>
+		<result property="loseDeny" column="LOSE_DENY"/>
+		<result property="grade" column="GRADE"/>
+	</resultMap>
+	
+	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
+		SELECT g.*, l.NAME as LEAGUE_NAME, l.IMAGE as LEAGUE_IMAGE,
+		
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
+		FROM tbl_game g, tbl_league l where g.LEAGUE_ID = l.ID AND g.ID = #value#
+	</select>
+	
+	<select id="selectGameList" resultMap="GameResultMap" parameterClass="map">
+		SELECT
+			g.*, l.NAME as LEAGUE_NAME,
+			l.IMAGE as LEAGUE_IMAGE,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
+		FROM tbl_game g, tbl_league l
+		WHERE g.LEAGUE_ID = l.ID
+		<isNotNull prepend="AND" property="homeTeam">
+			g.HOME_TEAM LIKE #homeTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="awayTeam">
+			g.AWAY_TEAM LIKE #awayTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="type">
+			g.TYPE = #type#
+		</isNotNull>
+		<isNotNull prepend="AND" property="leagueId">
+			l.ID = #leagueId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			g.GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="gradeLess">
+			<![CDATA[
+			g.GRADE <= #gradeLess#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="displayStatus">
+			g.DP_STATUS = #displayStatus#
+		</isNotNull>
+		<isNotNull prepend="AND" property="statusList">
+			<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				g.STATUS = #statusList[]#
+			</iterate>
+		</isNotNull>
+		<isNotNull prepend="AND" property="betStatus">
+			g.BET_STATUS = #betStatus#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			g.GAME_DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			g.GAME_DATE <= #toDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="betGameCount">
+			<![CDATA[
+			(SELECT COUNT(*) FROM tbl_betting_game bg WHERE g.ID = bg.GAME_ID) > #betGameCount#
+			]]>
+		</isNotNull>
+		ORDER BY GAME_DATE $ORDERBY$
+		<isNotNull prepend="LIMIT" property="fromRow">
+			#fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectGameCount" resultClass="int" parameterClass="map">
+		SELECT COUNT(*)
+		FROM tbl_game g, tbl_league l
+		WHERE g.LEAGUE_ID = l.ID
+		<isNotNull prepend="AND" property="homeTeam">
+			g.HOME_TEAM LIKE #homeTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="awayTeam">
+			g.AWAY_TEAM LIKE #awayTeam#
+		</isNotNull>
+		<isNotNull prepend="AND" property="type">
+			g.TYPE = #type#
+		</isNotNull>
+		<isNotNull prepend="AND" property="leagueId">
+			l.ID = #leagueId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			g.STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="grade">
+			g.GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="gradeLess">
+			<![CDATA[
+			g.GRADE <= #gradeLess#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="displayStatus">
+			g.DP_STATUS = #displayStatus#
+		</isNotNull>
+		<isNotNull prepend="AND" property="statusList">
+			<iterate prepend="" property="statusList" open="(" close=")" conjunction="OR">
+				g.STATUS = #statusList[]#
+			</iterate>
+		</isNotNull>
+		<isNotNull prepend="AND" property="betStatus">
+			g.BET_STATUS = #betStatus#
+		</isNotNull>
+		<isNotNull prepend="AND" property="fromDate">
+			<![CDATA[
+			g.GAME_DATE >= #fromDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			g.GAME_DATE <= #toDate#
+			]]>
+		</isNotNull>
+		<isNotNull prepend="AND" property="betGameCount">
+			<![CDATA[
+			(SELECT COUNT(*) FROM tbl_betting_game bg WHERE g.ID = bg.GAME_ID) > #betGameCount#
+			]]>
+		</isNotNull>
+	</select>
+	
+	<insert id="insertGame" parameterClass="Game">
+		INSERT INTO tbl_game(HOME_TEAM, AWAY_TEAM, WIN_RATE, DRAW_RATE, LOSE_RATE, STATUS, GAME_DATE, LEAGUE_ID, TYPE, BET_STATUS, DP_STATUS, WIN_DENY, DRAW_DENY, LOSE_DENY, GRADE)
+			VALUES(#homeTeam#, #awayTeam#, #winRate#, #drawRate#, #loseRate#, #status#, #gameDate#, #leagueId#, #type#, #betStatus#, #displayStatus#, #winDeny#, #drawDeny#, #loseDeny#, #grade#)
+	</insert>
+	
+	<update id="updateGame" parameterClass="Game">
+		UPDATE tbl_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="homeTeam">
+			HOME_TEAM = #homeTeam#
+			</isNotNull>
+			<isNotNull prepend="," property="awayTeam">
+			AWAY_TEAM = #awayTeam#
+			</isNotNull>
+			<isNotNull prepend="," property="winRate">
+			WIN_RATE = #winRate#
+			</isNotNull>
+			<isNotNull prepend="," property="drawRate">
+			DRAW_RATE = #drawRate#
+			</isNotNull>
+			<isNotNull prepend="," property="loseRate">
+			LOSE_RATE = #loseRate#
+			</isNotNull>
+			<isNotNull prepend="," property="gameDate">
+			GAME_DATE = #gameDate#
+			</isNotNull>
+			<isNotNull prepend="," property="leagueId">
+			LEAGUE_ID = #leagueId#
+			</isNotNull>
+			<isNotNull prepend="," property="type">
+			TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="grade">
+			GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="," property="displayStatus">
+			DP_STATUS = #displayStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="betStatus">
+			BET_STATUS = #betStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="homeScore">
+			HOME_SCORE = #homeScore# 
+			</isNotNull>
+			<isNotNull prepend="," property="awayScore">
+			AWAY_SCORE = #awayScore# 
+			</isNotNull>
+			<isNotNull prepend="," property="result">
+			RESULT = #result# 
+			</isNotNull>
+			<isNotNull prepend="," property="winDeny">
+			WIN_DENY = #winDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="drawDeny">
+			DRAW_DENY = #drawDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="loseDeny">
+			LOSE_DENY = #loseDeny# 
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+	
+	<update id="batchGameBetStatus" parameterClass="date">
+		<![CDATA[
+		UPDATE tbl_game
+		SET
+			BET_STATUS = 'BTS02'
+		WHERE
+			GAME_DATE <= #date# AND
+			BET_STATUS = 'BTS01'
+		]]>			
+	</update>
+	
+	<update id="batchGameStatus" parameterClass="date">
+		<![CDATA[
+		UPDATE tbl_game
+		SET
+			STATUS = 'GS003'
+		WHERE
+			GAME_DATE <= #date# AND
+			STATUS = 'GS002'
+		]]>			
+	</update>
+</sqlMap>
