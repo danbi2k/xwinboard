@@ -18,7 +18,7 @@ public class TransactionService extends XwinService
 	public void sendTransaction(List<Transaction> transactionList)
 	{
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(10000);
 		
 		String xml = XmlUtil.toXml(transactionList);
 		
@@ -32,7 +32,11 @@ public class TransactionService extends XwinService
 		
 		try {
 			hc.executeMethod(post);
-			System.out.println(post.getResponseBodyAsString());
+			if (post.getStatusCode() != 200) {
+				System.out.println("One More Try..");
+				hc.executeMethod(post);
+			}
+			System.out.println("TRANSACTION : " + post.getStatusCode() + " " + post.getResponseBodyAsString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
