@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
@@ -322,7 +323,7 @@ public class MemberController extends XwinController
 			
 			try {
 				SmsWait smsWait = new SmsWait();
-				smsWait.setMsg("[Bravo] 가입 인증번호  [ " + phonePin + " ]");
+				smsWait.setMsg("[" + SiteConfig.SITE_NAME + "] 가입 인증번호  [ " + phonePin + " ]");
 				smsWait.setPhone(phone);
 				smsWait.setCallback("0000000000");
 				
