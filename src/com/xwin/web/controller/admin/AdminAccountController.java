@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.user.Member;
@@ -265,7 +266,7 @@ public class AdminAccountController extends XwinController
 			/*
 			String nickName = member.getNickName();
 			String mobile = member.getMobile().replaceAll("-", "");
-			String message = "[Bravo]" + nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다.";
+			String message = "[" + SiteConfig.SITE_NAME + "]" + nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다.";
 			try {
 				sendSmsConnector.sendSms(message, mobile, "0000000000");
 			} catch (Exception e) {
@@ -301,7 +302,7 @@ public class AdminAccountController extends XwinController
 			if (member.getGetSms().equals("Y")) {
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
-				String message = "[Bravo] " + nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다.";
+				String message = "[" + SiteConfig.SITE_NAME + "] " + nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다.";
 				
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);
