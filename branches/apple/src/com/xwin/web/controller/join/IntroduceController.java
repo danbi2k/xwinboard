@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.join.Invitation;
@@ -99,7 +100,7 @@ public class IntroduceController extends XwinController
 			//smsWait.setMsg(inviteKey + " " + userId);
 			//smsWaitDao.insertSmsWait(smsWait);
 			
-			smsWait.setMsg("[추천] http://bravotime.net" + "\n소개인ID : " + userId + "\n추천장 : " + inviteKey);
+			smsWait.setMsg("[추천] http://" + SiteConfig.SITE_DOMAIN + "\n소개인ID : " + userId + "\n추천장 : " + inviteKey);
 			smsWaitDao.insertSmsWait(smsWait);		
 			
 			member.setIntroLetter(member.getIntroLetter()-1);
