@@ -7,11 +7,11 @@ import org.apache.commons.httpclient.methods.PostMethod;
 
 public class MunjaBadaConnector implements SendSmsConnector
 {
-	
-	private final String USERID = "vegas5004";
-	private final String PASSWD = "5004369";
 	private final String URL = "http://www.munjabada.co.kr/Remote/RemoteSms.php";
-	private final String RETURN_URL = "bethit.net:10180/munja.aspx";
+	
+	private String userId;
+	private String password;
+	private String returnUrl;
 	
 	public void sendSms(String message, String phone, String callback) throws Exception
 	{
@@ -19,9 +19,9 @@ public class MunjaBadaConnector implements SendSmsConnector
 		PostMethod method = new PostMethod(URL);
 		method.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=euc-kr");
 		
-		method.setParameter("remote_id", USERID);
-		method.setParameter("remote_pass", PASSWD);
-		method.setParameter("remote_returnurl", RETURN_URL);
+		method.setParameter("remote_id", userId);
+		method.setParameter("remote_pass", password);
+		method.setParameter("remote_returnurl", returnUrl);
 		method.setParameter("remote_num", "1");
 		method.setParameter("remote_phone", phone.replaceAll("-", ""));
 		method.setParameter("remote_callback", callback);
@@ -47,8 +47,8 @@ public class MunjaBadaConnector implements SendSmsConnector
 					sb.append(",");
 			}
 			
-			method.setParameter("remote_id", USERID);
-			method.setParameter("remote_pass", PASSWD);
+			method.setParameter("remote_id", userId);
+			method.setParameter("remote_pass", password);
 			method.setParameter("remote_num", "" + size);
 			method.setParameter("remote_phone", sb.toString());
 			method.setParameter("remote_callback", callback);
@@ -57,5 +57,17 @@ public class MunjaBadaConnector implements SendSmsConnector
 			hc.executeMethod(method);
 			System.out.println(method.getResponseBodyAsString());
 		}
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setReturnUrl(String returnUrl) {
+		this.returnUrl = returnUrl;
 	}
 }

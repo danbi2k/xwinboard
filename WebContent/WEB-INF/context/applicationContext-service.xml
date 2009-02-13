@@ -35,7 +35,5 @@
 		p:accountDao-ref="accountDao"
 		p:pointDao-ref="pointDao"/>	
 		
-	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>	
-		
-	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector"/>
+	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>
 </beans>
