@@ -30,6 +30,7 @@ public class BettingService extends XwinService
 		betting.setGameType(gameFolder.getType());
 		betting.setNickName(member.getNickName());
 		betting.setIntroducerId(member.getIntroducerId());
+		betting.setMemberId(member.getMemberId());
 		
 		String bettingId = bettingDao.insertBetting(betting);
 		

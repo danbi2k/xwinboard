@@ -30,6 +30,7 @@ public class Betting extends XwinObject
 	private String isDeleted;
 	private Integer successCount;
 	private String gameGrade;
+	private Integer memberId;
 	
 	private List<BetGame> betGameList;
 	
@@ -143,6 +144,12 @@ public class Betting extends XwinObject
 	}
 	public void setGameGrade(String gameGrade) {
 		this.gameGrade = gameGrade;
+	}
+	public Integer getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 	public String toString()
 	{

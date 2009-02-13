@@ -38,6 +38,7 @@
 		<result property="boardDenyDate" column="BOARD_DENY_DATE"/>
 		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
 		<result property="passwordExpire" column="PASSWORD_EXPIRE"/>
+		<result property="memberId" column="MEMBERID"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
