@@ -11,7 +11,7 @@ public class IndexController extends XwinController
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("user_login");
+		ModelAndView mv = new ModelAndView("home");
 		
 		return mv;
 	}

@@ -17,8 +17,8 @@
 	</bean>	
 		    
 	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector">
-		<property name="userId" value="vegas5004"/>
-		<property name="password" value="5004369"/>
+		<property name="userId" value="qnwk"/>
+		<property name="password" value="qnwkdhkd"/>
 		<property name="returnUrl" value="bethit.net:10180/munja.aspx"/>
 	</bean>
 	
