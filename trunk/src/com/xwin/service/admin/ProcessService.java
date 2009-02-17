@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Admin;
@@ -19,7 +22,7 @@ import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 
-public class ProcessService extends XwinService
+public class ProcessService extends XwinService implements MessageSourceAware
 {	
 	public void judgeGameResult(Game game)
 	{
@@ -226,7 +229,10 @@ public class ProcessService extends XwinService
 			// 문자발송
 			try {
 				if (member.getGetSms().equals("Y")) {
-					String message = "[" + SiteConfig.SITE_NAME + "] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
+//					String message = "[" + SiteConfig.SITE_NAME + "] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
+					String message = msgSrc.getMessage("SMS_SUCCESS",
+							new Object[]{SiteConfig.SITE_NAME, betting.getNickName(), betting.getId(), XwinUtil.comma3(betting.getExpect())},
+							SiteConfig.SITE_LOCALE);
 					
 					SmsWait smsWait = new SmsWait();
 					smsWait.setMsg(message);
@@ -319,72 +325,10 @@ public class ProcessService extends XwinService
 		return result;
 	}
 	
-//	public void multipleTotalRate(String gameId)
-//	{
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("gameId", gameId);
-//		List<Betting> bettingList = bettingDao.selectBettingList(param);
-//		for (Betting betting : bettingList)
-//			multipleTotalRate(betting);
-//	}
-//	
-//	public void multipleTotalRate(Betting betting)
-//	{
-//		List<BetGame> betGameList = betting.getBetGameList();
-//		
-//		double totalRate = 0.0;
-//		if (betGameList != null) {
-//			for (BetGame betGame : betGameList) {
-//				Double rate = null;
-//				if (betGame.getGuess().equals("W"))
-//					rate = betGame.getWinRate();
-//				else if (betGame.getGuess().equals("D"))
-//					rate = betGame.getDrawRate();
-//				else if (betGame.getGuess().equals("L"))
-//					rate = betGame.getLoseRate();
-//				
-//				if (rate == 0.0) continue;
-//				if (betGame.getType().equals("handy") && betGame.getResult().equals("D")) continue;
-//				if (betGame.getStatus().equals(Code.GAME_STATUS_CANCEL)) continue;
-//				
-//				if (totalRate == 0.0)
-//					totalRate = rate;
-//				else
-//					totalRate *= rate;				
-//			}
-//		}
-//		
-//		Double cutRate = XwinUtil.doubleCut(totalRate);
-//		Long expect = XwinUtil.calcExpectMoney(cutRate, betting.getMoney());
-//		
-//		betting.setRate(cutRate);
-//		betting.setExpect(expect);
-//		
-//		bettingDao.updateBetting(betting);
-//	}
-	
-	private void notifyGameResult(List<Betting> bettingList) {
-		if (bettingList != null) {
-			for (Betting betting : bettingList) {				
-				try {
-					Member member = memberDao.selectMember(betting.getUserId(), null);
-					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS) && member.getGetSms().equals("Y")) {
-						String message = "[" + SiteConfig.SITE_NAME + "] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 " +
-								Code.getValue(betting.getStatus()) + " 되었습니다.";
-						if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-							message += "배당금 : " + XwinUtil.comma3(betting.getExpect());
-						
-						SmsWait smsWait = new SmsWait();
-						smsWait.setMsg(message);
-						smsWait.setPhone(member.getMobile());
-						smsWait.setCallback("000-000-0000");
-						
-						smsWaitDao.insertSmsWait(smsWait);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	private MessageSource msgSrc = null;
+
+	public void setMessageSource(MessageSource messageSource)
+	{
+		msgSrc = messageSource;
 	}
 }

@@ -126,6 +126,9 @@
 			<isNotNull prepend="," property="passwordExpire">
 				PASSWORD_EXPIRE = #passwordExpire#
 			</isNotNull>
+			<isNotNull prepend="," property="memberId">
+				MEMBERID = #memberId#
+			</isNotNull>
 		</dynamic>
 		WHERE USERID = #userId#			
 	</update>
