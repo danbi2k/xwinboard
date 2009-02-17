@@ -6,9 +6,6 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
-		    
-	<bean id="ktfSmsConnector" class="com.xwin.infra.sms.KtfSmsConnector"
-		p:ktfSmsDao-ref="ktfSmsDao" />
 		
 	<bean id="moneyInService" class="com.xwin.service.admin.MoneyInService"
 		p:accountDao-ref="accountDao"
