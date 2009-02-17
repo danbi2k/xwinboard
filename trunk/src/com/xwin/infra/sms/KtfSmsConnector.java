@@ -26,16 +26,9 @@ import com.xwin.infra.dao.KtfSmsDao;
 public class KtfSmsConnector
 {
 	private static final DocumentBuilderFactory docBuilderFact = DocumentBuilderFactory.newInstance();
-//	private static final String[] getUri = {"http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029017589&LogTime=20081206143116&ClientIP=192.168.10.111&MagicN_Id=Y29vbGlvbg==&ALevel=1&boxType=1&pagesize=2000&curpage=1"};
-//	private static final String[] delUri = {"http://221.148.243.76/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01029017589&LogTime=20081206143116&ClientIP=192.168.10.111&IsALL=N&boxType=1&ALevel=1&targetMsg="};
-	private static final String[] getUri = {
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=100&curpage=1",
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=100&curpage=1"
-	};
-	private static final String[] delUri = {
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg=",
-		"http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&IsALL=N&boxType=1&ALevel=1&targetMsg="
-	};
+
+	private List<String> getUri = new ArrayList<String>();
+	private List<String> delUri = new ArrayList<String>();
 	
 	private KtfSmsDao ktfSmsDao = null;
 	
@@ -56,9 +49,9 @@ public class KtfSmsConnector
 		HttpClient hc = new HttpClient();
 		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
 			
-		for (int x = 0 ; x < getUri.length ; x++) {
+		for (int x = 0 ; x < getUri.size() ; x++) {
 			try {
-				HttpMethod method = new GetMethod(getUri[x]);
+				HttpMethod method = new GetMethod(getUri.get(x));
 				hc.executeMethod(method);
 				InputStream is = method.getResponseBodyAsStream();
 				
@@ -94,7 +87,6 @@ public class KtfSmsConnector
 			}
 		}
 		
-		
 		return mapList;
 	}
 	
@@ -107,7 +99,7 @@ public class KtfSmsConnector
 		try {
 			DocumentBuilder actBuilder = docBuilderFact.newDocumentBuilder();
 			String delParam = msgSeq + "|" + inDate + "|" + sm; 
-			actBuilder.parse(delUri[x] + delParam);
+			actBuilder.parse(delUri.get(x) + delParam);
 //			System.out.println(delUri[x] + delParam);
 			
 //			HttpClient hc = new HttpClient();
@@ -145,5 +137,21 @@ public class KtfSmsConnector
 	public List<KtfSmsMessage> getMessageList()
 	{
 		return ktfSmsDao.selectList();
+	}
+
+	public List<String> getGetUri() {
+		return getUri;
+	}
+
+	public void setGetUri(List<String> getUri) {
+		this.getUri = getUri;
+	}
+
+	public List<String> getDelUri() {
+		return delUri;
+	}
+
+	public void setDelUri(List<String> delUri) {
+		this.delUri = delUri;
 	}
 }
