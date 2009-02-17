@@ -38,6 +38,9 @@
 	<update id="updateBetGame" parameterClass="BetGame">
 		UPDATE tbl_betting_game
 		<dynamic prepend="SET">
+			<isNotNull prepend="," property="guess">
+				GUESS = #guess#
+			</isNotNull>
 			<isNotNull prepend="," property="result">
 				RESULT = #result#
 			</isNotNull>

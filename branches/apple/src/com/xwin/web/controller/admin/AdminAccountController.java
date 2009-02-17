@@ -9,6 +9,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
@@ -24,7 +26,7 @@ import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
-public class AdminAccountController extends XwinController
+public class AdminAccountController extends XwinController implements MessageSourceAware
 {
 	int ROWSIZE = 30;
 	
@@ -302,7 +304,9 @@ public class AdminAccountController extends XwinController
 			if (member.getGetSms().equals("Y")) {
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
-				String message = "[" + SiteConfig.SITE_NAME + "] " + nickName + " 님께 " + moneyOut.getMoney() + "원이 환전 되었습니다.";
+				String message = msgSrc.getMessage("SMS_EXCHANGE",
+						new Object[]{SiteConfig.SITE_NAME, nickName, XwinUtil.comma3(moneyOut.getMoney())},
+						SiteConfig.SITE_LOCALE);
 				
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);
@@ -572,5 +576,11 @@ public class AdminAccountController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;	
+	}
+	
+	private MessageSource msgSrc = null;
+
+	public void setMessageSource(MessageSource messageSource) {
+		msgSrc = messageSource;		
 	}
 }

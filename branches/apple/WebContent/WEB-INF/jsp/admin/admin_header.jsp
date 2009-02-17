@@ -37,17 +37,8 @@ if (admin == null) {
 var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
 var exchangePlay = <%=EX_PLAY.equals("on")?"true":"false"%>;
 
-function checkIndi()
+function checkIndiCallBack(result)
 {
-	var chargingIndi = document.getElementById("chargingIndi");
-	var exchangeIndi = document.getElementById("exchangeIndi");
-	//var centerIndi = document.getElementById("centerIndi");
-	var vipIndi = document.getElementById("vipIndi");
-	var hackingIndi = document.getElementById("hackingIndi");
-
-	var query = "mode=getIndicator";
-	var http = new JKL.ParseXML("admin.aspx", query);
-	var result = http.parse();
 	if (result == undefined) {
 		//location.href = 'admin';
 		return;
@@ -61,6 +52,20 @@ function checkIndi()
 		vipVal = vipIndi.innerHTML = (data.vipIndi);
 		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
 	}
+}
+
+function checkIndi()
+{
+	var chargingIndi = document.getElementById("chargingIndi");
+	var exchangeIndi = document.getElementById("exchangeIndi");
+	//var centerIndi = document.getElementById("centerIndi");
+	var vipIndi = document.getElementById("vipIndi");
+	var hackingIndi = document.getElementById("hackingIndi");
+
+	var query = "mode=getIndicator";
+	var http = new JKL.ParseXML("admin.aspx", query);
+	http.async(checkIndiCallBack);
+	http.parse();
 }
 
 function playSound()

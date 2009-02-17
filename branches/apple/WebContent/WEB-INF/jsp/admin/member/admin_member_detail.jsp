@@ -153,7 +153,7 @@
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>가입일</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%></td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%>:<%=member.getMemberId()%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>상태</td>
@@ -444,7 +444,6 @@ if (accountList != null) {
 %>		
 </table>
 </form>
-
 <div class="pages">
 <%
 	int pIdx = 0;
