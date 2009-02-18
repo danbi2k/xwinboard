@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
@@ -56,7 +57,7 @@ public class LoginController extends XwinController
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
 				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
-			} else if (comparePassword(member.getPin(), pin) == false) {
+			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
 				rx.setCode(-1);
 				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
 			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {

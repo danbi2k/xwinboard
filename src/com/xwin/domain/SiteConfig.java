@@ -9,4 +9,5 @@ public class SiteConfig extends XwinObject
 	public static final Locale SITE_LOCALE = Locale.US;	
 	public static final String SITE_NAME = "Bravo";
 	public static final String SITE_DOMAIN = "bravotime.net";
+	public static final boolean PIN_LOGIN = true;
 }
