@@ -10,79 +10,71 @@
 
 <%@include file="../header.jsp"%>
 
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
-</table>
-
--->
-
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_board.gif"></td><td>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.</td></td>
-	</table>
-</td></tr>
-<tr><td valign="top" align="center" height="300">
+<div class='sub_ti1'>
+			<img src='img/sub_board_ti.gif' alt='게시판' class='ml10 mr10 fl'> 
+			<div class='sub_ti_desc'>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다. </div>
+	<!-- 	<div class='state_bar'>
+				<div class='state_bar_txt'>
+				<span class='name'>홍길동</span> 님
+				<span class='cash'>· Cash:<span class='val'>0</span></span> 
+				<span class='apple'>· Apple:<span class='val'>100,000</span></span> 
+				<span class='link'><a href=''>배팅내역보기</a></span>
+				</div>
+			</div> -->
+			<div class='sub_ti_bar'></div>
+		</div>
 
 
-<link rel='stylesheet' href='/board/skin_board/board.css'><script language='JavaScript' src='/board/skin_board/board.js'></script>
-<script>
-function list(){
-    location.href="/board/board.asp?idx=board";
-}
-function check_frm(){
-	if (havingSqlKeyword(frm.title.value)) { alert("제목에 사용할수 없는 문자열이 있습니다"); frm.title.focus(); return false; }
-	if (havingSqlKeyword(frm.name.value)) { alert("작성자에 사용할수 없는 문자열이 있습니다"); frm.name.focus(); return false; }
-	if (havingSqlKeyword(frm.context.value)) { alert("내용에 사용할수 없는 문자열이 있습니다"); frm.context.focus(); return false; }
+		<div id='sub_content1'>
+			<div class='board'>
+				<div class='write_box'>
+					<form name="frm" action="board.aspx" method="post">
+					<input type="hidden" name="mode" value="writeBoardItem">
+					<input type="hidden" name="boardName" value="<%=boardName%>">
+					<table>
+						<tr>
+							<th>작성자</th>
+							<td><%=member.getNickName()%></td>
+						</tr>
+						<tr>
+							<th>제 목</th>
+							<td><input type='text' class='w1' name='title'></td>
+						</tr>
+						<tr>
+							<th>내 용</th>
+							<td><textarea type='text' class='w2' name='context'></textarea></td>
+						</tr>
+					</table>
+					</form>
+				</div>
+				<!-- end view_box -->
+				<div class='write_bt'>
+					<img src='img/board_writeok_bt.gif' alt='작성완료' class='img_bt' onclick='write_board()' style='cursor:hand'>
+					<img src='img/board_list_bt.gif' alt='글목록' class='img_bt' onclick='history.back()' style='cursor:hand'>
+
+				</div>				
+				<!-- end write_bt -->
 	
-    if(frm.title.value   ==""){ alert("제목을 입력하세요!");   frm.title.focus();    return false; }
-    if(frm.name.value    ==""){ alert("작성자를 입력하세요!"); frm.name.focus();     return false; }
+			</div>
+			<!-- end board -->
+		</div>
+		<!-- sub_content1 -->
+
+<script>
+function write_board()
+{
+	var frm = document.frm;
+	if(frm.title.value   ==""){ alert("제목을 입력하세요!");   frm.title.focus();    return false; }
+    //if(frm.name.value    ==""){ alert("작성자를 입력하세요!"); frm.name.focus();     return false; }
     if(frm.context.value==""){ alert("내용을 입력하세요!");   frm.context.focus(); return false; }
-    return true;
+    
+	if (havingSqlKeyword(frm.title.value)) { alert("제목에 사용할수 없는 문자열이 있습니다"); frm.title.focus(); return false; }
+	//if (havingSqlKeyword(frm.name.value)) { alert("작성자에 사용할수 없는 문자열이 있습니다"); frm.name.focus(); return false; }
+	if (havingSqlKeyword(frm.context.value)) { alert("내용에 사용할수 없는 문자열이 있습니다"); frm.context.focus(); return false; }
+
+    frm.submit();
 }
 </script>
-
-
-<table width="95%" border="0" align="center" bgcolor="#d9d8d6" cellpadding="3" cellspacing="1" style="margin-top:7px;">
-<colgroup>
-<col height="31" width="10%" align="center">
-<col height="31" width="90%" align="center">
-</colgroup>
-<form name="frm" action="board.aspx" method="post" onsubmit="return check_frm();">
-<input type="hidden" name="mode" value="writeBoardItem">
-<input type="hidden" name="boardName" value="<%=boardName%>">
-
-<tr bgcolor="#0a0a0a">
-	<td bgcolor="#222222" style="color:white;"><b>작성자</td>
-    <td align="left"><input type="text" name="name" readonly style="background-color:#0a0a0a;border:0;color:white" value="<%=member.getNickName()%>" style="width:100;"></td>
-<tr bgcolor="#0a0a0a">
-	<td bgcolor="#222222" style="color:white;"><b>제&nbsp;목</td>
-    <td align="left"><input type="text" name="title" class="board" value="" style="width:100%;background-color:#4f4f4f;color:#FFFFFF">
-	</td></tr>
-<tr bgcolor="#0a0a0a">
-	<td bgcolor="#222222" style="color:white;"><b>내&nbsp;용</td>
-	<td align="left"><textarea name="context" class="board" style="width:100%;height:300;background-color:#4f4f4f;color:#FFFFFF"></textarea></td></tr>
-</table>
-
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="margin-top:5;">
-<tr><td width="50%" height="30"><div align="left">
-        <a href="javascript:history.back()"><img src="images/btn_list.gif" border="0"></a>
-    </td>
-    <td width="50%" height="30"  align="right">
-		<input type="image" src="images/btn_write.gif" style="cursor:hand">
-    </td></tr>
-</form>
-</table>
-
-
-</td></tr>
-</table>
-
 <%@include file="../footer.jsp"%>
 
 
