@@ -1,4 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -99,7 +98,6 @@
 				</div>
 				<div class='incash_bt'>
 				<img src='img/sub_incash_bt.gif' class='img_bt' onclick="FnInMoney_Submit(frm);" >
-				<img src='img/sub_incash_cancel_bt.gif' class='img_bt' onclick="location.href='/';">
 				</div>
 
 				
