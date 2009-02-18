@@ -16,16 +16,8 @@
 		pageIndex = "0";
 %>
 <div class='sub_ti1'>
-			<img src='./img/sub_board_ti.gif' alt='게시판' class='ml10 mr10 fl'> 
+			<img src='img/sub_board_ti.gif' alt='게시판' class='ml10 mr10 fl'> 
 			<div class='sub_ti_desc'>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다. </div>
-	<!-- 	<div class='state_bar'>
-				<div class='state_bar_txt'>
-				<span class='name'>홍길동</span> 님
-				<span class='cash'>· Cash:<span class='val'>0</span></span> 
-				<span class='apple'>· Apple:<span class='val'>100,000</span></span> 
-				<span class='link'><a href=''>배팅내역보기</a></span>
-				</div>
-			</div> -->
 			<div class='sub_ti_bar'></div>
 		</div>
 
@@ -35,51 +27,66 @@
 				<div class='view_box'>
 					<table>
 						<tr>
-							<th>안녕하세요 반갑습니다.</th>
+							<th><%=boardItem.getTitle()%></th>
 						</tr>
 						<tr>
 							<td class='v1'>
-							<span>작성자 : 홍길동</span><span>조회수 : 24</span><span>등록일 : 01/06 23:08</span>
+							<span>작성자 : <%=boardItem.getNickName()%></span><span>조회수 : <%=boardItem.getReadCount() %></span><span>등록일 : <%=XwinUtil.getBoardItemDate(boardItem.getDate()) %></span>
 							</td>
 						</tr>
 						<tr>
 							<td class='v2'>
-							안녕하세요 반갑습니다.<br>
-							안녕하세요 반갑습니다.<br>
-							안녕하세요 반갑습니다.<br>
-							안녕하세요 반갑습니다.<br>
-							안녕하세요 반갑습니다.<br>
-							안녕하세요 반갑습니다.<br>
+							<%
+						    String context = boardItem.getContext();
+						    context = StringEscapeUtils.escapeHtml(context);
+						    context = context.replaceAll("\n", "<br>");
+						    out.print(context);
+						    %>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<!-- end view_box -->
 				<div class='write_bt'>
-					<a href=''><img src='./img/board_list_bt.gif' alt='글목록' class='img_bt'></a>
-					<a href=''><img src='./img/board_del_bt.gif' alt='글삭제' class='img_bt'></a>
-					<a href=''><img src='./img/board_write_bt.gif' alt='글쓰기' class='img_bt'></a>
+					<a href='board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src='img/board_list_bt.gif' alt='글목록' class='img_bt'></a>
+					<%if (boardItem.getUserId().equals(member.getUserId())) {%>
+					<a href=''><img src='img/board_del_bt.gif' alt='글삭제' class='img_bt' onclick="deleteItem()"></a>
+					<%} %>
+					<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src='img/board_write_bt.gif' alt='글쓰기' class='img_bt'></a>
 				</div>				
 				<!-- end write_bt -->
 				<div class='comment_write'>
+					<form name="comment_frm" method="post">
+					<input type="hidden" name="mode" value="writeBoardComment">
+					<input type="hidden" name="boardId" value="<%=boardItem.getId()%>">
+					<input type="hidden" name="boardName" value="<%=boardName%>">
 					<table>
 						<tr>
 						<td class='title'>COMMENT</td>
-						<td>작성자 <input type='text' class='input_text w80'></td>
-						<td>내용 <input type='text' class='input_text w380'></td>
-						<td><img src='./img/board_comment_bt.gif' alt='코멘트입력'></td>
+						<td>작성자 <input type='text' class='input_text w80' name='name' value='<%=member.getNickName()%>' readonly></td>
+						<td>내용 <input type='text' class='input_text w380' name='comment'></td>
+						<td><img src='img/board_comment_bt.gif' alt='코멘트입력' style="cursor:hand" onclick="comment_add()"></td>
 						</tr>
 					</table>
-
+					</form>
 				</div>			
 				<!-- end comment_write -->
 				<div class='comment_list'>
 					<table>
-						<tr><td class='c1'>홍기동</td><td class='c2'>안녕하세요 반갑습니다.[2]</td><td class='c3'>01/06 23:08</td></tr>
-						<tr><td class='c1'>홍기동</td><td class='c2'>안녕하세요 반갑습니다.[2]</td><td class='c3'>01/06 23:08</td></tr>
-						<tr><td class='c1'>홍기동</td><td class='c2'>안녕하세요 반갑습니다.[2]</td><td class='c3'>01/06 23:08</td></tr>
-						<tr><td class='c1'>홍기동</td><td class='c2'>안녕하세요 반갑습니다.[2]</td><td class='c3'>01/06 23:08</td></tr>
-						<tr><td class='c1'>홍기동</td><td class='c2'>안녕하세요 반갑습니다.[2]</td><td class='c3'>01/06 23:08</td></tr>
+					 <%
+			        if (boardCommentList != null) {
+			        	for (BoardComment boardComment : boardCommentList) {
+			        %>
+						<tr>
+							<td class='c1'><%=boardComment.getNickName()%></td>
+							<td class='c2'><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
+							<td class='c3'><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
+							<td class='c4'><img src='img/sub_incashlist_del_bt.gif'></td>
+						</tr>
+					<%
+			        	}
+			        }
+			        %>
 					</table>		
 				</div>			
 				<!-- end comment_list -->
@@ -119,33 +126,6 @@ function deleteComment(id)
 	}
 }
 
-function list(){
-    location.href="/board/board.asp?idx=board";
-}
-function pre_go(){
-    
-        location.href="/board/board.asp?idx=board&no=1568";
-    
-}
-function next_go(){
-    
-        alert("다음 게시믈이 없습니다.");
-    
-}
-function edit(no){
-    if(confirm("수정하시겠습니까?")){
-        location.href="/board/board.asp?idx=board&m=e&no="+ no;
-    }
-}
-function del(no){
-    location.href="/board/board.asp?idx=board&m=d&no="+ no;
-}
-</script>
-
-
-<!--############################################################################################//-->
-
-<script>
 function comment_add(){
 	if (havingSqlKeyword(comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
 	if (havingSqlKeyword(comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
