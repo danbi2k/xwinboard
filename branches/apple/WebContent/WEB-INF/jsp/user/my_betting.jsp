@@ -28,7 +28,7 @@
 		for (Betting betting : bettingList) {
 %>			
 				<div class='list_box'>
-					<img src='img/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5'> 배당율 : <span><%=betting.getRateStr()%></span> / 배팅금액 : <span><%=XwinUtil.comma3(betting.getMoney())%></span> / 예상적중금액 : <span><%=XwinUtil.comma3(betting.getExpect())%></span> / 적중금액 :
+					<img src='img/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"> 배당율 : <span><%=betting.getRateStr()%></span> / 배팅금액 : <span><%=XwinUtil.comma3(betting.getMoney())%></span> / 예상적중금액 : <span><%=XwinUtil.comma3(betting.getExpect())%></span> / 적중금액 :
 					<span>
 					<%
 					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
