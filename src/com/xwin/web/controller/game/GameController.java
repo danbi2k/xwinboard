@@ -37,6 +37,7 @@ public class GameController extends XwinController
 			return new ModelAndView("dummy");
 		
 		String type = request.getParameter("type");
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("gameFolder_" + type, new GameFolder(type));
@@ -51,7 +52,7 @@ public class GameController extends XwinController
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("toDate", cal.getTime());
-		if (member.getGrade().equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
+		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
 			param.put("grade", Code.USER_GRADE_VIP);
 		else
 			param.put("grade", Code.USER_GRADE_NORMAL);
