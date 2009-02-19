@@ -18,6 +18,17 @@
 		</property>
 	</bean>
 	
+	<bean id="gameSyncJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.xwin.infra.schedule.GameSyncManager"/>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="gameDao">
+					<ref bean="gameDao"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
 	<bean id="autoMoneyInJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass" value="com.xwin.infra.schedule.AutoMoneyInManager"/>
 		<property name="jobDataAsMap">
@@ -86,6 +97,12 @@
 		<property name="repeatInterval" value="60000"/>
 	</bean>
 	
+	<bean id="gameSyncTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="gameSyncJob"/>
+		<property name="startDelay" value="20000"/>
+		<property name="repeatInterval" value="10800000"/>
+	</bean>
+	
 	<bean id="autoMoneyInTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="autoMoneyInJob"/>
 		<property name="startDelay" value="20000"/>
@@ -114,6 +131,7 @@
 		<property name="triggers">
 			<list>
 				<!-- ref bean="gameBetStatusTrigger"/ -->
+				<!-- ref bean="gameSyncTrigger"/ -->
 				<!-- ref bean="autoMoneyInTrigger"/ --> <!-- 충전시키는부분 -->
 				<!-- ref bean="transactionTrigger"/ --> <!-- SMS가져오는 부분 -->
 				<!-- ref bean="sendSmsTrigger"/ -->

@@ -135,6 +135,8 @@
 		p:transactionDao-ref="transactionDao"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:memberDao-ref="memberDao"
+		p:gameDao-ref="gameDao"
+		p:leagueDao-ref="leagueDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="controllerNameResolver"
