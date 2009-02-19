@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>APPLE-BET</title>
+<title>Insert title here</title>
 </head>
-<frameset rows="0,100%" border="0">
-	<frame name=left src="" border=0 scrolling="yes" noresize>
-	<frame name=mainFrame src="home.aspx" border=0 scrolling="yes" noresize>
-</frameset>
 <body>
+<script>
+alert("로그인이 필요합니다");
+location.href = "main.aspx";
+</script>
 </body>
 </html>

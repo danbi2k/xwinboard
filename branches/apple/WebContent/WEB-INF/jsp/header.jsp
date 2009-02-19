@@ -84,8 +84,8 @@
 		<ul>
 		<li><a href='home.aspx' target='_self'>HOME</a> |</li>
 		<li><a href='moneyIn.aspx?mode=viewMoneyInRequest' target='_self'>캐쉬충전</a> |</li>
-		<li><a href='moneyOut.aspx?mode=viewMoneyOutRequest' target='_self'>환전요청</a> |</li>
-		<li><a href='myBet.aspx?mode=viewMyBettingList' target='_self'>배팅이력</a> |</li>
+		<li><a href='moneyOut.aspx?mode=viewMoneyOutRequest' target='_self'>환전신청</a> |</li>
+		<li><a href='myBet.aspx?mode=viewMyBettingList' target='_self'>배팅내역</a> |</li>
 		<li><a href='myMoney.aspx?mode=viewMyMoneyList' target='_self'>거래이력</a> |</li>
 		<li><a href='login.aspx?mode=processLogout' target='_self'>로그아웃</a></li>
 		</ul>

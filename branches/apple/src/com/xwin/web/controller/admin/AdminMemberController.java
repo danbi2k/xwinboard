@@ -553,7 +553,7 @@ public class AdminMemberController extends XwinController
 		ResultXml rx = null;
 		
 		if (password == null || password.length() < 4)
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
 			member.setPassword(password);
@@ -581,7 +581,7 @@ public class AdminMemberController extends XwinController
 		ResultXml rx = null;
 		
 		if (pin == null || pin.length() < 4)
-			rx = new ResultXml(-1, "환전비밀번호를 4자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "환전패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
 			member.setPin(pin);

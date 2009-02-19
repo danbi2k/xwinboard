@@ -37,7 +37,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
+		if(!d.passwd.value) { alert('패스워드를 입력하세요'); d.passwd.focus(); return false; }
 		d.action='/admin_mode/member/index.php?mode=modify_exe';
 		d.submit();
 	}

@@ -62,7 +62,40 @@
 
 				</div>
 				
-
+<!-----[ 페이징 ]--------------------------------------------/-->
+				<div class='paginate'>    
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<span class='pre'><a href='javascript:goPage(<%=startPage - 1%>)'><img src='img/list_prev_bt.gif' alt='이전'></a></span>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<span class='txt'><strong><%=i+1%></strong></span>
+<%
+		} else {
+%>		
+			<span class='txt'><a href='javascript:goPage(<%=i%>)'><%=i+1%></a></span>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>		
+		<span class='next'><a href='javascript:goPage(<%=i%>)''><img src='img/list_next_bt.gif' alt='다음' class='next'></a></span>
+<%
+	}
+%>
+				</div>		
 				
 
 			</div>

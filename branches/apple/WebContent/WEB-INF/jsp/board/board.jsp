@@ -85,8 +85,9 @@
 					</div>				
 
 				<!-- end list_box -->
+
 <!-----[ 페이징 ]--------------------------------------------/-->
-    
+				<div class='paginate'>    
 <%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
@@ -94,27 +95,28 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+		<span class='pre'><a href='javascript:goPage(<%=startPage - 1%>)'><img src='img/list_prev_bt.gif' alt='이전'></a></span>
 <%
 	}
 	int i = 0, c = 0;
 	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
 		if (i == pIdx) {
 %>
-			<b> <%=i+1%> </b>
+			<span class='txt'><strong><%=i+1%></strong></span>
 <%
 		} else {
 %>		
-			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+			<span class='txt'><a href='javascript:goPage(<%=i%>)'><%=i+1%></a></span>
 <%			
 		}
 	}
 	if (i < pageNum) {
-%>
-		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+%>		
+		<span class='next'><a href='javascript:goPage(<%=i%>)''><img src='img/list_next_bt.gif' alt='다음' class='next'></a></span>
 <%
 	}
-%>			
+%>
+				</div>			
 			</div>
 		</div>
 		<!-- sub_content1 -->

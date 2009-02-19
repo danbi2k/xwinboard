@@ -87,6 +87,9 @@
 		<isNotNull prepend="AND" property="grade">
 			bi.GRADE = #grade#
 		</isNotNull>
+		<isNotNull prepend="AND" property="type">
+			bi.TYPE = #type#
+		</isNotNull>
 		<isNotNull prepend="AND" property="userIdLike">
 			bi.USERID LIKE #userIdLike#
 		</isNotNull>
@@ -124,6 +127,9 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="grade">
 			bi.GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="type">
+			bi.TYPE = #type#
 		</isNotNull>
 		<isNotNull prepend="AND" property="userIdLike">
 			bi.USERID LIKE #userIdLike#
