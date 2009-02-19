@@ -17,7 +17,7 @@ function checkIT() {
 	
 	var d=document.regist;
 	if(!d.userid.value.trim()) { alert('아이디를 입력하세요'); d.userid.focus(); return false; }
-	if(!d.password.value.trim()) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
+	if(!d.password.value.trim()) { alert('패스워드를 입력하세요'); d.password.focus(); return false; }
 	if(!d.pin.value.trim()) { alert('PIN을 입력하세요'); d.pin.focus(); return false; }
 	
 	var query = "mode=processLogin";
@@ -68,7 +68,7 @@ function goButton(form)
 							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:61px" ID="login_bttn"></td>
 						</tr>
 						<tr>
-							<td>비밀번호</td>
+							<td>패스워드</td>
 							<td style="PADDING-LEFT: 5px">
 							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
 						</tr>

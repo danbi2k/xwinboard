@@ -44,19 +44,12 @@ public class LoginController extends XwinController
 			
 			Member member = memberDao.selectMember(userId, null);
 			
-			String server = "kor";
-			if (url.contains("-vip"))
-				server = "vip";
-			
 			if (member == null) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 사용자 입니다");
-			} else if (member.getGrade().equals(Code.USER_GRADE_NORMAL)) {
-				rx.setCode(-3);
-				rx.setMessage("일반회원 이십니다.");				
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
-				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
+				rx.setMessage("패스워드를 잘못 입력하셨습니다");
 			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
 				rx.setCode(-1);
 				rx.setMessage("PIN번호를 잘못 입력하셨습니다");

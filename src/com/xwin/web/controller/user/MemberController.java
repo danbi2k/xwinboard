@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
@@ -25,7 +29,7 @@ import com.xwin.web.command.MemberCommand;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
-public class MemberController extends XwinController
+public class MemberController extends XwinController implements MessageSourceAware
 {
 	public ModelAndView viewModifyForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -35,7 +39,7 @@ public class MemberController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
-		ModelAndView mv = new ModelAndView("user/modify");
+		ModelAndView mv = new ModelAndView("join/modify");
 		mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
@@ -44,19 +48,19 @@ public class MemberController extends XwinController
 	public ModelAndView registerMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
-		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");
-		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
-		if (invitation == null)
-			return new ModelAndView("dummy");
-		
-		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+//		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+//			return new ModelAndView("block");
+//		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+//		if (invitation == null)
+//			return new ModelAndView("dummy");
+//		
+//		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
 		ResultXml rx = null;
-		if (invitation.getJoinId() == null) {
+//		if (invitation.getJoinId() == null) {
 			if (phonePin != null) {
 				if (phonePin.equals(command.getPhonePin())) {
 					rx = checkExistUserId(command.getUserId());
@@ -69,7 +73,7 @@ public class MemberController extends XwinController
 								if (rx.getCode() == 0) {
 									rx = checkEmail(command.getEmail1(), command.getEmail2());
 									if (rx.getCode() == 0) {
-										rx = checkPin(command.getPin());
+										rx = checkPin(phonePin);
 										if (rx.getCode() == 0) {
 											Member member = new Member();
 											member.setUserId(command.getUserId());
@@ -77,16 +81,16 @@ public class MemberController extends XwinController
 											member.setNickName(command.getNickName());
 											member.setMobile(mobile);
 											member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-											member.setPin(command.getPin());
+											member.setPin(phonePin);
 											member.setStatus(Code.USER_STATUS_NORMAL);
-											member.setGrade(Code.USER_GRADE_VIP);
+											member.setGrade(Code.USER_GRADE_NORMAL);
 											member.setJoinDate(new Date());
 											member.setBankName(command.getBankName());
 											member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
 											member.setBankOwner(command.getBankOwner());
 											member.setBankDate(new Date());
 											member.setGetSms(command.getSmsCheck());
-											member.setIntroducerId(invitation.getUserId());
+//											member.setIntroducerId(invitation.getUserId());
 											
 											String WelcomeMsg = "환영합니다";
 											
@@ -103,12 +107,12 @@ public class MemberController extends XwinController
 											memberDao.insertMember(member);
 											
 	
-											invitation.setJoinId(member.getUserId());
-											invitationDao.updateInvitation(invitation);
-											
-											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
-											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-											memberDao.updateMember(introducer);
+//											invitation.setJoinId(member.getUserId());
+//											invitationDao.updateInvitation(invitation);
+//											
+//											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
+//											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+//											memberDao.updateMember(introducer);
 											
 											rx = new ResultXml(0, WelcomeMsg, null);
 										}
@@ -123,9 +127,9 @@ public class MemberController extends XwinController
 			} else {
 				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
 			}
-		} else {
-			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
-		}
+//		} else {
+//			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
+//		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -214,7 +218,7 @@ public class MemberController extends XwinController
 		ResultXml rx = null;
 		
 		if ((pin == null || pin.length() < 4))
-			rx = new ResultXml(-1, "환전비밀번호는 4자 이상 입력하세요", null);
+			rx = new ResultXml(-1, "환전패스워드는 4자 이상 입력하세요", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -227,9 +231,9 @@ public class MemberController extends XwinController
 		
 		if ((password1 == null || password1.length() < 4)
 				|| (password2 == null || password2.length() < 4))
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력하세요", null);
+			rx = new ResultXml(-1, "패스워드를 4자 이상 입력하세요", null);
 		else if (password1.equals(password2) == false)
-			rx = new ResultXml(-1, "비밀번호가 일치하지 않습니다", null);
+			rx = new ResultXml(-1, "패스워드가 일치하지 않습니다", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -309,30 +313,31 @@ public class MemberController extends XwinController
 		
 		String phone = request.getParameter("phone");
 		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("mobile", phone);
-//		Integer count = memberDao.selectMemberCount(param);
-//		Member member = (Member) request.getSession().getAttribute("Member");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("mobile", phone);
+		Integer count = memberDao.selectMemberCount(param);
+		Member member = (Member) request.getSession().getAttribute("Member");
 		
-//		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
-//			rx = new ResultXml(0, "이미 가입된 휴대전화 입니다", null);
-//		}
-//		else {
-			String phonePin = "" + ((int)(Math.random() * 10000));
+		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
+			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
+		}
+		else {
+			String phonePin = "" + RandomStringUtils.randomAlphanumeric(5);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
 				SmsWait smsWait = new SmsWait();
-				smsWait.setMsg("[" + SiteConfig.SITE_NAME + "] 가입 인증번호  [ " + phonePin + " ]");
+				String message = msgSrc.getMessage("SMS_JOIN_AUTH", new Object[]{SiteConfig.SITE_NAME, phonePin}, SiteConfig.SITE_LOCALE);
+				smsWait.setMsg(message);
 				smsWait.setPhone(phone);
-				smsWait.setCallback("0000000000");
+				smsWait.setCallback(SiteConfig.SITE_PHONE);
 				
 				smsWaitDao.insertSmsWait(smsWait);
-				rx = new ResultXml(0, "인증번호를 발송하였습니다", null);
+				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_SUCCESS", null, SiteConfig.SITE_LOCALE), null);
 			} catch (Exception e) {
-				rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);
+				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);
 			}
-//		}
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -433,5 +438,12 @@ public class MemberController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
+	}
+	
+	private MessageSource msgSrc = null;
+
+	public void setMessageSource(MessageSource messageSource)
+	{
+		msgSrc = messageSource;
 	}
 }

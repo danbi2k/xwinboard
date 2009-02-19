@@ -47,8 +47,8 @@
 						<td><%=member.getBankOwner()%></td>
 					</tr>
 					<tr>
-						<th>환전 비밀번호</th>
-						<td><input type='password' class='input_text w100' name='pin'> *회원가입시 입력하신 환전 비밀번호를 입력하세요!</td>
+						<th>환전 패스워드</th>
+						<td><input type='password' class='input_text w100' name='pin'> *회원가입시 입력하신 환전 패스워드를 입력하세요!</td>
 					</tr>
 						
 					

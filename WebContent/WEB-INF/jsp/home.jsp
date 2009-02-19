@@ -2,11 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>    
-<%@ page import="com.xwin.domain.game.*"%>
+<%@ page import="com.xwin.domain.board.*"%>
 <%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
 <%
-	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
+	List<BoardItem> noticeList = (List<BoardItem>) request.getAttribute("noticeList");
+	List<BoardItem> userList = (List<BoardItem>) request.getAttribute("userList");
 	request.setAttribute("isIndex", Boolean.TRUE);
 %>
 
@@ -15,10 +16,12 @@
 		<div class='lside'>
 		<%if (login) { %>
 			<div class='m_login'>
-				<span class='name'>홍길동</span> 님
-				<span class='cash'>· Cash:<span class='val'>0</span></span> 
-				<span class='apple'>· Apple:<span class='val'>100,000</span></span> 
-				<span class='link'><a href=''>배팅내역보기</a></span>
+				<div class='login_after_txt'>
+					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br>
+					<div class='cash'>· 캐쉬:</div> <div class='val'><%=XwinUtil.comma3(member.getBalance())%> <span>원</span></div>
+					<div class='apple'>· 애플:</div> <div class='val2'><%=XwinUtil.comma3(member.getPoint())%> <span>ap</span></div>
+					<div class='link'><a href='myBet.aspx?mode=viewMyBettingList' target='_self'>배팅내역</a> | <a href='member.aspx?mode=viewModifyForm'>정보변경</a></div>
+				</div>
 			</div>
 		<%} else { %>
 			<div class='m_login'>
@@ -38,8 +41,8 @@
 				</form>
 
 				<div class='idpw'>
-				<a href=''>회원가입</a> |
-				<a href=''>비밀번호찾기</a>
+				<a href='join.aspx?mode=viewJoinForm'>회원가입</a> |
+				<a>추천가입</a>
 				</div>
 			</div>
 			<%} %>
@@ -63,12 +66,18 @@
 			<div class='m_latest_notice_body'>
 			<!-- 공지사항내용 -->
 			<ul>
-			<li><a href=''>· 스페셜 관련 공지-필.. </a></li>
-			<li><a href=''>· 9차 게시판/댓글 이벤트 .</a></li>
-			<li><a href=''>· 배당률 변동 관련 공지-..</a></li>
-			<li><a href=''>· 클럽국제친선경기관련 공..</a></li>
-			<li><a href=''>· 입금계좌 관련 공지-필독..</a></li>
-			<li><a href=''>· 중복배팅 관련-필독★</a></li>
+<%
+	if (noticeList != null) {
+		for (BoardItem notice : noticeList) {
+			String title = notice.getTitle();
+			if (title.length() > 12)
+				title = title.substring(0, 12) + "..";
+%>
+			<li><a href=''>· <%=title%></a></li>
+<%
+		}
+	}
+%>
 			</ul>
 
 			</div>
@@ -78,12 +87,18 @@
 			<div class='m_latest_board_body'>
 			<!-- 게시판내용 -->
 			<ul>
-			<li><a href=''>· NBA?? </a></li>
-			<li><a href=''>· u-21프랑스 제발 이기자~~~ </a></li>
-			<li><a href=''>· 233.234 싸이트 갑자기 왜 .. </a></li>
-			<li><a href=''>· 고객센터 확인좀 부탁드려요~~ </a></li>
-			<li><a href=''>· 거대한 꿈을 안고 잠자리로.. </a></li>
-			<li><a href=''>· 고객센터좀 빨리 확인해 주..</a></li>
+<%
+	if (userList != null) {
+		for (BoardItem user : userList) {
+			String title = user.getTitle();
+			if (title.length() > 12)
+				title = title.substring(0, 12) + "..";
+%>
+			<li><a href=''>· <%=title%></a></li>
+<%
+		}
+	}
+%>
 			</ul>
 			</div>
 			<div class='m_latest_board_bottom'></div>
