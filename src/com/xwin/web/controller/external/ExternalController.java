@@ -1,6 +1,7 @@
 package com.xwin.web.controller.external;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.SmsWait;
+import com.xwin.domain.game.Game;
+import com.xwin.domain.game.League;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -76,6 +79,33 @@ public class ExternalController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(phoneList));
+		
+		return mv;
+	}
+	
+	public ModelAndView getGameList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.GAME_STATUS_RUN);
+		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
+		param.put("fromDate", new Date());
+		
+		List<Game> gameList = gameDao.selectGameList(param);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(gameList));
+		
+		return mv;
+	}
+	
+	public ModelAndView getLeagueList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		List<League> leagueList = leagueDao.selectLeagueList();
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(leagueList));
 		
 		return mv;
 	}
