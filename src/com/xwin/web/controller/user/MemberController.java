@@ -35,7 +35,7 @@ public class MemberController extends XwinController
 		if (request.getSession().getAttribute("Member") == null)
 			return new ModelAndView("dummy");
 		
-		ModelAndView mv = new ModelAndView("user/modify");
+		ModelAndView mv = new ModelAndView("join/modify");
 		mv.addObject("isModify", Boolean.TRUE);
 		
 		return mv;
