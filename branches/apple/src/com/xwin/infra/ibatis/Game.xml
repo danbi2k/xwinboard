@@ -33,6 +33,7 @@
 		<result property="drawDeny" column="DRAW_DENY"/>
 		<result property="loseDeny" column="LOSE_DENY"/>
 		<result property="grade" column="GRADE"/>
+		<result property="note" column="NOTE"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -224,6 +225,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="loseDeny">
 			LOSE_DENY = #loseDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="note">
+			NOTE = #note# 
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#

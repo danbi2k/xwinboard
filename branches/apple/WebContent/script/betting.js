@@ -83,10 +83,16 @@ function FnGameBet(cobj, id, type, guess)
 	var query = "";
 	var boxes = document.getElementsByName("check"+id);
 	if (checked) {
-		document.getElementById("checkW"+id).className="out";
-		if (type == 'wdl')
-			document.getElementById("checkD"+id).className="out";
-		document.getElementById("checkL"+id).className="out";
+		var checkW = document.getElementById("checkW"+id);
+		var checkD = document.getElementById("checkD"+id);
+		var checkL = document.getElementById("checkL"+id);
+		
+		if (checkW.className == 'click')
+			checkW.className="out";
+		if (checkD.className == 'click')
+			checkD.className="out";
+		if (checkL.className == 'click')
+			checkL.className="out";
 		
 		query = "mode=addGameFolder";
 		query += "&gameId=" + id;
@@ -114,9 +120,7 @@ function FnGameBet(cobj, id, type, guess)
 		FnDrawFolder(data, type);
 	} else {
 		alert(result.resultXml.message);
-		if (checked) {
-			cobj.className = "out";
-		}
+		cobj.className = "out";
 		if (result.resultXml.code == -1) {
 			var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
 			FnDrawFolder(data, type);

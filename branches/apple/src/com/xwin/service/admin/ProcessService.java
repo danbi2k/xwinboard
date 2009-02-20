@@ -249,36 +249,36 @@ public class ProcessService extends XwinService implements MessageSourceAware
 		if (afterProcess) {
 			// 포인트지급
 			Double point = 0.0;
-			if (member.getGrade().equals(Code.USER_GRADE_NORMAL))
-				point = betting.getMoney() * 0.02;
-			else if (member.getGrade().equals(Code.USER_GRADE_VIP))
-				point = betting.getMoney() * 0.03;
-			
-			Member receiver = null;
-			if (member.getIntroducerId() == null) {
-				receiver = member;
-			}
-			else {
-				receiver = memberDao.selectMember(member.getIntroducerId(), null);
-			}
-			
-			if (AccessUtil.checkDeny(receiver, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(receiver, Code.DENY_WRITE_QNA) == false) {				
-				memberDao.plusMinusPoint(receiver.getUserId(), point.longValue());
+			if (Admin.BETTING_POINT_USE) {
+				Double betting_point_rate = Admin.BETTING_POINT_RATE.doubleValue() * 0.01;
+				point = betting.getMoney() * betting_point_rate;
 				
-				Point pointLog = new Point();
-				pointLog.setUserId(receiver.getUserId());
-				pointLog.setType(Code.POINT_TYPE_BETTING);
-				pointLog.setDate(new Date());
-				pointLog.setOldBalance(receiver.getPoint());
-				pointLog.setMoney(point.longValue());
-				pointLog.setBalance(receiver.getPoint() + point.longValue());
-				pointLog.setBettingId(betting.getId());
-				pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
-				pointLog.setBettingUserId(member.getUserId());
+				Member receiver = null;
+				if (member.getIntroducerId() == null) {
+					receiver = member;
+				}
+				else {
+					receiver = memberDao.selectMember(member.getIntroducerId(), null);
+				}
 				
-				pointDao.insertPoint(pointLog);
-			} else {
-				point = 0.0;
+				if (AccessUtil.checkDeny(receiver, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(receiver, Code.DENY_WRITE_QNA) == false) {				
+					memberDao.plusMinusPoint(receiver.getUserId(), point.longValue());
+					
+					Point pointLog = new Point();
+					pointLog.setUserId(receiver.getUserId());
+					pointLog.setType(Code.POINT_TYPE_BETTING);
+					pointLog.setDate(new Date());
+					pointLog.setOldBalance(receiver.getPoint());
+					pointLog.setMoney(point.longValue());
+					pointLog.setBalance(receiver.getPoint() + point.longValue());
+					pointLog.setBettingId(betting.getId());
+					pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
+					pointLog.setBettingUserId(member.getUserId());
+					
+					pointDao.insertPoint(pointLog);
+				} else {
+					point = 0.0;
+				}
 			}
 				
 			//소개인 정보 갱신
