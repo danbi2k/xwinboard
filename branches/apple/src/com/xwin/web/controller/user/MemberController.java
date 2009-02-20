@@ -12,14 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
-import org.springframework.context.ResourceLoaderAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
-import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -322,7 +320,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
 		}
 		else {
-			String phonePin = "" + RandomStringUtils.randomAlphanumeric(5);
+			String phonePin = RandomStringUtils.randomAlphanumeric(5);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
