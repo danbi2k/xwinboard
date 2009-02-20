@@ -64,25 +64,25 @@ public class AdminSmsController extends XwinController
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
 		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("status", Code.USER_STATUS_NORMAL);
-//		List<Member> memberList = memberDao.selectMemberList(param);
-//		if (memberList != null) {
-//			List<String> phoneList = new ArrayList<String>(memberList.size());
-//			for (Member member : memberList) {
-//				phoneList.add(member.getMobile().replaceAll("-", ""));
-//			}
-//			
-//			sendSmsConnector.sendSmsList(message, phoneList, callback);
-//			
-//		}
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.USER_STATUS_NORMAL);
+		List<Member> memberList = memberDao.selectMemberList(param);
+		if (memberList != null) {
+			List<String> phoneList = new ArrayList<String>(memberList.size());
+			for (Member member : memberList) {
+				phoneList.add(member.getMobile().replaceAll("-", ""));
+			}
+			
+			sendSmsConnector.sendSmsList(message, phoneList, callback);
+			
+		}
 		
-		SmsWait smsWait = new SmsWait();
-		smsWait.setMsg(message);
-		smsWait.setPhone("ALL");
-		smsWait.setCallback(callback);
-		
-		smsWaitDao.insertSmsWait(smsWait);	
+//		SmsWait smsWait = new SmsWait();
+//		smsWait.setMsg(message);
+//		smsWait.setPhone("ALL");
+//		smsWait.setCallback(callback);
+//		
+//		smsWaitDao.insertSmsWait(smsWait);	
 		
 		ResultXml rx = new ResultXml(0, "전송되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

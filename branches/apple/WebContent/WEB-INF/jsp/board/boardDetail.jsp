@@ -18,6 +18,14 @@
 <div class='sub_ti1'>
 			<img src='img/sub_board_ti.gif' alt='게시판' class='ml10 mr10 fl'> 
 			<div class='sub_ti_desc'>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다. </div>
+			<div class='state_bar'>
+				<div class='state_bar_txt'>
+				<span class='name'><%=member.getNickName()%></span> 님
+				<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
+				<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
+				<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+				</div>
+			</div>
 			<div class='sub_ti_bar'></div>
 		</div>
 
@@ -81,7 +89,11 @@
 							<td class='c1'><%=boardComment.getNickName()%></td>
 							<td class='c2'><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
 							<td class='c3'><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
-							<td class='c4'><img src='img/sub_incashlist_del_bt.gif'></td>
+							<td class='c4'>
+							<%if (boardComment.getUserId().equals(member.getUserId())) {%>
+								<img src='img/sub_incashlist_del_bt.gif' onclick="deleteComment(<%=boardComment.getId()%>)">
+							<%} %>
+							</td>
 						</tr>
 					<%
 			        	}

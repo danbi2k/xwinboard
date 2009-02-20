@@ -17,7 +17,15 @@
 
 <div class='sub_ti1'>
 		<img src='img/sub_mycash_ti.gif' alt='캐쉬내역' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 캐쉬 입환전 내역 입니다.</div>
+		<div class='sub_ti_desc'>· 캐쉬 충환전 내역 입니다.</div>
+		<div class='state_bar'>
+			<div class='state_bar_txt'>
+			<span class='name'><%=member.getNickName()%></span> 님
+			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
+			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
+			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			</div>
+		</div>
 		<div class='sub_ti_bar'></div>
 		</div>
 

@@ -12,10 +12,10 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<!--li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터</a></li-->
-					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터 (VIP)</a></li>
-					<!--li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판</a></li-->
-					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터</a></li>
+					<!-- li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터 (VIP)</a></li -->
+					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판</a></li>
+					<!-- li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li -->
 					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 				</ul>

@@ -25,10 +25,10 @@
 		<div class='sub_ti_desc'>· 회원정보를 변경합니다.</div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
-			<span class='name'>홍길동</span> 님
-			<span class='cash'>· Cash:<span class='val'>0</span></span> 
-			<span class='apple'>· Apple:<span class='val'>100,000</span></span> 
-			<span class='link'><a href=''>배팅내역보기</a></span>
+			<span class='name'><%=member.getNickName()%></span> 님
+			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
+			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
+			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -37,6 +37,11 @@
 
 		<div id='sub_content1'>
 			<div class='member_modify'>
+				<h3>· 회원정보변경안내</h3>
+				<div class='box'>
+					1. 회원정보는 패스워드만 변경이 가능합니다.<br>
+					2. 기타 정보 변경을 원하시는 회원님은 고객센터로 요청해 주십시오.
+				</div>
 				<h3>· 회원정보변경</h3>
 				<div class='box'>
 					<form name='frm_mem'>
@@ -53,25 +58,8 @@
 							<td><%=member.getUserId()%></td>
 						</tr>
 						<tr>
-							<th>새 패스워드</th>
-							<td><input type='password' name='password1' class='input_text w100'></td>
-						</tr>
-						<tr>
-							<th>새 패스워드 확인 </th>
-							<td><input type='password' name='password2' class='input_text w100'></td>
-						</tr>
-						<tr>
 							<th>닉네임</th>
 							<td><%=member.getNickName()%></td>
-						</tr>
-						<tr>
-							<th>휴대폰번호</th>
-							<td><%=member.getMobile()%> <img src='img/member_callnum_bt.gif' alt='인증번호요청' class='img_bt' onclick="sendAuthNumber()"> <br>
-							<input type='checkbox' name='smsCheck' class='input_check' <%=member.getGetSms().equals("Y")?"checked":""%>> 체크 하시면 경기결과를 문자로 전송해 드립니다.</td>
-						</tr>
-						<tr>
-							<th>인증번호</th>
-							<td><input type='text' name='phonePin' class='input_text w100'></td>
 						</tr>
 						<tr>	
 							<th>이메일</th>
@@ -80,6 +68,23 @@
 						<tr>	
 							<th>환전계좌번호</th>
 							<td><%=member.getBankName()%> <%=member.getBankNumber()%> <%=member.getBankOwner()%></td>
+						</tr>
+						<tr>
+							<th>휴대폰번호</th>
+							<td><%=member.getMobile()%> <img src='img/member_callnum_bt.gif' alt='인증번호요청' class='img_bt' onclick="sendAuthNumber()"> <br>
+							<input type='checkbox' name='smsCheck' class='input_check' <%=member.getGetSms().equals("Y")?"checked":""%>> 경기결과SMS수신</td>
+						</tr>
+						<tr>
+							<th>새 패스워드</th>
+							<td><input type='password' name='password1' class='input_text w100'></td>
+						</tr>
+						<tr>
+							<th>새 패스워드 확인 </th>
+							<td><input type='password' name='password2' class='input_text w100'></td>
+						</tr>
+						<tr>
+							<th>인증번호</th>
+							<td><input type='text' name='phonePin' class='input_text w100'></td>
 						</tr>
 						</table>
 
