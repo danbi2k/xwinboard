@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
@@ -25,7 +28,7 @@ import com.xwin.web.command.MemberCommand;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
-public class MemberController extends XwinController
+public class MemberController extends XwinController implements MessageSourceAware
 {
 	public ModelAndView viewModifyForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -315,22 +318,23 @@ public class MemberController extends XwinController
 //		Member member = (Member) request.getSession().getAttribute("Member");
 		
 //		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
-//			rx = new ResultXml(0, "이미 가입된 휴대전화 입니다", null);
+//			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
 //		}
 //		else {
-			String phonePin = "" + ((int)(Math.random() * 10000));
+			String phonePin = RandomStringUtils.randomNumeric(4);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
 				SmsWait smsWait = new SmsWait();
-				smsWait.setMsg("[" + SiteConfig.SITE_NAME + "] 가입 인증번호  [ " + phonePin + " ]");
+				String message = msgSrc.getMessage("SMS_JOIN_AUTH", new Object[]{SiteConfig.SITE_NAME, phonePin}, SiteConfig.SITE_LOCALE);
+				smsWait.setMsg(message);
 				smsWait.setPhone(phone);
-				smsWait.setCallback("0000000000");
+				smsWait.setCallback(SiteConfig.SITE_PHONE);
 				
 				smsWaitDao.insertSmsWait(smsWait);
-				rx = new ResultXml(0, "인증번호를 발송하였습니다", null);
+				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_SUCCESS", null, SiteConfig.SITE_LOCALE), null);
 			} catch (Exception e) {
-				rx = new ResultXml(0, "인증번호 발송에 실패하였습니다", null);
+				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);
 			}
 //		}
 		
@@ -433,5 +437,12 @@ public class MemberController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
+	}
+	
+	private MessageSource msgSrc = null;
+
+	public void setMessageSource(MessageSource messageSource)
+	{
+		msgSrc = messageSource;
 	}
 }
