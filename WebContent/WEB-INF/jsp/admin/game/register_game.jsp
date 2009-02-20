@@ -19,11 +19,16 @@
 		if(!d.gameHour.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gameHour.focus(); return false; }
 		if(!d.gameMinute.value) { alert('경기 시작 시각(분)을 선택하세요'); d.gameMinute.focus(); return false; }
 		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
-		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }
-		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }		
+		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }		
 		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
+		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		if (d.uoCheck) {
+			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
+			if(!d.handyRate.value) { alert('핸디 배당률을 입력하세요'); d.handyRate.focus(); return false; }
+			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
+		}
 		/*
 		if(d.gametype_set.value=='1x2') {
 			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
@@ -40,10 +45,14 @@
 		query += "&gameHour=" + d.gameHour.value;
 		query += "&gameMinute=" + d.gameMinute.value;
 		query += "&homeTeam=" + d.homeTeam.value;
-		query += "&winRate=" + d.winRate.value;
 		query += "&awayTeam=" + d.awayTeam.value;
+		query += "&winRate=" + d.winRate.value;
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
+		query += "&underRate=" + d.underRate.value;
+		query += "&handyRate=" + d.handyRate.value;
+		query += "&overRate=" + d.overRate.value;
+		query += "&uoCheck=" + d.uoCheck.checked;
 		if (d.winDeny.checked)
 			query += "&winDeny=N";
 		else
@@ -132,6 +141,17 @@
 		패 <input type='text' name='loseRate' size=5/>											
 		</td>
 	</tr>
+<%if (type.equals("handy")){ %>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">오버언더</td>
+		<td bgcolor="#FFFFFF"  colspan="3">
+		오버 <input type='text' name='overRate' size=5/>
+		핸디	<input type='text' name='handyRate' size=5/>
+		언더 <input type='text' name='underRate' size=5/><br>
+		<input type='checkbox' name='uoCheck'> 체크하시면 오버/언더 경기가 동시에 등록됩니다.									
+		</td>
+	</tr>
+<%} %>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">배팅차단</td>
 		<td bgcolor="#FFFFFF"  colspan=3>

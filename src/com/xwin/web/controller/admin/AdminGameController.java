@@ -192,6 +192,18 @@ public class AdminGameController extends XwinController
 		
 		gameDao.insertGame(game);
 		
+		if (command.isUoCheck() && command.getUnderRate() != null && command.getHandyRate() != null && command.getOverRate() != null)
+		{
+			game.setWinRate(command.getOverRate());
+			game.setDrawRate(Math.abs(command.getHandyRate()) * -1);
+			game.setLoseRate(command.getUnderRate());
+			
+			game.setHomeTeam(game.getHomeTeam() + "(↑오버)");
+			game.setAwayTeam(game.getAwayTeam() + "(↓언더)");
+			
+			gameDao.insertGame(game);
+		}
+		
 		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
