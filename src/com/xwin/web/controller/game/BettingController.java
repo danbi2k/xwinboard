@@ -147,7 +147,7 @@ public class BettingController extends XwinController
 			retCode = -1;
 			message = "배팅 가능 상태가 아닙니다";
 		}
-		else if ((XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money) + fc.getExpect()) > MAX_EXPECT) {
+		else if ((XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money)) > MAX_EXPECT) {
 			gameFolder.remove(game.getId());
 			retCode = -1;
 			message = "배당금이 300만원을 초과 하였습니다";

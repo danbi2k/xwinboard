@@ -237,7 +237,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 					SmsWait smsWait = new SmsWait();
 					smsWait.setMsg(message);
 					smsWait.setPhone(member.getMobile());
-					smsWait.setCallback("000-000-0000");
+					smsWait.setCallback(SiteConfig.SITE_PHONE);
 					
 					smsWaitDao.insertSmsWait(smsWait);
 				}
