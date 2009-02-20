@@ -23,8 +23,8 @@ var gameType = '<%=type%>'
 %>
 
 <div class='sub_ti1'>
-		<img src='img/sub_wdl_ti.gif' alt='승무패' class='ml10 mr10 fl'> 
-		<div class='sub_ti_desc'>· 경기목록 1~10경기까지 자유롭게 조합배팅이 가능합니다.</div>
+		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl'> 
+		<div class='sub_ti_desc'>· 회원님의 대박을 기원합니다.</div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님
@@ -63,10 +63,10 @@ var gameType = '<%=type%>'
 							<td><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
 
-							<td class='<%=clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
+							<td class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
 								<%=game.getHomeTeam()%> x <%=game.getWinRateStr()%>
 							</td>
-							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&game.getDrawRate()==0?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
+							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
 								<%
 									if (game.getType().equals("wdl"))
 										out.print("x" + game.getDrawRateStr());
@@ -78,7 +78,7 @@ var gameType = '<%=type%>'
 										
 								%>
 							</td>
-							<td class='<%=clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
+							<td class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
 								x <%=game.getLoseRateStr()%> <%=game.getAwayTeam()%>
 							</td>
 							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					

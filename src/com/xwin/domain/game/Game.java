@@ -51,6 +51,7 @@ public class Game extends XwinObject
 	
 	private String grade;
 	private String syncId;
+	private String note;
 
 	public String getId() {
 		return id;
@@ -305,5 +306,13 @@ public class Game extends XwinObject
 
 	public void setSyncId(String syncId) {
 		this.syncId = syncId;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 }

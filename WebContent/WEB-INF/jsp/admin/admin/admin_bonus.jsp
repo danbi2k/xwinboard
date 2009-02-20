@@ -33,6 +33,19 @@
 			</td>
 		</tr>	
 	</table>
+	<BR>
+	<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
+	     <tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>배팅 포인트 사용</td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type="checkbox" name="BETTING_POINT_USE" <%=Admin.BETTING_POINT_USE ? "checked":""%>></td>
+		</tr>	
+		<tr align="center" bgcolor="#E4E4E4" height=20>
+			<td width=20%>배팅 포인트 기준</td>
+			<td width=80% bgcolor='#ffffff' align='left'>
+				<input type="text" size="2" name="BETTING_POINT_RATE" value="<%=Admin.BETTING_POINT_RATE%>"> % 지급
+			</td>
+		</tr>	
+	</table>
 	<BR>													
 	<table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
 		<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -56,6 +69,9 @@ function changeBonus()
 	query += "&HANDY_BONUS_USE=" + (frm.HANDY_BONUS_USE.checked?"Y":"N");
 	query += "&HANDY_BONUS_LIMIT=" + frm.HANDY_BONUS_LIMIT.value;
 	query += "&HANDY_BONUS_RATE=" + frm.HANDY_BONUS_RATE.value;
+
+	query += "&BETTING_POINT_USE=" + (frm.BETTING_POINT_USE.checked?"Y":"N");
+	query += "&BETTING_POINT_RATE=" + frm.BETTING_POINT_RATE.value;
 	
 	var http = new JKL.ParseXML("adminInfo.aspx", query);
 	var result = http.parse();

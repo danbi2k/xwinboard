@@ -44,7 +44,7 @@ public class AdminLoginController extends XwinController
 		
 		session.removeAttribute("Admin");		
 		
-		ModelAndView mv = new ModelAndView("redirect:/admin");
+		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
 	}
 }
