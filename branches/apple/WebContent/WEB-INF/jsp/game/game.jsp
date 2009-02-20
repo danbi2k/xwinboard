@@ -43,7 +43,7 @@ var gameType = '<%=type%>'
 
 
 				<div class='league_select'>
-					<img src='img/sub_reload_bt.gif' alt='새로고침' class='img_bt'>
+					<img src='img/sub_reload_bt.gif' alt='새로고침' class='img_bt' onclick='location.reload()'>
 				</div>
 				<!-- end league_select -->
 
@@ -63,8 +63,8 @@ var gameType = '<%=type%>'
 							<td><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
 
-							<td class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
-								<%=game.getHomeTeam()%> x <%=game.getWinRateStr()%>
+							<td style='text-align:right'class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
+								<%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;x<%=game.getWinRateStr()%>&nbsp;
 							</td>
 							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
 								<%
@@ -78,8 +78,8 @@ var gameType = '<%=type%>'
 										
 								%>
 							</td>
-							<td class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
-								x <%=game.getLoseRateStr()%> <%=game.getAwayTeam()%>
+							<td style='text-align:left' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
+								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%>
 							</td>
 							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					
 						<%
@@ -134,10 +134,10 @@ var gameType = '<%=type%>'
 			</table>
 			</div>
 			<div class='side_foot'></div>
-			<div class='side_cart_bt'>
+			<!-- div class='side_cart_bt'>
 			<img src='img/side_cartin_bt.gif' alt='카트에담기'>
 			<img src='img/side_cartview_bt.gif' alt='카트보기'>
-			</div>
+			</div -->
 		</div>
 		<!-- end sub_right_content -->
 <%@include file="../footer.jsp"%>

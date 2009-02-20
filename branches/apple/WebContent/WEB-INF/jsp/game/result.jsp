@@ -78,19 +78,19 @@
 						<tr>
 							<td><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
-							<td><%=game.getHomeTeam()%> <%=game.getWinRateStr()%></td>
+							<td style='text-align:right'><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;x<%=game.getWinRateStr()%>&nbsp;</td>
 							<td>
 								<%if (game.getType().equals("wdl")) {
-									out.print(game.getDrawRateStr());
+									out.print("x" + game.getDrawRateStr());
 								} else {
 									out.print(game.getDrawRate()>0?"+":"");
 									out.print(game.getDrawRate());
 								}%>
 							</td>
-							<td><%=game.getLoseRateStr()%> <%=game.getAwayTeam()%></td>
+							<td style='text-align:left'>&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%></td>
 							<td>
 								<%if (game.getStatus().equals(Code.GAME_STATUS_END)) {
-								out.print(game.getHomeScore() + ":" + game.getAwayScore() + " " + Code.getValue(game.getResult()));
+								out.print(game.getHomeScore() + " : " + game.getAwayScore() + " " + Code.getValue(game.getResult()));
 								} else {
 								out.print(Code.getValue(game.getStatus()));
 								}%>								
