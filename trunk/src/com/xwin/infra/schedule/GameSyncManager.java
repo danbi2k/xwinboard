@@ -48,7 +48,8 @@ public class GameSyncManager extends QuartzJobBean
 					game.setSyncId(game.getId());
 					gameDao.insertGame(game);
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("dup : " + game.getId());
+					//e.printStackTrace();
 				}
 			}
 		}
