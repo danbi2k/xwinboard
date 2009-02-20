@@ -10,6 +10,7 @@
 	String type = request.getParameter("type");
 	String grade = request.getParameter("grade");
 %>
+<script language="JavaScript" src="script/scroller.js"></script>
 <script>
 var gameType = '<%=type%>'
 </script>
@@ -50,21 +51,37 @@ var gameType = '<%=type%>'
 					<table>
 						<tr><th class='t1'>경기일시</th><th class='t2'>리그</th><th class='t3'>(승) 홈팀</th><th class='t4'>무</th><th class='t5'>(패) 원정팀</th><th class='t6'>상태</th></tr>
 						
-						<tr><td>02/18 04:30</td><td>리그명</td><td>홈팀명</td><td>무</td><td>원정팀명</td><td>마감</td></tr>
 						<%
 						if (gameList != null) {
 							for (Game game : gameList) {
 							//for (int i = 0 ; i < 100 ; i++) {
 							//	Game game = gameList.get(0);
-								String action = "onMouseOver=\"this.className='over'\" onClick=\"this.className='click'\" onMouseOut =\"this.className='out'\"";
+							String clsStr = game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT)?"out":"";
+							//	String over = game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT)?"onMouseOver=\"this.className='over'\"":"";
 						%>
 						<tr>
 							<td><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
-							<td class='out' <%=action%>><%=game.getHomeTeam()%> x <%=game.getWinRateStr()%></td>
-							<td class='out' <%=action%>>x <%=game.getDrawRateStr()%></td>
-							<td class='out' <%=action%>>x <%=game.getLoseRateStr()%> <%=game.getAwayTeam()%></td>
-							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>						
+
+							<td class='<%=clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
+								<%=game.getHomeTeam()%> x <%=game.getWinRateStr()%>
+							</td>
+							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&game.getDrawRate()==0?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
+								<%
+									if (game.getType().equals("wdl"))
+										out.print("x" + game.getDrawRateStr());
+									else {
+										if (game.getDrawRate() > 0)
+											out.print("+");
+										out.print(game.getDrawRate());
+									}
+										
+								%>
+							</td>
+							<td class='<%=clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
+								x <%=game.getLoseRateStr()%> <%=game.getAwayTeam()%>
+							</td>
+							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					
 						<%
 							}
 						}
@@ -98,42 +115,22 @@ var gameType = '<%=type%>'
 		</div>
 		<!-- end sub_content2 -->
 		<div id='sub_right_content'>
-			<div class='side_ti'><img src='img/side_alldel_bt.gif' alt='전체삭제' class='alldel_bt'></div>
+			<div class='side_ti'><img src='img/side_alldel_bt.gif' alt='전체삭제' class='alldel_bt' onclick="FnDeleteFolder('<%=type%>')"></div>
 			<div class='side_body'>
+			<div id='gameFolderDiv'></div>
 			<table>
 			<tr>
-				<td class='t1'>Ethad Al-Ramtha</td>
-				<td class='t2'><img src='img/side_del_bt.gif'></td>
+				<td class='t3'>배당률:</td><td class='t4'><div id='rateDiv'>0.00</div></td>
 			</tr>
 			<tr>
-				<td class='t1'>Al-Hussein</td>
-				<td class='t2'>무 3.90 </td>
-			</tr>
-			<tr><td class='line' colspan=2></td></tr>
-			<tr>
-				<td class='t1'>Ethad Al-Ramtha</td>
-				<td class='t2'><img src='img/side_del_bt.gif'></td>
+				<td class='t3'>배팅금액:</td><td class='t4'><input id='moneyDiv' type='text' style='width:60px; height:14px; border: 1px #450808 solid;' value='5,000' onkeyup='FnCalcFolder()'></td>
 			</tr>
 			<tr>
-				<td class='t1'>Al-Hussein</td>
-				<td class='t2'>무 3.90 </td>
-			</tr>
-			<tr><td class='line' colspan=2></td></tr>
-			</table>
-		
-			<table>
-			<tr>
-				<td class='t3'>예상배당률:</td><td class='t4'>30.11</td>
+				<td  class='t3'>예상배당금:</td><td class='t4'><div id='expectDiv'>0</div></td>
 			</tr>
 			<tr>
-				<td class='t3'>배팅금액:</td><td class='t4'><input type='text' style='width:60px; height:14px; border: 1px #450808 solid;'></td>
-			</tr>
-			<tr>
-				<td  class='t3'>예상배당금:</td><td class='t4'>500,000</td>
-			</tr>
-			<tr>
-			<td colspan='2' class='bet_bt'><img src='img/side_bet_bt.gif' alt='배팅하기'></td></tr>
-			<td colspan='2' class='move_chk'><input type='checkbox' class='input_check'> 이동카트사용</td></tr>
+			<td colspan='2' class='bet_bt'><img src='img/side_bet_bt.gif' alt='배팅하기' onclick="FnBetting()"></td></tr>
+			<td colspan='2' class='move_chk'><input id='animate' type='checkbox' class='input_check' onclick='toggleAnimate();' checked> 이동카트사용</td></tr>
 			</table>
 			</div>
 			<div class='side_foot'></div>
