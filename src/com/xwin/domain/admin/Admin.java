@@ -36,6 +36,9 @@ public class Admin extends XwinObject
 	public static Integer WDL_BONUS_LIMIT = 100;
 	public static Integer WDL_BONUS_RATE = 0;
 	
+	public static boolean BETTING_POINT_USE = false;
+	public static Integer BETTING_POINT_RATE = 0;
+	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}

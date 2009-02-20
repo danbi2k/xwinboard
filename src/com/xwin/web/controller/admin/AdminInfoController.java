@@ -146,6 +146,9 @@ public class AdminInfoController extends XwinController
 		String WDL_BONUS_LIMIT = request.getParameter("WDL_BONUS_LIMIT");
 		String WDL_BONUS_RATE = request.getParameter("WDL_BONUS_RATE");
 		
+		String BETTING_POINT_USE = request.getParameter("BETTING_POINT_USE");
+		String BETTING_POINT_RATE = request.getParameter("BETTING_POINT_RATE");
+		
 		ResultXml rx = null;
 		
 		try {
@@ -157,6 +160,9 @@ public class AdminInfoController extends XwinController
 			Admin.WDL_BONUS_LIMIT = Integer.parseInt(WDL_BONUS_LIMIT.trim());
 			Admin.WDL_BONUS_RATE = Integer.parseInt(WDL_BONUS_RATE.trim());
 			
+			Admin.BETTING_POINT_USE = BETTING_POINT_USE.equals("Y");
+			Admin.BETTING_POINT_RATE = Integer.parseInt(BETTING_POINT_RATE.trim());
+			
 			adminDao.updateAdmin("HANDY_BONUS_USE", HANDY_BONUS_USE);
 			adminDao.updateAdmin("HANDY_BONUS_LIMIT", HANDY_BONUS_LIMIT);
 			adminDao.updateAdmin("HANDY_BONUS_RATE", HANDY_BONUS_RATE);
@@ -164,6 +170,9 @@ public class AdminInfoController extends XwinController
 			adminDao.updateAdmin("WDL_BONUS_USE", WDL_BONUS_USE);
 			adminDao.updateAdmin("WDL_BONUS_LIMIT", WDL_BONUS_LIMIT);
 			adminDao.updateAdmin("WDL_BONUS_RATE", WDL_BONUS_RATE);
+			
+			adminDao.updateAdmin("BETTING_POINT_USE", BETTING_POINT_USE);
+			adminDao.updateAdmin("BETTING_POINT_RATE", BETTING_POINT_RATE);
 			
 			rx = new ResultXml(0, "변경 되었습니다", null);
 		} catch (Exception e) {
