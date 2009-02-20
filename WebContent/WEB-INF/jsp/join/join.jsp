@@ -53,7 +53,7 @@
 								<input type='text' name='phone2' class='input_text w40'> -
 								<input type='text' name='phone3' class='input_text w40'>
 								<img src='img/member_callnum_bt.gif' alt='인증번호요청' class='img_bt' onclick="sendAuthNumber()"> <br>
-								<input type='checkbox' name='smsCheck' class='input_check' checked> 체크 하시면 경기결과를 문자로 전송해 드립니다.
+								<input type='checkbox' name='smsCheck' class='input_check' checked> 경기결과SMS수신
 							</td>
 						</tr>
 						<tr>

@@ -26,10 +26,10 @@ var gameType = '<%=type%>'
 		<div class='sub_ti_desc'>· 경기목록 1~10경기까지 자유롭게 조합배팅이 가능합니다.</div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
-			<span class='name'>홍길동</span> 님
-			<span class='cash'>· Cash:<span class='val'>0</span></span> 
-			<span class='apple'>· Apple:<span class='val'>100,000</span></span> 
-			<span class='link'><a href=''>배팅내역보기</a></span>
+			<span class='name'><%=member.getNickName()%></span> 님
+			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
+			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
+			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>

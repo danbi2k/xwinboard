@@ -270,9 +270,9 @@ label{height:18px;}
 .state_bar{display:inline; background:url(../img/state_bar_bg.gif) no-repeat top left; width:432px; height:33px; margin:-3px 0px 0px 0px; float:right;}
 .state_bar .state_bar_txt{margin:10px 0px 0px 20px; _margin:10px 0px 0px 20px; font-family:'µ¸¿ò'; font-size:11px; color:#ffffff;}
 .state_bar .state_bar_txt .name{font-weight:900; margin:0px 0px 0px 0px; font-family:'µ¸¿ò'; font-size:12px; color:#ffffff;}
-.state_bar .state_bar_txt .cash{margin:0px 0px 0px 30px; font-family:'verdana'; font-size:10px; color:#ffffff;}
+.state_bar .state_bar_txt .cash{margin:0px 0px 0px 50px; font-family:'verdana'; font-size:10px; color:#ffffff;}
 .state_bar .state_bar_txt .cash .val{margin:0px 0px 0px 5px; font-family:'verdana'; font-size:11px; color:#FBCA71;}
-.state_bar .state_bar_txt .apple{margin:0px 0px 0px 30px; font-family:'verdana'; font-size:10px; color:#ffffff;}
+.state_bar .state_bar_txt .apple{margin:0px 0px 0px 50px; font-family:'verdana'; font-size:10px; color:#ffffff;}
 .state_bar .state_bar_txt .apple .val{margin:0px 0px 0px 5px; font-family:'verdana'; font-size:11px; color:#FBCA71;}
 .state_bar .state_bar_txt .link {float:right; position:relative; top:-13px; left:-10px;}
 .state_bar .state_bar_txt .link a{text-decoration:none !important; color:#ffffff;   font-family:'µ¸¿ò'; letter-spacing:-1px; }

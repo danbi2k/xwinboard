@@ -63,17 +63,17 @@ public class TransactionManager extends QuartzJobBean
 					ktfSmsDao.insertMessage(message);
 				}
 				
-				if (transaction != null) {
-					transactionList.add(transaction);
-				}
+//				if (transaction != null) {
+//					transactionList.add(transaction);
+//				}
 			}	
 		}
 		
-		try {
-			transactionService.sendTransaction(transactionList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			transactionService.sendTransaction(transactionList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	private Transaction shinhanBankProcess(KtfSmsMessage message) {
