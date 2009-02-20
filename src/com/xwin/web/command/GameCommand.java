@@ -27,7 +27,7 @@ public class GameCommand extends XwinObject
 	private String drawDeny;
 	private String loseDeny;
 	private String grade;
-	
+	private String note;
 	
 	public String getGameId() {
 		return gameId;
@@ -64,6 +64,30 @@ public class GameCommand extends XwinObject
 	}
 	public void setLoseRate(Double loseRate) {
 		this.loseRate = loseRate;
+	}
+	public Double getOverRate() {
+		return overRate;
+	}
+	public void setOverRate(Double overRate) {
+		this.overRate = overRate;
+	}
+	public Double getHandyRate() {
+		return handyRate;
+	}
+	public void setHandyRate(Double handyRate) {
+		this.handyRate = handyRate;
+	}
+	public Double getUnderRate() {
+		return underRate;
+	}
+	public void setUnderRate(Double underRate) {
+		this.underRate = underRate;
+	}
+	public boolean isUoCheck() {
+		return uoCheck;
+	}
+	public void setUoCheck(boolean uoCheck) {
+		this.uoCheck = uoCheck;
 	}
 	public String getGameDate() {
 		return gameDate;
@@ -131,28 +155,10 @@ public class GameCommand extends XwinObject
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public Double getOverRate() {
-		return overRate;
+	public String getNote() {
+		return note;
 	}
-	public void setOverRate(Double overRate) {
-		this.overRate = overRate;
+	public void setNote(String note) {
+		this.note = note;
 	}
-	public Double getHandyRate() {
-		return handyRate;
-	}
-	public void setHandyRate(Double handyRate) {
-		this.handyRate = handyRate;
-	}
-	public Double getUnderRate() {
-		return underRate;
-	}
-	public void setUnderRate(Double underRate) {
-		this.underRate = underRate;
-	}
-	public boolean isUoCheck() {
-		return uoCheck;
-	}
-	public void setUoCheck(boolean uoCheck) {
-		this.uoCheck = uoCheck;
-	}	
 }

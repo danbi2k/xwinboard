@@ -230,6 +230,7 @@ public class AdminGameController extends XwinController
 			game.setWinRate(command.getWinRate());
 			game.setDrawRate(command.getDrawRate());
 			game.setLoseRate(command.getLoseRate());
+			game.setNote(command.getNote());
 			
 			//game.setStatus(Code.GAME_STATUS_RUN);
 			Date now = new Date();

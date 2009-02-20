@@ -24,11 +24,13 @@
 		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		<%if (type.equals("handy")){ %>
 		if (d.uoCheck) {
 			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
 			if(!d.handyRate.value) { alert('핸디 배당률을 입력하세요'); d.handyRate.focus(); return false; }
 			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
 		}
+		<%}%>
 		/*
 		if(d.gametype_set.value=='1x2') {
 			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
@@ -49,10 +51,12 @@
 		query += "&winRate=" + d.winRate.value;
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
+		<%if (type.equals("handy")){ %>
 		query += "&underRate=" + d.underRate.value;
 		query += "&handyRate=" + d.handyRate.value;
 		query += "&overRate=" + d.overRate.value;
 		query += "&uoCheck=" + d.uoCheck.checked;
+		<%}%>
 		if (d.winDeny.checked)
 			query += "&winDeny=N";
 		else

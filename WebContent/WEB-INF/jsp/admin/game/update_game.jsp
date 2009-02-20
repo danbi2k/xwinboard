@@ -46,6 +46,7 @@
 		query += "&awayTeam=" + d.awayTeam.value;
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
+		query += "&note=" + Xwin.Escape(d.note.value);
 		if (d.winDeny.checked)
 			query += "&winDeny=N";
 		else
@@ -147,6 +148,12 @@
 			무 <input type='checkbox' name='drawDeny' value="N" <%=game.getDrawDeny().equals("Y")?"":"checked" %>>
 			패 <input type='checkbox' name='loseDeny' value="N" <%=game.getLoseDeny().equals("Y")?"":"checked" %>>
 			(체크하신 승/무/패 가 배팅이 차단됩니다)											
+		</td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">공지</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea>								
 		</td>
 	</tr>	
  </table>

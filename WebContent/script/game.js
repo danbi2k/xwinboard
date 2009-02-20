@@ -1,3 +1,4 @@
+var notice = [];
 function FnGetGameList(type, leagueId, grade, status)
 {
 	var query = "mode=getGameList";
@@ -34,6 +35,7 @@ function FnDrawGameList(data,type)
 		row.push("<td  width=70 align=center ><font color=FFFFFF><b>핸디</td>");
 	row.push("<td  width=600 align=center ><font color=FFFFFF><b>(패)원정팀</td>");
 	row.push("<td  width=60 align=center ><font color=FFFFFF><b>상태</td>");
+	row.push("<td  width=60 align=center ><font color=FFFFFF><b>공지</td>");
 	row.push("</tr>");
 	
 	if (data.length > 0) {
@@ -103,6 +105,12 @@ function FnDrawGameList(data,type)
 			row.push("</table>");
 			row.push("</td>");
 			row.push("<td align=center ><nobr><font color='" + datecolor + "'>" + C(data[i].betStatus) + "</td>");
+			row.push("<td align=center ><nobr><font color='white'>");
+			if (data[i].note) {
+				notice[data[i].id] = data[i].note;
+				row.push("<a onclick='showNotice(" + data[i].id + ")'>공지</a>");
+			}
+			row.push("</td>");
 			row.push("</tr>");
 		}
 	}
@@ -147,4 +155,8 @@ function BetListView(BetNo){
 	var window_left = (screen.width-w)/2;
 	var window_top  = (screen.height-h)/2;
 	window.open("myBet.aspx?mode=viewMyBettingDetail&bettingId="+ BetNo, "BetDetail",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+}
+
+function showNotice(id) {
+	alert(notice[id]);
 }
