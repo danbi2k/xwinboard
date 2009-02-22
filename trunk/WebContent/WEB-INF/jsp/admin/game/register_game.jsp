@@ -25,7 +25,7 @@
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
 		<%if (type.equals("handy")){ %>
-		if (d.uoCheck) {
+		if (d.uoCheck.checked) {
 			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
 			if(!d.handyRate.value) { alert('핸디 배당률을 입력하세요'); d.handyRate.focus(); return false; }
 			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
