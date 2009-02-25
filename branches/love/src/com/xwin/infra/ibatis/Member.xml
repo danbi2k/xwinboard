@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Member">
+
+	<typeAlias alias="Member" type="com.xwin.domain.user.Member" />
+	
+	<resultMap id="memberResultMap" class="Member">
+		<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="pin" column="PIN"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="status" column="STATUS"/>
+		<result property="grade" column="GRADE"/>
+		<result property="joinDate" column="JOIN_DATE"/>
+		<result property="point" column="POINT"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="bankNumber" column="BANKNUMBER"/>
+		<result property="bankOwner" column="BANKOWNER"/>
+		<result property="bankDate" column="BANKDATE"/>
+		<result property="getSms" column="GET_SMS"/>
+		<result property="denyrity" column="DENYRITY"/>
+		<result property="bettingDate" column="BETTING_DATE"/>
+		<result property="introducerId" column="INTRODUCER_ID"/>
+		<result property="introLetter" column="INTRO_LETTER"/>
+		<result property="introduceCount" column="INTRO_COUNT"/>
+		<result property="introduceBettingCount" column="INTRO_BET_COUNT"/>
+		<result property="introduceBettingMoney" column="INTRO_BET_MONEY"/>
+		<result property="introduceBettingPoint" column="INTRO_BET_POINT"/>
+		<result property="note" column="NOTE"/>
+		<result property="boardDenyDate" column="BOARD_DENY_DATE"/>
+		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
+		<result property="passwordExpire" column="PASSWORD_EXPIRE"/>
+		<result property="memberId" column="MEMBERID"/>
+	</resultMap>
+	
+	<resultMap id="memberStatResultMap" class="Member">
+	<result property="id" column="ID"/>
+		<result property="userId" column="USERID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="pin" column="PIN"/>
+		<result property="balance" column="BALANCE"/>
+		<result property="status" column="STATUS"/>
+		<result property="grade" column="GRADE"/>
+		<result property="joinDate" column="JOIN_DATE"/>
+		<result property="point" column="POINT"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="bankNumber" column="BANKNUMBER"/>
+		<result property="bankOwner" column="BANKOWNER"/>
+		<result property="bankDate" column="BANKDATE"/>
+		<result property="getSms" column="GET_SMS"/>
+		<result property="denyrity" column="DENYRITY"/>
+		<result property="bettingDate" column="BETTING_DATE"/>
+		<result property="moneyInSum" column="MONEYIN_SUM"/>
+		<result property="moneyOutSum" column="MONEYOUT_SUM"/>
+		<result property="bettingSum" column="BETTING_SUM"/>
+		<result property="profit" column="PROFIT"/>
+	</resultMap>
+	
+	<insert id="insertMember" parameterClass="Member">
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#)
+	</insert>
+	
+	<update id="updateMember" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="password">
+				PASSWORD = #password#
+			</isNotNull>
+			<isNotNull prepend="," property="pin">
+				PIN = #pin#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+				NICKNAME = #nickName#
+			</isNotNull>	
+			<isNotNull prepend="," property="mobile">	
+				MOBILE = #mobile#
+			</isNotNull>	
+			<isNotNull prepend="," property="email">
+				EMAIL = #email#
+			</isNotNull>	
+			<isNotNull prepend="," property="status">
+				STATUS = #status#
+			</isNotNull>	
+			<isNotNull prepend="," property="grade">
+				GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="," property="bankName">
+				BANKNAME = #bankName#
+			</isNotNull>
+			<isNotNull prepend="," property="bankNumber">
+				BANKNUMBER = #bankNumber#
+			</isNotNull>
+			<isNotNull prepend="," property="bankOwner">
+				BANKOWNER = #bankOwner#
+			</isNotNull>
+			<isNotNull prepend="," property="bankDate">
+				BANKDATE = #bankDate#
+			</isNotNull>
+			<isNotNull prepend="," property="getSms">
+				GET_SMS = #getSms#
+			</isNotNull>
+			<isNotNull prepend="," property="denyrity">
+				DENYRITY = #denyrity#
+			</isNotNull>
+			<isNotNull prepend="," property="note">
+				NOTE = #note#
+			</isNotNull>
+			<isNotNull prepend="," property="introLetter">
+				INTRO_LETTER = #introLetter#
+			</isNotNull>
+			<isNotNull prepend="," property="introduceCount">
+				INTRO_COUNT = #introduceCount#
+			</isNotNull>
+			<isNotNull prepend="," property="passwordExpire">
+				PASSWORD_EXPIRE = #passwordExpire#
+			</isNotNull>
+			<isNotNull prepend="," property="memberId">
+				MEMBERID = #memberId#
+			</isNotNull>
+		</dynamic>
+		WHERE USERID = #userId#			
+	</update>
+	
+	<update id="updateMemberPasswordExpire" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="passwordExpire">
+				PASSWORD_EXPIRE = #passwordExpire#
+			</isNotNull>
+		</dynamic>
+		WHERE STATUS = #status#
+	</update>
+	
+	<update id="updateMemberDenyrity" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="boardDenyDate">
+				BOARD_DENY_DATE = #boardDenyDate#
+			</isNotNull>
+			<isNull prepend="," property="boardDenyDate">
+				BOARD_DENY_DATE = null
+			</isNull>
+			<isNotNull prepend="," property="qnaDenyDate">
+				QNA_DENY_DATE = #qnaDenyDate#
+			</isNotNull>
+			<isNull prepend="," property="qnaDenyDate">
+				QNA_DENY_DATE = null
+			</isNull>
+			<isNotNull prepend="," property="denyrity">
+				DENYRITY = #denyrity#
+			</isNotNull>		
+		</dynamic>
+		WHERE USERID = #userId#
+	</update>
+	
+	<update id="updateMemberIntroduce" parameterClass="Member">
+		UPDATE tbl_member
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="introduceBettingCount">
+				INTRO_BET_COUNT = INTRO_BET_COUNT + (#introduceBettingCount#)
+			</isNotNull>
+			<isNotNull prepend="," property="introduceBettingMoney">
+				INTRO_BET_MONEY = INTRO_BET_MONEY + (#introduceBettingMoney#)
+			</isNotNull>
+			<isNotNull prepend="," property="introduceBettingPoint">
+				INTRO_BET_POINT = INTRO_BET_POINT + (#introduceBettingPoint#)
+			</isNotNull>
+		</dynamic>
+		WHERE USERID = #userId#			
+	</update>
+	
+	<delete id="deleteMember" parameterClass="java.lang.String">
+		DELETE FROM tbl_member WHERE ID = #value#
+	</delete>
+	
+	<select id="selectMember" resultMap="memberResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_member
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickName">
+				NICKNAME = #nickName#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="selectMemberList" resultMap="memberResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_member
+		WHERE GRADE != '100'
+		<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			USERID LIKE #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickName">
+			NICKNAME LIKE #nickName#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="mobile">
+			MOBILE LIKE #mobile#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="email">
+			EMAIL LIKE #email#
+		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
+		</isNotNull>
+		<isNotNull prepend="AND" property="passwordExpire">
+			PASSWORD_EXPIRE = #passwordExpire#
+		</isNotNull>
+		<isNotNull property="orderCol">
+			ORDER BY $orderCol$ $orderBy$
+		</isNotNull>
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectMemberCount" resultClass="integer"
+		parameterClass="map">
+		SELECT COUNT(*) FROM tbl_member
+		WHERE GRADE != '100'
+		<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			USERID LIKE #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickName">
+			NICKNAME LIKE #nickName#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="mobile">
+			MOBILE LIKE #mobile#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="email">
+			EMAIL LIKE #email#
+		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
+		</isNotNull>
+		<isNotNull prepend="AND" property="passwordExpire">
+			PASSWORD_EXPIRE = #passwordExpire#
+		</isNotNull>
+		<isNotNull prepend="AND" property="introducerId">
+			INTRODUCER_ID = #introducerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="denyrity">
+			DENYRITY > 0
+		</isNotNull>
+	</select>
+	
+	<select id="countMemberByUserId" parameterClass="string" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_member WHERE USERID = #value#
+	</select>
+	
+	<select id="countMemberByNickName" parameterClass="string" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_member WHERE NICKNAME = #value#
+	</select>
+	
+	<select id="selectTotalBalance" resultClass="long">
+		SELECT SUM(balance) FROM tbl_member
+	</select>
+	
+	<update id="updateBalance" parameterClass="map" >
+		UPDATE tbl_member SET BALANCE = #balance# WHERE USERID = #userId#
+	</update>
+	
+	<update id="plusMinusBalance" parameterClass="map">
+		UPDATE tbl_member
+		SET BALANCE = BALANCE + (#money#)
+		WHERE USERID = #userId#
+	</update>
+	
+	<update id="plusMinusPoint" parameterClass="map">
+		UPDATE tbl_member
+		SET POINT = POINT + (#point#)
+		WHERE USERID = #userId#
+	</update>
+	
+	<update id="plusMinusIntroLetter" parameterClass="map">
+		UPDATE tbl_member
+		SET INTRO_LETTER = INTRO_LETTER + (#introLetter#)
+		WHERE USERID = #userId#
+	</update>
+	
+	<select id="confirmGetJoinEvent" parameterClass="string" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_event_join WHERE MOBILE = #value#
+	</select>
+	
+	<insert id="loggingGetEvent" parameterClass="string">
+		INSERT INTO tbl_event_join(MOBILE) VALUES(#value#)
+	</insert>
+	
+	<update id="updateMemberStatus" parameterClass="map">
+		UPDATE tbl_member
+		SET STATUS = #status#
+		WHERE USERID = #userId#
+	</update>
+	
+	<select id="selectMemberStatList" resultMap="memberStatResultMap"
+		parameterClass="map">
+		SELECT
+		*,
+		(MONEYOUT_SUM + BALANCE - MONEYIN_SUM) AS PROFIT
+		FROM view_member_stat
+		WHERE GRADE != '100'
+		<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+		</isNotNull>
+		<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+			USERID LIKE #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickName">
+			NICKNAME LIKE #nickName#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="mobile">
+			MOBILE LIKE #mobile#
+		</isNotNull>			
+		<isNotNull prepend="AND" property="email">
+			EMAIL LIKE #email#
+		</isNotNull>
+		ORDER BY PROFIT $ORDERBY$, BALANCE DESC
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+</sqlMap>
