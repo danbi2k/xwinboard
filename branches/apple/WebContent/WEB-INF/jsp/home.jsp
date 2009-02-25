@@ -62,7 +62,7 @@
 	</object></div>
 		<div class='rside'>
 
-			<div class='m_latest_notice_top'><a href=''><img src='img/latest_more_bt.gif' alt='공지사항 더보기'></a></div>
+			<div class='m_latest_notice_top'><a href='board.aspx?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='공지사항 더보기'></a></div>
 			<div class='m_latest_notice_body'>
 			<!-- 공지사항내용 -->
 			<ul>
@@ -73,7 +73,7 @@
 			if (title.length() > 12)
 				title = title.substring(0, 12) + "..";
 %>
-			<li><a href=''>· <%=title%></a></li>
+			<li><a href='board.aspx?mode=viewBoardDetail&boardName=user&id=<%=notice.getId()%>&pageIndex=0'>· <%=title%></a></li>
 <%
 		}
 	}
@@ -83,7 +83,7 @@
 			</div>
 			<div class='m_latest_notice_bottom'></div>
 
-			<div class='m_latest_board_top'><a href=''><img src='img/latest_more_bt.gif' alt='게시판 더보기'></a></div>
+			<div class='m_latest_board_top'><a href='board.aspx?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='게시판 더보기'></a></div>
 			<div class='m_latest_board_body'>
 			<!-- 게시판내용 -->
 			<ul>
@@ -94,7 +94,7 @@
 			if (title.length() > 12)
 				title = title.substring(0, 12) + "..";
 %>
-			<li><a href=''>· <%=title%></a></li>
+			<li><a href='board.aspx?mode=viewBoardDetail&boardName=user&id=<%=user.getId()%>&pageIndex=0'>· <%=title%></a></li>
 <%
 		}
 	}

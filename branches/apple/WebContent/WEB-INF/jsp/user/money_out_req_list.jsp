@@ -40,11 +40,11 @@
 			
 					<table>
 					<tr>
-						<th class='t1'>신청일시</th>
-						<th class='t2'>환전계좌</th>
-						<th class='t3'>환전액</th>
+						<th class='t1'>신청날짜</th>
+						<th class='t2'>계좌번호</th>
+						<th class='t3'>환전금액</th>
 						<th class='t4'>상태</th>
-						<th class='t5'>처리일시</th>
+						<th class='t5'>환전날짜</th>
 						<th class='t6'>삭제</th>
 					</tr>
 					<%

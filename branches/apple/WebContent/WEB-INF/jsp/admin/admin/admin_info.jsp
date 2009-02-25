@@ -6,7 +6,7 @@
 <!--
 		function checkIT() {
 		var d=document.regist;
-		if(!d.password.value) { alert('패스워드를 입력하세요'); d.password.focus(); return false; }
+		if(!d.password.value) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
 
 		var query = "mode=updateAdminInfo";
 		query += "&nickName=" + d.name.value;
@@ -39,7 +39,7 @@
 			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='name' value='<%=admin.getNickName()%>'></td>
 		</tr>	
 	     <tr align="center" bgcolor="#E4E4E4" height=20>
-			<td width=20%>패스워드</td>
+			<td width=20%>비밀번호</td>
 			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='password' value='<%=admin.getPassword()%>'></td>
 		</tr>
 		 <tr align="center" bgcolor="#E4E4E4" height=20>

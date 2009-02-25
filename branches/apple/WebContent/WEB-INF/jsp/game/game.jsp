@@ -38,8 +38,8 @@ var gameType = '<%=type%>'
 		</div>
 
 
-		<div id='sub_content2'>
-			<div class='wdl'>
+		<div id='sub_content1'>
+			<div class='<%=type%>'>
 
 
 				<div class='league_select'>
@@ -63,7 +63,7 @@ var gameType = '<%=type%>'
 							<td><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
 
-							<td style='text-align:right'class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
+							<td style='padding-right:5px; text-align:right' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
 								<%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;x<%=game.getWinRateStr()%>&nbsp;
 							</td>
 							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
@@ -78,7 +78,7 @@ var gameType = '<%=type%>'
 										
 								%>
 							</td>
-							<td style='text-align:left' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
+							<td style='padding-left:5px; text-align:left' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
 								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%>
 							</td>
 							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					

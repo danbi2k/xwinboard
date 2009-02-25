@@ -87,13 +87,14 @@
 			        %>
 						<tr>
 							<td class='c1'><%=boardComment.getNickName()%></td>
-							<td class='c2'><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></td>
-							<td class='c3'><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></td>
-							<td class='c4'>
+							<td class='c2'><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%>
 							<%if (boardComment.getUserId().equals(member.getUserId())) {%>
-								<img src='img/sub_incashlist_del_bt.gif' onclick="deleteComment(<%=boardComment.getId()%>)">
+								<img src='img/board_comment_del_bt.gif' onclick="deleteComment(<%=boardComment.getId()%>)">
 							<%} %>
 							</td>
+							<td class='c3'><%=XwinUtil.getBoardItemDate(boardComment.getDate())%></td>
+							</td>
+							<td class='c4'>
 						</tr>
 					<%
 			        	}

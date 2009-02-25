@@ -42,9 +42,9 @@
 					<table>
 					<tr>
 						<th class='t1'>거래일자</th>
-						<th class='t2'>기잔고</th>
-						<th class='t3'>입환전</th>
-						<th class='t4'>잔액</th>
+						<th class='t2'>기존캐쉬</th>
+						<th class='t3'>거래캐쉬</th>
+						<th class='t4'>현존캐쉬</th>
 						<th class='t5'>종류</th>
 						<th class='t6'>비고</th>
 						<th class='t7'>삭제</th>
@@ -119,7 +119,7 @@ function goPage(index)
 
 function deleteMyMoneyLog(id)
 {
-	if (confirm("머니기록을 삭제하시겠습니까?")) {
+	if (confirm("캐쉬내역을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("myMoney.aspx", query);

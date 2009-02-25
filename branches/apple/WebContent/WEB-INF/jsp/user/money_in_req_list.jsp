@@ -33,12 +33,11 @@
 			<div class='incashlist'>
 				<h3>· 캐쉬충전 방법</h3>
 				<div class='box'>
-					1. 입금하실 금액과 입금자명을 입력하고 [캐쉬충전] 신청을 합니다.<br>
-					2. 입금하실 계좌 번호를 꼭! 확인합니다. <br>
-					3. 인터넷뱅킹, 폰뱅킹, 무통장입금, ATM이체 등의 방법으로 입금을 합니다.<br>
-					4. 입금자명과 입금액이 동일시 입금후 2~3분이내 자동충전 처리 됩니다.<br>
-					5. 신청하신후 1시간 이내에 입금되지 않은 신청은 자동취소 처리 됩니다.<br>
-					<b>※ 입력하신 정보(입금액/입금자명)와 실제입금금액/입금자명이 동일해야만 처리가 가능합니다.</b>
+					1. 입금(충전)하실 금액을 "입금예정액"에 기록합니다.<br>
+					2. 입금자명에 이체시 "보내는분"과 동일한 이름을 기록합니다.<br>
+					3. 입금계좌에 인터넷뱅킹, 폰뱅킹, 무통장입금, ATM등의 방법으로 입금합니다.<br>
+					  <b>※(주의): 입력하신 정보(입금예정액/입금자명)와 실제입금금액/입금자명이 동일하여야 합니다.</b><br>
+					  <b>※(주의): 신청하신 후 1시간 이내에 입금되지 않으면 취소 처리됩니다.</b>
 				</div>
 
 
@@ -78,7 +77,7 @@
 			<td><%=moneyIn.getProcDateStr()%></td>
 			<td>
 				<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
-				<img src="images/btn_cancel.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
+				<img src="img/sub_incashlist_cancel_bt.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
 				<%}%>
 			</td>
 			<td>
@@ -92,8 +91,7 @@
 		}
 	%>
 					</table><br>
-※ 캐쉬충전 취소를 하시면, 입금하셔도 입금 확인이 되지 않습니다.<br>
-※ 입금한 정보와 캐쉬충전신청 정보를 동일하게 맞추어 주시기 바랍니다.
+※ 캐쉬충전시 입금자명이나 금액을 잘못 입력하셨다면 [취소] 하시고 다시 신청하세요.<br>
 				</div>
 				
 <!-----[ 페이징 ]--------------------------------------------/-->
@@ -146,7 +144,7 @@ function goPage(index)
 
 function cancelMoneyInRequest(id)
 {
-	if (confirm("충전 신청을 취소 하시겠습니까?")) {
+	if (confirm("충전신청을 취소 하시겠습니까?")) {
 		var query = "mode=cancelMoneyInRequest";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("moneyIn.aspx", query);
@@ -159,7 +157,7 @@ function cancelMoneyInRequest(id)
 
 function removeMoneyInRequestLog(id)
 {
-	if (confirm("충전  기록을 삭제 하시겠습니까?")) {
+	if (confirm("충전기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("moneyIn.aspx", query);

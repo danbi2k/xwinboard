@@ -168,7 +168,7 @@ function out_pw_set(){
 	window.open("outmoney_pw_set.asp","checkNICKwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
 }
 
-//######### 머니충전신청 ##############
+//######### 캐쉬충전신청 ##############
 function FnInMoney_Submit(frm)
 {
 	var query = "mode=moneyInRequest";
@@ -184,13 +184,13 @@ function FnInMoney_Submit(frm)
 }
 
 function FnInMoneyCancle(idx){
-	if(confirm("머니충전신청을 취소하시겠습니까?")){
+	if(confirm("캐쉬충전신청을 취소하시겠습니까?")){
 		location.href="inmoney.asp?cancle="+ idx;
 	}
 }
 function FnOutMoney_Submit(frm){
 	if(!frm.out_money.value) {alert("금액을 입력하세요"); frm.out_money.focus(); return; }
-	if(!frm.pin.value) {alert("환전비밀번호를 입력하세요"); frm.pin.focus(); return; }
+	if(!frm.password.value) {alert("패스워드를 입력하세요"); frm.password.focus(); return; }
 	if(frm.account_bank.value==""){ alert("환전받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
 	if(frm.account_num.value.length<7){ alert("환전받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
@@ -200,7 +200,7 @@ function FnOutMoney_Submit(frm){
 	query += "&bankName=" + frm.account_bank.value;
 	query += "&number=" + frm.account_num.value;
 	query += "&name=" + frm.account_name.value;
-	query += "&pin=" + frm.pin.value;
+	query += "&password=" + frm.password.value;
 	
 	var http = new JKL.ParseXML("moneyOut.aspx", query);
 	var result = http.parse();
