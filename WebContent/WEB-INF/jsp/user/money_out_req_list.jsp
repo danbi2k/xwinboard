@@ -22,7 +22,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -33,8 +33,8 @@
 			<div class='outcashlist'>
 
 				<div class='tab'>
-				<img src='img/sub_outcashlist_on_ti.gif' onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequestList'" style="cursor:hand;">
-				<img src='img/sub_outcash_off_ti.gif' onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequest'" style="cursor:hand;">
+				<img src='img/sub_outcashlist_on_ti.gif' onclick="location.href='sendcache.php?mode=viewMoneyOutRequestList'" style="cursor:hand;">
+				<img src='img/sub_outcash_off_ti.gif' onclick="location.href='sendcache.php?mode=viewMoneyOutRequest'" style="cursor:hand;">
 				</div>
 				<div class='box tabbox list_box'>
 			
@@ -116,7 +116,7 @@
 <script>
 function goPage(index)
 {
-	location.href="moneyOut.aspx?mode=viewMoneyOutRequestList&pageIndex=" + index;
+	location.href="sendcache.php?mode=viewMoneyOutRequestList&pageIndex=" + index;
 }
 
 function removeMoneyOutRequestLog(id)
@@ -124,7 +124,7 @@ function removeMoneyOutRequestLog(id)
 	if (confirm("환전 기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyOutRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyOut.aspx", query);
+		var http = new JKL.ParseXML("sendcache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

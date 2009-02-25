@@ -34,7 +34,7 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout">
+	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.php?mode=processLogout">
 
 	<link rel='stylesheet' href='style/default.css' type='text/css'>
 	<script language="JavaScript" src="script/code.js"></script>
@@ -53,7 +53,7 @@
 	if (login == false && isIndex == false) {
 	%>
 	alert("로그인이 필요합니다");
-	location.href = "login.aspx?mode=processLogout";
+	location.href = "login.php?mode=processLogout";
 	<%
 	}
 	%>
@@ -61,7 +61,7 @@
 	<%
 	if (login && (member.getBankName() == null || member.getBankName().length() == 0) && isModify == false) {
 	%>
-	location.href = "member.aspx?mode=viewModifyForm";
+	location.href = "user.php?mode=viewModifyForm";
 	<%
 	}
 	%>
@@ -69,7 +69,7 @@
 	<%
 	if (login && (member.getPasswordExpire().equals("Y")) && isModify == false) {
 	%>
-	location.href = "member.aspx?mode=viewModifyForm";
+	location.href = "user.php?mode=viewModifyForm";
 	<%
 	}
 	%>	
@@ -79,16 +79,16 @@
 <div id='top_bg'></div>
 <div id='wrap'>
 	<div id='header'>
-		<div class='glogo'><a href="home.aspx"><img src='img/glogo.jpg' alt='www.apbet.net'></a></div>
+		<div class='glogo'><a href="home.php"><img src='img/glogo.jpg' alt='www.apbet.net'></a></div>
 		<div class='gnb'>
 		<ul>
-		<li><a href='home.aspx' target='_self'>HOME</a> |</li>
-		<li><a href='moneyIn.aspx?mode=viewMoneyInRequest' target='_self'>캐쉬충전</a> |</li>
-		<li><a href='moneyOut.aspx?mode=viewMoneyOutRequest' target='_self'>환전신청</a> |</li>
-		<li><a href='myBet.aspx?mode=viewMyBettingList' target='_self'>배팅내역</a> |</li>
-		<li><a href='myMoney.aspx?mode=viewMyMoneyList' target='_self'>캐쉬내역</a> |</li>
-		<li><a href='myMoney.aspx?mode=viewMyPointList' target='_self'>애플내역</a> |</li>
-		<li><a href='login.aspx?mode=processLogout' target='_self'>로그아웃</a></li>
+		<li><a href='home.php' target='_self'>HOME</a> |</li>
+		<li><a href='earncache.php?mode=viewMoneyInRequest' target='_self'>캐쉬충전</a> |</li>
+		<li><a href='sendcache.php?mode=viewMoneyOutRequest' target='_self'>환전신청</a> |</li>
+		<li><a href='betlog.php?mode=viewMyBettingList' target='_self'>배팅내역</a> |</li>
+		<li><a href='account.php?mode=viewMyMoneyList' target='_self'>캐쉬내역</a> |</li>
+		<li><a href='account.php?mode=viewMyPointList' target='_self'>애플내역</a> |</li>
+		<li><a href='login.php?mode=processLogout' target='_self'>로그아웃</a></li>
 		</ul>
 		</div>
 		<div class='nav'>

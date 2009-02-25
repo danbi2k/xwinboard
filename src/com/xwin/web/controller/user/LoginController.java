@@ -44,12 +44,12 @@ public class LoginController extends XwinController
 			
 			Member member = memberDao.selectMember(userId, null);
 			
-			if (member == null) {
+			if (member == null || member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) || member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
 				rx.setCode(-1);
-				rx.setMessage("등록되지 않은 사용자 입니다");
+				rx.setMessage("등록되지 않은 아이디 입니다.\n아이디를 확인해 주세요");
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
-				rx.setMessage("패스워드를 잘못 입력하셨습니다");
+				rx.setMessage("패스워드를 정확히 입력해주세요");
 			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
 				rx.setCode(-1);
 				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
@@ -93,9 +93,10 @@ public class LoginController extends XwinController
 	{
 		HttpSession session = request.getSession();
 		
-		session.removeAttribute("Member");		
+		session.removeAttribute("Member");
+		session.invalidate();
 		
-		ModelAndView mv = new ModelAndView("redirect:/index.aspx");
+		ModelAndView mv = new ModelAndView("redirect:/default.php");
 		return mv;
 	}
 }

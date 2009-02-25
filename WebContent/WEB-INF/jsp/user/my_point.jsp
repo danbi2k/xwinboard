@@ -23,7 +23,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -34,8 +34,8 @@
 			<div class='applelist'>
 
 				<div class='tab'>
-				<a href="myMoney.aspx?mode=viewMyPointList"><img src='img/sub_apple_on_ti.gif'></a>
-				<a href="myMoney.aspx?mode=viewMyMoneyList"><img src='img/sub_cashlist_off_ti.gif' class='img_bt'></a>
+				<a href="account.php?mode=viewMyPointList"><img src='img/sub_apple_on_ti.gif'></a>
+				<a href="account.php?mode=viewMyMoneyList"><img src='img/sub_cashlist_off_ti.gif' class='img_bt'></a>
 
 				</div>
 				<div class='box tabbox list_box'>
@@ -57,7 +57,7 @@
 	<td><%=XwinUtil.comma3(point.getOldBalance())%></td>
 	<td><%=XwinUtil.comma3(point.getMoney())%></td>
 	<td><%=XwinUtil.comma3(point.getBalance())%></td>
-	<td></td>
+	<td><%=point.getNote()%></td>
 	</tr>
 	<%
 		}
@@ -113,7 +113,7 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.aspx?mode=viewMyPointList&pageIndex=" + index;
+	location.href="account.php?mode=viewMyPointList&pageIndex=" + index;
 }
 </script>
 <%@include file="../footer.jsp"%>

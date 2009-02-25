@@ -22,7 +22,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -42,8 +42,8 @@
 
 
 				<div class='tab'>
-				<img src='./img/sub_incashlist_on_ti.gif' onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequestList'" style="cursor:hand;" >
-				<img src='./img/sub_incash_off_ti.gif' class='img_bt' onclick="location.href='moneyIn.aspx?mode=viewMoneyInRequest'" style="cursor:hand;">
+				<img src='./img/sub_incashlist_on_ti.gif' onclick="location.href='earncache.php?mode=viewMoneyInRequestList'" style="cursor:hand;" >
+				<img src='./img/sub_incash_off_ti.gif' class='img_bt' onclick="location.href='earncache.php?mode=viewMoneyInRequest'" style="cursor:hand;">
 				</div>
 				<div class='box tabbox list_box'>
 			
@@ -139,7 +139,7 @@
 <script>
 function goPage(index)
 {
-	location.href="moneyIn.aspx?mode=viewMoneyInRequestList&pageIndex=" + index;
+	location.href="earncache.php?mode=viewMoneyInRequestList&pageIndex=" + index;
 }
 
 function cancelMoneyInRequest(id)
@@ -147,7 +147,7 @@ function cancelMoneyInRequest(id)
 	if (confirm("충전신청을 취소 하시겠습니까?")) {
 		var query = "mode=cancelMoneyInRequest";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyIn.aspx", query);
+		var http = new JKL.ParseXML("earncache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -160,7 +160,7 @@ function removeMoneyInRequestLog(id)
 	if (confirm("충전기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyIn.aspx", query);
+		var http = new JKL.ParseXML("earncache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

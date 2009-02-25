@@ -6,7 +6,7 @@ function user_login(frm) {
 	query += "&userId=" + frm.userId.value;
 	query += "&password=" + frm.password.value;
 	
-	var http = new JKL.ParseXML("login.aspx", query);
+	var http = new JKL.ParseXML("login.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
@@ -14,5 +14,5 @@ function user_login(frm) {
 		return;
 	}
 	
-	location.href = "home.aspx";
+	location.href = "home.php";
 }

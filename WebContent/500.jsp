@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-오공공
+<h1>500 Error</h1>
 </body>
 </html>

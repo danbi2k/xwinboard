@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-alert("접근 권한이 없습니다");
-location.href = "main.aspx";
+alert("이 페이지는 접근이 승인되지 않았습니다.");
+location.href = "center.php";
 </script>
 </body>
 </html>

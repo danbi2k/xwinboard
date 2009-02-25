@@ -28,7 +28,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -133,7 +133,7 @@ function sendAuthNumber(){
 	var query = "mode=sendAuthNumber";
 	query += "&phone=" + f.phone1.value + "-" + f.phone2.value + "-" + f.phone3.value;
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 
 	alert(result.resultXml.message); 

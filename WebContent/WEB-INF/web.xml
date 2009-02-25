@@ -24,6 +24,14 @@
 		<filter-name>Param Filter</filter-name>
 		<url-pattern>*.aspx</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>*.php</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Param Filter</filter-name>
+		<url-pattern>*.php</url-pattern>
+	</filter-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/context/applicationContext*.xml</param-value>
@@ -48,6 +56,10 @@
 	<servlet-mapping>
 		<servlet-name>context/action</servlet-name>
 		<url-pattern>*.aspx</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>context/action</servlet-name>
+		<url-pattern>*.php</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
