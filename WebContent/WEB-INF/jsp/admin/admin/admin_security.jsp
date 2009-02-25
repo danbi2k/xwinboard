@@ -48,7 +48,7 @@
 <BR>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 		<tr align="center" bgcolor="#E4E4E4" height=20>
-			<td width=20%>패스워드변경요청</td>
+			<td width=20%>비밀번호변경요청</td>
 			<td width=80% bgcolor='#ffffff' align='left'>
 				변경하지않은회원 : <%=remainCount%>명<BR>
 				변경한회원 : <%=changeCount%>명<BR>

@@ -112,7 +112,7 @@
 		</td>
 	</tr>
     <tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>패스워드</td>
+		<td width=20%>비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<input name="password" type="text" value="<%=member.getPassword()%>"/>
 			<input type="button" value="변경" onclick="changePassword()"/>
@@ -145,7 +145,7 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>환전패스워드</td>
+		<td width=20%>환전비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<input name="pin" type="text" value="<%=member.getPin()%>"/>
 			<input type="button" value="변경" onclick="changePin()"/>
@@ -285,7 +285,7 @@
 		<td width=80% bgcolor='#ffffff' align='left'>
 		<table width=100%>
 		<tr>
-		<td colspan="3"><input type="checkbox" name="expireCheck" <%=member.getPasswordExpire().equals("Y")?"checked":""%> onclick="changePasswordExpire()"/> 패스워드의무변경</td>
+		<td colspan="3"><input type="checkbox" name="expireCheck" <%=member.getPasswordExpire().equals("Y")?"checked":""%> onclick="changePasswordExpire()"/> 비밀번호의무변경</td>
 		</tr>
 		<tr>
 		<td><input onclick="resetBoardDenyDate(this)" type="checkbox" name="deny_board" value="<%=Code.DENY_WRITE_BOARD%>" <%=(member.getDenyrity()&Code.DENY_WRITE_BOARD) > 0 ? "checked":""%>/> 게시판 쓰기 금지</td>
@@ -623,7 +623,7 @@ function changePassword()
 	var frm = document.regist;
 	if (frm.password != undefined) {
 		if (!frm.password.value) {
-			alert("패스워드를 입력해 주십시오");
+			alert("비밀번호를 입력해 주십시오");
 			return;
 		}
 	}
@@ -644,7 +644,7 @@ function changePin()
 	var frm = document.regist;
 	if (frm.pin!= undefined) {
 		if (!frm.pin.value) {
-			alert("환전패스워드를 입력해 주십시오");
+			alert("환전비밀번호를 입력해 주십시오");
 			return;
 		}
 	}

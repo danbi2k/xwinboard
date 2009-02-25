@@ -146,7 +146,7 @@ function FnDrawFolder(data, type) {
 			
 			row.push("<tr>");
 			row.push("<td class='t1'>" + data[i].awayTeam + "</td>");
-			row.push("<td class='t2'>" + C(data[i].guess) + " " + data[i].selRate + "</td>");
+			row.push("<td class='t2'>" + C(data[i].guess) + " " + Xwin.Digit2(data[i].selRate) + "</td>");
 			row.push("</tr>");
 			
 			row.push("<tr><td class='line' colspan=2></td></tr>");

@@ -122,18 +122,18 @@ public class Code
 		put(GAME_DISPLAY_CLOSE, "미표시");
 		put(GAME_DISPLAY_OPEN, "표시");
 		
-		put(ACCOUNT_TYPE_BETTING, "배팅출금");
-		put(ACCOUNT_TYPE_JACKPOT, "배팅적중");
-		put(ACCOUNT_TYPE_MONEYIN, "캐쉬충전");
-		put(ACCOUNT_TYPE_MONEYOUT, "캐쉬환전");
-		put(ACCOUNT_TYPE_BETCANCEL,"배팅취소(환불)");
-		put(ACCOUNT_TYPE_NOMATCH, "경기취소(환불)");
-		put(ACCOUNT_TYPE_MONEYIN_DIRECT, "(+)충전");
-		put(ACCOUNT_TYPE_MONEYOUT_DIRECT, "(-)충전");
-		put(ACCOUNT_TYPE_HANDYDRAW, "무승부(환불)");
-		put(ACCOUNT_TYPE_POINTCHARGE, "캐쉬전환");
-		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환전취소(환불)");
-		put(ACCOUNT_TYPE_BETTING_RETURN, "배팅취소(환불)");
+		put(ACCOUNT_TYPE_BETTING, "배팅");
+		put(ACCOUNT_TYPE_JACKPOT, "적중");
+		put(ACCOUNT_TYPE_MONEYIN, "충전");
+		put(ACCOUNT_TYPE_MONEYOUT, "환전");
+		put(ACCOUNT_TYPE_BETCANCEL,"환불(배팅취소)");
+		put(ACCOUNT_TYPE_NOMATCH, "환불(경기취소)");
+		put(ACCOUNT_TYPE_MONEYIN_DIRECT, "관리자(+)충전");
+		put(ACCOUNT_TYPE_MONEYOUT_DIRECT, "관리자(-)충전");
+		put(ACCOUNT_TYPE_HANDYDRAW, "환불(무승부)");
+		put(ACCOUNT_TYPE_POINTCHARGE, "애플전환");
+		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환불(환전취소)");
+		put(ACCOUNT_TYPE_BETTING_RETURN, "환불(배팅취소)");
 		put(ACCOUNT_TYPE_BONUS, "Bonus");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
@@ -142,13 +142,13 @@ public class Code
 		put(MONEY_IN_REQUEST, "충전신청");
 		put(MONEY_IN_SUCCESS, "충전성공");
 		put(MONEY_IN_CANCEL, "충전취소");
-		put(MONEY_IN_DIRECT, "(+)충전");
+		put(MONEY_IN_DIRECT, "관리자(+)충전");
 		put(MONEY_IN_CANCEL_TIMEOUT, "시간초과");
 		
 		put(MONEY_OUT_REQUEST, "환전신청");
 		put(MONEY_OUT_SUCCESS, "환전성공");
 		put(MONEY_OUT_CANCEL, "환전취소");
-		put(MONEY_OUT_DIRECT, "(-)충전");
+		put(MONEY_OUT_DIRECT, "관리자(-)충전");
 		
 		put(GAME_STATUS_READY, "대기");
 		put(GAME_STATUS_RUN, "진행");

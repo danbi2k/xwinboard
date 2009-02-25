@@ -42,10 +42,10 @@
 			
 					<table>
 					<tr>
-						<th class='t1'>거래일자</th>
-						<th class='t2'>기애플</th>
-						<th class='t3'>입출애플</th>
-						<th class='t4'>잔여애플</th>
+						<th class='t1'>날짜</th>
+						<th class='t2'>기존애플</th>
+						<th class='t3'>거래애플</th>
+						<th class='t4'>현존애플</th>
 						<th class='t5'>비고</th>
 					</tr>
 	<%
@@ -63,7 +63,9 @@
 		}
 	}
 	%>
-					</table><br>
+					</table>
+
+					<div class='ex_bt'><img src='img/sub_cashlist_ex_bt.gif' alt='캐쉬전환' class='img_bt' onclick="exchangePoint(<%=member.getPoint()%>)"></div>
 
 				</div>
 				

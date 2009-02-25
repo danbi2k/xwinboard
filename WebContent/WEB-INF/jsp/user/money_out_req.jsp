@@ -8,7 +8,7 @@
 
 <div class='sub_ti1'>
 		<img src='img/sub_outcash_ti.gif' alt='환전요청' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 환전요청을 하시면 캐쉬를 실계좌로 입금해 드립니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님
@@ -33,30 +33,33 @@
 					<input type="hidden" name="account_bank" value="<%=member.getBankName()%>"/>
 					<input type="hidden" name="account_num" value="<%=member.getBankNumber()%>"/>
 					<input type="hidden" name="account_name" value="<%=member.getBankOwner()%>"/>
-					<table>
+					<table>	
 					<tr>
-						<th>캐쉬잔액</th>
-						<td><%=XwinUtil.comma3(member.getBalance())%> 원</td>
-					</tr>
-					<tr>
-						<th>환전 신청액</th>
-						<td><input type='text' class='input_text w100' name='out_money' onkeyup="only123(this); comma3Input(this);"></td>
-					</tr>
-					<tr>
-						<th>환전계좌 은행</th>
+						<th>입금받을은행</th>
 						<td><%=member.getBankName()%></td>
 					</tr>
 					<tr>
-						<th>환전계좌 번호</th>
+						<th>계좌 번호</th>
 						<td><%=member.getBankNumber()%></td>
 					</tr>
 					<tr>
-						<th>환전계좌 수취인</th>
+						<th>예금주</th>
 						<td><%=member.getBankOwner()%></td>
 					</tr>
 					<tr>
-						<th>환전 패스워드</th>
-						<td><input type='password' class='input_text w100' name='pin'> *회원가입시 입력하신 환전 패스워드를 입력하세요!</td>
+						<th>보유캐쉬</th>
+						<td><%=XwinUtil.comma3(member.getBalance())%> 원</td>
+					</tr>				
+					<tr>
+						<th>환전금액</th>
+						<td>
+							<input type='text' class='input_text w100' name='out_money' onkeyup="only123(this); comma3Input(this);">
+							※(주의) : 만원 단위만 환전가능합니다
+						</td>
+					</tr>
+					<tr>
+						<th>패스워드</th>
+						<td><input type='password' class='input_text w100' name='password'></td>
 					</tr>
 						
 					

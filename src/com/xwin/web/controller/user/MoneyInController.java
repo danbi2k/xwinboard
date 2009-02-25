@@ -119,7 +119,7 @@ public class MoneyInController extends XwinController
 				moneyIn.setNickName(member.getNickName());
 				moneyInDao.insertMoneyIn(moneyIn);
 		
-				rx = new ResultXml(0, "머니충전이 요청되었습니다", null);
+				rx = new ResultXml(0, "캐쉬충전이 요청되었습니다", null);
 			}
 		} catch (NumberFormatException e) {
 			rx = new ResultXml(-1, "입금 예정액을 입력하세요", null);
