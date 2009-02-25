@@ -36,7 +36,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -59,17 +59,18 @@
 			String classHead = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)?"notice":"";
 			String classSubject = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)?"notice subject":"subject";
 			String head = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)?"공지":""+itemIdx--;
+			String readCount = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)?"":""+boardItem.getReadCount();
 %>
 			<tr>
 				<td class='<%=classHead%>'><%=head%></td>
 				<td class='<%=classSubject%>'>
-					<a href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<a href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
 					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 					</b>
 				</td>
 				<td class='<%=classHead%>'><%=boardItem.getNickName()%></td>
 				<td class='<%=classHead%>'><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></td>
-				<td class='<%=classHead%>'><%=boardItem.getReadCount()%></td>
+				<td class='<%=classHead%>'><%=readCount%></td>
 			</tr>
 <%
 		}
@@ -79,7 +80,7 @@
 
 				</div>
 					<div class='write_bt'>
-					<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'>
+					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'>
 					<img src='img/board_write_bt.gif' alt='글쓰기' class='img_bt'>
 					</a>				
 					</div>				
@@ -124,7 +125,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
+	location.href="bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

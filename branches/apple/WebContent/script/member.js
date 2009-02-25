@@ -43,7 +43,7 @@ function FnMemReg(frm)
 	else
 		query += "&smsCheck=" + "N";
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
@@ -53,7 +53,7 @@ function FnMemReg(frm)
 	} else {
 		alert(result.resultXml.message);
 		if (result.resultXml.code == -2)
-			location.href = "index.aspx";
+			location.href = "default.php";
 	}
 }
 
@@ -88,12 +88,12 @@ function FnMemModify(frm)
 		query += "&bankOwner=" + frm.bankOwner.value
 	}
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
 		alert("수정되었습니다");
-		location.href ="home.aspx";
+		location.href ="home.php";
 	} else {
 		alert(result.resultXml.message);
 	}	
@@ -101,11 +101,11 @@ function FnMemModify(frm)
 function FnMemOut(){
 	if(confirm("탈퇴를 신청하시겠습니까?\n\n탈퇴를 신청하시면, 관리자가 확인후 탈퇴를 시켜드립니다.")){
 		var query = "mode=requestSecede";
-		var http = new JKL.ParseXML("member.aspx", query);
+		var http = new JKL.ParseXML("user.php", query);
 		var result = http.parse();
 		if (result.resultXml.code == 0) {
 			alert(result.resultXml.message);
-			location.href = "index.aspx";
+			location.href = "default.php";
 		}
 	}
 }
@@ -117,7 +117,7 @@ function FnMemOutCancle(){
 function check_id(frm){
 	var query = "mode=checkExistUserId";
 	query += "&userId=" + frm.id_input.value;
-	var http= new JKL.ParseXML("member.aspx", query);
+	var http= new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
@@ -138,7 +138,7 @@ function check_rid(frm){
 function check_nick(frm){
 	var query = "mode=checkExistNickName";
 	query += "&nickName=" + frm.nick_input.value;
-	var http= new JKL.ParseXML("member.aspx", query);
+	var http= new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
@@ -175,11 +175,11 @@ function FnInMoney_Submit(frm)
 	query += "&money=" + trimComma3(frm.money.value);
 	query += "&name=" + frm.name.value;
 	query += "&bankBookId=" + frm.bankBookId.value;
-	var http = new JKL.ParseXML("moneyIn.aspx", query);
+	var http = new JKL.ParseXML("earncache.php", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0) {
-		location.href="moneyIn.aspx?mode=viewMoneyInRequestList";
+		location.href="earncache.php?mode=viewMoneyInRequestList";
 	}
 }
 
@@ -202,12 +202,12 @@ function FnOutMoney_Submit(frm){
 	query += "&name=" + frm.account_name.value;
 	query += "&password=" + frm.password.value;
 	
-	var http = new JKL.ParseXML("moneyOut.aspx", query);
+	var http = new JKL.ParseXML("sendcache.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0) {
-		location.href='moneyOut.aspx?mode=viewMoneyOutRequestList';
+		location.href='sendcache.php?mode=viewMoneyOutRequestList';
 	}
 }
 function FnOutMoneyCancle(idx){

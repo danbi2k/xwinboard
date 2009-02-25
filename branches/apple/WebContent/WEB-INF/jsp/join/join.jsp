@@ -13,9 +13,13 @@
 
 		<div id='sub_content1'>
 			<div class='member_modify'>
-				<h3>· 가입안내</h3>
+				<h3>· 가입축하 이벤트 안내</h3>
 				<div class='box'>
-					1. 가입축하 이벤트 첫충전시 10% 애플 지급!!
+					<ol>
+						<li>
+						&nbsp;&nbsp;● 회원 가입시 5,000 캐쉬를 지급해 드립니다.
+						</li>
+					</ol>	
 				</div>
 				<h3>· 가입신청서</h3>
 				<div class='box'>
@@ -25,7 +29,7 @@
 						<table>
 						<tr>
 							<th>아이디</th>
-							<td><input type='text' name='userId' class='input_text w100' onfocusout='abc123(this)' onkeyup='abc123(this)'></td>
+							<td><input type='text' name='userId' class='input_text w100' onfocusout='abc123(this)' onkeyup='abc123(this)'> <font color="yellow">★ 영문과 숫자 조합이 가능합니다</font></td>
 						</tr>
 						<tr>
 							<th>패스워드</th>
@@ -53,12 +57,12 @@
 								<input type='text' name='phone2' class='input_text w40'> -
 								<input type='text' name='phone3' class='input_text w40'>
 								<img src='img/member_callnum_bt.gif' alt='인증번호요청' class='img_bt' onclick="sendAuthNumber()"> <br>
-								<input type='checkbox' name='smsCheck' class='input_check' checked> 경기결과SMS수신
+								배팅 결과 문자 수신 요청 <input type='checkbox' name='smsCheck' class='input_check' checked>
 							</td>
 						</tr>
 						<tr>
 							<th>가입인증번호</th>
-							<td><input type='text' name='phonePin' class='input_text w100'></td>
+							<td><input type='text' name='phonePin' class='input_text w100'> <font color="yellow">★ 대소문자를 정확히 구분해 주세요. 전송시 시간이 다소 걸릴 수 있습니다.</font></td>
 						</tr>
 						<tr>	
 							<th>이메일</th>
@@ -75,8 +79,6 @@
 								</select>
 								계좌번호 : <input type='text' name='bankNumber' class='input_text w120'>
 								예금주 : <input type='text' name='bankOwner' class='input_text w90'><br>
-								<font color="yellow">※ 환전은 등록된 계좌번호로만 가능하며 계좌번호 변경시에는 고객센터로 요청해주십시오.</font>
-								</td>
 							</td>
 						</tr>
 						</table>
@@ -118,7 +120,7 @@ function sendAuthNumber(){
 	var query = "mode=sendAuthNumber";
 	query += "&phone=" + f.phone1.value + "-" + f.phone2.value + "-" + f.phone3.value;
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 
 	alert(result.resultXml.message); 

@@ -8,7 +8,7 @@ function exchangePoint(point)
 
 	if (confirm("애플 " + comma3(balance) + "ap 을 캐쉬로 전환하시겠습니까?")) {
 		var query = "mode=exchangePoint";
-		var http = new JKL.ParseXML("member.aspx", query);
+		var http = new JKL.ParseXML("user.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -108,20 +108,20 @@ function FnLogin_Submit(frm){
 	query += "&password=" + frm.password.value;
 	query += "&pin=" + frm.pin.value;
 	
-	var http = new JKL.ParseXML("login.aspx", query);
+	var http = new JKL.ParseXML("login.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
 		alert(result.resultXml.message);
-		location.href = "index.aspx";
+		location.href = "default.php";
 		return;
 	}
 	
-	location.href = "home.aspx";
+	location.href = "home.php";
 }
 
 function FnLogout(){	
 	if(!confirm("로그아웃 하시겠습니까?")){ return false; }
-	document.location.href = "login.aspx?mode=processLogout";
+	document.location.href = "login.php?mode=processLogout";
 }
 

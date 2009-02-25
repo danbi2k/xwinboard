@@ -8,7 +8,7 @@
 %>
 <%@include file="../header.jsp"%>
 
-<form name="frm" action="bettingCart.aspx">
+<form name="frm" action="cart.php">
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 
@@ -147,7 +147,7 @@ function deleteGameInGameFolder(index, gameId)
 		var query = "mode=deleteGameInGameFolder";
 		query += "&folderIndex=" + index;
 		query += "&gameId=" + gameId;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -160,7 +160,7 @@ function deleteGameFolder(id)
 	if (confirm("배팅카트에서 삭제하시겠습니까?")) {
 		var query = "mode=deleteGameFolder";
 		query += "&folderIndex=" + id;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -172,7 +172,7 @@ function deleteAllGameFolder(id)
 {
 	if (confirm("전체 삭제하시겠습니까?")) {
 		var query = "mode=deleteAllGameFolder";
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -211,7 +211,7 @@ function betting()
 			return;
 		}
 
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

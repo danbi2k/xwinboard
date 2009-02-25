@@ -18,7 +18,7 @@
 				<span class='name'><%=member.getNickName()%></span> 님
 				<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 				<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-				<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+				<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 				</div>
 			</div>
 			<div class='sub_ti_bar'></div>
@@ -28,7 +28,7 @@
 		<div id='sub_content1'>
 			<div class='board'>
 				<div class='write_box'>
-					<form name="frm" action="board.aspx" method="post">
+					<form name="frm" action="bbs.php" method="post">
 					<input type="hidden" name="mode" value="writeBoardItem">
 					<input type="hidden" name="boardName" value="<%=boardName%>">
 					<table>

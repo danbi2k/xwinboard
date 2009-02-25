@@ -93,14 +93,14 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											String WelcomeMsg = "환영합니다";
 											
 											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-	//										if (cnt == 0) {
-	//											memberDao.loggingGetEvent(member.getMobile());
-	//											member.setBalance(5000L);
-	//											WelcomeMsg = "가입축하캐쉬 5,000원이 지급되었습니다";
-	//											
-	//										} else {
+											if (cnt == 0) {
+												memberDao.loggingGetEvent(member.getMobile());
+												member.setBalance(5000L);
+												WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+												
+											} else {
 												member.setBalance(0L);
-	//										}
+											}
 											
 											memberDao.insertMember(member);
 											

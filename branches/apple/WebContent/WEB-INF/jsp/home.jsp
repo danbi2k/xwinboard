@@ -20,7 +20,7 @@
 					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br>
 					<div class='cash'>· 캐쉬:</div> <div class='val'><%=XwinUtil.comma3(member.getBalance())%> <span>원</span></div>
 					<div class='apple'>· 애플:</div> <div class='val2'><%=XwinUtil.comma3(member.getPoint())%> <span>ap</span></div>
-					<div class='link'><a href='myBet.aspx?mode=viewMyBettingList' target='_self'>배팅내역</a> | <a href='member.aspx?mode=viewModifyForm'>정보변경</a></div>
+					<div class='link'><a href='betlog.php?mode=viewMyBettingList' target='_self'>배팅내역</a> | <a href='user.php?mode=viewModifyForm'>정보변경</a></div>
 				</div>
 			</div>
 		<%} else { %>
@@ -29,19 +29,19 @@
 				<table>
 				<tr>
 				<td><label class='mr5'><img src='img/login_id_lb.gif'></label></td>
-				<td class='pb3'><input type='text' class='input_text w90' name='userId'></td>
+				<td class='pb3'><input type='text' class='input_text w90' name='userId' onkeydown='enter(document.login)'></td>
 				</tr>
 
 				<tr>
 				<td><label class='mr5'><img src='img/login_pass_lb.gif'></label></td>
-				<td><input type='password' class='input_text w90' name='password' class=''></td>
+				<td><input type='password' class='input_text w90' name='password' class='' onkeydown='enter(document.login)'></td>
 				</tr>
 				</table>
 				<span class='fl ml6 mt14'><img src='img/login_do_bt.gif' alt='login' onclick="user_login(document.login)"></span>
 				</form>
 
 				<div class='idpw'>
-				<a href='join.aspx?mode=viewJoinForm'>회원가입</a> |
+				<a href='userform.php?mode=viewJoinForm'>회원가입</a> |
 				<a>추천가입</a>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 	</object></div>
 		<div class='rside'>
 
-			<div class='m_latest_notice_top'><a href='board.aspx?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='공지사항 더보기'></a></div>
+			<div class='m_latest_notice_top'><a href='bbs.php?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='공지사항 더보기'></a></div>
 			<div class='m_latest_notice_body'>
 			<!-- 공지사항내용 -->
 			<ul>
@@ -73,7 +73,7 @@
 			if (title.length() > 12)
 				title = title.substring(0, 12) + "..";
 %>
-			<li><a href='board.aspx?mode=viewBoardDetail&boardName=user&id=<%=notice.getId()%>&pageIndex=0'>· <%=title%></a></li>
+			<li><a href='bbs.php?mode=viewBoardDetail&boardName=user&id=<%=notice.getId()%>&pageIndex=0'>· <%=title%></a></li>
 <%
 		}
 	}
@@ -83,7 +83,7 @@
 			</div>
 			<div class='m_latest_notice_bottom'></div>
 
-			<div class='m_latest_board_top'><a href='board.aspx?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='게시판 더보기'></a></div>
+			<div class='m_latest_board_top'><a href='bbs.php?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='게시판 더보기'></a></div>
 			<div class='m_latest_board_body'>
 			<!-- 게시판내용 -->
 			<ul>
@@ -94,7 +94,7 @@
 			if (title.length() > 12)
 				title = title.substring(0, 12) + "..";
 %>
-			<li><a href='board.aspx?mode=viewBoardDetail&boardName=user&id=<%=user.getId()%>&pageIndex=0'>· <%=title%></a></li>
+			<li><a href='bbs.php?mode=viewBoardDetail&boardName=user&id=<%=user.getId()%>&pageIndex=0'>· <%=title%></a></li>
 <%
 		}
 	}
@@ -103,5 +103,48 @@
 			</div>
 			<div class='m_latest_board_bottom'></div>
 		</div>
+<script>
+function enter(frm)
+{
+	if (event.keyCode == 13) {
+		user_login(frm);
+	}
+}
 
+function popupopen()
+{
+	var w = 448;
+	var h = 425;
+	var window_left = (screen.width-w)/2;
+	var window_top  = (screen.height-h)/2;
+	window.open('winpopup.php', 'Notice','status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+}
+
+function getCookie( name )
+{
+	var seoroopCookie = name + "=";
+	var i = 0;
+	while ( i <= document.cookie.length )
+	{
+ 		var e = (i+seoroopCookie.length);
+ 		if ( document.cookie.substring( i, e ) == seoroopCookie ) {
+ 			if ( (popendCookie=document.cookie.indexOf( ";", e )) == -1 )
+ 				popendCookie = document.cookie.length;
+				return unescape( document.cookie.substring( e, popendCookie ) );
+ 			}
+ 			i = document.cookie.indexOf( " ", i ) + 1;
+		if ( i == 0 )
+			break;
+	}
+	return "";
+}
+
+var POPUPFLAG = "<%=Admin.POPUPFLAG%>";
+var COOKIEFLAG = getCookie("COOKIEFLAG");
+
+if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
+{
+	popupopen();
+}
+</script>
 <%@include file="footer.jsp"%>

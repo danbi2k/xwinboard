@@ -23,7 +23,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -34,8 +34,8 @@
 			<div class='cashlist'>
 
 				<div class='tab'>
-				<a href="myMoney.aspx?mode=viewMyMoneyList"><img src='img/sub_cashlist_on_ti.gif'></a>
-				<a href="myMoney.aspx?mode=viewMyPointList"><img src='img/sub_apple_off_ti.gif'></a>
+				<a href="account.php?mode=viewMyMoneyList"><img src='img/sub_cashlist_on_ti.gif'></a>
+				<a href="account.php?mode=viewMyPointList"><img src='img/sub_apple_off_ti.gif'></a>
 				</div>
 				<div class='box tabbox list_box'>
 			
@@ -114,7 +114,7 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.aspx?mode=viewMyMoneyList&pageIndex=" + index;
+	location.href="account.php?mode=viewMyMoneyList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
@@ -122,7 +122,7 @@ function deleteMyMoneyLog(id)
 	if (confirm("캐쉬내역을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("myMoney.aspx", query);
+		var http = new JKL.ParseXML("account.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

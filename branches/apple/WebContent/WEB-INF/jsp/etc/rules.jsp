@@ -7,14 +7,6 @@
 <div class='sub_ti1'>
 		<img src='./img/sub_betrule_ti.gif' alt='배팅규정' class='ml10 mr10 fl'> 
 		<div class='sub_ti_desc'>· 배팅규칙에 대해 알려드립니다.</div>
-		<div class='state_bar'>
-			<div class='state_bar_txt'>
-			<span class='name'><%=member.getNickName()%></span> 님
-			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
-			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
-			</div>
-		</div>
 		<div class='sub_ti_bar'></div>
 		</div>
 
@@ -98,6 +90,31 @@
 				야구 - 정규 9이닝 까지 승부결과가 나지않을시 연장전 경기결과적용 더블헤더 경기 시에는 첫 번째 개최되는 경기를 적용합니다.! 
 				</li>
 				<li>
+				베팅 시간은 경기시작 한국시간 기준으로 경기시작 5분전에 시간별로 마감됩니다.
+				</li>
+			</ol>
+
+			<ol><h1>◎ 승무패/핸디캡 경기 [조합베팅] 규정</h1>
+				<li>
+				대상경기 들을 선택하여 승무패/핸디캡 경기 [조합베팅] 하는 방식입니다. 
+				</li>
+				<li>
+				선택한 경기를 모두 맞힌 것을 적중으로 하며, 적중금은 적중배당률과 베팅금액을 곱하여 계산합니다. 
+				</li>
+				<li>
+				승무패/핸디캡 경기 [조합베팅]의 베팅상한선은 \5,000 ~ \1,000,000 까지이며 초과 베팅 할 경우 베팅이 제한됩니다. 최대 적중금 상한가는 3백만 원이며, 적중배당률과 구입금액의 곱이 3백만 원을 초과할 경우 적중금 지급이 제한됩니다.(애플벳의 공지에 의해 변동가능) 
+				</li>
+				<li>
+				취소된 경기는 모두1.0배로 처리하며, 선택한 경기중 한 경기라도 결과가 확정 되었을 경우 그 베팅은 유효하게 처리됩니다. 단, 선택한 경기가 모두 취소가 되었을 경우는 환불합니다.
+				</li>
+				<li>
+				대상경기 시간은 정규 경기시간까지의 결과를 적용합니다.(야구,농구,배구제외)
+				축구 - 전/후반까지의 결과 적용(연장전 및 승부차기 제외)
+				농구 -1~4쿼터까지 정규시간만 적용(연장전 제외) 
+				배구 - 정규세트까지 승부결과가 나지않을시 연장전 경기결과적용
+				야구 - 정규 9이닝 까지 승부결과가 나지않을시 연장전 경기결과적용 더블헤더 경기 시에는 첫 번째 개최되는 경기를 적용합니다.! 
+				</li>
+				<li>				
 				베팅 시간은 경기시작 한국시간 기준으로 경기시작 5분전에 시간별로 마감됩니다.
 				</li>
 			</ol>

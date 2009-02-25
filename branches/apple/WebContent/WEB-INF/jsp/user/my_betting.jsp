@@ -22,7 +22,7 @@
 			<span class='name'><%=member.getNickName()%></span> 님
 			<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 			<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-			<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+			<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 			</div>
 		</div>
 		<div class='sub_ti_bar'></div>
@@ -133,7 +133,7 @@ function deleteMyBetting(id)
 	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyBetting";
 		query += "&bettingId=" + id;
-		var http = new JKL.ParseXML("myBet.aspx", query);
+		var http = new JKL.ParseXML("betlog.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -143,7 +143,7 @@ function deleteMyBetting(id)
 
 function goPage(pageIndex)
 {
-	location.href = "myBet.aspx?mode=viewMyBettingList&pageIndex=" + pageIndex;
+	location.href = "betlog.php?mode=viewMyBettingList&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

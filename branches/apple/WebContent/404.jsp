@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-사공사
+<h1>404 Not Found</h1>
 </body>
 </html>

@@ -157,7 +157,7 @@ public class BoardController extends XwinController
 		boardComment.setUserId(member.getUserId());
 		boardDao.insertBoardComment(boardComment);
 		
-		ModelAndView mv = new ModelAndView("redirect:/board.aspx?mode=viewBoardDetail&boardName="+boardName+"&addComment=true&id=" + boardId);
+		ModelAndView mv = new ModelAndView("redirect:/bbs.php?mode=viewBoardDetail&boardName="+boardName+"&addComment=true&id=" + boardId);
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		
@@ -201,7 +201,7 @@ public class BoardController extends XwinController
 		boardDao.insertBoardItem(boardItem);
 	
 		ModelAndView mv = null;
-		mv = new ModelAndView("redirect:/board.aspx?mode=viewBoard&boardName=" + boardName);
+		mv = new ModelAndView("redirect:/bbs.php?mode=viewBoard&boardName=" + boardName);
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		

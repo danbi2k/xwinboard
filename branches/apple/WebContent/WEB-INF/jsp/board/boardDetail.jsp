@@ -12,6 +12,7 @@
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 	String boardName = request.getParameter("boardName");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	String readCount = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)?"":""+boardItem.getReadCount();
 	if (pageIndex == null)
 		pageIndex = "0";
 %>
@@ -23,7 +24,7 @@
 				<span class='name'><%=member.getNickName()%></span> 님
 				<span class='cash'>· Cash:<span class='val'><%=XwinUtil.comma3(member.getBalance())%></span></span> 
 				<span class='apple'>· Apple:<span class='val'><%=XwinUtil.comma3(member.getPoint())%></span></span> 
-				<!-- span class='link'><a href='myBet.aspx?mode=viewMyBettingList'>배팅내역보기</a></span -->
+				<!-- span class='link'><a href='betlog.php?mode=viewMyBettingList'>배팅내역보기</a></span -->
 				</div>
 			</div>
 			<div class='sub_ti_bar'></div>
@@ -39,7 +40,7 @@
 						</tr>
 						<tr>
 							<td class='v1'>
-							<span>작성자 : <%=boardItem.getNickName()%></span><span>조회수 : <%=boardItem.getReadCount() %></span><span>등록일 : <%=XwinUtil.getBoardItemDate(boardItem.getDate()) %></span>
+							<span>작성자 : <%=boardItem.getNickName()%></span><span>조회수 : <%=readCount%></span><span>등록일 : <%=XwinUtil.getBoardItemDate(boardItem.getDate()) %></span>
 							</td>
 						</tr>
 						<tr>
@@ -56,11 +57,11 @@
 				</div>
 				<!-- end view_box -->
 				<div class='write_bt'>
-					<a href='board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src='img/board_list_bt.gif' alt='글목록' class='img_bt'></a>
+					<a href='bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src='img/board_list_bt.gif' alt='글목록' class='img_bt'></a>
 					<%if (boardItem.getUserId().equals(member.getUserId())) {%>
 					<a href=''><img src='img/board_del_bt.gif' alt='글삭제' class='img_bt' onclick="deleteItem()"></a>
 					<%} %>
-					<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src='img/board_write_bt.gif' alt='글쓰기' class='img_bt'></a>
+					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src='img/board_write_bt.gif' alt='글쓰기' class='img_bt'></a>
 				</div>				
 				<!-- end write_bt -->
 				<div class='comment_write'>
@@ -116,11 +117,11 @@ function deleteItem()
 		var query = "mode=deleteBoardItem";
 		query += "&id=<%=boardItem.getId()%>";
 		query += "&boardName=<%=boardName%>";
-		var http = new JKL.ParseXML("board.aspx", query);
+		var http = new JKL.ParseXML("bbs.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>";
+			location.href = "bbs.php?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>&pageIndex=<%=pageIndex%>";
 		}
 	}
 }
@@ -130,7 +131,7 @@ function deleteComment(id)
 	if (confirm("삭제하시겠습니까?")) {
 		var query = "mode=deleteBoardComment";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("board.aspx", query);
+		var http = new JKL.ParseXML("bbs.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
@@ -140,14 +141,14 @@ function deleteComment(id)
 }
 
 function comment_add(){
-	if (havingSqlKeyword(comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
-	if (havingSqlKeyword(comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
+	if (havingSqlKeyword(document.comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
+	if (havingSqlKeyword(document.comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
 	
-    if(comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
-    if(comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
-    comment_frm.action = "board.aspx";
-    comment_frm.method = "post";
-    comment_frm.submit();
+    if(document.comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
+    if(document.comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
+    document.comment_frm.action = "bbs.php";
+    document.comment_frm.method = "post";
+    document.comment_frm.submit();
 
 }
 function comment_del(val){
