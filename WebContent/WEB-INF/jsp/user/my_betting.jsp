@@ -13,32 +13,10 @@
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
 %>
 <%@include file="../header.jsp"%>
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
+			<tr><td><img src="/love/img/menu15.jpg" border="0"></td></tr>
+		
 </table>
-
--->
-
-<form name="frm" action="myBet.aspx">
-<input type="hidden" name="mode" value="viewMyBettingList"/>
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-
-<table width="900" style="border-bottom:1 solid #909090;">
-<tr>
-	<td width="100"><img src="images/title_mybet.gif"></td>
-	<td>배팅 내역 및 결과입니다.</td>
-</tr>
-</table>
-</td><tr>
-<tr><td valign="top" align="center">
-<table border="0" cellpadding="0" cellspacing="0" width="900">
-
+<table align="center" cellpadding="0" cellspacing="0" width="771">
 <%
 	if (bettingList != null) {
 		for (Betting betting : bettingList) {
@@ -46,21 +24,21 @@
 
 <tr>
 		<td>
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<table border="0" cellpadding="0" cellspacing="0">
 				<tbody><tr>
 					<td>
-						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
+						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1">
 							<tbody><tr bgcolor="#212021" height="27">
-								<td align="center" width="120"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
-								<td align="center" width="120"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
-								<td align="center" width="300"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
+								<td align="center" width="200"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
 								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
 								
-								<td align="center" width="300"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>배팅팀</nobr></b></font></td>
-								<td align="center" width="95"><font color="#ffffff"><b><nobr>경기결과</nobr></b></font></td>
-								<td align="center" width="80"><font color="#ffffff"><b><nobr>적중유무</nobr></b></font></td>
-								<td align="center" width="80"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
+								<td align="center" width="200"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
+								<td align="center" width="60"><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
+								<td align="center" width="60"><font color="#ffffff"><b><nobr>결과</nobr></b></font></td>
+								<td align="center" width="60"><font color="#ffffff"><b><nobr>적중</nobr></b></font></td>
+								<td align="center" width="60"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
 								
 							</tr>
 							
@@ -72,8 +50,8 @@
 		for (BetGame betGame : betGameList) {
 %>
 							<tr bgcolor="#000000" height="25">
-								<td align="center"><nobr><font color="#ffffff"><%=betting.getDateStr() %></font></nobr></td>
-								<td align="center"><nobr><font color="#ffffff"><%=betGame.getGameDateStr()%></font></nobr></td>
+								<td align="center"><nobr><font color="#ffffff"><%=XwinUtil.getBoardItemDate(betting.getDate())%></font></nobr></td>
+								<td align="center"><nobr><font color="#ffffff"><%=XwinUtil.getBoardItemDate(betGame.getGameDate())%></font></nobr></td>
 								<td align="right"><nobr>
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#ffffff">
@@ -124,7 +102,7 @@
 									<%
 									if (betting.getStatus().equals(Code.BET_STATUS_RUN) == false) {
 									%>
-									<img src="images/btn_coment_del.gif" onclick="deleteMyBetting(<%=betting.getId()%>)">
+									<img src="img/x.gif" onclick="deleteMyBetting(<%=betting.getId()%>)">
 									<%
 									}
 									%>
@@ -167,14 +145,6 @@
 	}
 %>
 </table>
-</td>
-</tr>
-<tr>
-</tr>
-</table>
-<br>
-<br>
-<div class="pages">
 <%
 	int pIdx = 0;
 	if (pageIndex != null)
@@ -185,7 +155,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -196,19 +166,16 @@
 <%
 		} else {
 %>		
-			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+			<a href='javascript:goPage(<%=i%>)'>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</a>
 <%			
 		}
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
-</div>
-<br>
-<br>
 <script>
 function deleteMyBetting(id)
 {
@@ -227,5 +194,5 @@ function goPage(pageIndex)
 {
 	location.href = "myBet.aspx?mode=viewMyBettingList&pageIndex=" + pageIndex;
 }
-</script>
+</script>          
 <%@include file="../footer.jsp"%>
