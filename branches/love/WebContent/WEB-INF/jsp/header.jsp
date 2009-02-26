@@ -118,12 +118,12 @@
 		</td>
 	</tr>
 	<tr>
-		<td width="958" height="38" align="center" valign="middle" background="/love/img/table_01.jpg">
+		<td width="958" height="38" align="center" valign="middle" background="img/table_01.jpg">
 			
 		</td>
 	</tr>
 
 
 	<tr>
-		<td width="958" height="683" align="center" valign="top" background="/love/img/table_02.jpg">
+		<td width="958" height="683" align="center" valign="top" background="img/table_02.jpg">
             <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">	
