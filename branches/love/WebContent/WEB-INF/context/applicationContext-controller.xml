@@ -25,7 +25,8 @@
 	<bean id="mainController"  class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="main"/>
 		
-	<bean id="homeController"  class="com.xwin.web.controller.HomeController"/>
+	<bean id="homeController"  class="com.xwin.web.controller.HomeController"
+		p:gameDao-ref="gameDao"/>
 	
 	<bean id="indexController" class="com.xwin.web.controller.IndexController"
 		p:gameDao-ref="gameDao"

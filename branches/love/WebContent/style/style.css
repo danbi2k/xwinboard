@@ -1,57 +1,49 @@
-/* CSS Document */
-@charset "utf-8"
+BODY { scrollbar-3dlight-color:#1A1A1A;
+scrollbar-arrow-color:#9C1710;
+scrollbar-track-color:#1A1A1A;
+scrollbar-darkshadow-color:#1A1A1A;
+scrollbar-face-color:#1A1A1A;
+scrollbar-highlight-color:#1A1A1A;
+scrollbar-shadow-color:#969696;
+background-color:transparent;}
 
-SELECT  {background-color : #ffffff;}
+BODY,TD,input,DIV,form,TEXTAREA,center,option,pre,blockquote {font-size:8pt; font-family:verdana; color:#ffffff; line-height:160%;}
+body {overflow-x:hidden; overflow-y:auto;}
+SELECT {font-size:8pt;font-family:verdana;color:#ffffff;line-height:160%;background-color:#707070;}
 
-   BODY {
-        margin-left:  0;
-        margin-top:   0;
-        margin-right: 0;
-        margin-bottom: 0;
-        font-size: 9pt;
-        font-family: "µ¸¿ò,µ¸¿òÃ¼";
-		color: #3D3D3D;
-		line-height: 18px;
-		
-		scrollbar-3dlight-color:595959;
-	    scrollbar-arrow-color:7F7F7F;
-	    scrollbar-base-color:CFCFCF;
-	    scrollbar-darkshadow-color:FFFFFF;
-	    scrollbar-face-color:DFDFDF;
-	    scrollbar-highlight-color:FFFFF;
-	    scrollbar-shadow-color:595959
-		
-    }
-    TD, TH, DIV {
-        font-family: "µ¸¿ò,µ¸¿òÃ¼";
-        font-size: 9pt;
-		color: #3D3D3D;
-		
-    }
+A:link    {color:#ffffff;text-decoration:none; }
+A:visited {color:#ffffff;text-decoration:none; }
+A:active  {color:#ffffff;text-decoration:none; }
+A:hover  {color:#ffffff;text-decoration:none;}
 
-    INPUT, TEXTAREA {
-        font-family: "µ¸¿ò,µ¸¿òÃ¼";
-        font-size: 9pt;
-		color: #3D3D3D;
-    }
-	
-A:link {color:#3D3D3D;;text-decoration:none} 
-A:visited {color:#3D3D3D;;text-decoration:none} 
-A:active {color:#3D3D3D;} 
-A:hover {color:#0C75E0;text-decoration:none} 
- 
-.box {font-size: 9pt; border:1 solid #CDCDCD;background-color:white;  } 
-.nonbox {font-size: 9pt; border:0 solid #999999;background-color:white;  } 
-.radio {font-size: 9pt; border:0 solid #999999;background-color:white;  } 
-.text {font-size: 9pt; border:1 solid #999999;}
-.select {font-size: 9pt; border:0 solid #999999;}
-.outset {font-size:9pt;border:1 outset #ffffff;}.fontsiz8 {
-	font-size: 11px;
-}
-.sub_menu_left {  font-family:,µ¸¿ò; font-size: 17px; color: #000000; text-decoration: none; font-weight : bold;}
-.sub_tit {  font-family:,µ¸¿ò; font-size: 15px; color: #ffffff; text-decoration: none; font-weight : bold;}
-.sub_menu {  font-family:,µ¸¿ò; font-size: 11px; color: #4073CA; text-decoration: none; font-weight : bold;}
-a.menu:link 		{ FONT-SIZE: 11px; TEXT-DECORATION: none; color:#000000 ; font-weight : bold;}
-a.menu:visited 		{ FONT-SIZE: 11px; TEXT-DECORATION: none; color:#000000; font-weight : bold;}
-a.menu:active 		{ FONT-SIZE: 11px; TEXT-DECORATION: none; color:#000000; font-weight : bold;}
-a.menu:hover 		{ FONT-SIZE: 11px; TEXT-DECORATION: none; color:#BA344D ; font-weight : bold;}
+
+.notice {font-family:verdana;font-size:12pt;color:#C0C0C0;font-weight:bold;}
+.maindate {font-family:verdana;font-size:7pt;color:#ffffff;line-height:100%;width:90;height:24;}
+.maint {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:120%;width:185;height:24;letter-spacing:-1}
+.button_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
+.button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
+.mbutton_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;height:26;} 
+.mbutton_out{background-image:url(../img/cbg01.jpg);font-size:8pt; font-family:verdana;color:#ffffff;line-height:160%;height:26;} 
+.bettable {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:458;height:40;}
+.scoretable {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:887;height:40;}
+.bettd {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:500;height:24;}
+.table887 {width:887;height:26;}
+.table771 {width:771;height:26;}
+.tablebg1 {background-image:url(../img/cbg01.jpg);height:26;}
+.tablebg2 {background-image:url(../img/cbg02.jpg);height:26;}
+.tablebg3 {background-image:url(../img/cbg03.jpg);height:26;}
+.tablebg4 {background-image:url(../img/cbg04.jpg);height:26;}
+.click {background-image:url(../img/cbg10.jpg);height:26;}
+.bbsline {height:1;background-color:#2f2f2f}
+.menubar {font-size:8pt; font-family:µ¸¿ò;color:#BAB4B4;line-height:160%;}
+.textpoint {font-size:8pt; font-family:µ¸¿ò;color:#FD9E4C;line-height:160%;}
+.input1 {font-family:verdana;font-size:9pt;border:solid 0; color:ffffff;background-color:transparent;line-height:160%;width:116;height:25;font-weight:bold;}
+.input2 {font-family:verdana;font-size:9pt;border:solid 1; color:#484848;background-color:#313131;line-height:160%;width:116;height:24;}
+.input3 {font-family:verdana;font-size:9pt;border:solid 1; color:#484848;background-color:#313131;line-height:160%;width:150;height:24;}
+.inputmodify {font-family:verdana;font-size:9pt;border:solid 1; color:#484848;background-color:#313131;line-height:160%;width:300;height:24;}
+
+.v7 {font-family:verdana;font-size:7pt;color:#000000;}
+.b7 {font-family:verdana;font-size:7pt;color:#000000;}
+.textarea {border:solid 1px #484848;background-color:#313131; overflow-x:hidden; overflow-y:auto;width:90%;}
+
+         

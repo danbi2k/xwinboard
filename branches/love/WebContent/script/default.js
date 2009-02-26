@@ -106,14 +106,13 @@ function FnLogin_Submit(frm){
 	var query = "mode=processLogin";
 	query += "&userId=" + frm.userId.value;
 	query += "&password=" + frm.password.value;
-	query += "&pin=" + frm.pin.value;
 	
 	var http = new JKL.ParseXML("login.aspx", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
 		alert(result.resultXml.message);
-		location.href = "index.aspx";
+		location.href = "home.aspx";
 		return;
 	}
 	
