@@ -51,15 +51,12 @@ public class LoginController extends XwinController
 			if (member == null) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 사용자 입니다");
-			} else if (member.getGrade().equals(Code.USER_GRADE_NORMAL)) {
-				rx.setCode(-3);
-				rx.setMessage("일반회원 이십니다.");				
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
 				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
-			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
-				rx.setCode(-1);
-				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
+//			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
+//				rx.setCode(-1);
+//				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
 			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
 				rx.setCode(-1);
 				rx.setMessage("탈퇴 요청 중입니다");

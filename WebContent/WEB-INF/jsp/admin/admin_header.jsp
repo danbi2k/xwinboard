@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.xwin.domain.user.*" %>
-<%@ page import="com.xwin.domain.admin.*" %>
+<%@ page import="com.xwin.domain.*" %>
 <%
 	Member admin = (Member)session.getAttribute("Admin");
 	String EX_PLAY = (String)session.getAttribute("EX_PLAY");
@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Bravo Admin</title>
+<title><%=SiteConfig.SITE_NAME%> Admin</title>
 <meta name="keywords" content="" />
 <meta name="description" content=""/>
 <link href="style/lasvegastoo.css" rel="stylesheet" type="text/css" />
@@ -102,7 +102,7 @@ setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10">Bravo</a></h1>
+		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10"><%=SiteConfig.SITE_NAME%></a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>

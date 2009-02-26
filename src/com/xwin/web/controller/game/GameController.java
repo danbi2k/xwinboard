@@ -32,18 +32,32 @@ public class GameController extends XwinController
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String type = request.getParameter("type");
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("gameFolder_" + type, new GameFolder(type));
 		
-		List<League> leagueList = leagueDao.selectLeagueList();
+		Calendar cal = Calendar.getInstance();
+		cal = XwinUtil.getOnlyDate(cal);
+		cal.add(Calendar.DATE, 3);
+		cal.add(Calendar.MILLISECOND, -1);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("type", type);
+		param.put("status", Code.GAME_STATUS_RUN);
+		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
+		param.put("toDate", cal.getTime());
+		param.put("grade", grade);
+		
+		List<Game> gameList = gameDao.selectGameList(param);
 		
 		ModelAndView mv = new ModelAndView("game/game");
-		mv.addObject("leagueList", leagueList);
+		mv.addObject("gameList", gameList);
 
 		return mv; 
 	}

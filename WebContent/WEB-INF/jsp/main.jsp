@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bravo</title>
+<title>BET-LOVE</title>
 </head>
 <frameset rows="0,100%" border="0">
 	<frame name=left src="" border=0 scrolling="yes" noresize>
-	<frame name=mainFrame src="index.aspx" border=0 scrolling="yes" noresize>
+	<frame name=mainFrame src="home.aspx" border=0 scrolling="yes" noresize>
 </frameset>
 <body>
 </body>
