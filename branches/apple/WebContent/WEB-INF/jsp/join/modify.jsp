@@ -22,7 +22,7 @@
 %>
 <div class='sub_ti1'>
 		<img src='img/sub_member_modify_ti.gif' alt='회원정보변경' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 회원정보를 변경합니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님

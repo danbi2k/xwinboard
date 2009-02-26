@@ -16,7 +16,7 @@
 
 <div class='sub_ti1'>
 		<img src='img/sub_betlist_ti.gif' alt='배팅내역' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 배팅 내역 및 결과입니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님

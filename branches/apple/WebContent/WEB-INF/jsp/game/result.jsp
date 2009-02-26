@@ -26,7 +26,7 @@
 <%@include file="../header.jsp"%>
 <div class='sub_ti1'>
 		<img src='img/sub_gameresult_ti.gif' alt='이용약관' class='ml10 mr10 fl'> 
-		<div class='sub_ti_desc'>· 지난 경기 결과입니다.(최근 7일까지만 제공됩니다.)</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님

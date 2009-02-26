@@ -17,7 +17,7 @@
 
 <div class='sub_ti1'>
 		<img src='img/sub_myapple_ti.gif' alt='애플' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 애플 지급/전환 내역 입니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님

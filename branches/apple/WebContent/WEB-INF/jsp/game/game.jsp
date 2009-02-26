@@ -24,7 +24,7 @@ var gameType = '<%=type%>'
 
 <div class='sub_ti1'>
 		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl'> 
-		<div class='sub_ti_desc'>· 회원님의 대박을 기원합니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님

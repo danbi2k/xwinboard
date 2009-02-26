@@ -16,7 +16,7 @@
 %>
 <div class='sub_ti1'>
 		<img src='img/sub_outcash_ti.gif' alt='환전요청' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 환전요청을 하시면 캐쉬를 실계좌로 입금해 드립니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
 			<span class='name'><%=member.getNickName()%></span> 님
