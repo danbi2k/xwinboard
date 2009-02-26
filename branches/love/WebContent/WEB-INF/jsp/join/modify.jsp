@@ -20,37 +20,12 @@
 	boolean needBank = member.getBankName() == null || member.getBankName().length() == 0;
 	boolean needExpire = member.getPasswordExpire().equals("Y");
 %>
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
+
+			<tr><td><img src="/love/img/menu15.jpg" border="0"></td></tr>
+		
 </table>
-
--->
-
-<Script>
-function SetNICK(nick){
-	var frm = document.all.frm_mem;
-	frm.nick.value = nick;
-	frm.nick_input.value = nick;
-}
-</Script>
-
-<table width="960" height="400" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	
-<table width="900" style="border-bottom:1 solid #909090;">
-	<tr>
-		<td width="100"><img src="images/title_memberinfo.gif"></td>
-		<td>회원정보를 수정합니다.</td>
-	</tr>
-	</table>
-</td></tr>
-<tr><td valign="top" align="center">
-
+<table align="center" cellpadding="0" cellspacing="0" width="771">
+<tr><td>
 	<form name="frm_mem">
 	<input type="hidden" name="userId" value="<%=member.getUserId()%>">
 	<input type="hidden" name="phone1" value="<%=phone[0]%>"/>
@@ -58,11 +33,12 @@ function SetNICK(nick){
 	<input type="hidden" name="phone3" value="<%=phone[2]%>"/>
 	<input type="hidden" name="email1" value="<%=email[0]%>"/>
 	<input type="hidden" name="email2" value="<%=email[1]%>">
-	<table width="800" style="margin-top:10">
+	
+	<table width="750" style="margin-top:10">
 	<tr><td><b>회원 정보 수정</b></td></tr>
 	</table>
 
-	<table width="800" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
+	<table width="750" bgcolor="#333333" cellpadding="5" style="border:1 solid #909090;">
 	<colgroup>
 	<col width="150" align="center">
 	<col width="650">
@@ -108,7 +84,7 @@ function SetNICK(nick){
 	</tr>
 	</table>
 
-	<table width="800" style="margin-top:10">
+	<table width="750" style="margin-top:10">
 	<tr><td align="center">
 
 		<img src="images/btn_modifyok.gif" onclick="FnMemModify(frm_mem);" style="cursor:hand;" hspace="5">		
@@ -119,14 +95,11 @@ function SetNICK(nick){
 
 	</form>
 
-
-
-	<table width="800" style="margin-top:10">
+	<table width="750" style="margin-top:10">
 	<tr><td><b>탈퇴 신청</b></td></tr>
-
 	</table>
 
-	<table width="800" height="50" bgcolor="#333333" cellpadding="15" style="border:1 solid #909090;">
+	<table width="750" height="50" bgcolor="#333333" cellpadding="15" style="border:1 solid #909090;">
 	<tr><td>
 		
 		탈퇴신청을 하시면, 관리자가 확인후 탈퇴를 처리해 드립니다.<br>
@@ -135,7 +108,7 @@ function SetNICK(nick){
 	</td></tr>
 	</table>
 
-	<table width="800" style="margin-top:10">
+	<table width="750" style="margin-top:10">
 
 	<tr><td align="center">
 		
@@ -146,10 +119,9 @@ function SetNICK(nick){
 	</td></tr>
 	</table>
 
-	<br><br>
-
 </td></tr>
 </table>
+
 
 <script>
 <%

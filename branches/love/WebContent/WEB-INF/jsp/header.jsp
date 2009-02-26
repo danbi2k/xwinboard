@@ -81,9 +81,9 @@
 					    </table>    
 					            </td>
 					            <td width="199" height="25" align="right" valign="middle">
-					                <a href='login.php?mode=processLogout' target='_self'><img src="img/login/out.jpg" border="0"></a>&nbsp;
-									<img src="img/login/info.jpg" border="0">&nbsp;
-									<img src="img/login/sp.jpg" border="0">
+					                <a href='login.aspx?mode=processLogout' target='_self'><img src="img/login/out.jpg" border="0"></a>&nbsp;
+									<a href='member.aspx?mode=viewModifyForm'><img src="img/login/info.jpg" border="0"></a>
+									<a href='myBet.aspx?mode=viewMyBettingList'><img src="img/login/sp.jpg" border="0"></a>
 					            </td>
 					        </tr>
 					    </table>

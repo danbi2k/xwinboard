@@ -99,7 +99,7 @@ public class LoginController extends XwinController
 		
 		session.removeAttribute("Member");		
 		
-		ModelAndView mv = new ModelAndView("redirect:/index.aspx");
+		ModelAndView mv = new ModelAndView("redirect:/home.aspx");
 		return mv;
 	}
 }

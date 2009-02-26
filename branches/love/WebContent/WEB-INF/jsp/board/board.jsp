@@ -94,7 +94,7 @@
           <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">
 	        <tr>
 			    <td width="787" height="40" align="center">
-   <%
+<%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
