@@ -34,7 +34,6 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.php?mode=processLogout">
 
 	<link rel='stylesheet' href='style/default.css' type='text/css'>
 	<script language="JavaScript" src="script/code.js"></script>
