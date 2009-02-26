@@ -12,7 +12,7 @@
 
 <div class='sub_ti1'>
 			<img src='img/sub_board_ti.gif' alt='게시판' class='ml10 mr10 fl'> 
-			<div class='sub_ti_desc'>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다. </div>
+			<div class='sub_ti_desc'></div>
 			<div class='state_bar'>
 				<div class='state_bar_txt'>
 				<span class='name'><%=member.getNickName()%></span> 님

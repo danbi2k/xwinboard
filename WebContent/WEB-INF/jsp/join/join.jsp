@@ -6,7 +6,7 @@
 <%@include file="../header.jsp"%>
 <div class='sub_ti1'>
 		<img src='img/sub_member_ti.gif' alt='회원가입' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 환영합니다</div>
+		<div class='sub_ti_desc'></div>
 		<div class='sub_ti_bar'></div>
 		</div>
 

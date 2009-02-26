@@ -6,7 +6,7 @@
 
 <div class='sub_ti1'>
 		<img src='./img/sub_betrule_ti.gif' alt='배팅규정' class='ml10 mr10 fl'> 
-		<div class='sub_ti_desc'>· 배팅규칙에 대해 알려드립니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='sub_ti_bar'></div>
 		</div>
 

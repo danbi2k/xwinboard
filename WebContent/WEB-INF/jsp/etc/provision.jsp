@@ -5,7 +5,7 @@
 <%@include file="../header.jsp"%>
 <div class='sub_ti1'>
 		<img src='./img/sub_prov_ti.gif' alt='이용약관' class='ml10 mr10 fl'>
-		<div class='sub_ti_desc'>· 이용약관 입니다.</div>
+		<div class='sub_ti_desc'></div>
 		<div class='sub_ti_bar'></div>
 		</div>
 
