@@ -5,7 +5,7 @@ scrollbar-darkshadow-color:#1A1A1A;
 scrollbar-face-color:#1A1A1A;
 scrollbar-highlight-color:#1A1A1A;
 scrollbar-shadow-color:#969696;
-background-color:transparent;}
+background-color:#1A1A1A;}
 
 BODY,TD,input,DIV,form,TEXTAREA,center,option,pre,blockquote {font-size:8pt; font-family:verdana; color:#ffffff; line-height:160%;}
 body {overflow-x:hidden; overflow-y:auto;}
@@ -45,5 +45,16 @@ A:hover  {color:#ffffff;text-decoration:none;}
 .v7 {font-family:verdana;font-size:7pt;color:#000000;}
 .b7 {font-family:verdana;font-size:7pt;color:#000000;}
 .textarea {border:solid 1px #484848;background-color:#313131; overflow-x:hidden; overflow-y:auto;width:90%;}
+
+.handicap {font-size:12px; margin:30px 0px 10px 0px;}
+.handicap h3{font-size:13px; color:#ffffff; margin:20px 0px 20px 20px;}
+.handicap li{}
+.handicap dt{margin:0px 0px 0px 10px; padding:0; font-weight:900;}
+.handicap dd{margin:0px 0px 5px 20px; line-height:18px;}
+.handicap .box{margin:20px 20px 20px 20px; padding:15px 10px 15px 10px; line-height:24px; color:#ecd2d2; border:1px solid #ffffff; background-color:#1A1A1A;}
+.handicap .box table{margin:30px 10px 10px 10px; width:100%; border-spacing:0px; border-collapse:collapse;}
+.handicap .box th{width:50%; border:1px solid #ffffff; text-align:center;}
+.handicap .box td{border:1px solid #ffffff; text-align:center;}
+.handicap .alert{text-align:center; margin:10px 20px 10px 20px; padding:0px 10px 0px 10px; line-height:24px; color:#FAB842;}
 
          

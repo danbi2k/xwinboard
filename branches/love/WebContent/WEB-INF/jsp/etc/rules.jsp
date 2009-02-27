@@ -1,42 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="com.xwin.domain.*" %>
 
 <%@include file="../header.jsp"%>
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
-</table>
-
--->
-
-<form name="frm">
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_rules.gif"></td><td>배팅 규칙을 안내합니다.</td></td>
-
-	</table>
-</td></tr>
-<tr><td valign="top" align="center">
-
-
-	<table width="800" cellspacing="2" cellpadding="5" style="margin-top:10;">
-	<tr><td style="padding-left:150;">
-		<p style="color:orange">본 배팅규정은 회사의 정책 변화에 따라  수시로 변경될 수 있습니다.<br>
-		사이트 운영 기준에 관심을 가지시고 충전/환전 시 또는 배팅을 하실 때 항상 확인해주시기 바랍니다.  
-	</td></tr>
-	</table>
-
-	<TABLE cellSpacing=0 cellPadding=0 width="95%" 
-                                border=0>
-                                <TBODY>
-                                <TR>
+			<tr><td><img src="img/menu12.jpg" border="0"></td></tr>
+		
+            </table>
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
+   
+    <tr>
+        <td width="680" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+            <p>
+			<table>
+			<TR>
                                 <TD><SPAN 
                                 style="FONT-SIZE: 12pt; LINE-HEIGHT: 13pt"><B>▒승무패 
                                 경기</FONT> </B></SPAN></TD></TR>
@@ -209,14 +185,13 @@
                                 정해진 범위 안에서 이용해주기 바라며, <BR>회사는 서로 신뢰하고 동반자로서의 관계를 
                                 유지하기 위해 항상 최선을 다 할 것입니다. <BR><BR></TD></TR>
                                 <TR>
-                                <TD align=right><B><%=SiteConfig.SITE_NAME%> 임직원일동 2008년11월 
-                                </B></TD></TR></TBODY></TABLE>
-
-	<br>
-
-</td></tr>
+                                <TD align=right><B>BET-LOVE 임직원일동 2009년 03월 
+                                </B></TD></TR>
+			</table>
+			</p>
+        </td>
+    </tr>
 </table>
-</form>
 
 
 <%@include file="../footer.jsp"%>
