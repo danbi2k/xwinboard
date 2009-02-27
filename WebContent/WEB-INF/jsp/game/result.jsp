@@ -15,7 +15,7 @@
 		gameDate = XwinUtil.toDateStr(new Date(), 2);
 	
 	Calendar cal = Calendar.getInstance();
-	String[] dateList = new String[20]; 
+	String[] dateList = new String[7]; 
 	
 	for (int i = 0 ; i < dateList.length ; i++) {
 		dateList[i] = XwinUtil.toDateStr(cal.getTime(), 2);

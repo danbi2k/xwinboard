@@ -49,6 +49,7 @@
 				<prop key="/rules.aspx">rulesController</prop>
 				<prop key="/aboutHandy.aspx">aboutHandyController</prop>
 				<prop key="/livescore.aspx">liveScoreController</prop>
+				<prop key="/bettingInfo.aspx">bettingInfoController</prop>
 			</props>
 		</property>
 	</bean>

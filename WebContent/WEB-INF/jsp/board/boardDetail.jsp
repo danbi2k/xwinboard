@@ -61,10 +61,45 @@
 			    <td width="100" height="40" align="right">
 					<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0" align="absmiddle"></a>
 				</td>
+				<%if (boardItem.getUserId().equals(member.getUserId())) {%>
+				<td width="100" height="40" align="right">
+					<img src="img/delete.jpg" border="0" align="absmiddle" onclick="deleteItem()">
+				</td>
+				<%} %>
 			</tr>
 		    
      </table>
 
+<script>
+function deleteItem()
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteBoardItem";
+		query += "&id=<%=boardItem.getId()%>";
+		query += "&boardName=<%=boardName%>";
+		var http = new JKL.ParseXML("board.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>";
+		}
+	}
+}
+
+function deleteComment(id)
+{
+	if (confirm("삭제하시겠습니까?")) {
+		var query = "mode=deleteBoardComment";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("board.aspx", query);
+		var result = http.parse();
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.reload();
+		}
+	}
+}
+</script>
 <%@include file="../footer.jsp"%>
 
 
