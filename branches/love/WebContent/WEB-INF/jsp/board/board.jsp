@@ -108,7 +108,7 @@
 	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
 		if (i == pIdx) {
 %>
-			<b> <%=i+1%> </b>
+			<b>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</b>
 <%
 		} else {
 %>		

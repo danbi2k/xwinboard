@@ -105,7 +105,7 @@ if (gameList != null) {
   <table align="center" cellpadding="0" cellspacing="0" width="469">
     <tr>
         <td width="469" align="right" height="40" background="img/carthead.jpg">
-            <img src="img/cartview.gif" border="0" align="absbottom">&nbsp;
+            <a href='bettingCart.aspx?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
 			<img src="img/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
         </td>
     </tr>
@@ -137,7 +137,7 @@ if (gameList != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg"></p>
+			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
 			        </td>
 			    </tr>
 			    <tr>
