@@ -147,7 +147,7 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>환전비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="pin" type="text" value="<%=member.getPin()%>"/>
+			<input name="pin" type="text" value="<%=member.getPassword()%>"/>
 			<input type="button" value="변경" onclick="changePin()"/>
 		</td>
  	</tr>
