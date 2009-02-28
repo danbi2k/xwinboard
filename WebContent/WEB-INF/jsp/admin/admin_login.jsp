@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.domain.*" %>
 <html>
 <head>
 <title>관리자인증</title>
@@ -84,7 +85,7 @@ function goButton(form)
 			</table>
 			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
 				<tr>
-					<td align="center">Copyright 2008 Bravo All right 
+					<td align="center">Copyright 2008 <%=SiteConfig.SITE_NAME%> All right 
 					reserved.</td>
 				</tr>
 			</table>
