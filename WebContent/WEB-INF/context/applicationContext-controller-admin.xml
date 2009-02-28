@@ -114,6 +114,7 @@
 		class="com.xwin.web.controller.admin.AdminQnaController"
 		p:memberDao-ref="memberDao"
 		p:boardDao-ref="boardDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminBoardController"
@@ -121,6 +122,7 @@
 		p:memberDao-ref="memberDao"
 		p:boardDao-ref="boardDao"
 		p:adminDao-ref="adminDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminStatisticsController"

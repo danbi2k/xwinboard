@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.game.Betting;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -68,9 +69,14 @@ public class AdminQnaController extends XwinController
 		String id = request.getParameter("id");
 		String grade = request.getParameter("grade");
 		BoardItem boardItem = boardDao.selectBoardItem(id, "qna", grade);
+
+		Betting betting = null;
+		if (boardItem.getBettingId() != null)
+			betting = bettingDao.selectBetting(boardItem.getBettingId());
 		
 		ModelAndView mv = new ModelAndView("admin/qna/admin_qna_detail");
 		mv.addObject("boardItem", boardItem);
+		mv.addObject("betting", betting);
 		
 		return mv;
 	}
