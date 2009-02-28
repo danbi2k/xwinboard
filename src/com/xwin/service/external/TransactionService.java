@@ -12,7 +12,7 @@ import com.xwin.service.admin.XwinService;
 
 public class TransactionService extends XwinService
 {
-	private static final String SERVER_URL = "http://bethit.net:10180/external.aspx?mode=setTransaction";
+	private static final String SERVER_URL = "http://bet-love.com/external.aspx?mode=setTransaction";
 	//private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=setTransaction";
 	
 	public void sendTransaction(List<Transaction> transactionList)

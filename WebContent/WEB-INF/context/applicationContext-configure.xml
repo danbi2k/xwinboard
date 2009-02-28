@@ -19,7 +19,7 @@
 	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector">
 		<property name="userId" value="vegas5004"/>
 		<property name="password" value="5004369"/>
-		<property name="returnUrl" value="bethit.net:10180/munja.aspx"/>
+		<property name="returnUrl" value="bet-love.com/munja.aspx"/>
 	</bean>
 	
 			    
