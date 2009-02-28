@@ -48,13 +48,13 @@ public class JoinController extends XwinController
 	public ModelAndView viewJoinForm(HttpServletRequest request,
 		HttpServletResponse response) throws Exception
 	{
-		HttpSession session = request.getSession();
-		Invitation invitation = (Invitation) session.getAttribute("INVITATION");
+//		HttpSession session = request.getSession();
+//		Invitation invitation = (Invitation) session.getAttribute("INVITATION");
 		ModelAndView mv = null;
-		if (invitation != null)
+//		if (invitation != null)
 			mv = new ModelAndView("join/join");
-		else
-			mv = new ModelAndView("dummy");
+//		else
+//			mv = new ModelAndView("dummy");
 		
 		return mv;
 	}

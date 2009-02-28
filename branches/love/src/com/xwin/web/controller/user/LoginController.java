@@ -51,9 +51,6 @@ public class LoginController extends XwinController
 			if (member == null) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 사용자 입니다");
-			} else if (comparePassword(member.getPassword(), password) == false) {
-				rx.setCode(-1);
-				rx.setMessage("비밀번호를 잘못 입력하셨습니다");
 //			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
 //				rx.setCode(-1);
 //				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
@@ -63,6 +60,9 @@ public class LoginController extends XwinController
 			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
 				rx.setCode(-1);
 				rx.setMessage("탈퇴한 사용자 입니다");
+			} else if (comparePassword(member.getPassword(), password) == false) {
+				rx.setCode(-1);
+				rx.setMessage("비밀번호를 잘못 입력하셨습니다");				
 			} else {
 				rx.setCode(0);
 				HttpSession session = request.getSession();

@@ -185,4 +185,22 @@ public class GameController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView getNote(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		String gameId = request.getParameter("gameId");
+		Game game = gameDao.selectGame(gameId);
+		
+		ResultXml resultXml = new ResultXml(0, game.getNote(), null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
+		
+		return mv;
+	}
 }

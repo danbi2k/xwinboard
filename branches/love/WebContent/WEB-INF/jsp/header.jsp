@@ -62,7 +62,8 @@
 			     	<a href="home.aspx"><img src="img/logo.jpg" border="0"></a>
 			     </td>
 				 <td width="650" height="81" align="right" style="padding-right:13;padding-top:50;">
-			     	<div align="right">
+					<%if (login) { %>
+					<div align="right">
 					    <table cellpadding="0" cellspacing="0" width="650" height="25">
 					        <tr>
 					            <td width="451" height="25" align="left" valign="middle" background="img/login/lo.jpg">
@@ -82,12 +83,36 @@
 					            </td>
 					            <td width="199" height="25" align="right" valign="middle">
 					                <a href='login.aspx?mode=processLogout' target='_self'><img src="img/login/out.jpg" border="0"></a>&nbsp;
-									<a href='member.aspx?mode=viewModifyForm'><img src="img/login/info.jpg" border="0"></a>
+									<a href='member.aspx?mode=viewModifyForm'><img src="img/login/info.jpg" border="0">&nbsp;</a>
 									<a href='myBet.aspx?mode=viewMyBettingList'><img src="img/login/sp.jpg" border="0"></a>
 					            </td>
 					        </tr>
 					    </table>
 					</div>
+					<%} else { %>
+					<div align="right">
+						<form name="login">
+					    <table cellpadding="0" cellspacing="0" width="650" height="25">
+					        <tr>
+					            <td width="525" height="25" align="left" valign="middle" >
+					               <table cellpadding="0" cellspacing="0" width="525" height="25">
+					                <tr>
+					                 <td width="525" height="25" align="right" valign="middle">
+					               <input name='userId' onkeydown="enter(document.login)" type="text" class="input1" id="m_id"  style="background-image:url(img/login/idbg.jpg);" >&nbsp;
+									<input name='password' onkeydown='enter(document.login)' type="password" class="input1" id="m_passwd"  style="background-image:url(img/login/pwbg.jpg);">          
+					                </td>
+					           
+					        </tr>
+					    </table>    
+					            </td>
+					            <td width="125" height="25" align="right" valign="bottom">
+					                <img src="img/login/login.jpg" border="0" onclick="FnLogin_Submit(document.login)">&nbsp;<img src="img/login/join.jpg" border="0" onclick="location.href='join.aspx?mode=viewJoinForm'">
+					            </td>
+					        </tr>
+					    </table>
+						</form>
+					</div>
+					<%} %>
 			     </td>
 	           </tr>
 			</table>

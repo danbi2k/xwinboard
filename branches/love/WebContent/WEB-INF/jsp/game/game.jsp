@@ -83,7 +83,11 @@ if (gameList != null) {
             <p><%=Code.getValue(game.getBetStatus())%></p>
         </td>
         <td width="40" class="tablebg<%=x%>" align="center" valign="middle">
-            <p>공지</p>
+            <p>
+			<%if (game.getNote() != null) { %>
+			<span onclick="getNote(<%=game.getId()%>)">공지</span>
+			<%} %>
+			</p>
         </td>
     </tr>
 <%
@@ -156,6 +160,16 @@ if (gameList != null) {
     </tr>
   </table>
   </div>
-
+<script>
+function getNote(gameId)
+{
+	var query = "mode=getNote";
+	query += "&gameId=" + gameId;
+	var http = new JKL.ParseXML("game.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0)
+		alert(result.resultXml.message);
+}
+</script>
 
 <%@include file="../footer.jsp"%>
