@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.board.*" %>
+<%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
 <%@ page import="org.apache.commons.lang.*"%>
 
@@ -9,6 +10,7 @@
 
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
+	Betting betting = (Betting) request.getAttribute("betting");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 	String boardName = request.getParameter("boardName");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -29,7 +31,9 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_board.gif"></td><td>게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.</td></td>
+	<tr><td width="100"><img src="images/title_<%=boardName.equals("user")?"board":"customer"%>.gif"></td><td>
+		<%=boardName.equals("user")?"게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.":"1:1 고객센터 입니다. 문의사항 및 건의사항을 적어주세요."%>
+	</td></td>
 	</table>
 </td></tr>
 <tr><td valign="top" align="center" height="300">
@@ -49,6 +53,89 @@ function img_resize(obj,max_width){
 }
 </script>
 
+<%
+if (betting != null) {
+%>
+<table border="0" cellpadding="0" cellspacing="0" width="900">
+<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td>
+						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
+							<tbody><tr bgcolor="#212021" height="27">
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
+								<td align="center" width="270"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
+								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
+								
+								<td align="center" width="270"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
+								<td align="center" width="60"><font color="#ffffff"><b><nobr>배팅팀</nobr></b></font></td>
+								<td align="center" width="95"><font color="#ffffff"><b><nobr>경기결과</nobr></b></font></td>
+								<td align="center" width="80"><font color="#ffffff"><b><nobr>적중유무</nobr></b></font></td>
+							</tr>
+							
+<%
+	List<BetGame> betGameList = betting.getBetGameList();
+	if (betGameList != null) {
+		int betGameCount = betGameList.size();
+		int count = 0;
+		for (BetGame betGame : betGameList) {
+%>
+							<tr bgcolor="#000000" height="25">
+								<td align="center"><nobr><font color="#ffffff"><%=betting.getDateStr() %></font></nobr></td>
+								<td align="center"><nobr><font color="#ffffff"><%=betGame.getGameDateStr()%></font></nobr></td>
+								<td align="right"><nobr>
+									<font color="#ffffff">
+									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font>
+									</nobr></td>
+								<td align="center"><nobr>
+									<font color="#ffffff"><%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>
+								</font></nobr></td>
+								
+								<td><nobr>&nbsp;
+									<font color="#ffffff">
+									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
+								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
+								<td align="center"><nobr>&nbsp;<font color="#ffffff">
+								<%=Code.getValue(betGame.getResult())%>
+								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
+								</font></nobr></td>
+								<td align="center"><nobr>
+									<font color="#ffffff">
+									<B><%=Code.getValue(betGame.getResultStatus())%></B></font></nobr>
+								</td>
+							</tr>
+<%
+		}	
+	}		
+%>	
+					
+						</tbody></table>		
+					</td>
+				</tr>
+				<tr><td height="3"></td></tr>
+				<tr>
+					<td align="center">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%>원 / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%>원 /
+					적중금액 :
+					<%
+					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+						out.print("<font color='#FFC602'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
+					else
+						out.print(0);							
+					%>
+					 원
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+	<tr><td height="10"></td>
+	</tr>
+</table>
+<%
+}
+%>
 <table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"><img src="images/title_left.gif"></td>

@@ -31,7 +31,7 @@
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_board.gif"></td>
+	<tr><td width="100"><img src="images/title_<%=boardName.equals("user")?"board":"customer"%>.gif"></td>
 	<td>
 	<%=boardName.equals("user")?"게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.":"1:1 고객센터 입니다. 문의사항 및 건의사항을 적어주세요."%>
 	</td></td>

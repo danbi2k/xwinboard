@@ -51,17 +51,17 @@
 					<td>
 						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
 							<tbody><tr bgcolor="#212021" height="27">
-								<td align="center" width="120"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
-								<td align="center" width="120"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
-								<td align="center" width="300"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
+								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
+								<td align="center" width="270"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
 								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
 								
-								<td align="center" width="300"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
+								<td align="center" width="270"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>배팅팀</nobr></b></font></td>
 								<td align="center" width="95"><font color="#ffffff"><b><nobr>경기결과</nobr></b></font></td>
 								<td align="center" width="80"><font color="#ffffff"><b><nobr>적중유무</nobr></b></font></td>
-								<td align="center" width="80"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
-								
+								<td align="center" width="70"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
+								<td align="center" width="90"><font color="#ffffff"><b><nobr>복사</nobr></b></font></td>
 							</tr>
 							
 <%
@@ -128,6 +128,10 @@
 									<%
 									}
 									%>
+								</td>
+								<td align="center" rowspan="<%=betGameCount%>" nowrap>
+									<img src="images/btn_board.jpg" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
+									<img src="images/btn_qna.jpg" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
 								</td>
 								<%
 								count++;
