@@ -19,7 +19,7 @@ A:hover  {color:#ffffff;text-decoration:none;}
 
 .notice {font-family:verdana;font-size:12pt;color:#C0C0C0;font-weight:bold;}
 .maindate {font-family:verdana;font-size:7pt;color:#ffffff;line-height:100%;width:90;height:24;}
-.maint {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:120%;width:185;height:24;letter-spacing:-1}
+.maint {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;width:185;height:24;letter-spacing:-1}
 .button_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .mbutton_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;height:26;} 
