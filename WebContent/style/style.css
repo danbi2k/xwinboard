@@ -35,16 +35,18 @@ A:hover  {color:#ffffff;text-decoration:none;}
 .tablebg4 {background-image:url(../img/cbg04.jpg);height:26;}
 .click {background-image:url(../img/cbg10.jpg);height:26;}
 .bbsline {height:1;background-color:#2f2f2f}
-.menubar {font-size:8pt; font-family:µ¸¿ò;color:#BAB4B4;line-height:160%;}
+.menubar {font-size:8pt; font-family:µ¸¿ò;color:#BAB4B4;line-height:180%;}
 .textpoint {font-size:8pt; font-family:µ¸¿ò;color:#FD9E4C;line-height:160%;}
 .input1 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:transparent;line-height:160%;width:116;height:25;font-weight:bold;}
 .input2 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:#313131;line-height:160%;width:116;height:24;}
 .input3 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:#313131;line-height:160%;width:150;height:24;}
 .inputmodify {font-family:verdana;font-size:9pt;border:solid 1; color:#484848;background-color:#313131;line-height:160%;width:300;height:24;}
+.credit {font-size:12px;font-weight:bold;color:orange;background-color:#000000;}
 
 .v7 {font-family:verdana;font-size:7pt;color:#000000;}
 .b7 {font-family:verdana;font-size:7pt;color:#000000;}
 .textarea {border:solid 1px #484848;background-color:#313131; overflow-x:hidden; overflow-y:auto;width:90%;}
+.submit {border:solid 1px #484848;font-family:verdana;font-size:7pt;color:#ffffff;background-color:#56000F;line-height:7;}
 
 .handicap {font-size:12px; margin:30px 0px 10px 0px;}
 .handicap h3{font-size:13px; color:#ffffff; margin:20px 0px 20px 20px;}

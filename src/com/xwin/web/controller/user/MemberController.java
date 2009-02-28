@@ -49,17 +49,17 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
-		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
-		if (invitation == null)
-			return new ModelAndView("dummy");
-		
-		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+//		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+//		if (invitation == null)
+//			return new ModelAndView("dummy");
+//		
+//		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
 		ResultXml rx = null;
-		if (invitation.getJoinId() == null) {
+//		if (invitation.getJoinId() == null) {
 			if (phonePin != null) {
 				if (phonePin.equals(command.getPhonePin())) {
 					rx = checkExistUserId(command.getUserId());
@@ -89,7 +89,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											member.setBankOwner(command.getBankOwner());
 											member.setBankDate(new Date());
 											member.setGetSms(command.getSmsCheck());
-											member.setIntroducerId(invitation.getUserId());
+//											member.setIntroducerId(invitation.getUserId());
 											
 											String WelcomeMsg = "환영합니다";
 											
@@ -106,12 +106,12 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											memberDao.insertMember(member);
 											
 	
-											invitation.setJoinId(member.getUserId());
-											invitationDao.updateInvitation(invitation);
-											
-											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
-											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-											memberDao.updateMember(introducer);
+//											invitation.setJoinId(member.getUserId());
+//											invitationDao.updateInvitation(invitation);
+//											
+//											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
+//											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+//											memberDao.updateMember(introducer);
 											
 											rx = new ResultXml(0, WelcomeMsg, null);
 										}
@@ -126,9 +126,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			} else {
 				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
 			}
-		} else {
-			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
-		}
+//		} else {
+//			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
+//		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

@@ -105,7 +105,7 @@ function FnMemOut(){
 		var result = http.parse();
 		if (result.resultXml.code == 0) {
 			alert(result.resultXml.message);
-			location.href = "index.aspx";
+			location.href = "home.aspx";
 		}
 	}
 }

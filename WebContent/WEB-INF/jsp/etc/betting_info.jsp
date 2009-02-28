@@ -12,13 +12,13 @@
         <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
             <p>
 <TABLE 
-                        style="BORDER-RIGHT: #dddddd 0px solid; BORDER-TOP: #dddddd 0px solid; BORDER-LEFT: #dddddd 0px solid; BORDER-BOTTOM: #dddddd 0px solid" 
+                        style="BORDER-RIGHT: #444444 0px solid; BORDER-TOP: #444444 0px solid; BORDER-LEFT: #444444 0px solid; BORDER-BOTTOM: #444444 0px solid" 
                         cellSpacing=0 cellPadding=10 width=700 border=0>
                           <TBODY>
                           <TR>
                             <TD>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -130,13 +130,13 @@
                                 복싱</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- 실시간 경기현황 정보제공 끝 --><BR><!-- 경기중계 시작<IMG 
                         height=25 src="img/info/sub21_stit2.gif" width=154> 
                         <TABLE 
-                        style="BORDER-RIGHT: #dddddd 0px solid; BORDER-TOP: #dddddd 0px solid; BORDER-LEFT: #dddddd 0px solid; BORDER-BOTTOM: #dddddd 0px solid" 
+                        style="BORDER-RIGHT: #444444 0px solid; BORDER-TOP: #444444 0px solid; BORDER-LEFT: #444444 0px solid; BORDER-BOTTOM: #444444 0px solid" 
                         cellSpacing=0 cellPadding=10 width=700 border=0>
                           <TBODY>
                           <TR>
                             <TD>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -290,13 +290,13 @@
                                 <TD width=358>&nbsp; 
                           </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- 경기중계 끝 --><BR><!-- 종목별 공식 지정단체 시작 -->
                         <TABLE 
-                        style="BORDER-RIGHT: #dddddd 0px solid; BORDER-TOP: #dddddd 0px solid; BORDER-LEFT: #dddddd 0px solid; BORDER-BOTTOM: #dddddd 0px solid" 
+                        style="BORDER-RIGHT: #444444 0px solid; BORDER-TOP: #444444 0px solid; BORDER-LEFT: #444444 0px solid; BORDER-BOTTOM: #444444 0px solid" 
                         cellSpacing=0 cellPadding=10 width=700 border=0>
                           <TBODY>
                           <TR>
                             <TD>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -608,7 +608,7 @@
                                 <TD width=358>&nbsp; 
 </TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -669,7 +669,7 @@
                                 <TD width=358>&nbsp; 
 </TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -800,7 +800,7 @@
                                 <TD width=358>&nbsp; 
 </TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -876,7 +876,7 @@
                                 width=266>호주오픈 테니스 
                                 대회</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -899,7 +899,7 @@
                                 <TD width=358>&nbsp; 
 </TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -922,7 +922,7 @@
                                 <TD width=358>&nbsp; 
 </TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
@@ -996,7 +996,7 @@
                                 및 결과, 
                                 매치업</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
                               <TABLE 
-                              style="BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; BORDER-LEFT: #dddddd 1px solid; BORDER-BOTTOM: #dddddd 1px solid" 
+                              style="BORDER-RIGHT: #444444 1px solid; BORDER-TOP: #444444 1px solid; BORDER-LEFT: #444444 1px solid; BORDER-BOTTOM: #444444 1px solid" 
                               cellSpacing=5 cellPadding=0 width=700 border=0>
                                 <TBODY>
                                 <TR>
