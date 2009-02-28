@@ -6,6 +6,7 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/popup.aspx">popupController</prop>
 				<prop key="/main.aspx">mainController</prop>
 				<prop key="/home.aspx">homeController</prop>
 				<prop key="/index.aspx">indexController</prop>			

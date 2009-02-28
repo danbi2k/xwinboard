@@ -283,8 +283,43 @@ function enter(frm)
 		FnLogin_Submit(frm);
 	}
 }
-</script>
 
+function popupopen()
+{
+	var w = 950;
+	var h = 600;
+	var window_left = (screen.width-w)/2;
+	var window_top  = (screen.height-h)/2;
+	window.open('popup.aspx', 'Notice','status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+}
+
+function getCookie( name )
+{
+	var seoroopCookie = name + "=";
+	var i = 0;
+	while ( i <= document.cookie.length )
+	{
+ 		var e = (i+seoroopCookie.length);
+ 		if ( document.cookie.substring( i, e ) == seoroopCookie ) {
+ 			if ( (popendCookie=document.cookie.indexOf( ";", e )) == -1 )
+ 				popendCookie = document.cookie.length;
+				return unescape( document.cookie.substring( e, popendCookie ) );
+ 			}
+ 			i = document.cookie.indexOf( " ", i ) + 1;
+		if ( i == 0 )
+			break;
+	}
+	return "";
+}
+
+var POPUPFLAG = "<%=Admin.POPUPFLAG%>";
+var COOKIEFLAG = getCookie("COOKIEFLAG");
+
+if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
+{
+	popupopen();
+}
+</script>
 </center></body>
 
 </html>

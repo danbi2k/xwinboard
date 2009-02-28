@@ -7,6 +7,9 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="popupController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+		p:viewName="popup"/>
+		
 	<bean id="bettingInfoController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/betting_info"/>
 		
