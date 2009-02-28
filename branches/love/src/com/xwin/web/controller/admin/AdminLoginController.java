@@ -42,7 +42,8 @@ public class AdminLoginController extends XwinController
 	{
 		HttpSession session = request.getSession();
 		
-		session.removeAttribute("Admin");		
+		session.removeAttribute("Admin");
+		session.invalidate();
 		
 		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
