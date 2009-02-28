@@ -72,7 +72,7 @@
 					                 <td width="451" height="25" align="left" valign="middle" class="maint" style="padding-left:70">
 					              		<%=member.getNickName()%>         
 					                </td>
-									<td width="451" height="25" align="left" valign="middle" class="maint" style="padding-left:100">
+									<td width="451" height="25" align="left" valign="middle" class="maint" style="padding-left:80">
 					              		<%=XwinUtil.comma3(member.getBalance())%>         
 					                </td>
 									<td width="451" height="25" align="left" valign="middle" class="maint" style="padding-left:70">

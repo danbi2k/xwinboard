@@ -85,7 +85,7 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
 			    <td width="771" height="40" align="center">
-					<img src="img/chong.jpg" border="0" align="absmiddle" onclick="FnOutMoney_Submit(frm);">&nbsp;
+					<img src="img/ok.jpg" border="0" align="absmiddle" onclick="FnOutMoney_Submit(frm);">&nbsp;
 					<img src="img/back.jpg" border="0" align="absmiddle" onclick="location.reload();">
 			    </td>
 			  
