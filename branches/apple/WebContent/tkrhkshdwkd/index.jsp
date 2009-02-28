@@ -5,6 +5,6 @@
 <head>
 <META 
      HTTP-EQUIV="Refresh"
-     CONTENT="0; URL=../adminIndex.aspx">
+     CONTENT="0; URL=../tkrhkqkx.php">
 </head>
 </html>

@@ -48,10 +48,10 @@
 				<ul>
 					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">승무패</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">핸디캡</a></li>
-					<li><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">이벤트</a></li>
+					<!-- li><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">이벤트</a></li -->
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(승무패)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(핸디캡)</a></li>
-					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">경기결과(이벤트)</a></li>
+					<!-- li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">경기결과(이벤트)</a></li -->
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
 				</ul>
 			</div>
@@ -81,9 +81,9 @@
 			<h2 class="heading">서버관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li>
-					<li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li>
-					<li><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
+					<!--li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li -->
+					<!--li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li-->
+					<li class="first"><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
 					<li><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
 					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
 					<li><a href="adminLog.aspx?mode=viewHackingLog">해킹탐지</a></li>
