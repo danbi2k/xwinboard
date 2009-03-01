@@ -55,6 +55,60 @@
 <area shape="rect" coords="232, 22, 383, 43" href="http://www.kofree.net/DNSFree/Setup.exe" onfocus="this.blur()">
 </map>
 <center>
+<div id="popup" style="position:absolute;left:50%;top:130px;width:950px;z-index:1;margin-left:-470px;visibility:hidden;background-color:#111111">
+<table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
+<tr align="center">
+<td width="10"></td>
+<td width="*"><b style="color:white">긴급공지</td>
+<td width="10"></td>
+</tr>
+</table>
+
+<table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #4a4a4a;">
+<tr height="100%" valign="top"><td style="padding:13px;" bgcolor="#555555" style="color:black;">
+
+    <%
+    String context = Admin.POPUP;
+    context = StringEscapeUtils.escapeHtml(context);
+    context = context.replaceAll("\n", "<br>");
+    out.print(context);
+    %>
+
+</td></tr>
+<tr><td bgcolor="#525252">
+    <table width="100%" style="color:#8b8b8b;">
+    <tr>
+        <td width="50%"><b style="color:black">작성자 : <b>관리자</b></td>
+        <td width="50%" align="right"><b style="color:black">
+			오늘하루이창을열지않음 <input type="checkbox" id="popupcheck">
+			닫기 <img src="img/x.gif" onclick="popupclose()">	
+		</td>
+    </tr></table>
+</td></tr>
+</table>
+&nbsp;
+</div>
+<div id="memoDiv" style="padding:10 10 10 10;position:absolute;left:50%;top:50%;width:350px;height:350px;z-index:2;margin-left:-175px;margin-top:-175px;visibility:hidden;background-color:#CCCCCC;color:#000000">
+<form>
+<table border=0 style='width:100%;color:#000000'>
+<tr>
+<td align='center' style='color:#000000'><font size=3><B>긴급알림</B></font></td>
+</tr>
+<tr height=100%>
+<td height=280px>
+<span id="memoContents" style='width:100%;height:100%;color:#000000' valign='top'></span>
+</td>
+</tr>
+<tr>
+<td align='right' style='color:#000000'>
+	다시보지않음<input type="checkbox" id="isReaded"/>
+	닫기 <img src="img/x.gif" onclick="memoClose()"/>
+</td>
+</tr>
+</table>
+</form>
+</div>
+
 <table id="" width="1100" height="1270" cellpadding="0" cellspacing="0">
 	<tr>
 		<td colspan="3" width="958" height="81" valign="top" background="img/m_01.jpg">
@@ -127,12 +181,12 @@
 	</tr>
 	<tr>
 		<td colspan="3" width="958" height="60" align="center" valign="middle" background="img/m_03.jpg">
-			<script>mEmbed('src=img/menu.swf','width=931','height=60','wmode=#ffffff','menu=false','quality=high','bgcolor=#ffffff');</script> 
+			<script>mEmbed('src=img/menu.swf','width=931','height=60','wmode=opaque','menu=false','quality=high','bgcolor=#ffffff');</script> 
 		</td>
 	</tr>
 	<tr>
 		<td colspan="3" width="958" height="309" align="center" valign="top" background="img/m_04.jpg" style="padding-top:8;padding-left:2">
-			<script>mEmbed('src=img/img.swf','width=929','height=300','wmode=#ffffff','menu=false','quality=high','bgcolor=#ffffff');</script>
+			<script>mEmbed('src=img/img.swf','width=929','height=300','wmode=opaque','menu=false','quality=high','bgcolor=#ffffff');</script>
 		</td>
 	</tr>
 	<tr>
@@ -286,11 +340,26 @@ function enter(frm)
 
 function popupopen()
 {
-	var w = 950;
-	var h = 600;
-	var window_left = (screen.width-w)/2;
-	var window_top  = (screen.height-h)/2;
-	window.open('popup.aspx', 'Notice','status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+	var popup = document.getElementById("popup");
+	popup.style.visibility = "visible"
+}
+
+function popupclose()
+{
+	var popup = document.getElementById("popup");
+	var popupcheck = document.getElementById("popupcheck");
+	popup.style.visibility = "hidden";
+
+	if (popupcheck.checked) {
+		setCookie("COOKIEFLAG", "N", 1);
+	}		
+}
+
+function setCookie( name, value, expiredays )
+{
+	var todayDate = new Date();
+	todayDate.setDate( todayDate.getDate() + expiredays );
+	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
 }
 
 function getCookie( name )
@@ -312,6 +381,7 @@ function getCookie( name )
 	return "";
 }
 
+
 var POPUPFLAG = "<%=Admin.POPUPFLAG%>";
 var COOKIEFLAG = getCookie("COOKIEFLAG");
 
@@ -319,6 +389,44 @@ if (POPUPFLAG == "Y" && COOKIEFLAG == "" && <%=login%> == true)
 {
 	popupopen();
 }
+
+var memoId;
+
+function receiveMemo()
+{
+	var query = "mode=receiveMemo";
+	var http = new JKL.ParseXML("member.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0 && result.resultXml.object) {
+		var span = document.getElementById("memoContents");
+		var memo = result.resultXml.object.memo;
+		var regexp = new RegExp(/\n/ig);
+		memo = memo.replace(regexp, "<BR>");
+		span.innerHTML = memo;
+		memoId = result.resultXml.object.id;
+		var memoDiv = document.getElementById("memoDiv");
+		memoDiv.style.visibility = "visible";
+	}
+}
+
+function memoClose()
+{
+	var isReaded = document.getElementById("isReaded");
+	if (isReaded.checked) {
+		var query = "mode=readMemo";
+		query += "&id=" + memoId;
+		var http = new JKL.ParseXML("member.aspx", query);
+		var result = http.parse();
+	}
+	
+	var memoDiv = document.getElementById("memoDiv");
+	memoDiv.style.visibility = "hidden";
+
+	receiveMemo();
+}
+<%if (login) {%>
+receiveMemo();
+<%}%>
 </script>
 </center></body>
 
