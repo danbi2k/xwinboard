@@ -20,7 +20,7 @@ public class GameSyncService extends XwinService
 	{
 		String gameXml = null;
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(10000);
 		
 		PostMethod post = new PostMethod(GAME_URL);		
 		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
