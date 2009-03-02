@@ -132,6 +132,9 @@ public class GameController extends XwinController
 		cal.add(Calendar.DATE, 3);
 		cal.add(Calendar.MILLISECOND, -1);
 		
+		if (type != null && type.equals("mix"))
+			type = null;
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("leagueId", leagueId);

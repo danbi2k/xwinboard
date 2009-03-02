@@ -31,8 +31,11 @@ function FnDrawGameList(data,type)
 	
 	if (type == 'wdl')
 		row.push("<td  width=70 align=center ><font color=FFFFFF><b>무</td>");
-	else
+	else if (type == 'handy')
 		row.push("<td  width=70 align=center ><font color=FFFFFF><b>핸디</td>");
+	else
+		row.push("<td  width=70 align=center ><font color=FFFFFF><b>무/핸디</td>");
+	
 	row.push("<td  width=600 align=center ><font color=FFFFFF><b>(패)원정팀</td>");
 	row.push("<td  width=60 align=center ><font color=FFFFFF><b>상태</td>");
 	row.push("<td  width=60 align=center ><font color=FFFFFF><b>공지</td>");

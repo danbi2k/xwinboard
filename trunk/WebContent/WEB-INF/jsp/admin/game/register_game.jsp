@@ -8,11 +8,16 @@
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	String type = request.getParameter("type");
-	String grade = request.getParameter("grade");	
+	String grade = request.getParameter("grade");
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.registerGame;
+		var gameType = undefined;
+		if (d.gameType[0].checked)
+			gameType = d.gameType[0].value;
+		else if (d.gameType[1].checked)
+			gameType = d.gameType[1].value;
 		if(!d.leagueId.value) { alert('리그명을 선택하세요'); d.reagueId.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
 		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
@@ -24,6 +29,7 @@
 		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		if (!gameType) { alert('종류를 선택하세요');  return false;}
 		<%if (type.equals("handy")){ %>
 		if (d.uoCheck.checked) {
 			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
@@ -31,16 +37,9 @@
 			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
 		}
 		<%}%>
-		/*
-		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
-		}
-		else {
-			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
-		}*/
 
 		var query = "mode=registerGame";
-		query += "&type=<%=type%>";
+		query += "&type=" + gameType;
 		query += "&grade=<%=grade%>";
 		query += "&leagueId=" + d.leagueId.value;
 		query += "&gameDate=" + d.gameDate.value;
@@ -78,7 +77,7 @@
 		}
 	}
 </SCRIPT>
-<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기등록":"이벤트경기등록"):"핸디캡경기등록"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -126,7 +125,18 @@
 			%>
 			</select>
 		</td>
-	</tr>		
+	</tr>
+	<%if (type.equals("mix")) { %>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">종류</td>
+		<td bgcolor="#FFFFFF" width=35% colspan='3'>
+			승무패 <input type='radio' name="gameType" value="wdl"/>
+			핸디캡<input type='radio' name="gameType" value="handy"/>
+		</td>
+	</tr>			
+	<%} else { %>
+		<input type='hidden' name="type" value="<%=type%>"/>
+	<%} %>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">홈팀</td>
 		<td bgcolor="#FFFFFF" width=35%>팀명 <input type='text' name="homeTeam"/></td>
@@ -137,11 +147,7 @@
 		<td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
 		<td bgcolor="#FFFFFF"  colspan="3">
 		승 <input type='text' name='winRate' size=5/>
-		<%if (type.equals("wdl")) {%>
-		무 <input type='text' name='drawRate' size=5/>
-		<%} else { %>
-		핸디	 <input type='text' name='drawRate' size=5/>
-		<%} %>
+		<%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %> <input type='text' name='drawRate' size=5/>
 		패 <input type='text' name='loseRate' size=5/>											
 		</td>
 	</tr>
