@@ -22,11 +22,12 @@
 		<result property="isDeleted" column="ISDELETED"/>
 		<result property="isChecked" column="ISCHECKED"/>
 		<result property="grade" column="GRADE"/>
+		<result property="bettingId" column="BETTING_ID"/>
 	</resultMap>
 	
 	<insert id="insertBoardItem" parameterClass="BoardItem">
-		INSERT INTO tbl_board_item(TITLE, USERID, NICKNAME, DATE, CONTEXT, TYPE, BOARDNAME, STATUS, GRADE)
-			VALUES(#title#, #userId#, #nickName#, #date#, #context#, #type#, #boardName#, #status#, #grade#)
+		INSERT INTO tbl_board_item(TITLE, USERID, NICKNAME, DATE, CONTEXT, TYPE, BOARDNAME, STATUS, GRADE, BETTING_ID)
+			VALUES(#title#, #userId#, #nickName#, #date#, #context#, #type#, #boardName#, #status#, #grade#, #bettingId#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>	
@@ -74,7 +75,7 @@
 		SELECT
 			ID, TITLE, USERID, NICKNAME, DATE, READCOUNT, BOARDNAME, ISDELETED, ISCHECKED,
 			'' as CONTEXT,
-			TYPE, GRADE,
+			TYPE, GRADE, BETTING_ID,
 			(SELECT COUNT(*) FROM tbl_board_comment bc WHERE bc.BOARD_ID = bi.ID) as COMMENT_COUNT 
 		FROM tbl_board_item bi
 		WHERE bi.ISDELETED = 'N'		
