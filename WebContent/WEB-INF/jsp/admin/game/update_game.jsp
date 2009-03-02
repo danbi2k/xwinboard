@@ -36,7 +36,6 @@
 
 		var query = "mode=updateGame";
 		query += "&gameId=" + <%=game.getId()%>;
-		query += "&type=<%=type%>";
 		query += "&leagueId=" + d.leagueId.value;
 		query += "&gameDate=" + d.gameDate.value;
 		query += "&gameHour=" + d.gameHour.value;
@@ -64,11 +63,11 @@
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=game.getGrade()%>&pageIndex=<%=pageIndex%>";
+			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=grade%>&pageIndex=<%=pageIndex%>";
 		}
 	}
 </SCRIPT>
-<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
+<div class="title"><%=game.getType().equals("wdl")?(game.getGrade().equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -133,7 +132,7 @@
 		<td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
 			승 <input type='text' name='winRate' size=5 value='<%=game.getWinRateStr()%>'/>
-			<%if (type.equals("wdl")) {%>
+			<%if (game.getType().equals("wdl")) {%>
 			무 <input type='text' name='drawRate' size=5 value='<%=game.getDrawRateStr()%>'/>
 			<%} else { %>
 			핸디<input type='text' name='drawRate' size=5 value='<%=game.getDrawRate()>0?"+"+game.getDrawRate():game.getDrawRate()%>'/>

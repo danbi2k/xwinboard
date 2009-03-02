@@ -46,6 +46,9 @@ public class AdminGameController extends XwinController
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
+		if (type != null && type.equals("mix"))
+			type = null;
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("leagueId", leagueId);
@@ -89,6 +92,9 @@ public class AdminGameController extends XwinController
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
+		
+		if (type != null && type.equals("mix"))
+			type = null;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
@@ -219,8 +225,6 @@ public class AdminGameController extends XwinController
 		ResultXml rx = null;
 		
 		try {
-			String type = (String) request.getParameter("type");
-			
 			Game game = new Game();
 			game.setId(command.getGameId());
 			game.setLeagueId(command.getLeagueId());
@@ -239,7 +243,6 @@ public class AdminGameController extends XwinController
 				game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
 			}
 			
-			game.setType(type);
 			game.setWinDeny(command.getWinDeny());
 			game.setDrawDeny(command.getDrawDeny());
 			game.setLoseDeny(command.getLoseDeny());

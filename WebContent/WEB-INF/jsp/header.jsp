@@ -132,7 +132,7 @@ if (login) {
 	<td>
 		<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 		
-		<img src="images/smenu_event.gif" onclick="location.href='game.aspx?mode=viewGameList&type=wdl&grade=10';" style="cursor:hand">
+		<img src="images/smenu_event.gif" onclick="location.href='game.aspx?mode=viewGameList&type=mix&grade=10';" style="cursor:hand">
 	
 	</td>
 	<%} %>
