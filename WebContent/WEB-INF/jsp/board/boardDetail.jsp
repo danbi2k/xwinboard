@@ -18,7 +18,7 @@
 		pageIndex = "0";
 %>
 
-<tr><td><img src="img/menu04.jpg" border="0"></td></tr>
+<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>.jpg" border="0"></td></tr>
 		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
             </table>
 
