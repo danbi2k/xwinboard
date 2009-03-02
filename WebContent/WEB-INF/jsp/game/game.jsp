@@ -16,6 +16,13 @@
 
 <script>
 var gameType = '<%=type%>'
+
+function thisReload()
+{
+	location.reload();
+}
+
+setInterval(thisReload, 180000);
 </script>
 			<tr><td><img src="img/menu0<%=img%>.jpg" border="0"></td></tr>
 		
@@ -32,7 +39,7 @@ var gameType = '<%=type%>'
             <p>승(홈팀)</p>
         </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p>무</p>
+            <p><%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %></p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
             <p>패(원정팀)</p>
@@ -61,10 +68,10 @@ if (gameList != null) {
         <td width="135" class="tablebg<%=y%>" align="left" valign="middle">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;<img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></p>
         </td>
-        <td width="250" class='<%=game.getWinDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="right" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
+        <td width="250" class='<%=game.getWinDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="right" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'W')" id="checkW<%=game.getId()%>">
             <p><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=game.getWinRateStr()%>&nbsp;</p>
         </td>
-        <td width="80" class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"tablebg4":"tablebg"+y%>' align="center" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
+        <td width="80" class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"tablebg4":"tablebg"+y%>' align="center" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'D')" id="checkD<%=game.getId()%>">
             <p><%
 				if (game.getType().equals("wdl"))
 					out.print(game.getDrawRateStr());
@@ -76,7 +83,7 @@ if (gameList != null) {
 					
 			%></p>
         </td>
-        <td width="250" class='<%=game.getLoseDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="left" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
+        <td width="250" class='<%=game.getLoseDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="left" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'L')" id="checkL<%=game.getId()%>">
             <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%></p>
         </td>
         <td width="40" class="tablebg<%=y%>" align="center" valign="middle">
@@ -84,7 +91,7 @@ if (gameList != null) {
         </td>
         <td width="40" class="tablebg<%=x%>" align="center" valign="middle">
             <p>
-			<%if (game.getNote() != null) { %>
+			<%if (game.getNote() != null && game.getNote().length() > 0) { %>
 			<span onclick="getNote(<%=game.getId()%>)">공지</span>
 			<%} %>
 			</p>
