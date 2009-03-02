@@ -22,8 +22,8 @@
 		<property name="jobClass" value="com.xwin.infra.schedule.GameSyncManager"/>
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="gameDao">
-					<ref bean="gameDao"/>
+				<entry key="gameSyncService">
+					<ref bean="gameSyncService"/>
 				</entry>
 			</map>
 		</property>

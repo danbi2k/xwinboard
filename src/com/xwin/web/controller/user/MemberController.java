@@ -56,9 +56,13 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
+		String introducerId = XwinUtil.arcNvl(command.getIntroducerId());
+		Member introducer = null;
+		if (introducerId != null)
+			introducer = memberDao.selectMember(introducerId, null);
 		
 		ResultXml rx = null;
-//		if (invitation.getJoinId() == null) {
+		if (introducerId == null || introducerId.length() == 0 || (introducerId != null && introducer != null)) {
 			if (phonePin != null) {
 				if (phonePin.equals(command.getPhonePin())) {
 					rx = checkExistUserId(command.getUserId());
@@ -88,7 +92,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											member.setBankOwner(command.getBankOwner());
 											member.setBankDate(new Date());
 											member.setGetSms(command.getSmsCheck());
-//											member.setIntroducerId(invitation.getUserId());
+											member.setIntroducerId(introducerId);
 											
 											String WelcomeMsg = "환영합니다";
 											
@@ -108,9 +112,23 @@ public class MemberController extends XwinController implements MessageSourceAwa
 //											invitation.setJoinId(member.getUserId());
 //											invitationDao.updateInvitation(invitation);
 //											
-//											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
-//											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-//											memberDao.updateMember(introducer);
+											if (introducer != null) {
+												introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+												memberDao.updateMember(introducer);
+												
+												Long intro_bonus = 5000L;
+												
+												Account account = new Account();
+												account.setUserId(introducer.getUserId());
+												account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
+												account.setDate(new Date());
+												account.setOldBalance(introducer.getBalance());
+												account.setMoney(intro_bonus);
+												account.setBalance(introducer.getBalance() + intro_bonus);
+												accountDao.insertAccount(account);
+												
+												memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
+											}
 											
 											rx = new ResultXml(0, WelcomeMsg, null);
 										}
@@ -125,9 +143,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			} else {
 				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
 			}
-//		} else {
-//			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
-//		}
+		} else {
+			rx = new ResultXml(-1, "추천인 ID를 다시 확인하십시오", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -380,6 +398,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			pointLog.setOldBalance(point);
 			pointLog.setMoney(balance * -1);
 			pointLog.setBalance(member.getPoint() - balance);
+			pointLog.setNote("캐쉬전환");
 			
 			pointDao.insertPoint(pointLog);
 			

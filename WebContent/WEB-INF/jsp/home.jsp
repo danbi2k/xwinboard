@@ -41,8 +41,8 @@
 				</form>
 
 				<div class='idpw'>
-				<a href='userform.php?mode=viewJoinForm'>회원가입</a> |
-				<a>추천가입</a>
+				<input type="checkbox" checked>보안로그인 | 				
+				<a href='userform.php?mode=viewJoinForm'>회원가입</a>
 				</div>
 			</div>
 			<%} %>

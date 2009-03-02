@@ -78,6 +78,7 @@ public class Code
 	public static final String ACCOUNT_TYPE_MONEYOUT_CANCEL	= "AT011";
 	public static final String ACCOUNT_TYPE_BETTING_RETURN = "AT012";
 	public static final String ACCOUNT_TYPE_BONUS		= "AT013";
+	public static final String ACCOUNT_TYPE_INTRODUCE		= "AT014";
 	
 	public static final String POINT_TYPE_MONEYIN		= "PNT01";
 	public static final String POINT_TYPE_BETTING		= "PNT02";
@@ -135,6 +136,7 @@ public class Code
 		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환불(환전취소)");
 		put(ACCOUNT_TYPE_BETTING_RETURN, "환불(배팅취소)");
 		put(ACCOUNT_TYPE_BONUS, "Bonus");
+		put(ACCOUNT_TYPE_INTRODUCE, "프랜드추천보너스");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
 		put(BANKBOOK_STATUS_UNUSED, "사용중지");
