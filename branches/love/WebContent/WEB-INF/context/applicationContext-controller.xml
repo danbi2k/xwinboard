@@ -103,6 +103,7 @@
 		p:memberDao-ref="memberDao"
 		p:boardDao-ref="boardDao"
 		p:accessDao-ref="accessDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="moneyInController"
