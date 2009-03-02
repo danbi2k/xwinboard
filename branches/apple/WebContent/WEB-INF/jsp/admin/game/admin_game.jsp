@@ -103,6 +103,22 @@
 		}
 	}
 
+	function removeGame(id)
+	{
+		if (confirm("" + id + "번 경기를 삭제 하시겠습니까?")) {
+			var query = "mode=removeGame";
+			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
+			
+			var http = new JKL.ParseXML("adminGame.aspx", query);
+			var result = http.parse();
+			alert(result.resultXml.message);
+			//if (result.resultXml.code == 0) {
+			//	location.reload();
+			//}
+		}
+	}
+
 	function changeDisplayStatus(id, oselect)
 	{
 		var displayStatus = oselect.value;
@@ -119,19 +135,6 @@
 	function cancelGameScore(id)
 	{
 		var query = "mode=cancelGameScore";
-		query += "&id=" + id;
-		
-		var http = new JKL.ParseXML("adminGame.aspx", query);
-		var result = http.parse();
-		alert(result.resultXml.message);
-		if (result.resultXml.code == 0) {
-			location.reload();
-		}
-	}
-
-	function removeGame(id)
-	{
-		var query = "mode=removeGame";
 		query += "&id=" + id;
 		
 		var http = new JKL.ParseXML("adminGame.aspx", query);
@@ -162,6 +165,19 @@
 		for (var i=0; i < c.length ; i++) {
 			if (c[i].checked) {
 				cancelGame(c[i].value);
+			} 
+		}
+
+		location.reload();
+	}
+
+	function removeAllGame()
+	{
+		var c = document.game.checkGame;
+		c = Xwin.ToArray(c);
+		for (var i=0; i < c.length ; i++) {
+			if (c[i].checked) {
+				removeGame(c[i].value);
 			} 
 		}
 
@@ -310,7 +326,8 @@
 			%>
 	</table>
 	<input type='button' value='스코어저장' onclick='saveAllScore()' style='cursor:hand'>
-	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'>
+	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'><BR><BR><BR>
+	<input type='button' value='경기완전삭제' onclick='removeAllGame()' style='cursor:hand'>
 <div class="pages">
 <%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
 import com.xwin.infra.util.Code;
@@ -275,6 +276,35 @@ public class AdminGameController extends XwinController
 		processService.judgeGameResult(game);		
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView removeGame(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;		
+		String id = request.getParameter("id");		
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("gameId", id);
+		Integer bettingCount = bettingDao.selectBettingCount(param);
+
+		if (bettingCount > 0) {
+			rx = new ResultXml(-1, "배팅이 진행된 경기는 삭제할수 없습니다", null);			
+		} else {
+			Game game = new Game();
+			game.setId(id);
+			game.setStatus(Code.GAME_STATUS_DELETE);			
+			gameDao.updateGame(game);
+			
+			rx = new ResultXml(0, "경기가 삭제 되었습니다", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
