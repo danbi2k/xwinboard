@@ -16,7 +16,7 @@
 			<tr><td><img src="img/menu15.jpg" border="0"></td></tr>
 		
 </table>
-<table align="center" cellpadding="0" cellspacing="0" width="771">
+<table align="center" cellpadding="0" cellspacing="0" width="841">
 <%
 	if (bettingList != null) {
 		for (Betting betting : bettingList) {
@@ -29,17 +29,17 @@
 					<td>
 						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1">
 							<tbody><tr bgcolor="#212021" height="27">
-								<td align="center" width="110"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
-								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
-								<td align="center" width="200"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
+								<td align="center" width="90"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
+								<td align="center" width="90"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
+								<td align="center" width="210"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
 								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
 								
-								<td align="center" width="200"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
+								<td align="center" width="210"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>결과</nobr></b></font></td>
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>적중</nobr></b></font></td>
 								<td align="center" width="60"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
-								
+								<td align="center" width="70"><font color="#ffffff"><b><nobr>복사</nobr></b></font></td>
 							</tr>
 							
 <%
@@ -106,6 +106,10 @@
 									<%
 									}
 									%>
+								</td>
+								<td align="center" rowspan="<%=betGameCount%>" nowrap>
+									<img src="img/btn_board.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
+									<img src="img/btn_qna.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
 								</td>
 								<%
 								count++;
