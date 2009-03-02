@@ -80,6 +80,7 @@
 		p:processService-ref="processService"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
+		p:gameSyncService-ref="gameSyncService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 					
 	<bean id="adminController"

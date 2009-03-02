@@ -98,6 +98,13 @@ function changeExPlay()
 	http.parse();
 }
 
+function gameSync()
+{ 
+	var query = "mode=gameSync";
+	var http = new JKL.ParseXML("adminGame.aspx", query);
+	http.parse();
+}
+
 setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
@@ -112,6 +119,7 @@ setInterval("playSound()", 3000);
 			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
 			<!-- li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li -->
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
+			<li><input type="button" value="경기퍼오기" onclick="gameSync()"></li>
 		</ul>
 	</div>
 	<div id="content">

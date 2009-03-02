@@ -27,6 +27,7 @@ import com.xwin.infra.dao.SmsWaitDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.SendSmsConnector;
 import com.xwin.service.admin.ProcessService;
+import com.xwin.service.external.GameSyncService;
 import com.xwin.service.game.BettingService;
 
 public class XwinController extends MultiActionController
@@ -55,6 +56,7 @@ public class XwinController extends MultiActionController
 	protected SendSmsConnector sendSmsConnector = null;
 	protected ProcessService processService = null;
 	protected BettingService bettingService = null;
+	protected GameSyncService gameSyncService = null;
 	
 	public Member getLoginMember(HttpServletRequest request) {
 		Member member = (Member) request.getSession().getAttribute("Member");
@@ -138,5 +140,9 @@ public class XwinController extends MultiActionController
 
 	public void setBettingService(BettingService bettingService) {
 		this.bettingService = bettingService;
+	}
+
+	public void setGameSyncService(GameSyncService gameSyncService) {
+		this.gameSyncService = gameSyncService;
 	}
 }

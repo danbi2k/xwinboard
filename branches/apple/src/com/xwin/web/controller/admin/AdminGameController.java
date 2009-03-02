@@ -395,4 +395,18 @@ public class AdminGameController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
+	
+	public ModelAndView gameSync(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		gameSyncService.sync();
+		
+		ResultXml rx = new ResultXml(0, "경기를 동기화 하였습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
 }

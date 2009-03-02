@@ -21,6 +21,7 @@ public class MemberCommand extends XwinObject
 	private String bankNumber;
 	private String bankOwner;
 	private String smsCheck;
+	private String introducerId;
 	
 	public String getUserId() {
 		return userId;
@@ -111,5 +112,11 @@ public class MemberCommand extends XwinObject
 	}
 	public void setSmsCheck(String smsCheck) {
 		this.smsCheck = smsCheck;
+	}
+	public String getIntroducerId() {
+		return introducerId;
+	}
+	public void setIntroducerId(String introducerId) {
+		this.introducerId = introducerId;
 	}
 }

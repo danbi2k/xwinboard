@@ -93,6 +93,29 @@ public class BettingService extends XwinService
 		pointLog.setBettingUserId(member.getUserId());
 		
 		pointDao.insertPoint(pointLog);
+		
+		//추천인 애플지급
+		String introducerId = member.getIntroducerId();
+		if (introducerId != null) {
+			Member introducer = memberDao.selectMember(introducerId, null);
+			Double intro_point_rate = 0.03;
+			
+			Double intro_point = betting.getMoney() * intro_point_rate;
+			memberDao.plusMinusPoint(introducerId, point.longValue());
+			
+			Point introPointLog = new Point();
+			introPointLog.setUserId(introducer.getUserId());
+			introPointLog.setType(Code.POINT_TYPE_BETTING);
+			introPointLog.setDate(new Date());
+			introPointLog.setOldBalance(introducer.getPoint());
+			introPointLog.setMoney(intro_point.longValue());
+			introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
+			introPointLog.setBettingId(betting.getId());
+			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(betting_point_rate*100) + "% 애플");
+			introPointLog.setBettingUserId(member.getUserId());
+			
+			pointDao.insertPoint(introPointLog);
+		}
 	}
 
 	public boolean checkBettingAccept(GameFolder gameFolder)

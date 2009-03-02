@@ -32,5 +32,8 @@
 		p:accountDao-ref="accountDao"
 		p:pointDao-ref="pointDao"/>	
 		
+	<bean id="gameSyncService" class="com.xwin.service.external.GameSyncService"
+		p:gameDao-ref="gameDao"/>		
+		
 	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>
 </beans>
