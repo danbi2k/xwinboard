@@ -76,7 +76,6 @@
 			query += "&homeScore=" + homeScore;
 			query += "&awayScore=" + awayScore;
 			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -92,7 +91,6 @@
 		if (confirm("" + id + "번 경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
-			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -235,17 +233,7 @@
 			<th>홈팀</th>
 			<th>원정팀</th>
 			<th>승</th>
-			<%
-			if (type.equals("wdl")) {
-			%>
-			<th>무</th>
-			<%
-			} else {
-			%>
-			<th>핸디</th>
-			<%
-			}
-			%>
+			<th>무/핸디</th>
 			<th>패</th>								
 			<th nowrap>스코어</th>
 			<th>결과</th>
@@ -261,7 +249,7 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkGame" value="<%=game.getId()%>"></th>
-			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=game.getType()%>&grade=<%=game.getGrade()%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&grade=<%=grade%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>
@@ -269,7 +257,7 @@
 			<td><%=game.getAwayTeam()%></td>
 			<td><%=game.getWinRateStr()%></td>
 			<%
-			if (type.equals("wdl")) {
+			if (game.getType().equals("wdl")) {
 			%>
 			<td><%=game.getDrawRateStr()%></td>
 			<%
