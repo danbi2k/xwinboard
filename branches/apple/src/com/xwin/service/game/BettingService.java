@@ -111,7 +111,7 @@ public class BettingService extends XwinService
 			introPointLog.setMoney(intro_point.longValue());
 			introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
 			introPointLog.setBettingId(betting.getId());
-			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(betting_point_rate*100) + "% 애플");
+			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(intro_point_rate*100) + "% 애플");
 			introPointLog.setBettingUserId(member.getUserId());
 			
 			pointDao.insertPoint(introPointLog);
