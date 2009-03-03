@@ -72,7 +72,7 @@ if (qnaList != null) {
 </table>
 </form>
 
-<input type="button" onclick="deleteQnaItem()" value="삭제">
+<!-- input type="button" onclick="deleteQnaItem()" value="삭제" -->
 
 <div class="pages">
 <%
