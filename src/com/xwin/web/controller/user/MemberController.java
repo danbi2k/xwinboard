@@ -18,7 +18,6 @@ import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
-import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -93,15 +92,14 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											
 											String WelcomeMsg = "환영합니다";
 											
-											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-	//										if (cnt == 0) {
-	//											memberDao.loggingGetEvent(member.getMobile());
-	//											member.setBalance(5000L);
-	//											WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
-	//											
-	//										} else {
-												member.setBalance(0L);
-	//										}
+//											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
+//											if (cnt == 0) {
+//												memberDao.loggingGetEvent(member.getMobile());
+												member.setBalance(5000L);
+												WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
+												
+//											} else {
+//												member.setBalance(0L);
 											
 											memberDao.insertMember(member);
 											
@@ -312,15 +310,15 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		String phone = request.getParameter("phone");
 		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("mobile", phone);
-//		Integer count = memberDao.selectMemberCount(param);
-//		Member member = (Member) request.getSession().getAttribute("Member");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("mobile", phone);
+		Integer count = memberDao.selectMemberCount(param);
+		Member member = (Member) request.getSession().getAttribute("Member");
 		
-//		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
-//			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
-//		}
-//		else {
+		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
+			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
+		}
+		else {
 			String phonePin = RandomStringUtils.randomNumeric(4);
 			request.getSession().setAttribute(phone, phonePin);	
 			
@@ -336,7 +334,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			} catch (Exception e) {
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);
 			}
-//		}
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
