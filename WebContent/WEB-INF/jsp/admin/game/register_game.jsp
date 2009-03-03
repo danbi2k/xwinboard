@@ -13,11 +13,15 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.registerGame;
-		var gameType = undefined;
+		var gameType
+		<%if (type.equals("mix")) {%>
 		if (d.gameType[0].checked)
 			gameType = d.gameType[0].value;
 		else if (d.gameType[1].checked)
 			gameType = d.gameType[1].value;
+		<%} else {%>
+		gameType = '<%=type%>';
+		<%}%>
 		if(!d.leagueId.value) { alert('리그명을 선택하세요'); d.reagueId.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
 		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
