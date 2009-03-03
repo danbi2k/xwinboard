@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
 import com.xwin.infra.util.Code;
@@ -148,10 +149,13 @@ public class AdminGameController extends XwinController
 		String id = request.getParameter("id");
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Game game = gameDao.selectGame(id);
+		List<ReuseComment> reuseCommentList = reuseCommentDao.selectReuseCommentList(Code.REUSE_COMMENT_GAME);
 		
 		ModelAndView mv = new ModelAndView("admin/game/update_game");
 		mv.addObject("leagueList", leagueList);
 		mv.addObject("game", game);
+		mv.addObject("reuseCommentList", reuseCommentList);
+		
 		return mv;
 	}
 	
@@ -248,6 +252,13 @@ public class AdminGameController extends XwinController
 			game.setLoseDeny(command.getLoseDeny());
 			
 			gameDao.updateGame(game);
+			
+			if (command.getReuse().equals("true")) {
+				ReuseComment reuseComment = new ReuseComment();
+				reuseComment.setComment(command.getNote());
+				reuseComment.setType(Code.REUSE_COMMENT_GAME);
+				reuseCommentDao.insertReuseComment(reuseComment);
+			} 
 			
 			rx = new ResultXml(0, "수정되었습니다", null);
 		} catch (Exception e) {
