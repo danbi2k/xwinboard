@@ -96,6 +96,9 @@ public class Code
 	public static final String BOARDITEM_STATUS_NORMAL		= "BIS01";
 	public static final String BOARDITEM_STATUS_REMOVE		= "BIS03";
 	
+	public static final String REUSE_COMMENT_QNA			= "RUC01";
+	public static final String REUSE_COMMENT_GAME			= "RUC02";
+	
 	static 
 	{
 		put(TRAN_TYPE_MONEYIN, "입금");
@@ -185,6 +188,9 @@ public class Code
 		
 		put("wdl", "승무패");
 		put("handy", "핸디캡");
+		
+		put(REUSE_COMMENT_QNA, "고객센터댓글");
+		put(REUSE_COMMENT_GAME, "게임공지");
 	}
 	
 	private static void put(String key, String value)

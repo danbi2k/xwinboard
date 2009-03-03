@@ -19,6 +19,7 @@
 	<sqlMap resource="com/xwin/infra/ibatis/Point.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Access.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Admin.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/ReuseComment.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Transaction.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/SmsWait.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Memo.xml" />
