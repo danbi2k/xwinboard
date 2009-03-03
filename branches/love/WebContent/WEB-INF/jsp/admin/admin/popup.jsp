@@ -38,7 +38,7 @@ function savePopup()
 	}
 	
 	var query = "mode=savePopup";
-	alert(Xwin.Escape(document.notice.text.value));
+	//alert(Xwin.Escape(document.notice.text.value));
 	query += "&popup=" + Xwin.Escape(document.notice.text.value);
 	if (document.notice.popupFlag.checked == true)
 		query += "&popupFlag=Y";
