@@ -79,6 +79,15 @@ public class GameController extends XwinController
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		if (type == null)
+			type = "wdl";
+		
+		String grade = Code.USER_GRADE_NORMAL;
+		if (type.equals("mix")) {
+			grade = Code.USER_GRADE_VIP;
+			type = null;
+		}
+		
 		if (gameDate == null)
 			gameDate = XwinUtil.toDateStr(new Date(), 2);
 		
@@ -109,6 +118,7 @@ public class GameController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
+		param.put("grade", grade);
 		param.put("leagueId", leagueId);
 		List<String> statusList = new ArrayList<String>();
 		statusList.add(Code.GAME_STATUS_END);
@@ -117,7 +127,7 @@ public class GameController extends XwinController
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
-		param.put("gradeLess", member.getGrade());
+//		param.put("gradeLess", member.getGrade());
 		//param.put("fromRow", pIdx * ROWSIZE);
 		//param.put("rowSize", ROWSIZE);
 		

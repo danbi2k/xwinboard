@@ -21,8 +21,7 @@
 	boolean needExpire = member.getPasswordExpire().equals("Y");
 %>
 
-			<tr><td><img src="img/menu04.jpg" border="0"></td></tr>
-		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu14.jpg" border="0"></td></tr>
             </table>
      
      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">

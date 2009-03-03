@@ -21,6 +21,9 @@
 		dateList[i] = XwinUtil.toDateStr(cal.getTime(), 2);
 		cal.add(Calendar.DATE, -1);
 	}
+	
+	if (type.length() == 0)
+		type = "wdl";
 %>
 
 <%@include file="../header.jsp"%>
@@ -34,9 +37,9 @@
 				<input type="hidden" name="mode" value="viewGameResultList"/>
 				경기종류&nbsp;
 				<select name="type" onchange="frm.submit();">
-					<option value="">--전체--</option>
 					<option value='wdl' <%=type.equals("wdl")?"selected":""%>>승무패</option>
-					<option value='handy' <%=type.equals("handy")?"selected":""%>>핸디캡</option>
+					<option value='handy' <%=type.equals("handy")?"selected":""%>>핸디캡</option>					
+					<option value='mix' <%=type.equals("mix")?"selected":""%>>하프타임</option>
 				</select>
 				경기일자&nbsp;
 				<select name="gameDate" onchange="frm.submit();">
