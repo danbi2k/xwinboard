@@ -65,6 +65,9 @@ public class XwinInitServlet extends HttpServlet
 		Admin.WDL_BONUS_USE = adminDao.selectAdmin("WDL_BONUS_USE").equals("Y");
 		Admin.WDL_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_LIMIT").trim());
 		Admin.WDL_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_RATE").trim());
+		Admin.MIX_BONUS_USE = adminDao.selectAdmin("MIX_BONUS_USE").equals("Y");
+		Admin.MIX_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("MIX_BONUS_LIMIT").trim());
+		Admin.MIX_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("MIX_BONUS_RATE").trim());
 		
 		Admin.BETTING_POINT_USE = adminDao.selectAdmin("BETTING_POINT_USE").equals("Y");
 		Admin.BETTING_POINT_RATE = Integer.parseInt(adminDao.selectAdmin("BETTING_POINT_RATE").trim());

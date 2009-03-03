@@ -220,6 +220,24 @@ public class ProcessService extends XwinService implements MessageSourceAware
 							
 							memberDao.plusMinusPoint(userId, handy_bonus_point);
 						}
+					} else if (Admin.MIX_BONUS_USE && betting.getGameType().equals("mix") && betting.getGameGrade().equals(Code.USER_GRADE_VIP)) {
+						if (betting.getSuccessCount() >= Admin.MIX_BONUS_LIMIT) {
+							Double mix_bonus_rate = Admin.MIX_BONUS_RATE.doubleValue() * 0.01;
+							Long mix_bonus_point = XwinUtil.calcExpectMoney(mix_bonus_rate, betting.getExpect());
+							
+							Point pointLog = new Point();
+							pointLog.setUserId(userId);
+							pointLog.setType(Code.POINT_TYPE_BONUS);
+							pointLog.setDate(new Date());
+							pointLog.setOldBalance(member.getPoint());
+							pointLog.setMoney(mix_bonus_point);
+							pointLog.setBalance(member.getPoint() + mix_bonus_point);
+							pointLog.setBettingId(betting.getId());
+							pointLog.setNote("하프타임" + Admin.MIX_BONUS_LIMIT + "폴더 이상 " + Admin.MIX_BONUS_RATE + "%");
+							pointDao.insertPoint(pointLog);
+							
+							memberDao.plusMinusPoint(userId, mix_bonus_point);
+						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -255,7 +273,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 				
 				Member receiver = null;
 				if (member.getIntroducerId() == null) {
-					receiver = member;
+					receiver = memberDao.selectMember(member.getUserId(), null);
 				}
 				else {
 					receiver = memberDao.selectMember(member.getIntroducerId(), null);
