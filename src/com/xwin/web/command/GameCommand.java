@@ -28,6 +28,7 @@ public class GameCommand extends XwinObject
 	private String loseDeny;
 	private String grade;
 	private String note;
+	private String reuse;
 	
 	public String getGameId() {
 		return gameId;
@@ -160,5 +161,11 @@ public class GameCommand extends XwinObject
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public String getReuse() {
+		return reuse;
+	}
+	public void setReuse(String reuse) {
+		this.reuse = reuse;
 	}
 }
