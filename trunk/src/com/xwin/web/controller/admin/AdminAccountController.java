@@ -270,7 +270,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			String mobile = member.getMobile().replaceAll("-", "");
 			String message = "[" + SiteConfig.SITE_NAME + "]" + nickName + " 님께 " + XwinUtil.comma3(moneyIn.getMoney()) + "원이 충전 되었습니다.";
 			try {
-				sendSmsConnector.sendSms(message, mobile, "SiteConfig.SITE_PHONE");
+				sendSmsConnector.sendSms(message, mobile, SiteConfig.SITE_PHONE);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -311,7 +311,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);
 				smsWait.setPhone(mobile);
-				smsWait.setCallback("SiteConfig.SITE_PHONE");
+				smsWait.setCallback(SiteConfig.SITE_PHONE);
 				
 				smsWaitDao.insertSmsWait(smsWait);
 			}
