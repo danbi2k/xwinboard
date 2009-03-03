@@ -20,6 +20,7 @@
 					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
 					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
+					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
 				</ul>
 			</div>
 		</div>
@@ -55,6 +56,7 @@
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(핸디캡)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">경기결과(이벤트)</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
+					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_GAME%>">공지관리</a></li>
 				</ul>
 			</div>
 		</div>

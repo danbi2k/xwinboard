@@ -96,4 +96,8 @@
 	<bean id="invitationDao"
 		class="com.xwin.infra.dao.InvitationDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="reuseCommentDao"
+		class="com.xwin.infra.dao.ReuseCommentDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 </beans>

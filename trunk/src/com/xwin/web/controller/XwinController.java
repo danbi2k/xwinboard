@@ -23,6 +23,7 @@ import com.xwin.infra.dao.MoneyInDao;
 import com.xwin.infra.dao.MoneyInOutDao;
 import com.xwin.infra.dao.MoneyOutDao;
 import com.xwin.infra.dao.PointDao;
+import com.xwin.infra.dao.ReuseCommentDao;
 import com.xwin.infra.dao.SmsWaitDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.SendSmsConnector;
@@ -51,6 +52,7 @@ public class XwinController extends MultiActionController
 	protected MemoDao memoDao = null;
 	protected HackingLogDao hackingLogDao = null;
 	protected InvitationDao invitationDao = null;
+	protected ReuseCommentDao reuseCommentDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected ProcessService processService = null;
@@ -138,5 +140,9 @@ public class XwinController extends MultiActionController
 
 	public void setBettingService(BettingService bettingService) {
 		this.bettingService = bettingService;
+	}
+
+	public void setReuseCommentDao(ReuseCommentDao reuseCommentDao) {
+		this.reuseCommentDao = reuseCommentDao;
 	}
 }

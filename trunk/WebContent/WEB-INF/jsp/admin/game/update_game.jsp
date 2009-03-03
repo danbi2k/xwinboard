@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.game.*"%>
+<%@ page import="com.xwin.domain.common.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="org.apache.commons.lang.*"%>
 
  <%@ include file="../admin_header.jsp"%>
 <%
@@ -11,6 +13,7 @@
 	String type = request.getParameter("type");
 	String grade = request.getParameter("grade");	
 	String pageIndex = request.getParameter("pageIndex");
+	List<ReuseComment> reuseCommentList = (List<ReuseComment>) request.getAttribute("reuseCommentList");
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
@@ -46,6 +49,7 @@
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
 		query += "&note=" + Xwin.Escape(d.note.value);
+		query += "&reuse=" + d.reuse.checked;
 		if (d.winDeny.checked)
 			query += "&winDeny=N";
 		else
@@ -65,6 +69,16 @@
 		if (result.resultXml.code == 0) {
 			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=grade%>&pageIndex=<%=pageIndex%>";
 		}
+	}
+	
+	function getReuseComment(id)
+	{
+		var query = "mode=getReuseComment";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("adminReuse.aspx", query);
+		var result = http.parse();
+		if (result.resultXml.code == 0)
+			document.registerGame.note.value = result.resultXml.message;	
 	}
 </SCRIPT>
 <div class="title"><%=game.getType().equals("wdl")?(game.getGrade().equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
@@ -152,9 +166,10 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">공지</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea>								
+			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea><br>
+			<input type="checkbox" name="reuse">자주사용하는공지에저장								
 		</td>
-	</tr>	
+	</tr>
  </table>
 </form>
 <BR>
@@ -164,5 +179,30 @@
 	     <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
 	</tr>
 </table>
+<BR>
+<h3>재사용공지</h3>
+<form name="reuse">
+<table class="list">
+<%
+if (reuseCommentList != null) {
+	for (ReuseComment reuseComment : reuseCommentList) {
+%>
+<tr>
+	<th width="20"><%=reuseComment.getId()%></th>
+	<td width="*" onclick='getReuseComment(<%=reuseComment.getId()%>)' style="cursor:hand">
+	<%
+		String comment = StringEscapeUtils.escapeHtml(reuseComment.getComment());
+		comment = comment.replaceAll("\n", "<BR>");
+		out.print(comment);
+	%>
+	</td>
+	<td width="20"  align=center><img src="images/btn_coment_del.gif" onclick="deleteReuseComment(<%=reuseComment.getId()%>)"></td>
+</tr>
+<%
+	}
+}
+%>
+</table>
+</form>
 <!-- 페이지 내용 -->
 <%@ include file="../admin_footer.jsp"%>

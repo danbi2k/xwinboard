@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.game.Betting;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -69,6 +71,7 @@ public class AdminQnaController extends XwinController
 		String id = request.getParameter("id");
 		String grade = request.getParameter("grade");
 		BoardItem boardItem = boardDao.selectBoardItem(id, "qna", grade);
+		List<ReuseComment> reuseCommentList = reuseCommentDao.selectReuseCommentList(Code.REUSE_COMMENT_QNA);
 
 		Betting betting = null;
 		if (boardItem.getBettingId() != null)
@@ -77,6 +80,7 @@ public class AdminQnaController extends XwinController
 		ModelAndView mv = new ModelAndView("admin/qna/admin_qna_detail");
 		mv.addObject("boardItem", boardItem);
 		mv.addObject("betting", betting);
+		mv.addObject("reuseCommentList", reuseCommentList);
 		
 		return mv;
 	}
@@ -89,6 +93,7 @@ public class AdminQnaController extends XwinController
 		
 		String id = request.getParameter("id");
 		String comment = request.getParameter("comment");
+		String reuse = request.getParameter("reuse");
 		
 		BoardComment boardComment = new BoardComment();
 		boardComment.setBoardId(id);
@@ -102,6 +107,13 @@ public class AdminQnaController extends XwinController
 		boardItem.setId(id);
 		boardItem.setIsChecked("Y");
 		boardDao.updateBoardItem(boardItem);
+		
+		if (reuse.equals("true")) {
+			ReuseComment reuseComment = new ReuseComment();
+			reuseComment.setComment(comment);
+			reuseComment.setType(Code.REUSE_COMMENT_QNA);
+			reuseCommentDao.insertReuseComment(reuseComment);
+		}
 		
 		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
