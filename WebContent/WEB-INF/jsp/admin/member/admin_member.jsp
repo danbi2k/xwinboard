@@ -23,6 +23,11 @@
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
+	if (orderCol.length() == 0)
+		orderCol = "BALANCE";
+	if (orderBy.length() == 0)
+		orderBy = "DESC";
+	
 	Integer normalCount = (Integer) request.getAttribute("normalCount");
 	Integer secedeReqCount = (Integer) request.getAttribute("secedeReqCount");
 	Integer secedeCount = (Integer) request.getAttribute("secedeCount");

@@ -91,13 +91,13 @@ a:hover {
 	width: 130px;
 	margin: 0 0 10px 0;
 	padding: 0;
-	background: #DEE2E8;
+	background: #FFC9D7;
 }
 
 .boxed .heading {
 	margin-top: 0;
 	padding: 8px 15px;
-	background: #5E80BD no-repeat center bottom;
+	background: #BD5DB1 no-repeat center bottom;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	font: bold 1em Tahoma, Arial, Helvetica, sans-serif;
@@ -174,7 +174,7 @@ a:hover {
 	float: right;
 	width: 840px;
 	height: 50px;
-	background: #EEEEEE;
+	background: #FFC9C9;
 }
 
 #pages h2 {
