@@ -35,6 +35,9 @@ public class Admin extends XwinObject
 	public static boolean WDL_BONUS_USE = false;
 	public static Integer WDL_BONUS_LIMIT = 100;
 	public static Integer WDL_BONUS_RATE = 0;
+	public static boolean MIX_BONUS_USE = false;
+	public static Integer MIX_BONUS_LIMIT = 100;
+	public static Integer MIX_BONUS_RATE = 0;
 	
 	public static boolean BETTING_POINT_USE = false;
 	public static Integer BETTING_POINT_RATE = 0;
