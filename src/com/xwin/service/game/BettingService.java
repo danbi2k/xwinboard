@@ -75,7 +75,7 @@ public class BettingService extends XwinService
 			betting_point_rate = 0.05;
 		else if (size == 4)
 			betting_point_rate = 0.07;
-		else if (size > 5)
+		else if (size >= 5)
 			betting_point_rate = 0.10;
 		
 		Double point = betting.getMoney() * betting_point_rate;
