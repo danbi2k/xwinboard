@@ -208,8 +208,8 @@ public class AdminGameController extends XwinController
 			game.setDrawRate(Math.abs(command.getHandyRate()) * -1);
 			game.setLoseRate(command.getUnderRate());
 			
-			game.setHomeTeam(game.getHomeTeam() + "(↑오버)");
-			game.setAwayTeam(game.getAwayTeam() + "(↓언더)");
+			game.setHomeTeam(game.getHomeTeam() + "(Over)");
+			game.setAwayTeam(game.getAwayTeam() + "(Under)");
 			
 			gameDao.insertGame(game);
 		}
