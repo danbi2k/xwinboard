@@ -142,6 +142,7 @@ if (boardCommentList != null) {
 		out.print(comment);
 	%>
 	</td>
+	<td width="10%"  align=center><img src="images/btn_coment_del.gif" onclick="deleteBoardComment(<%=boardComment.getId()%>)"></td>
 </tr>
 <%
 	}
