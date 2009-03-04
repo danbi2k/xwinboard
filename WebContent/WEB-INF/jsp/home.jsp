@@ -32,7 +32,13 @@
 <html>
 <head>
 <title>환영합니다</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=UTF-8">
+    <Meta Http-Equiv="Imagetoolbar" Content="No">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" content="-1">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout">
+	
 	<script language="JavaScript" src="script/code.js"></script>
 	<script language="JavaScript" src="script/default.js"></script>
 	<script language="JavaScript" src="script/game.js"></script>
