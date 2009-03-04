@@ -108,8 +108,8 @@
 									%>
 								</td>
 								<td align="center" rowspan="<%=betGameCount%>" nowrap>
-									<img src="img/btn_board.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
-									<img src="img/btn_qna.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+									<img style='margin:5px 5px 5px 5px' src="img/btn_board.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
+									<img style='margin:5px 5px 5px 5px' src="img/btn_qna.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
 								</td>
 								<%
 								count++;

@@ -73,9 +73,12 @@ if (gameList != null) {
         </td>
         <td width="80" class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"tablebg4":"tablebg"+y%>' align="center" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'D')" id="checkD<%=game.getId()%>">
             <p><%
-				if (game.getType().equals("wdl"))
-					out.print(game.getDrawRateStr());
-				else {
+				if (game.getType().equals("wdl")) {
+					if (game.getDrawRate()==0||game.getDrawDeny().equals("N"))
+						out.print("x");
+					else
+						out.print(game.getDrawRateStr());
+				} else {
 					if (game.getDrawRate() > 0)
 						out.print("+");
 					out.print(game.getDrawRate());
