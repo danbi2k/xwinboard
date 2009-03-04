@@ -41,6 +41,9 @@ public class GameSyncService extends XwinService
 				try {
 					game.setSyncId(game.getId());
 					game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
+					if (game.getWinRate() == 0.0 || game.getLoseRate() == 0.0)
+						continue;
+					
 					if (game.getType().equals("wdl")) {
 						Double winRate = XwinUtil.doubleCut(game.getWinRate() * 1.1);
 						Double drawRate = XwinUtil.doubleCut(game.getDrawRate() * 1.1);
