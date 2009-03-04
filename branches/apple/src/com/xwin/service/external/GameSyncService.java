@@ -41,13 +41,13 @@ public class GameSyncService extends XwinService
 				try {
 					game.setSyncId(game.getId());
 					game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
-					if (game.getWinRate() == 0.0 || game.getLoseRate() == 0.0)
+					if (game.getWinRate() <= 1.0 || game.getLoseRate() <= 1.0)
 						continue;
 					
 					if (game.getType().equals("wdl")) {
-						Double winRate = XwinUtil.doubleCut(game.getWinRate() * 1.1);
-						Double drawRate = XwinUtil.doubleCut(game.getDrawRate() * 1.1);
-						Double loseRate = XwinUtil.doubleCut(game.getLoseRate() * 1.1);
+						Double winRate = XwinUtil.doubleCut(calcRate(game.getWinRate()));
+						Double drawRate = XwinUtil.doubleCut(calcRate(game.getDrawRate()));
+						Double loseRate = XwinUtil.doubleCut(calcRate(game.getLoseRate()));
 						
 						game.setWinRate(winRate);
 						game.setDrawRate(drawRate);
@@ -66,5 +66,18 @@ public class GameSyncService extends XwinService
 				}
 			}
 		}
+	}
+	
+	public Double calcRate(Double x)
+	{
+		Double y = 0.0;
+		
+		if (x < 2.0) {
+			y = 1.0 + ((x - 1.0) * 1.2);
+		} else {
+			y = 1.0 + ((x - 1.0) * 1.1);
+		}
+		
+		return y;
 	}
 }
