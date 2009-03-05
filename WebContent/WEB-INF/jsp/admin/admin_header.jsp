@@ -6,9 +6,13 @@
 <%
 	Member admin = (Member)session.getAttribute("Admin");
 	String EX_PLAY = (String)session.getAttribute("EX_PLAY");
+	String QNA_PLAY = (String)session.getAttribute("QNA_PLAY");
 	
 	if (EX_PLAY == null)
 		EX_PLAY = "on";
+	
+	if (QNA_PLAY == null)
+		QNA_PLAY = "on";
 %>
 <html>
 <head>
@@ -36,6 +40,7 @@ if (admin == null) {
 
 var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
 var exchangePlay = <%=EX_PLAY.equals("on")?"true":"false"%>;
+var qnacenterPlay = <%=QNA_PLAY.equals("on")?"true":"false"%>;
 
 function checkIndiCallBack(result)
 {
@@ -74,7 +79,7 @@ function playSound()
 	//	playIt(player1);
 	if (exchangePlay && exchangeVal > 0)
 		playIt(player2);
-	if (centerVal > 0)
+	if (qnacenterPlay && centerVal > 0)
 		playIt(player3);
 	//if (vipVal > 0)
 	//	playIt(player3);
@@ -98,6 +103,22 @@ function changeExPlay()
 	http.parse();
 }
 
+function changeQnaPlay()
+{ 
+	qnacenterPlay = !qnacenterPlay;
+	var qnaPlay = document.getElementById("qnaPlay");
+	if (qnacenterPlay) {
+		qnaPlay.innerHTML = "on";
+	} else {
+		qnaPlay.innerHTML = "off";
+	}
+
+	var query = "mode=changeQnaPlay";
+	query += "&qnaPlay=" + qnaPlay.innerHTML;
+	var http = new JKL.ParseXML("admin.aspx", query);
+	http.parse();
+}
+
 setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
@@ -109,8 +130,8 @@ setInterval("playSound()", 3000);
 		<ul>
 			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
 			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
-			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
-			<!-- li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li -->
+			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a><span style='font-size:12;' id='qnaPlay' onclick='changeQnaPlay()'><%=QNA_PLAY%></span></li>
+			<!-- li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a><span style='font-size:12;' id='qnaPlay' onclick='changeQnaPlay()'><%=QNA_PLAY%></span></li -->
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 		</ul>
 	</div>
