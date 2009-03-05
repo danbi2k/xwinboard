@@ -39,6 +39,7 @@
 		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
 		<result property="passwordExpire" column="PASSWORD_EXPIRE"/>
 		<result property="memberId" column="MEMBERID"/>
+		<result property="joinBonus" column="JOIN_BONUS"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
@@ -68,8 +69,8 @@
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID, JOIN_BONUS)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#, #joinBonus#)
 	</insert>
 	
 	<update id="updateMember" parameterClass="Member">
