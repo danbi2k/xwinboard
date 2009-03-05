@@ -6,6 +6,9 @@
 
  <%@ include file="../admin_header.jsp"%>
 
+<%
+	String EXIST = (String) request.getAttribute("EXIST");
+%>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
@@ -23,6 +26,9 @@
 		}
 	}
 
+	<%if (EXIST != null) {%>
+	alert("<%=EXIST%> 는 이미 등록된 리그명 입니다.\n이미지를 변경하시려면 삭제후 재등록 하십시오");
+	<%}%>
 </SCRIPT>
 
 <form name='regist' action="adminLeague.aspx" method='post' enctype="multipart/form-data">
