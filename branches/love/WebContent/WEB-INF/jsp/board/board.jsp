@@ -67,7 +67,7 @@
             		<p><%=head%></p>
         		</td>
 				 <td width="527" height="35" align="left" valign="middle">
-					<p><a <%=isNotice?"style=color:#45BCD7;'":""%>href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
 					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 					</b>
 					</a>
