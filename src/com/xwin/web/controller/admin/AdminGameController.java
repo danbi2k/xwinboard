@@ -181,8 +181,12 @@ public class AdminGameController extends XwinController
 		
 		String type = (String) request.getParameter("type");
 		
+		League league = leagueDao.selectLeagueByName(command.getLeagueName());
+		
 		Game game = new Game();
-		game.setLeagueId(command.getLeagueId());
+		game.setLeagueId(league.getId());
+		game.setLeagueName(league.getName());
+		game.setLeagueImage(league.getImage());
 		game.setHomeTeam(command.getHomeTeam());
 		game.setAwayTeam(command.getAwayTeam());
 		game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
@@ -208,8 +212,8 @@ public class AdminGameController extends XwinController
 			game.setDrawRate(Math.abs(command.getHandyRate()) * -1);
 			game.setLoseRate(command.getUnderRate());
 			
-			game.setHomeTeam(game.getHomeTeam() + "(Over)");
-			game.setAwayTeam(game.getAwayTeam() + "(Under)");
+			game.setHomeTeam(game.getHomeTeam() + "(↑오버)");
+			game.setAwayTeam(game.getAwayTeam() + "(↓언더)");
 			
 			gameDao.insertGame(game);
 		}
@@ -229,9 +233,13 @@ public class AdminGameController extends XwinController
 		ResultXml rx = null;
 		
 		try {
+			League league = leagueDao.selectLeagueByName(command.getLeagueName());
+			
 			Game game = new Game();
 			game.setId(command.getGameId());
-			game.setLeagueId(command.getLeagueId());
+			game.setLeagueId(league.getId());
+			game.setLeagueName(league.getName());
+			game.setLeagueImage(league.getImage());
 			game.setHomeTeam(command.getHomeTeam());
 			game.setAwayTeam(command.getAwayTeam());
 			game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
@@ -289,6 +297,35 @@ public class AdminGameController extends XwinController
 		processService.judgeGameResult(game);		
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView removeGame(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;		
+		String id = request.getParameter("id");		
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("gameId", id);
+		Integer bettingCount = bettingDao.selectBettingCount(param);
+
+		if (bettingCount > 0) {
+			rx = new ResultXml(-1, "배팅이 진행된 경기는 삭제할수 없습니다", null);			
+		} else {
+			Game game = new Game();
+			game.setId(id);
+			game.setStatus(Code.GAME_STATUS_DELETE);			
+			gameDao.updateGame(game);
+			
+			rx = new ResultXml(0, "경기가 삭제 되었습니다", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

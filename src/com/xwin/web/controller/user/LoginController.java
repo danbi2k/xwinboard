@@ -98,6 +98,7 @@ public class LoginController extends XwinController
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("Member");		
+		session.invalidate();
 		
 		ModelAndView mv = new ModelAndView("redirect:/home.aspx");
 		return mv;

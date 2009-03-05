@@ -42,6 +42,11 @@ public class LeagueDao extends XwinDao
 	{
 		return (League) sqlMapClientTemplate.queryForObject("selectLeagueById", id);
 	}
+	
+	public League selectLeagueByName(String name)
+	{
+		return (League) sqlMapClientTemplate.queryForObject("selectLeagueByName", name);
+	}
 
 	public void updateLeague(League league)
 	{
