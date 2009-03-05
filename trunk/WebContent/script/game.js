@@ -76,12 +76,11 @@ function FnDrawGameList(data,type)
 			row.push("<td align=center ><nobr>");
 			
 			if (data[i].type == 'wdl') {
-				if (data[i].betStatus == 'BTS01' && data[i].drawDeny == "Y") {
+				if (data[i].betStatus == 'BTS01' && data[i].drawDeny == "Y" && data[i].drawRate != 0) {
 					row.push("<input type='checkbox' name='check" + data[i].id + "' id='check" + data[i].id + "D' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'D');\">");
+					row.push(data[i].drawRateStr);
 				} else {
-					row.push("<input type='checkbox' disabled>");
-				}
-				row.push(data[i].drawRateStr);	
+				}	
 			} else {
 				if (data[i].drawRate > 0)
 					row.push("+");
