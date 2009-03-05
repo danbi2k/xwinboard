@@ -215,6 +215,9 @@
 			<isNotNull prepend="AND" property="gameId">
 			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
 			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+			b.USERID = #userId#
+			</isNotNull>
 		</dynamic>
 	</select>
 	
@@ -223,8 +226,14 @@
 		SELECT SUM(MONEY)
 		FROM tbl_betting b
 		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="status">
+			STATUS = #status#
+			</isNotNull>
 			<isNotNull prepend="AND" property="gameId">
 			b.ID in (SELECT bg.BETTING_ID FROM tbl_betting_game bg WHERE bg.GAME_ID = #gameId#)
+			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+			b.USERID = #userId#
 			</isNotNull>
 		</dynamic>
 	</select>

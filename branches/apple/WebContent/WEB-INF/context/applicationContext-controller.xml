@@ -116,6 +116,7 @@
 		p:moneyOutDao-ref="moneyOutDao"
 		p:accountDao-ref="accountDao"
 		p:accessDao-ref="accessDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="myMoneyController"

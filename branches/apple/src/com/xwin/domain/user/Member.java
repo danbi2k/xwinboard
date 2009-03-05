@@ -53,6 +53,7 @@ public class Member extends XwinObject
 	private String passwordExpire;
 	
 	private Integer memberId;
+	private Integer joinBonus;
 	
 	public String getId() {
 		return id;
@@ -270,5 +271,11 @@ public class Member extends XwinObject
 	}
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
+	}
+	public Integer getJoinBonus() {
+		return joinBonus;
+	}
+	public void setJoinBonus(Integer joinBonus) {
+		this.joinBonus = joinBonus;
 	}
 }
