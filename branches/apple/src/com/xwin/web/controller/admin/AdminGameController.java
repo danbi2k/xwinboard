@@ -172,8 +172,12 @@ public class AdminGameController extends XwinController
 		
 		String type = (String) request.getParameter("type");
 		
+		League league = leagueDao.selectLeagueByName(command.getLeagueName());
+		
 		Game game = new Game();
-		game.setLeagueId(command.getLeagueId());
+		game.setLeagueId(league.getId());
+		game.setLeagueName(league.getName());
+		game.setLeagueImage(league.getImage());
 		game.setHomeTeam(command.getHomeTeam());
 		game.setAwayTeam(command.getAwayTeam());
 		game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
@@ -220,11 +224,14 @@ public class AdminGameController extends XwinController
 		ResultXml rx = null;
 		
 		try {
+			League league = leagueDao.selectLeagueByName(command.getLeagueName());
 			String type = (String) request.getParameter("type");
 			
 			Game game = new Game();
 			game.setId(command.getGameId());
-			game.setLeagueId(command.getLeagueId());
+			game.setLeagueId(league.getId());
+			game.setLeagueName(league.getName());
+			game.setLeagueImage(league.getImage());
 			game.setHomeTeam(command.getHomeTeam());
 			game.setAwayTeam(command.getAwayTeam());
 			game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));

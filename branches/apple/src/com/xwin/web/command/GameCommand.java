@@ -21,6 +21,7 @@ public class GameCommand extends XwinObject
 	private Integer gameMinute;
 	private String status;
 	private String leagueId;
+	private String leagueName;
 	private Integer homeScore;
 	private Integer awayScore;
 	private String winDeny;
@@ -28,6 +29,7 @@ public class GameCommand extends XwinObject
 	private String loseDeny;
 	private String grade;
 	private String note;
+	private String reuse;
 	
 	public String getGameId() {
 		return gameId;
@@ -119,6 +121,12 @@ public class GameCommand extends XwinObject
 	public void setLeagueId(String leagueId) {
 		this.leagueId = leagueId;
 	}
+	public String getLeagueName() {
+		return leagueName;
+	}
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
 	public Integer getHomeScore() {
 		return homeScore;
 	}
@@ -160,5 +168,11 @@ public class GameCommand extends XwinObject
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public String getReuse() {
+		return reuse;
+	}
+	public void setReuse(String reuse) {
+		this.reuse = reuse;
 	}
 }
