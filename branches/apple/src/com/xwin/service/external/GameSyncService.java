@@ -70,6 +70,9 @@ public class GameSyncService extends XwinService
 	
 	public Double calcRate(Double x)
 	{
+		if (x <= 1.0)
+			return x;
+		
 		Double y = 0.0;
 		
 		if (x < 2.0) {
