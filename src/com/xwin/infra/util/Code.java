@@ -50,6 +50,7 @@ public class Code
 	public static final String GAME_STATUS_RUN			= "GS003";
 	public static final String GAME_STATUS_END			= "GS004";
 	public static final String GAME_STATUS_CANCEL		= "GS005";
+	public static final String GAME_STATUS_DELETE		= "GS006";
 	
 	public static final String MONEY_IN_REQUEST			= "MC001";
 	public static final String MONEY_IN_SUCCESS			= "MC002";
@@ -157,6 +158,7 @@ public class Code
 		put(GAME_STATUS_RUN, "경기진행");
 		put(GAME_STATUS_END, "경기종료");
 		put(GAME_STATUS_CANCEL, "경기취소");
+		put(GAME_STATUS_DELETE, "삭제");
 		
 		put(BET_STATUS_RUN, "진행중");
 		put(BET_STATUS_SUCCESS, "당첨");

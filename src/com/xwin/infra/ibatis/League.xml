@@ -23,7 +23,7 @@
 				NAME LIKE #name#
 			</isNotNull>
 		</dynamic>
-		ORDER BY NAME DESC
+		ORDER BY NAME ASC
 		<isNotNull prepend="LIMIT" property="fromRow">
 			#fromRow#, #rowSize#
 		</isNotNull>
@@ -42,6 +42,11 @@
 	<select id="selectLeagueById" resultMap="leagueResultMap"
 		parameterClass="java.lang.String">
 		SELECT * FROM tbl_league WHERE ID = #value#
+	</select>
+	
+	<select id="selectLeagueByName" resultMap="leagueResultMap"
+		parameterClass="java.lang.String">
+		SELECT * FROM tbl_league WHERE NAME = #value#
 	</select>
 	
 	<insert id="insertLeague" parameterClass="League">

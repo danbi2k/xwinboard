@@ -22,7 +22,7 @@
 		<%} else {%>
 		gameType = '<%=type%>';
 		<%}%>
-		if(!d.leagueId.value) { alert('리그명을 선택하세요'); d.reagueId.focus(); return false; }
+		if(!d.leagueName.value) { alert('리그명을 선택하세요'); d.leagueName.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
 		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
 		if(!d.gameHour.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gameHour.focus(); return false; }
@@ -45,7 +45,7 @@
 		var query = "mode=registerGame";
 		query += "&type=" + gameType;
 		query += "&grade=<%=grade%>";
-		query += "&leagueId=" + d.leagueId.value;
+		query += "&leagueName=" + d.leagueName.value;
 		query += "&gameDate=" + d.gameDate.value;
 		query += "&gameHour=" + d.gameHour.value;
 		query += "&gameMinute=" + d.gameMinute.value;
@@ -89,13 +89,13 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<select name='leagueId'>
+			<select name='leagueName'>
 				<%
 				if (leagueList != null) {
 					for (League league : leagueList) {
 						
 				%>
-				<option value='<%=league.getId()%>' > <%=league.getName()%> </option>
+				<option value='<%=league.getName()%>' > <%=league.getName()%> </option>
 				<%
 					}
 				}

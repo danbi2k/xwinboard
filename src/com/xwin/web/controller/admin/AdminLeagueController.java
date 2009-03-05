@@ -84,13 +84,20 @@ public class AdminLeagueController extends XwinController
 		MultipartFile mf = command.getImage();
 		String fileName = XwinUtil.uploadContent(mf, Code.LEAGUE_IMAGE_PATH);
 		
-		League league = new League();
-		league.setName(command.getName());
-		league.setImage(fileName);
-		
-		leagueDao.insertLeague(league);		
-		
-		ModelAndView mv = new ModelAndView("redirect:adminLeague.aspx?mode=viewLeagueList");
+		ModelAndView mv = null;
+		try {
+			League league = new League();
+			league.setName(command.getName());
+			league.setImage(fileName);
+			
+			leagueDao.insertLeague(league);		
+			
+			mv = new ModelAndView("redirect:adminLeague.aspx?mode=viewLeagueList");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv = new ModelAndView("admin/game/register_league");
+			mv.addObject("EXIST", command.getName());
+		}
 		
 		return mv;
 	}
