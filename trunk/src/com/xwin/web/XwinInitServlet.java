@@ -46,6 +46,9 @@ public class XwinInitServlet extends HttpServlet
 		WebApplicationContext wac = 
 			WebApplicationContextUtils.getRequiredWebApplicationContext(ctx);
 		
+		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
+		Admin.memberDao = memberDao;
+		
 		AdminDao adminDao = (AdminDao) wac.getBean("adminDao");
 		Admin.NOTICE = adminDao.selectAdmin("NOTICE");
 		Admin.POPUP = adminDao.selectAdmin("POPUP");
@@ -71,9 +74,6 @@ public class XwinInitServlet extends HttpServlet
 		
 		Admin.BETTING_POINT_USE = adminDao.selectAdmin("BETTING_POINT_USE").equals("Y");
 		Admin.BETTING_POINT_RATE = Integer.parseInt(adminDao.selectAdmin("BETTING_POINT_RATE").trim());
-		
-		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
-		Admin.memberDao = memberDao;
 		
 		Member admin = memberDao.selectMember("secadmin", null);
 		Admin.ADMIN_EMAIL = admin.getEmail();
