@@ -199,4 +199,28 @@ public class AdminController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView changeQnaPlay(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String qnaPlay = XwinUtil.arcNvl(request.getParameter("qnaPlay"));
+		HttpSession session = request.getSession();
+		
+		String QNA_PLAY = "on";
+		if (qnaPlay == null)
+			QNA_PLAY = (String) session.getAttribute("QNA_PLAY");
+		else {
+			QNA_PLAY = qnaPlay;
+			session.setAttribute("QNA_PLAY", qnaPlay);
+		}
+		
+		ResultXml rx = new ResultXml(0, QNA_PLAY, null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }
