@@ -72,7 +72,7 @@ public class XwinInitServlet extends HttpServlet
 		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
 		Admin.memberDao = memberDao;
 		
-		Member admin = memberDao.selectMember("secadmin", null);
+		Member admin = memberDao.selectMember("admin", null);
 		Admin.ADMIN_EMAIL = admin.getEmail();
 	}
 
