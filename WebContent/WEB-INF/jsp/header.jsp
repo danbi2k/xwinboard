@@ -191,7 +191,7 @@ receiveMemo();
 	</tr>
 	<tr>
 		<td width="958" width="958" height="60" align="center" valign="middle" background="img/s_03.jpg">
-			<script>mEmbed('src=img/menu.swf','width=931','height=60','wmode=#ffffff','menu=false','quality=high','bgcolor=#ffffff');</script> 
+			<script>mEmbed('src=img/menu2.swf','width=931','height=60','wmode=#ffffff','menu=false','quality=high','bgcolor=#ffffff');</script> 
 		</td>
 	</tr>
 	<tr>
