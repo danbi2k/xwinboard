@@ -44,7 +44,10 @@ public class AdminController extends XwinController
 		param = new HashMap<String, Object>(1);
 		param.put("isChecked", "N");
 		indicator.setHackingIndi(hackingLogDao.selectHackingLogCount(param).toString());
-
+		
+		indicator.setWdlIndi(Admin.SYNC_COUNT_WDL.toString());
+		indicator.setHandyIndi(Admin.SYNC_COUNT_HANDY.toString());
+		
 		ResultXml rx = new ResultXml(0, null, indicator);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
