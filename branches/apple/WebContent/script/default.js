@@ -1,3 +1,16 @@
+var topLink = [];
+topLink["m1"] = "play.php?mode=viewGameList&type=wdl&grade=1";
+topLink["m2"] = "play.php?mode=viewGameList&type=handy&grade=1";
+topLink["m3"] = "play.php?mode=viewGameResultList";
+topLink["m4"] = "bbs.php?mode=viewBoard&boardName=user";
+topLink["m5"] = "bbs.php?mode=viewBoard&boardName=qna";
+
+function goTopLink(index)
+{
+	//alert(index);
+	location.href = topLink[index];
+}
+
 function exchangePoint(point)
 {
 	var balance = point - (point % 10000);
