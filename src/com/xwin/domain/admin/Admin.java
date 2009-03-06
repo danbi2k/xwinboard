@@ -39,6 +39,9 @@ public class Admin extends XwinObject
 	public static boolean BETTING_POINT_USE = false;
 	public static Integer BETTING_POINT_RATE = 0;
 	
+	public static Integer SYNC_COUNT_WDL = 0;
+	public static Integer SYNC_COUNT_HANDY = 0;
+	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}

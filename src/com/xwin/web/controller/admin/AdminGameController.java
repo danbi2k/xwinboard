@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
@@ -46,6 +47,11 @@ public class AdminGameController extends XwinController
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
+		
+		if (type.equals("wdl"))
+			Admin.SYNC_COUNT_WDL = 0;
+		else if (type.equals("handy"))
+			Admin.SYNC_COUNT_HANDY = 0;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);

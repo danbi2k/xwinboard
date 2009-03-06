@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.Game;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -20,7 +21,7 @@ public class GameSyncService extends XwinService
 	{
 		String gameXml = null;
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(10000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
 		
 		PostMethod post = new PostMethod(GAME_URL);		
 		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
@@ -35,6 +36,7 @@ public class GameSyncService extends XwinService
 		
 		//List<SmsWait> smsWaitList = smsWaitDao.selectSmsWaitList();
 		
+		int wdl_count = 0, handy_count = 0;
 		List<Game> gameList = (List<Game>) XmlUtil.fromXml(gameXml);
 		if (gameList != null) {
 			for (Game game : gameList) {
@@ -52,20 +54,30 @@ public class GameSyncService extends XwinService
 						game.setWinRate(winRate);
 						game.setDrawRate(drawRate);
 						game.setLoseRate(loseRate);
+						
+						wdl_count++;
 					} else if (game.getType().equals("handy")) {
 						Double winRate = game.getWinRate() + 0.05;
 						Double loseRate = game.getLoseRate() + 0.05;
 						
 						game.setWinRate(winRate);
 						game.setLoseRate(loseRate);
+						
+						handy_count++;
 					}
 					gameDao.insertGame(game);
 				} catch (Exception e) {
 					System.out.println("dup : " + game.getId());
+					if (game.getType().equals("wdl"))
+						wdl_count--;
+					else if (game.getType().equals("handy"))
+						handy_count--;
 					//e.printStackTrace();
 				}
 			}
 		}
+		Admin.SYNC_COUNT_WDL = wdl_count;
+		Admin.SYNC_COUNT_HANDY = handy_count;
 	}
 	
 	public Double calcRate(Double x)

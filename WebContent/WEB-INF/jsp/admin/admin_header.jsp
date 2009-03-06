@@ -3,6 +3,7 @@
 
 <%@ page import="com.xwin.domain.user.*" %>
 <%@ page import="com.xwin.domain.admin.*" %>
+<%@ page import="com.xwin.infra.util.*" %>
 <%
 	Member admin = (Member)session.getAttribute("Admin");
 	String EX_PLAY = (String)session.getAttribute("EX_PLAY");
@@ -34,7 +35,7 @@ if (admin == null) {
 }
 %>
 
-var chargingVal, exchangeVal, centerVal, vipVal, hackVal;
+var chargingVal, exchangeVal, centerVal, vipVal, hackVal, wdlVal, handyVal;
 var exchangePlay = <%=EX_PLAY.equals("on")?"true":"false"%>;
 
 function checkIndiCallBack(result)
@@ -51,6 +52,8 @@ function checkIndiCallBack(result)
 		centerVal = centerIndi.innerHTML = (data.centerIndi);
 		//vipVal = vipIndi.innerHTML = (data.vipIndi);
 		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
+		wdlVal = wdlIndi.innerHTML = (data.wdlIndi);
+		handyVal = handyIndi.innerHTML = (data.handyIndi);
 	}
 }
 
@@ -80,6 +83,8 @@ function playSound()
 	//	playIt(player3);
 	if (hackVal > 0)
 		playIt(player4);
+	if (wdlVal+handyVal > 0)
+		playIt(player5);
 }
 
 function changeExPlay()
@@ -119,6 +124,8 @@ setInterval("playSound()", 3000);
 			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
 			<!-- li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li -->
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
+			<li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
+			<li>핸디캡  <a id="handyIndi" href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
 			<li><input type="button" value="경기퍼오기" onclick="gameSync()"></li>
 		</ul>
 	</div>
