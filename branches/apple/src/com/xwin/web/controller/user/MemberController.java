@@ -99,9 +99,11 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
 											if (cnt == 0) {
 												//memberDao.loggingGetEvent(member.getMobile());
-												member.setBalance(5000L);
-												member.setJoinBonus(5000);
-												WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+												//member.setBalance(5000L);
+												//member.setJoinBonus(5000);
+												//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+												member.setBalance(0L);
+												member.setJoinBonus(0);
 												
 											} else {
 												member.setBalance(30000L);
