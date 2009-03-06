@@ -211,12 +211,21 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 		ResultXml rx = null;
 		
+		String phone = phone1 + "-" + phone2 + "-" + phone3;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("mobile", phone);
+		Integer count = memberDao.selectMemberCount(param);
+		
 		if ((phone1 == null || phone1.length() < 3) ||
 				(phone2 == null || phone2.length() < 3) ||
 				(phone3 == null || phone3.length() < 4))
-			rx = new ResultXml(-1, "휴대폰 번호를 정확히 입력하세요", null);
-		else
+			rx = new ResultXml(-1, "핸드폰 번호를 정확히 입력하세요", null);
+		else if (count > 0) {
+			rx = new ResultXml(-1, "등록된 핸드폰 번호 입니다.", null);
+		} else {
 			rx = ResultXml.SUCCESS;
+		}
 		
 		return rx;
 	}
