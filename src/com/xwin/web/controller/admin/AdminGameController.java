@@ -286,9 +286,33 @@ public class AdminGameController extends XwinController
 		
 		gameDao.updateGame(game);
 		
-		processService.judgeGameResult(game);		
+		processService.judgeGameResult(game, false);		
 		
 		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView recoverGame(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;		
+		String id = request.getParameter("id");
+		
+		Game game = new Game();
+		game.setId(id);
+		game.setStatus(Code.GAME_STATUS_RUN);
+		
+		gameDao.updateGame(game);
+		
+		processService.judgeGameResult(game, true);		
+		
+		rx = new ResultXml(0, "경기가 복구 되었습니다", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -358,7 +382,7 @@ public class AdminGameController extends XwinController
 			gameDao.updateGame(game);
 			
 			try {
-				processService.judgeGameResult(game);				
+				processService.judgeGameResult(game, false);				
 				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -405,7 +429,7 @@ public class AdminGameController extends XwinController
 			gameDao.updateGame(game);
 			
 			try {
-				processService.judgeGameResult(game);				
+				processService.judgeGameResult(game, false);				
 				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
