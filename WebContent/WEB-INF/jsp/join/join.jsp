@@ -82,8 +82,8 @@
 							</td>
 						</tr>
 						<tr>	
-							<th>프랜드 아이디</th>
-							<td><input type='text' name='introducerId' class='input_text w100'>
+							<th>프랜드 아이디</th> 
+							<td><input type='text' name='introducerId' class='input_text w100'> <font color="yellow">★ 로그인아이디를 적어주세요. 닉네임을 적으시면 안됩니다.</font></td>
 						</tr>
 						</table>
 
