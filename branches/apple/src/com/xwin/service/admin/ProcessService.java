@@ -11,25 +11,23 @@ import org.springframework.context.MessageSourceAware;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Admin;
-import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.user.Member;
-import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 
 public class ProcessService extends XwinService implements MessageSourceAware
 {	
-	public void judgeGameResult(Game game)
+	public void judgeGameResult(Game game, Boolean all)
 	{
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
-		param.put("notCalcStatus", Code.BET_CALC_COMMIT);
+		if (all == false)
+			param.put("notCalcStatus", Code.BET_CALC_COMMIT);
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		
 		if (bettingList != null) {
@@ -94,6 +92,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 							betGame.setResultStatus(Code.RESULT_STATUS_CANCEL);
 							thisRate = 1.0;
 							cancelCount++;
+						} else if (betGame.getStatus().equals(Code.GAME_STATUS_RUN)) {
+							betGame.setResultStatus(Code.RESULT_STATUS_RUN);
 						}
 						
 						if (totalRate == 0.0)
@@ -115,6 +115,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 					betting.setStatus(Code.BET_STATUS_RETURN);
 				} else if (totalCount == (successCount + cancelCount + drawCount)) {
 					betting.setStatus(Code.BET_STATUS_SUCCESS);
+				} else {
+					betting.setStatus(Code.BET_STATUS_RUN);
 				}
 				
 				Double cutRate = XwinUtil.doubleCut(totalRate); 
@@ -126,6 +128,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 					calcuateBetting(betting);
 					betting.setEndDate(new Date());
 					betting.setCalcStatus(Code.BET_CALC_COMMIT);
+				} else {
+					betting.setCalcStatus(Code.BET_CALC_DISABLE);
 				}
 				
 				bettingDao.updateBetting(betting);

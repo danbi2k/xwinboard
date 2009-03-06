@@ -77,7 +77,14 @@
 	     <td><input type="button" value="재처리" onclick="reprocessGame()"></td>
 		<%
 		}
-		%>                               
+		%> 
+		<%
+		if (game.getStatus().equals(Code.GAME_STATUS_CANCEL)) {
+		%>
+		 <td><input type="button" value="복구" onclick="recoverGame()"></td>                              
+		<%
+		}
+		%>
 	     <td><input type="button" value="취소" onclick="history.back()"></td>
 	</tr>
 </table>
@@ -96,6 +103,18 @@ function reprocessGame()
 	var query="mode=reprocessGame";
 	query += "&homeScore=" + homeScore;
 	query += "&awayScore=" + awayScore;
+	query += "&id=<%=game.getId()%>";
+	query += "&type=<%=game.getType()%>";
+	var http = new JKL.ParseXML("adminGame.aspx", query);
+	var result = http.parse();
+	alert (result.resultXml.message);
+}
+
+function recoverGame()
+{
+	var frm = document.repGame;
+
+	var query="mode=recoverGame";
 	query += "&id=<%=game.getId()%>";
 	query += "&type=<%=game.getType()%>";
 	var http = new JKL.ParseXML("adminGame.aspx", query);
