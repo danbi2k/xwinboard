@@ -33,7 +33,7 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.aspx?mode=processLogout">
+	<META HTTP-EQUIV="Refresh" Content="900; URL=login.aspx?mode=processLogout">
 	
 	<script language="JavaScript" src="script/code.js"></script>
 	<script language="JavaScript" src="script/default.js"></script>
