@@ -311,6 +311,12 @@
 		WHERE USERID = #userId#
 	</update>
 	
+	<update id="plusMinusJoinBonus" parameterClass="map">
+		UPDATE tbl_member
+		SET JOIN_BONUS = JOIN_BONUS + (#joinBonus#)
+		WHERE USERID = #userId#
+	</update>
+	
 	<update id="plusMinusIntroLetter" parameterClass="map">
 		UPDATE tbl_member
 		SET INTRO_LETTER = INTRO_LETTER + (#introLetter#)

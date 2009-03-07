@@ -107,7 +107,7 @@ public class MoneyOutController extends XwinController
 			rx = new ResultXml(-1, "잔액이 부족합니다", null);
 		}
 		else if (sum < member.getJoinBonus()) {
-			rx = new ResultXml(-1, "회원님께서는 가입보너스로 받으신 " + XwinUtil.comma3(member.getJoinBonus()) + "캐쉬를 \n배팅에 사용하신 후에 환전이 가능합니다. \n현배팅액 : " + XwinUtil.comma3(sum), null);
+			rx = new ResultXml(-1, "회원님께서는 가입보너스 및 프랜드보너스로 받으신 " + XwinUtil.comma3(member.getJoinBonus()) + "캐쉬를 \n배팅에 사용하신 후에 환전이 가능합니다. \n현배팅액 : " + XwinUtil.comma3(sum), null);
 		}
 		else {
 			moneyOut.setUserId(member.getUserId());
