@@ -133,6 +133,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												accountDao.insertAccount(account);
 												
 												memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
+												memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
 											}
 											
 											rx = new ResultXml(0, WelcomeMsg, null);

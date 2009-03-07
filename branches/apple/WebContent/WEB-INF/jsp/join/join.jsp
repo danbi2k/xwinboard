@@ -13,14 +13,6 @@
 
 		<div id='sub_content1'>
 			<div class='member_modify'>
-				<h3>· 가입축하 이벤트 안내</h3>
-				<div class='box'>
-					<ol>
-						<li>
-						&nbsp;&nbsp;● 회원 가입시 5,000 캐쉬 지급 이벤트는 종료 되었습니다. 공지사항을 참조하세요
-						</li>
-					</ol>	
-				</div>
 				<h3>· 가입신청서</h3>
 				<div class='box'>
 					<form name='frm_reg'>
