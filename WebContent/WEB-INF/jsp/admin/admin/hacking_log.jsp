@@ -45,7 +45,7 @@ if (hackingLogList != null) {
 		<td width=15%><%=XwinUtil.nvl(hackingLog.getNickName())%></td>
 		<td width=10%><%=XwinUtil.toDateStr(hackingLog.getDate(), 1)%></td>
 		<td width=15%><%=XwinUtil.nvl(hackingLog.getMode())%></td>
-		<td width=*><%=XwinUtil.nvl(hackingLog.getValue())%>
+		<td width=45% style='word-break:break-all;'><%=XwinUtil.nvl(hackingLog.getValue())%>
 		</td>
 	</tr>
 <%
