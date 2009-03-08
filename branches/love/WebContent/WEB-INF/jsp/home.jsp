@@ -139,7 +139,7 @@
 					              		<%=XwinUtil.comma3(member.getBalance())%>         
 					                </td>
 									<td width="451" height="25" align="left" valign="middle" class="maint" style="padding-left:70">
-					              		<%=XwinUtil.comma3(member.getPoint())%>         
+					              		<a href='javascript:exchangePoignt(<%=member.getPoint()%>)'><%=XwinUtil.comma3(member.getPoint())%></a>         
 					                </td>					           
 					        </tr>
 					    </table>    
