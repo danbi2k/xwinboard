@@ -57,8 +57,8 @@ public class GameSyncService extends XwinService
 						
 						wdl_count++;
 					} else if (game.getType().equals("handy")) {
-						Double winRate = game.getWinRate() + 0.03;
-						Double loseRate = game.getLoseRate() + 0.03;
+						Double winRate = game.getWinRate() + 0.02;
+						Double loseRate = game.getLoseRate() + 0.02;
 						
 						game.setWinRate(winRate);
 						game.setLoseRate(loseRate);
@@ -88,9 +88,9 @@ public class GameSyncService extends XwinService
 		Double y = 0.0;
 		
 		if (x < 2.0) {
-			y = 1.0 + ((x - 1.0) * 1.15);
+			y = 1.0 + ((x - 1.0) * 1.10);
 		} else {
-			y = 1.0 + ((x - 1.0) * 1.1);
+			y = 1.0 + ((x - 1.0) * 1.05);
 		}
 		
 		return y;

@@ -91,7 +91,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												member.setJoinDate(new Date());
 												member.setBankName(command.getBankName());
 												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
-												member.setBankOwner(command.getBankOwner());
+												member.setBankOwner(XwinUtil.bankTrim(command.getBankOwner()));
 												member.setBankDate(new Date());
 												member.setGetSms(command.getSmsCheck());
 												member.setIntroducerId(introducerId);

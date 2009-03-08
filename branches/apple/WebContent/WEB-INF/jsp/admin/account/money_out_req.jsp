@@ -204,12 +204,12 @@ function checkBankBookInfo(bankName, bankNumber, bankOwner, userId)
 	if (result.resultXml.code == 0) {
 		var dupList = Xwin.ToArray(result.resultXml.object.member);
 		if (dupList.length > 1) {
+			var x = 1;
 			var dupId = "환전계좌중복!! (" + bankName + " " + bankNumber + " " + bankOwner + ")\n중복된 다른 아이디/닉네임 목록\n\n";
 			for (i in dupList) {
 				if (userId == dupList[i].userId)
 					continue;
-				var x = parseInt(i) + 1;
-				dupId += (x) + ". " + dupList[i].userId + " " + dupList[i].nickName + "\n";
+				dupId += (x++) + ". " + dupList[i].userId + " " + dupList[i].nickName + "\n";
 			}
 			alert(dupId);
 		} else {

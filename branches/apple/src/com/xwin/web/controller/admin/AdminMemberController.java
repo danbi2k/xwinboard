@@ -294,7 +294,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			member = new Member();
 			member.setBankName(bankName);
 			member.setBankNumber(XwinUtil.bankTrim(bankNumber));
-			member.setBankOwner(bankOwner);
+			member.setBankOwner(XwinUtil.bankTrim(bankOwner));
 			member.setUserId(userId);
 			member.setBankDate(new Date());
 			
