@@ -236,6 +236,15 @@
 		<isNotNull prepend="AND" property="passwordExpire">
 			PASSWORD_EXPIRE = #passwordExpire#
 		</isNotNull>
+		<isNotNull prepend="AND" property="bankName">
+			BANKNAME = #bankName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankNumber">
+			BANKNUMBER = #bankNumber#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankOwner">
+			BANKOWNER = #bankOwner#
+		</isNotNull>
 		<isNotNull property="orderCol">
 			ORDER BY $orderCol$ $orderBy$
 		</isNotNull>
@@ -275,11 +284,14 @@
 		<isNotNull prepend="AND" property="passwordExpire">
 			PASSWORD_EXPIRE = #passwordExpire#
 		</isNotNull>
-		<isNotNull prepend="AND" property="introducerId">
-			INTRODUCER_ID = #introducerId#
+		<isNotNull prepend="AND" property="bankName">
+			BANKNAME = #bankName#
 		</isNotNull>
-		<isNotNull prepend="AND" property="denyrity">
-			DENYRITY > 0
+		<isNotNull prepend="AND" property="bankNumber">
+			BANKNUMBER = #bankNumber#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankOwner">
+			BANKOWNER = #bankOwner#
 		</isNotNull>
 	</select>
 	

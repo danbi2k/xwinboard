@@ -578,6 +578,27 @@ public class AdminAccountController extends XwinController implements MessageSou
 		return mv;	
 	}
 	
+	public ModelAndView checkBankBookInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String bankName = request.getParameter("bankName");
+		String bankNumber = request.getParameter("bankNumber");
+		String bankOwner = request.getParameter("bankOwner");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);		
+		
+		List <Member> dupList = memberDao.selectMemberList(param);
+		
+		ResultXml rx = new ResultXml(0, null, dupList);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
 	private MessageSource msgSrc = null;
 
 	public void setMessageSource(MessageSource messageSource) {

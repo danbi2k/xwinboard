@@ -10,6 +10,7 @@ import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.game.League;
+import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.web.command.FolderCalc;
 import com.xwin.web.command.Indicator;
@@ -34,6 +35,7 @@ public class XmlUtil
 		xstream.alias("indicator", Indicator.class);
 		xstream.alias("transaction", Transaction.class);
 		xstream.alias("smsWait", Transaction.class);
+		xstream.alias("member", Member.class);
 	}
 	
 	public static String toXml(Object object)

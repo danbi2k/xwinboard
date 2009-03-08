@@ -197,7 +197,10 @@
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>추천해준회원</td>
-		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getIntroducerId())%></td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<a href='javascript:goMemberDetail("<%=XwinUtil.nvl(member.getIntroducerId())%>")'><%=XwinUtil.nvl(member.getIntroducerId())%></a>
+			<%=XwinUtil.nvl(member.getNickName())%>
+		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>추천한회원</td>
@@ -616,6 +619,16 @@ function changeBankInfo()
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0)
 		location.reload();
+	else if (result.resultXml.code == -2) {
+		var dupList = Xwin.ToArray(result.resultXml.object.member);
+		var dupId = "중복아이디목록 : ";
+		for (var i in dupList) {
+			if (dupList[i].userId == '<%=member.getUserId()%>')
+				continue;
+			dupId = dupId + dupList[i].userId + " ";
+		}
+		alert(dupId);
+	}
 }
 
 function changePassword()
