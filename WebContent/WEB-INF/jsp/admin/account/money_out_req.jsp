@@ -92,7 +92,7 @@
 		<td>
 			<input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'>	
 			<input type='button' value='취소' onclick='cancelMoneyOutRequest(<%=moneyOut.getId()%>)'>
-			<input type='button' value='계좌확인' onclick='checkBankBookInfo("<%=moneyOut.getBankName()%>", "<%=moneyOut.getNumber()%>", "<%=moneyOut.getName()%>")'>
+			<input type='button' value='계좌확인' onclick='checkBankBookInfo("<%=moneyOut.getBankName()%>", "<%=moneyOut.getNumber()%>", "<%=moneyOut.getName()%>", "<%=moneyOut.getUserId()%>")'>
 		</td>
 	</tr>
 <%
@@ -192,7 +192,7 @@ function deleteCheckedItem()
 	} 
 }
 
-function checkBankBookInfo(bankName, bankNumber, bankOwner)
+function checkBankBookInfo(bankName, bankNumber, bankOwner, userId)
 {
 	var query = "mode=checkBankBookInfo";
 	query += "&bankName=" + bankName;
@@ -203,12 +203,18 @@ function checkBankBookInfo(bankName, bankNumber, bankOwner)
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var dupList = Xwin.ToArray(result.resultXml.object.member);
-		var dupId = "환전계좌가 (" + bankName + " " + bankNumber + " " + bankOwner + ") 인 아이디/닉네임 목록\n\n";
-		for (i in dupList) {
-			var x = parseInt(i) + 1;
-			dupId += (x) + ". " + dupList[i].userId + " " + dupList[i].nickName + "\n";
+		if (dupList.length > 1) {
+			var dupId = "환전계좌중복!! (" + bankName + " " + bankNumber + " " + bankOwner + ")\n중복된 다른 아이디/닉네임 목록\n\n";
+			for (i in dupList) {
+				if (userId == dupList[i].userId)
+					continue;
+				var x = parseInt(i) + 1;
+				dupId += (x) + ". " + dupList[i].userId + " " + dupList[i].nickName + "\n";
+			}
+			alert(dupId);
+		} else {
+			alert("환전 계좌 중복 없음");
 		}
-		alert(dupId);
 	}
 }
 
