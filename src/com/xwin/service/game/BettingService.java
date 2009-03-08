@@ -69,14 +69,10 @@ public class BettingService extends XwinService
 		
 		
 		//애플 지급
-		Double betting_point_rate = 0.03;
+		Double betting_point_rate = 0.01;
 		int size = itemList.size();
-		if (size == 3)
+		if (size >= 4)
 			betting_point_rate = 0.05;
-		else if (size == 4)
-			betting_point_rate = 0.07;
-		else if (size >= 5)
-			betting_point_rate = 0.10;
 		
 		Double point = betting.getMoney() * betting_point_rate;
 		memberDao.plusMinusPoint(member.getUserId(), point.longValue());
@@ -89,7 +85,7 @@ public class BettingService extends XwinService
 		pointLog.setMoney(point.longValue());
 		pointLog.setBalance(member.getPoint() + point.longValue());
 		pointLog.setBettingId(betting.getId());
-		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate*100) + "% 애플");
+		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 애플");
 		pointLog.setBettingUserId(member.getUserId());
 		
 		pointDao.insertPoint(pointLog);
