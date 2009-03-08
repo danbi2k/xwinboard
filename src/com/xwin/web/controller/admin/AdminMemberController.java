@@ -260,27 +260,48 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String bankOwner = request.getParameter("bankOwner");
 		String userId = request.getParameter("userId");
 		
-		Member member = memberDao.selectMember(userId, null);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);
 		
-		BankBook bankBook = new BankBook();
-		bankBook.setBankName(member.getBankName());
-		bankBook.setNumber(member.getBankNumber());
-		bankBook.setName(member.getBankOwner());
-		bankBook.setStatus(userId);
-		bankBook.setDate(member.getBankDate());
+		ResultXml rx = null;
+		List <Member> dupList = memberDao.selectMemberList(param);
+		if (bankName == null || bankName.length() < 2)
+			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
+		else if (bankNumber == null || bankNumber.length() < 5)
+			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
+		else if (bankOwner == null || bankOwner.length() < 2)
+			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
+		else if (dupList.size() > 0) {
+			if (dupList.size() == 1 && dupList.get(0).getUserId().equals(userId))
+				rx = new ResultXml(-1, "기존 환전계좌번호 입니다", null);
+			else
+				rx = new ResultXml(-2, "다른 아이디에 등록된 환전계좌번호 입니다", dupList);
+		}
+		else {		
+			Member member = memberDao.selectMember(userId, null);
+			
+			BankBook bankBook = new BankBook();
+			bankBook.setBankName(member.getBankName());
+			bankBook.setNumber(member.getBankNumber());
+			bankBook.setName(member.getBankOwner());
+			bankBook.setStatus(userId);
+			bankBook.setDate(member.getBankDate());
+			
+			bankBookDao.insertMemberBankBook(bankBook);
+			
+			member = new Member();
+			member.setBankName(bankName);
+			member.setBankNumber(XwinUtil.bankTrim(bankNumber));
+			member.setBankOwner(bankOwner);
+			member.setUserId(userId);
+			member.setBankDate(new Date());
+			
+			memberDao.updateMember(member);		
 		
-		bankBookDao.insertMemberBankBook(bankBook);
-		
-		member = new Member();
-		member.setBankName(bankName);
-		member.setBankNumber(XwinUtil.bankTrim(bankNumber));
-		member.setBankOwner(bankOwner);
-		member.setUserId(userId);
-		member.setBankDate(new Date());
-		
-		memberDao.updateMember(member);		
-	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

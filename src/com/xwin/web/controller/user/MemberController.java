@@ -77,66 +77,69 @@ public class MemberController extends XwinController implements MessageSourceAwa
 									if (rx.getCode() == 0) {
 										rx = checkPin(phonePin);
 										if (rx.getCode() == 0) {
-											Member member = new Member();
-											member.setUserId(command.getUserId());
-											member.setPassword(command.getPassword1());
-											member.setNickName(command.getNickName());
-											member.setMobile(mobile);
-											member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-											member.setPin(phonePin);
-											member.setStatus(Code.USER_STATUS_NORMAL);
-											member.setGrade(Code.USER_GRADE_NORMAL);
-											member.setJoinDate(new Date());
-											member.setBankName(command.getBankName());
-											member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
-											member.setBankOwner(command.getBankOwner());
-											member.setBankDate(new Date());
-											member.setGetSms(command.getSmsCheck());
-											member.setIntroducerId(introducerId);
-											
-											String WelcomeMsg = "환영합니다";
-											
-											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-											if (cnt == 0) {
-												//memberDao.loggingGetEvent(member.getMobile());
-												//member.setBalance(5000L);
-												//member.setJoinBonus(5000);
-												//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
-												member.setBalance(0L);
-												member.setJoinBonus(0);
+											rx = checkExistBankBook(command.getBankName(), command.getBankNumber(), command.getBankOwner());
+											if (rx.getCode() == 0) {
+												Member member = new Member();
+												member.setUserId(command.getUserId());
+												member.setPassword(command.getPassword1());
+												member.setNickName(command.getNickName());
+												member.setMobile(mobile);
+												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+												member.setPin(phonePin);
+												member.setStatus(Code.USER_STATUS_NORMAL);
+												member.setGrade(Code.USER_GRADE_NORMAL);
+												member.setJoinDate(new Date());
+												member.setBankName(command.getBankName());
+												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
+												member.setBankOwner(command.getBankOwner());
+												member.setBankDate(new Date());
+												member.setGetSms(command.getSmsCheck());
+												member.setIntroducerId(introducerId);
 												
-											} else {
-												member.setBalance(30000L);
-												member.setJoinBonus(30000);
-												WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
+												String WelcomeMsg = "환영합니다";
+												
+												Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
+												if (cnt == 0) {
+													//memberDao.loggingGetEvent(member.getMobile());
+													//member.setBalance(5000L);
+													//member.setJoinBonus(5000);
+													//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+													member.setBalance(0L);
+													member.setJoinBonus(0);
+													
+												} else {
+													member.setBalance(30000L);
+													member.setJoinBonus(30000);
+													WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
+												}
+												
+												memberDao.insertMember(member);
+												
+		
+	//											invitation.setJoinId(member.getUserId());
+	//											invitationDao.updateInvitation(invitation);
+	//											
+												if (introducer != null) {
+													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+													memberDao.updateMember(introducer);
+													
+													Long intro_bonus = 5000L;
+													
+													Account account = new Account();
+													account.setUserId(introducer.getUserId());
+													account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
+													account.setDate(new Date());
+													account.setOldBalance(introducer.getBalance());
+													account.setMoney(intro_bonus);
+													account.setBalance(introducer.getBalance() + intro_bonus);
+													accountDao.insertAccount(account);
+													
+													memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
+													memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
+												}
+												
+												rx = new ResultXml(0, WelcomeMsg, null);
 											}
-											
-											memberDao.insertMember(member);
-											
-	
-//											invitation.setJoinId(member.getUserId());
-//											invitationDao.updateInvitation(invitation);
-//											
-											if (introducer != null) {
-												introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-												memberDao.updateMember(introducer);
-												
-												Long intro_bonus = 5000L;
-												
-												Account account = new Account();
-												account.setUserId(introducer.getUserId());
-												account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
-												account.setDate(new Date());
-												account.setOldBalance(introducer.getBalance());
-												account.setMoney(intro_bonus);
-												account.setBalance(introducer.getBalance() + intro_bonus);
-												accountDao.insertAccount(account);
-												
-												memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
-												memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
-											}
-											
-											rx = new ResultXml(0, WelcomeMsg, null);
 										}
 									}
 								}
@@ -296,6 +299,27 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
 		else if (memberDao.countMemberByNickName(nickName) > 0)			
 			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
+		
+		return rx;
+	}
+	
+	private ResultXml checkExistBankBook(String bankName, String bankNumber, String bankOwner) throws Exception
+	{
+		ResultXml rx = ResultXml.SUCCESS;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);
+		
+		if (bankName == null || bankName.length() < 2)
+			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
+		else if (bankNumber == null || bankNumber.length() < 5)
+			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
+		else if (bankOwner == null || bankOwner.length() < 2)
+			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
+		else if (memberDao.selectMemberCount(param) > 0)			
+			rx = new ResultXml(-1, "이미 등록된 환전계좌번호 입니다", null);
 		
 		return rx;
 	}
