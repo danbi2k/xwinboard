@@ -119,7 +119,7 @@ public class Code
 		put(BOARDITEM_TYPE_USER, "일반");
 		
 		put(BETTING_STATUS_ACCEPT, "배팅");
-		put(BETTING_STATUS_DENY, "금지");
+		put(BETTING_STATUS_DENY, "마감");
 		
 		put(GAME_DISPLAY_CLOSE, "미표시");
 		put(GAME_DISPLAY_OPEN, "표시");

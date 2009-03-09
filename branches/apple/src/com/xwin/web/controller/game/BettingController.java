@@ -62,7 +62,7 @@ public class BettingController extends XwinController
 			rx = new ResultXml(-1, "선택하신 게임이 없습니다", null);
 		}
 		else if (bettingService.checkBettingAccept(gameFolder) == false) {
-			rx = new ResultXml(-2, "일부 게임이 배팅 금지 상태 입니다", null);
+			rx = new ResultXml(-2, "일부 게임이 배팅 마감 상태 입니다", null);
 		}
 		else if (fc.getMoney() < 5000) {
 			rx = new ResultXml(-1, "5,000캐쉬 이상 배팅 하셔야 합니다", null);
@@ -139,7 +139,7 @@ public class BettingController extends XwinController
 				game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
 			gameFolder.remove(game.getId());
 			retCode = -2;
-			message = "일부 게임이 배팅 금지 상태 입니다";
+			message = "일부 게임이 배팅 마감 상태 입니다";
 		} else if ((guess.equals("W") && game.getWinDeny().equals("Y") == false) ||
 				(guess.equals("D") && game.getDrawDeny().equals("Y") == false) ||
 				(guess.equals("L") && game.getLoseDeny().equals("Y") == false)) {
