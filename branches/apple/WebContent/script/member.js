@@ -38,7 +38,7 @@ function FnMemReg(frm)
 	query += "&bankName=" + frm.bankName.value;
 	query += "&bankNumber=" + frm.bankNumber.value;
 	query += "&bankOwner=" + frm.bankOwner.value;
-	query += "&introducerId=" + frm.introducerId.value;
+	//query += "&introducerId=" + frm.introducerId.value;
 	if (frm.smsCheck.checked)
 		query += "&smsCheck=" + "Y";
 	else
