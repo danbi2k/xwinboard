@@ -97,7 +97,7 @@ public class BettingService extends XwinService
 			Double intro_point_rate = 0.03;
 			
 			Double intro_point = betting.getMoney() * intro_point_rate;
-			memberDao.plusMinusPoint(introducerId, point.longValue());
+			memberDao.plusMinusPoint(introducerId, intro_point.longValue());
 			
 			Point introPointLog = new Point();
 			introPointLog.setUserId(introducer.getUserId());
