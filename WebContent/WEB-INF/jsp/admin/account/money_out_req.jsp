@@ -209,7 +209,7 @@ function checkBankBookInfo(bankName, bankNumber, bankOwner, userId)
 			for (i in dupList) {
 				if (userId == dupList[i].userId)
 					continue;
-				dupId += (x++) + ". " + dupList[i].userId + " " + dupList[i].nickName + "\n";
+				dupId += (x++) + ". " + dupList[i].userId + " " + dupList[i].nickName + " " + C(dupList[i].status) + "\n";
 			}
 			alert(dupId);
 		} else {
