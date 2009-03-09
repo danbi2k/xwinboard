@@ -46,6 +46,16 @@
 		WHERE g.ID = #value#
 	</select>
 	
+	<select id="selectGameBySyncId" resultMap="GameResultMap" parameterClass="string">
+		SELECT
+			g.*,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
+		FROM tbl_game g 
+		WHERE g.SYNC_ID = #value#
+	</select>
+	
 	<select id="selectGameList" resultMap="GameResultMap" parameterClass="map">
 		SELECT
 			g.*,
