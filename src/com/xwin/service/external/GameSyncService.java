@@ -96,6 +96,7 @@ public class GameSyncService extends XwinService
 						
 						syncGame.setWinRate(winRate);
 						syncGame.setLoseRate(loseRate);
+						syncGame.setDrawRate(game.getDrawRate());
 						
 						if (dbGame.getWinRate().equals(syncGame.getWinRate()) == false)
 							note += dateStr + " 승배당변경 : " + dbGame.getWinRateStr() + " -> " + syncGame.getWinRateStr() + "\n";
