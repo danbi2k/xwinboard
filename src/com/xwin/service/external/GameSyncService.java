@@ -80,11 +80,14 @@ public class GameSyncService extends XwinService
 					syncGame.setId(dbGame.getId());
 					syncGame.setHomeTeam(game.getHomeTeam());
 					syncGame.setAwayTeam(game.getAwayTeam());
+					syncGame.setGameDate(game.getGameDate());
 					
 					if (dbGame.getHomeTeam().equals(syncGame.getHomeTeam()) == false)
 						note += dateStr + " 홈팀명변경: " + dbGame.getHomeTeam() + " -> " + syncGame.getHomeTeam() + "\n";
 					if (dbGame.getAwayTeam().equals(syncGame.getAwayTeam()) == false)
 						note += dateStr + " 원정팀명변경: " + dbGame.getAwayTeam() + " -> " + syncGame.getAwayTeam() + "\n";
+					if (dbGame.getGameDate().equals(syncGame.getGameDate()) == false)
+						note += dateStr + " 경기일시변경: " + XwinUtil.getBoardItemDate(dbGame.getGameDate()) + " -> " + XwinUtil.getBoardItemDate(syncGame.getGameDate()) + "\n";
 					
 					if (game.getType().equals("wdl")) {
 						Double winRate = XwinUtil.doubleCut(calcRate(game.getWinRate()));
