@@ -91,12 +91,13 @@ public class GameSyncService extends XwinService
 						if (dbGame.getLoseRate().equals(syncGame.getLoseRate()) == false)
 							note += dateStr + " 패배당변경 : " + dbGame.getLoseRateStr() + " -> " + syncGame.getLoseRateStr() + "\n";
 					} else if (game.getType().equals("handy")) {
-						Double winRate = game.getWinRate() + 0.02;
-						Double loseRate = game.getLoseRate() + 0.02;
+						Double winRate = XwinUtil.doubleCut(game.getWinRate() + 0.02);
+						Double loseRate = XwinUtil.doubleCut(game.getLoseRate() + 0.02);
+						Double drawRate = XwinUtil.doubleCut(game.getDrawRate());
 						
 						syncGame.setWinRate(winRate);
+						syncGame.setDrawRate(drawRate);
 						syncGame.setLoseRate(loseRate);
-						syncGame.setDrawRate(game.getDrawRate());
 						
 						if (dbGame.getWinRate().equals(syncGame.getWinRate()) == false)
 							note += dateStr + " 승배당변경 : " + dbGame.getWinRateStr() + " -> " + syncGame.getWinRateStr() + "\n";
