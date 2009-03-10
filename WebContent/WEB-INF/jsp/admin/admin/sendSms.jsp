@@ -3,6 +3,7 @@
     
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="com.xwin.domain.*"%>
 <%@ page import="java.util.*"%>
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
@@ -66,7 +67,7 @@ var targetCheck = 0;
 	-->
 	<tr>
 		<td>발신번호</td>
-		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="0000000000"></td>
+		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="<%=SiteConfig.SITE_PHONE%>"></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="submit1" value="전송" onClick="onSubmit();">	<input type="reset" name="Submit5" value="취소"></td>

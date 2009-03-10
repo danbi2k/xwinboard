@@ -109,6 +109,7 @@
 		class="com.xwin.web.controller.admin.AdminSmsController"
 		p:memberDao-ref="memberDao"
 		p:smsWaitDao-ref="smsWaitDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminQnaController"
