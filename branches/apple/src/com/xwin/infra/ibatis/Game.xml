@@ -34,6 +34,7 @@
 		<result property="loseDeny" column="LOSE_DENY"/>
 		<result property="grade" column="GRADE"/>
 		<result property="note" column="NOTE"/>
+		<result property="syncDeny" column="SYNC_DENY"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -243,6 +244,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="loseDeny">
 			LOSE_DENY = #loseDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="syncDeny">
+			SYNC_DENY = #syncDeny# 
 			</isNotNull>
 			<isNotNull prepend="," property="note">
 			NOTE = #note# 

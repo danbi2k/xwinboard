@@ -73,7 +73,7 @@ public class GameSyncService extends XwinService
 						handy_count++;
 					}
 					gameDao.insertGame(game);
-				} else {
+				} else if (dbGame.getSyncDeny().equals("Y")) {
 					String note = XwinUtil.nvl(dbGame.getNote());
 					
 					Game syncGame = new Game();

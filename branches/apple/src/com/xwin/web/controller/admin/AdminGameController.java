@@ -257,6 +257,7 @@ public class AdminGameController extends XwinController
 			game.setWinDeny(command.getWinDeny());
 			game.setDrawDeny(command.getDrawDeny());
 			game.setLoseDeny(command.getLoseDeny());
+			game.setSyncDeny(command.getSyncDeny());
 			
 			gameDao.updateGame(game);
 			

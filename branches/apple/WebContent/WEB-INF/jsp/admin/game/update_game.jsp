@@ -57,7 +57,11 @@
 		if (d.loseDeny.checked)
 			query += "&loseDeny=N";
 		else
-			query += "&loseDeny=Y";		
+			query += "&loseDeny=Y";	
+		if (d.syncDeny.checked)
+			query += "&syncDeny=Y";
+		else
+			query += "&syncDeny=N";		
 
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
@@ -154,7 +158,14 @@
 		<td bgcolor="#FFFFFF"  colspan=3>
 			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea>								
 		</td>
-	</tr>	
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">자동퍼오기</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<input type='checkbox' name='syncDeny' value="N" <%=game.getSyncDeny().equals("Y")?"checked":"" %>>
+			(체크를 해제하면 자동으로 퍼오지 않습니다, 수동으로 값을 수정한 경기는 체크를 해제하고 [등록하기]를 눌러주십시오)
+		</td>
+	</tr>
  </table>
 </form>
 <BR>
