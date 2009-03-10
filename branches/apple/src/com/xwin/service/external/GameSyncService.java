@@ -43,6 +43,9 @@ public class GameSyncService extends XwinService
 		List<Game> gameList = (List<Game>) XmlUtil.fromXml(gameXml);
 		if (gameList != null) {
 			for (Game game : gameList) {
+				if (game.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE))
+					continue;
+				
 				game.setSyncId(game.getId());
 				game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
 				if (game.getWinRate() <= 1.0 || game.getLoseRate() <= 1.0)
@@ -71,10 +74,18 @@ public class GameSyncService extends XwinService
 					}
 					gameDao.insertGame(game);
 				} else {
+					String note = XwinUtil.nvl(dbGame.getNote());
+					
 					Game syncGame = new Game();
 					syncGame.setId(dbGame.getId());
-
-					String note = XwinUtil.nvl(dbGame.getNote());
+					syncGame.setHomeTeam(game.getHomeTeam());
+					syncGame.setAwayTeam(game.getAwayTeam());
+					
+					if (dbGame.getHomeTeam().equals(syncGame.getHomeTeam()) == false)
+						note += dateStr + " 홈팀명변경: " + dbGame.getHomeTeam() + " -> " + syncGame.getHomeTeam() + "\n";
+					if (dbGame.getAwayTeam().equals(syncGame.getAwayTeam()) == false)
+						note += dateStr + " 원정팀명변경: " + dbGame.getAwayTeam() + " -> " + syncGame.getAwayTeam() + "\n";
+					
 					if (game.getType().equals("wdl")) {
 						Double winRate = XwinUtil.doubleCut(calcRate(game.getWinRate()));
 						Double drawRate = XwinUtil.doubleCut(calcRate(game.getDrawRate()));
