@@ -1,7 +1,11 @@
 package com.xwin.service.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
@@ -19,6 +23,7 @@ public class BettingService extends XwinService
 	public void processBetting(GameFolder gameFolder, Member member)
 	{
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
+		String signature = makeBettingSignature(itemList);
 		
 		Betting betting = new Betting();
 		
@@ -32,6 +37,7 @@ public class BettingService extends XwinService
 		betting.setNickName(member.getNickName());
 		betting.setIntroducerId(member.getIntroducerId());
 		betting.setMemberId(member.getMemberId());
+		betting.setSignature(signature);
 		
 		String bettingId = bettingDao.insertBetting(betting);
 		
@@ -134,5 +140,36 @@ public class BettingService extends XwinService
 		}
 			
 		return accept;
+	}
+
+	public boolean checkDuplicateBetting(GameFolder gameFolder, String userId)
+	{
+		boolean duplicate = false;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("signature", makeBettingSignature(gameFolder.getGameFolderItemList()));
+		param.put("status", Code.BET_STATUS_RUN);
+		Integer count = bettingDao.selectBettingCount(param);
+		
+		if (count > 0)
+			duplicate = true;
+			
+		return duplicate;
+	}
+	
+	public String makeBettingSignature(List<GameFolderItem> itemList)
+	{
+		List<String> idGuessList = new ArrayList<String>(itemList.size());
+		for (GameFolderItem gfi : itemList) {
+			idGuessList.add(gfi.getId() + gfi.getGuess());
+		}
+		Collections.sort(idGuessList);
+		String signature = "";
+		for (String idGuess : idGuessList) {
+			signature += idGuess;
+		}
+		
+		return signature;
 	}
 }
