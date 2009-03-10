@@ -23,11 +23,12 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="betGameList" column="ID" select="selectBetGameListByBettingId"/>
 		<result property="memberId" column="MEMBERID"/>
+		<result property="signature" column="SIGNATURE"/>
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -111,6 +112,9 @@
 			<isNotNull prepend="AND" property="nickNameLike">
 			NICKNAME LIKE #nickNameLike#
 			</isNotNull>
+			<isNotNull prepend="AND" property="signature">
+			SIGNATURE = #signature#
+			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 			<![CDATA[
 			DATE >= #fromDate#
@@ -180,6 +184,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nickNameLike">
 			NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="signature">
+			SIGNATURE = #signature#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 			<![CDATA[
