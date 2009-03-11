@@ -138,9 +138,9 @@ public class GameSyncService extends XwinService
 		Double y = 0.0;
 		
 		if (x < 2.0) {
-			y = 1.0 + ((x - 1.0) * 1.10);
-		} else {
 			y = 1.0 + ((x - 1.0) * 1.05);
+		} else {
+			y = 1.0 + ((x - 1.0) * 1.03);
 		}
 		
 		return y;
