@@ -56,6 +56,7 @@ public class BettingController extends XwinController
 		
 		Long money = Long.parseLong(_money);		
 		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
+		Integer retVal = 0;
 		
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList.size() == 0) {
@@ -76,8 +77,11 @@ public class BettingController extends XwinController
 		else if (_action.equals("betting") && fc.getAfter() < 0) {
 			rx = new ResultXml(-1, "캐쉬 잔고가 부족합니다", null);
 		}
-		else if (bettingService.checkDuplicateBetting(gameFolder, member.getUserId())) {
-			rx = new ResultXml(-1, "중복배팅입니다", null);
+		else if ((retVal = bettingService.checkDuplicateBetting(gameFolder, member.getUserId())) < 0) {
+			if (retVal == -1)
+				rx = new ResultXml(-1, "중복배팅입니다\n배팅금액 1,000,000캐쉬 초과", null);
+			else
+				rx = new ResultXml(-1, "중복배팅입니다\n배당금액 3,000,000캐쉬 초과", null);
 		}
 		else if (_action.equals("betting")) {
 			bettingService.processBetting(gameFolder, member);

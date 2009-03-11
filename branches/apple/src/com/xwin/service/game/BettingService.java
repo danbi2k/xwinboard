@@ -16,6 +16,7 @@ import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.service.admin.XwinService;
 
 public class BettingService extends XwinService
@@ -142,18 +143,26 @@ public class BettingService extends XwinService
 		return accept;
 	}
 
-	public boolean checkDuplicateBetting(GameFolder gameFolder, String userId)
+	public Integer checkDuplicateBetting(GameFolder gameFolder, String userId)
 	{
-		boolean duplicate = false;
+		Integer duplicate = 1;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", userId);
 		param.put("signature", makeBettingSignature(gameFolder.getGameFolderItemList()));
 		param.put("status", Code.BET_STATUS_RUN);
-		Integer count = bettingDao.selectBettingCount(param);
+//		Integer count = bettingDao.selectBettingCount(param);
+//		
+//		if (count > 0)
+//			duplicate = true;
 		
-		if (count > 0)
-			duplicate = true;
+		Integer moneySum = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		Integer expectSum = XwinUtil.ntz(bettingDao.selectBettingExpectSum(param));
+		
+		if (moneySum + gameFolder.getMoney() > 1000000)
+			duplicate = -1;
+		else if (expectSum + gameFolder.getExpect() > 3000000)
+			duplicate = -2;
 			
 		return duplicate;
 	}
