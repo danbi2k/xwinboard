@@ -102,11 +102,11 @@ public class MoneyInController extends XwinController
 			Long money = Long.parseLong(_money);
 			
 			if (money <= 0)
-				rx = new ResultXml(-1, "0 보다 큰 값을 입력하세요", null);
+				rx = new ResultXml(-1, "충전 신청액을 다시 확인해 주세요", null);
 			else if (_name == null || _name.length() == 0)
-				rx = new ResultXml(-1, "입금자를 입력하세요", null);
+				rx = new ResultXml(-1, "예금주를 입력하세요", null);
 			else if (existCnt > 0) {
-				rx = new ResultXml(-1, "이미 신청하신 충전요청이 있습니다", null);
+				rx = new ResultXml(-1, "충전신청은 1건씩 가능합니다.", null);
 			}
 			else {			
 				MoneyIn moneyIn = new MoneyIn();
@@ -119,10 +119,10 @@ public class MoneyInController extends XwinController
 				moneyIn.setNickName(member.getNickName());
 				moneyInDao.insertMoneyIn(moneyIn);
 		
-				rx = new ResultXml(0, "캐쉬충전이 요청되었습니다", null);
+				rx = new ResultXml(0, "캐쉬충전이 접수 되었습니다", null);
 			}
 		} catch (NumberFormatException e) {
-			rx = new ResultXml(-1, "입금 예정액을 입력하세요", null);
+			rx = new ResultXml(-1, "충전 신청액을 다시 확인해 주세요", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");		
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -144,12 +144,12 @@ public class MoneyInController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false)
-			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "취소할수 없는 충전 신청 입니다", null);
 		else {
 			moneyIn.setStatus(Code.MONEY_IN_CANCEL);
 			moneyIn.setProcDate(new Date());
 			moneyInDao.updateMoneyIn(moneyIn);			
-			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+			rx = new ResultXml(0, "충전 신청이 정상적으로 취소되었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -172,11 +172,11 @@ public class MoneyInController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST))
-			rx = new ResultXml(0, "삭제 가능 상태가 아닙니다", null);
+			rx = new ResultXml(0, "진행중인 내역은 삭제 하실 수 없습니다", null);
 		else {
 			moneyIn.setIsRemoved("Y");
 			moneyInDao.updateMoneyIn(moneyIn);			
-			rx = new ResultXml(0, "충전기록이 삭제되었습니다", null);
+			rx = new ResultXml(0, "충전신청 내역이 정상적으로 삭제되었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
