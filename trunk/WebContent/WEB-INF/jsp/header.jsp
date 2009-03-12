@@ -73,7 +73,7 @@
 	%>	
 	</script>
 </head>
-<body oncontextmenu='return false' ondragstart='return false' onselectstart='return false' style="margin:0">
+<body style="margin:0">
 
 <a name="top"></a>
 
