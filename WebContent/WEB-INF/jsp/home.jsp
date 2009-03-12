@@ -53,7 +53,7 @@
 	<script language="javascript" src="script/mEmbed.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
-<body bgcolor="#1a1a1a" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' oncontextmenu='return false' ondragstart='return false' onselectstart='return false'>
+<body bgcolor="#1a1a1a" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <map name="ImageMap1">
 <area shape="rect" coords="25, 22, 65, 42" href="provision.aspx" onfocus="this.blur()">
 <area shape="rect" coords="86, 23, 128, 41" href="rules.aspx" onfocus="this.blur()">
