@@ -1,13 +1,11 @@
 var notice = [];
-function FnGetGameList(type, leagueId, grade, status)
+function FnGetGameList(type, leagueId, grade, memberId)
 {
 	var query = "mode=getGameList";
 	if (leagueId != undefined)
 		query += "&leagueId=" + leagueId;
 	if (type != undefined)
 		query += "&type=" + type;
-	if (status != undefined)
-		query += "&status=" + status;
 	if (grade != undefined)
 		query += "&grade=" + grade;
 	
@@ -16,11 +14,11 @@ function FnGetGameList(type, leagueId, grade, status)
 	
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.game);
-		FnDrawGameList(data, type);
+		FnDrawGameList(data, type, memberId);
 		FnDrawFolderCheck(type);
 	}
 }
-function FnDrawGameList(data,type)
+function FnDrawGameList(data, type, memberId)
 {
 	var row = [];
 	row.push("<table width=100% border=0 cellpadding=0 cellspacing=1 bgcolor=424142>");
@@ -58,7 +56,10 @@ function FnDrawGameList(data,type)
 			row.push("<tr>");
 			row.push("<td align=center width=60><nobr>&nbsp;</td>");
 			row.push("<td align=center width=60>&nbsp;</td>");								
-			row.push("<td width=90% align=right><nobr><font size='3' color=" + txtcolor + "><B>" + data[i].homeTeam);			
+			row.push("<td width=90% align=right>");
+			if (memberId == 1)
+				row.push("(" + comma3(data[i].winMoney) + ")&nbsp;");
+			row.push("<nobr><font size='3' color=" + txtcolor + "><B>" + data[i].homeTeam);			
 			if (data[i].betStatus == 'BTS01' && data[i].winDeny == "Y") {
 				row.push("&nbsp;<input type='checkbox' name='check" + data[i].id + "' id='check" + data[i].id + "W' onclick=\"FnGameBet(this, '" + data[i].id + "','" + type + "', 'W');\">");
 			} else {
@@ -87,6 +88,10 @@ function FnDrawGameList(data,type)
 				row.push(data[i].drawRate);	
 			}
 			
+
+			if (memberId == 1)
+				row.push("<br>(" + comma3(data[i].drawMoney) + ")");
+			
 			row.push("</td>");
 			row.push("<td align=left >");
 			row.push("<table border=0 width=100% cellpadding=0 cellspacing=1 bgcolor=424142>");
@@ -102,6 +107,8 @@ function FnDrawGameList(data,type)
 			}
 			
 			row.push("&nbsp;<font size='3' color=" + txtcolor + "><B>" + data[i].awayTeam + "</B></font>");
+			if (memberId == 1)
+				row.push("&nbsp;(" + comma3(data[i].loseMoney) + ")");
 			row.push("</td>");								
 			row.push("</tr>");
 			row.push("</table>");
