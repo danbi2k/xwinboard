@@ -460,6 +460,7 @@ label{height:18px;}
 .cart_list .list_box .t5{width:100px;}
 .cart_list .list_box .t6{width:80px;}
 .cart_list .list_box td{text-align:center; height:25px; border: 1px solid #460000; background-color:#721717;}
+.cart_list .list_box span{color:#FBCA71; font-family:'verdana'; font-size:12px; font-weight:900;}
 
 .cart_list .bet_box{text-align:center; margin-top:15px; color:#ecd2d2;}
 .cart_list .bet_box td{padding-right:5px;}

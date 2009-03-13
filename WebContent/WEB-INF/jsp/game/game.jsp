@@ -134,10 +134,10 @@ var gameType = '<%=type%>'
 			</table>
 			</div>
 			<div class='side_foot'></div>
-			<!-- div class='side_cart_bt'>
-			<img src='img/side_cartin_bt.gif' alt='카트에담기'>
-			<img src='img/side_cartview_bt.gif' alt='카트보기'>
-			</div -->
+			<div class='side_cart_bt'>
+			<img src='img/side_cartin_bt.gif' alt='카트에담기' onclick="FnAddBettingCart()">
+			<img src='img/side_cartview_bt.gif' alt='카트보기' onclick="location.href='cart.php?mode=viewBettingCart'">
+			</div>
 		</div>
 		<!-- end sub_right_content -->
 <%@include file="../footer.jsp"%>

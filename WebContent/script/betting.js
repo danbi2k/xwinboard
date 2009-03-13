@@ -198,7 +198,7 @@ function FnBetting()
 
 function FnAddBettingCart()
 {
-	if (confirm("배팅카트에 추가 하시겠습니까?")) {
+	if (confirm("배팅카트에 담으시겠습니까?")) {
 		var moneyDiv = document.getElementById("moneyDiv");
 		var money = moneyDiv.value;
 		if (money == undefined || money.length == 0)
