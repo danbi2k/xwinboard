@@ -43,7 +43,7 @@ var gameType = '<%=type%>'
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td>리그선택 : 
-	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('<%=type%>', this.value, '<%=grade%>');">
+	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('<%=type%>', this.value, '<%=grade%>', <%=member.getMemberId()%>);">
 		<option value="">--전체--</option>
 		<%
 		if (leagueList != null && leagueList.size() > 0) {
@@ -121,7 +121,7 @@ var gameType = '<%=type%>'
 <script>
 function reload()
 {
-	FnGetGameList('<%=type%>', FolderFrm.leagueId.value, '<%=grade%>');	
+	FnGetGameList('<%=type%>', FolderFrm.leagueId.value, '<%=grade%>', <%=member.getMemberId()%>);	
 }
 
 reload();
