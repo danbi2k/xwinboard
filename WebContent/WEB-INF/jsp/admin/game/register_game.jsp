@@ -77,8 +77,21 @@
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.reload();
-		}
+			d.homeTeam.value = '';
+			d.awayTeam.value = '';
+			d.winRate.value = '';
+			d.loseRate.value = '';
+			d.drawRate.value = '';
+			d.winDeny.checked = false;
+			d.drawDeny.checked = false;
+			d.loseDeny.checked = false;
+			<%if (type.equals("handy")){ %>
+			d.underRate.value = '';
+			d.handyRate.value = '';
+			d.overRate.value = '';
+			d.uoCheck.checked = false;
+			<%}%>
+		}	
 	}
 </SCRIPT>
 <div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
