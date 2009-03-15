@@ -145,13 +145,6 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>환전비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="pin" type="text" value="<%=member.getPassword()%>"/>
-			<input type="button" value="변경" onclick="changePin()"/>
-		</td>
- 	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>가입일</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%>:<%=member.getMemberId()%></td>
  	</tr>
@@ -160,46 +153,9 @@
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천장</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<%=member.getIntroLetter()%> 장
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
-			<input type="button" value="추천장지급" onclick="giveIntroLetter()"/>
-		</td>
- 	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>미사용추천장</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-		<table class="prettytable">
-		<%
-		if (noJoinList != null) {
-		%>
-		<tr>
-			<th>추천장</th>
-			<th>휴대폰</th>
-			<th>발송일</th>
-		</tr>
-		<%
-			for (Invitation invitation : noJoinList) {
-		%>
-			<tr>
-			<td><%=invitation.getInviteKey()%></a>	</td>
-			<td><%=invitation.getMobile()%></td>
-			<td><%=XwinUtil.toDateStr(invitation.getSendDate(), 1)%></td>
-			</tr>
-		<%
-			}
-		}
-		%>
-		</table>
-		</td>
- 	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>추천해준회원</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<a href='javascript:goMemberDetail("<%=XwinUtil.nvl(member.getIntroducerId())%>")'><%=XwinUtil.nvl(member.getIntroducerId())%></a>
-			<%=XwinUtil.nvl(member.getNickName())%>
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
@@ -312,23 +268,6 @@
 		<input type="button" value="변경" onclick="changeDenyrity()"/> ※ 금지 해제일을 넣지 않으면 수동으로 금지 해제 하셔야 합니다.
 		</td>
  	</tr>
-	<!-- 
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>회원상태</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_NORMAL%>' <%=member.getStatus().equals(Code.USER_STATUS_NORMAL)?"checked":""%>> 정상 
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_SECEDE%>' <%=member.getStatus().equals(Code.USER_STATUS_SECEDE)?"checked":""%>> 탈퇴
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_SECEDE_REQ%>' <%=member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)?"checked":""%>> 탈퇴요청
-		</td>
-	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>회원종류</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input type='radio' name='grade' value='<%=Code.USER_GRADE_NORMAL%>' <%=member.getGrade().equals(Code.USER_GRADE_NORMAL)?"checked":""%>> 일반 
-			<input type='radio' name='grade' value='<%=Code.USER_GRADE_VIP%>' <%=member.getGrade().equals(Code.USER_GRADE_VIP)?"checked":""%>> VIP
-		</td>
-	</tr>
-	 -->
 </table>
 <BR>													
 <table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
@@ -379,16 +318,6 @@
 		</td>
 	</tr>
 </table>
-</form>
-
-<form name="memo">
-<table class="list">
-	<tr>
-		<th width="10%">쪽지</th>
-		<td><textarea name="memo" style='width=100%;height=200px'></textarea></td>
-	</tr>
-</table>
-<input type="button" value="발송" onclick="sendMemo()"/>
 </form>
 
 <form name="note">
