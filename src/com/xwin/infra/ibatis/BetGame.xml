@@ -41,6 +41,9 @@
 			<isNotNull prepend="," property="guess">
 				GUESS = #guess#
 			</isNotNull>
+			<isNotNull prepend="," property="selRate">
+				SEL_RATE = #selRate#
+			</isNotNull>
 			<isNotNull prepend="," property="result">
 				RESULT = #result#
 			</isNotNull>
