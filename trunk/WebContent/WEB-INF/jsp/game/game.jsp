@@ -38,12 +38,12 @@ var gameType = '<%=type%>'
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">
 	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_gamelist.gif"></td><td>1~10경기까지 자유롭게 조합배팅이 가능합니다.</td>
+	<tr><td width="100"><img src="images/title_gamelist.gif"></td><td><span onclick="FnGetGameList('<%=type%>', this.value, '<%=grade%>', <%=member.getMemberId()%>);">1</span>~10경기까지 자유롭게 조합배팅이 가능합니다.</td>
 
 	<td align="right">
 		<table cellpadding="0" cellspacing="0">
 		<tr><td>리그선택 : 
-	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('<%=type%>', this.value, '<%=grade%>', <%=member.getMemberId()%>);">
+	<select name="leagueId" style="color:white;background-color:black;" onchange="FnGetGameList('<%=type%>', this.value, '<%=grade%>', 0);">
 		<option value="">--전체--</option>
 		<%
 		if (leagueList != null && leagueList.size() > 0) {
@@ -121,7 +121,7 @@ var gameType = '<%=type%>'
 <script>
 function reload()
 {
-	FnGetGameList('<%=type%>', FolderFrm.leagueId.value, '<%=grade%>', <%=member.getMemberId()%>);	
+	FnGetGameList('<%=type%>', FolderFrm.leagueId.value, '<%=grade%>', 0);	
 }
 
 reload();
