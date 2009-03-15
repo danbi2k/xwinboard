@@ -63,6 +63,14 @@ public class ProcessService extends XwinService implements MessageSourceAware
 							
 							if (isIt) {
 								betGame.setGuess(result);
+								if (result.equals("W"))
+									betGame.setSelRate(betGame.getWinRate());
+								else if (result.equals("D"))
+									betGame.setSelRate(betGame.getDrawRate());
+								else if (result.equals("L"))
+									betGame.setSelRate(betGame.getLoseRate());
+								
+								thisRate = betGame.getSelRate();
 							}
 							
 							if (betGame.getType().equals("wdl")) {
