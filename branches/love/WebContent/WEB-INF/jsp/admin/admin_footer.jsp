@@ -57,6 +57,7 @@
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">경기결과(하프타임)</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_GAME%>">공지관리</a></li>
+					<li><a href="adminToto.aspx?mode=viewRegisterTotoForm">토토관리</a></li>
 				</ul>
 			</div>
 		</div>
