@@ -101,7 +101,7 @@ public class Code
 	static 
 	{
 		put(TRAN_TYPE_MONEYIN, "입금");
-		put(TRAN_TYPE_MONEYOUT, "환전");
+		put(TRAN_TYPE_MONEYOUT, "출금");
 		
 		put(POINT_TYPE_MONEYIN, "충전애플");
 		put(POINT_TYPE_BETTING, "배팅애플");

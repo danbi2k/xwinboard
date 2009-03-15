@@ -102,6 +102,26 @@
 			</ul>
 			</div>
 			<div class='m_latest_board_bottom'></div>
+			
+			<div class='m_latest_board_top'><a href='bbs.php?mode=viewBoard&boardName=user'><img src='img/latest_more_bt.gif' alt='게시판 더보기'></a></div>
+			<div class='m_latest_board_body'>
+			<!-- 게시판내용 -->
+			<ul>
+<%
+	if (userList != null) {
+		for (BoardItem user : userList) {
+			String title = user.getTitle();
+			if (title.length() > 12)
+				title = title.substring(0, 12) + "..";
+%>
+			<li><a href='bbs.php?mode=viewBoardDetail&boardName=user&id=<%=user.getId()%>&pageIndex=0'>· <%=title%></a></li>
+<%
+		}
+	}
+%>
+			</ul>
+			</div>
+			<div class='m_latest_board_bottom'></div>
 		</div>
 <script>
 function enter(frm)
