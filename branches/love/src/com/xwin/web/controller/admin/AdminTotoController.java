@@ -2,6 +2,7 @@ package com.xwin.web.controller.admin;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +85,19 @@ public class AdminTotoController extends XwinController
 	{
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
+		
+		Enumeration paramNames = request.getParameterNames();
+		StringBuffer sb = new StringBuffer();
+		while (paramNames.hasMoreElements()) {
+			String key = paramNames.nextElement().toString();
+			if (key.equals("mode") == false) {
+				String value = request.getParameter(key);
+				sb.append(key + "='" + value + "';");
+			}
+		}
+		
+		String concatString = sb.toString();
+		System.out.println(concatString);		
 		
 		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

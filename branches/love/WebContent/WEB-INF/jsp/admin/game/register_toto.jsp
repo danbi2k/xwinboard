@@ -4,7 +4,7 @@
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 
-<%@ include file="../admin_header.jsp"%>
+
 <%
 	String _colNum = request.getParameter("colNum");
 	String _rowNum = request.getParameter("rowNum");
@@ -24,6 +24,7 @@
 
 <form>
 <input type="hidden" name="mode" value="viewRegisterTotoForm"/>
+제목 : <input type="text" size="80"/><br>
 <select name="colNum">
 	<option value="1" <%=colNum==1?"selected":""%>>1경기</option>
 	<option value="2" <%=colNum==2?"selected":""%>>2경기</option>
@@ -33,6 +34,8 @@
 <input type="submit" value="입력폼생성"/>
 </form>
 
+<form name="totoFrm" action="adminToto.aspx" method="post">
+<input type="hidden" name="mode" value="registerToto"/>
 <table class="toto"">
 <tr>
 <%
@@ -47,9 +50,9 @@
 <%
 	for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" colspan="2"><input type="text" size="10"/></td>
+	<td align="center" colspan="2"><input type="text" size="10" name="T<%=j%>L" value="T<%=j%>L"/></td>
 	<td align="center" colspan="2">VS</td>
-	<td align="center" colspan="2"><input type="text" size="10"/></td>
+	<td align="center" colspan="2"><input type="text" size="10" name="T<%=j%>R" value="T<%=j%>R"/></td>
 <%
 	}
 %>
@@ -58,8 +61,8 @@
 <%
 	for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" colspan="3"><input type="text" size="14"/></td>
-	<td align="center" colspan="3"><input type="text" size="14"/></td>
+	<td align="center" colspan="3"><input type="text" size="14" name="I<%=j%>L" value="I<%=j%>L"/></td>
+	<td align="center" colspan="3"><input type="text" size="14" name="I<%=j%>R" value="I<%=j%>R"/></td>
 <%
 	}
 %>
@@ -72,10 +75,10 @@
 		for (int j = 0 ; j < colNum ; j++) {
 %>
 	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
-	<td align="center"><input type="text" size="8"/></td>
+	<td align="center"><input type="text" size="8" name="C<%=j%>L" value="C<%=j%>L<%=i%>"/></td>
 	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
 	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
-	<td align="center"><input type="text" size="8"/></td>
+	<td align="center"><input type="text" size="8" name="C<%=j%>R" value="C<%=j%>R<%=i%>"/></td>
 	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
 <%		
 		}
@@ -85,9 +88,10 @@
 	}
 %>
 </table>
-<input type="button" value="저장"/>
+<input type="submit" value="저장"/>
 <input type="button" value="검사" onclick="confirmMarking()"/>
 <input type="button" value="로드" onclick="loadMarking('0A3-0B0-0C0-0D0-1A5-1B4-1C7-1D3-2A3-2B2-2C2-2D7')"/>
+</form>
 
 <script>
 var selected = [];
@@ -146,4 +150,3 @@ function loadMarking(markString)
 }
 </script>
 <div id="_debug"></div>
-<%@ include file="../admin_footer.jsp"%>
