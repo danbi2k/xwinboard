@@ -108,7 +108,8 @@ function gameSync()
 { 
 	var query = "mode=gameSync";
 	var http = new JKL.ParseXML("adminGame.aspx", query);
-	http.parse();
+	var result = http.parse();
+	alert(result.resultXml.message);
 }
 
 setInterval("playSound()", 3000);

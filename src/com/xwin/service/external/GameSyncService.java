@@ -18,7 +18,7 @@ public class GameSyncService extends XwinService
 	private static final String GAME_URL = "http://bethit.net:10180/external.aspx?mode=getGameList";
 	private static final String LEAGUE_URL = "http://bethit.net:10180/external.aspx?mode=getLeagueList";
 	
-	public void sync()
+	public void sync() throws Exception
 	{
 		Date date = new Date();
 		String dateStr = XwinUtil.getBoardItemDate(date);
@@ -35,6 +35,7 @@ public class GameSyncService extends XwinService
 			System.out.println(gameXml);
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 		//List<SmsWait> smsWaitList = smsWaitDao.selectSmsWaitList();

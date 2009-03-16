@@ -470,9 +470,15 @@ public class AdminGameController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
-		gameSyncService.sync();
+		ResultXml rx = null;
 		
-		ResultXml rx = new ResultXml(0, "경기를 동기화 하였습니다", null);
+		try {
+			gameSyncService.sync();
+			rx = new ResultXml(0, "경기를 동기화 하였습니다", null);
+		} catch (Exception e) {
+			rx = new ResultXml(-1, "동기화에 실패하였습니다", null);
+		}
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

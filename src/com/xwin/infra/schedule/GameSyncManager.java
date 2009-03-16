@@ -14,6 +14,10 @@ public class GameSyncManager extends QuartzJobBean
 		GameSyncService gameSyncService =
 			(GameSyncService) context.getJobDetail().getJobDataMap().get("gameSyncService");
 		
-		gameSyncService.sync();
+		try {
+			gameSyncService.sync();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
