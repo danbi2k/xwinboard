@@ -66,7 +66,7 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">게임시간</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand" value='2009-03-17'>
+			<input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
 			<select name='gameHour'>
 			<%
 				for (int i = 0 ; i < 24 ; i++) {
