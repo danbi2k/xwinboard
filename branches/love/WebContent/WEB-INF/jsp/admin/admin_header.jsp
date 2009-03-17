@@ -76,13 +76,13 @@ function checkIndi()
 function playSound()
 {
 	//if (chargingVal > 0)
-	//	playIt(player1);
+	//	playIt(player3);
 	if (exchangePlay && exchangeVal > 0)
 		playIt(player2);
 	if (qnacenterPlay && centerVal > 0)
-		playIt(player3);
+		playIt(player1);
 	//if (vipVal > 0)
-	//	playIt(player3);
+	//	playIt(player1);
 	if (hackVal > 0)
 		playIt(player4);
 }
