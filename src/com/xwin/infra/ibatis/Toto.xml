@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Toto">
+
+	<typeAlias alias="Toto" type="com.xwin.domain.game.Toto" />
+	
+	<resultMap id="TotoResultMap" class="Toto">
+		<result property="id" column="ID"/>
+		<result property="title" column="TITLE"/>
+		<result property="gameDate" column="GAME_DATE"/>
+		<result property="leagueId" column="LEAGUE_ID"/>
+		<result property="leagueName" column="LEAGUE_NAME"/>
+		<result property="leagueImage" column="LEAGUE_IMAGE"/>
+		<result property="earnRate" column="EARN_RATE"/>
+		<result property="resultString" column="RESULT_STRING"/>
+		<result property="cardString" column="CARD_STRING"/>
+		<result property="rowNum" column="ROW_NUM"/>
+		<result property="colNum" column="COL_NUM"/>
+		<result property="status" column="STATUS"/>
+		<result property="betStatus" column="BET_STATUS"/>
+		<result property="displayStatus" column="DP_STATUS"/>
+	</resultMap>
+	
+	<insert id="insertToto" parameterClass="Toto">
+		INSERT INTO tbl_toto(TITLE, GAME_DATE, LEAGUE_ID, LEAGUE_NAME, LEAGUE_IMAGE, EARN_RATE, RESULT_STRING, CARD_STRING, ROW_NUM, COL_NUM, STATUS, BET_STATUS, DP_STATUS)
+			VALUES(#title#, #gameDate#, #leagueId#, #leagueName#, #leagueImage#, #earnRate#, #resultString#, #cardString#, #rowNum#, #colNum#, #status#, #betStatus#, #displayStatus#)
+	</insert>
+	
+	<update id="updateToto" parameterClass="Toto">
+		UPDATE tbl_game
+		<dynamic prepend="SET">
+			<isNotNull prepend="," property="title">
+			TITLE = #title#
+			</isNotNull>
+			<isNotNull prepend="," property="gameDate">
+			GAME_DATE = #gameDate#
+			</isNotNull>
+			<isNotNull prepend="," property="leagueId">
+			LEAGUE_ID = #leagueId#
+			</isNotNull>
+			<isNotNull prepend="," property="leagueName">
+			LEAGUE_NAME = #leagueName#
+			</isNotNull>
+			<isNotNull prepend="," property="leagueImage">
+			LEAGUE_IMAGE = #leagueImage#
+			</isNotNull>
+			<isNotNull prepend="," property="earnRate">
+			EARN_RATE = #earnRate#
+			</isNotNull>
+			<isNotNull prepend="," property="resultString">
+			RESULT_STRING = #resultString#
+			</isNotNull>
+			<isNotNull prepend="," property="cardString">
+			CARD_STRING = #cardString#
+			</isNotNull>
+			<isNotNull prepend="," property="row">
+			ROW_NUM = #rowNum#
+			</isNotNull>
+			<isNotNull prepend="," property="column">
+			COL_NUM = #colNum#
+			</isNotNull>
+			<isNotNull prepend="," property="status">
+			STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="displayStatus">
+			DP_STATUS = #displayStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="betStatus">
+			BET_STATUS = #betStatus#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+	
+	<select id="selectToto" resultMap="TotoResultMap" parameterClass="string">
+		SELECT *
+		FROM tbl_toto
+		WHERE ID = #value#
+	</select>
+	
+	<select id="selectTotoList" resultMap="TotoResultMap" parameterClass="map">
+		SELECT *
+		FROM tbl_toto
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="leagueId">
+				LEAGUE_ID = #leagueId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="displayStatus">
+				DP_STATUS = #displayStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+					STATUS = #statusList[]#
+				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="betStatus">
+				BET_STATUS = #betStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				GAME_DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				GAME_DATE <= #toDate#
+				]]>
+			</isNotNull>
+			ORDER BY GAME_DATE $ORDERBY$
+			<isNotNull prepend="LIMIT" property="fromRow">
+				#fromRow#, #rowSize#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="selectTotoCount" resultClass="Integer">
+		SELECT COUNT(*)
+		FROM tbl_toto
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="leagueId">
+				LEAGUE_ID = #leagueId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="displayStatus">
+				DP_STATUS = #displayStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+					STATUS = #statusList[]#
+				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="betStatus">
+				BET_STATUS = #betStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				GAME_DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				GAME_DATE <= #toDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

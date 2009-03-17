@@ -7,36 +7,20 @@
 <%@ include file="../admin_header.jsp"%>
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
-
-	String _colNum = request.getParameter("colNum");
-	String _rowNum = request.getParameter("rowNum");
+	Toto toto = (Toto) request.getAttribute("toto");
 	
-	Integer colNum = 0, rowNum = 0;
-	if (_colNum != null)
-		colNum = Integer.parseInt(_colNum);
-	if (_rowNum != null)
-		rowNum = Integer.parseInt(_rowNum);
+	Integer colNum = toto.getColNum();
+	Integer rowNum = toto.getRowNum();
 %>
 <SCRIPT LANGUAGE="JavaScript">
 
 </SCRIPT>
-<div class="title">토토 등록</div>
+<div class="title">토토 수정</div>
 
 ※ 입력란에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 
-<form>
-<input type="hidden" name="mode" value="viewRegisterTotoForm"/>
-<select name="colNum">
-	<option value="1" <%=colNum==1?"selected":""%>>1경기</option>
-	<option value="2" <%=colNum==2?"selected":""%>>2경기</option>
-	<option value="3" <%=colNum==3?"selected":""%>>3경기</option>
-</select>
-<input type="text" name="rowNum" size="2" value="<%=rowNum%>"/>줄
-<input type="submit" value="입력폼생성"/>
-</form>
-
 <form name="totoFrm" action="adminToto.aspx" method="post">
-<input type="hidden" name="mode" value="registerToto"/>
+<input type="hidden" name="mode" value="updateToto"/>
 <input type="hidden" name="rowNum" value="<%=rowNum%>"/>
 <input type="hidden" name="colNum" value="<%=colNum%>"/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
@@ -60,40 +44,42 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">제목</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type="text" size="80" name="title" id="title"/>
+			<input type="text" size="80" name="title" id="title" value="<%=toto.getTitle()%>"/>
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">게임시간</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand" value='2009-03-17'>
+			<input type='text' name='gameDate' size=10 readonly value='<%=XwinUtil.toDateStr(toto.getGameDate(), 2)%>' onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
 			<select name='gameHour'>
 			<%
-				for (int i = 0 ; i < 24 ; i++) {
-					String hour = "" + i;
+			String gameHour = XwinUtil.getHour(toto.getGameDate());
+			for (int i = 0 ; i < 24 ; i++) {
+				String hour = "" + i;
 			%>
-				<option value='<%=hour%>'><%=XwinUtil.Int2Digit(i)%></option>
+			<option value='<%=hour%>' <%=hour.equals(gameHour)?"selected":""%>><%=XwinUtil.Int2Digit(i)%></option>
 			<%
-				}
+			}
 			%>
 			</select>
 			시
 			<select name='gameMinute'>
 			<%
-				for (int i = 0 ; i < 60 ; i+=5) {
-					String minute = "" + i;
+			String gameMinute = XwinUtil.getMinute(toto.getGameDate());
+			for (int i = 0 ; i < 60 ; i+=5) {
+				String minute = "" + i;
 			%>
-				<option value='<%=minute%>'><%=XwinUtil.Int2Digit(i)%></option>
+			<option value='<%=minute%>' <%=minute.equals(gameMinute)?"selected":""%>><%=XwinUtil.Int2Digit(i)%></option>
 			<%
-				}
+			}
 			%>
 			</select>
 		</td>
-	</tr>
+	</tr>		
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">수익비율</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type="text" size="10" name="earnRate" id="earnRate"/>%
+			<input type="text" size="10" name="earnRate" id="earnRate" value="<%=toto.getEarnRate()%>"/>%
 		</td>
 	</tr>
 </table>
@@ -135,12 +121,12 @@
 <%
 		for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)" disabled/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
 	<td align="center"><input type="text" size="8" id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)" disabled/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)" disabled/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
 	<td align="center"><input type="text" size="8" id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)" disabled/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
 <%		
 		}
 %>
@@ -149,12 +135,8 @@
 	}
 %>
 </table>
-<input type="submit" value="저장"/>
-<input type="button" value="샘플폼로드" onclick="loadForm('T1L=금호생명|T0R=SKT|I2R=최종(연장포함)|T0L=KTF|I2L=전반(1+2)|I1R=최종(연장포함)|I1L=전반(1+2)|I0R=최종(연장포함)|I0L=전반(1+2)|C2L9=48~51|C2L8=44~47|C2L7=40~43|C2L6=36~39|C2L5=32~35|C2R9=88~91|C2L4=28~31|C1L9=48~51|C2R8=84~87|C2L3=24~27|C1L8=44~47|C2L2=20~23|C2R7=80~83|C1L7=40~43|C2L1=16~19|C2R6=76~79|C1L6=36~39|C2L0=12~15|C2R5=72~75|C1L5=32~35|C2R4=68~71|C1R9=88~91|C1L4=28~31|C2R3=64~67|C0L9=48~51|C1L3=24~27|C1R8=84~87|C2R2=60~63|C0L8=44~47|C1L2=20~23|C1R7=80~83|C2R1=56~59|C0L7=40~43|C1L1=16~19|C1R6=76~79|C2R0=52~55|C0L6=36~39|C1L0=12~15|C1R5=72~75|C0L5=32~35|C1R4=68~71|C0R9=88~91|C0L4=28~31|C1R3=64~67|C0L3=24~27|C0R8=84~87|C1R2=60~63|C0L2=20~23|C0R7=80~83|C1R1=56~59|C0L1=16~19|C0R6=76~79|C1R0=52~55|C0L0=12~15|C0R5=72~75|C0R4=68~71|C0R3=64~67|C0R2=60~63|C0R1=56~59|C0R0=52~55|T2R=두산|T2L=롯데|T1R=신한생명|')"/>
-<!-- 
-<input type="button" value="마킹검사" onclick="confirmMarking()"/>
-<input type="button" value="마킹로드" onclick="loadMarking('0A3-0B0-0C0-0D0-1A5-1B4-1C7-1D3-2A3-2B2-2C2-2D7')"/>
- -->
+<input type="submit" value="변경"/>
+<input type="button" value="결과처리" onclick="alert('개발중')"/>
 </form>
 
 <script>
@@ -225,6 +207,9 @@ function loadForm(formString)
 			tobj.value = keyValue[1];
 	}
 }
+
+var cardString = '<%=toto.getCardString()%>';
+loadForm(cardString);
 </script>
 <div id="_debug"></div>
 <%@ include file="../admin_footer.jsp"%>

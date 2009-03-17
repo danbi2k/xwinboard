@@ -88,6 +88,8 @@
 		p:memberDao-ref="memberDao"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
+		p:leagueDao-ref="leagueDao"
+		p:totoDao-ref="totoDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 					
 	<bean id="adminController"
