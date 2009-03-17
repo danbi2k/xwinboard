@@ -99,5 +99,9 @@
 	
 	<bean id="reuseCommentDao"
 		class="com.xwin.infra.dao.ReuseCommentDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="totoDao"
+		class="com.xwin.infra.dao.TotoDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 </beans>
