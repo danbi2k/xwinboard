@@ -30,9 +30,9 @@
 		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
 		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }		
 		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
-		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }
-		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
-		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		if(!d.winRate.value) { d.winRate.value = 0.0; }
+		if(!d.loseRate.value) { d.loseRate.value = 0.0; }
+		if(!d.drawRate.value) { d.drawRate.value = 0.0; }
 		if (!gameType) { alert('종류를 선택하세요');  return false;}
 		<%if (type.equals("handy")){ %>
 		if (d.uoCheck.checked) {
