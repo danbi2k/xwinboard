@@ -25,7 +25,7 @@
 					<td>
 						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
 							<tbody><tr bgcolor="#212021" height="27">
-								<td><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
+								<td align="center"><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
 								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
 								<td align="center" width="200"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
 								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
