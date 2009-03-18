@@ -62,10 +62,10 @@ if (gameList != null) {
 %>
 
     <tr>
-        <td width="90" class="tablebg<%=x%>" align="center" valign="middle">
+        <td width="90" class="tablebg3" align="center" valign="middle">
             <p><%=XwinUtil.getBoardItemDate(game.getGameDate())%></p>
         </td>
-        <td width="135" class="tablebg<%=y%>" align="left" valign="middle">
+        <td width="135" class="tablebg4" align="left" valign="middle">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;<img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></p>
         </td>
         <td width="250" class='<%=game.getWinDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="right" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'W')" id="checkW<%=game.getId()%>">
