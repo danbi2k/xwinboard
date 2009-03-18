@@ -4,10 +4,92 @@
 <html>
 <head>
 <title>환영합니다</title>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-	<link rel="stylesheet" href="style/admin.css">
-	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script language="javascript" src="script/mEmbed.js"></script>
+<script language="javascript" src="script/jkl-parsexml.js"></script>
+<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
+<body bgcolor="#000000" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<form name="regist">
+<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/index.jpg" style="background-repeat:no-repeat;" align="center">
+    <tr>
+        <td width="339" height="460">
+            <p>&nbsp;</p>
+        </td>
+        <td width="370" height="460" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="315" height="460">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="339" height="77" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="85" height="23">
+            <p></p>
+        </td>
+        <td width="186" height="23">
+            <p><input name="userId" type="text" class="input1" id="m_id"></p>
+        </td>
+        <td width="99" height="77" rowspan="3" align="center" valign="top">
+            <p><img src="img/login.jpg" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
+        </td>
+        <td width="315" height="77" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="85" height="32">
+            <p>&nbsp;</p>
+        </td>
+        <td width="186" height="32">
+            <p><input name="password" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="85" height="22">
+            <p>&nbsp;</p>
+        </td>
+        <td width="186" height="22">
+            <p><input name="pin" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="339" height="242" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="370" height="14" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="315" height="242" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="85" height="38">
+            <p>&nbsp;</p>
+        </td>
+        <td width="186" height="38" align="center">
+            <p><a href="join.aspx?mode=viewJoinLoginForm"><img src="img/entry.jpg" border="0"></a></p>
+        </td>
+        <td width="99" height="38">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="370" height="190" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+</table>
+</form>
+</body>
+</html>
+
+
 <SCRIPT LANGUAGE="JavaScript">
 <!--
 function checkIT() {
@@ -39,64 +121,6 @@ function goButton(form)
 	}
 }
 
-
-	
-//-->
-</SCRIPT>
-
-<body onLoad="document.regist.userId.focus()" bgcolor="#000000">
-<img src="images/genesis.jpg" style="position:absolute;left:50%;top:70px;width:950px;margin-left:-470px;">
-<div style="position:absolute;left:50%;top:400px;width:950px;z-index:1;margin-left:-470px;">
-	<form method='post' name='regist'">
-	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
-		<tr>
-			<td align="center" valign="top"  style="padding-top:100px">
-			<table style="BORDER-RIGHT: #000000 2px solid; BORDER-TOP: #000000 2px solid; BORDER-LEFT: #000000 2px solid; BORDER-BOTTOM: #000000 2px solid" cellSpacing="0" height="80" cellPadding="0" width="280" bgColor="#d9d8d6" id="table2">
-				<tr>
-					<td valign="center" align="middle">
-					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
-						<tr>
-							<td>아이디</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="1" maxLength="20" name="userId" value=""></td>
-							<td style="PADDING-LEFT: 5px" rowSpan="3">							
-							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:61px" ID="login_bttn"></td>
-						</tr>
-						<tr>
-							<td>비밀번호</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
-						</tr>
-						<tr>
-							<td>PIN번호</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
-						</tr>
-						<tr><td></td></tr>
-					</table>
-					</td>
-				</tr>
-			</table>
-			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
-				<tr>
-					<td align="center" height="30"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
-
-				</tr>
-				<tr><td height="15"></td></tr>
-				<tr>
-					<td align="center"><font size="3" color="#ffffff"><B><a href="join.aspx?mode=viewJoinLoginForm">[추천장등록]</a></B></font></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-	</table>
-</form>
-</div>
-</body>
-</html>
-
-<SCRIPT LANGUAGE="JavaScript">
-<!--
 if((regist.userId.value != "") && (regist.password.value != "")){
 		document.getElementById("login_bttn").click();
 }

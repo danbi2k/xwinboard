@@ -18,7 +18,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://localhost:3306/xwin</value>
+			<value>jdbc:mysql://localhost:3306/bravo</value>
 		</property>
 		<property name="username">
 			<value>kingbet</value>

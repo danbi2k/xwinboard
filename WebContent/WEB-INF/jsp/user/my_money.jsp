@@ -15,77 +15,79 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_mymoney.gif"></td><td>머니 입출금 내역 입니다.</td>
-
-	</table>
-</td></tr>
-<tr><td valign="top" align="center" height="300">
-
-	<table width="800" cellpadding="0" cellspacing="0" style="margin-top:15">
-	<tr><td>
-		<table  cellpadding="0" cellspacing="0" >
-		<tr><td>
-			<a href="myMoney.aspx?mode=viewMyMoneyList"><img src="images/tab_money.gif" style="cursor:hand;" border=0></a>
-			</td>
-		<td>&nbsp;</td>
-		<td>
-			<a href="myMoney.aspx?mode=viewMyPointList"><img src="images/tab_point.gif" style="cursor:hand;" border=0></a>
-			</td>	
-		</tr></table>
-
-	</td></tr>
-	</table>
-
-	<table width="800" bgcolor="#d9d8d6" cellspacing="1" cellpadding="5" style="border:1 solid #909090;">
-	<colgroup>
-	<col width="140" align="center">
-	<col width="100" align="right">
-	<col width="100" align="right">
-	<col width="100" align="right">
-	<col width="*" align="center">
-	<col width="*" align="center">
-	<col width="*" align="center">
-	</colgroup>
-
-	<tr bgcolor="#ce892c">
-		<th style="color:white" align="center">거래일자</th>
-		<th style="color:white" align="center">기잔고</th>
-		<th style="color:white" align="center">입출금</th>
-		<th style="color:white" align="center">잔액</th>
-		<th style="color:white" align="center">종류</th>
-		<th style="color:white" align="center">비고</th>
-		<th style="color:white" align="center">삭제</th>
+			<tr><td><img src="img/menu10.jpg" border="0"></td></tr>
 		
-	</tr>
+            </table>
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
+    <tr>
+        <td width="887" height="33" align="left" valign="top">
+            <p><img src="img/10-.jpg" border="0">&nbsp;<a href="myMoney.aspx?mode=viewMyPointList"><img src="img/12.jpg" border="0"></a></p>
+        </td>
+    </tr>
+    
+</table>
+     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+    <tr>
+        <td width="131" height="40" align="center" valign="middle" class="menubar">
+            <p>거래일자</p>
+        </td>
+        <td width="100" height="40" align="center" valign="middle" class="menubar">
+            <p>기잔고</p>
+        </td>
+        <td width="100" height="40" align="center" valign="middle" class="menubar">
+            <p>입출금</p>
+       </td>
+        <td width="148" height="40" align="center" valign="middle" class="menubar">
+            <p>잔액</p>
+        </td>
+        <td width="100" height="40" align="center" valign="middle" class="menubar">
+            <p>종류</p>
+        </td>
+        <td width="150" height="40" align="center" valign="middle" class="menubar">
+            <p>비고</p>
+        </td>
+        <td width="42" height="40" align="center" valign="middle" class="menubar">
+            <p>삭제</p>
+        </td>
+    </tr>
+</table>
+<table align="center" cellpadding="0" cellspacing="0" width="771">
 	<%
 	if (accountList != null && accountList.size() > 0) {
 		for (Account account : accountList) {
-	%>
-	<tr bgcolor='black'>
-	<td><%=account.getDateStr()%></td>
-	<td><%=XwinUtil.comma3(account.getOldBalance())%></td>
-	<td><%=XwinUtil.comma3(account.getMoney())%></td>
-	<td><%=XwinUtil.comma3(account.getBalance())%></td>
-	<td><%=Code.getValue(account.getType())%></td>
-	<td><%=XwinUtil.nvl(account.getNote())%>
-	<td><img src="images/btn_coment_del.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></td>
-	</tr>
+	%>  
+    <tr>
+        <td width="131" class="tablebg1" align="center" valign="middle">
+            <p><%=account.getDateStr()%></p>
+        </td>
+        <td width="100" class="tablebg2" align="center" valign="middle">
+            <p><%=XwinUtil.comma3(account.getOldBalance())%></p>
+        </td>
+        <td width="100" class="tablebg1" align="center" valign="middle">
+            <p><%=XwinUtil.comma3(account.getMoney())%></p>
+        </td>
+        <td width="148" class="tablebg2" align="center" valign="middle">
+            <p><%=XwinUtil.comma3(account.getBalance())%></p>
+        </td>
+        <td width="100" class="tablebg1" align="center" valign="middle">
+            <p><%=Code.getValue(account.getType())%></p>
+        </td>
+        <td width="150" class="tablebg2" align="center" valign="middle">
+            <p><%=XwinUtil.nvl(account.getNote())%></p>
+        </td>
+        <td width="42" class="tablebg1" align="center" valign="middle">
+            <p><img src="img/x.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></p>
+        </td>
+    </tr>
 	<%
 		}
-	} else {
-	%>
-	<tr bgcolor='black'><td colspan='7' height='150' align='center' bgcolor='black'>머니 거래 내역이 없습니다.</td></tr>
-	<%
 	}
 	%>
-	</table>
-
-	<tr bgcolor='black'>
-	<td colspan='6' height='40' align='center' bgcolor='black'>
-	<%
+     </table>
+   
+<br>
+<br>
+<%
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
@@ -95,32 +97,27 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
 	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
 		if (i == pIdx) {
 %>
-			<b> <%=i+1%> </b>
+			<b>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</b>
 <%
 		} else {
 %>		
-			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+			<a href='javascript:goPage(<%=i%>)'>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</a>
 <%			
 		}
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
-	</td>
-	</tr>
-
-</td></tr>
-</table>
 
 <script>
 function goPage(index)

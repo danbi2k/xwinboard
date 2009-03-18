@@ -32,18 +32,35 @@ public class GameController extends XwinController
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		String type = request.getParameter("type");
+		String grade = XwinUtil.nvl(request.getParameter("grade"));
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("gameFolder_" + type, new GameFolder(type));
 		
-		List<League> leagueList = leagueDao.selectLeagueList();
+		Calendar cal = Calendar.getInstance();
+		cal = XwinUtil.getOnlyDate(cal);
+		cal.add(Calendar.DATE, 3);
+		cal.add(Calendar.MILLISECOND, -1);
+		
+		if (type != null && type.equals("mix"))
+			type = null;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("type", type);
+		param.put("status", Code.GAME_STATUS_RUN);
+		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
+		param.put("toDate", cal.getTime());
+		param.put("grade", grade);
+		
+		List<Game> gameList = gameDao.selectGameList(param);
 		
 		ModelAndView mv = new ModelAndView("game/game");
-		mv.addObject("leagueList", leagueList);
+		mv.addObject("gameList", gameList);
 
 		return mv; 
 	}
@@ -61,6 +78,15 @@ public class GameController extends XwinController
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		if (type == null)
+			type = "wdl";
+		
+		String grade = Code.USER_GRADE_NORMAL;
+		if (type.equals("mix")) {
+			grade = Code.USER_GRADE_VIP;
+			type = null;
+		}
 		
 		if (gameDate == null)
 			gameDate = XwinUtil.toDateStr(new Date(), 2);
@@ -92,6 +118,7 @@ public class GameController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
+		param.put("grade", grade);
 		param.put("leagueId", leagueId);
 		List<String> statusList = new ArrayList<String>();
 		statusList.add(Code.GAME_STATUS_END);
@@ -100,7 +127,7 @@ public class GameController extends XwinController
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
-		param.put("gradeLess", member.getGrade());
+//		param.put("gradeLess", member.getGrade());
 		//param.put("fromRow", pIdx * ROWSIZE);
 		//param.put("rowSize", ROWSIZE);
 		
@@ -131,9 +158,6 @@ public class GameController extends XwinController
 		cal = XwinUtil.getOnlyDate(cal);
 		cal.add(Calendar.DATE, 3);
 		cal.add(Calendar.MILLISECOND, -1);
-		
-		if (type != null && type.equals("mix"))
-			type = null;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);

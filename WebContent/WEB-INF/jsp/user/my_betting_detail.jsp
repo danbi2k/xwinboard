@@ -3,6 +3,7 @@
 <%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="com.xwin.domain.*" %>
 
 <%
 	Betting betting = (Betting) request.getAttribute("betting");
@@ -11,7 +12,7 @@
 <html>
 
 <head>
-<title>Bravo</title>
+<title><%=SiteConfig.SITE_NAME%></title>
     <Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=UTF-8">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
