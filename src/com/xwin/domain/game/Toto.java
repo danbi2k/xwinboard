@@ -22,6 +22,8 @@ public class Toto extends XwinObject
 	private String status;
 	private String betStatus;
 	private String displayStatus;
+	private Integer minMoney;
+	private Long carryOver;
 	
 	public String getId() {
 		return id;
@@ -106,5 +108,17 @@ public class Toto extends XwinObject
 	}
 	public void setColNum(Integer colNum) {
 		this.colNum = colNum;
+	}
+	public Integer getMinMoney() {
+		return minMoney;
+	}
+	public void setMinMoney(Integer minMoney) {
+		this.minMoney = minMoney;
+	}
+	public Long getCarryOver() {
+		return carryOver;
+	}
+	public void setCarryOver(Long carryOver) {
+		this.carryOver = carryOver;
 	}
 }

@@ -129,6 +129,8 @@ public class AdminTotoController extends XwinController
 		String leagueName = request.getParameter("leagueName");
 		String rowNum = request.getParameter("rowNum");
 		String colNum = request.getParameter("colNum");
+		String minMoney = request.getParameter("minMoney");
+		String carryOver = request.getParameter("carryOver");
 		
 		League league = leagueDao.selectLeagueByName(leagueName);
 		
@@ -160,6 +162,8 @@ public class AdminTotoController extends XwinController
 		toto.setStatus(Code.GAME_STATUS_RUN);
 		toto.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
 		toto.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+		toto.setMinMoney(Integer.parseInt(minMoney));
+		toto.setCarryOver(Long.parseLong(carryOver));
 		
 		totoDao.insertToto(toto);
 		
