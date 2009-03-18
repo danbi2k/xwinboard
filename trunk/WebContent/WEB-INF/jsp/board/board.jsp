@@ -28,124 +28,107 @@
 	int itemIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
-<table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_<%=boardName.equals("user")?"board":"customer"%>.gif"></td>
-	<td>
-	<%=boardName.equals("user")?"게시물을 작성하고, 중요 내용을 확인 할 수 있습니다.":"1:1 고객센터 입니다. 문의사항 및 건의사항을 적어주세요."%>
-	</td></td>
-
-	</table>
-</td></tr>
-<tr><td valign="top" align="center" height="300">
-
-
-<link rel='stylesheet' href='board.css'>
-<script language='JavaScript' src='board.js'></script><br><table align='center' width='95%' cellpadding='0' cellspacing='0' style='margin-top:7px;'><tr align='center'><td width='10'><img src='images/title_left.gif'></td><td width='50'  background='images/title_bg.gif'>번호</td><td width='*'   background='images/title_bg.gif'>제목</td><td width='100' background='images/title_bg.gif'>작성자</td><td width='100' background='images/title_bg.gif'>작성일</td><td width='50'  background='images/title_bg.gif'>조회수</td><td width='10'><img src='images/title_right.gif'></td></tr>
-	
-
+			<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>.jpg" border="0"></td></tr>
+		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
+            </table>
+     
+     <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
+    <tr>
+        <td width="90" height="40" align="center" valign="middle" class="menubar">
+            <p>번호</p>
+        </td>
+        <td width="527" height="40" align="center" valign="middle" class="menubar">
+            <p>제목</p>
+        </td>
+        <td width="110" height="40" align="center" valign="middle" class="menubar">
+            <p>작성자</p>
+       </td>
+        <td width="110" height="40" align="center" valign="middle" class="menubar">
+            <p>작성일</p>
+        </td>
+        <td width="50" height="40" align="center" valign="middle" class="menubar">
+            <p>조회수</p>
+        </td>
+        
+    </tr>
+</table>
+<table align="center" cellpadding="0" cellspacing="0" width="887" height="35">
 <%
 	if (boardItemList != null) {
 		for (BoardItem boardItem : boardItemList) {
-			if (boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE)) {
+			boolean isNotice = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE);
+			String classHead = isNotice?"notice":"";
+			String classSubject = isNotice?"notice subject":"subject";
+			String head = isNotice?"<img src='img/notice.jpg' border='0'>":""+itemIdx--;
+			String readCount = isNotice?"":""+boardItem.getReadCount();
 %>
-	<tr height='32' align="center">
-		<td>&nbsp;</td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><b><%=Code.getValue(boardItem.getType())%></td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list' align="left">
-			<span style="width:100%;color:#45BCD7;height:15;overflow:hidden;">
-				<b><a class="board_list" style="color:#45BCD7;" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>">
-				<%=boardItem.getTitle()%>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
-				</a></b>
-			</span>
-		</td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'><b><%=boardItem.getNickName()%></td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'>&nbsp;</td>
-		<td style='border-bottom:1 #b4b4b4 solid;color:#45BCD7' class='board_list'>&nbsp;</td>
-		<td>&nbsp;</td>
-
-	</tr>
+			<tr>
+				 <td width="90" height="35" align="center" valign="middle">
+            		<p><%=head%></p>
+        		</td>
+				 <td width="527" height="35" align="left" valign="middle">
+					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
+					</b>
+					</a>
+				</td>
+				<td width="110" height="35" align="center" valign="middle">
+		            <p><%=boardItem.getNickName()%></p>
+		        </td>
+				 <td width="110" height="35" align="center" valign="middle">
+		            <p><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></p>
+		        </td>
+		        <td width="50" height="35" align="center" valign="middle">
+		            <p><%=readCount%></p>
+		        </td>
+			</tr>
+			<tr>
+			   <td class="bbsline" colspan="5">
+			   </td>
+			</tr>
 <%
-			} else {
-%>
-	<tr height='32' align="center">
-    <td>&nbsp;</td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=itemIdx--%></td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list' align="left">
-		<span style="width:100%;height:15;overflow:hidden;">
-		<a class="board_list" href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>"><%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]</b></a>
-		</span>
-	</td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><b><%=boardItem.getNickName()%></b></td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><b><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></b></td>
-    <td style='border-bottom:1 #b4b4b4 solid;' class='board_list'><%=boardItem.getReadCount()%></td>
-    <td>&nbsp;</td>
-</tr>
-<%
-			}
 		}
 	}
-%>
-	
-
-</table>
-
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="padding-top:8px">
-<tr><td width="50%" height="30">
-    </td>
-
-    <td width="50%" height="30" align="right">
-		
-        &nbsp;&nbsp;<br><br>
-		<%if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y")) || boardName.equals("qna") && Admin.DENY_QNA.equals("Y")) {%>
-        <a href="board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>"><img src="images/btn_write.gif" border="0"></a>
-		<%} %>
-    </td></tr>
-</table>
-
-<table width="95%" height="41" align='center' cellpadding='0' cellspacing='0'>
-<tr><td width="*" style="padding-left:20;" align='center'>
-
-    <!-----[ 페이징 ]--------------------------------------------/-->
-    
-   <%
+%>  
+     </table>
+          <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">
+	        <tr>
+			    <td width="787" height="40" align="center">
+<%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
 	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
 		if (i == pIdx) {
 %>
-			<b> <%=i+1%> </b>
+			<b>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</b>
 <%
 		} else {
 %>		
-			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+			<a href='javascript:goPage(<%=i%>)'>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</a>
 <%			
 		}
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
-    </td>
-    </tr>
-</table>
-
-
-
-
-</td></tr>
-</table>
+			    </td>
+			    <td width="100" height="40" align="right">
+				<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
+				</td>
+			</tr>
+		    
+     </table>
 
 <script>
 function goPage(pageIndex)

@@ -1,4 +1,22 @@
-function exchangePoint(point)
+var topLink = [];
+topLink[1] = "game.aspx?mode=viewGameList&type=wdl&grade=1";
+topLink[2] = "game.aspx?mode=viewGameList&type=handy&grade=1";
+topLink[3] = "game.aspx?mode=viewGameList&type=mix&grade=10";
+topLink[4] = "board.aspx?mode=viewBoard&boardName=user";
+topLink[5] = "board.aspx?mode=viewBoard&boardName=qna";
+topLink[6] = "game.aspx?mode=viewGameResultList";
+topLink[7] = "introduce.aspx?mode=viewIntroduceForm";
+topLink[8] = "moneyIn.aspx?mode=viewMoneyInRequest";
+topLink[9] = "moneyOut.aspx?mode=viewMoneyOutRequest";
+topLink[10] = "myMoney.aspx?mode=viewMyMoneyList";
+
+function goTopLink(index)
+{
+	//alert(index);
+	location.href = topLink[index];
+}
+
+function exchangePoignt(point)
 {
 	var balance = point - (point % 10000);
 	if (balance < 10000) {

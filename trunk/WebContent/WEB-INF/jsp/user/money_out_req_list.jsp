@@ -14,124 +14,108 @@
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
-<!--
-<table width="985" height="26" bgcolor="#333333" style="border:1 solid #efefef;">
-<tr>
-	<td align="center" width="60">Notice</td>
-	<td width="*">공지사항나오는곳...</td>
-	<td align="center" width="80">[이전][다음]</td>
-</tr>
+			<tr><td><img src="img/menu09.jpg" border="0"></td></tr>
+		
+            </table>
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
+    <tr>
+        <td width="771" height="33" align="left" valign="top">
+            <p><a href="moneyOut.aspx?mode=viewMoneyOutRequest"><img src="img/9.jpg" border="0"></a>&nbsp;<img src="img/11-.jpg" border="0"></p>
+        </td>
+    </tr>
+	</table>
+      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+    <tr>
+        <td width="131" height="40" align="center" valign="middle" class="menubar">
+            <p>신청일자</p>
+        </td>
+        <td width="208" height="40" align="center" valign="middle" class="menubar">
+            <p>환전계좌</p>
+        </td>
+        <td width="120" height="40" align="center" valign="middle" class="menubar">
+            <p>환전액</p>
+       </td>
+        <td width="120" height="40" align="center" valign="middle" class="menubar">
+            <p>상태</p>
+        </td>
+        <td width="150" height="40" align="center" valign="middle" class="menubar">
+            <p>처리일시</p>
+        </td>
+        <td width="42" height="40" align="center" valign="middle" class="menubar">
+            <p>삭제</p>
+        </td>
+       
+    </tr>
 </table>
-
--->
-
-<table width="960"  style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
-<tr><td align="center">
-	<table width="900" style="border-bottom:1 solid #909090;">
-	<tr><td width="100"><img src="images/title_outmoney.gif"></td><td>환전요청을 하시면 머니를 실계좌로 입금해 드립니다.</td></td>
-
-	</table>
-</td></tr>
-<tr><td valign="top" align="center" height="300">
-
-
-	<table width="800" cellpadding="0" cellspacing="0" style="margin-top:15">
-	<tr><td>
-		<table  cellpadding="0" cellspacing="0" >
-		<tr><td><img src="images/tab_outmoney.gif"		 onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequest'" style="cursor:hand;filter:gray();"></td>
-			<td><img src="images/tab_outmoney_list.gif" onclick="location.href='moneyOut.aspx?mode=viewMoneyOutRequestList'" style="cursor:hand;" hspace="3"></td>
-		</tr></table>
-
-	</td></tr>
-	</table>
-
-
-
-
-	<table width="800" bgcolor="#d9d8d6" cellspacing="1" cellpadding="5" style="border:1 solid #909090;">
-	<colgroup>
-	<col width="100" align="center">
-	<col width="*">
-	<col width="80" align="right">
-	<col width="80" align="center">
-	<col width="100" align="center">
-	<col width="20" align="center">
-	</colgroup>
-
-	<tr bgcolor="#ce892c">
-		<th style="color:white">신청일시</th>
-		<th style="color:white" align="center">환전계좌</th>
-		<th style="color:white" align="center">환전액</th>
-		<th style="color:white">상태</th>
-		<th style="color:white">처리일시</th>
-		<th style="color:white">삭제</th>
-	</tr>
-
+<table align="center" cellpadding="0" cellspacing="0" width="771">
 	<%
 		if (moneyOutList != null && moneyOutList.size() > 0) {
 			for (MoneyOut moneyOut : moneyOutList) {
-	%>
-		<tr bgcolor='black'>
-			<td><%=moneyOut.getReqDateStr()%></td>
-			<td>[<%=moneyOut.getBankName()%>] <%=moneyOut.getNumber()%> <%=moneyOut.getName()%></td>
-			<td><%=XwinUtil.comma3(moneyOut.getMoney())%></td>
-			<td><%=Code.getValue(moneyOut.getStatus())%></td>
-			<td><%=moneyOut.getProcDateStr()%></td>
-			<td>
+	%>  
+    <tr>
+        <td width="131" class="tablebg1" align="center" valign="middle">
+            <p><%=moneyOut.getReqDateStr()%></p>
+        </td>
+        <td width="208" class="tablebg2" align="center" valign="middle">
+            <p>[<%=moneyOut.getBankName()%>] <%=moneyOut.getNumber()%> <%=moneyOut.getName()%></p>
+        </td>
+        <td width="120" class="tablebg1" align="center" valign="middle">
+            <p><%=XwinUtil.comma3(moneyOut.getMoney())%></p>
+        </td>
+        <td width="120" class="tablebg2" align="center" valign="middle">
+            <p><%=Code.getValue(moneyOut.getStatus())%></p>
+        </td>
+        <td width="150" class="tablebg1" align="lecenterft" valign="middle">
+            <p><%=moneyOut.getProcDateStr()%></p>
+        </td>
+        <td width="42" class="tablebg2" align="center" valign="middle">
+            <p>
 				<%if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST)) { %>
 				<%} else {%>
-				<img src="images/btn_coment_del.gif" onclick="removeMoneyOutRequestLog(<%=moneyOut.getId()%>)" title="환전기록삭제">
+				<img src="img/x.gif" onclick="removeMoneyOutRequestLog(<%=moneyOut.getId()%>)" title="환전기록삭제">
 				<%} %>
-			</td>
-		</tr>
+			</p>
+        </td>
+       
+    </tr>
 	<%	
 			}
-		} else {
-	%>
-	<tr bgcolor='black'><td colspan='6' height='150' align='center'>최근 환전 신청내역이 없습니다.</td></tr>
-	<%
 		}
-	%>
+	%>	 
 	</table>
-	<table width=100%>
-	<tr bgcolor='black'>
-	<td colspan='6' height='40' align='center' bgcolor='black'>
-	<%
+<br>
+<br>
+<%
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
-	int pageNum = (int) totalCount / ROWSIZE + 1;
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
 	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
 	int nextPage = startPage + SHOWPAGE;
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
 	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
 		if (i == pIdx) {
 %>
-			<b> <%=i+1%> </b>
+			<b>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</b>
 <%
 		} else {
 %>		
-			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+			<a href='javascript:goPage(<%=i%>)'>&nbsp;&nbsp;<%=i+1%>&nbsp;&nbsp;</a>
 <%			
 		}
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
-	</td>
-	</tr>
-	</table>
-</td></tr>
-</table>
 
 <script>
 function goPage(index)
