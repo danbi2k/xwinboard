@@ -23,11 +23,13 @@
 		<result property="status" column="STATUS"/>
 		<result property="betStatus" column="BET_STATUS"/>
 		<result property="displayStatus" column="DP_STATUS"/>
+		<result property="minMoney" column="MIN_MONEY"/>
+		<result property="carryOver" column="CARRY_OVER"/>
 	</resultMap>
 	
 	<insert id="insertToto" parameterClass="Toto">
-		INSERT INTO tbl_toto(TITLE, GAME_DATE, LEAGUE_ID, LEAGUE_NAME, LEAGUE_IMAGE, EARN_RATE, RESULT_STRING, CARD_STRING, ROW_NUM, COL_NUM, STATUS, BET_STATUS, DP_STATUS)
-			VALUES(#title#, #gameDate#, #leagueId#, #leagueName#, #leagueImage#, #earnRate#, #resultString#, #cardString#, #rowNum#, #colNum#, #status#, #betStatus#, #displayStatus#)
+		INSERT INTO tbl_toto(TITLE, GAME_DATE, LEAGUE_ID, LEAGUE_NAME, LEAGUE_IMAGE, EARN_RATE, RESULT_STRING, CARD_STRING, ROW_NUM, COL_NUM, STATUS, BET_STATUS, DP_STATUS, MIN_MONEY, CARRY_OVER)
+			VALUES(#title#, #gameDate#, #leagueId#, #leagueName#, #leagueImage#, #earnRate#, #resultString#, #cardString#, #rowNum#, #colNum#, #status#, #betStatus#, #displayStatus#, #minMoney#, #carryOver#)
 	</insert>
 	
 	<update id="updateToto" parameterClass="Toto">
@@ -71,6 +73,12 @@
 			</isNotNull>
 			<isNotNull prepend="," property="betStatus">
 			BET_STATUS = #betStatus#
+			</isNotNull>
+			<isNotNull prepend="," property="minMoney">
+			MIN_MONEY = #minMoney#
+			</isNotNull>
+			<isNotNull prepend="," property="carryOver">
+			CARRY_OVER = #carryOver#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#

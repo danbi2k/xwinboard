@@ -96,6 +96,18 @@
 			<input type="text" size="10" name="earnRate" id="earnRate"/>%
 		</td>
 	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">최소구매액</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<input type="text" size="10" name="minMoney" id="minMoney" value="2000"/>%
+		</td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">이월잔액</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<input type="text" size="10" name="carryOver" id="carryOver"/>%
+		</td>
+	</tr>
 </table>
 <table class="toto"">
 <tr>
