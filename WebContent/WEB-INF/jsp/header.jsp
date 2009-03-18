@@ -88,6 +88,9 @@ function receiveMemo()
 	if (result.resultXml.code == 0 && result.resultXml.object) {
 		var span = document.getElementById("memoContents");
 		var memo = result.resultXml.object.memo;
+		if (memo == undefined) {
+			return;
+		}
 		var regexp = new RegExp(/\n/ig);
 		memo = memo.replace(regexp, "<BR>");
 		span.innerHTML = memo;
