@@ -5,7 +5,8 @@
 <head>
 <title>환영합니다</title>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-	<link rel="stylesheet" href="style/admin.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<script language="javascript" src="script/mEmbed.js"></script>
 	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>
 </head>
 <SCRIPT LANGUAGE="JavaScript">
@@ -42,46 +43,82 @@ function goButton(form)
 //-->
 </SCRIPT>
 
-<body onLoad="document.regist.inviteKey.focus()" bgcolor="#446677">
-	<form method='post' name='regist'">
-	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
-		<tr>
-			<td align="center" valign="top"  style="padding-top:100px">
-			<table style="BORDER-RIGHT: #000000 5px solid; BORDER-TOP: #000000 5px solid; BORDER-LEFT: #000000 5px solid; BORDER-BOTTOM: #000000 5px solid" height="250" cellSpacing="0" cellPadding="0" width="480" bgColor="#d9d8d6" id="table2">
-				<tr>
-					<td style="PADDING-LEFT: 20px; FONT: bold 20pt verdana; COLOR: #ffffff" bgColor="#000000" height="70" align="center">
-					추천장등록</td>
-				</tr>
-				<tr>
-					<td valign="center" align="middle">
-					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
-						<tr>
-							<td>추천장</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="1" name="inviteKey" value=""></td>
-							<td style="PADDING-LEFT: 5px" rowSpan="2">							
-							<img src="images/admin/btn_login2.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:41px" ID="login_bttn"></td>
-						</tr>
-						<tr>
-							<td>소개인ID</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="text" maxLength="20"  value="" name="userId" onkeydown="goButton()"></td>
-						</tr>
-					</table>
-					</td>
-				</tr>
-			</table>
-			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
-				<tr>
-					<td align="center"><font color="#ffffff">문의 : <%=Admin.ADMIN_EMAIL%></font></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-	</table>
+<body bgcolor="#000000" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<form name="regist">
+<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/invi.jpg" style="background-repeat:no-repeat;" align="center">
+    <tr>
+        <td width="122" height="460">
+            <p>&nbsp;</p>
+        </td>
+        <td width="575" height="460" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="204" height="460">
+            <p>&nbsp;</p>
+        </td>
+ 
+       
+        <td width="123"></td>
+    </tr>
+    <tr>
+        <td width="122" height="72" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="306" height="26">
+            <p></p>
+        </td>
+        <td width="191" height="26">
+            <p><input name="inviteKey" type="text" class="input1" id="m_passwd"></p>
+        </td>
+        <td width="78" height="72" rowspan="3" align="center" valign="top">
+            <p><img src="img/login1.jpg" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
+        </td>
+        <td width="204" height="72" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="123" height="26"></td>
+    </tr>
+    <tr>
+        <td width="306" height="26">
+            <p>&nbsp;</p>
+        </td>
+        <td width="191" height="26">
+            <p><input name="userId" type="text" class="input1" id="m_id"></p>
+        </td>
+        <td width="123" height="26"></td>
+    </tr>
+
+    <tr>
+        <td width="306" height="242" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="473" height="14" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+        <td width="123" height="242" rowspan="3">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="122" height="242" rowspan="2">
+            <p>&nbsp;</p>
+        </td>
+        <td width="473" height="34" colspan="3">
+           <p>문의 : <%=Admin.ADMIN_EMAIL%></p>
+        </td>
+    </tr>
+
+    <tr>
+        <td width="473" height="208" colspan="3">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+
+</table>
 </form>
 </body>
 </html>
+
 
 <SCRIPT LANGUAGE="JavaScript">
 <!--
