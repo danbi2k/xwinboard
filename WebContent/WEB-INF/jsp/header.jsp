@@ -56,6 +56,11 @@
 <area shape="rect" coords="682, 24, 736, 48" href="aboutHandy.aspx" onfocus="this.blur()">
 <area shape="rect" coords="757, 28, 920, 46" href="http://www.kofree.net/DNSFree/Setup.exe" onfocus="this.blur()">
 </map>
+<map name="ImageMap2">
+<area shape="rect" coords="5, 6, 54, 22" href="moneyIn.aspx?mode=viewMoneyInRequest">
+<area shape="rect" coords="73, 2, 126, 21" href="moneyOut.aspx?mode=viewMoneyOutRequest">
+<area shape="rect" coords="142, 3, 193, 22" href="myMoney.aspx?mode=viewMyMoneyList">
+</map>
 
 <div id="memoDiv" style="padding:10 10 10 10;position:absolute;left:50%;top:50%;width:350px;height:350px;z-index:2;margin-left:-175px;margin-top:-175px;visibility:hidden;background-color:#CCCCCC;color:#000000">
 <form>
@@ -121,17 +126,19 @@ receiveMemo();
 </script>
 
 <center>
-<table cellpadding="0" cellspacing="0" width="929" height="150" align="center">
+<table cellpadding="0" cellspacing="0" width="929" align="center">
     <tr>
-        <td width="213" height="84" >
+        <td width="213">
             <p><a href="home.aspx"><img src="img/logo.jpg" border="0"></a></p>
         </td>
-        <td width="716" height="84">
+        <td width="716">
             <p><script>mEmbed('src=img/menu.swf','width=716','height=62','wmode=opaque','menu=false','quality=high','bgcolor=#ffffff');</script></p>
         </td>
     </tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="929" align="center">
     <tr>
-        <td width="929" height="30" colspan="2" align="left">
+        <td width="650" align="left">
         	<%if (login) { %>
             <div align="left">
 			    <table cellpadding="0" cellspacing="0" width="650" height="25">
@@ -160,6 +167,9 @@ receiveMemo();
 			    </table>
 			</div>
 			<%} %>
+        </td>
+		 <td width="279" height="30" align="right">
+            <p><img src="img/m.jpg" border="0" usemap="#ImageMap2">&nbsp;&nbsp;</p>
         </td>
     </tr>
 
