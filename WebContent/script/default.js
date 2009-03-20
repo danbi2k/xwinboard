@@ -16,7 +16,7 @@ function goTopLink(index)
 	location.href = topLink[index];
 }
 
-function exchangePoignt(point)
+function exchangePoint(point)
 {
 	var balance = point - (point % 10000);
 	if (balance < 10000) {

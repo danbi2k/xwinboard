@@ -11,7 +11,6 @@
 <td style="padding:13px;" bgcolor="#555555" style="color:black;" align="center">
  도메인이 변경되었습니다.
 <BR><BR>
-<font color="yellow">www.bravolife.net</font> 으로 접속하여 주시기 바라겠습니다. 
 <BR><BR>
 기존도메인은 3월25일 까지만 사용가능하십니다
 <BR><BR>
