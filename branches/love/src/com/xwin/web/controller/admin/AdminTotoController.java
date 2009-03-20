@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xwin.domain.common.ReuseComment;
-import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
 import com.xwin.domain.game.Toto;
 import com.xwin.infra.util.Code;
@@ -96,7 +94,9 @@ public class AdminTotoController extends XwinController
 		
 		String id = request.getParameter("id");
 		List<League> leagueList = leagueDao.selectLeagueList();
-		Toto toto = totoDao.selectToto(id);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		Toto toto = totoDao.selectToto(param);
 		
 		ModelAndView mv = new ModelAndView("admin/game/update_toto");
 		mv.addObject("leagueList", leagueList);
@@ -205,6 +205,38 @@ public class AdminTotoController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView changeDisplayStatus(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String id = request.getParameter("id");
+		String displayStatus = request.getParameter("displayStatus");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("status", Code.GAME_STATUS_RUN);
+		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
+		Integer existCount = totoDao.selectTotoCount(param);
+		
+		ResultXml rx = null;
+		if (existCount > 0 && displayStatus.equals(Code.GAME_DISPLAY_OPEN)) {
+			rx = new ResultXml(-1, "이미 진행중인 토토가 있습니다", null);
+		}
+		else {		
+			Toto toto = new Toto();
+			toto.setId(id);
+			toto.setDisplayStatus(displayStatus);			
+			totoDao.updateToto(toto);
+			
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

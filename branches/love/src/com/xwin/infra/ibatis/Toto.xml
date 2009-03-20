@@ -33,7 +33,7 @@
 	</insert>
 	
 	<update id="updateToto" parameterClass="Toto">
-		UPDATE tbl_game
+		UPDATE tbl_toto
 		<dynamic prepend="SET">
 			<isNotNull prepend="," property="title">
 			TITLE = #title#
@@ -59,10 +59,10 @@
 			<isNotNull prepend="," property="cardString">
 			CARD_STRING = #cardString#
 			</isNotNull>
-			<isNotNull prepend="," property="row">
+			<isNotNull prepend="," property="rowNum">
 			ROW_NUM = #rowNum#
 			</isNotNull>
-			<isNotNull prepend="," property="column">
+			<isNotNull prepend="," property="colNum">
 			COL_NUM = #colNum#
 			</isNotNull>
 			<isNotNull prepend="," property="status">
@@ -84,10 +84,23 @@
 		WHERE ID = #id#
 	</update>
 	
-	<select id="selectToto" resultMap="TotoResultMap" parameterClass="string">
+	<select id="selectToto" resultMap="TotoResultMap" parameterClass="map">
 		SELECT *
 		FROM tbl_toto
-		WHERE ID = #value#
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+				ID = #value#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="bettingStatus">
+				BET_STATUS = #bettingStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="displayStatus">
+				DP_STATUS = #displayStatus#
+			</isNotNull>
+		</dynamic>
 	</select>
 	
 	<select id="selectTotoList" resultMap="TotoResultMap" parameterClass="map">
