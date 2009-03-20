@@ -64,7 +64,7 @@
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
-		<td align="center" bgcolor="E7E7E7" width="15%">게임시간</td>
+		<td align="center" bgcolor="E7E7E7" width="15%">마감시각</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
 			<input type='text' name='gameDate' size=10 readonly onClick="popUpCalendar(this,gameDate,'yyyy-mm-dd');" style="cursor:hand">
 			<select name='gameHour'>
@@ -99,13 +99,13 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">최소구매액</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type="text" size="10" name="minMoney" id="minMoney" value="2000"/>%
+			<input type="text" size="10" name="minMoney" id="minMoney" value="2000"/>원
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">이월잔액</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type="text" size="10" name="carryOver" id="carryOver"/>%
+			<input type="text" size="10" name="carryOver" id="carryOver" value="0"/>원
 		</td>
 	</tr>
 </table>

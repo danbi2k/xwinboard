@@ -19,9 +19,9 @@ public class TotoDao extends XwinDao
 		sqlMapClientTemplate.update("updateToto", game);
 	}
 	
-	public Toto selectToto(String id)
+	public Toto selectToto(Map<String, Object> param)
 	{
-		return (Toto) sqlMapClientTemplate.queryForObject("selectToto", id);
+		return (Toto) sqlMapClientTemplate.queryForObject("selectToto", param);
 	}
 	
 	

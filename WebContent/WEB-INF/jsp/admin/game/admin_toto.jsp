@@ -195,6 +195,22 @@
 %>
 	</div>
 <script>
+function changeDisplayStatus(id, oselect)
+{
+	var displayStatus = oselect.value;
+
+	var query = "mode=changeDisplayStatus";
+	query += "&displayStatus=" + displayStatus;
+	query += "&id=" + id;
+	
+	var http = new JKL.ParseXML("adminToto.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code < 0) {
+		alert(result.resultXml.message);
+		location.reload();
+	}
+}
+
 function goPage(index)
 {
 	var frm = document.search;
