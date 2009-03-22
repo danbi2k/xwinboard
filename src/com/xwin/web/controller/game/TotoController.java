@@ -9,10 +9,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.League;
 import com.xwin.domain.game.Toto;
 import com.xwin.domain.user.Member;
@@ -26,7 +26,7 @@ public class TotoController extends XwinController
 {
 	int ROWSIZE = 30;
 	
-	public ModelAndView viewTotoList(HttpServletRequest request,
+	public ModelAndView viewToto(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
@@ -42,9 +42,52 @@ public class TotoController extends XwinController
 		Toto toto = totoDao.selectToto(param);
 		
 		ModelAndView mv = new ModelAndView("game/toto");
-		mv.addObject("totoList", toto);
+		mv.addObject("toto", toto);
 
 		return mv; 
+	}
+	
+	public ModelAndView betting(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		String markingString = XwinUtil.arcNvl(request.getParameter("markingString"));
+		String totoId = XwinUtil.arcNvl(request.getParameter("totoId"));
+		String _money = XwinUtil.arcNvl(request.getParameter("money"));
+
+		ResultXml rx = null;
+		
+		Integer money = 0;
+		try {
+			money = Integer.parseInt(_money);
+		} catch (Exception e) {
+			e.printStackTrace();
+			rx = new ResultXml(-1, "구매금액을 확인하십시오", null);
+		}
+		
+		BetToto betToto = new BetToto();
+		betToto.setTotoId(totoId);
+		betToto.setMarkingString(markingString);
+		betToto.setMoney(money);
+		betToto.setUserId(member.getUserId());
+		betToto.setNickName(member.getNickName());
+		betToto.setDate(new Date());
+		betToto.setRate(0.0);
+		betToto.setStatus(Code.BET_STATUS_RUN);
+		betToto.setCalcStatus(Code.BET_CALC_DISABLE);
+		
+		betTotoDao.insertBetToto(betToto);
+		rx = new ResultXml(0, "구매 하셨습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;		
 	}
 	
 	public ModelAndView viewTotoResultList(HttpServletRequest request,

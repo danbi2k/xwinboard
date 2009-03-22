@@ -1,6 +1,8 @@
 package com.xwin.domain.game;
 
-public class BetToto extends Game
+import java.util.Date;
+
+public class BetToto
 {
 	private static final long serialVersionUID = 4739208784483978447L;
 	
@@ -8,9 +10,9 @@ public class BetToto extends Game
 	private String totoId;
 	private String userId;
 	private String nickName;
-	private String date;
-	private String rate;
-	private String money;
+	private Date date;
+	private Double rate;
+	private Integer money;
 	private String calcStatus;
 	private String status;
 	private String isDeleted;
@@ -41,22 +43,22 @@ public class BetToto extends Game
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getRate() {
+	public Double getRate() {
 		return rate;
 	}
-	public void setRate(String rate) {
+	public void setRate(Double rate) {
 		this.rate = rate;
 	}
-	public String getMoney() {
+	public Integer getMoney() {
 		return money;
 	}
-	public void setMoney(String money) {
+	public void setMoney(Integer money) {
 		this.money = money;
 	}
 	public String getCalcStatus() {
