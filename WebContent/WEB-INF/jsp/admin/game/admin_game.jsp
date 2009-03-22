@@ -168,6 +168,19 @@
 
 		location.reload();
 	}
+
+	function removeAllGame()
+	{
+		var c = document.game.checkGame;
+		c = Xwin.ToArray(c);
+		for (var i=0; i < c.length ; i++) {
+			if (c[i].checked) {
+				removeGame(c[i].value);
+			} 
+		}
+
+		location.reload();
+	}
 </SCRIPT>
 
 <div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트":type.equals("wdl")?"승무패":"핸디캡"%></div>
@@ -301,7 +314,8 @@
 			%>
 	</table>
 	<input type='button' value='스코어저장' onclick='saveAllScore()' style='cursor:hand'>
-	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'>
+	<input type='button' value='경기취소' onclick='calcelAllGame()' style='cursor:hand'><BR><BR><BR>
+	<input type='button' value='경기완전삭제' onclick='removeAllGame()' style='cursor:hand'>
 <div class="pages">
 <%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);

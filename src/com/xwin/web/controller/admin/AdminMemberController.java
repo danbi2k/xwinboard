@@ -137,6 +137,17 @@ public class AdminMemberController extends XwinController implements MessageSour
 		param.put("joinIdNull", "");
 		List<Invitation> noJoinList = invitationDao.selectInvitationList(param);
 		
+		// Access Log
+		if (member.getMemberId() == 1) {
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(member.getUserId());
+			access.setNickName(member.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_INSPECTION);
+			accessDao.insertAccess(access);
+		}		
+		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
 		mv.addObject("accountList", accountList);
