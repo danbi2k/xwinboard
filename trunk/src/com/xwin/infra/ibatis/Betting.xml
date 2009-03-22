@@ -254,7 +254,7 @@
 		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
 		FROM tbl_betting
 		WHERE STATUS in ('BS001', 'BS002', 'BS003') AND
-		DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+		END_DATE >= CURDATE()-1 AND END_DATE < CURDATE()+0
 		GROUP BY date_format(DATE, '%Y%m%d')) as A,
 		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(EXPECT) as OUTMONEY
 		FROM tbl_betting
@@ -264,12 +264,12 @@
 	    (SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as POINT_BETTING
 	    FROM tbl_point
 	    WHERE TYPE = 'PNT02' AND
-	    DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+	    END_DATE >= CURDATE()-1 AND END_DATE < CURDATE()+0
 	    GROUP BY date_format(DATE, '%Y%m%d')) as C,
 	    (SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as POINT_BONUS
 	    FROM tbl_point
 	    WHERE TYPE = 'PNT03' AND
-	    DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+	    END_DATE >= CURDATE()-1 AND END_DATE < CURDATE()+0
 	    GROUP BY date_format(DATE, '%Y%m%d')) as D
 		WHERE A.DATE = B.DATE AND A.DATE = C.DATE AND A.DATE = D.DATE
 	]]>	

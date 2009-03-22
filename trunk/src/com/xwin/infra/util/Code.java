@@ -100,6 +100,9 @@ public class Code
 	public static final String REUSE_COMMENT_QNA			= "RUC01";
 	public static final String REUSE_COMMENT_GAME			= "RUC02";
 	
+	public static final String ACCESS_LOGIN					= "ACC01";
+	public static final String ACCESS_INSPECTION			= "ACC10";
+	
 	static 
 	{
 		put(TRAN_TYPE_MONEYIN, "입금");
