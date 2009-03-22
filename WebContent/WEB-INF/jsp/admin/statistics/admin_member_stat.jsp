@@ -68,7 +68,7 @@
 
 </SCRIPT>
 
-<div class="title">회원목록</div>
+<div class="title">회원현황</div>
 <form method='GET' name='search' action='adminStat.aspx'>
 	<input type='hidden' name='mode' value='viewMemberStat'/>
 	<input type='hidden' name='pageIndex'/>
