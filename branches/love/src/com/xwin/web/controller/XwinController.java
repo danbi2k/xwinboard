@@ -10,6 +10,7 @@ import com.xwin.infra.dao.AccountDao;
 import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.BankBookDao;
 import com.xwin.infra.dao.BetGameDao;
+import com.xwin.infra.dao.BetTotoDao;
 import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.BoardDao;
 import com.xwin.infra.dao.GameDao;
@@ -55,6 +56,7 @@ public class XwinController extends MultiActionController
 	protected InvitationDao invitationDao = null;
 	protected ReuseCommentDao reuseCommentDao = null;
 	protected TotoDao totoDao = null;
+	protected BetTotoDao betTotoDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected ProcessService processService = null;
@@ -138,6 +140,10 @@ public class XwinController extends MultiActionController
 
 	public void setTotoDao(TotoDao totoDao) {
 		this.totoDao = totoDao;
+	}
+
+	public void setBetTotoDao(BetTotoDao betTotoDao) {
+		this.betTotoDao = betTotoDao;
 	}
 
 	public void setProcessService(ProcessService processService) {

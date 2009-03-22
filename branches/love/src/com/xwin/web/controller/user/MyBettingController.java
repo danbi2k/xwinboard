@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
@@ -25,18 +26,11 @@ public class MyBettingController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
-		
-		ModelAndView mv = null;
-		
+			//return new ModelAndView("block");		
 		Member member = (Member) request.getSession().getAttribute("Member");
-		if (member == null) {
-			mv = new ModelAndView("dummy");
-			return mv;
-		}
 		
+		if (member == null)
+			return new ModelAndView("dummy");		
 
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		int pIdx = 0;
@@ -53,7 +47,7 @@ public class MyBettingController extends XwinController
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
 		
-		mv = new ModelAndView("user/my_betting");
+		ModelAndView mv = new ModelAndView("user/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
 		return mv;
@@ -89,6 +83,38 @@ public class MyBettingController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));		
+		return mv;
+	}
+	
+	public ModelAndView viewMyTotoList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");		
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		if (member == null)
+			return new ModelAndView("dummy");	
+		
+
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		param.put("notStatus", Code.BET_STATUS_CANCEL);
+		param.put("isDeleted", "N");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<BetToto> betTotoList =	betTotoDao.selectBetTotoList(param);
+		Integer betTotoCount =	betTotoDao.selectBetTotoCount(param);
+		
+		ModelAndView mv = new ModelAndView("user/my_toto");
+		mv.addObject("betTotoList", betTotoList);
+		mv.addObject("betTotoCount", betTotoCount);
 		return mv;
 	}
 }

@@ -54,6 +54,7 @@
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body bgcolor="#1a1a1a" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<a href="toto.aspx?mode=viewToto">토토</a>
 <map name="ImageMap1">
 <area shape="rect" coords="25, 22, 65, 42" href="provision.aspx" onfocus="this.blur()">
 <area shape="rect" coords="86, 23, 128, 41" href="rules.aspx" onfocus="this.blur()">
