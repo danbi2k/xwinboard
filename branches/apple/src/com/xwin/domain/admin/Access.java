@@ -17,6 +17,7 @@ public class Access extends XwinObject
 	Date date;
 	String ipAddress;
 	String block;
+	String type;
 	
 	public String getId() {
 		return id;
@@ -53,5 +54,11 @@ public class Access extends XwinObject
 	}
 	public void setBlock(String block) {
 		this.block = block;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }

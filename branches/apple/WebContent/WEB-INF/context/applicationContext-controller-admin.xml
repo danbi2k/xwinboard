@@ -24,6 +24,7 @@
 		p:boardDao-ref="boardDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
+		p:accessDao-ref="accessDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminMainController"

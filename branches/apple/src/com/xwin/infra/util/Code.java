@@ -98,6 +98,10 @@ public class Code
 	public static final String BOARDITEM_STATUS_NORMAL		= "BIS01";
 	public static final String BOARDITEM_STATUS_REMOVE		= "BIS03";
 	
+	public static final String ACCESS_USER_LOGIN			= "ACC01";
+	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
+	public static final String ACCESS_INSPECTION			= "ACC10";
+	
 	static 
 	{
 		put(TRAN_TYPE_MONEYIN, "입금");

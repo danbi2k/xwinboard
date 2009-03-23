@@ -1,11 +1,14 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Access;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -27,6 +30,15 @@ public class AdminLoginController extends XwinController
 		if (admin!= null && admin.getPassword().equals(password) && admin.getPin().equals(pin)) {
 			request.getSession().setAttribute("Admin", admin);
 			rx = ResultXml.SUCCESS;
+			
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(admin.getUserId());
+			access.setNickName(admin.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_ADMIN_LOGIN);
+			
+			accessDao.insertAccess(access);
 		} else {
 			rx = new ResultXml(-1, "관리자 정보가 잘못되었습니다", null);
 		}
