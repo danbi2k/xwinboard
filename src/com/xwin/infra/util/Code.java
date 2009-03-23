@@ -100,7 +100,8 @@ public class Code
 	public static final String REUSE_COMMENT_QNA			= "RUC01";
 	public static final String REUSE_COMMENT_GAME			= "RUC02";
 	
-	public static final String ACCESS_LOGIN					= "ACC01";
+	public static final String ACCESS_USER_LOGIN			= "ACC01";
+	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	static 
