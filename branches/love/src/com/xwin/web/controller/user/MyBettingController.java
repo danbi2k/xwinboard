@@ -117,4 +117,31 @@ public class MyBettingController extends XwinController
 		mv.addObject("betTotoCount", betTotoCount);
 		return mv;
 	}
+	
+	public ModelAndView viewMyTotoDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");		
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		if (member == null)
+			return new ModelAndView("dummy");	
+		
+		String id = request.getParameter("id");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		param.put("userId", member.getUserId());
+		
+		List<BetToto> betTotoList = betTotoDao.selectBetTotoList(param);
+		BetToto betToto = null;
+		if (betTotoList.size() == 1)
+			betToto = betTotoList.get(0);
+		
+		ModelAndView mv = new ModelAndView("user/my_toto_detail");
+		mv.addObject("betToto", betToto);
+		
+		return mv;
+	}
 }
