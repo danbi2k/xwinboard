@@ -174,13 +174,18 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String block = XwinUtil.arcNvl(request.getParameter("block"));
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
+		if (type == null)
+			type = Code.ACCESS_USER_LOGIN;
+		
 		Map<String, Object> param = new HashMap<String, Object>();
-		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");		
+		param.put("type", type);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("fromDate", XwinUtil.toDate(fromDate));
