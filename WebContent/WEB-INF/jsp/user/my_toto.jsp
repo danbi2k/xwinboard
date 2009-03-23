@@ -37,7 +37,7 @@
 			class="menubar">
 		<p>구매일자</p>
 		</td>
-		<td width="209" height="40" align="center" valign="middle"
+		<td width="450" height="40" align="center" valign="middle"
 			class="menubar">
 		<p>회차</p>
 		</td>
@@ -63,8 +63,8 @@
 		<td width="131" class="tablebg1" align="center" valign="middle">
 		<p><%=XwinUtil.getBoardItemDate(betToto.getDate())%></p>
 		</td>
-		<td width="209" class="tablebg2" align="center" valign="middle">
-		<p></p>
+		<td width="450" class="tablebg2" align="center" valign="middle">
+		<p><a href="myBet.aspx?mode=viewMyTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getTitle()%></a></p>
 		</td>
 		<td width="80" class="tablebg1" align="center" valign="middle">
 		<p><%=XwinUtil.comma3(betToto.getMoney())%></p>

@@ -7,8 +7,8 @@
 <%@ include file="../header.jsp"%>
 
 <%
-	Toto toto = (Toto) request.getAttribute("toto");
-	Integer colNum = toto.getColNum(), rowNum = toto.getRowNum();
+	BetToto betToto = (BetToto) request.getAttribute("betToto");
+	Integer colNum = betToto.getColNum(), rowNum = betToto.getRowNum();
 %>
 
 <tr>
@@ -21,8 +21,8 @@
 	<tr>
 		<td width="771" height="33" align="left" valign="top">
 		<p>
-			<span style="background-color:AA0055">토토구매</span>&nbsp;
-			<a href="myBet.aspx?mode=viewMyTotoList"><span style="background-color:000000">구매내역</span></a></p>
+			<a href="toto.aspx?mode=viewToto"><span style="background-color:000000">토토구매</span></a>&nbsp;
+			<span style="background-color:AA0055">구매내역</span></p>
 		</td>
 	</tr>
 </table>
@@ -41,7 +41,7 @@
 			            <p>회차</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p><%=toto.getTitle()%></p>
+			            <p><%=betToto.getTitle()%></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -65,7 +65,7 @@
 			            <p>발매기간</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p><%=toto.getGameDate()%>까지</p>
+			            <p>2009-03-10 까지</p>
 			        </td>
 			    </tr>
 			</table>
@@ -158,7 +158,7 @@
 			    </tr>
 			    <tr>
 			        <td colspan="3">
-			        ※ 최소 구매 가능 금액은 <%=XwinUtil.comma3(toto.getMinMoney())%>원 입니다. <br>
+			        ※ 최소 구매 가능 금액은 <%=XwinUtil.comma3(betToto.getMinMoney())%>원 입니다. <br>
 			        ※배당률은 실시간으로 변합니다. 배팅시 예상배당률과 배팅후배당률은 다를수 있습니다.
 			        </td>
 			    </tr>
@@ -180,8 +180,8 @@ spot[1] = "B";
 spot[2] = "C";
 spot[3] = "D";
 
-var colNum = <%=toto.getColNum()%>;
-var rowNum = <%=toto.getRowNum()%>;
+var colNum = <%=betToto.getColNum()%>;
+var rowNum = <%=betToto.getRowNum()%>;
 
 function betting()
 {
@@ -193,7 +193,7 @@ function betting()
 		
 		var query = "mode=betting";
 		query += "&markingString=" + markingString;
-		query += "&totoId=<%=toto.getId()%>";
+		query += "&totoId=<%=betToto.getId()%>";
 		query += "&money=" + money;
 
 		var http = new JKL.ParseXML("toto.aspx", query);

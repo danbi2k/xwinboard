@@ -2,7 +2,7 @@ package com.xwin.domain.game;
 
 import java.util.Date;
 
-public class BetToto
+public class BetToto extends Toto
 {
 	private static final long serialVersionUID = 4739208784483978447L;
 	
@@ -14,7 +14,7 @@ public class BetToto
 	private Double rate;
 	private Integer money;
 	private String calcStatus;
-	private String status;
+	private String runStatus;
 	private String isDeleted;
 	private String endDate;
 	private String markingString;
@@ -67,11 +67,11 @@ public class BetToto
 	public void setCalcStatus(String calcStatus) {
 		this.calcStatus = calcStatus;
 	}
-	public String getStatus() {
-		return status;
+	public String getRunStatus() {
+		return runStatus;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRunStatus(String runStatus) {
+		this.runStatus = runStatus;
 	}
 	public String getIsDeleted() {
 		return isDeleted;

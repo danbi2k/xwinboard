@@ -8,7 +8,7 @@
 
 	<typeAlias alias="BetToto" type="com.xwin.domain.game.BetToto" />
 	
-	<resultMap id="bettingTotoResultMap" class="BetToto">
+	<resultMap id="bettingTotoResultMap" class="BetToto" extends="Toto.TotoResultMap">
 		<result property="id" column="ID"/>
 		<result property="totoId" column="TOTO_ID"/>
 		<result property="userId" column="USERID"/>
@@ -17,22 +17,22 @@
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
 		<result property="calcStatus" column="CALC_STATUS"/>
-		<result property="status" column="STATUS"/>
+		<result property="runStatus" column="RUN_STATUS"/>
 		<result property="isDeleted" column="ISDELETED"/>
 		<result property="endDate" column="END_DATE"/>
 		<result property="markingString" column="MARKING_STRING"/>
 	</resultMap>
 	
 	<insert id="insertBetToto" parameterClass="BetToto">
-		INSERT INTO tbl_betting_toto(TOTO_ID, USERID, NICKNAME, DATE, RATE, MONEY, STATUS, MARKING_STRING)
-			VALUES(#totoId#, #userId#, #nickName#, #date#, #rate#, #money#, #status#, #markingString#)
+		INSERT INTO tbl_betting_toto(TOTO_ID, USERID, NICKNAME, DATE, RATE, MONEY, RUN_STATUS, MARKING_STRING)
+			VALUES(#totoId#, #userId#, #nickName#, #date#, #rate#, #money#, #runStatus#, #markingString#)
 	</insert>
 	
 	<select id="selectBetToto" resultMap="bettingTotoResultMap"
 		parameterClass="map">
 		SELECT *
-		FROM tbl_betting_toto b
-		WHERE ID = #id#
+		FROM tbl_betting_toto b, tbl_toto t
+		WHERE b.TOTO_ID = t.ID AND ID = #id#
 	</select>
 	
 	<update id="updateBetToto" parameterClass="BetToto">
@@ -41,8 +41,8 @@
 			<isNotNull prepend="," property="rate">
 			RATE = #rate#
 			</isNotNull>
-			<isNotNull prepend="," property="status">
-			STATUS = #status#
+			<isNotNull prepend="," property="runStatus">
+			RUN_STATUS = #runStatus#
 			</isNotNull>
 			<isNotNull prepend="," property="calcStatus">
 			CALC_STATUS = #calcStatus#
@@ -69,58 +69,57 @@
 	
 	<select id="selectBetTotoList" resultMap="bettingTotoResultMap"
 		parameterClass="map">
-		SELECT b.*
-		FROM tbl_betting_toto b
-		<dynamic prepend="WHERE">
+		SELECT *
+		FROM tbl_betting_toto b, tbl_toto t
+		WHERE b.TOTO_ID = t.ID 
 			<isNotNull prepend="AND" property="id">
-			ID = #id#
+			b.ID = #id#
 			</isNotNull>
 			<isNotNull prepend="AND" property="totoId">
-			TOTO_ID = #totoId#
+			b.TOTO_ID = #totoId#
 			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-			STATUS = #status#
+			<isNotNull prepend="AND" property="runStatus">
+			b.RUN_STATUS = #runStatus#
 			</isNotNull>
-			<isNotNull prepend="AND" property="statusList">
-				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
-					STATUS = #statusList[]#
+			<isNotNull prepend="AND" property="runStatusList">
+				<iterate prepend="" property="runStatusList" open=" (" close=") " conjunction="OR">
+					b.RUN_STATUS = #runStatusList[]#
 				</iterate>
 			</isNotNull>
 			<isNotNull prepend="AND" property="calcStatus">
-			CALC_STATUS = #calcStatus#
+			b.CALC_STATUS = #calcStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notCalcStatus">
-			CALC_STATUS != #notCalcStatus#
+			b.CALC_STATUS != #notCalcStatus#
 			</isNotNull>
-			<isNotNull prepend="AND" property="notStatus">
-			STATUS != #notStatus#
+			<isNotNull prepend="AND" property="notRunStatus">
+			b.RUN_STATUS != #notStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userId">
-			USERID = #userId#
+			b.USERID = #userId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
-			ISDELETED = #isDeleted#
+			b.ISDELETED = #isDeleted#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
-			USERID LIKE #userIdLike#
+			b.USERID LIKE #userIdLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="markingString">
-			MARKING_STRING = #markingString#
+			b.MARKING_STRING = #markingString#
 			</isNotNull>
 			<isNotNull prepend="AND" property="nickNameLike">
-			NICKNAME LIKE #nickNameLike#
+			b.NICKNAME LIKE #nickNameLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="fromDate">
 			<![CDATA[
-			DATE >= #fromDate#
+			b.DATE >= #fromDate#
 			]]>
 			</isNotNull>
 			<isNotNull prepend="AND" property="toDate">
 			<![CDATA[
-			DATE <= #toDate#
+			b.DATE <= #toDate#
 			]]>
 			</isNotNull>
-		</dynamic>
 		ORDER BY DATE DESC
 		<isNotNull prepend="LIMIT" property="fromRow">
 			#fromRow#, #rowSize#
@@ -138,12 +137,12 @@
 			<isNotNull prepend="AND" property="totoId">
 			TOTO_ID = #totoId#
 			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-			STATUS = #status#
+			<isNotNull prepend="AND" property="runStatus">
+			RUN_STATUS = #runStatus#
 			</isNotNull>
-			<isNotNull prepend="AND" property="statusList">
-				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
-					STATUS = #statusList[]#
+			<isNotNull prepend="AND" property="runStatusList">
+				<iterate prepend="" property="runStatusList" open=" (" close=") " conjunction="OR">
+					RUN_STATUS = #runStatusList[]#
 				</iterate>
 			</isNotNull>
 			<isNotNull prepend="AND" property="calcStatus">
@@ -152,8 +151,8 @@
 			<isNotNull prepend="AND" property="notCalcStatus">
 			CALC_STATUS != #notCalcStatus#
 			</isNotNull>
-			<isNotNull prepend="AND" property="notStatus">
-			STATUS != #notStatus#
+			<isNotNull prepend="AND" property="notRunStatus">
+			RUN_STATUS != #notRunStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userId">
 			USERID = #userId#
