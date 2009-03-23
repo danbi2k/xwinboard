@@ -50,6 +50,7 @@
 		<th width=15%>닉네임</th>
 		<th width=*>접속시각</th>
 		<th width=15%>아이피</th>
+		<th width=15%>종류</th>
 		<th>차단</th>
 	</tr>
 <%
@@ -59,9 +60,10 @@ if (accessList != null) {
 	<tr>
 		<td width=5%><%=access.getId()%></td>
 		<td width=10%><a href='javascript:goMemberDetail("<%=access.getUserId()%>")'><%=access.getUserId()%></a></td>
-		<td width=10%><%=access.getNickName()%></td>
+		<td width=15%><%=access.getNickName()%></td>
 		<td width=*><%=XwinUtil.toDateStr(access.getDate(), 1)%></td>
-		<td width=10%><%=access.getIpAddress()%></td>
+		<td width=15%><%=access.getIpAddress()%></td>
+		<td width=15%><%=Code.getValue(XwinUtil.nvl(access.getType()))%></td>
 		<td width=10%>
 			<%if ("Y".equals(access.getBlock())) { %>
 			<input type="button" onclick="releaseIp('<%=access.getIpAddress()%>')" value="해제"/>
