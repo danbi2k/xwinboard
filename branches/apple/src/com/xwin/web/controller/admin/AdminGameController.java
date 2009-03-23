@@ -229,42 +229,47 @@ public class AdminGameController extends XwinController
 		
 		ResultXml rx = null;
 		
-		try {
-			League league = leagueDao.selectLeagueByName(command.getLeagueName());
-			String type = (String) request.getParameter("type");
-			
-			Game game = new Game();
-			game.setId(command.getGameId());
-			game.setLeagueId(league.getId());
-			game.setLeagueName(league.getName());
-			game.setLeagueImage(league.getImage());
-			game.setHomeTeam(command.getHomeTeam());
-			game.setAwayTeam(command.getAwayTeam());
-			game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
-			game.setWinRate(command.getWinRate());
-			game.setDrawRate(command.getDrawRate());
-			game.setLoseRate(command.getLoseRate());
-			game.setNote(command.getNote());
-			
-			//game.setStatus(Code.GAME_STATUS_RUN);
-			Date now = new Date();
-			long timeDiff = game.getGameDate().getTime() - now.getTime();
-			if (timeDiff >= FIVEMINUTE) {
-				game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+		Game dbGame = gameDao.selectGame(command.getGameId());
+		if (dbGame.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT)) {		
+			try {
+				League league = leagueDao.selectLeagueByName(command.getLeagueName());
+				String type = (String) request.getParameter("type");
+				
+				Game game = new Game();
+				game.setId(command.getGameId());
+				game.setLeagueId(league.getId());
+				game.setLeagueName(league.getName());
+				game.setLeagueImage(league.getImage());
+				game.setHomeTeam(command.getHomeTeam());
+				game.setAwayTeam(command.getAwayTeam());
+				game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
+				game.setWinRate(command.getWinRate());
+				game.setDrawRate(command.getDrawRate());
+				game.setLoseRate(command.getLoseRate());
+				game.setNote(command.getNote());
+				
+				//game.setStatus(Code.GAME_STATUS_RUN);
+				Date now = new Date();
+				long timeDiff = game.getGameDate().getTime() - now.getTime();
+				if (timeDiff >= FIVEMINUTE) {
+					game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+				}
+				
+				game.setType(type);
+				game.setWinDeny(command.getWinDeny());
+				game.setDrawDeny(command.getDrawDeny());
+				game.setLoseDeny(command.getLoseDeny());
+				game.setSyncDeny(command.getSyncDeny());
+				
+				gameDao.updateGame(game);
+				
+				rx = new ResultXml(0, "수정되었습니다", null);
+			} catch (Exception e) {
+				rx = new ResultXml(-1, "서버오류", null);
+				throw e;
 			}
-			
-			game.setType(type);
-			game.setWinDeny(command.getWinDeny());
-			game.setDrawDeny(command.getDrawDeny());
-			game.setLoseDeny(command.getLoseDeny());
-			game.setSyncDeny(command.getSyncDeny());
-			
-			gameDao.updateGame(game);
-			
-			rx = new ResultXml(0, "수정되었습니다", null);
-		} catch (Exception e) {
-			rx = new ResultXml(-1, "서버오류", null);
-			throw e;
+		} else {
+			rx = new ResultXml(-1, "마감된 경기는 수정할 수 없습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
