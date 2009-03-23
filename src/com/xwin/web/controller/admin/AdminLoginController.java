@@ -34,6 +34,16 @@ public class AdminLoginController extends XwinController
 		String ip = request.getRemoteAddr();
 		TRY_IP.put(ip, XwinUtil.ntz(TRY_IP.get(ip))+1);			
 		Integer tryCount = TRY_IP.get(ip);
+		
+		Access tryAccess = new Access();
+		tryAccess.setDate(new Date());
+		tryAccess.setUserId(admin.getUserId());
+		tryAccess.setNickName(admin.getNickName());
+		tryAccess.setIpAddress(request.getRemoteAddr());
+		tryAccess.setType(Code.ACCESS_ADMIN_LOGIN_TRY);
+		
+		accessDao.insertAccess(tryAccess);
+		
 		if (tryCount > 5) {
 			rx = new ResultXml(-1, "로그인 시도 횟수를 초과 하였습니다. 접속을 차단 합니다.", null);
 		} 

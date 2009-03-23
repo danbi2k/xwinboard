@@ -100,6 +100,7 @@ public class Code
 	
 	public static final String ACCESS_USER_LOGIN			= "ACC01";
 	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
+	public static final String ACCESS_ADMIN_LOGIN_TRY		= "ACC03";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	static 
@@ -193,6 +194,10 @@ public class Code
 		
 		put("wdl", "승무패");
 		put("handy", "핸디캡");
+		
+		put(ACCESS_ADMIN_LOGIN, "관리자로그인");
+		put(ACCESS_ADMIN_LOGIN_TRY, "관리자로그인시도");
+		put(ACCESS_USER_LOGIN, "사용자로그인");
 	}
 	
 	private static void put(String key, String value)
