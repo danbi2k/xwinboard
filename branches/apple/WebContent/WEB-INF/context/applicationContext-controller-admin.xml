@@ -53,6 +53,7 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:invitationDao-ref="invitationDao"
+		p:smsWaitDao-ref="smsWaitDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"
