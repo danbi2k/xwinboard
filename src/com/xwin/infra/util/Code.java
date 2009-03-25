@@ -101,6 +101,7 @@ public class Code
 	public static final String ACCESS_USER_LOGIN			= "ACC01";
 	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
 	public static final String ACCESS_ADMIN_LOGIN_TRY		= "ACC03";
+	public static final String ACCESS_ADMIN_WRITE_BOARD		= "ACC04";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	static 
