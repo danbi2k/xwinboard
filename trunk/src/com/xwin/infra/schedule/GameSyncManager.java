@@ -14,8 +14,8 @@ import com.xwin.infra.util.XmlUtil;
 
 public class GameSyncManager extends QuartzJobBean
 {
-	private static final String GAME_URL = "http://bethit.net:10180/external.aspx?mode=getGameList";
-	private static final String LEAGUE_URL = "http://bethit.net:10180/external.aspx?mode=getLeagueList";
+	private static final String GAME_URL = "http://222.122.219.82:10180/external.aspx?mode=getGameList";
+	private static final String LEAGUE_URL = "http://222.122.219.82:10180/external.aspx?mode=getLeagueList";
 	//private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
 	//private static final String ALLUSER_URL = "http://localhost:8080/xwin/external.aspx?mode=getAllNormalPhoneNumber";
 	
