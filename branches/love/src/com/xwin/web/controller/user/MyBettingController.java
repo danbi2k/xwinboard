@@ -134,13 +134,20 @@ public class MyBettingController extends XwinController
 		param.put("id", id);
 		param.put("userId", member.getUserId());
 		
-		List<BetToto> betTotoList = betTotoDao.selectBetTotoList(param);
-		BetToto betToto = null;
-		if (betTotoList.size() == 1)
-			betToto = betTotoList.get(0);
+		BetToto betToto = betTotoDao.selectBetToto(param);
+		
+		param = new HashMap<String, Object>();
+		param.put("totoId", betToto.getTotoId());
+		param.put("notRunStatus", Code.BET_STATUS_CANCEL);
+		Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
+		Long totalMoney = totalMoneySum - XwinUtil.calcExpectMoney(betToto.getEarnRate() / 100.0, totalMoneySum);
+		
+		Integer totalCount = betTotoDao.selectBetTotoCount(param);
 		
 		ModelAndView mv = new ModelAndView("user/my_toto_detail");
 		mv.addObject("betToto", betToto);
+		mv.addObject("totalMoney", totalMoney);
+		mv.addObject("totalCount", totalCount);
 		
 		return mv;
 	}

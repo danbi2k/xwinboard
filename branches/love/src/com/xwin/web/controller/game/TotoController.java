@@ -37,12 +37,25 @@ public class TotoController extends XwinController
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.GAME_STATUS_RUN);
-		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
-		
+		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);		
 		Toto toto = totoDao.selectToto(param);
+		
+		Long totalMoney = null;
+		Integer totalCount = null;
+		if (toto != null) {
+			param = new HashMap<String, Object>();
+			param.put("totoId", toto.getId());
+			param.put("notRunStatus", Code.BET_STATUS_CANCEL);
+			Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
+			totalMoney = totalMoneySum - XwinUtil.calcExpectMoney(toto.getEarnRate() / 100.0, totalMoneySum);
+			
+			totalCount = betTotoDao.selectBetTotoCount(param);
+		}
 		
 		ModelAndView mv = new ModelAndView("game/toto");
 		mv.addObject("toto", toto);
+		mv.addObject("totalMoney", totalMoney);
+		mv.addObject("totalCount", totalCount);
 
 		return mv; 
 	}
@@ -78,7 +91,7 @@ public class TotoController extends XwinController
 		betToto.setNickName(member.getNickName());
 		betToto.setDate(new Date());
 		betToto.setRate(0.0);
-		betToto.setStatus(Code.BET_STATUS_RUN);
+		betToto.setRunStatus(Code.BET_STATUS_RUN);
 		betToto.setCalcStatus(Code.BET_CALC_DISABLE);
 		
 		betTotoDao.insertBetToto(betToto);

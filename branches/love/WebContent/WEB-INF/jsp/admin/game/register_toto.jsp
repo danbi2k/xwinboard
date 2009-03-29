@@ -32,7 +32,7 @@
 	<option value="3" <%=colNum==3?"selected":""%>>3경기</option>
 </select>
 <input type="text" name="rowNum" size="2" value="<%=rowNum%>"/>줄
-<input type="submit" value="입력폼생성"/>
+<input type="submit" value="토토폼생성"/>
 </form>
 
 <form name="totoFrm" action="adminToto.aspx" method="post">
@@ -109,7 +109,7 @@
 		</td>
 	</tr>
 </table>
-<table class="toto"">
+<table class="toto">
 <tr>
 <%
 	for (int j = 0 ; j < colNum ; j++) {
@@ -161,7 +161,7 @@
 	}
 %>
 </table>
-<input type="submit" value="저장"/>
+<input type="button" value="저장" onclick="submitTotoForm()"/>
 <input type="button" value="샘플폼로드" onclick="loadForm('T1L=금호생명|T0R=SKT|I2R=최종(연장포함)|T0L=KTF|I2L=전반(1+2)|I1R=최종(연장포함)|I1L=전반(1+2)|I0R=최종(연장포함)|I0L=전반(1+2)|C2L9=48~51|C2L8=44~47|C2L7=40~43|C2L6=36~39|C2L5=32~35|C2R9=88~91|C2L4=28~31|C1L9=48~51|C2R8=84~87|C2L3=24~27|C1L8=44~47|C2L2=20~23|C2R7=80~83|C1L7=40~43|C2L1=16~19|C2R6=76~79|C1L6=36~39|C2L0=12~15|C2R5=72~75|C1L5=32~35|C2R4=68~71|C1R9=88~91|C1L4=28~31|C2R3=64~67|C0L9=48~51|C1L3=24~27|C1R8=84~87|C2R2=60~63|C0L8=44~47|C1L2=20~23|C1R7=80~83|C2R1=56~59|C0L7=40~43|C1L1=16~19|C1R6=76~79|C2R0=52~55|C0L6=36~39|C1L0=12~15|C1R5=72~75|C0L5=32~35|C1R4=68~71|C0R9=88~91|C0L4=28~31|C1R3=64~67|C0L3=24~27|C0R8=84~87|C1R2=60~63|C0L2=20~23|C0R7=80~83|C1R1=56~59|C0L1=16~19|C0R6=76~79|C1R0=52~55|C0L0=12~15|C0R5=72~75|C0R4=68~71|C0R3=64~67|C0R2=60~63|C0R1=56~59|C0R0=52~55|T2R=두산|T2L=롯데|T1R=신한생명|')"/>
 <!-- 
 <input type="button" value="마킹검사" onclick="confirmMarking()"/>
@@ -236,6 +236,19 @@ function loadForm(formString)
 		if (tobj != null)	
 			tobj.value = keyValue[1];
 	}
+}
+
+function submitTotoForm()
+{
+	var frm = document.totoFrm;
+	if (!frm.title.value) { alert("제목을 입력하세요"); return false;}
+	if (!frm.gameDate.value) { alert("마감시각을 입력하세요"); return false;}
+	if (!frm.earnRate.value) { alert("수익비율을 입력하세요"); return false;}
+	if (!frm.minMoney.value) { alert("최소구매액을 입력하세요"); return false;}
+	if (!frm.carryOver.value) { alert("이월잔액을 입력하세요"); return false;}
+	if (frm.rowNum.value < 1) { alert("토토폼을 1줄 이상 생성하세요"); return false;}
+
+	frm.submit();
 }
 </script>
 <div id="_debug"></div>

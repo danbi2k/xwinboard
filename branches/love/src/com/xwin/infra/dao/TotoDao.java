@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +15,15 @@ public class TotoDao extends XwinDao
 		sqlMapClientTemplate.insert("insertToto", toto);
 	}
 	
-	public void updateToto(Toto game)
+	public void updateToto(Toto toto)
 	{
-		sqlMapClientTemplate.update("updateToto", game);
+		sqlMapClientTemplate.update("updateToto", toto);
+	}
+
+	public Toto selectTotoById(String id) {
+		Map<String, Object> param = new HashMap<String, Object>(1);
+		param.put("id", id);
+		return (Toto) sqlMapClientTemplate.queryForObject("selectToto", param);
 	}
 	
 	public Toto selectToto(Map<String, Object> param)

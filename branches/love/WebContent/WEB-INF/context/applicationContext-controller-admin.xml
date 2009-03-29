@@ -90,6 +90,7 @@
 		p:accountDao-ref="accountDao"
 		p:leagueDao-ref="leagueDao"
 		p:totoDao-ref="totoDao"
+		p:betTotoDao-ref="betTotoDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 					
 	<bean id="adminController"

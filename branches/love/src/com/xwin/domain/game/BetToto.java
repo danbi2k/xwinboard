@@ -12,6 +12,7 @@ public class BetToto extends Toto
 	private String nickName;
 	private Date date;
 	private Double rate;
+	private Long expect;
 	private Integer money;
 	private String calcStatus;
 	private String runStatus;
@@ -54,6 +55,12 @@ public class BetToto extends Toto
 	}
 	public void setRate(Double rate) {
 		this.rate = rate;
+	}
+	public Long getExpect() {
+		return expect;
+	}
+	public void setExpect(Long expect) {
+		this.expect = expect;
 	}
 	public Integer getMoney() {
 		return money;
