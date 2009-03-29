@@ -83,7 +83,6 @@
 	}
 </SCRIPT>
 
-<input type="button" value="등록하기" onclick="location.href='adminToto.aspx?mode=viewRegisterTotoForm'">
 <br>
 <br>
 <form method='get' name='search'>
@@ -104,11 +103,11 @@
 	}
 	%>
 </select>
-배팅상태
-<select name='betStatus' onChange='this.form.submit()'>
+경기상태
+<select name='status' onChange='this.form.submit()'>
 	<option value=''>전체</option>
-	<option value='<%=Code.BETTING_STATUS_ACCEPT%>' <%=betStatus.equals(Code.BETTING_STATUS_ACCEPT)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_ACCEPT)%></option>
-	<option value='<%=Code.BETTING_STATUS_DENY%>' <%=betStatus.equals(Code.BETTING_STATUS_DENY)?"selected":""%>><%=Code.getValue(Code.BETTING_STATUS_DENY)%></option>	
+	<option value='<%=Code.GAME_STATUS_END%>' <%=status.equals(Code.GAME_STATUS_END)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_END)%></option>
+	<option value='<%=Code.GAME_STATUS_CANCEL%>' <%=status.equals(Code.GAME_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.GAME_STATUS_CANCEL)%></option>	
  </select>
 <BR>
  경기일
@@ -122,15 +121,18 @@
  <input type='submit' value='검 색'>
 </form>
 <form method='get' name='game'>
-	<table class="toto">
+	<table class="prettytable">
  		<tr>
 			<th><input type="checkbox"></th>
 			<th width=5%>번호</th>
 			<th>리그명</th>
-			<th width="15%">경기시각</th>
+			<th>경기시각</th>
 			<th width="*">제목</th>
-			<th>표시</th>
-			<th>배팅</th>
+			<th>총발매수</th>
+			<th>총발매액</th>
+			<th>총당첨수</th>
+			<th>수익</th>
+			<th>상태</th>
 	  	</tr>
 
 		<%
@@ -140,26 +142,21 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkToto" value="<%=toto.getId()%>"></th>
-			<td width=5%><a href="adminToto.aspx?mode=viewUpdateTotoForm&id=<%=toto.getId()%>&pageIndex=<%=pIdx%>"><%=toto.getId()%></a></td>
+			<td width=5%><%=toto.getId()%></td>
 			<td><%=toto.getLeagueName()%></td>			
 			<td><%=XwinUtil.toDateStr(toto.getGameDate(), 0)%></td>
-			<td>
-				<a href="adminToto.aspx?mode=viewBetTotoList&id=<%=toto.getId()%>&pageIndex=<%=pIdx%>"><%=toto.getTitle()%></a>
-			</td>
-			<td>
-				<select name='displayStatus' onchange='changeDisplayStatus(<%=toto.getId()%>, this)'>
-					<option value='<%=Code.GAME_DISPLAY_CLOSE%>' <%=toto.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE)?"selected":""%>><%=Code.getValue(Code.GAME_DISPLAY_CLOSE)%></option>
-					<option value='<%=Code.GAME_DISPLAY_OPEN%>' <%=toto.getDisplayStatus().equals(Code.GAME_DISPLAY_OPEN)?"selected":""%>><%=Code.getValue(Code.GAME_DISPLAY_OPEN)%></option>
-				</select>
-			</td>
-			<td><B><%=Code.getValue(toto.getBetStatus())%></B></td>
+			<td><%=toto.getTitle()%></td>
+			<td><%=toto.getTotalCount()%></td>
+			<td><%=toto.getTotalMoney()%></td>
+			<td><%=toto.getSuccessCount()%></td>
+			<td><%=toto.getEarnMoney()%></td>
+			<td><%=Code.getValue(toto.getStatus())%></td>
 		</tr>
 			<%
 				}
 			}
 			%>
 	</table>
-	<input type='button' value='경기취소' onclick='calcelAllToto()' style='cursor:hand'>
 <div class="pages">
 <%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);

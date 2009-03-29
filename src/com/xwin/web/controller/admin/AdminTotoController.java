@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.League;
 import com.xwin.domain.game.Toto;
 import com.xwin.infra.util.Code;
@@ -69,7 +71,44 @@ public class AdminTotoController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
+		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
+		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String betStatus = XwinUtil.arcNvl(request.getParameter("betStatus"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
+		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("leagueId", leagueId);
+		if (status != null) {
+			param.put("status", status);
+		} else {
+			List<String> statusList = new ArrayList<String>();
+			statusList.add(Code.GAME_STATUS_END);
+			statusList.add(Code.GAME_STATUS_CANCEL);
+			param.put("statusList", statusList);
+		}
+		param.put("betStatus", betStatus);
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		param.put("fromDate", XwinUtil.toDate(fromDate));
+		param.put("toDate", XwinUtil.toDateFullTime(toDate));
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<League> leagueList = leagueDao.selectLeagueList();
+		List<Toto> totoList = totoDao.selectTotoList(param);
+		Integer totoCount = totoDao.selectTotoCount(param);
+		
 		ModelAndView mv = new ModelAndView("admin/game/admin_end_toto");
+		mv.addObject("leagueList", leagueList);
+		mv.addObject("totoList", totoList);
+		mv.addObject("totoCount", totoCount);
 		return mv;
 	}
 	
@@ -167,32 +206,117 @@ public class AdminTotoController extends XwinController
 		
 		totoDao.insertToto(toto);
 		
-//		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
 		ModelAndView mv = new ModelAndView("redirect:/adminToto.aspx?mode=viewTotoList");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
 	
 	public ModelAndView updateToto(HttpServletRequest request,
 			HttpServletResponse response, GameCommand command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
+
+//		if (request.getSession().getAttribute("Admin") == null)
+//			return new ModelAndView("admin_dummy");
 		
-		ResultXml rx = null;
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String gameDate = request.getParameter("gameDate");
+		String gameHour = request.getParameter("gameHour");
+		String gameMinute = request.getParameter("gameMinute");
+		String earnRate = request.getParameter("earnRate");
+		String leagueName = request.getParameter("leagueName");
+		String minMoney = request.getParameter("minMoney");
+		String carryOver = request.getParameter("carryOver");
 		
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		League league = leagueDao.selectLeagueByName(leagueName);
+		
+		Enumeration paramNames = request.getParameterNames();
+		StringBuffer sb = new StringBuffer();
+		while (paramNames.hasMoreElements()) {
+			String key = paramNames.nextElement().toString();
+			if (key.startsWith("T") || key.startsWith("I") || key.startsWith("C")) {
+				String value = request.getParameter(key);
+				value = value.replaceAll("=", "");
+				value = value.replaceAll("|", "");
+				sb.append(key + "=" + value + "|");
+			}
+		}
+		
+		String cardString = sb.toString();
+		System.out.println(cardString);
+		
+		Toto toto = new Toto();
+		toto.setId(id);
+		toto.setTitle(title);
+		toto.setGameDate(XwinUtil.getDate(gameDate, Integer.parseInt(gameHour), Integer.parseInt(gameMinute)));
+		toto.setEarnRate(Double.parseDouble(earnRate));
+		toto.setCardString(cardString);
+		toto.setLeagueId(league.getId());
+		toto.setLeagueName(league.getName());
+		toto.setLeagueImage(league.getImage());
+		toto.setMinMoney(Integer.parseInt(minMoney));
+		toto.setCarryOver(Long.parseLong(carryOver));
+		
+		totoDao.updateToto(toto);
+		
+		ModelAndView mv = new ModelAndView("redirect:/adminToto.aspx?mode=viewTotoList");
 		return mv;
 	}
 	
-	public ModelAndView endGame(HttpServletRequest request,
+	public ModelAndView endToto(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
-		ResultXml rx = null;
+		String resultString = request.getParameter("resultString");
+		String id = request.getParameter("id");
+		
+		Toto toto = totoDao.selectTotoById(id);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("totoId", id);
+		param.put("runStatus", Code.BET_STATUS_RUN);
+		
+		Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
+		Long earnMoney = XwinUtil.calcExpectMoney(toto.getEarnRate() / 100.0, totalMoneySum);
+		Long totalMoney = totalMoneySum - earnMoney;
+		
+		param.put("markingString", resultString);
+		Long successMoneySum = betTotoDao.selectBetTotoMoneySum(param);
+		
+		param.remove("markingString");
+		List<BetToto> betTotoList = betTotoDao.selectBetTotoList(param);
+		Integer successCount = 0;
+		if (betTotoList != null) {
+			for (BetToto betToto : betTotoList) {
+				if (betToto.getMarkingString().equals(resultString)) {
+					Double portion = betToto.getMoney().doubleValue() / successMoneySum.doubleValue();
+					Long expect = XwinUtil.calcExpectMoney(portion, totalMoney);
+					Double rate = XwinUtil.doubleCut(expect.doubleValue() / betToto.getMoney().doubleValue()); 
+					
+					betToto.setRunStatus(Code.BET_STATUS_SUCCESS);
+					betToto.setRate(rate);
+					betToto.setExpect(expect);
+					successCount++;
+				} else {
+					betToto.setRunStatus(Code.BET_STATUS_FAILURE);
+					betToto.setRate(0.0);
+					betToto.setExpect(0L);
+				}
+				
+				betTotoDao.updateBetToto(betToto);
+			}
+		}
+		
+		toto.setResultString(resultString);
+		toto.setStatus(Code.GAME_STATUS_END);
+		toto.setSuccessCount(successCount);
+		toto.setTotalMoney(totalMoney);
+		toto.setTotalCount(betTotoList.size());
+		toto.setEarnMoney(earnMoney);
+		totoDao.updateToto(toto);		
+		
+		ResultXml rx = new ResultXml(0, "결과가 처리되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -239,6 +363,60 @@ public class AdminTotoController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView viewBetTotoList(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String totoId = XwinUtil.arcNvl(request.getParameter("id"));
+		String runStatus = XwinUtil.arcNvl(request.getParameter("runStatus"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();	
+		param.put("totoId", totoId);
+		param.put("runStatus", runStatus);
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<BetToto> betTotoList =	betTotoDao.selectBetTotoList(param);
+		Integer betTotoCount =	betTotoDao.selectBetTotoCount(param);
+		
+		Toto toto = totoDao.selectTotoById(totoId);
+		
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_toto");
+		mv.addObject("toto", toto);
+		mv.addObject("betTotoList", betTotoList);
+		mv.addObject("betTotoCount", betTotoCount);
+		
+		return mv;
+	}
+	
+	public ModelAndView viewBetTotoDetail(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String id = XwinUtil.arcNvl(request.getParameter("id"));
+	
+		Map<String, Object> param = new HashMap<String, Object>();	
+		param.put("id", id);		
+		BetToto betToto = betTotoDao.selectBetToto(param);
+		
+		ModelAndView mv = new ModelAndView("admin/betting/admin_betting_toto_detail");
+		mv.addObject("betToto", betToto);
+		
 		return mv;
 	}
 }

@@ -24,6 +24,10 @@ public class Toto extends XwinObject
 	private String displayStatus;
 	private Integer minMoney;
 	private Long carryOver;
+	private Integer successCount;
+	private Long totalMoney;
+	private Integer totalCount;
+	private Long earnMoney;
 	
 	public String getId() {
 		return id;
@@ -120,5 +124,29 @@ public class Toto extends XwinObject
 	}
 	public void setCarryOver(Long carryOver) {
 		this.carryOver = carryOver;
+	}
+	public Integer getSuccessCount() {
+		return successCount;
+	}
+	public void setSuccessCount(Integer successCount) {
+		this.successCount = successCount;
+	}
+	public Long getTotalMoney() {
+		return totalMoney;
+	}
+	public void setTotalMoney(Long totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+	public Long getEarnMoney() {
+		return earnMoney;
+	}
+	public void setEarnMoney(Long earnMoney) {
+		this.earnMoney = earnMoney;
 	}
 }

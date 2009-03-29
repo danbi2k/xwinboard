@@ -8,7 +8,13 @@
 
 <%
 	Toto toto = (Toto) request.getAttribute("toto");
-	Integer colNum = toto.getColNum(), rowNum = toto.getRowNum();
+	Long totalMoney = (Long) request.getAttribute("totalMoney");
+	Integer totalCount = (Integer) request.getAttribute("totalCount");
+	Integer colNum = null, rowNum = null;
+	if (toto != null) {
+		colNum= toto.getColNum();
+		rowNum = toto.getRowNum();
+	}
 %>
 
 <tr>
@@ -30,6 +36,7 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
   <tr>
      <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
+<%if (toto != null) { %>     
 <!-- -->
  <div>
   <table cellpadding="0" cellspacing="0" width="369">
@@ -49,15 +56,15 @@
 			            <p>총발매금액</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p>100원</p>
+			            <p><%=XwinUtil.comma3(totalMoney)%> 원</p>
 			        </td>
 			    </tr>
 			    <tr>
 			        <td width="100" height="25">
-			            <p>전체투표수</p>
+			            <p>전체발매수</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p>100</p>
+			            <p><%=totalCount%> 개</p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -65,7 +72,7 @@
 			            <p>발매기간</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p><%=toto.getGameDate()%>까지</p>
+			            <p><%=XwinUtil.getBoardItemDate(toto.getGameDate())%> 까지</p>
 			        </td>
 			    </tr>
 			</table>
@@ -74,12 +81,12 @@
   </table>
  </div>
 <BR><BR><BR>
-<table width="100%">
+<table cellpadding="0" cellspacing="0" width="100%">
 <tr>
 <%
 	for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" colspan="6"><%=j+1%> 경기</td>
+	<td align="center" colspan="6" class="totoHeader"><%=j+1%> 경기</td>
 <%
 	}
 %>
@@ -88,9 +95,9 @@
 <%
 	for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" colspan="2"><span id="T<%=j%>L" name="T<%=j%>L"/></span></td>
-	<td align="center" colspan="2">VS</td>
-	<td align="center" colspan="2"><span id="T<%=j%>R" name="T<%=j%>R"/></span></td>
+	<td align="center" colspan="2" class="totoTeam"><span id="T<%=j%>L" name="T<%=j%>L"/></span></td>
+	<td align="center" colspan="2" class="totoTeam">VS</td>
+	<td align="center" colspan="2" class="totoTeam"><span id="T<%=j%>R" name="T<%=j%>R"/></span></td>
 <%
 	}
 %>
@@ -99,8 +106,8 @@
 <%
 	for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" colspan="3"><span id="I<%=j%>L" name="I<%=j%>L"/></span></td>
-	<td align="center" colspan="3"><span id="I<%=j%>R" name="I<%=j%>R""/></span></td>
+	<td align="center" colspan="3" class="totoCategory"><span id="I<%=j%>L" name="I<%=j%>L"/></span></td>
+	<td align="center" colspan="3" class="totoCategory"><span id="I<%=j%>R" name="I<%=j%>R""/></span></td>
 <%
 	}
 %>
@@ -112,12 +119,12 @@
 <%
 		for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
-	<td align="center"><span id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></span></td>
-	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
-	<td align="center"><span id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></span></td>
-	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
+	<td align="center" class="totoBody left"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
+	<td align="center" class="totoBody mid"><span id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></span></td>
+	<td align="center" class="totoBody right"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
+	<td align="center" class="totoBody left"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
+	<td align="center" class="totoBody mid"><span id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></span></td>
+	<td align="center" class="totoBody right"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
 <%		
 		}
 %>
@@ -139,7 +146,7 @@
 			            <p>구매금액</p>
 			        </td>
 			        <td width="299" height="30">
-			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
+			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='<%=XwinUtil.comma3(toto.getMinMoney())%>' onkeyup="only123(this); comma3Input(this);"></p>
 			        </td>
 			        <td width="70" height="30">
 			            <p>&nbsp;<input type="button" value="구매" style="background-color:AA0055" onclick="betting()"/></p>
@@ -168,6 +175,9 @@
   </table>
  </div>
 <!-- -->
+<%} else { %>
+진행중인 토토가 없습니다
+<%} %>
         </td>
     </tr>
 </table>
@@ -180,9 +190,9 @@ spot[1] = "B";
 spot[2] = "C";
 spot[3] = "D";
 
+<%if (toto != null) {%>
 var colNum = <%=toto.getColNum()%>;
 var rowNum = <%=toto.getRowNum()%>;
-
 function betting()
 {
 	var markingString = confirmMarking();
@@ -264,8 +274,8 @@ function loadMarking(markString)
 	}
 }
 
-loadCard('T1L=금호생명|T0R=SKT|I2R=최종(연장포함)|T0L=KTF|I2L=전반(1+2)|I1R=최종(연장포함)|I1L=전반(1+2)|I0R=최종(연장포함)|I0L=전반(1+2)|C2L9=48~51|C2L8=44~47|C2L7=40~43|C2L6=36~39|C2L5=32~35|C2R9=88~91|C2L4=28~31|C1L9=48~51|C2R8=84~87|C2L3=24~27|C1L8=44~47|C2L2=20~23|C2R7=80~83|C1L7=40~43|C2L1=16~19|C2R6=76~79|C1L6=36~39|C2L0=12~15|C2R5=72~75|C1L5=32~35|C2R4=68~71|C1R9=88~91|C1L4=28~31|C2R3=64~67|C0L9=48~51|C1L3=24~27|C1R8=84~87|C2R2=60~63|C0L8=44~47|C1L2=20~23|C1R7=80~83|C2R1=56~59|C0L7=40~43|C1L1=16~19|C1R6=76~79|C2R0=52~55|C0L6=36~39|C1L0=12~15|C1R5=72~75|C0L5=32~35|C1R4=68~71|C0R9=88~91|C0L4=28~31|C1R3=64~67|C0L3=24~27|C0R8=84~87|C1R2=60~63|C0L2=20~23|C0R7=80~83|C1R1=56~59|C0L1=16~19|C0R6=76~79|C1R0=52~55|C0L0=12~15|C0R5=72~75|C0R4=68~71|C0R3=64~67|C0R2=60~63|C0R1=56~59|C0R0=52~55|T2R=두산|T2L=롯데|T1R=신한생명|');
-loadMarking('0A3-0B0-0C0-0D0-1A5-1B4-1C7-1D3-2A3-2B2-2C2-2D7');
+loadCard('<%=toto.getCardString()%>');
+<%}%>
 </script>
 
 <%@include file="../footer.jsp"%>

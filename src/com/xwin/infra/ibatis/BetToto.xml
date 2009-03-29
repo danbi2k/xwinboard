@@ -15,6 +15,7 @@
 		<result property="nickName" column="NICKNAME"/>
 		<result property="date" column="DATE"/>
 		<result property="rate" column="RATE"/>
+		<result property="expect" column="EXPECT"/>
 		<result property="money" column="MONEY"/>
 		<result property="calcStatus" column="CALC_STATUS"/>
 		<result property="runStatus" column="RUN_STATUS"/>
@@ -32,7 +33,16 @@
 		parameterClass="map">
 		SELECT *
 		FROM tbl_betting_toto b, tbl_toto t
-		WHERE b.TOTO_ID = t.ID AND ID = #id#
+		WHERE b.TOTO_ID = t.ID
+		<isNotNull prepend="AND" property="id">
+		b.ID = #id#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userId">
+		b.USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="totoId">
+		t.ID = #totoId#
+		</isNotNull>		
 	</select>
 	
 	<update id="updateBetToto" parameterClass="BetToto">
@@ -53,6 +63,9 @@
 			<isNotNull prepend="," property="endDate">
 			END_DATE = #endDate#
 			</isNotNull>
+			<isNotNull prepend="," property="expect">
+			EXPECT = #expect#
+			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
 	</update>
@@ -71,7 +84,7 @@
 		parameterClass="map">
 		SELECT *
 		FROM tbl_betting_toto b, tbl_toto t
-		WHERE b.TOTO_ID = t.ID 
+		WHERE b.TOTO_ID = t.ID
 			<isNotNull prepend="AND" property="id">
 			b.ID = #id#
 			</isNotNull>
@@ -93,7 +106,7 @@
 			b.CALC_STATUS != #notCalcStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="notRunStatus">
-			b.RUN_STATUS != #notStatus#
+			b.RUN_STATUS != #notRunStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="userId">
 			b.USERID = #userId#
@@ -182,14 +195,17 @@
 		</dynamic>
 	</select>
 	
-	<select id="selectBetTotoMoneySum" resultClass="integer"
+	<select id="selectBetTotoMoneySum" resultClass="long"
 		parameterClass="map">
 		SELECT SUM(MONEY)
 		FROM tbl_betting_toto b
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="totoId">
 			TOTO_ID = #totoId#
-			</isNotNull>			
+			</isNotNull>	
+			<isNotNull prepend="AND" property="runStatus">
+			RUN_STATUS = #runStatus#
+			</isNotNull>				
 			<isNotNull prepend="AND" property="markingString">
 			MARKING_STRING = #markingString#
 			</isNotNull>

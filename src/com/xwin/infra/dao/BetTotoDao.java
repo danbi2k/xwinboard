@@ -29,11 +29,8 @@ public class BetTotoDao extends XwinDao
 		sqlMapClientTemplate.delete("deleteBetTotoByDate", date);
 	}
 	
-	public BetToto selectBetToto(String id)
+	public BetToto selectBetToto(Map<String, Object> param)
 	{
-		Map<String, Object> param = new HashMap<String, Object>(1);
-		param.put("id", id);
-		
 		return (BetToto) sqlMapClientTemplate.queryForObject("selectBetToto", param);
 	}
 	
@@ -47,9 +44,9 @@ public class BetTotoDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectBetTotoCount", param);
 	}
 	
-	public Integer selectBetTotoMoneySum(Map<String, Object> param)
+	public Long selectBetTotoMoneySum(Map<String, Object> param)
 	{
-		return (Integer) sqlMapClientTemplate.queryForObject("selectBetTotoMoneySum", param);
+		return (Long) sqlMapClientTemplate.queryForObject("selectBetTotoMoneySum", param);
 	}
 	
 	public void updateBetToto(BetToto betToto)

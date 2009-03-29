@@ -23,6 +23,7 @@
 <input type="hidden" name="mode" value="updateToto"/>
 <input type="hidden" name="rowNum" value="<%=rowNum%>"/>
 <input type="hidden" name="colNum" value="<%=colNum%>"/>
+<input type="hidden" name="id" value="<%=toto.getId()%>"/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">리그명</td>
@@ -82,6 +83,18 @@
 			<input type="text" size="10" name="earnRate" id="earnRate" value="<%=toto.getEarnRate()%>"/>%
 		</td>
 	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">최소구매액</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<input type="text" size="10" name="minMoney" id="minMoney" value="<%=toto.getMinMoney()%>"/>원
+		</td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">이월잔액</td>
+		<td bgcolor="#FFFFFF"  colspan=3>
+			<input type="text" size="10" name="carryOver" id="carryOver" value="<%=toto.getCarryOver()%>"/>원
+		</td>
+	</tr>
 </table>
 <table class="toto"">
 <tr>
@@ -135,8 +148,8 @@
 	}
 %>
 </table>
-<input type="submit" value="변경"/>
-<input type="button" value="결과처리" onclick="alert('개발중')"/>
+<input type="button" value="변경" onclick="submitTotoForm()"/>
+<input type="button" value="결과처리" onclick="endToto()"/>
 </form>
 
 <script>
@@ -208,8 +221,41 @@ function loadForm(formString)
 	}
 }
 
+function submitTotoForm()
+{
+	var frm = document.totoFrm;
+	if (!frm.title.value) { alert("제목을 입력하세요"); return false;}
+	if (!frm.gameDate.value) { alert("마감시각을 입력하세요"); return false;}
+	if (!frm.earnRate.value) { alert("수익비율을 입력하세요"); return false;}
+	if (!frm.minMoney.value) { alert("최소구매액을 입력하세요"); return false;}
+	if (!frm.carryOver.value) { alert("이월잔액을 입력하세요"); return false;}
+	if (frm.rowNum.value < 1) { alert("토토폼을 1줄 이상 생성하세요"); return false;}
+
+	frm.submit();
+}
+
+function endToto()
+{
+	var resultString = confirmMarking();
+	if (resultString) {
+		var query = "mode=endToto";
+		query += "&resultString=" + resultString;
+		query += "&id=<%=toto.getId()%>";
+
+		var http = new JKL.ParseXML("adminToto.aspx", query);
+		var result = http.parse();
+
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.reload();
+		}
+	}	
+}
+
 var cardString = '<%=toto.getCardString()%>';
+var resultString = '<%=toto.getResultString()%>';
 loadForm(cardString);
+loadMarking(resultString);
 </script>
 <div id="_debug"></div>
 <%@ include file="../admin_footer.jsp"%>

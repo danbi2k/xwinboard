@@ -25,6 +25,10 @@
 		<result property="displayStatus" column="DP_STATUS"/>
 		<result property="minMoney" column="MIN_MONEY"/>
 		<result property="carryOver" column="CARRY_OVER"/>
+		<result property="successCount" column="SUCCESS_COUNT"/>
+		<result property="totalMoney" column="TOTAL_MONEY"/>
+		<result property="totalCount" column="TOTAL_COUNT"/>
+		<result property="earnMoney" column="EARN_MONEY"/>
 	</resultMap>
 	
 	<insert id="insertToto" parameterClass="Toto">
@@ -80,6 +84,18 @@
 			<isNotNull prepend="," property="carryOver">
 			CARRY_OVER = #carryOver#
 			</isNotNull>
+			<isNotNull prepend="," property="successCount">
+			SUCCESS_COUNT = #successCount#
+			</isNotNull>
+			<isNotNull prepend="," property="totalMoney">
+			TOTAL_MONEY = #totalMoney#
+			</isNotNull>
+			<isNotNull prepend="," property="totalCount">
+			TOTAL_COUNT = #totalCount#
+			</isNotNull>
+			<isNotNull prepend="," property="earnMoney">
+			EARN_MONEY = #earnMoney#
+			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
 	</update>
@@ -89,7 +105,7 @@
 		FROM tbl_toto
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="id">
-				ID = #value#
+				ID = #id#
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#

@@ -70,12 +70,12 @@
 		<p><%=XwinUtil.comma3(betToto.getMoney())%></p>
 		</td>
 		<td width="80" class="tablebg2" align="center" valign="middle">
-		<p><%=Code.getValue(betToto.getStatus())%></p>
+		<p><%=Code.getValue(betToto.getRunStatus())%></p>
 		</td>
 		<td width="30" class="tablebg1" align="center" valign="middle">
 		<p>
 		<%
-		if (betToto.getStatus().equals(Code.BET_STATUS_RUN) == false) {
+		if (betToto.getRunStatus().equals(Code.BET_STATUS_RUN) == false) {
 		%>
 		<img src="img/x.gif" onclick="deleteMyToto(<%=betToto.getId()%>)">
 		<%
