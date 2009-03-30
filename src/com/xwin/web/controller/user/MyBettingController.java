@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.Betting;
+import com.xwin.domain.game.Toto;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -134,20 +135,13 @@ public class MyBettingController extends XwinController
 		param.put("id", id);
 		param.put("userId", member.getUserId());
 		
-		BetToto betToto = betTotoDao.selectBetToto(param);
+		BetToto betToto = betTotoDao.selectBetToto(param);		
+		Toto toto = totoDao.selectTotoById(betToto.getTotoId());
 		
-		param = new HashMap<String, Object>();
-		param.put("totoId", betToto.getTotoId());
-		param.put("notRunStatus", Code.BET_STATUS_CANCEL);
-		Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
-		Long totalMoney = totalMoneySum - XwinUtil.calcExpectMoney(betToto.getEarnRate() / 100.0, totalMoneySum);
-		
-		Integer totalCount = betTotoDao.selectBetTotoCount(param);
 		
 		ModelAndView mv = new ModelAndView("user/my_toto_detail");
+		mv.addObject("toto", toto);
 		mv.addObject("betToto", betToto);
-		mv.addObject("totalMoney", totalMoney);
-		mv.addObject("totalCount", totalCount);
 		
 		return mv;
 	}

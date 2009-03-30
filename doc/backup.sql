@@ -6,16 +6,17 @@ CREATE TABLE  `love`.`tbl_betting_toto` (
   `MARKING_STRING` varchar(64) NOT NULL,
   `DATE` datetime NOT NULL,
   `MONEY` int(10) unsigned NOT NULL,
-  `STATUS` varchar(45) NOT NULL,
+  `RUN_STATUS` varchar(45) NOT NULL,
   `NICKNAME` varchar(45) NOT NULL,
-  `CALC_STATUS` varchar(45) NOT NULL,
-  `ISDELETED` varchar(8) NOT NULL,
+  `CALC_STATUS` varchar(45) NOT NULL DEFAULT 'BTC01',
+  `ISDELETED` varchar(8) NOT NULL DEFAULT 'N',
   `END_DATE` datetime DEFAULT NULL,
   `RATE` double NOT NULL,
+  `EXPECT` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_tbl_betting_toto_1` (`TOTO_ID`),
   CONSTRAINT `FK_tbl_betting_toto_1` FOREIGN KEY (`TOTO_ID`) REFERENCES `tbl_toto` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `love`.`tbl_toto`;
 CREATE TABLE  `love`.`tbl_toto` (
@@ -35,8 +36,10 @@ CREATE TABLE  `love`.`tbl_toto` (
   `DP_STATUS` varchar(16) NOT NULL,
   `MIN_MONEY` int(10) unsigned NOT NULL,
   `CARRY_OVER` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `SUCCESS_COUNT` int(10) unsigned DEFAULT NULL,
+  `SUCCESS_MONEY` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `xwin`.`tbl_access`;
 CREATE TABLE  `xwin`.`tbl_access` (

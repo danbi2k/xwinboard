@@ -8,7 +8,7 @@
 
 	<typeAlias alias="Toto" type="com.xwin.domain.game.Toto" />
 	
-	<resultMap id="TotoResultMap" class="Toto">
+	<resultMap id="TotoResultMapCore" class="Toto">
 		<result property="id" column="ID"/>
 		<result property="title" column="TITLE"/>
 		<result property="gameDate" column="GAME_DATE"/>
@@ -25,10 +25,14 @@
 		<result property="displayStatus" column="DP_STATUS"/>
 		<result property="minMoney" column="MIN_MONEY"/>
 		<result property="carryOver" column="CARRY_OVER"/>
-		<result property="successCount" column="SUCCESS_COUNT"/>
+	</resultMap>
+	
+	<resultMap id="TotoResultMap" class="Toto" extends="TotoResultMapCore">
 		<result property="totalMoney" column="TOTAL_MONEY"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
-		<result property="earnMoney" column="EARN_MONEY"/>
+		<result property="successCount" column="SUCCESS_COUNT"/>
+		<result property="successMoney" column="SUCCESS_MONEY"/>
+		<!-- result property="earnMoney" column="EARN_MONEY"/ -->
 	</resultMap>
 	
 	<insert id="insertToto" parameterClass="Toto">
@@ -87,22 +91,18 @@
 			<isNotNull prepend="," property="successCount">
 			SUCCESS_COUNT = #successCount#
 			</isNotNull>
-			<isNotNull prepend="," property="totalMoney">
-			TOTAL_MONEY = #totalMoney#
-			</isNotNull>
-			<isNotNull prepend="," property="totalCount">
-			TOTAL_COUNT = #totalCount#
-			</isNotNull>
-			<isNotNull prepend="," property="earnMoney">
-			EARN_MONEY = #earnMoney#
+			<isNotNull prepend="," property="successMoney">
+			SUCCESS_MONEY = #successMoney#
 			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
 	</update>
 	
 	<select id="selectToto" resultMap="TotoResultMap" parameterClass="map">
-		SELECT *
-		FROM tbl_toto
+		SELECT t.*,
+		(SELECT (SUM(MONEY)*(100.0-t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_MONEY,
+		(SELECT COUNT(*) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_COUNT
+		FROM tbl_toto t
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="id">
 				ID = #id#
@@ -120,8 +120,10 @@
 	</select>
 	
 	<select id="selectTotoList" resultMap="TotoResultMap" parameterClass="map">
-		SELECT *
-		FROM tbl_toto
+		SELECT t.*,
+		(SELECT (SUM(MONEY)*(100.0-t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_MONEY,
+		(SELECT COUNT(*) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_COUNT
+		FROM tbl_toto t
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="leagueId">
 				LEAGUE_ID = #leagueId#

@@ -8,7 +8,7 @@
 
 	<typeAlias alias="BetToto" type="com.xwin.domain.game.BetToto" />
 	
-	<resultMap id="bettingTotoResultMap" class="BetToto" extends="Toto.TotoResultMap">
+	<resultMap id="bettingTotoResultMap" class="BetToto" extends="Toto.TotoResultMapCore">
 		<result property="id" column="ID"/>
 		<result property="totoId" column="TOTO_ID"/>
 		<result property="userId" column="USERID"/>

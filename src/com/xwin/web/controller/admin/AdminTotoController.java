@@ -150,7 +150,13 @@ public class AdminTotoController extends XwinController
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
+		String id = request.getParameter("id");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		Toto toto = totoDao.selectToto(param);
+		
 		ModelAndView mv = new ModelAndView("admin/game/reprocess_toto");
+		mv.addObject("toto", toto);
 		return mv;
 	}
 	
@@ -277,9 +283,7 @@ public class AdminTotoController extends XwinController
 		param.put("totoId", id);
 		param.put("runStatus", Code.BET_STATUS_RUN);
 		
-		Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
-		Long earnMoney = XwinUtil.calcExpectMoney(toto.getEarnRate() / 100.0, totalMoneySum);
-		Long totalMoney = totalMoneySum - earnMoney;
+		Long totalMoney = toto.getTotalMoney() + toto.getCarryOver();
 		
 		param.put("markingString", resultString);
 		Long successMoneySum = betTotoDao.selectBetTotoMoneySum(param);
@@ -287,17 +291,20 @@ public class AdminTotoController extends XwinController
 		param.remove("markingString");
 		List<BetToto> betTotoList = betTotoDao.selectBetTotoList(param);
 		Integer successCount = 0;
+		Long successMoney = 0L;
 		if (betTotoList != null) {
 			for (BetToto betToto : betTotoList) {
 				if (betToto.getMarkingString().equals(resultString)) {
 					Double portion = betToto.getMoney().doubleValue() / successMoneySum.doubleValue();
-					Long expect = XwinUtil.calcExpectMoney(portion, totalMoney);
+					Double _expect = Math.ceil(portion * totalMoney.doubleValue());
+					Long expect = _expect.longValue();
 					Double rate = XwinUtil.doubleCut(expect.doubleValue() / betToto.getMoney().doubleValue()); 
 					
 					betToto.setRunStatus(Code.BET_STATUS_SUCCESS);
 					betToto.setRate(rate);
 					betToto.setExpect(expect);
 					successCount++;
+					successMoney += expect;
 				} else {
 					betToto.setRunStatus(Code.BET_STATUS_FAILURE);
 					betToto.setRate(0.0);
@@ -311,9 +318,10 @@ public class AdminTotoController extends XwinController
 		toto.setResultString(resultString);
 		toto.setStatus(Code.GAME_STATUS_END);
 		toto.setSuccessCount(successCount);
+		toto.setSuccessMoney(successMoney);
 		toto.setTotalMoney(totalMoney);
 		toto.setTotalCount(betTotoList.size());
-		toto.setEarnMoney(earnMoney);
+//		toto.setEarnMoney(earnMoney);
 		totoDao.updateToto(toto);		
 		
 		ResultXml rx = new ResultXml(0, "결과가 처리되었습니다", null);
