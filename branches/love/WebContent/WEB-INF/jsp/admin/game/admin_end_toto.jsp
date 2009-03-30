@@ -142,14 +142,14 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkToto" value="<%=toto.getId()%>"></th>
-			<td width=5%><%=toto.getId()%></td>
+			<td width=5%><a href="adminToto.aspx?mode=viewReprocessToto&id=<%=toto.getId()%>&pageIndex=<%=pIdx%>"><%=toto.getId()%></a></td>
 			<td><%=toto.getLeagueName()%></td>			
 			<td><%=XwinUtil.toDateStr(toto.getGameDate(), 0)%></td>
 			<td><%=toto.getTitle()%></td>
 			<td><%=toto.getTotalCount()%></td>
-			<td><%=toto.getTotalMoney()%></td>
-			<td><%=toto.getSuccessCount()%></td>
-			<td><%=toto.getEarnMoney()%></td>
+			<td><%=XwinUtil.comma3(toto.getTotalMoney())%></td>
+			<td><%=XwinUtil.comma3(toto.getSuccessCount())%></td>
+			<td><%=XwinUtil.comma3(toto.getTotalMoney() * toto.getEarnRate() / 100)%></td>
 			<td><%=Code.getValue(toto.getStatus())%></td>
 		</tr>
 			<%

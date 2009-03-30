@@ -122,7 +122,7 @@
  <input type='submit' value='검 색'>
 </form>
 <form method='get' name='game'>
-	<table class="toto">
+	<table class="prettytable">
  		<tr>
 			<th><input type="checkbox"></th>
 			<th width=5%>번호</th>

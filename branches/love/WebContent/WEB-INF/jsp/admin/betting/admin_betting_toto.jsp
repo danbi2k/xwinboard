@@ -9,6 +9,10 @@
 	final Integer SHOWPAGE = 20;
 
 	Toto toto = (Toto) request.getAttribute("toto");
+	
+	Integer colNum = toto.getColNum();
+	Integer rowNum = toto.getRowNum();
+	
 	List<BetToto> betTotoList = (List<BetToto>) request.getAttribute("betTotoList");
 	Integer totalCount = (Integer) request.getAttribute("betTotoCount");
 	Long betTotoMoney = (Long) request.getAttribute("betTotoMoney");
@@ -51,6 +55,60 @@
 총발매수 : <%=totalCount%> <BR>
 총발매액 : <%=XwinUtil.comma3(betTotoMoney)%> <BR>
 
+<table class="toto"">
+<tr>
+<%
+	for (int j = 0 ; j < colNum ; j++) {
+%>
+	<td align="center" colspan="6"><%=j+1%> 경기</td>
+<%
+	}
+%>
+</tr>
+<tr>
+<%
+	for (int j = 0 ; j < colNum ; j++) {
+%>
+	<td align="center" colspan="2"><span id="T<%=j%>L" name="T<%=j%>L"/></span></td>
+	<td align="center" colspan="2">VS</td>
+	<td align="center" colspan="2"><span id="T<%=j%>R" name="T<%=j%>R"/></span></td>
+<%
+	}
+%>
+</tr>
+<tr>
+<%
+	for (int j = 0 ; j < colNum ; j++) {
+%>
+	<td align="center" colspan="3"><span id="I<%=j%>L" name="I<%=j%>L"/></span></td>
+	<td align="center" colspan="3"><span id="I<%=j%>R" name="I<%=j%>R""/></span></td>
+<%
+	}
+%>
+</tr>
+<%
+	for (int i = 0 ; i < rowNum ; i++) {
+%>
+<tr>
+<%
+		for (int j = 0 ; j < colNum ; j++) {
+%>
+	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
+	<td align="center"><span id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></span></td>
+	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
+	<td align="center"><span id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></span></td>
+	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
+<%		
+		}
+%>
+</tr>
+<%
+	}
+%>
+</table>
+
+<input type="button" value="결과처리" onclick="endToto()"/>
 
 <table class="prettytable">
 		<tr>
@@ -115,6 +173,83 @@
 </div>
 
 <script>
+var rowNum = <%=rowNum%>;
+var colNum = <%=colNum%>;
+
+var spot = [];
+spot[0] = "A";
+spot[1] = "B";
+spot[2] = "C";
+spot[3] = "D";
+
+function loadCard(formString)
+{
+	var formList = formString.split("|");
+	for (var i = 0 ; i < formList.length ; i++) {
+		var keyValue = formList[i].split("=");
+		if (keyValue[0].length == 0)
+			continue;
+		var tobj = document.getElementById(keyValue[0]);
+		if (tobj != null)	
+			tobj.innerHTML = keyValue[1];
+	}
+}
+
+function endToto()
+{
+	var resultString = confirmMarking();
+	if (resultString) {
+		var query = "mode=endToto";
+		query += "&resultString=" + resultString;
+		query += "&id=<%=toto.getId()%>";
+
+		var http = new JKL.ParseXML("adminToto.aspx", query);
+		var result = http.parse();
+
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.replace("adminToto.aspx?mode=viewReprocessToto&id=<%=toto.getId()%>");
+		}
+	}	
+}
+
+function confirmMarking()
+{
+	var markId = [];
+	for (var i = 0 ; i < colNum ; i++) {
+		for (var j = 0 ; j < 4 ; j++) {
+			var name = i + spot[j];
+			var cobjList = document.getElementsByName(name);
+			var flag = false;
+			for (var x = 0 ; x < cobjList.length ; x++) {
+				flag |= cobjList[x].checked;
+				if (cobjList[x].checked)
+					markId.push(cobjList[x].id);
+			}
+			if (flag == false) {
+				alert("선택되지 않은 항목이 있습니다");
+				return;
+			}
+		}
+	}
+
+	var markString = markId.join("-");
+	return markString;
+}
+
+function checkToto(cobj)
+{
+	var cobjList = document.getElementsByName(cobj.name);
+	if (cobj.checked) {
+		for (var i = 0 ; i < cobjList.length ; i++) {
+			if (cobjList[i] != cobj)
+				cobjList[i].checked = false;
+		}
+	}
+}
+
+loadCard('<%=toto.getCardString()%>');
+
 function goPage(index)
 {
 	var frm = document.search;

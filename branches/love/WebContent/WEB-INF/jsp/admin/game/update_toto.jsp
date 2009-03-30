@@ -96,7 +96,7 @@
 		</td>
 	</tr>
 </table>
-<table class="toto"">
+<table class="toto">
 <tr>
 <%
 	for (int j = 0 ; j < colNum ; j++) {
@@ -134,12 +134,12 @@
 <%
 		for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" onclick="checkToto(this)"/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>A<%=i%>" name="<%=j%>A" disabled/></td>
 	<td align="center"><input type="text" size="8" id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" onclick="checkToto(this)"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" onclick="checkToto(this)"/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>B<%=i%>" name="<%=j%>B" disabled/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>C<%=i%>" name="<%=j%>C" disabled/></td>
 	<td align="center"><input type="text" size="8" id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></td>
-	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" onclick="checkToto(this)"/></td>
+	<td align="center"><input type="checkbox" id="<%=j%>D<%=i%>" name="<%=j%>D" disabled/></td>
 <%		
 		}
 %>
@@ -149,7 +149,6 @@
 %>
 </table>
 <input type="button" value="변경" onclick="submitTotoForm()"/>
-<input type="button" value="결과처리" onclick="endToto()"/>
 </form>
 
 <script>
@@ -162,51 +161,6 @@ spot[0] = "A";
 spot[1] = "B";
 spot[2] = "C";
 spot[3] = "D";
-
-function checkToto(cobj)
-{
-	var cobjList = document.getElementsByName(cobj.name);
-	if (cobj.checked) {
-		for (var i = 0 ; i < cobjList.length ; i++) {
-			if (cobjList[i] != cobj)
-				cobjList[i].checked = false;
-		}
-	}
-}
-
-function confirmMarking()
-{
-	var markId = [];
-	for (var i = 0 ; i < colNum ; i++) {
-		for (var j = 0 ; j < 4 ; j++) {
-			var name = i + spot[j];
-			var cobjList = document.getElementsByName(name);
-			var flag = false;
-			for (var x = 0 ; x < cobjList.length ; x++) {
-				flag |= cobjList[x].checked;
-				if (cobjList[x].checked)
-					markId.push(cobjList[x].id);
-			}
-			if (flag == false) {
-				alert("선택되지 않은 항목이 있습니다");
-				return;
-			}
-		}
-	}
-
-	var markString = markId.join("-");
-	_debug.innerHTML = markString;
-	return markString;
-}
-
-function loadMarking(markString)
-{
-	var markId = markString.split("-");
-	for (var i = 0 ; i < markId.length ; i++) {
-		var cobj = document.getElementById(markId[i]);
-		cobj.checked = true;
-	}
-}
 
 function loadForm(formString)
 {
@@ -234,28 +188,8 @@ function submitTotoForm()
 	frm.submit();
 }
 
-function endToto()
-{
-	var resultString = confirmMarking();
-	if (resultString) {
-		var query = "mode=endToto";
-		query += "&resultString=" + resultString;
-		query += "&id=<%=toto.getId()%>";
-
-		var http = new JKL.ParseXML("adminToto.aspx", query);
-		var result = http.parse();
-
-		alert(result.resultXml.message);
-		if (result.resultXml.code == 0) {
-			location.reload();
-		}
-	}	
-}
-
 var cardString = '<%=toto.getCardString()%>';
-var resultString = '<%=toto.getResultString()%>';
 loadForm(cardString);
-loadMarking(resultString);
 </script>
 <div id="_debug"></div>
 <%@ include file="../admin_footer.jsp"%>

@@ -7,9 +7,8 @@
 <%@ include file="../header.jsp"%>
 
 <%
+	Toto toto = (Toto) request.getAttribute("toto");
 	BetToto betToto = (BetToto) request.getAttribute("betToto");
-	Long totalMoney = (Long) request.getAttribute("totalMoney");
-	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	
 	Integer colNum = betToto.getColNum(), rowNum = betToto.getRowNum();
 %>
@@ -47,10 +46,24 @@
 			            <p><%=betToto.getTitle()%></p>
 			        </td>
 			        <td class="totoLeft" height="25">
+			            <p>마감시각</p>
+			        </td>
+			        <td class="totoRight" height="25">
+			            <p><%=XwinUtil.getBoardItemDate(betToto.getGameDate())%></p>
+			        </td>
+			    </tr>
+			    <tr>
+			        <td class="totoLeft" height="25">
+			            <p>이월잔액</p>
+			        </td>
+			        <td class="totoRight" height="25">
+			            <p><%=XwinUtil.comma3(betToto.getCarryOver())%></p>
+			        </td>
+			        <td class="totoLeft" height="25">
 			            <p>총발매금액</p>
 			        </td>
 			        <td class="totoRight" height="25">
-			            <p><%=XwinUtil.comma3(totalMoney)%>원</p>
+			            <p><%=XwinUtil.comma3(toto.getTotalMoney())%>원</p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -58,7 +71,7 @@
 			            <p>전체투표수</p>
 			        </td>
 			        <td class="totoRight" height="25">
-			            <p><%=XwinUtil.comma3(totalCount)%></p>
+			            <p><%=XwinUtil.comma3(toto.getTotalCount())%></p>
 			        </td>
 			        <td class="totoLeft" height="25">
 			            <p>구매일</p>
