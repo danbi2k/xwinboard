@@ -79,6 +79,7 @@
 </SCRIPT>
 
 <div class="title">회원정보</div>
+<input type="button" value="<%=member.getUserId()%> (<%=member.getNickName()%>) 로 로그인" onclick="memberLogin('<%=member.getUserId()%>')"/>
 <BR>
 <span style='font-size:18'>충전 : <%=XwinUtil.comma3(chargeSum)%> 환전 : <%=XwinUtil.comma3(exchangeSum)%> 합계 : <%=XwinUtil.comma3(chargeSum - exchangeSum)%></span>
 <form method=post name='regist'>
@@ -114,7 +115,7 @@
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="password" type="text" value="<%=member.getPassword()%>"/>
+			<input name="password" type="text" value=""/>
 			<input type="button" value="변경" onclick="changePassword()"/>
 		</td>
  	</tr>
@@ -738,6 +739,21 @@ function minus_charging()
 		var result = http.parse();
 		alert(result.resultXml.message);
 		location.reload();
+	}
+}
+
+function memberLogin(userId)
+{
+	var query = "mode=memberLogin";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0) {
+		var sUrl = "/";
+		var sTarget = "Member";
+		var sStatus = "toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=1024,height=768,top=100,left=100";
+
+		window.open(sUrl, sTarget, sStatus);
 	}
 }
 </script>

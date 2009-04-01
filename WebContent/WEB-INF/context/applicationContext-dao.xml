@@ -93,6 +93,10 @@
 		class="com.xwin.infra.dao.HackingLogDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
+	<bean id="otpLogDao"
+		class="com.xwin.infra.dao.OtpLogDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
+		
 	<bean id="invitationDao"
 		class="com.xwin.infra.dao.InvitationDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />

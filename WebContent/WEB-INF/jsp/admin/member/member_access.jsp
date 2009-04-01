@@ -19,17 +19,27 @@
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 	String block = XwinUtil.nvl(request.getParameter("block"));
+	String type = XwinUtil.nvl(request.getParameter("type"));
 %>
 <div class="title">접속목록</div>
 
 <form method='GET' name="search" action="adminMember.aspx">
 	<input type='hidden' name='mode' value='viewAccessList'/>
 	<input type='hidden' name='pageIndex'/>
+	<select name='type' onchange='this.form.submit()'>
+		<option value=''>전체</option>
+		<option value='<%=Code.ACCESS_USER_LOGIN%>' <%=type.equals(Code.ACCESS_USER_LOGIN)?"selected":""%>><%=Code.getValue(Code.ACCESS_USER_LOGIN)%></option>
+		<option value='<%=Code.ACCESS_USER_LOGIN_BY_ADMIN%>' <%=type.equals(Code.ACCESS_USER_LOGIN_BY_ADMIN)?"selected":""%>><%=Code.getValue(Code.ACCESS_USER_LOGIN_BY_ADMIN)%></option>
+		<option value='<%=Code.ACCESS_ADMIN_LOGIN_SUCCESS%>' <%=type.equals(Code.ACCESS_ADMIN_LOGIN_SUCCESS)?"selected":""%>><%=Code.getValue(Code.ACCESS_ADMIN_LOGIN_SUCCESS)%></option>
+		<option value='<%=Code.ACCESS_ADMIN_LOGIN_FAILURE%>' <%=type.equals(Code.ACCESS_ADMIN_LOGIN_FAILURE)?"selected":""%>><%=Code.getValue(Code.ACCESS_ADMIN_LOGIN_FAILURE)%></option>
+		<option value='<%=Code.ACCESS_ADMIN_LOGIN_DENY%>' <%=type.equals(Code.ACCESS_ADMIN_LOGIN_DENY)?"selected":""%>><%=Code.getValue(Code.ACCESS_ADMIN_LOGIN_DENY)%></option>
+	</select>
 	<select name='block' onchange='this.form.submit()'>
 		<option value=''>전체</option>
 		<option value='block' <%=block.equals("block")?"selected":""%>>해제</option>
 		<option value='noBlock' <%=block.equals("noBlock")?"selected":""%>>차단</option>
 	</select>
+<BR>
 	검색
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
@@ -51,7 +61,8 @@
 		<th width=*>접속시각</th>
 		<th width=15%>아이피</th>
 		<th width=15%>종류</th>
-		<th>차단</th>
+		<th width=5%>PIN</th>
+		<th width=10%>차단</th>
 	</tr>
 <%
 if (accessList != null) {
@@ -63,7 +74,8 @@ if (accessList != null) {
 		<td width=15%><%=access.getNickName()%></td>
 		<td width=*><%=XwinUtil.toDateStr(access.getDate(), 1)%></td>
 		<td width=15%><%=access.getIpAddress()%></td>
-		<td width=15%><%=Code.getValue(XwinUtil.nvl(access.getType()))%></td>
+		<td width=20%><%=Code.getValue(XwinUtil.nvl(access.getType()))%></td>
+		<td width=5%><%=XwinUtil.nvl(access.getPin())%></td>
 		<td width=10%>
 			<%if ("Y".equals(access.getBlock())) { %>
 			<input type="button" onclick="releaseIp('<%=access.getIpAddress()%>')" value="해제"/>

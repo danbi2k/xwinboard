@@ -181,7 +181,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 				if (rx.getCode() == 0) {
 					rx = checkPin(command.getPin());
 					if (rx.getCode() == 0) {
-						member.setPassword(command.getPassword1());
+						member.setPassword(XwinUtil.getEncoded(command.getPassword1()));
 						member.setPin(command.getPin());
 						member.setGetSms(command.getSmsCheck());
 						member.setPasswordExpire("C");

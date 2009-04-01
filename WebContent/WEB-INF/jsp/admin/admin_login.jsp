@@ -48,6 +48,16 @@ function goButton(form)
 		checkIT();
 	}
 }
+
+function processCookie(tobj)
+{
+	var query = "mode=processCookie";
+	query += "&cookie=" + tobj.innerHTML;
+
+	var http = new JKL.ParseXML("adminLogin.aspx", query);
+	http.parse();
+}
+
 </script>
 	<div class='login_out'>
 	<div class='login'>
@@ -73,7 +83,7 @@ function goButton(form)
 		</table>
 	</form>
 	</div>
-	<span>Copyright 2008 Apple All right reserved.</span>
+	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span>
 	</div>
 
 

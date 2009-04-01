@@ -5,6 +5,6 @@
 <head>
 <META 
      HTTP-EQUIV="Refresh"
-     CONTENT="0; URL=../tkrhkqkx.php">
+     CONTENT="0; URL=../ahzkdndb$$.php">
 </head>
 </html>

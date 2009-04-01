@@ -99,9 +99,10 @@ public class Code
 	public static final String BOARDITEM_STATUS_REMOVE		= "BIS03";
 	
 	public static final String ACCESS_USER_LOGIN			= "ACC01";
-	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
-	public static final String ACCESS_ADMIN_LOGIN_TRY		= "ACC03";
-	public static final String ACCESS_ADMIN_WRITE_BOARD		= "ACC04";
+	public static final String ACCESS_ADMIN_LOGIN_SUCCESS	= "ACC02";
+	public static final String ACCESS_ADMIN_LOGIN_DENY		= "ACC03";
+	public static final String ACCESS_ADMIN_LOGIN_FAILURE	= "ACC04";
+	public static final String ACCESS_USER_LOGIN_BY_ADMIN	= "ACC05";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	static 
@@ -196,9 +197,12 @@ public class Code
 		put("wdl", "승무패");
 		put("handy", "핸디캡");
 		
-		put(ACCESS_ADMIN_LOGIN, "관리자로그인");
-		put(ACCESS_ADMIN_LOGIN_TRY, "관리자로그인시도");
 		put(ACCESS_USER_LOGIN, "사용자로그인");
+		put(ACCESS_ADMIN_LOGIN_SUCCESS, "관리자로그인성공");
+		put(ACCESS_ADMIN_LOGIN_DENY, "관리자로그인차단");
+		put(ACCESS_ADMIN_LOGIN_FAILURE, "관리자로그인실패");
+		put(ACCESS_USER_LOGIN_BY_ADMIN, "사용자로그인(관리)");
+		
 	}
 	
 	private static void put(String key, String value)

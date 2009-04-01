@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
+import com.xwin.domain.log.OtpLog;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -22,9 +23,16 @@ public class AdminLoginController extends XwinController
 {
 	private static Map<String, Integer> TRY_IP = new HashMap<String, Integer>();
 	
+	private Map<String, String> authPhone = new HashMap<String, String>();
+	
 	public ModelAndView processLogin(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception
 	{
+		HttpSession session = request.getSession();
+		Integer sessionpin = (Integer) session.getAttribute("OTP");
+		session.removeAttribute("OTP");
+		String adminPin = XwinUtil.makeAdminPin(sessionpin);
+		
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
@@ -35,33 +43,49 @@ public class AdminLoginController extends XwinController
 		TRY_IP.put(ip, XwinUtil.ntz(TRY_IP.get(ip))+1);			
 		Integer tryCount = TRY_IP.get(ip);
 		
-		Access tryAccess = new Access();
-		tryAccess.setDate(new Date());
-		tryAccess.setUserId(admin.getUserId());
-		tryAccess.setNickName(admin.getNickName());
-		tryAccess.setIpAddress(request.getRemoteAddr());
-		tryAccess.setType(Code.ACCESS_ADMIN_LOGIN_TRY);
-		
-		accessDao.insertAccess(tryAccess);
-		
 		if (tryCount > 5) {
+			Access tryAccess = new Access();
+			tryAccess.setDate(new Date());
+			tryAccess.setUserId(userId);
+			tryAccess.setNickName("");
+			tryAccess.setIpAddress(request.getRemoteAddr());
+			tryAccess.setType(Code.ACCESS_ADMIN_LOGIN_DENY);
+			tryAccess.setPin(pin);
+			
+			accessDao.insertAccess(tryAccess);
+			
 			rx = new ResultXml(-1, "로그인 시도 횟수를 초과 하였습니다. 접속을 차단 합니다.", null);
 		} 
-		else if (admin!= null && admin.getPassword().equals(password) && admin.getPin().equals(pin)) {
-				TRY_IP.remove(ip);
-				request.getSession().setAttribute("Admin", admin);
-				rx = ResultXml.SUCCESS;
-				
-				Access access = new Access();
-				access.setDate(new Date());
-				access.setUserId(admin.getUserId());
-				access.setNickName(admin.getNickName());
-				access.setIpAddress(request.getRemoteAddr());
-				access.setType(Code.ACCESS_ADMIN_LOGIN);
-				
-				accessDao.insertAccess(access);
+		else if (
+				adminPin != null &&
+				admin != null &&
+				admin.getPassword().equals(XwinUtil.getEncoded(password)) &&
+				adminPin.equals(pin)) {
+			TRY_IP.remove(ip);
+			request.getSession().setAttribute("Admin", admin);
+			rx = ResultXml.SUCCESS;
+			
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(admin.getUserId());
+			access.setNickName(admin.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_ADMIN_LOGIN_SUCCESS);
+			access.setPin(pin);
+			
+			accessDao.insertAccess(access);
 		}
 		else {
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(userId);
+			access.setNickName("");
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_ADMIN_LOGIN_FAILURE);
+			access.setPin(pin);
+			
+			accessDao.insertAccess(access);
+			
 			rx = new ResultXml(-1, "관리자 정보가 잘못되었습니다", null);
 		}
 		
@@ -80,5 +104,35 @@ public class AdminLoginController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
+	}
+	
+	public ModelAndView processCookie(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		HttpSession session = request.getSession();
+		
+		String cookie = request.getParameter("cookie");
+		String value = authPhone.get(cookie);
+		if (value != null) {
+			int pin = (int) (Math.random() * 10000);
+			session.setAttribute("OTP", pin);
+			String pinStr = "" + pin;
+			//sendSmsConnector.sendSms(pinStr, value, "0000");
+			System.out.println(pinStr);
+			
+			OtpLog otpLog = new OtpLog();
+			otpLog.setDate(new Date());
+			otpLog.setPhone(value);
+			otpLog.setPin(pinStr);
+			otpLog.setIpAddress(request.getRemoteAddr());
+			otpLogDao.insertOtpLog(otpLog);
+		}
+		
+		ModelAndView mv = new ModelAndView("redirect:/");
+		return mv;
+	}
+
+	public void setAuthPhone(Map<String, String> authPhone) {
+		this.authPhone = authPhone;
 	}
 }

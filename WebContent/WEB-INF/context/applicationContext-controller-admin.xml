@@ -25,7 +25,20 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:accessDao-ref="accessDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
+		p:otpLogDao-ref="otpLogDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:methodNameResolver-ref="controllerNameResolver"
+	>
+		<property name="authPhone">
+			<map>
+				<entry key="r" value="0100000000"/>
+				<entry key="g" value="0100000001"/>
+				<entry key="9" value="0100000002"/>
+				<entry key="p" value="0100000003"/>
+				<entry key="e" value="0100000004"/>
+			</map>
+		</property>
+	</bean>
 		
 	<bean id="adminMainController"
 		class="com.xwin.web.controller.admin.AdminMainController"

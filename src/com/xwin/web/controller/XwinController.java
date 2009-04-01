@@ -22,6 +22,7 @@ import com.xwin.infra.dao.MemoDao;
 import com.xwin.infra.dao.MoneyInDao;
 import com.xwin.infra.dao.MoneyInOutDao;
 import com.xwin.infra.dao.MoneyOutDao;
+import com.xwin.infra.dao.OtpLogDao;
 import com.xwin.infra.dao.PointDao;
 import com.xwin.infra.dao.SmsWaitDao;
 import com.xwin.infra.dao.TransactionDao;
@@ -51,6 +52,7 @@ public class XwinController extends MultiActionController
 	protected SmsWaitDao smsWaitDao = null;
 	protected MemoDao memoDao = null;
 	protected HackingLogDao hackingLogDao = null;
+	protected OtpLogDao otpLogDao = null;
 	protected InvitationDao invitationDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
@@ -128,6 +130,10 @@ public class XwinController extends MultiActionController
 
 	public void setHackingLogDao(HackingLogDao hackingLogDao) {
 		this.hackingLogDao = hackingLogDao;
+	}
+
+	public void setOtpLogDao(OtpLogDao otpLogDao) {
+		this.otpLogDao = otpLogDao;
 	}
 
 	public void setInvitationDao(InvitationDao invitationDao) {

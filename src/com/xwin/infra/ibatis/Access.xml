@@ -16,11 +16,13 @@
 		<result property="ipAddress" column="IP_ADDR"/>
 		<result property="block" column="BLOCK"/>
 		<result property="type" column="TYPE"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="pin" column="pin"/>
 	</resultMap>
 	
 	<insert id="insertAccess" parameterClass="Access">
-		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR, TYPE)
-		VALUES(#userId#, #nickName#, #date#, #ipAddress#, #type#)
+		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR, TYPE, PASSWORD, PIN)
+		VALUES(#userId#, #nickName#, #date#, #ipAddress#, #type#, #password#, #pin#)
 	</insert>
 	
 	<delete id="deleteAccess" parameterClass="string">

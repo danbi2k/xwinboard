@@ -15,6 +15,7 @@ import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -73,6 +74,7 @@ public class LoginController extends XwinController
 				access.setUserId(member.getUserId());
 				access.setNickName(member.getNickName());
 				access.setIpAddress(request.getRemoteAddr());
+				access.setType(Code.ACCESS_USER_LOGIN);
 				
 				accessDao.insertAccess(access);
 			}
@@ -85,7 +87,8 @@ public class LoginController extends XwinController
 	}
 	
 	private boolean comparePassword(String dbPass, String uiPass) {
-		return dbPass.equals(uiPass);
+		String encodedPass = XwinUtil.getEncoded(uiPass);
+		return dbPass.equals(encodedPass);
 	}
 
 	public ModelAndView processLogout(HttpServletRequest request,
