@@ -1,14 +1,26 @@
 DROP TABLE IF EXISTS `xwin`.`tbl_access`;
-CREATE TABLE  `xwin`.`tbl_access` (
+CREATE TABLE  `apple`.`tbl_access` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `USERID` varchar(45) NOT NULL,
   `NICKNAME` varchar(45) NOT NULL,
   `DATE` varchar(45) NOT NULL,
   `IP_ADDR` varchar(45) NOT NULL,
+  `TYPE` varchar(45) DEFAULT NULL,
+  `PASSWORD` varchar(45) DEFAULT NULL,
+  `PIN` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `Index_2` (`USERID`),
-  CONSTRAINT `FK_tbl_access_1` FOREIGN KEY (`USERID`) REFERENCES `tbl_member` (`USERID`)
-) ENGINE=InnoDB AUTO_INCREMENT=244753 DEFAULT CHARSET=utf8;
+  KEY `Index_2` (`USERID`)
+) ENGINE=InnoDB AUTO_INCREMENT=252295 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `xwin`.`tbl_log_otp`;
+CREATE TABLE  `apple`.`tbl_log_otp` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `PHONE` varchar(45) NOT NULL,
+  `PIN` varchar(45) NOT NULL,
+  `DATE` datetime NOT NULL,
+  `IP_ADDR` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `xwin`.`tbl_account`;
 CREATE TABLE  `xwin`.`tbl_account` (
