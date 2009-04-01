@@ -12,6 +12,7 @@ import com.xwin.domain.admin.Admin;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -35,8 +36,8 @@ public class AdminInfoController extends XwinController
 		
 		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
-		admin.setPassword(command.getPassword());
-		admin.setPin(command.getPin());
+		admin.setPassword(XwinUtil.getEncoded(command.getPassword()));
+		admin.setPin(XwinUtil.getEncoded(command.getPin()));
 		admin.setNickName(command.getNickName());
 		admin.setMobile(command.getMobile());
 		admin.setEmail(command.getEmail());

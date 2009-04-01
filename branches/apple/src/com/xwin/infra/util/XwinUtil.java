@@ -3,6 +3,7 @@ package com.xwin.infra.util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -12,6 +13,8 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import sun.misc.BASE64Encoder;
 
 public class XwinUtil
 {
@@ -314,5 +317,40 @@ public class XwinUtil
 		retNumber = retNumber.trim();
 		
 		return retNumber;
+	}
+	
+	public static String getEncoded(String message)
+	{
+		if (message == null)
+			return null;   
+        try{
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(message.getBytes());
+            byte[] md5Bytes = md5.digest(); 
+
+            BASE64Encoder base64 = new BASE64Encoder();
+            String encoded = base64.encode(md5Bytes); 
+            
+            return encoded;           
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        return null;
+	}
+	
+	public static String makeAdminPin(Integer pin)
+	{
+		if (pin == null)
+			return null;
+		
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH) + 1;
+		int date = cal.get(Calendar.DATE);
+		
+		Integer adminPin = pin * month + date;
+		
+		return adminPin.toString();
 	}
 }

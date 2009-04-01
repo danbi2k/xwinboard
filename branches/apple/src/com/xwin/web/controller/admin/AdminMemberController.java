@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -16,6 +17,7 @@ import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.comm.SmsWait;
+import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
@@ -164,6 +166,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String block = XwinUtil.arcNvl(request.getParameter("block"));
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
@@ -177,6 +180,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		if (block != null && block.length() > 0)
 			param.put(block, "");
+		param.put("type", type);
 		
 		List<Access> accessList = accessDao.selectAccessList(param);
 		Integer accessCount = accessDao.selectAccessCount(param);
@@ -592,7 +596,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			rx = new ResultXml(-1, "패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPassword(password);
+			member.setPassword(XwinUtil.getEncoded(password));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
@@ -620,7 +624,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			rx = new ResultXml(-1, "환전패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPin(pin);
+			member.setPin(XwinUtil.getEncoded(pin));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
@@ -681,12 +685,32 @@ public class AdminMemberController extends XwinController implements MessageSour
 		return mv;
 	}
 	
-	public ModelAndView qnwkdhkd(HttpServletRequest request,
+	public ModelAndView memberLogin(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member admin = memberDao.selectMember("admin", Code.USER_GRADE_ADMIN);
-		ResultXml rx = new ResultXml(0, admin.getPassword()+" " + admin.getPin(), null);
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
 		
+		String userId = request.getParameter("userId");
+		Member member = memberDao.selectMember(userId, null);
+		
+		if (member != null) {
+			HttpSession session = request.getSession();
+			member.setLoginDate(new Date());
+			session.setAttribute("Member", member);
+			session.setAttribute("BettingCart", new BettingCart());
+			
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(member.getUserId());
+			access.setNickName(member.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_USER_LOGIN_BY_ADMIN);
+			
+			accessDao.insertAccess(access);
+		}
+		
+		ResultXml rx = new ResultXml(0, "", null);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

@@ -40,11 +40,11 @@
 		</tr>	
 	     <tr align="center" bgcolor="#E4E4E4" height=20>
 			<td width=20%>비밀번호</td>
-			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='password' value='<%=admin.getPassword()%>'></td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='password'></td>
 		</tr>
 		 <tr align="center" bgcolor="#E4E4E4" height=20>
 			<td width=20%>PIN</td>
-			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='pin' value='<%=admin.getPin()%>'></td>
+			<td width=80% bgcolor='#ffffff' align='left'><input type='text' name='pin'></td>
 		</tr>			
 		<tr align="center" bgcolor="#E4E4E4" height=20>
 			<td width=20%>전화번호</td>
