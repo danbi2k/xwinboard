@@ -59,7 +59,7 @@ public class AdminLoginController extends XwinController
 		else if (
 				adminPin != null &&
 				admin != null &&
-				admin.getPassword().equals(XwinUtil.getEncoded(password)) &&
+				admin.getPassword().equals(XwinUtil.getAdminPassword(password)) &&
 				adminPin.equals(pin)) {
 			TRY_IP.remove(ip);
 			request.getSession().setAttribute("Admin", admin);

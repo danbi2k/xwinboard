@@ -319,12 +319,22 @@ public class XwinUtil
 		return retNumber;
 	}
 	
-	public static String getEncoded(String message)
+	public static String getAdminPassword(String message)
+	{
+		return getEncoded(message, "SHA-256");
+	}
+	
+	public static String getUserPassword(String message)
+	{
+		return getEncoded(message, "SHA-1");
+	}
+	
+	private static String getEncoded(String message, String algorithm)
 	{
 		if (message == null)
 			return null;   
         try{
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            MessageDigest md5 = MessageDigest.getInstance(algorithm);
             md5.update(message.getBytes());
             byte[] md5Bytes = md5.digest(); 
 
