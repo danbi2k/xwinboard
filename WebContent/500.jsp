@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-오공공
+ERROR
 </body>
 </html>
