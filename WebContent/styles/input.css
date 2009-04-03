@@ -1,0 +1,98 @@
+.godel  {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	text-decoration : underline;
+	font-weight : normal;
+	color : blue;}
+
+A  {
+	font-size : 11px;
+	font-family : Verdana, Arial, Geneva;
+	text-decoration : underline;
+	font-weight : bold;
+	color : #1D4D7C;}
+
+A:Visited  {
+	font-size : 11px;
+	font-family : Verdana, Arial, Geneva;
+	text-decoration : underline;
+	font-weight : bold;
+	color : #1D4D7C;}
+
+A:Active  {
+	font-size : 11px;
+	font-family : Verdana, Arial, Geneva;
+	text-decoration : underline;
+	font-weight : bold;
+	color : #9EADC6;}
+
+A:Hover  {
+	font-size : 11px;
+	font-family : Verdana, Arial, Geneva;
+	text-decoration : none;
+	font-weight : bold;
+	color : #9EADC6;}
+	
+.LinkFooter  {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+	color : #FFFFFF;}
+
+.LinkFooter:Visited  {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+	color : #FFFFFF;}
+
+.LinkFooter:Active  {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+	color : #FFFFFF;}
+
+.LinkFooter:Hover  {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+	color : #F7D755;}
+
+BODY, TR, TD, P{
+	font-size : 14px;
+	font-family : Verdana, Arial, Geneva;
+	color : #1D4D7C;}
+
+SELECT  {
+	font-size : 11px;
+	font-family : Verdana, Arial, Geneva;
+	background-color:#FAFAFA;
+	border: 1px solid Gray;
+	color : #1D4D7C;}
+
+TEXTAREA {
+	font-size : 10px;
+	font-family : Verdana, Arial, Geneva;
+	background-color:#FFFFFF;
+	border: 1px solid Gray;
+	color : #1D4D7C;}
+
+.TextSmall {
+	font-size : 10px;
+	font-family : Verdana, Arial, Geneva;
+	color : #1D4D7C;}
+	
+.TextFooter {
+	font-size : 9px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+	color : #FFFFFF;}
+	
+HR  {
+	height : 1px; 
+	color : #333333;}
+	
+.actionlabel {
+	font-size : 10px;
+	font-family : Verdana, Arial, Geneva;
+	font-weight : bold;
+}

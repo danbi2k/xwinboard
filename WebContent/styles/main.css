@@ -1,0 +1,264 @@
+
+.indexBody {
+margin-left: 0px;
+margin-top: 0px;
+margin-bottom: 0px;
+margin-right: 0px;
+background: white url(images/holidaybg.gif);
+}
+.tab {
+padding : 1px 0px 1px 6px;
+background-color: #e3f4ed;
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+/*color: #808080;*/
+color: #606060;
+color: #257954;
+font-weight: bold;
+text-decoration: none;
+cursor: pointer;
+border-style: solid;
+border-width: 2px 0px 2px 0px;
+border-color: white;
+}
+.tabSelected {
+padding : 1px 7px 1px 8px;
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+font-weight: bold;
+text-decoration: none;
+cursor: pointer;
+border-style: dotted;
+border-width: 1px 0px 0px 1px;
+border-color: #478F8F;
+/* background:#c7e3d7 url(images/gg0n.gif);*/
+background: #D2E4FC;
+}
+.tabCorner {
+padding : 0px 0px 1px 0px;
+background: #e3f4ed;
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+font-weight: bold;
+text-decoration: none;
+cursor: pointer;
+border-style: solid;
+border-width: 2px 3px 2px 0px;
+border-color: white;
+}
+.tabCornerSelected {
+padding : 0px 0px 1px 0px;
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+font-weight: bold;
+text-decoration: none;
+border-style: solid;
+border-width: 0px 3px 0px 0px;
+border-color: white;
+/*background:#c7e3d7 url(images/gg0n.gif);*/
+/*background: #c8d7e3;*/
+background: #D2E4FC;
+}
+.tabNew {
+margin: 5px 2px 2px 2px;
+padding : 3px 2px 0px 3px;
+font-family: Arial;
+font-size: 7pt;
+color: #3c5197;
+text-decoration: none;
+cursor: pointer;
+border-style: dashed;
+border-width: 1px 1px 0px 1px;
+border-color: #c8d7e3;
+padding-left: 0px;
+border-color: white;
+}
+.tabNote {
+font-family: Arial;
+font-size: 7pt;
+color: #808080;
+margin-top: 0px;
+margin-bottom: 0px;
+padding-top: 0px;
+padding-bottom: 0px;
+}
+.tocLabel {
+font-family: Arial;
+font-size: 8pt;
+color: #404040;
+font-weight: bold;
+}
+.tocSmall {
+font-family: Arial;
+font-size: 7pt;
+color: #404040;
+}
+.contentFrame {
+border-style: solid;
+border-width: 1px 1px 1px 1px;
+border-color: #005077;
+background: white;
+}
+.menu {
+border-style: solid;
+border-width: 1px 2px 2px 1px;
+border-color:  #707070;
+position: absolute;
+background-color: #f6f6f6;
+padding-left: 5px;
+padding-right: 5px;
+font-family: Arial;
+font-size: 9pt;
+color: black;
+z-index: +1;
+left: 20px;
+top: 20px;
+}
+.selectedRow {
+font-family: Arial;
+font-size: 8pt;
+background-color: #c8d7e3;
+cursor: pointer;
+}
+.selectedRowMap {
+background-color: #f6f66b;
+}
+.headerRow {
+font-family: Arial;
+font-size: 8pt;
+color: #003050;
+font-weight: bold;
+width: 250px;
+}
+.headerRowMap {
+color: #A00000;
+}
+.footerRow {
+font-family: Arial;
+font-size: 8pt;
+color: #505050;
+}
+.regularRow {
+font-family: Arial;
+font-size: 8pt;
+cursor: pointer;
+}
+.promo {
+font-family: Arial;
+font-size: 7pt;
+color: #606060;
+}
+.promoMain {
+font-family: Arial;
+font-size: 11pt;
+color: #606060;
+}
+.indexLink {
+color: #103080;
+text-decoration: none;
+font-weight: normal;
+}
+.modules {
+font-family: Arial;
+font-size: 8pt;
+color: #707070;
+}
+.module {
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+text-decoration: none;
+}
+.moduleSelected {
+font-family: Arial;
+font-size: 8pt;
+color: white;
+font-weight: bold;
+text-decoration: none;
+padding: 0px;
+margin:0px;
+}
+.intro {
+font-family: Arial;
+font-size: 9pt;
+color: #303030;
+}
+.news {
+font-family: Arial;
+font-size: 9pt;
+color: #303030;
+}
+.movable {
+font-family: Arial;
+font-size: 9pt;
+color: #005077;
+cursor: col-resize;
+}
+.openMoreLink {
+font-family: Arial;
+font-size: 8pt;
+color: #005077;
+text-decoration: none;
+font-weight: bold;
+padding-left: 3px;
+}
+.topStatus {
+font-family: Arial;
+font-size: 8pt;
+color: #505050;
+text-decoration: none;
+border-style: solid;
+border-width: 0px 0px 1px 0px;
+border-color:  white;
+background: #c7e3d7;
+padding-top: 1px;
+padding-bottom: 1px;
+background:#c7e3d7 url(images/gg.gif);
+}
+.introTd {
+font-family: Arial;
+font-size: 11pt;
+color: #303030;
+text-decoration: none;
+border-style: solid;
+border-width: 1px 1px 1px 1px;
+border-color:  #005077;
+background: white;
+}
+.advert {
+font-family: Arial;
+font-size: 9pt;
+color: #808080;
+text-decoration: none;
+}
+a {
+color: #005077;
+text-decoration: none;
+font-weight: bold;
+}
+.adframe {
+padding: 0px;
+border: 2px solid #c8d7e3;
+border: 1px solid white;
+margin: 0px 0px 0px 1px;
+background: white;
+}
+.toolbarButton  {
+font-size:10px;
+color: #003057;
+font-weight: normal;
+background: #e3f4ed;
+padding: 0px 5px 0px 5px
+}
+.topMenuItem { 
+	cursor:pointer;
+	cursor:hand; 
+	padding:1px 5px 2px 5px; 
+	color:#336699; 
+	font-weight:bold; 
+}
+.topMenuTable { padding:1px 5px 3px 3px; color:black; font-size:8pt; font-family:Verdana; font-weight:bold; }

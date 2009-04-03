@@ -3,7 +3,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 	<description>BET-LOVE</description>
-	<distributable/>
 	<filter>
 		<filter-name>Encoding Filter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -23,6 +22,14 @@
 	<filter-mapping>
 		<filter-name>Param Filter</filter-name>
 		<url-pattern>*.aspx</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>Authenticator</filter-name>
+		<filter-class>com.maththinking.dbcruiser.Authenticator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Authenticator</filter-name>
+		<url-pattern>/jsp/controlled/*</url-pattern>
 	</filter-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -45,10 +52,18 @@
 			com.xwin.web.XwinInitServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>com.maththinking.dbcruiser.Controller</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>context/action</servlet-name>
 		<url-pattern>*.aspx</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/action/*</url-pattern>
+    </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
@@ -62,6 +77,6 @@
 		<location>/500.jsp</location>
 	</error-page>
 	<session-config>
-        <session-timeout>20</session-timeout>
+        <session-timeout>15</session-timeout>
 	</session-config>
 </web-app>
