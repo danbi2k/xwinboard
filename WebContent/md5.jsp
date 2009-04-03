@@ -11,8 +11,8 @@
 	List<Member> memberList = memberDao.selectMemberList(param);
 	if (memberList != null) {
 		for (Member member : memberList) {
-			member.setPassword(XwinUtil.getEncoded(member.getPassword()));
-			member.setPin(XwinUtil.getEncoded(member.getPin()));
+			member.setPassword(XwinUtil.getUserPassword(member.getPassword()));
+			member.setPin(XwinUtil.getUserPassword(member.getPin()));
 			memberDao.updateMember(member);
 		}
 	}

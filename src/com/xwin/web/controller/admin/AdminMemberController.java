@@ -596,7 +596,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			rx = new ResultXml(-1, "패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPassword(XwinUtil.getEncoded(password));
+			member.setPassword(XwinUtil.getUserPassword(password));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
@@ -624,7 +624,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			rx = new ResultXml(-1, "환전패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPin(XwinUtil.getEncoded(pin));
+			member.setPin(XwinUtil.getUserPassword(pin));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			

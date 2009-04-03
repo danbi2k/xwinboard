@@ -36,8 +36,8 @@ public class AdminInfoController extends XwinController
 		
 		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
-		admin.setPassword(XwinUtil.getEncoded(command.getPassword()));
-		admin.setPin(XwinUtil.getEncoded(command.getPin()));
+		admin.setPassword(XwinUtil.getAdminPassword(command.getPassword()));
+		admin.setPin(XwinUtil.getAdminPassword(command.getPin()));
 		admin.setNickName(command.getNickName());
 		admin.setMobile(command.getMobile());
 		admin.setEmail(command.getEmail());

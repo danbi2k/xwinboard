@@ -87,7 +87,7 @@ public class LoginController extends XwinController
 	}
 	
 	private boolean comparePassword(String dbPass, String uiPass) {
-		String encodedPass = XwinUtil.getEncoded(uiPass);
+		String encodedPass = XwinUtil.getUserPassword(uiPass);
 		return dbPass.equals(encodedPass);
 	}
 
