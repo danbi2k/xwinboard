@@ -1,0 +1,176 @@
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.wireframemenu{
+border: 1px solid #C0C0C0;
+background-color: white;
+border-bottom-width: 0;
+width: 120px;
+}
+
+* html .wireframemenu{ /*IE only rule. Original menu width minus all left/right paddings */
+width: 120px;
+}
+
+.wireframemenu ul{
+padding: 0;
+margin: 0;
+list-style-type: none;
+}
+
+.wireframemenu a{
+/*font: bold 13px Verdana;*/
+font: bold 11px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+padding: 0px 3px;
+display: block;
+width: 100%; /*Define width for IE6's sake*/
+color: #595959;
+text-decoration: none;
+border-bottom: 1px solid #C0C0C0;
+}
+
+.wireframemenu a:visited{
+color: #595959;
+}
+
+html>body .wireframemenu a{ /*Non IE rule*/
+width: auto;
+}
+
+.wireframemenu a:hover{
+background-color: #F8FBBD;
+color: black;
+}
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.bevelmenu{
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 135px;
+}
+
+.bevelmenu li a{
+font: bold 11px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+color: #336699;
+display: block;
+width: 100%;
+padding: 2px 4px;
+text-decoration: none;
+font-weight: bold;
+/*background-color: #FFF2BF;*/
+background-color: #D2E4FC;
+border: 2px solid #FFF2BF;
+text-decoration:none;
+}
+
+.bevelmenu li a:hover{
+color: black;
+background-color: #FFE271;
+border-style: outset;
+}
+
+html>body .bevelmenu li a:active{ /* Apply mousedown effect (non IE browsers only) */
+border-style: inset;
+}
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.buttonmenu{
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 135px;
+}
+
+.buttonmenu li a{
+font: bold 11px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+color: white;
+display: block;
+width: 100%;
+padding: 2px 4px;
+text-decoration: none;
+font-weight: bold;
+border: 1px solid;
+border-color:#D5BFD0 #5A3A54 #5A3A54 #D5BFD0; /*light dark dark light*/
+/*background-color: #704968;*/
+background-color: #808080;
+text-decoration:none;
+}
+
+
+.buttonmenu li a:visited{
+color: white;
+}
+
+.buttonmenu li a:hover, .buttonmenu li a:active{
+color: black;
+background-color: #CDB4C8;
+}
+
+.navmenu{
+width:100%
+} 
+
+.navmenu ul
+{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.navmenu li
+{
+float: left;
+margin: 0 0;
+}
+
+.navmenu li a {
+  /*background: url(background.gif) #fff bottom left repeat-x;*/
+  /*height: 2em;*/
+  line-height: 20px;
+  float: left;
+  /*width: 80px;*/
+  display: block;
+  padding : 0px 5px 0px 5px;
+  border: 0.1em solid #9A9A9A;
+  color: #0d2474;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* Hide from IE5-Mac \*/
+  .navmenu li a {
+  float: none
+}
+/* End hide */
+
+
+.navmenu li a:hover{
+  color: black;
+  background-color: #FFE271;
+  border-style: outset;
+}
+
+.navmenu li a:visited{
+  text-decoration: none;
+}
+
+.actbutton{
+  color: #ffffff;
+  background-color: #8080C0;
+  /*border-style: outset;*/
+}
+
+
+.resultTitle {
+  color: #0000CC;
+  font: bold 11px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+}
+
+
+
