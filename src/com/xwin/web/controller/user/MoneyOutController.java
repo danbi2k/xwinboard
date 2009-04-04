@@ -100,7 +100,7 @@ public class MoneyOutController extends XwinController
 		else if ((moneyOut.getMoney() % 10000) > 0) {
 			rx = new ResultXml(-1, "10,000캐쉬 단위로 신청해 주세요", null);
 		}
-		else if (member.getPassword().equals(password) == false) {
+		else if (member.getPassword().equals(XwinUtil.getUserPassword(password)) == false) {
 			rx = new ResultXml(-1, "로그인 패스워드를 입력해 주세요", null);
 		}
 		else if (member.getBalance() < moneyOut.getMoney()) {

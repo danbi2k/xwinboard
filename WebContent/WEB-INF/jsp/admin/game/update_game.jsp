@@ -162,7 +162,7 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">자동퍼오기</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type='checkbox' name='syncDeny' value="N" <%=game.getSyncDeny().equals("Y")?"checked":"" %> disabled>
+			<input type='checkbox' name='syncDeny' value="N" <%=game.getSyncDeny().equals("Y")?"checked":"" %>>
 			(체크를 해제하면 자동으로 퍼오지 않습니다, 수동으로 값을 수정한 경기는 체크를 해제하고 [등록하기]를 눌러주십시오)
 		</td>
 	</tr>
