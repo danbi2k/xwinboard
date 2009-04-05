@@ -336,7 +336,6 @@
 		</td>
 	</tr>
 </table>
-<a href="toto.aspx?mode=viewToto">?</a>
 <script>
 function enter(frm)
 {
