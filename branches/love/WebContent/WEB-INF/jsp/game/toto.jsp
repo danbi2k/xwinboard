@@ -18,19 +18,17 @@
 %>
 
 <tr>
-	<td><img src="img/menu11.jpg" border="0"></td>
+	<td><img src="img/menu18.jpg" border="0"></td>
 </tr>
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
-	<tr>
-		<td width="771" height="33" align="left" valign="top">
-		<p>
-			<span style="background-color:AA0055">토토구매</span>&nbsp;
-			<a href="myBet.aspx?mode=viewMyTotoList"><span style="background-color:000000">구매내역</span></a></p>
-		</td>
-	</tr>
+		 <tr>
+        <td width="771" height="33" align="left" valign="top">
+            <p><img src="img/toto_1.jpg" border="0">&nbsp;<a href="myBet.aspx?mode=viewMyTotoList"><img src="img/toto__2.jpg" border="0"></a></p>
+        </td>
+    </tr>
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
@@ -149,7 +147,7 @@
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='<%=XwinUtil.comma3(toto.getMinMoney())%>' onkeyup="only123(this); comma3Input(this);"></p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<input type="button" value="구매" style="background-color:AA0055" onclick="betting()"/></p>
+			            <p>&nbsp;<img src="img/totobutton1.jpg" border="0" onclick="betting()"/></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -160,7 +158,7 @@
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<input type="button" onclick="" value="예상배당률계산" style="background-color:AA0055"/></p>
+			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick=""</p>
 			        </td>
 			    </tr>
 			    <tr>

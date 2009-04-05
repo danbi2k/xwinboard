@@ -9,6 +9,7 @@ topLink[7] = "bettingInfo.aspx";
 topLink[8] = "moneyIn.aspx?mode=viewMoneyInRequest";
 topLink[9] = "moneyOut.aspx?mode=viewMoneyOutRequest";
 topLink[10] = "myMoney.aspx?mode=viewMyMoneyList";
+topLink[11] = "toto.aspx?mode=viewToto";
 
 function goTopLink(index)
 {

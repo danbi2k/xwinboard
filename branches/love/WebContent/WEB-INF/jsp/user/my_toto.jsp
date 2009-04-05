@@ -15,19 +15,18 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <tr>
-	<td><img src="img/menu11.jpg" border="0"></td>
+	<td><img src="img/menu18.jpg" border="0"></td>
 </tr>
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
-	<tr>
-		<td width="771" height="33" align="left" valign="top">
-		<p>
-			<a href="toto.aspx?mode=viewToto"><span style="background-color:000000">토토구매</span></a>&nbsp;
-			<span style="background-color:AA0055">구매내역</span></p>
-		</td>
-	</tr>
+		 <tr>
+        <td width="771" height="33" align="left" valign="top">
+            <p><a href="toto.aspx?mode=viewToto"><img src="img/toto_2.jpg" border="0"></a>&nbsp;<img src="img/toto__1.jpg" border="0"></p>
+        </td>
+    </tr>
+	
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
