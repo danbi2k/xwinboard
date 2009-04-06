@@ -278,21 +278,24 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		Member member = memberDao.selectMember(userId, null);
 		
-		BankBook bankBook = new BankBook();
-		bankBook.setBankName(member.getBankName());
-		bankBook.setNumber(member.getBankNumber());
-		bankBook.setName(member.getBankOwner());
-		bankBook.setStatus(userId);
-		bankBook.setDate(member.getBankDate());
-		
-		bankBookDao.insertMemberBankBook(bankBook);
+		if (member.getMemberId() == 0) {
+			BankBook bankBook = new BankBook();
+			bankBook.setBankName(member.getBankName());
+			bankBook.setNumber(member.getBankNumber());
+			bankBook.setName(member.getBankOwner());
+			bankBook.setStatus(userId);
+			bankBook.setDate(member.getBankDate());
+			
+			bankBookDao.insertMemberBankBook(bankBook);
+		}
 		
 		member = new Member();
 		member.setBankName(bankName);
 		member.setBankNumber(XwinUtil.bankTrim(bankNumber));
 		member.setBankOwner(bankOwner);
 		member.setUserId(userId);
-		member.setBankDate(new Date());
+		if (member.getMemberId() == 0)
+			member.setBankDate(new Date());
 		
 		memberDao.updateMember(member);		
 	

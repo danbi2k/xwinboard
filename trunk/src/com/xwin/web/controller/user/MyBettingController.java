@@ -91,4 +91,31 @@ public class MyBettingController extends XwinController
 		mv.addObject("resultXml", XmlUtil.toXml(rx));		
 		return mv;
 	}
+	
+	public ModelAndView removeMyBetting(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = new ResultXml(-1, null, null);
+		String bettingId = request.getParameter("bettingId");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member.getMemberId() == 1) {
+			Betting betting =
+				bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
+			
+			if (betting != null) {
+				betting.setMemberId(0);
+				bettingDao.updateBetting(betting);
+				
+				rx = new ResultXml(0, "to 0", null);	
+			}
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));		
+		return mv;
+	}
 }
