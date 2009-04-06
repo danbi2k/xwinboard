@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.League;
 import com.xwin.domain.game.Toto;
@@ -35,21 +36,20 @@ public class TotoController extends XwinController
 		if (member == null)
 			return new ModelAndView("dummy");
 		
+		if (member.getUserId().equals("xx") == false)
+			return new ModelAndView("notready");
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.GAME_STATUS_RUN);
-		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);		
+		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
+		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
 		Toto toto = totoDao.selectToto(param);
 		
 		Long totalMoney = null;
 		Integer totalCount = null;
 		if (toto != null) {
-			param = new HashMap<String, Object>();
-			param.put("totoId", toto.getId());
-			param.put("notRunStatus", Code.BET_STATUS_CANCEL);
-			Long totalMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
-			totalMoney = totalMoneySum - XwinUtil.calcExpectMoney(toto.getEarnRate() / 100.0, totalMoneySum);
-			
-			totalCount = betTotoDao.selectBetTotoCount(param);
+			totalMoney = toto.getTotalMoney();
+			totalCount = toto.getTotalCount();
 		}
 		
 		ModelAndView mv = new ModelAndView("game/toto");
@@ -72,30 +72,58 @@ public class TotoController extends XwinController
 		String markingString = XwinUtil.arcNvl(request.getParameter("markingString"));
 		String totoId = XwinUtil.arcNvl(request.getParameter("totoId"));
 		String _money = XwinUtil.arcNvl(request.getParameter("money"));
+		
+		Toto toto = totoDao.selectTotoById(totoId);
 
 		ResultXml rx = null;
 		
-		Integer money = 0;
+		Long money = 0L;
 		try {
-			money = Integer.parseInt(_money);
+			money = Long.parseLong(_money);
 		} catch (Exception e) {
 			e.printStackTrace();
-			rx = new ResultXml(-1, "구매금액을 확인하십시오", null);
 		}
 		
-		BetToto betToto = new BetToto();
-		betToto.setTotoId(totoId);
-		betToto.setMarkingString(markingString);
-		betToto.setMoney(money);
-		betToto.setUserId(member.getUserId());
-		betToto.setNickName(member.getNickName());
-		betToto.setDate(new Date());
-		betToto.setRate(0.0);
-		betToto.setRunStatus(Code.BET_STATUS_RUN);
-		betToto.setCalcStatus(Code.BET_CALC_DISABLE);
-		
-		betTotoDao.insertBetToto(betToto);
-		rx = new ResultXml(0, "구매 하셨습니다", null);
+		if (money < toto.getMinMoney()) {
+			rx = new ResultXml(-1, "최소 구매 금액은 " + XwinUtil.comma3(toto.getMinMoney()) + "원 입니다.", null);
+		}
+		else if (money > member.getBalance()) {
+			rx = new ResultXml(-1, "잔액이 부족합니다", null);
+		}
+		else if (toto.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
+			rx = new ResultXml(-1, "토토가 진행 상태가 아닙니다.", null);
+			
+		}
+		else if (toto.getBetStatus().equals(Code.BETTING_STATUS_DENY) == false) {
+			rx = new ResultXml(-1, "마감된 토토 입니다.", null);
+		}
+		else {		
+			BetToto betToto = new BetToto();
+			betToto.setTotoId(totoId);
+			betToto.setMarkingString(markingString);
+			betToto.setMoney(money);
+			betToto.setUserId(member.getUserId());
+			betToto.setNickName(member.getNickName());
+			betToto.setDate(new Date());
+			betToto.setRate(0.0);
+			betToto.setRunStatus(Code.BET_STATUS_RUN);
+			betToto.setCalcStatus(Code.BET_CALC_DISABLE);	
+			betTotoDao.insertBetToto(betToto);
+			
+			Account account = new Account();
+			account.setUserId(member.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_BETTING);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(betToto.getMoney() * -1);
+			account.setBalance(member.getBalance() - betToto.getMoney());
+			account.setBettingId(betToto.getId());
+			
+			accountDao.insertAccount(account);			
+			memberDao.plusMinusBalance(member.getUserId(), betToto.getMoney() * -1);
+			
+			rx = new ResultXml(0, "구매 하셨습니다", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -212,6 +240,45 @@ public class TotoController extends XwinController
 		//Integer totoCount = totoDao.selectTotoCount(param);
 		
 		ResultXml resultXml = new ResultXml(0, null, totoList);
+
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
+		
+		return mv;
+	}
+	
+	public ModelAndView calcRate(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		String markingString = request.getParameter("markingString");
+		String totoId = request.getParameter("totoId");
+		String _money = request.getParameter("money");
+		
+		Toto toto = totoDao.selectTotoById(totoId);
+		
+		Long money = Long.parseLong(_money);
+		Double profit = money.doubleValue() * toto.getEarnRate() / 100.0;
+		Long shareMoney = money - profit.longValue();
+		Long totalMoney = XwinUtil.ntz(toto.getTotalMoney()) + XwinUtil.ntz(toto.getCarryOver()) + shareMoney;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("totoId", totoId);
+		param.put("runStatus", Code.BET_STATUS_RUN);		
+		param.put("markingString", markingString);
+		Long successMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
+		
+		Double portion = money.doubleValue() / (successMoneySum.doubleValue() + money.doubleValue());
+		Double _expect = Math.ceil(portion * totalMoney.doubleValue());
+		Long expect = _expect.longValue();
+		Double rate = XwinUtil.doubleCut(expect.doubleValue() / money.doubleValue());		
+		
+		ResultXml resultXml = new ResultXml(0, XwinUtil.to2Digit(rate), null);
 
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(resultXml));

@@ -29,6 +29,7 @@
 	
 	<resultMap id="TotoResultMap" class="Toto" extends="TotoResultMapCore">
 		<result property="totalMoney" column="TOTAL_MONEY"/>
+		<result property="earnMoney" column="EARN_MONEY"/>
 		<result property="totalCount" column="TOTAL_COUNT"/>
 		<result property="successCount" column="SUCCESS_COUNT"/>
 		<result property="successMoney" column="SUCCESS_MONEY"/>
@@ -101,6 +102,7 @@
 	<select id="selectToto" resultMap="TotoResultMap" parameterClass="map">
 		SELECT t.*,
 		(SELECT (SUM(MONEY)*(100.0-t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_MONEY,
+		(SELECT (SUM(MONEY)*(t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as EARN_MONEY,
 		(SELECT COUNT(*) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_COUNT
 		FROM tbl_toto t
 		<dynamic prepend="WHERE">
@@ -122,6 +124,7 @@
 	<select id="selectTotoList" resultMap="TotoResultMap" parameterClass="map">
 		SELECT t.*,
 		(SELECT (SUM(MONEY)*(100.0-t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_MONEY,
+		(SELECT (SUM(MONEY)*(t.EARN_RATE)/100.0) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as EARN_MONEY,
 		(SELECT COUNT(*) FROM tbl_betting_toto bt WHERE t.ID = bt.TOTO_ID AND bt.RUN_STATUS != 'BS004') as TOTAL_COUNT
 		FROM tbl_toto t
 		<dynamic prepend="WHERE">
@@ -192,4 +195,15 @@
 			</isNotNull>
 		</dynamic>
 	</select>
+	
+	<update id="batchTotoBetStatus" parameterClass="date">
+		<![CDATA[
+		UPDATE tbl_toto
+		SET
+			BET_STATUS = 'BTS02'
+		WHERE
+			GAME_DATE <= #date# AND
+			BET_STATUS = 'BTS01'
+		]]>			
+	</update>
 </sqlMap>

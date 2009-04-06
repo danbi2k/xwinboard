@@ -149,7 +149,7 @@
 			<td><%=toto.getTotalCount()%></td>
 			<td><%=XwinUtil.comma3(toto.getTotalMoney())%></td>
 			<td><%=XwinUtil.comma3(toto.getSuccessCount())%></td>
-			<td><%=XwinUtil.comma3(toto.getTotalMoney() * toto.getEarnRate() / 100)%></td>
+			<td><%=XwinUtil.comma3(toto.getEarnMoney())%></td>
 			<td><%=Code.getValue(toto.getStatus())%></td>
 		</tr>
 			<%

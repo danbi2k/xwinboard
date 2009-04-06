@@ -6,8 +6,15 @@
 
 <%@ include file="../admin_header.jsp"%>
 <%
-	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
+	List<BetToto> betTotoList = (List<BetToto>) request.getAttribute("betTotoList");
 	Toto toto = (Toto) request.getAttribute("toto");
+	
+	String search = XwinUtil.nvl(request.getParameter("search"));
+	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
+	String runStatus = XwinUtil.nvl(request.getParameter("runStatus"));
+	String betStatus = XwinUtil.nvl(request.getParameter("betStatus"));
+	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
+	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 	
 	Integer colNum = toto.getColNum();
 	Integer rowNum = toto.getRowNum();
@@ -16,6 +23,26 @@
 
 </SCRIPT>
 <div class="title">토토 결과</div>
+
+<form method='get' name='search' action='adminToto.aspx'>
+<input type='hidden' name='mode' value='viewReprocessToto'/>
+<input type='hidden' name='id' value='<%=toto.getId()%>'/>
+<input type='hidden' name='pageIndex'/>
+
+상태
+<select name='runStatus' onChange='this.form.submit()'>
+	<option value=''>전체</option>
+	<option value='<%=Code.BET_STATUS_SUCCESS%>' <%=runStatus.equals(Code.BET_STATUS_SUCCESS)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_SUCCESS)%></option>
+	<option value='<%=Code.BET_STATUS_FAILURE%>' <%=runStatus.equals(Code.BET_STATUS_FAILURE)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_FAILURE)%></option>
+	<option value='<%=Code.BET_STATUS_CANCEL%>' <%=runStatus.equals(Code.BET_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>	
+ </select>
+<select name='search'>
+	<option value='userIdLike' <%=search.equals("userIdLike")?"selected":""%>>회원아이디</option>
+	<option value='nickNameLike' <%=search.equals("nickNameLike")?"selected":""%>>회원닉네임</option>
+</select>
+<input type='text' name='keyword' value='<%=keyword%>'>
+<input type='submit' value='검 색'>
+</form>
 
 <form name="totoFrm" action="adminToto.aspx" method="post">
 <input type="hidden" name="mode" value="updateToto"/>
@@ -56,31 +83,31 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">총판매액</td>
 		<td bgcolor="#FFFFFF">
-			<%=toto.getLeagueName()%>
+			<%=XwinUtil.comma3(toto.getTotalMoney())%>
 		</td>
 		<td align="center" bgcolor="E7E7E7" width="15%">총발매수</td>
 		<td bgcolor="#FFFFFF">
-			<%=toto.getTitle()%>
+			<%=toto.getTotalCount()%>
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">수익</td>
 		<td bgcolor="#FFFFFF">
-			<%=XwinUtil.getBoardItemDate(toto.getGameDate())%>
+			<%=XwinUtil.comma3(toto.getEarnMoney()) %>
 		</td>
 		<td align="center" bgcolor="E7E7E7" width="15%">당첨금</td>
 		<td bgcolor="#FFFFFF">
-			<%=toto.getEarnRate()%>
+			<%=XwinUtil.comma3(toto.getSuccessMoney())%>
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">잔액</td>
-		<td bgcolor="#FFFFFF">
-			<%=XwinUtil.comma3(toto.getMinMoney())%>
-		</td>
-		<td align="center" bgcolor="E7E7E7" width="15%">잔액</td>
-		<td bgcolor="#FFFFFF">
-			<%=XwinUtil.comma3(toto.getCarryOver())%>
+		<td bgcolor="#FFFFFF" colspan=3>
+			<%Long carry = toto.getTotalMoney() - toto.getSuccessMoney();%>
+			<%=XwinUtil.comma3(carry)%><BR>
+			<%if (carry > 0) { %>
+			<font color="red" >※ 당첨자가 없어 당첨금이 이월 되었습니다.<BR>다음 토토를 등록할때  잔액 <%=XwinUtil.comma3(carry)%>원을 [이월잔액] 항목에 기입하십시오.
+			<%} %>
 		</td>
 	</tr>
 </table>
@@ -137,6 +164,34 @@
 %>
 </table>
 </form>
+
+<table class="prettytable">
+		<tr>
+		<th width=5%>번호</th>
+		<th>아이디 (닉네임)</th>
+		<th>구매일</th>
+		<th>구매액</th>
+		<th>당첨액</th>
+		<th>상태</th>
+  	</tr>
+
+	<%
+	if (betTotoList != null) {
+		for (BetToto betToto : betTotoList) {
+			
+	%>
+		<tr>
+		<td width=5%><a href="adminToto.aspx?mode=viewBetTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getId()%></a></td>
+		<td width=15% align='left'>&nbsp;<a href='javascript:goMemberDetail("<%=betToto.getUserId()%>")'><%=betToto.getUserId()%></a> (<%=betToto.getNickName()%>)
+		<td width=15%><%=XwinUtil.getBoardItemDate(betToto.getDate())%></td>
+		<td><%=XwinUtil.comma3(betToto.getMoney())%></td>
+		<td><%=XwinUtil.comma3(betToto.getExpect())%></td>
+		<td><%=Code.getValue(betToto.getRunStatus())%></td>
+	<%
+		}
+	}
+	%>
+</table>
 
 <script>
 var selected = [];

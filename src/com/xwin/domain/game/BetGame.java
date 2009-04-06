@@ -36,15 +36,4 @@ public class BetGame extends Game
 	public void setSelRate(Double selRate) {
 		this.selRate = selRate;
 	}
-	
-	public String toString()
-	{
-		StringBuffer sb = new StringBuffer();
-		
-		sb.append("\nbettingId= " + bettingId);
-		sb.append("\nguess= " + guess);
-		sb.append("\nselRate= " + selRate);
-		
-		return sb.toString();
-	}
 }

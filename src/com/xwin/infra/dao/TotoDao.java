@@ -1,5 +1,6 @@
 package com.xwin.infra.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,5 +41,10 @@ public class TotoDao extends XwinDao
 	public Integer selectTotoCount(Map<String, Object> param)
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectTotoCount", param);
+	}
+	
+	public void batchTotoBetStatus(Date date)
+	{
+		sqlMapClientTemplate.update("batchTotoBetStatus", date);
 	}
 }

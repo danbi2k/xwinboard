@@ -154,6 +154,8 @@
 		p:leagueDao-ref="leagueDao"
 		p:accessDao-ref="accessDao"
 		p:betTotoDao-ref="betTotoDao"
+		p:accountDao-ref="accountDao"
+		p:memberDao-ref="memberDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 		
 	<bean id="controllerNameResolver"
