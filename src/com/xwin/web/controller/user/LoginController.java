@@ -77,6 +77,7 @@ public class LoginController extends XwinController
 				access.setUserId(member.getUserId());
 				access.setNickName(member.getNickName());
 				access.setIpAddress(request.getRemoteAddr());
+				access.setType(Code.ACCESS_USER_LOGIN);
 				
 				accessDao.insertAccess(access);
 			}

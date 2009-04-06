@@ -87,6 +87,41 @@ public class MyBettingController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView deleteMyToto(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = null;
+		
+		String betTotoId = request.getParameter("betTotoId");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", betTotoId);
+		BetToto betToto =
+			betTotoDao.selectBetToto(param);
+		
+		if (betToto != null && betToto.getUserId().equals(member.getUserId())) {
+			if (betToto.getStatus().equals(Code.BET_STATUS_RUN)) {
+				rx = new ResultXml(0, "진행중인 구매내역은 삭제하실수 없습니다", betToto);
+			} else {
+				betToto.setIsDeleted("Y");
+				betTotoDao.updateBetToto(betToto);
+				rx = new ResultXml(0, "구매 기록이 삭제되었습니다", betToto);
+			}
+		} else {
+			rx = new ResultXml(0, "유효하지 않은 배팅 입니다", betToto);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));		
+		return mv;
+	}
+	
 	public ModelAndView viewMyTotoList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -143,6 +178,33 @@ public class MyBettingController extends XwinController
 		mv.addObject("toto", toto);
 		mv.addObject("betToto", betToto);
 		
+		return mv;
+	}
+	
+	public ModelAndView removeMyBetting(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
+		
+		ResultXml rx = new ResultXml(-1, null, null);
+		String bettingId = request.getParameter("bettingId");
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member.getMemberId() == 1) {
+			Betting betting =
+				bettingDao.selectBettingByUserId(member.getUserId(), bettingId);
+			
+			if (betting != null) {
+				betting.setMemberId(0);
+				bettingDao.updateBetting(betting);
+				
+				rx = new ResultXml(0, "to 0", null);	
+			}
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));		
 		return mv;
 	}
 }

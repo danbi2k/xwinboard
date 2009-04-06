@@ -15,11 +15,12 @@
 		<result property="date" column="DATE"/>
 		<result property="ipAddress" column="IP_ADDR"/>
 		<result property="block" column="BLOCK"/>
+		<result property="type" column="TYPE"/>
 	</resultMap>
 	
 	<insert id="insertAccess" parameterClass="Access">
-		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR)
-		VALUES(#userId#, #nickName#, #date#, #ipAddress#)
+		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR, TYPE)
+		VALUES(#userId#, #nickName#, #date#, #ipAddress#, #type#)
 	</insert>
 	
 	<delete id="deleteAccess" parameterClass="string">
@@ -29,6 +30,9 @@
 	<select id="selectAccessList" resultMap="accessResultMap" parameterClass="map">
 		SELECT a.*, b.STATUS as BLOCK FROM tbl_access a left join tbl_block_ip b on a.IP_ADDR = b.IP_ADDR 
 		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="type">
+				a.TYPE = #type#
+			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 				a.USERID LIKE #userIdLike#
 			</isNotNull>
@@ -64,6 +68,9 @@
 	<select id="selectAccessCount" resultClass="integer" parameterClass="map">
 		SELECT COUNT(*) FROM tbl_access a left join tbl_block_ip b on a.IP_ADDR = b.IP_ADDR
 		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="type">
+				a.TYPE = #type#
+			</isNotNull>
 			<isNotNull prepend="AND" property="userIdLike">
 				a.USERID LIKE #userIdLike#
 			</isNotNull>

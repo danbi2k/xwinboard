@@ -123,9 +123,9 @@
 %>
 
 <script>
-function deleteMyBetting(id)
+function deleteMyToto(id)
 {
-	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
+	if (confirm("구매 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyToto";
 		query += "&betTotoId=" + id;
 		var http = new JKL.ParseXML("myBet.aspx", query);
