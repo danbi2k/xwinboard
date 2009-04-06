@@ -25,6 +25,7 @@ public class Toto extends XwinObject
 	private Integer minMoney;
 	private Long carryOver;
 	private Long totalMoney;
+	private Long earnMoney;
 	private Integer totalCount;
 	private Integer successCount;
 	private Long successMoney;
@@ -130,6 +131,12 @@ public class Toto extends XwinObject
 	}
 	public void setTotalMoney(Long totalMoney) {
 		this.totalMoney = totalMoney;
+	}
+	public Long getEarnMoney() {
+		return earnMoney;
+	}
+	public void setEarnMoney(Long earnMoney) {
+		this.earnMoney = earnMoney;
 	}
 	public Integer getTotalCount() {
 		return totalCount;

@@ -13,6 +13,22 @@
 <%@ include file="../admin_header.jsp"%>
 
 <div class="title">토토 구매 내역</div>
+
+<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">구매일</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=XwinUtil.getBoardItemDate(betToto.getDate())%></td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">구매액</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=XwinUtil.comma3(betToto.getMoney())%></td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">상태</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=Code.getValue(betToto.getRunStatus())%></td>
+	</tr>
+</table>
+
 <table cellpadding="0" cellspacing="0" width="100%" class="prettytable">
 <tr>
 <%
@@ -65,14 +81,6 @@
 	}
 %>
 </table>
-<ul>
-<li>구매일 : <%=XwinUtil.getBoardItemDate(betToto.getDate())%></li>
-<li>구매액 : <%=XwinUtil.comma3(betToto.getMoney())%></li>
-<li>상태 : <%=Code.getValue(betToto.getRunStatus())%></li>
-<li>배당율 : <%=XwinUtil.nvl(betToto.getRate())%></li>
-<li>당첨금 : <%=XwinUtil.comma3(betToto.getExpect())%></li>
-
-</ul>
 <script>
 var spot = [];
 spot[0] = "A";

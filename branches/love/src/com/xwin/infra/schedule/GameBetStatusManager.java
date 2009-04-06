@@ -8,6 +8,7 @@ import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.xwin.infra.dao.GameDao;
+import com.xwin.infra.dao.TotoDao;
 
 public class GameBetStatusManager extends QuartzJobBean
 {
@@ -16,10 +17,16 @@ public class GameBetStatusManager extends QuartzJobBean
 			throws JobExecutionException
 	{
 		GameDao gameDao = (GameDao) context.getJobDetail().getJobDataMap().get("gameDao");
+		TotoDao totoDao = (TotoDao) context.getJobDetail().getJobDataMap().get("totoDao");
+		
+		Date today = new Date();
+		
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MINUTE, 5);
 
 		gameDao.batchGameBetStatus(cal.getTime());
-		gameDao.batchGameStatus(new Date());
+		gameDao.batchGameStatus(today);
+		
+		totoDao.batchTotoBetStatus(today);
 	}
 }

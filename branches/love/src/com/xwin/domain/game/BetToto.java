@@ -13,7 +13,7 @@ public class BetToto extends Toto
 	private Date date;
 	private Double rate;
 	private Long expect;
-	private Integer money;
+	private Long money;
 	private String calcStatus;
 	private String runStatus;
 	private String isDeleted;
@@ -62,10 +62,10 @@ public class BetToto extends Toto
 	public void setExpect(Long expect) {
 		this.expect = expect;
 	}
-	public Integer getMoney() {
+	public Long getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Long money) {
 		this.money = money;
 	}
 	public String getCalcStatus() {

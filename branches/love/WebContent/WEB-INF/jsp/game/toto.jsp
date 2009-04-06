@@ -158,7 +158,7 @@
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick=""</p>
+			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick="calcRate()"</p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -196,8 +196,12 @@ function betting()
 	var markingString = confirmMarking();
 	if (markingString) {
 		var money = document.getElementById("moneyDiv").value;
-		var regexp= RegExp(/,/ig);
-		money = money.replace(regexp, "");
+		if (!money) {
+			money = 0;
+		} else {
+			var regexp= RegExp(/,/ig);
+			money = money.replace(regexp, "");
+		}
 		
 		var query = "mode=betting";
 		query += "&markingString=" + markingString;
@@ -270,6 +274,34 @@ function loadMarking(markString)
 		var cobj = document.getElementById(markId[i]);
 		cobj.checked = true;
 	}
+}
+
+function calcRate()
+{
+	var markingString = confirmMarking();
+	if (markingString) {
+		var money = document.getElementById("moneyDiv").value;
+		if (!money) {
+			money = 0;
+		} else {
+			var regexp= RegExp(/,/ig);
+			money = money.replace(regexp, "");
+		}
+		
+		var query = "mode=calcRate";
+		query += "&markingString=" + markingString;
+		query += "&totoId=<%=toto.getId()%>";
+		query += "&money=" + money;
+
+		var http = new JKL.ParseXML("toto.aspx", query);
+		var result = http.parse();
+
+		//alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			var rateDiv = document.getElementById("rateDiv");
+			rateDiv.innerHTML = result.resultXml.message;
+		}
+	}	
 }
 
 loadCard('<%=toto.getCardString()%>');

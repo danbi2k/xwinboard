@@ -1,6 +1,7 @@
 package com.xwin.web.controller.admin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Account;
 import com.xwin.domain.game.BetToto;
 import com.xwin.domain.game.League;
 import com.xwin.domain.game.Toto;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -24,7 +27,6 @@ import com.xwin.web.controller.XwinController;
 public class AdminTotoController extends XwinController
 {	
 	public static final int ROWSIZE = 30;
-	public static final long FIVEMINUTE = 5 * 60 * 1000;
 	
 	public ModelAndView viewTotoList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -149,14 +151,34 @@ public class AdminTotoController extends XwinController
 	{
 		if (request.getSession().getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
+		String totoId = XwinUtil.arcNvl(request.getParameter("id"));
+		String runStatus = XwinUtil.arcNvl(request.getParameter("runStatus"));
+		String search = XwinUtil.arcNvl(request.getParameter("search"));
+		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
-		String id = request.getParameter("id");
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("id", id);
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		Map<String, Object> param = new HashMap<String, Object>();	
+		param.put("totoId", totoId);
+		param.put("runStatus", runStatus);
+		if (keyword != null) param.put(search, "%"+keyword+"%");
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
+		
+		List<BetToto> betTotoList =	betTotoDao.selectBetTotoList(param);
+		Integer betTotoCount =	betTotoDao.selectBetTotoCount(param);
+		
+		param = new HashMap<String, Object>();
+		param.put("id", totoId);
 		Toto toto = totoDao.selectToto(param);
 		
 		ModelAndView mv = new ModelAndView("admin/game/reprocess_toto");
 		mv.addObject("toto", toto);
+		mv.addObject("betTotoList", betTotoList);
+		mv.addObject("betTotoCount", betTotoCount);
 		return mv;
 	}
 	
@@ -262,6 +284,12 @@ public class AdminTotoController extends XwinController
 		toto.setMinMoney(Integer.parseInt(minMoney));
 		toto.setCarryOver(Long.parseLong(carryOver));
 		
+		Date now = new Date();
+		long timeDiff = toto.getGameDate().getTime() - now.getTime();
+		if (timeDiff > 0) {
+			toto.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+		}
+		
 		totoDao.updateToto(toto);
 		
 		ModelAndView mv = new ModelAndView("redirect:/adminToto.aspx?mode=viewTotoList");
@@ -283,7 +311,7 @@ public class AdminTotoController extends XwinController
 		param.put("totoId", id);
 		param.put("runStatus", Code.BET_STATUS_RUN);
 		
-		Long totalMoney = toto.getTotalMoney() + toto.getCarryOver();
+		Long totalMoney = XwinUtil.ntz(toto.getTotalMoney()) + XwinUtil.ntz(toto.getCarryOver());
 		
 		param.put("markingString", resultString);
 		Long successMoneySum = betTotoDao.selectBetTotoMoneySum(param);
@@ -305,6 +333,20 @@ public class AdminTotoController extends XwinController
 					betToto.setExpect(expect);
 					successCount++;
 					successMoney += expect;
+					
+					Member member = memberDao.selectMember(betToto.getUserId(), null);
+					
+					Account account = new Account();
+					account.setUserId(member.getUserId());
+					account.setType(Code.ACCOUNT_TYPE_JACKPOT);
+					account.setDate(new Date());
+					account.setOldBalance(member.getBalance());
+					account.setMoney(betToto.getExpect());
+					account.setBalance(member.getBalance() + betToto.getExpect());
+					account.setBettingId(betToto.getId());
+					accountDao.insertAccount(account);
+					
+					memberDao.plusMinusBalance(member.getUserId(), betToto.getExpect());
 				} else {
 					betToto.setRunStatus(Code.BET_STATUS_FAILURE);
 					betToto.setRate(0.0);

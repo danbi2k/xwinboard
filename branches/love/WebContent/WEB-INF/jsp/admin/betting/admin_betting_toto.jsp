@@ -15,7 +15,6 @@
 	
 	List<BetToto> betTotoList = (List<BetToto>) request.getAttribute("betTotoList");
 	Integer totalCount = (Integer) request.getAttribute("betTotoCount");
-	Long betTotoMoney = (Long) request.getAttribute("betTotoMoney");
 	
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
@@ -51,9 +50,20 @@
 <input type='submit' value='검 색'>
 </form>
 <BR>
-제목 : <%=toto.getTitle()%> <BR>
-총발매수 : <%=totalCount%> <BR>
-총발매액 : <%=XwinUtil.comma3(betTotoMoney)%> <BR>
+<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">제목</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=toto.getTitle()%></td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">총발매수</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=XwinUtil.comma3(toto.getTotalCount())%></td>
+	</tr>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">총발매액</td>
+		<td bgcolor="#FFFFFF"  colspan=3><%=XwinUtil.comma3(toto.getTotalMoney())%></td>
+	</tr>
+</table>
 
 <table class="toto"">
 <tr>
