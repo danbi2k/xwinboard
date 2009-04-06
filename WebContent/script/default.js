@@ -12,7 +12,7 @@ topLink[10] = "myMoney.aspx?mode=viewMyMoneyList";
 
 function goTopLink(index)
 {
-	//alert(index);
+	alert(index);
 	location.href = topLink[index];
 }
 
