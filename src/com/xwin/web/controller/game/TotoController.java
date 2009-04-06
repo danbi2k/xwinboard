@@ -94,7 +94,7 @@ public class TotoController extends XwinController
 			rx = new ResultXml(-1, "토토가 진행 상태가 아닙니다.", null);
 			
 		}
-		else if (toto.getBetStatus().equals(Code.BETTING_STATUS_DENY) == false) {
+		else if (toto.getBetStatus().equals(Code.BETTING_STATUS_DENY)) {
 			rx = new ResultXml(-1, "마감된 토토 입니다.", null);
 		}
 		else {		

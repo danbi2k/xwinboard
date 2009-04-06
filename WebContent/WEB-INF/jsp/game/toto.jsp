@@ -51,6 +51,14 @@
 			    </tr>
 			    <tr>
 			        <td width="100" height="25">
+			            <p>이월액</p>
+			        </td>
+			        <td width="200" height="25">
+			            <p><%=XwinUtil.comma3(toto.getCarryOver())%> 원</p>
+			        </td>
+			    </tr>
+			    <tr>
+			        <td width="100" height="25">
 			            <p>총발매금액</p>
 			        </td>
 			        <td width="200" height="25">
