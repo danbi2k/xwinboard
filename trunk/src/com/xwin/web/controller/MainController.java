@@ -14,7 +14,7 @@ public class MainController extends XwinController
 		String url = request.getRequestURL().toString();
 		String retView = "";
 		
-		if (url.contains("bravolife"))
+		if (url.contains("bravolife") || url.contains("localhost"))
 			retView = "main";
 		else
 			retView = "changeInfo";

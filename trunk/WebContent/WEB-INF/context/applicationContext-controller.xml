@@ -87,6 +87,8 @@
 		p:memberDao-ref="memberDao"
 		p:bettingDao-ref="bettingDao"
 		p:betGameDao-ref="betGameDao"
+		p:totoDao-ref="totoDao"
+		p:betTotoDao-ref="betTotoDao"
 		p:accessDao-ref="accessDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>	
 		
@@ -138,6 +140,15 @@
 		p:gameDao-ref="gameDao"
 		p:leagueDao-ref="leagueDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="totoController" class="com.xwin.web.controller.game.TotoController"
+		p:totoDao-ref="totoDao"
+		p:leagueDao-ref="leagueDao"
+		p:accessDao-ref="accessDao"
+		p:betTotoDao-ref="betTotoDao"
+		p:accountDao-ref="accountDao"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 		
 	<bean id="controllerNameResolver"
 		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"

@@ -41,6 +41,17 @@ public class XwinUtil
 		return nf.format(num);
 	}
 	
+	public static String comma3(Double num)
+	{
+		if (num == null)
+			return "0";
+		
+		Long longNum = num.longValue();
+		
+		NumberFormat nf = NumberFormat.getInstance();
+		return nf.format(longNum);
+	}
+	
 	public static String comma3(String num)
 	{
 		if (num == null || num.length() == 0)
