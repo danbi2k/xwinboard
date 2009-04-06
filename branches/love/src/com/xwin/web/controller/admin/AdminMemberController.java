@@ -137,6 +137,17 @@ public class AdminMemberController extends XwinController implements MessageSour
 		param.put("joinIdNull", "");
 		List<Invitation> noJoinList = invitationDao.selectInvitationList(param);
 		
+		// Access Log
+		if (member.getMemberId() == 1) {
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(member.getUserId());
+			access.setNickName(member.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_INSPECTION);
+			accessDao.insertAccess(access);
+		}		
+		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
 		mv.addObject("member", member);
 		mv.addObject("accountList", accountList);
@@ -163,13 +174,18 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String block = XwinUtil.arcNvl(request.getParameter("block"));
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
+		if (type == null)
+			type = Code.ACCESS_USER_LOGIN;
+		
 		Map<String, Object> param = new HashMap<String, Object>();
-		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");		
+		param.put("type", type);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("fromDate", XwinUtil.toDate(fromDate));
@@ -262,21 +278,24 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		Member member = memberDao.selectMember(userId, null);
 		
-		BankBook bankBook = new BankBook();
-		bankBook.setBankName(member.getBankName());
-		bankBook.setNumber(member.getBankNumber());
-		bankBook.setName(member.getBankOwner());
-		bankBook.setStatus(userId);
-		bankBook.setDate(member.getBankDate());
-		
-		bankBookDao.insertMemberBankBook(bankBook);
+		if (member.getMemberId() == 0) {
+			BankBook bankBook = new BankBook();
+			bankBook.setBankName(member.getBankName());
+			bankBook.setNumber(member.getBankNumber());
+			bankBook.setName(member.getBankOwner());
+			bankBook.setStatus(userId);
+			bankBook.setDate(member.getBankDate());
+			
+			bankBookDao.insertMemberBankBook(bankBook);
+		}
 		
 		member = new Member();
 		member.setBankName(bankName);
 		member.setBankNumber(XwinUtil.bankTrim(bankNumber));
 		member.setBankOwner(bankOwner);
 		member.setUserId(userId);
-		member.setBankDate(new Date());
+		if (member.getMemberId() == 0)
+			member.setBankDate(new Date());
 		
 		memberDao.updateMember(member);		
 	
