@@ -6,13 +6,11 @@ topLink[4] = "board.aspx?mode=viewBoard&boardName=user";
 topLink[5] = "board.aspx?mode=viewBoard&boardName=qna";
 topLink[6] = "game.aspx?mode=viewGameResultList";
 topLink[7] = "introduce.aspx?mode=viewIntroduceForm";
-topLink[8] = "moneyIn.aspx?mode=viewMoneyInRequest";
-topLink[9] = "moneyOut.aspx?mode=viewMoneyOutRequest";
-topLink[10] = "myMoney.aspx?mode=viewMyMoneyList";
+topLink[8] = "toto.aspx?mode=viewToto";
 
 function goTopLink(index)
 {
-	alert(index);
+	//alert(index);
 	location.href = topLink[index];
 }
 

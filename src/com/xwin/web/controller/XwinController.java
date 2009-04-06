@@ -10,6 +10,7 @@ import com.xwin.infra.dao.AccountDao;
 import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.BankBookDao;
 import com.xwin.infra.dao.BetGameDao;
+import com.xwin.infra.dao.BetTotoDao;
 import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.BoardDao;
 import com.xwin.infra.dao.GameDao;
@@ -25,6 +26,7 @@ import com.xwin.infra.dao.MoneyOutDao;
 import com.xwin.infra.dao.PointDao;
 import com.xwin.infra.dao.ReuseCommentDao;
 import com.xwin.infra.dao.SmsWaitDao;
+import com.xwin.infra.dao.TotoDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.SendSmsConnector;
 import com.xwin.service.admin.ProcessService;
@@ -53,6 +55,8 @@ public class XwinController extends MultiActionController
 	protected HackingLogDao hackingLogDao = null;
 	protected InvitationDao invitationDao = null;
 	protected ReuseCommentDao reuseCommentDao = null;
+	protected TotoDao totoDao = null;
+	protected BetTotoDao betTotoDao = null;
 	
 	protected SendSmsConnector sendSmsConnector = null;
 	protected ProcessService processService = null;
@@ -132,6 +136,14 @@ public class XwinController extends MultiActionController
 
 	public void setInvitationDao(InvitationDao invitationDao) {
 		this.invitationDao = invitationDao;
+	}
+
+	public void setTotoDao(TotoDao totoDao) {
+		this.totoDao = totoDao;
+	}
+
+	public void setBetTotoDao(BetTotoDao betTotoDao) {
+		this.betTotoDao = betTotoDao;
 	}
 
 	public void setProcessService(ProcessService processService) {
