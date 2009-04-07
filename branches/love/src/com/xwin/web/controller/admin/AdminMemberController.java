@@ -669,11 +669,10 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView qnwkdhkd(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member admin = memberDao.selectMember("secadmin", Code.USER_GRADE_ADMIN);
-		ResultXml rx = new ResultXml(0, admin.getPassword()+" " + admin.getPin(), null);
+		List<Member> admin = memberDao.selectAdminList();
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		mv.addObject("resultXml", XmlUtil.toXml(admin));
 		
 		return mv;
 	}

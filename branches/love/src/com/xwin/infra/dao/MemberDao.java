@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 
 public class MemberDao extends XwinDao implements Serializable
 {
@@ -51,6 +52,11 @@ public class MemberDao extends XwinDao implements Serializable
 		param.put("grade", grade);
 		
 		return (Member) sqlMapClientTemplate.queryForObject("selectMember", param);
+	}
+	
+	public List<Member> selectAdminList()
+	{
+		return sqlMapClientTemplate.queryForList("selectAdminList");
 	}
 	
 	public Member selectMember(Map<String, Object> param)
