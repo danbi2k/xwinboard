@@ -330,6 +330,11 @@
 		WHERE USERID = #userId#
 	</update>
 	
+	<select id="selectAdminList" resultMap="memberResultMap" parameterClass="map">
+		SELECT * FROM tbl_member
+		WHERE GRADE = 100
+	</select>
+	
 	<select id="selectMemberStatList" resultMap="memberStatResultMap"
 		parameterClass="map">
 		SELECT
