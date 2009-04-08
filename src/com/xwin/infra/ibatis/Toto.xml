@@ -112,8 +112,8 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
-			<isNotNull prepend="AND" property="bettingStatus">
-				BET_STATUS = #bettingStatus#
+			<isNotNull prepend="AND" property="betStatus">
+				BET_STATUS = #betStatus#
 			</isNotNull>
 			<isNotNull prepend="AND" property="displayStatus">
 				DP_STATUS = #displayStatus#

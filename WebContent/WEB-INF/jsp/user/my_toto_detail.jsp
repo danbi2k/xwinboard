@@ -9,6 +9,7 @@
 <%
 	Toto toto = (Toto) request.getAttribute("toto");
 	BetToto betToto = (BetToto) request.getAttribute("betToto");
+	String rateString = (String) request.getAttribute("rateString");
 	
 	Integer colNum = betToto.getColNum(), rowNum = betToto.getRowNum();
 %>
@@ -97,7 +98,7 @@
 			            <p>배당</p>
 			        </td>
 			        <td class="totoRight" height="25">
-			            <p><%=betToto.getRate()%> 배</p>
+			            <p><%=betToto.getRunStatus().equals(Code.BET_STATUS_RUN)?rateString:betToto.getRate()%> 배</p>
 			        </td>
 			        <td class="totoLeft" height="25">
 			            <p>당첨금</p>

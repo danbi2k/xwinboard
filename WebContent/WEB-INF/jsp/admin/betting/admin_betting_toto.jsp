@@ -119,6 +119,7 @@
 </table>
 
 <input type="button" value="결과처리" onclick="endToto()"/>
+<input type="button" value="토토취소(전체)" onclick="cancelToto()"/>
 
 <table class="prettytable">
 		<tr>
@@ -128,12 +129,12 @@
 		<th>구매액</th>
 		<th>당첨액</th>
 		<th>상태</th>
+		<th>취소</th>
   	</tr>
 
 	<%
 	if (betTotoList != null) {
 		for (BetToto betToto : betTotoList) {
-			
 	%>
 		<tr>
 		<td width=5%><a href="adminToto.aspx?mode=viewBetTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getId()%></a></td>
@@ -142,6 +143,7 @@
 		<td><%=XwinUtil.comma3(betToto.getMoney())%></td>
 		<td><%=XwinUtil.comma3(betToto.getExpect())%></td>
 		<td><%=Code.getValue(betToto.getRunStatus())%></td>
+		<td><input type="button" value="취소" onclick="cancelBetToto(<%=betToto.getId()%>)"/></td>
 	<%
 		}
 	}
@@ -207,10 +209,28 @@ function loadCard(formString)
 
 function endToto()
 {
-	var resultString = confirmMarking();
-	if (resultString) {
-		var query = "mode=endToto";
-		query += "&resultString=" + resultString;
+	if (confirm("입력하신 내역으로 토토를 처리하시겠습니까?")) {
+		var resultString = confirmMarking();
+		if (resultString) {
+			var query = "mode=endToto";
+			query += "&resultString=" + resultString;
+			query += "&id=<%=toto.getId()%>";
+	
+			var http = new JKL.ParseXML("adminToto.aspx", query);
+			var result = http.parse();
+	
+			alert(result.resultXml.message);
+			if (result.resultXml.code == 0) {
+				location.replace("adminToto.aspx?mode=viewReprocessToto&id=<%=toto.getId()%>");
+			}
+		}
+	}
+}
+
+function cancelToto()
+{
+	if (confirm("토토를 취소하시겠습니까?")) {
+		var query = "mode=cancelToto";
 		query += "&id=<%=toto.getId()%>";
 
 		var http = new JKL.ParseXML("adminToto.aspx", query);
@@ -220,8 +240,25 @@ function endToto()
 		if (result.resultXml.code == 0) {
 			location.replace("adminToto.aspx?mode=viewReprocessToto&id=<%=toto.getId()%>");
 		}
-	}	
+	}
 }
+
+function cancelBetToto(id)
+{
+	if (confirm("구매를 취소하시겠습니까?")) {
+		var query = "mode=cancelBetToto";
+		query += "&id=" + id;
+
+		var http = new JKL.ParseXML("adminToto.aspx", query);
+		var result = http.parse();
+
+		alert(result.resultXml.message);
+		if (result.resultXml.code == 0) {
+			location.reload();
+		}
+	}
+}
+
 
 function confirmMarking()
 {

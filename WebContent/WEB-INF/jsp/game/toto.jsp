@@ -8,13 +8,6 @@
 
 <%
 	Toto toto = (Toto) request.getAttribute("toto");
-	Long totalMoney = (Long) request.getAttribute("totalMoney");
-	Integer totalCount = (Integer) request.getAttribute("totalCount");
-	Integer colNum = null, rowNum = null;
-	if (toto != null) {
-		colNum= toto.getColNum();
-		rowNum = toto.getRowNum();
-	}
 %>
 
 <tr>
@@ -34,7 +27,14 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
   <tr>
      <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
-<%if (toto != null) { %>     
+<%
+if (toto != null) {
+	Long totalMoney = XwinUtil.ntz(toto.getTotalMoney());
+	Long earnMoney = XwinUtil.ntz(toto.getEarnMoney());
+	Integer totalCount = XwinUtil.ntz(toto.getTotalCount());
+	Integer colNum= toto.getColNum();
+	Integer rowNum = toto.getRowNum();
+%> 
 <!-- -->
  <div>
   <table cellpadding="0" cellspacing="0" width="369">
@@ -62,7 +62,7 @@
 			            <p>총발매금액</p>
 			        </td>
 			        <td width="200" height="25">
-			            <p><%=XwinUtil.comma3(totalMoney)%> 원</p>
+			            <p><%=XwinUtil.comma3(totalMoney + earnMoney)%> 원</p>
 			        </td>
 			    </tr>
 			    <tr>
