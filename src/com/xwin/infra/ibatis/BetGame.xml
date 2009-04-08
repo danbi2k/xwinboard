@@ -63,10 +63,9 @@
 	<select id="selectBetGameList" resultMap="betGameResultMap"
 		parameterClass="map">
 		SELECT g.ID, g.HOME_TEAM, g.AWAY_TEAM, g.STATUS, g.GAME_DATE, g.TYPE, g.HOME_SCORE, g.AWAY_SCORE, g.GRADE,
-			g.LEAGUE_ID, l.NAME as LEAGUE_NAME, b.*
-		FROM tbl_game g, tbl_league l, tbl_betting_game b
+			g.LEAGUE_ID, g.LEAGUE_NAME, b.*
+		FROM tbl_game g, tbl_betting_game b
 		WHERE
-		g.LEAGUE_ID = l.ID AND
 		g.ID = b.GAME_ID
 		<isNotNull prepend="AND" property="bettingId">
 			b.BETTING_ID = #bettingId#
@@ -79,10 +78,9 @@
 	<select id="selectBetGameListByBettingId" resultMap="betGameResultMap"
 		parameterClass="string">
 		SELECT g.ID, g.HOME_TEAM, g.AWAY_TEAM, g.STATUS, g.GAME_DATE, g.TYPE, g.HOME_SCORE, g.AWAY_SCORE, g.GRADE,
-			g.LEAGUE_ID, l.NAME as LEAGUE_NAME, b.*
-		FROM tbl_game g, tbl_league l, tbl_betting_game b
+			g.LEAGUE_ID, g.LEAGUE_NAME, b.*
+		FROM tbl_game g, tbl_betting_game b
 		WHERE
-		g.LEAGUE_ID = l.ID AND
 		g.ID = b.GAME_ID AND
 		b.BETTING_ID = #value#
 	</select>
