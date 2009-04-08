@@ -62,7 +62,7 @@
 			            <p>총발매금액</p>
 			        </td>
 			        <td class="totoRight" height="25">
-			            <p><%=XwinUtil.comma3(toto.getTotalMoney())%>원</p>
+			            <p><%=XwinUtil.comma3(XwinUtil.ntz(toto.getTotalMoney()) + XwinUtil.ntz(toto.getEarnMoney()))%>원</p>
 			        </td>
 			    </tr>
 			    <tr>
