@@ -147,6 +147,11 @@ function removeMoneyInRequestLog(id) {
 			location.reload(0);
 	}
 }
+
+function goPage(pageIndex)
+{
+	location.href = "myBet.aspx?mode=viewMyTotoList&pageIndex=" + pageIndex;
+}
 </script>
 
 <%@include file="../footer.jsp"%>

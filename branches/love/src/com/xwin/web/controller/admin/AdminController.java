@@ -223,4 +223,68 @@ public class AdminController extends XwinController
 		
 		return mv;
 	}
+	
+	public ModelAndView viewMaintanance(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		ModelAndView mv = new ModelAndView("admin/admin/maintanance");
+		
+		return mv;
+	} 
+	
+	public ModelAndView deleteMoneyInOutData(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String date = request.getParameter("date");
+		maintananceDao.deleteMoneyInData(date);
+		maintananceDao.deleteMoneyOutData(date);
+		maintananceDao.deleteTransactionData(date);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	} 
+	
+	public ModelAndView deleteAccountData(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String date = request.getParameter("date");
+		maintananceDao.deleteAccountData(date);
+		maintananceDao.deletePointData(date);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	} 
+	
+	public ModelAndView deleteBettingData(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String date = request.getParameter("date");
+		maintananceDao.deleteBetGameData(date);
+		maintananceDao.updateBoardWithBetting(date);
+		maintananceDao.deleteBettingData(date);
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 }

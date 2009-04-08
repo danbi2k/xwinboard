@@ -101,9 +101,13 @@
 		</td>
 	</tr>
 	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">상태</td>
+		<td bgcolor="#FFFFFF">
+			<%=Code.getValue(toto.getStatus()) %>
+		</td>
 		<td align="center" bgcolor="E7E7E7" width="15%">잔액</td>
-		<td bgcolor="#FFFFFF" colspan=3>
-			<%Long carry = toto.getTotalMoney() - toto.getSuccessMoney();%>
+		<td bgcolor="#FFFFFF">
+			<%Long carry = XwinUtil.ntz(toto.getTotalMoney()) - XwinUtil.ntz(toto.getSuccessMoney()) + XwinUtil.ntz(toto.getCarryOver());%>
 			<%=XwinUtil.comma3(carry)%><BR>
 			<%if (carry > 0) { %>
 			<font color="red" >※ 당첨자가 없어 당첨금이 이월 되었습니다.<BR>다음 토토를 등록할때  잔액 <%=XwinUtil.comma3(carry)%>원을 [이월잔액] 항목에 기입하십시오.
@@ -178,6 +182,7 @@
 	<%
 	if (betTotoList != null) {
 		for (BetToto betToto : betTotoList) {
+			String color = betToto.getRunStatus().equals(Code.BET_STATUS_SUCCESS)?"yellow":betToto.getRunStatus().equals(Code.BET_STATUS_FAILURE)?"red":"black";
 			
 	%>
 		<tr>
@@ -186,7 +191,7 @@
 		<td width=15%><%=XwinUtil.getBoardItemDate(betToto.getDate())%></td>
 		<td><%=XwinUtil.comma3(betToto.getMoney())%></td>
 		<td><%=XwinUtil.comma3(betToto.getExpect())%></td>
-		<td><%=Code.getValue(betToto.getRunStatus())%></td>
+		<td><font color="<%=color%>"><%=Code.getValue(betToto.getRunStatus())%></font></td>
 	<%
 		}
 	}

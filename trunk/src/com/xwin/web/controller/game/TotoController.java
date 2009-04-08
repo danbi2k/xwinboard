@@ -36,26 +36,14 @@ public class TotoController extends XwinController
 		if (member == null)
 			return new ModelAndView("dummy");
 		
-		if (member.getUserId().equals("xx") == false)
-			return new ModelAndView("notready");
-		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
 		Toto toto = totoDao.selectToto(param);
 		
-		Long totalMoney = null;
-		Integer totalCount = null;
-		if (toto != null) {
-			totalMoney = toto.getTotalMoney();
-			totalCount = toto.getTotalCount();
-		}
-		
 		ModelAndView mv = new ModelAndView("game/toto");
 		mv.addObject("toto", toto);
-		mv.addObject("totalMoney", totalMoney);
-		mv.addObject("totalCount", totalCount);
 
 		return mv; 
 	}

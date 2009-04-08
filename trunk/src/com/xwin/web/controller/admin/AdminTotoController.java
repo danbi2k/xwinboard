@@ -102,6 +102,7 @@ public class AdminTotoController extends XwinController
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
+		param.put("ORDERBY", "DESC");
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
 		List<Toto> totoList = totoDao.selectTotoList(param);
@@ -293,6 +294,82 @@ public class AdminTotoController extends XwinController
 		totoDao.updateToto(toto);
 		
 		ModelAndView mv = new ModelAndView("redirect:/adminToto.aspx?mode=viewTotoList");
+		return mv;
+	}
+	
+	public ModelAndView cancelToto(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String id = request.getParameter("id");
+		Toto toto = totoDao.selectTotoById(id);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("totoId", id);
+		param.put("runStatus", Code.BET_STATUS_RUN);
+		List<BetToto> betTotoList = betTotoDao.selectBetTotoList(param);
+		if (betTotoList != null) {
+			for (BetToto betToto : betTotoList) {
+				betToto.setRunStatus(Code.BET_STATUS_CANCEL);
+				betToto.setRate(0.0);
+				betToto.setExpect(0L);
+				betTotoDao.updateBetToto(betToto);
+				
+				Member member = memberDao.selectMember(betToto.getUserId(), null);
+				
+				Account account = new Account();
+				account.setUserId(member.getUserId());
+				account.setType(Code.ACCOUNT_TYPE_BETTING_RETURN);		
+				account.setDate(new Date());
+				account.setOldBalance(member.getBalance());
+				account.setMoney(betToto.getMoney());
+				account.setBalance(member.getBalance() + betToto.getMoney());
+				account.setBettingId(betToto.getId());
+				accountDao.insertAccount(account);
+				
+				memberDao.plusMinusBalance(member.getUserId(), betToto.getMoney());
+			}
+		}
+		
+		toto.setStatus(Code.GAME_STATUS_CANCEL);
+		totoDao.updateToto(toto);
+		
+		ResultXml rx = new ResultXml(0, "토토가 취소 되었습니다.", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView cancelBetToto(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String id = request.getParameter("id");
+		BetToto betToto = betTotoDao.selectBetTotoById(id);
+		betToto.setRunStatus(Code.BET_STATUS_CANCEL);
+		betTotoDao.updateBetToto(betToto);
+		
+		Member member = memberDao.selectMember(betToto.getUserId(), null);
+		
+		Account account = new Account();
+		account.setUserId(member.getUserId());
+		account.setType(Code.ACCOUNT_TYPE_BETTING_RETURN);		
+		account.setDate(new Date());
+		account.setOldBalance(member.getBalance());
+		account.setMoney(betToto.getMoney());
+		account.setBalance(member.getBalance() + betToto.getMoney());
+		account.setBettingId(betToto.getId());
+		accountDao.insertAccount(account);
+		
+		memberDao.plusMinusBalance(member.getUserId(), betToto.getMoney());
+		
+		ResultXml rx = new ResultXml(0, "토토 구매가 취소 되었습니다.", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
 	}
 	

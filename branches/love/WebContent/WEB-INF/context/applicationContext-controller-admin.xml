@@ -102,6 +102,7 @@
 		p:adminDao-ref="adminDao"
 		p:bankBookDao-ref="bankBookDao"
 		p:hackingLogDao-ref="hackingLogDao"
+		p:maintananceDao-ref="maintananceDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminBettingController"

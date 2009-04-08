@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Maintanance">
+
+	<delete id="deleteMoneyInData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_money_in where PROC_DATE < #value# OR REQ_DATE < #value#;
+		]]>
+	</delete>
+	
+	<delete id="deleteMoneyOutData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_money_out where PROC_DATE < #value# OR REQ_DATE < #value#;
+		]]>
+	</delete>
+	
+	<delete id="deleteTransactionData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_transaction where DATE < #value#;
+		]]>
+	</delete>
+	
+	<delete id="deleteAccountData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_account where date < #value#;
+		]]>
+	</delete>
+	
+	<delete id="deletePointData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_point where date < #value#;
+		]]>
+	</delete>
+	
+	<delete id="deleteBetGameData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_betting_game where betting_id in (select id from tbl_betting where end_date < #value#);
+		]]>
+	</delete>
+	
+	<delete id="updateBoardWithBetting" parameterClass="string">
+		<![CDATA[
+		update tbl_board_item set betting_id = null where betting_id in (select id from tbl_betting where end_date < #value#);
+		]]>
+	</delete>
+	
+	<delete id="deleteBettingData" parameterClass="string">
+		<![CDATA[
+		delete from tbl_betting where end_date < #value#;
+		]]>
+	</delete>
+</sqlMap>

@@ -106,7 +106,7 @@ public class MyBettingController extends XwinController
 			betTotoDao.selectBetToto(param);
 		
 		if (betToto != null && betToto.getUserId().equals(member.getUserId())) {
-			if (betToto.getStatus().equals(Code.BET_STATUS_RUN)) {
+			if (betToto.getRunStatus().equals(Code.BET_STATUS_RUN)) {
 				rx = new ResultXml(0, "진행중인 구매내역은 삭제하실수 없습니다", betToto);
 			} else {
 				betToto.setIsDeleted("Y");
@@ -173,10 +173,24 @@ public class MyBettingController extends XwinController
 		BetToto betToto = betTotoDao.selectBetToto(param);		
 		Toto toto = totoDao.selectTotoById(betToto.getTotoId());
 		
+		Long money = betToto.getMoney();
+		Long totalMoney = XwinUtil.ntz(toto.getTotalMoney()) + XwinUtil.ntz(toto.getCarryOver());
+		
+		param = new HashMap<String, Object>();
+		param.put("totoId", betToto.getTotoId());
+		param.put("runStatus", Code.BET_STATUS_RUN);		
+		param.put("markingString", betToto.getMarkingString());
+		Long successMoneySum = XwinUtil.ntz(betTotoDao.selectBetTotoMoneySum(param));
+		
+		Double portion = money.doubleValue() / (successMoneySum.doubleValue());
+		Double _expect = Math.ceil(portion * totalMoney.doubleValue());
+		Long expect = _expect.longValue();
+		Double rate = XwinUtil.doubleCut(expect.doubleValue() / money.doubleValue());		
 		
 		ModelAndView mv = new ModelAndView("user/my_toto_detail");
 		mv.addObject("toto", toto);
 		mv.addObject("betToto", betToto);
+		mv.addObject("rateString", XwinUtil.to2Digit(rate));
 		
 		return mv;
 	}
