@@ -17,7 +17,7 @@ public class MainController extends XwinController
 		if (url.contains("bravolife") || url.contains("localhost"))
 			retView = "main";
 		else
-			retView = "changeInfo";
+			retView = "main";
 		
 		ModelAndView mv = new ModelAndView(retView);
 		
