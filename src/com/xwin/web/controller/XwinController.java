@@ -18,6 +18,7 @@ import com.xwin.infra.dao.HackingLogDao;
 import com.xwin.infra.dao.InvitationDao;
 import com.xwin.infra.dao.KtfSmsDao;
 import com.xwin.infra.dao.LeagueDao;
+import com.xwin.infra.dao.MaintananceDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.dao.MemoDao;
 import com.xwin.infra.dao.MoneyInDao;
@@ -55,6 +56,7 @@ public class XwinController extends MultiActionController
 	protected HackingLogDao hackingLogDao = null;
 	protected InvitationDao invitationDao = null;
 	protected ReuseCommentDao reuseCommentDao = null;
+	protected MaintananceDao maintananceDao = null;
 	protected TotoDao totoDao = null;
 	protected BetTotoDao betTotoDao = null;
 	
@@ -156,5 +158,9 @@ public class XwinController extends MultiActionController
 
 	public void setReuseCommentDao(ReuseCommentDao reuseCommentDao) {
 		this.reuseCommentDao = reuseCommentDao;
+	}
+
+	public void setMaintananceDao(MaintananceDao maintananceDao) {
+		this.maintananceDao = maintananceDao;
 	}
 }
