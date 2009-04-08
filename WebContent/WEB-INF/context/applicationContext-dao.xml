@@ -108,4 +108,8 @@
 	<bean id="betTotoDao"
 		class="com.xwin.infra.dao.BetTotoDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />			
+		
+	<bean id="maintananceDao"
+		class="com.xwin.infra.dao.MaintananceDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />		
 </beans>

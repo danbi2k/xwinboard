@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.user.Member;
-import com.xwin.infra.util.Code;
 
 public class MemberDao extends XwinDao implements Serializable
 {

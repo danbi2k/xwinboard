@@ -101,6 +101,22 @@
 		}
 	}
 
+	function removeGame(id)
+	{
+		if (confirm("" + id + "번 경기를 삭제 하시겠습니까?")) {
+			var query = "mode=removeGame";
+			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
+			
+			var http = new JKL.ParseXML("adminGame.aspx", query);
+			var result = http.parse();
+			alert(result.resultXml.message);
+			//if (result.resultXml.code == 0) {
+			//	location.reload();
+			//}
+		}
+	}
+
 	function changeDisplayStatus(id, oselect)
 	{
 		var displayStatus = oselect.value;
@@ -117,19 +133,6 @@
 	function cancelGameScore(id)
 	{
 		var query = "mode=cancelGameScore";
-		query += "&id=" + id;
-		
-		var http = new JKL.ParseXML("adminGame.aspx", query);
-		var result = http.parse();
-		alert(result.resultXml.message);
-		if (result.resultXml.code == 0) {
-			location.reload();
-		}
-	}
-
-	function removeGame(id)
-	{
-		var query = "mode=removeGame";
 		query += "&id=" + id;
 		
 		var http = new JKL.ParseXML("adminGame.aspx", query);
