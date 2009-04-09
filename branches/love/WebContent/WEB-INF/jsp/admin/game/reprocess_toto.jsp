@@ -6,7 +6,11 @@
 
 <%@ include file="../admin_header.jsp"%>
 <%
+	final Integer ROWSIZE = 30;
+	final Integer SHOWPAGE = 20;
+	
 	List<BetToto> betTotoList = (List<BetToto>) request.getAttribute("betTotoList");
+	Integer totalCount = (Integer) request.getAttribute("betTotoCount");
 	Toto toto = (Toto) request.getAttribute("toto");
 	
 	String search = XwinUtil.nvl(request.getParameter("search"));
@@ -15,6 +19,8 @@
 	String betStatus = XwinUtil.nvl(request.getParameter("betStatus"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
+	
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	
 	Integer colNum = toto.getColNum();
 	Integer rowNum = toto.getRowNum();
@@ -198,6 +204,40 @@
 	%>
 </table>
 
+<div class="pages">
+<%
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+	
+	if (startPage > 0) {
+%>
+		<a href='javascript:goPage(<%=startPage - 1%>)'>&lt;&lt;&lt;</a>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+		if (i == pIdx) {
+%>
+			<b> <%=i+1%> </b>
+<%
+		} else {
+%>		
+			<a href='javascript:goPage(<%=i%>)'>[ <%=i+1%> ]</a>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+		<a href='javascript:goPage(<%=i%>)'>&gt;&gt;&gt;</a>
+<%
+	}
+%>
+</div>
+
 <script>
 var selected = [];
 var rowNum = <%=rowNum%>;
@@ -244,6 +284,13 @@ loadCard('<%=toto.getCardString()%>');
 <%if (toto.getResultString() != null) {%>
 loadResult('<%=toto.getResultString()%>');
 <%}%>
+
+function goPage(index)
+{
+	var frm = document.search;
+	frm.pageIndex.value = index;
+	frm.submit();
+}
 </script>
 <div id="_debug"></div>
 <%@ include file="../admin_footer.jsp"%>
