@@ -99,7 +99,7 @@ public class LoginController extends XwinController
 					
 				}
 				
-				access.setIpAddress(request.getRemoteAddr());
+				access.setIpAddress(ip);
 				access.setType(Code.ACCESS_USER_LOGIN);
 				
 				accessDao.insertAccess(access);
