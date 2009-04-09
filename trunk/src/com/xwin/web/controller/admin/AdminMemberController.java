@@ -289,15 +289,15 @@ public class AdminMemberController extends XwinController implements MessageSour
 			bankBookDao.insertMemberBankBook(bankBook);
 		}
 		
-		member = new Member();
-		member.setBankName(bankName);
-		member.setBankNumber(XwinUtil.bankTrim(bankNumber));
-		member.setBankOwner(bankOwner);
-		member.setUserId(userId);
+		Member newMember = new Member();
+		newMember.setBankName(bankName);
+		newMember.setBankNumber(XwinUtil.bankTrim(bankNumber));
+		newMember.setBankOwner(bankOwner);
+		newMember.setUserId(userId);
 		if (member.getMemberId() == 0)
-			member.setBankDate(new Date());
+			newMember.setBankDate(new Date());
 		
-		memberDao.updateMember(member);		
+		memberDao.updateMember(newMember);		
 	
 		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
