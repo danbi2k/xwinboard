@@ -33,6 +33,7 @@
 <form method='get' name='search' action='adminToto.aspx'>
 <input type='hidden' name='mode' value='viewBetTotoList'/>
 <input type='hidden' name='pageIndex'/>
+<input type='hidden' name='id' value='<%=toto.getId()%>'/>
 
 상태
 <select name='runStatus' onChange='this.form.submit()'>
