@@ -185,12 +185,18 @@ public class MyBettingController extends XwinController
 		Double portion = money.doubleValue() / (successMoneySum.doubleValue());
 		Double _expect = Math.ceil(portion * totalMoney.doubleValue());
 		Long expect = _expect.longValue();
-		Double rate = XwinUtil.doubleCut(expect.doubleValue() / money.doubleValue());		
+		Double rate = XwinUtil.doubleCut(expect.doubleValue() / money.doubleValue());
+		
+		param = new HashMap<String, Object>();
+		param.put("totoId", betToto.getTotoId());
+		param.put("runStatus", Code.BET_STATUS_SUCCESS);
+		List<BetToto> successList = betTotoDao.selectBetTotoList(param);
 		
 		ModelAndView mv = new ModelAndView("user/my_toto_detail");
 		mv.addObject("toto", toto);
 		mv.addObject("betToto", betToto);
 		mv.addObject("rateString", XwinUtil.to2Digit(rate));
+		mv.addObject("successList", successList);
 		
 		return mv;
 	}
