@@ -10,6 +10,7 @@
 	Toto toto = (Toto) request.getAttribute("toto");
 	BetToto betToto = (BetToto) request.getAttribute("betToto");
 	String rateString = (String) request.getAttribute("rateString");
+	List<BetToto> successList = (List<BetToto>) request.getAttribute("successList");
 	
 	Integer colNum = betToto.getColNum(), rowNum = betToto.getRowNum();
 %>
@@ -165,6 +166,59 @@
 	}
 %>
 </table>
+<BR><BR>
+<%
+if (toto.getStatus().equals(Code.GAME_STATUS_END)) {
+%>
+<table align="center" cellpadding="0" cellspacing="0" width="650"
+	height="40" background="img/bar-.jpg">
+	<tr>
+		<td width="250" height="40" align="center" valign="middle"
+			class="menubar">
+		<p>닉네임</p>
+		</td>
+		<td width="200" height="40" align="center" valign="middle"
+			class="menubar">
+		<p>구매액</p>
+		</td>
+		<td width="200" height="40" align="center" valign="middle"
+			class="menubar">
+		<p>당첨액</p>
+		</td>
+	</tr>
+</table>
+<%} %>
+<table align="center" width="650">
+<%
+if (toto.getStatus().equals(Code.GAME_STATUS_END)) {
+	if (successList != null) {
+		for (BetToto successToto : successList) {
+%>
+			    <tr>
+			        <td class="tablebg1" height="25" width="250" align="center">
+			            <p><%=successToto.getNickName()%></p>
+			        </td>
+			        <td class="tablebg2" height="25" width="200" align="center">
+			            <p><%=XwinUtil.comma3(successToto.getMoney())%></p>
+			        </td>
+					<td class="tablebg1" height="25" width="200" align="center">
+						<p><%=XwinUtil.comma3(successToto.getExpect())%></p>
+					</td>
+			    </tr>
+<%			
+		}
+	} else {
+%>
+		<tr>
+			<td class="tablebg1" heigh="25" width="650" calspan="3" align="center">
+				<p>당첨자가 없습니다.</p>
+			</td>
+		</tr>		
+<%
+	}
+}
+%>
+			</table>
         </td>
     </tr>
 </table>

@@ -39,7 +39,7 @@ public class TotoController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
-		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
+		//param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
 		Toto toto = totoDao.selectToto(param);
 		
 		ModelAndView mv = new ModelAndView("game/toto");
