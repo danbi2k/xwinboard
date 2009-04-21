@@ -55,12 +55,12 @@ public class MemberController extends XwinController implements MessageSourceAwa
 //		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
-		String phonePin = (String) request.getSession().getAttribute(mobile);
+//		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
 		ResultXml rx = null;
 //		if (invitation.getJoinId() == null) {
-			if (phonePin != null) {
-				if (phonePin.equals(command.getPhonePin())) {
+//			if (phonePin != null) {
+//				if (phonePin.equals(command.getPhonePin())) {
 					rx = checkExistUserId(command.getUserId());
 					if (rx.getCode() == 0) {
 						rx = checkExistNickName(command.getNickName(), null);
@@ -87,7 +87,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 											member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
 											member.setBankOwner(command.getBankOwner());
 											member.setBankDate(new Date());
-											member.setGetSms(command.getSmsCheck());
+											member.setGetSms("N");
 //											member.setIntroducerId(invitation.getUserId());
 											
 											String WelcomeMsg = "환영합니다";
@@ -118,12 +118,12 @@ public class MemberController extends XwinController implements MessageSourceAwa
 							}
 						}
 					}
-				} else {
-					rx = new ResultXml(-1, "인증번호가 틀렸습니다", null);
-				}
-			} else {
-				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
-			}
+//				} else {
+//					rx = new ResultXml(-1, "인증번호가 틀렸습니다", null);
+//				}
+//			} else {
+//				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
+//			}
 //		} else {
 //			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
 //		}
@@ -143,19 +143,18 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		Member member = (Member) request.getSession().getAttribute("Member");
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
-		String phonePin = (String) request.getSession().getAttribute(mobile);
-		request.getSession().removeAttribute(mobile);
+//		String phonePin = (String) request.getSession().getAttribute(mobile);
 		
 		ResultXml rx = null;
-		if (phonePin != null) {
-			if (phonePin.equals(command.getPhonePin())) {
+//		if (phonePin != null) {
+//			if (phonePin.equals(command.getPhonePin())) {
 				rx = checkPassword(command.getPassword1(), command.getPassword2());
 				if (rx.getCode() == 0) {
 					rx = checkPin(command.getPin());
 					if (rx.getCode() == 0) {
 						member.setPassword(command.getPassword1());
 						member.setPin(command.getPin());
-						member.setGetSms(command.getSmsCheck());
+						member.setGetSms("N");
 						member.setPasswordExpire("C");
 						//member.setNickName(command.getNickName());
 						//member.setMobile(command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3());
@@ -171,12 +170,12 @@ public class MemberController extends XwinController implements MessageSourceAwa
 						rx = ResultXml.SUCCESS;
 					} 		
 				}
-			} else {
-				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);
-			}
-		} else {
-			rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
-		}
+//			} else {
+//				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);
+//			}
+//		} else {
+//			rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
+//		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

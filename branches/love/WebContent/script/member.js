@@ -34,14 +34,9 @@ function FnMemReg(frm)
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
 	query += "&pin=" + frm.pin.value;
-	query += "&phonePin=" + frm.phonePin.value;
 	query += "&bankName=" + frm.bankName.value;
 	query += "&bankNumber=" + frm.bankNumber.value;
 	query += "&bankOwner=" + frm.bankOwner.value;
-	if (frm.smsCheck.checked)
-		query += "&smsCheck=" + "Y";
-	else
-		query += "&smsCheck=" + "N";
 	
 	var http = new JKL.ParseXML("member.aspx", query);
 	var result = http.parse();
@@ -75,12 +70,6 @@ function FnMemModify(frm)
 	query += "&phone1=" + frm.phone1.value;
 	query += "&phone2=" + frm.phone2.value;
 	query += "&phone3=" + frm.phone3.value;
-	query += "&phonePin=" + frm.phonePin.value;
-	
-	if (frm.smsCheck.checked)
-		query += "&smsCheck=" + "Y";
-	else
-		query += "&smsCheck=" + "N";
 	
 	if (frm.bankName != undefined) {
 		query += "&bankName=" + frm.bankName.value;
