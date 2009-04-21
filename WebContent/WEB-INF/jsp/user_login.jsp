@@ -80,8 +80,8 @@
         </td>
     </tr>
     <tr>
-        <td width="370" height="190" colspan="3">
-            <p>&nbsp;</p>
+        <td width="370" height="190" colspan="3" align="center">
+            <p><%=Admin.ADMIN_EMAIL%></p>
         </td>
     </tr>
 </table>

@@ -12,11 +12,9 @@
  도메인이 변경되었습니다.
 <BR><BR>
 <BR><BR>
-기존도메인은 3월25일 까지만 사용가능하십니다
-<BR><BR>
 기타문의는 사항은 이메일로 문의바랍니다.
 <BR><BR>
-EMAIL문의: bravotime7@yahoo.co.kr
+EMAIL문의: bravo_world7@yahoo.co.kr
 </td>
 </tr>
 </table>
