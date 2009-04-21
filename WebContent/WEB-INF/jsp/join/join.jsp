@@ -132,14 +132,7 @@
 			</select> -
 			<input class="input2" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="input2" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
-	<img src="img/send.jpg" border="0" align="absmiddle" onclick="sendAuthNumber()"/><BR>
-	<input type="checkbox" name="smsCheck" checked/>  체크 하시면 경기결과를 문자로 전송해 드립니다.
 </td>
-</tr>
-<tr>
- <td align=right class=menubar>인증번호</td>
- <td></td>
- <td><input type=password name=phonePin maxlength=200 class=input2 ></td>
 </tr>
 <tr>
  <td align=right class=menubar>이메일</td>

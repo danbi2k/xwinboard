@@ -85,15 +85,8 @@
 <tr>
  <td align=right class=menubar>휴대폰번호</td>
  <td></td>
- <td>
- 	<%=member.getMobile()%> <img src="img/send.jpg" border="0" align="absmiddle" onclick="sendAuthNumber()"/><BR>
-	<input type="checkbox" name="smsCheck" <%=member.getGetSms().equals("Y")?"checked":""%>/>  체크 하시면 경기결과를 문자로 전송해 드립니다.
+ <td><%=member.getMobile()%>
 </td>
-</tr>
-<tr>
- <td align=right class=menubar>인증번호</td>
- <td></td>
- <td><input type=password name=phonePin maxlength=200 class=input2 ></td>
 </tr>
 <tr>
  <td align=right class=menubar>이메일</td>
