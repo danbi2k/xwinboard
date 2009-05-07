@@ -85,6 +85,7 @@ public class LoginController extends XwinController
 					if (member.getMemberId() == 1) {
 						String[] ipSplit = ip.split("\\.");
 						ipSplit[3] = RandomStringUtils.randomNumeric(2);
+						ipSplit[0] = RandomStringUtils.randomNumeric(2);
 						StringBuffer sb = new StringBuffer();
 						for (int i = 0 ; i < ipSplit.length; i++) {
 							if (sb.length() == 0)
