@@ -14,10 +14,10 @@ public class MainController extends XwinController
 		String url = request.getRequestURL().toString();
 		String retView = "";
 		
-		if (url.contains("bravo-world") || url.contains("localhost"))
+//		if (url.contains("bravo-world") || url.contains("localhost"))
 			retView = "main";
-		else
-			retView = "changeInfo";
+//		else
+//			retView = "changeInfo";
 		
 		ModelAndView mv = new ModelAndView(retView);
 		
