@@ -204,12 +204,6 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);
 		
-		SmsWait smsWait = new SmsWait();
-		smsWait.setCallback("1111");
-		smsWait.setMsg(userId + " 탈퇴 " + request.getRemoteAddr());
-		smsWait.setPhone("01047681985");
-		smsWaitDao.insertSmsWait(smsWait);
-		
 		ResultXml rx = new ResultXml(0, "탈퇴시켰습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -229,12 +223,6 @@ public class AdminMemberController extends XwinController implements MessageSour
 		member.setStatus(Code.USER_STATUS_NORMAL);
 		
 		memberDao.updateMember(member);
-		
-		SmsWait smsWait = new SmsWait();
-		smsWait.setCallback("1111");
-		smsWait.setMsg(userId + " 복구 " + request.getRemoteAddr());
-		smsWait.setPhone("01047681985");
-		smsWaitDao.insertSmsWait(smsWait);
 		
 		ResultXml rx = new ResultXml(0, "복구시켰습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");

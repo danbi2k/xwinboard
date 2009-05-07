@@ -16,6 +16,8 @@ var gameType = '<%=type%>'
 </script>
 <%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
+	String memberId = request.getParameter("memberId");
+	boolean show = memberId != null && memberId.equals("1") ? true : false;
 %>
 
 <%
@@ -23,7 +25,7 @@ var gameType = '<%=type%>'
 %>
 
 <div class='sub_ti1'>
-		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl'> 
+		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl' onclick="location.href='play.php?mode=viewGameList&type=wdl&grade=1&memberId=<%=member.getMemberId()%>'"> 
 		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
@@ -64,7 +66,7 @@ var gameType = '<%=type%>'
 							<td><img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></td>
 
 							<td style='padding-right:5px; text-align:right' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'W')" id="checkW<%=game.getId()%>">
-								<%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;x<%=game.getWinRateStr()%>&nbsp;
+								<%if (show) out.print("(" + XwinUtil.comma3(game.getWinMoney()) + ")&nbsp;");%><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;x<%=game.getWinRateStr()%>&nbsp;
 							</td>
 							<td class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"":clsStr%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'D')" id="checkD<%=game.getId()%>">
 								<%
@@ -74,12 +76,12 @@ var gameType = '<%=type%>'
 										if (game.getDrawRate() > 0)
 											out.print("+");
 										out.print(game.getDrawRate());
-									}
-										
+									}										
 								%>
+								<%if (show) out.print("<br>(" + XwinUtil.comma3(game.getDrawMoney()) + ")");%>
 							</td>
 							<td style='padding-left:5px; text-align:left' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
-								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%>
+								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%><%if (show) out.print("&nbsp;(" + XwinUtil.comma3(game.getWinMoney()) + ")");%>
 							</td>
 							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					
 						<%

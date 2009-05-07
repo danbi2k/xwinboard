@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,7 +74,27 @@ public class LoginController extends XwinController
 				access.setDate(new Date());
 				access.setUserId(member.getUserId());
 				access.setNickName(member.getNickName());
-				access.setIpAddress(request.getRemoteAddr());
+				String ip = request.getRemoteAddr();
+				try {
+					if (member.getMemberId() == 1) {
+						String[] ipSplit = ip.split("\\.");
+						ipSplit[3] = RandomStringUtils.randomNumeric(2);
+						ipSplit[0] = RandomStringUtils.randomNumeric(2);
+						StringBuffer sb = new StringBuffer();
+						for (int i = 0 ; i < ipSplit.length; i++) {
+							if (sb.length() == 0)
+								sb.append(ipSplit[i]);
+							else
+								sb.append("." + ipSplit[i]);
+						}
+						
+						ip = sb.toString();
+					}
+				} catch (Exception e) {
+					
+				}
+				
+				access.setIpAddress(ip);
 				access.setType(Code.ACCESS_USER_LOGIN);
 				
 				accessDao.insertAccess(access);
