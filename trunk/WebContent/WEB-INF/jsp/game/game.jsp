@@ -12,6 +12,8 @@
 	String type = request.getParameter("type");
 	String grade = request.getParameter("grade");
 	String img = grade.equals("10")?"3":type.equals("wdl")?"1":"2";
+	String memberId = request.getParameter("memberId");
+	boolean show = memberId != null && memberId.equals("1") ? true : false;
 %>
 
 <script>
@@ -24,7 +26,7 @@ function thisReload()
 
 setInterval(thisReload, 180000);
 </script>
-			<tr><td><img src="img/menu0<%=img%>.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu0<%=img%>.jpg" border="0" onclick="location.href='game.aspx?mode=viewGameList&type=wdl&grade=1&memberId=<%=member.getMemberId()%>'"></td></tr>
 		
             </table>
        <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
@@ -69,7 +71,10 @@ if (gameList != null) {
             <p>&nbsp;&nbsp;&nbsp;&nbsp;<img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></p>
         </td>
         <td width="250" class='<%=game.getWinDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="right" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'W')" id="checkW<%=game.getId()%>">
-            <p><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=game.getWinRateStr()%>&nbsp;</p>
+            <p>
+				<%if (show) out.print("(" + XwinUtil.comma3(game.getWinMoney()) + ")");%>
+            	<%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=game.getWinRateStr()%>&nbsp;
+			</p>
         </td>
         <td width="80" class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"tablebg4":"tablebg"+y%>' align="center" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'D')" id="checkD<%=game.getId()%>">
             <p><%
@@ -82,12 +87,15 @@ if (gameList != null) {
 					if (game.getDrawRate() > 0)
 						out.print("+");
 					out.print(game.getDrawRate());
-				}
-					
-			%></p>
+				}					
+			%>
+			<%if (show) out.print("(" + XwinUtil.comma3(game.getDrawMoney()) + ")");%>
+			</p>
         </td>
         <td width="250" class='<%=game.getLoseDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="left" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'L')" id="checkL<%=game.getId()%>">
-            <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%></p>
+            <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%>
+			<%if (show) out.print("(" + XwinUtil.comma3(game.getWinMoney()) + ")");%>
+			</p>
         </td>
         <td width="40" class="tablebg<%=y%>" align="center" valign="middle">
             <p><%=Code.getValue(game.getBetStatus())%></p>
