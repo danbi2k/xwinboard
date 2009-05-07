@@ -202,7 +202,7 @@ public class Code
 		put(ACCESS_ADMIN_LOGIN_DENY, "관리자로그인차단");
 		put(ACCESS_ADMIN_LOGIN_FAILURE, "관리자로그인실패");
 		put(ACCESS_USER_LOGIN_BY_ADMIN, "사용자로그인(관리)");
-		
+		put(ACCESS_INSPECTION, "사용자조사");		
 	}
 	
 	private static void put(String key, String value)
