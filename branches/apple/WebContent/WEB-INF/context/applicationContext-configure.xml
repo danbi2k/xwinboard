@@ -27,8 +27,8 @@
 		p:ktfSmsDao-ref="ktfSmsDao">
 		<property name="getUri">
 			<list>
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01030346525&LogTime=20090220165832&ClientIP=10.21.49.124&MagicN_Id=cWtyZ284MzE=&ALevel=2&boxType=1&pagesize=10&curpage=1]]></value>
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029773490&LogTime=20090421112004&ClientIP=123.228.71.220&MagicN_Id=cWtyZ284MzE=&ALevel=2&boxType=1&pagesize=10&curpage=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01030346525&LogTime=20090220165832&ClientIP=10.21.49.124&MagicN_Id=cWtyZ284MzE=&ALevel=2&boxType=1&pagesize=100&curpage=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01029773490&LogTime=20090421112004&ClientIP=123.228.71.220&MagicN_Id=cWtyZ284MzE=&ALevel=2&boxType=1&pagesize=100&curpage=1]]></value>
 			</list>
 		</property>
 		<property name="delUri">
