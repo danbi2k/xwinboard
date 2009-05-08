@@ -94,7 +94,7 @@ if (gameList != null) {
         </td>
         <td width="250" class='<%=game.getLoseDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="left" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'L')" id="checkL<%=game.getId()%>">
             <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%>
-			<%if (show) out.print("(" + XwinUtil.comma3(game.getWinMoney()) + ")");%>
+			<%if (show) out.print("(" + XwinUtil.comma3(game.getLoseMoney()) + ")");%>
 			</p>
         </td>
         <td width="40" class="tablebg<%=y%>" align="center" valign="middle">
