@@ -83,7 +83,8 @@
 				<ul>
 					<!--li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li -->
 					<!--li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li-->
-					<li class="first"><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
+					<li class="first"><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
+					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
 					<li><a href="adminLog.aspx?mode=viewHackingLog">해킹탐지</a></li>
 					<!--li><a href="#">기본값관리</a></li -->
 					<!--li><a href="#">아이피차단</a></li  -->

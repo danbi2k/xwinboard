@@ -81,7 +81,7 @@ var gameType = '<%=type%>'
 								<%if (show) out.print("<br>(" + XwinUtil.comma3(game.getDrawMoney()) + ")");%>
 							</td>
 							<td style='padding-left:5px; text-align:left' class='<%=game.getWinDeny().equals("Y")?clsStr:""%>' onClick="FnGameBet(this, <%=game.getId()%>, '<%=game.getType()%>', 'L')" id="checkL<%=game.getId()%>">
-								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%><%if (show) out.print("&nbsp;(" + XwinUtil.comma3(game.getWinMoney()) + ")");%>
+								&nbsp;x<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%><%if (show) out.print("&nbsp;(" + XwinUtil.comma3(game.getLoseMoney()) + ")");%>
 							</td>
 							<td><%=Code.getValue(game.getBetStatus()) %></td></tr>					
 						<%
