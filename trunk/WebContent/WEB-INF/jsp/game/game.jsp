@@ -26,7 +26,7 @@ function thisReload()
 
 setInterval(thisReload, 180000);
 </script>
-			<tr><td><img src="img/menu0<%=img%>.jpg" border="0" onclick="location.href='game.aspx?mode=viewGameList&type=wdl&grade=1&memberId=<%=member.getMemberId()%>'"></td></tr>
+			<tr><td><img src="img/menu0<%=img%>.jpg" border="0" onclick="location.href='game.aspx?mode=viewGameList&type=<%=type%>&grade=1&memberId=<%=member.getMemberId()%>'"></td></tr>
 		
             </table>
        <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">

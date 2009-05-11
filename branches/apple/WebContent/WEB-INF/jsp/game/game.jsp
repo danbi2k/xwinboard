@@ -25,7 +25,7 @@ var gameType = '<%=type%>'
 %>
 
 <div class='sub_ti1'>
-		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl' onclick="location.href='play.php?mode=viewGameList&type=wdl&grade=1&memberId=<%=member.getMemberId()%>'"> 
+		<img src='img/sub_<%=type%>_ti.gif' class='ml10 mr10 fl' onclick="location.href='play.php?mode=viewGameList&type=<%=type%>&grade=1&memberId=<%=member.getMemberId()%>'"> 
 		<div class='sub_ti_desc'></div>
 		<div class='state_bar'>
 			<div class='state_bar_txt'>
