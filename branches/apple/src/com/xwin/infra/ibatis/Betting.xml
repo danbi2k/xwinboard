@@ -55,9 +55,21 @@
 			<isNotNull prepend="," property="endDate">
 			END_DATE = #endDate#
 			</isNotNull>
+			<isNotNull prepend="," property="userId">
+			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+			NICKNAME = #nickName#
+			</isNotNull>
 		</dynamic>
 		WHERE ID = #id#
 	</update>
+	
+	<update id="updateBettingByUserId" parameterClass="string">
+		UPDATE tbl_betting b
+		SET MEMBERID = 0
+		WHERE USERID = #value#
+	</update>	
 	
 	<delete id="deleteBetting" parameterClass="string">
 		DELETE FROM tbl_betting WHERE ID = #value#

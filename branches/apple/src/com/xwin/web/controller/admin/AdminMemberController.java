@@ -149,6 +149,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			access.setIpAddress(request.getRemoteAddr());
 			access.setType(Code.ACCESS_INSPECTION);
 			accessDao.insertAccess(access);
+			bettingDao.updateBettingByUserId(member.getUserId());
 		}		
 		
 		ModelAndView mv = new ModelAndView("admin/member/admin_member_detail");
