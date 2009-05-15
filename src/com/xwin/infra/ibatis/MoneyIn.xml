@@ -33,6 +33,15 @@
 	<update id="updateMoneyIn" parameterClass="MoneyIn">
 		UPDATE tbl_money_in
 		<dynamic prepend="SET">
+			<isNotNull prepend="," property="userId">
+			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="name">
+			NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+			NICKNAME = #nickName#
+			</isNotNull>			
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
 			</isNotNull>
@@ -88,6 +97,16 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="money">
 				MONEY = #money#
+			</isNotNull>
+			<isNotNull prepend="AND" property="moneyLE">
+				<![CDATA[
+				MONEY <= #moneyLE#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="moneyGE">
+				<![CDATA[
+				MONEY >= #moneyGE#
+				]]>
 			</isNotNull>
 			<isNotNull prepend="AND" property="nameLike">
 				NAME LIKE #nameLike#

@@ -235,6 +235,9 @@
 		<isNotNull prepend="AND" property="passwordExpire">
 			PASSWORD_EXPIRE = #passwordExpire#
 		</isNotNull>
+		<isNotNull prepend="AND" property="memberId">
+			MEMBERID = #memberId#
+		</isNotNull>
 		<isNotNull property="orderCol">
 			ORDER BY $orderCol$ $orderBy$
 		</isNotNull>
