@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-alert("로그인이 필요합니다");
+alert("memperlukan login");
 location.href = "main.aspx";
 </script>
 </body>

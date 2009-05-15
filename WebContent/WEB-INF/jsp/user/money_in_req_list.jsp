@@ -156,7 +156,7 @@
 	}
 
 	function cancelMoneyInRequest(id) {
-		if (confirm("충전 신청을 취소 하시겠습니까?")) {
+		if (confirm("ingin batalkan permintaan isi?")) {
 			var query = "mode=cancelMoneyInRequest";
 			query += "&id=" + id;
 			var http = new JKL.ParseXML("moneyIn.aspx", query);
@@ -168,7 +168,7 @@
 	}
 
 	function removeMoneyInRequestLog(id) {
-		if (confirm("충전  기록을 삭제 하시겠습니까?")) {
+		if (confirm("ingin hapuskan rekor isi?")) {
 			var query = "mode=removeMoneyInRequestLog";
 			query += "&id=" + id;
 			var http = new JKL.ParseXML("moneyIn.aspx", query);

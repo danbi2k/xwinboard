@@ -215,7 +215,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);
 		
-		ResultXml rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		ResultXml rx = new ResultXml(0, "di keluarkan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -235,7 +235,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);
 		
-		ResultXml rx = new ResultXml(0, "복구시켰습니다", null);
+		ResultXml rx = new ResultXml(0, "di betulkan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -258,7 +258,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);
 		
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -299,7 +299,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(newMember);		
 	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -321,7 +321,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);		
 	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -350,7 +350,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);		
 	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -372,7 +372,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);		
 	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -408,7 +408,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		member.setDenyrity(denyrity);		
 		memberDao.updateMemberDenyrity(member);		
 	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -426,10 +426,10 @@ public class AdminMemberController extends XwinController implements MessageSour
 		ResultXml rx = null;
 		
 		if (accessDao.selectBlockIpCount(ip) > 0) {
-			rx = new ResultXml(0, "이미 차단된 IP 입니다", null);
+			rx = new ResultXml(0, "IP yang sudah di tahan", null);
 		} else {
 			accessDao.insertBlockIp(ip);		
-			rx = new ResultXml(0, "차단 되었습니다", null);
+			rx = new ResultXml(0, "di tahankan", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -446,7 +446,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String ip = request.getParameter("ip");
 		accessDao.deleteBlockIp(ip);
 		
-		ResultXml rx = new ResultXml(0, "해제 되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di bebaskan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -469,7 +469,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memoDao.insertMemo(memo);
 		
-		ResultXml rx = new ResultXml(0, "발송되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di memberikan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -497,11 +497,11 @@ public class AdminMemberController extends XwinController implements MessageSour
 		memberDao.plusMinusIntroLeter(userId, introLetter);
 		
 		if (introLetter == 0)		
-			rx = new ResultXml(0, "잘못 입력하셨습니다", null);
+			rx = new ResultXml(0, "informasi yang salah", null);
 		else if (introLetter > 0)
-			rx = new ResultXml(0, "지급 되었습니다", null);
+			rx = new ResultXml(0, "sudah di sediakan", null);
 		else
-			rx = new ResultXml(0, "차감 되었습니다", null);
+			rx = new ResultXml(0, "sudah di deduksi", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -522,17 +522,17 @@ public class AdminMemberController extends XwinController implements MessageSour
 		ResultXml rx = null;
 		
 		if (nickName == null || nickName.length() < 2)
-			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "masukan nama panggilan dengan lebih dari 2 huruf", null);
 		else if (nickName.equals(orgNickName))
-			rx = new ResultXml(0, "같은 닉네임 입니다", null);
+			rx = new ResultXml(0, "masukan nama panggilan dengan lebih dari 2 huruf", null);
 		else if (memberDao.countMemberByNickName(nickName) > 0)			
-			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
+			rx = new ResultXml(-1, "nama panggilan yang sudah di daftar", null);
 		else {
 			Member member = new Member();
 			member.setNickName(nickName);
 			member.setUserId(userId);
 			memberDao.updateMember(member);
-			rx = new ResultXml(0, "변경되었습니다", null);
+			rx = new ResultXml(0, "di berubah", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -555,7 +555,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		memberDao.updateMember(member);		
 	
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -574,14 +574,14 @@ public class AdminMemberController extends XwinController implements MessageSour
 		ResultXml rx = null;
 		
 		if (password == null || password.length() < 4)
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "masukan sandi dengan lebih dari 4 huruf", null);
 		else {
 			Member member = new Member();
 			member.setPassword(password);
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
-			rx = new ResultXml(0, "변경되었습니다", null);
+			rx = new ResultXml(0, "di berubah", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -602,14 +602,14 @@ public class AdminMemberController extends XwinController implements MessageSour
 		ResultXml rx = null;
 		
 		if (pin == null || pin.length() < 4)
-			rx = new ResultXml(-1, "환전비밀번호를 4자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "masukan sandi tukar uang dengan lebih dari 4 huruf", null);
 		else {
 			Member member = new Member();
 			member.setPin(pin);
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
-			rx = new ResultXml(0, "변경되었습니다", null);
+			rx = new ResultXml(0, "di berubah", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -634,7 +634,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		member.setUserId(userId);
 		memberDao.updateMember(member);
 		
-		rx = new ResultXml(0, "변경되었습니다", null);
+		rx = new ResultXml(0, "di berubah", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -658,7 +658,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		member.setUserId(userId);
 		memberDao.updateMember(member);
 		
-		rx = new ResultXml(0, "변경되었습니다", null);
+		rx = new ResultXml(0, "di berubah", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

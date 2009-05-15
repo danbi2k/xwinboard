@@ -102,11 +102,11 @@ public class MoneyInController extends XwinController
 			Long money = Long.parseLong(_money);
 			
 			if (money <= 0)
-				rx = new ResultXml(-1, "0 보다 큰 값을 입력하세요", null);
+				rx = new ResultXml(-1, "harus masukan nomor lebih dari pada 0", null);
 			else if (_name == null || _name.length() == 0)
-				rx = new ResultXml(-1, "입금자를 입력하세요", null);
+				rx = new ResultXml(-1, "masuakan pembayaran", null);
 			else if (existCnt > 0) {
-				rx = new ResultXml(-1, "이미 신청하신 충전요청이 있습니다", null);
+				rx = new ResultXml(-1, "sudah ada permintaan isi yang di daftar", null);
 			}
 			else {			
 				MoneyIn moneyIn = new MoneyIn();
@@ -119,10 +119,10 @@ public class MoneyInController extends XwinController
 				moneyIn.setNickName(member.getNickName());
 				moneyInDao.insertMoneyIn(moneyIn);
 		
-				rx = new ResultXml(0, "머니충전이 요청되었습니다", null);
+				rx = new ResultXml(0, "permintaan isi uang telah di terima", null);
 			}
 		} catch (NumberFormatException e) {
-			rx = new ResultXml(-1, "입금 예정액을 입력하세요", null);
+			rx = new ResultXml(-1, "masukan biaya yang anda akan bayar", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");		
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -144,12 +144,12 @@ public class MoneyInController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false)
-			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "tidak ada permintaan isi", null);
 		else {
 			moneyIn.setStatus(Code.MONEY_IN_CANCEL);
 			moneyIn.setProcDate(new Date());
 			moneyInDao.updateMoneyIn(moneyIn);			
-			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+			rx = new ResultXml(0, "permintaan isi sudah di batal", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -172,11 +172,11 @@ public class MoneyInController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST))
-			rx = new ResultXml(0, "삭제 가능 상태가 아닙니다", null);
+			rx = new ResultXml(0, "situasi yang tidak bisa di hapus", null);
 		else {
 			moneyIn.setIsRemoved("Y");
 			moneyInDao.updateMoneyIn(moneyIn);			
-			rx = new ResultXml(0, "충전기록이 삭제되었습니다", null);
+			rx = new ResultXml(0, "rekor isi telah di hapus", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

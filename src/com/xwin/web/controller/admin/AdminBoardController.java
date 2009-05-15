@@ -179,11 +179,11 @@ public static final int ROWSIZE = 30;
 		boardComment.setBoardId(id);
 		boardComment.setComment(comment);
 		boardComment.setDate(new Date());
-		boardComment.setNickName("관리자");
+		boardComment.setNickName("Admin");
 		boardComment.setUserId("secadmin");
 		boardDao.insertBoardComment(boardComment);
 		
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -201,7 +201,7 @@ public static final int ROWSIZE = 30;
 		
 		boardDao.deleteBoardComment(id);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

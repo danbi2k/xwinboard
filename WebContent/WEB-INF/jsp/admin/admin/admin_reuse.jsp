@@ -48,7 +48,7 @@ if (reuseCommentList != null) {
 function writeReuseComment()
 {
 	if (havingSqlKeyword(document.cmt.comment.value)) {
-		alert("내용에 사용할수 없는 문자열이 있습니다"); document.cmt.comment.focus(); return false;
+		alert("ada senar kata yang tidak bisa di pakai"); document.cmt.comment.focus(); return false;
 	}
 	
 	var query = "mode=writeReuseComment";
@@ -63,7 +63,7 @@ function writeReuseComment()
 
 function deleteReuseComment(id)
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteReuseComment";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminReuse.aspx", query);

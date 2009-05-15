@@ -41,7 +41,7 @@
 <b style='color:white'>5.</b> 회원가입에 연령은 성인 즉 만 19세를 기준으로 합니다. 회사는 19세 미만의 고객이라고 판단되면 언제든지 해당회원의 접근을 제한<br>
 
    하거나 가입 승인을 취소하거나, 심지어 배팅을 하였다 하더라도 이에 대한 금액 지불을 거부할 수 있습니다.<br>
-<b style='color:white'>6.</b> 회원은 자신의 회원아이디와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 이러한 세부사항을 인지하고 있는 제 3자에 의해 만들어진 배팅이 유효한 것으로 간주 되며, 이에 따른 어떠한 책임도 회사는 지지 않습니다. <br>
+<b style='color:white'>6.</b> 회원은 자신의 anggota idenditas와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 이러한 세부사항을 인지하고 있는 제 3자에 의해 만들어진 배팅이 유효한 것으로 간주 되며, 이에 따른 어떠한 책임도 회사는 지지 않습니다. <br>
     환전비밀번호의 변경은 회원의 보유머니가 없는경우에만 변경될수 있습니다. [아이디 해킹방지를 위해 환전비밀번호제도를 운영합니다]<br>
 <b style='color:white'>7.</b> 회원은 언제든지 자신의 배팅머니를 사용하거나 환전신청하여 인출 할 수 있습니다.<br>
 <b style='color:white'>8.</b> 만약 회원의 배팅머니와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구<br>
@@ -96,7 +96,7 @@
  
 
 <tr>
- <td align=right class=menubar>회원아이디</td>
+ <td align=right class=menubar>anggota idenditas</td>
  <td></td>
  <td><input type=text name=userId maxlength=200 class=input2> (영문/숫자 조합 가능)</td>
 </tr>
@@ -166,7 +166,7 @@
 			</select>
 			계좌번호 : <input class="input2" name="bankNumber" type="text" size="20" maxlength="20" value="" style='IME-MODE: inactive'>
 			예금주 : <input class="input2" name="bankOwner" type="text" size="16" maxlength="16" value="" style='IME-MODE: inactive'><br>
-			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 고객센터를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
+			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 Pusat langganan를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
 			</td>
 </tr>
 <tr>
@@ -202,12 +202,12 @@
 function sendAuthNumber(){
 	var f = document.frm_reg;
 	if (!f.phone2.value && f.phone2.value.length < 3) {
-		alert("전화번호를 확인하시고 다시 넣어주세요");
+		alert("cek nomor telpon dan masukan lagi");
 		return;
 	}
 
 	if (!f.phone3.value && f.phone3.value.length < 4) {
-		alert("전화번호를 확인하시고 다시 넣어주세요");
+		alert("cek nomor telpon dan masukan lagi");
 		return;
 	}
 	

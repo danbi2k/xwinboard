@@ -80,9 +80,9 @@
 function saveBankBook()
 {
 	var frm = document.bankbook;
-	if (!frm.bankName.value) {alert("은행을선택하세요"); return false;}
-	if (!frm.number.value) {alert("계좌번호를 입력하세요"); return false;}
-	if (!frm.name.value) {alert("예금주를 입력하세요"); return false;}
+	if (!frm.bankName.value) {alert("pilih bank"); return false;}
+	if (!frm.number.value) {alert("masukan nomor rekening"); return false;}
+	if (!frm.name.value) {alert("masukan nama penabung"); return false;}
 
 	var query = "mode=saveBankBook";
 	query += "&bankName=" + frm.bankName.value;

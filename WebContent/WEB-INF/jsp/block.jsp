@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-alert("차단된 IP 입니다");
+alert("IP yang tidak bisa");
 </script>
 </body>
 </html>

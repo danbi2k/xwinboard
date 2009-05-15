@@ -149,7 +149,7 @@ var targetCheck = 0;
 		var str = obj.value;
 		
 		if (checkNumber(str) == false) {
-			alert("숫자만입력해 주세요");
+			alert("masukan nomor saja");
 			obj.value = "";
 			return;
 		}
@@ -188,7 +188,7 @@ var targetCheck = 0;
 
 		// 문자내용 체크
 		if (!Obj.msg.value) {
-			alert("문자내용이 존재하지 않습니다.");
+			alert("tidak ada isi pesanan");
 			Obj.msg.focus();
 			return;
 
@@ -197,7 +197,7 @@ var targetCheck = 0;
 		// 수신번호 체크
 		if (targetCheck==0 && Obj.phone.value.length < 10) {
 			
-			alert("수신번호가 존재하지 않습니다");
+			alert("tidak ada nomer menerimah");
 			Obj.phone.focus();
 			return;
 			
@@ -206,7 +206,7 @@ var targetCheck = 0;
 		// 송신번호 체크
 		if (Obj.callback.value == "") {
 
-			alert("발신번호를 입력하세요");
+			alert("masukan nomer surut");
 			Obj.callback.focus();
 			return;
 			

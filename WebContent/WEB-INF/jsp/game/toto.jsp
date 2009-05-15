@@ -251,7 +251,7 @@ function confirmMarking()
 					markingId.push(cobjList[x].id);
 			}
 			if (flag == false) {
-				alert("선택되지 않은 항목이 있습니다");
+				alert("ada hal tang belum terpilih");
 				return false;
 			}
 		}

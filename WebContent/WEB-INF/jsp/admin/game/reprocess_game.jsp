@@ -90,7 +90,7 @@ function reprocessGame()
 	var awayScore = frm.awayScore.value;
 
 	if (!homeScore || !awayScore) {
-		alert("스코어를 입력하세요");
+		alert("masukan skor");
 	}
 
 	var query="mode=reprocessGame";

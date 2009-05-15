@@ -129,7 +129,7 @@
 <script>
 function deleteGameInGameFolder(index, gameId)
 {
-	if (confirm("경기를 삭제하시겠습니까?")) {
+	if (confirm("ingin menghapus pertandingan?")) {
 		var query = "mode=deleteGameInGameFolder";
 		query += "&folderIndex=" + index;
 		query += "&gameId=" + gameId;
@@ -143,7 +143,7 @@ function deleteGameInGameFolder(index, gameId)
 
 function deleteGameFolder(id)
 {
-	if (confirm("배팅카트에서 삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus dari kart taruhan?")) {
 		var query = "mode=deleteGameFolder";
 		query += "&folderIndex=" + id;
 		var http = new JKL.ParseXML("bettingCart.aspx", query);
@@ -156,7 +156,7 @@ function deleteGameFolder(id)
 
 function deleteAllGameFolder(id)
 {
-	if (confirm("전체 삭제하시겠습니까?")) {
+	if (confirm("ingin hapus semua?")) {
 		var query = "mode=deleteAllGameFolder";
 		var http = new JKL.ParseXML("bettingCart.aspx", query);
 		var result = http.parse();
@@ -181,7 +181,7 @@ function calcTotalMoney()
 
 function betting()
 {
-	if (confirm("배팅하시겠습니까?")) {
+	if (confirm("ingin menaruh taruhan?")) {
 		var cartCheck = document.getElementsByName("cartCheck");
 		var count = 0;
 		var query = "mode=betting"
@@ -193,7 +193,7 @@ function betting()
 		}
 
 		if (count == 0) {
-			alert("선택된 배팅이 없습니다");
+			alert("tidak ada taruhan yang di pilih");
 			return;
 		}
 

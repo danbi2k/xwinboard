@@ -44,7 +44,7 @@
             <p>작성자</p>
        </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>작성일</p>
+            <p>tanggal menulis</p>
         </td>
         <td width="50" height="40" align="center" valign="middle" class="menubar">
             <p>조회수</p>

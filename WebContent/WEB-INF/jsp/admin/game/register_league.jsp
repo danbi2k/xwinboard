@@ -12,7 +12,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.name.value) { alert('리그명을 입력하세요'); d.name.focus(); return false; }
+		if(!d.name.value) { alert('masukan nama liga'); d.name.focus(); return false; }
 		
 		d.submit();
 	}
@@ -27,7 +27,7 @@
 	}
 
 	<%if (EXIST != null) {%>
-	alert("<%=EXIST%> 는 이미 등록된 리그명 입니다.\n이미지를 변경하시려면 삭제후 재등록 하십시오");
+	alert("liga <%=EXIST%> sudah terdaftar. kalau ingin ganti gambar hapuskan gambarnya dan daftar sekali lagi.");
 	<%}%>
 </SCRIPT>
 

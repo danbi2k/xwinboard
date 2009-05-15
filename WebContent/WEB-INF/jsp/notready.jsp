@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-alert("준비중입니다");
+alert("lagi menyiapkan");
 location.href = "main.aspx";
 </script>
 </body>

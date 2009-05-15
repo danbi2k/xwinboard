@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-alert("접근 권한이 없습니다");
+alert("tidak ada hak untuk mendekati");
 location.href = "main.aspx";
 </script>
 </body>

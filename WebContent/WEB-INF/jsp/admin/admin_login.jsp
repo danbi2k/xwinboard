@@ -17,9 +17,9 @@ function checkIT() {
 	}	
 	
 	var d=document.regist;
-	if(!d.userid.value.trim()) { alert('아이디를 입력하세요'); d.userid.focus(); return false; }
-	if(!d.password.value.trim()) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
-	if(!d.pin.value.trim()) { alert('PIN을 입력하세요'); d.pin.focus(); return false; }
+	if(!d.userid.value.trim()) { alert('masukan ID'); d.userid.focus(); return false; }
+	if(!d.password.value.trim()) { alert('masukan sandi'); d.password.focus(); return false; }
+	if(!d.pin.value.trim()) { alert('masukan PIN'); d.pin.focus(); return false; }
 	
 	var query = "mode=processLogin";
 	query += "&userId=" + d.userid.value;

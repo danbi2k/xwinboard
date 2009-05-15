@@ -37,7 +37,7 @@
  		<option value='ME004' <%=status.equals("ME004")?"selected":""%>>직차감</option>
  	</select>
  	<select name='search'>
- 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+ 		<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
  	</select>
  	<input type='text' name='keyword' value='<%=keyword%>'>
@@ -114,7 +114,7 @@
 <script>
 function deleteCheckedItem()
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=<%=status.equals(Code.MONEY_IN_DIRECT)?"deleteMoneyInList":"deleteMoneyOutList"%>";
 		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);

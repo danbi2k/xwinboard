@@ -19,7 +19,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.name.value) { alert('리그명을 입력하세요'); d.name.focus(); return false; }
+		if(!d.name.value) { alert('masukan nama liga'); d.name.focus(); return false; }
 		d.action='game/index.php?mode=modify_exe';
 		d.submit();
 	}

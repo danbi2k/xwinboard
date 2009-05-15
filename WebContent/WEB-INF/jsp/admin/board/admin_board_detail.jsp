@@ -162,8 +162,8 @@ if (boardCommentList != null) {
 function updateBoardItem()
 {
 	var f = document.update;
-	if (!f.title) {alert("제목을 입력하세요");return false;}
-	if (!f.context) {alert("내용을 입력하세요");return false;}
+	if (!f.title) {alert("masukan judul");return false;}
+	if (!f.context) {alert("masukan isi");return false;}
 
 	f.submit();
 }
@@ -171,7 +171,7 @@ function updateBoardItem()
 function writeBoardComment()
 {
 	if (havingSqlKeyword(document.cmt.comment.value)) {
-		alert("내용에 사용할수 없는 문자열이 있습니다"); document.cmt.comment.focus(); return false;
+		alert("ada senar kata yang tidak bisa di pakai"); document.cmt.comment.focus(); return false;
 	}
 	
 	var query = "mode=writeBoardComment";
@@ -186,7 +186,7 @@ function writeBoardComment()
 
 function deleteBoardComment(id)
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteBoardComment";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminBoard.aspx", query);
@@ -199,7 +199,7 @@ function deleteBoardComment(id)
 
 function deleteBoardItem()
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		location.href='adminBoard.aspx?mode=deleteBoardItem&id=<%=boardItem.getId()%>&grade=<%=boardItem.getGrade()%>';
 	}
 }

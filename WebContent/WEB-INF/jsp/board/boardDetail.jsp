@@ -248,11 +248,11 @@ if (boardCommentList != null) {
 </form>
 <script>
 function comment_add(){
-	if (havingSqlKeyword(comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
-	if (havingSqlKeyword(comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
+	if (havingSqlKeyword(comment_frm.name.value)) { alert("ada huruf atau kata yang tidak bisa memakai untuk nama"); comment_frm.name.focus(); return false; }
+	if (havingSqlKeyword(comment_frm.comment.value)) { alert("ada huruf atau kata yang tidak bisa memakai untuk blasan"); comment_frm.comment.focus(); return false; }
 	
-    if(comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
-    if(comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
+    if(comment_frm.name.value    ==""){ alert("masukan nama");      comment_frm.name.focus(); return false; }
+    if(comment_frm.comment.value ==""){ alert("masukan isi balasan."); comment_frm.comment.focus(); return false; }
     comment_frm.action = "board.aspx";
     comment_frm.method = "post";
     comment_frm.submit();
@@ -261,7 +261,7 @@ function comment_add(){
 
 function deleteItem()
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteBoardItem";
 		query += "&id=<%=boardItem.getId()%>";
 		query += "&boardName=<%=boardName%>";
@@ -276,7 +276,7 @@ function deleteItem()
 
 function deleteComment(id)
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteBoardComment";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("board.aspx", query);

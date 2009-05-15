@@ -147,7 +147,7 @@
 <script>
 function cancelIsCharge(id)
 {
-	if (confirm("관리자충전 하시겠습니까?")) {
+	if (confirm("ingin isi ulang sepagai maneger?")) {
 		var query = "mode=cancelIsCharge";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminTran.aspx", query);

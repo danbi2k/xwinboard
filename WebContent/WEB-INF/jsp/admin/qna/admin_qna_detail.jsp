@@ -22,7 +22,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"Pusat langganan (VIP)":"Pusat langganan" %></div>
 <%
 if (betting != null) {
 %>
@@ -200,7 +200,7 @@ function getReuseComment(id)
 
 function deleteBoardComment(id)
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteBoardComment";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminBoard.aspx", query);
@@ -214,7 +214,7 @@ function deleteBoardComment(id)
 function answerQna()
 {
 	if (havingSqlKeyword(document.answer.comment.value)) {
-		alert("내용에 사용할수 없는 문자열이 있습니다"); document.answer.comment.focus(); return false;
+		alert("ada senar kata yang tidak bisa di pakai"); document.answer.comment.focus(); return false;
 	}
 	
 	var query = "mode=answerQna";

@@ -127,7 +127,7 @@ function goPage(index)
 
 function deleteMyMoneyLog(id)
 {
-	if (confirm("머니기록을 삭제하시겠습니까?")) {
+	if (confirm("ingin hapuskan rekor jumlah uang?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("myMoney.aspx", query);

@@ -19,27 +19,6 @@
 	int SHOWPAGE = 20;
 %>
 		 
-<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
-		var d=document.regist;
-		if(confirm('환전하시겠습니까?')) {			
-			d.action='/admin_mode/calc/exchange.php';
-		}
-		else {
-			return false;
-		}
-	}
-
-	function delIT() {
-		if(confirm('해당 정보를 삭제하시겠습니까?\n\n삭제하셔도 해당 유저의 환전금액이 삭제되지는 않습니다.')) {
-			location='/admin_mode/calc/exchange.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-</SCRIPT>
 <div class="title">충환전내역</div>
 <font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>
 <form method='get' name='search' action='adminAccount.aspx'>
@@ -53,7 +32,7 @@
  	</select>
  	<select name='search'>
 		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
- 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+ 		<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
  	</select>
  	<input type='text' name='keyword' value='<%=keyword%>'>
@@ -140,7 +119,7 @@
 <script>
 function deleteCheckedItem()
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteMoneyOutList";
 		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);

@@ -336,7 +336,7 @@ public class AdminTotoController extends XwinController
 		toto.setStatus(Code.GAME_STATUS_CANCEL);
 		totoDao.updateToto(toto);
 		
-		ResultXml rx = new ResultXml(0, "토토가 취소 되었습니다.", null);
+		ResultXml rx = new ResultXml(0, "toto sudah di batalkan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -367,7 +367,7 @@ public class AdminTotoController extends XwinController
 		
 		memberDao.plusMinusBalance(member.getUserId(), betToto.getMoney());
 		
-		ResultXml rx = new ResultXml(0, "토토 구매가 취소 되었습니다.", null);
+		ResultXml rx = new ResultXml(0, "pembelian toto di batalkan", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -443,7 +443,7 @@ public class AdminTotoController extends XwinController
 //		toto.setEarnMoney(earnMoney);
 		totoDao.updateToto(toto);		
 		
-		ResultXml rx = new ResultXml(0, "결과가 처리되었습니다", null);
+		ResultXml rx = new ResultXml(0, "hasil sudah di atur", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -477,7 +477,7 @@ public class AdminTotoController extends XwinController
 		
 		ResultXml rx = null;
 		if (existCount > 0 && displayStatus.equals(Code.GAME_DISPLAY_OPEN)) {
-			rx = new ResultXml(-1, "이미 진행중인 토토가 있습니다", null);
+			rx = new ResultXml(-1, "sudah ada toto yang laku", null);
 		}
 		else {		
 			Toto toto = new Toto();
@@ -485,7 +485,7 @@ public class AdminTotoController extends XwinController
 			toto.setDisplayStatus(displayStatus);			
 			totoDao.updateToto(toto);
 			
-			rx = new ResultXml(0, "변경되었습니다", null);
+			rx = new ResultXml(0, "di berubah", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

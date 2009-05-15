@@ -241,10 +241,10 @@ public class BoardController extends XwinController
 			boardDao.deleteBoardCommentList(id);
 			boardDao.deleteBoardItem(id);
 			
-			rx = new ResultXml(0, "삭제되었습니다", null);
+			rx = new ResultXml(0, "sudah di hapus", null);
 		}
 		else {
-			rx = new ResultXml(-1, "권한이 없습니다", null);
+			rx = new ResultXml(-1, "tidak ada hak", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -270,10 +270,10 @@ public class BoardController extends XwinController
 			//boardDao.deleteBoardCommentList(id);
 			boardDao.deleteBoardComment(id);
 			
-			rx = new ResultXml(0, "삭제되었습니다", null);
+			rx = new ResultXml(0, "sudah di hapus", null);
 		}
 		else {
-			rx = new ResultXml(-1, "권한이 없습니다", null);
+			rx = new ResultXml(-1, "tidak ada hak", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

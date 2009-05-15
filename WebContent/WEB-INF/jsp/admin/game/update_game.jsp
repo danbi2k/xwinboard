@@ -18,23 +18,23 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.registerGame;
-		if(!d.leagueName.value) { alert('리그명을 선택하세요'); d.leagueName.focus(); return false; }
+		if(!d.leagueName.value) { alert('pilih nama liga'); d.leagueName.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
-		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
-		if(!d.gameHour.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gameHour.focus(); return false; }
+		if(!d.gameDate.value) { alert('pilih waktu(tanggal) mulai pertandingan'); d.gameDate.focus(); return false; }
+		if(!d.gameHour.value) { alert('pilih waktu(jam) mulai pertandingan'); d.gameHour.focus(); return false; }
 		if(!d.gameMinute.value) { alert('경기 시작 시각(분)을 선택하세요'); d.gameMinute.focus(); return false; }
-		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
-		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }
-		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }		
-		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
-		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
-		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
+		//if(!d.gametime4.value) { alert('pilih waktu(detik) mulai pertandingan'); d.gametime4.focus(); return false; }
+		if(!d.homeTeam.value) { alert('masukan nama home team'); d.homeTeam.focus(); return false; }
+		if(!d.winRate.value) { alert('masukan tarip deviden home team'); d.winRate.focus(); return false; }		
+		if(!d.awayTeam.value) { alert('masukan nama team kunjungan'); d.awayTeam.focus(); return false; }
+		if(!d.loseRate.value) { alert('masukan tarip deviden team kunjungan'); d.loseRate.focus(); return false; }
+		if(!d.drawRate.value) { alert('masukan tarip deviden waktu seri'); d.drawRate.focus(); return false; }
 		/*
 		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
+			if(!d.x_by.value) { alert('masukan tarip deviden waktu seri'); d.x_by.focus(); return false; }
 		}
 		else {
-			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
+			if(!d.handicap_title.value) { alert('masukan rintangan'); return false; }
 		}*/
 
 		var query = "mode=updateGame";

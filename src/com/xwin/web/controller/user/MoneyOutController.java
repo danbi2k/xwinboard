@@ -92,15 +92,15 @@ public class MoneyOutController extends XwinController
 		String pin = request.getParameter("pin");
 		
 		if (moneyOut.getMoney() <= 0)
-			rx = new ResultXml(-1, "0 보다 큰 값을 입력하세요", null);
+			rx = new ResultXml(-1, "harus masukan nomor lebih dari pada 0", null);
 		else if ((moneyOut.getMoney() % 10000) > 0) {
-			rx = new ResultXml(-1, "10,000원 단위로 신청하세요", null);
+			rx = new ResultXml(-1, "pemakaian satuan dari 10,000", null);
 		}
 		else if (member.getPin().equals(pin) == false) {
-			rx = new ResultXml(-1, "환전비밀번호가 틀렸습니다", null);
+			rx = new ResultXml(-1, "sandi tukar uand anda telah salah", null);
 		}
 		else if (member.getBalance() < moneyOut.getMoney()) {
-			rx = new ResultXml(-1, "잔액이 부족합니다", null);
+			rx = new ResultXml(-1, "uangnya tidak cukup", null);
 		}
 		else {
 			moneyOut.setUserId(member.getUserId());
@@ -127,7 +127,7 @@ public class MoneyOutController extends XwinController
 			
 			member.setBalance(member.getBalance() - moneyOut.getMoney());
 			
-			rx = new ResultXml(0, "환전신청이 등록되었습니다", null);
+			rx = new ResultXml(0, "permintaan tukar uang sudah di daftar", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -150,11 +150,11 @@ public class MoneyOutController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);		
 		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST))
-			rx = new ResultXml(0, "삭제 가능 상태가 아닙니다", null);
+			rx = new ResultXml(0, "bukan situasi bisa di hapus", null);
 		else {
 			moneyOut.setIsRemoved("Y");
 			moneyOutDao.updateMoneyOut(moneyOut);			
-			rx = new ResultXml(0, "환전 기록이 삭제되었습니다", null);
+			rx = new ResultXml(0, "rekor tukar uang telah di hapus", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

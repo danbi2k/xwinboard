@@ -44,7 +44,7 @@
 	<input type='hidden' name='status' value='<%=status%>'/>
 	<select name='search'>
 		<option value='name' <%=search.equals("name")?"selected":""%>>예금주명</option>
-		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+		<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
 	</select>
 	<input type='text' name='keyword' value='<%=keyword%>'>
@@ -138,7 +138,7 @@
 <script>
 function cancelMoneyOutRequest(id)
 {
-	if (confirm("환전 요청을 취소하시겠습니까?")) {
+	if (confirm("ingin batalkan permintaan isi ulang?")) {
 		var query = "mode=cancelMoneyOutRequest";
 		query += "&id=" + id;
 		
@@ -146,7 +146,7 @@ function cancelMoneyOutRequest(id)
 		var result = http.parse();
 	
 		if (result.resultXml.code == 0) {
-			alert("환전이 취소되었습니다");
+			alert("tukar uang telah di batal");
 			location.reload();
 		}
 	
@@ -171,7 +171,7 @@ function saveMoneyOutIsChecked(cobj)
 
 function deleteCheckedItem()
 {
-	if (confirm("삭제하시겠습니까?")) {
+	if (confirm("ingin di hapus?")) {
 		var query = "mode=deleteMoneyOutList";
 		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);
