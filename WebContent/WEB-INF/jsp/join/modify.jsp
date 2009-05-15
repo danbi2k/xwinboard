@@ -27,7 +27,7 @@
      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
     <tr>
         <td width="771" height="40" align="center" valign="middle" class="menubar">
-           회원정보수정 
+           mengubahkan info anggota 
         </td>
         
     </tr>
@@ -67,47 +67,46 @@
 
 
 <tr>
- <td align=right class=menubar>새비밀번호</td>
+ <td align=right class=menubar>kata rahasia baru</td>
  <td></td>
  <td> <input type=password name=password1 maxlength=200 class=input2 > </td>
 </tr>
 
 <tr>
- <td align=right class=menubar>새 비밀번호 확인</td>
+ <td align=right class=menubar>cek kata rahasia</td>
  <td></td>
  <td><input type=password name=password2 maxlength=200 class=input2 ></td>
 </tr>
 <tr>
- <td align=right class=menubar>닉네임</td>
+ <td align=right class=menubar>nama panggilan</td>
  <td></td>
  <td><%=member.getNickName()%></td>
 </tr>
 <tr>
- <td align=right class=menubar>휴대폰번호</td>
+ <td align=right class=menubar>nomor telpon selular</td>
  <td></td>
  <td><%=member.getMobile()%>
 </td>
 </tr>
 <tr>
- <td align=right class=menubar>이메일</td>
+ <td align=right class=menubar>e-mail</td>
  <td></td>
  <td><%=member.getEmail()%></td>
 </tr>
 <tr>
- <td align=right class=menubar>환전계좌번호</td>
+ <td align=right class=menubar>nomor deposito pertukaran</td>
  <td></td>
  <td><%=member.getBankName()%> <%=member.getBankNumber()%> <%=member.getBankOwner()%></td>
 </tr>
 <tr>
- <td align=right class=textpoint>새 환전비밀번호</td>
+ <td align=right class=textpoint>kata rahasia pertukaran baru</td>
  <td></td>
  <td><input type=password name=pin maxlength=200 class=input2 ></td>
 </tr>
 <tr>
  <td></td>
  <td></td>
- <td class=textpoint>[사이트 해킹방지용
-비밀번호입니다]</td>
+ <td class=textpoint>[kata rahasia untuk menjaga memarang website]</td>
 </tr>
 <tr>
 
@@ -134,7 +133,7 @@
 	      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
     <tr>
         <td width="771" height="40" align="center" valign="middle" class="menubar">
-           탈퇴신청 
+          mendaftar keluar Kalau mendaftar keluar 
         </td>
         
     </tr>
@@ -149,8 +148,8 @@
     <tr>
         <td width="771" height="30" background="img/minit_02.jpg" valign="top" style="padding:20" class="menubar">
          
-   탈퇴신청을 하시면, 관리자가 확인후 탈퇴를 처리해 드립니다.<br>
-   머니 잔액이 있을경우 환전 요청을 먼저 하시기 바랍니다. 
+   pengatur akan cek dulu dan keluar akan memecahkan,<BR>kalau ada uang tersisa meminta pertukaran dulu,
+ 
   
 
         </td>
