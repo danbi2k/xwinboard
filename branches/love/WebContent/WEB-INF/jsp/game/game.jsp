@@ -30,25 +30,25 @@ setInterval(thisReload, 180000);
        <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
    		 <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>경기일시</p>
+            <p>Date</p>
         </td>
         <td width="135" height="40" align="center" valign="middle" class="menubar">
-            <p>리그</p>
+            <p>League</p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>승(홈팀)</p>
+            <p>Win (Home)</p>
         </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p><%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %></p>
+            <p><%=type.equals("mix")?"Draw/Handy":type.equals("wdl")?"Draw":"Handy" %></p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>패(원정팀)</p>
+            <p>Lose(Away)</p>
         </td>
         <td width="40" height="40" align="center" valign="middle" class="menubar">
-            <p>상태</p>
+            <p>Status</p>
         </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>공지</p>
+            <p>berita umum</p>
         </td>
     </tr>
 </table>
@@ -134,7 +134,7 @@ if (gameList != null) {
 		   <table cellpadding="0" cellspacing="0" width="469" height="91" border="0">
 			    <tr>
 			        <td width="100" height="31">
-			            <p>배팅금액</p>
+			            <p>uang taruhan</p>
 			        </td>
 			        <td width="299" height="31">
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
@@ -145,7 +145,7 @@ if (gameList != null) {
 			    </tr>
 			    <tr>
 			        <td width="100" height="30">
-			            <p>예상배당율</p>
+			            <p>deviden kemungkinan</p>
 			        </td>
 			        <td width="299" height="30">
 			            <p id='rateDiv'>0.00</p>
@@ -156,7 +156,7 @@ if (gameList != null) {
 			    </tr>
 			    <tr>
 			        <td width="100" height="30">
-			            <p>예상적중금</p>
+			            <p>uang tepat kemungkinan</p>
 			        </td>
 			        <td width="299" height="30">
 			            <p id='expectDiv'>0</p>
