@@ -87,6 +87,12 @@
 				<entry key="memberDao">
 					<ref bean="memberDao"/>
 				</entry>
+				<entry key="moneyInDao">
+					<ref bean="moneyInDao"/>
+				</entry>
+				<entry key="moneyOutDao">
+					<ref bean="moneyOutDao"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
