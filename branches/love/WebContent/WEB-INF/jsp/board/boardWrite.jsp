@@ -187,12 +187,12 @@ if (betting != null) {
 <script>
 function check_frm(){
 	var frm = document.boardfrm;
-	if (havingSqlKeyword(frm.title.value)) { alert("제목에 사용할수 없는 문자열이 있습니다"); frm.title.focus(); return false; }
-	if (havingSqlKeyword(frm.context.value)) { alert("내용에 사용할수 없는 문자열이 있습니다"); frm.context.focus(); return false; }
+	if (havingSqlKeyword(frm.title.value)) { alert("ada kalimat atau kata yang tidak bisa di pakai"); frm.title.focus(); return false; }
+	if (havingSqlKeyword(frm.context.value)) { alert("ada senar kata yang tidak bisa di pakai"); frm.context.focus(); return false; }
 	
-    if(frm.title.value   ==""){ alert("제목을 입력하세요!");   frm.title.focus();    return false; }
+    if(frm.title.value   ==""){ alert("masukan judul");   frm.title.focus();    return false; }
     if(frm.name.value    ==""){ alert("작성자를 입력하세요!"); frm.name.focus();     return false; }
-    if(frm.context.value==""){ alert("내용을 입력하세요!");   frm.context.focus(); return false; }
+    if(frm.context.value==""){ alert("masukan isi");   frm.context.focus(); return false; }
 
     frm.submit();
 }

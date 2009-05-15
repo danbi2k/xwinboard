@@ -119,13 +119,13 @@ public class MemberController extends XwinController implements MessageSourceAwa
 						}
 					}
 //				} else {
-//					rx = new ResultXml(-1, "인증번호가 틀렸습니다", null);
+//					rx = new ResultXml(-1, "salah nomor sertifikat", null);
 //				}
 //			} else {
-//				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
+//				rx = new ResultXml(-1, "harus kirim nomor srtifikat", null);
 //			}
 //		} else {
-//			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
+//			rx = new ResultXml(-2, "rekomendasi yang sudah di daftar", null);
 //		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -171,10 +171,10 @@ public class MemberController extends XwinController implements MessageSourceAwa
 					} 		
 				}
 //			} else {
-//				rx = new ResultXml(-1, "인증번호가 틀렸습니다. 인증번호를 재전송 하십시오", null);
+//				rx = new ResultXml(-1, "salah nomor sertifikat. kirim sekali lagi nomor sertifikat", null);
 //			}
 //		} else {
-//			rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
+//			rx = new ResultXml(-1, "harus kirim nomor srtifikat", null);
 //		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -189,7 +189,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		if ((phone1 == null || phone1.length() < 3) ||
 				(phone2 == null || phone2.length() < 3) ||
 				(phone3 == null || phone3.length() < 4))
-			rx = new ResultXml(-1, "휴대폰 번호를 정확히 입력하세요", null);
+			rx = new ResultXml(-1, "masukan nomor H.P.yang tepat", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -202,7 +202,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		if ((email1 == null || email1.length() == 0) ||
 				(email2 == null || email2.length() == 0))
-			rx = new ResultXml(-1, "이메일 주소를 정확히 입력하세요", null);
+			rx = new ResultXml(-1, "masukan e-mail yang tepat", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -227,9 +227,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		if ((password1 == null || password1.length() < 4)
 				|| (password2 == null || password2.length() < 4))
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력하세요", null);
+			rx = new ResultXml(-1, "masukan sandi dengan lebih dari 4 huruf", null);
 		else if (password1.equals(password2) == false)
-			rx = new ResultXml(-1, "비밀번호가 일치하지 않습니다", null);
+			rx = new ResultXml(-1, "salah sandi", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -241,9 +241,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		ResultXml rx = null;
 		
 		if (userId == null || userId.length() < 2)
-			rx = new ResultXml(-1, "아이디를 2자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "masukan ID lebih dengan 2 huruf", null);
 		else if (memberDao.countMemberByUserId(userId) > 0)
-			rx = new ResultXml(-1, "등록된 아이디 입니다", null);
+			rx = new ResultXml(-1, "ID yang sudah di daftar", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -258,9 +258,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			return rx;
 		
 		if (nickName == null || nickName.length() < 2)
-			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "harus lebih dari pada 2 huruf", null);
 		else if (memberDao.countMemberByNickName(nickName) > 0)			
-			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
+			rx = new ResultXml(-1, "nama panggilan yang sudah di daftar", null);
 		
 		return rx;
 	}
@@ -278,7 +278,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		memberDao.updateMemberStatus(member.getUserId(), Code.USER_STATUS_SECEDE_REQ);
 		
-		ResultXml rx = new ResultXml(0, "탈퇴가 요청되었습니다", null);
+		ResultXml rx = new ResultXml(0, "permintaan keleuar telah di terima", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

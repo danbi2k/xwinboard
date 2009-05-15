@@ -125,7 +125,7 @@ function goPage(index)
 
 function removeMoneyOutRequestLog(id)
 {
-	if (confirm("환전 기록을 삭제 하시겠습니까?")) {
+	if (confirm("ingin hapuskan rekor tukar uang?")) {
 		var query = "mode=removeMoneyOutRequestLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("moneyOut.aspx", query);

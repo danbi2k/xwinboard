@@ -52,7 +52,7 @@
 	<form name="intro">
 	<table width="800" style="margin-top:10">
 	<tr><td><b>추천정보입력</b></td>
-		<td>※ 추천장이 필요하신 회원님은 고객센터로 문의하십시오.<BR>
+		<td>※ 추천장이 필요하신 회원님은 Pusat langganan로 문의하십시오.<BR>
 			※ 발송이 되었지만 가입하지 않은 추천장은 미가입 추천장 수를 확인하십시오.</td></tr>
 	</table>
 
@@ -229,7 +229,7 @@ function introduce()
 {
 	var frm = document.intro;
 	if (frm.phone1.value == "" || frm.phone2.value == "" || frm.phone3.value == "") {
-		alert("휴대폰 번호를 입력하세요");
+		alert("masukan nomor H.P");
 		return;
 	}
 

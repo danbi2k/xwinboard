@@ -78,7 +78,7 @@ public class IntroduceController extends XwinController
 		ResultXml rx = null;
 		
 		if (member.getIntroLetter() <= 0) {
-			rx = new ResultXml(-1, "추천장 수가 부족합니다", null);
+			rx = new ResultXml(-1, "tidak cukup rekomendasi", null);
 		} else {		
 			String mobile = request.getParameter("mobile");
 			
@@ -106,7 +106,7 @@ public class IntroduceController extends XwinController
 			member.setIntroLetter(member.getIntroLetter()-1);
 			memberDao.updateMember(member);
 			
-			rx = new ResultXml(0, "추천장이 발송 되었습니다", null);
+			rx = new ResultXml(0, "rekomendasi sudah di kirim", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

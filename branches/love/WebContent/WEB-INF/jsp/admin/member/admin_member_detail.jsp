@@ -54,28 +54,6 @@
 		if (result.resultXml.code == 0)
 			alert(result.resultXml.message);
 	}
-
-	function delIT(userid) {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='member/index.php?mode=del_exe&userid='+userid+'&page=1&page_list=1&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-
-	function chargeIT() {
-		var d=document.charge;
-		if(!d.amt.value) { alert('금액을 입력하세요'); d.amt.focus(); return false; }
-		if(!d.msg.value) { alert('내역을 입력하세요'); d.msg.focus(); return false; }
-		if(!confirm('금액을 충전/삭감 하시겠습니까?')) {
-			return false;
-		}
-		else {
-			d.action='member/index.php?mode=recharge&userid=ori7907&page=1&page_list=1&search=&kwd=&type=';
-		}
-	}
 </SCRIPT>
 
 <div class="title">회원정보</div>
@@ -85,7 +63,7 @@
 <input type='hidden' name='mode' value='updateMember'/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>회원아이디</td>
+		<td width=20%>anggota idenditas</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<a href='adminBetting.aspx?mode=viewBettingList&focusSearch=userId&keyword=<%=member.getUserId()%>'><%=member.getUserId()%></a>
 		</td>
@@ -297,7 +275,7 @@
 		<td>금지해제일 : <input type='text' name='board_deny_date' value='<%=XwinUtil.toDateStr(member.getBoardDenyDate(), 2)%>' size=10 readonly onClick="popUpCalendar(this,board_deny_date,'yyyy-mm-dd');" style="cursor:hand"></td>
 		</tr>
 		<tr>
-		<td><input onclick="resetQnaDenyDate(this)" type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> 고객센터 쓰기 금지</td>
+		<td><input onclick="resetQnaDenyDate(this)" type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> Pusat langganan 쓰기 금지</td>
 		<td>
 			<span onclick="setQnaDenyDate(5)">5일</span>&nbsp;&nbsp;
 			<span onclick="setQnaDenyDate(10)">10일</span>&nbsp;&nbsp;
@@ -600,7 +578,7 @@ function changeBankInfo()
 	var frm = document.regist;
 	if (frm.bankName != undefined) {
 		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
-			alert("환전계좌정보를 입력해 주십시오");
+			alert("masukan informasi rekening tukar uang");
 			return;
 		}
 	}
@@ -623,7 +601,7 @@ function changePassword()
 	var frm = document.regist;
 	if (frm.password != undefined) {
 		if (!frm.password.value) {
-			alert("비밀번호를 입력해 주십시오");
+			alert("masukan sandi");
 			return;
 		}
 	}
@@ -644,7 +622,7 @@ function changePin()
 	var frm = document.regist;
 	if (frm.pin!= undefined) {
 		if (!frm.pin.value) {
-			alert("환전비밀번호를 입력해 주십시오");
+			alert("masukan sandi tukar uang");
 			return;
 		}
 	}
@@ -696,7 +674,7 @@ function changePasswordExpire()
 
 function secedeMember()
 {
-	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n탈퇴시키시겠습니까?")) {
+	if (confirm("ingin mengeluarkan anggota <%=member.getUserId()%>(<%=member.getNickName()%>)?")) {
 		var query = "mode=secedeMember";
 		query += "&userId=<%=member.getUserId()%>";
 		var http = new JKL.ParseXML("adminMember.aspx", query);
@@ -709,7 +687,7 @@ function secedeMember()
 
 function recorverMember()
 {
-	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n복구시키시겠습니까?")) {
+	if (confirm("ingin memperoleh kembali anggota <%=member.getUserId()%>(<%=member.getNickName()%>)?")) {
 		var query = "mode=recorverMember";
 		query += "&userId=<%=member.getUserId()%>";
 		var http = new JKL.ParseXML("adminMember.aspx", query);
@@ -763,11 +741,11 @@ function plus_charging()
 {
 	var f = document.charging;
 	if (!f.plus) {
-		alert("숫자를 입력하세요");
+		alert("masukan nomor");
 		return false;
 	}
 	
-	if (confirm("<%=member.getNickName()%>님께 " + f.plus.value + " 원을 직충전 하시겠습니까?")) {
+	if (confirm("ingin isi langsung " + f.plus.value + "rp kepada <%=member.getNickName()%>?")) {
 		var query = "mode=directCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.plus.value;
@@ -783,11 +761,11 @@ function minus_charging()
 {
 	var f = document.charging;
 	if (!f.minus) {
-		alert("숫자를 입력하세요");
+		alert("masukan nomor");
 		return false;
 	}
 	
-	if (confirm("<%=member.getNickName()%>님께 " + f.minus.value + " 원을 직차감 하시겠습니까?")) {
+	if (confirm("ingin potong langsung " + f.minus.value + "rp dari <%=member.getNickName()%>?")) {
 		var query = "mode=directMinusCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.minus.value;

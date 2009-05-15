@@ -72,14 +72,14 @@ public class MyBettingController extends XwinController
 		
 		if (betting != null) {
 			if (betting.getStatus().equals(Code.BET_STATUS_RUN)) {
-				rx = new ResultXml(0, "진행중인 배팅은 삭제하실수 없습니다", betting);
+				rx = new ResultXml(0, "taruhan yang sedang berlaku tidak bisa di hapus", betting);
 			} else {
 				betting.setIsDeleted("Y");
 				bettingDao.updateBetting(betting);
-				rx = new ResultXml(0, "배팅 기록이 삭제되었습니다", betting);
+				rx = new ResultXml(0, "rekor taruhan telah di hapus", betting);
 			}
 		} else {
-			rx = new ResultXml(0, "유효하지 않은 배팅 입니다", betting);
+			rx = new ResultXml(0, "taruhan yang tidak berlaku", betting);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -107,11 +107,11 @@ public class MyBettingController extends XwinController
 		
 		if (betToto != null && betToto.getUserId().equals(member.getUserId())) {
 			if (betToto.getRunStatus().equals(Code.BET_STATUS_RUN)) {
-				rx = new ResultXml(0, "진행중인 구매내역은 삭제하실수 없습니다", betToto);
+				rx = new ResultXml(0, "daftar belanja tidak bisa di hapus wakrtu pembelian", betToto);
 			} else {
 				betToto.setIsDeleted("Y");
 				betTotoDao.updateBetToto(betToto);
-				rx = new ResultXml(0, "구매 기록이 삭제되었습니다", betToto);
+				rx = new ResultXml(0, "rekor pembelian sudah di hapus", betToto);
 			}
 		} else {
 			rx = new ResultXml(0, "유효하지 않은 배팅 입니다", betToto);

@@ -74,7 +74,7 @@ public class AdminController extends XwinController
 		
 		Admin.NOTICE = notice;
 		
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");		
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -107,7 +107,7 @@ public class AdminController extends XwinController
 		Admin.POPUP = popup;
 		Admin.POPUPFLAG = popupFlag;
 		
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");		
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -146,7 +146,7 @@ public class AdminController extends XwinController
 		
 		bankBookDao.insertBankBook(bankBook);
 		
-		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
+		ResultXml rx = new ResultXml(0, "Sudah di daftar", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -169,7 +169,7 @@ public class AdminController extends XwinController
 			bankBookDao.updateBankBook(bankBook);
 		}
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -246,7 +246,7 @@ public class AdminController extends XwinController
 		maintananceDao.deleteMoneyOutData(date);
 		maintananceDao.deleteTransactionData(date);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -263,7 +263,7 @@ public class AdminController extends XwinController
 		maintananceDao.deleteAccountData(date);
 		maintananceDao.deletePointData(date);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -281,7 +281,7 @@ public class AdminController extends XwinController
 		maintananceDao.updateBoardWithBetting(date);
 		maintananceDao.deleteBettingData(date);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

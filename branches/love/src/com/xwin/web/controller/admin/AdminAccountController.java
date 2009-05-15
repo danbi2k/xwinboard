@@ -275,9 +275,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 				e.printStackTrace();
 			}
 			*/
-			rx = new ResultXml(0, "충전되었습니다", null);
+			rx = new ResultXml(0, "sudah di isi", null);
 		} else {
-			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "bmasih belum bias di isi", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -316,9 +316,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 				smsWaitDao.insertSmsWait(smsWait);
 			}
 		
-			rx = new ResultXml(0, "환전되었습니다", null);
+			rx = new ResultXml(0, "sukses tukar uang", null);
 		} else {
-			rx = new ResultXml(0, "환전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "masih belum bias di tukar", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -341,7 +341,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		try {
 			money = Long.parseLong(_money);
 		} catch (Exception e) {
-			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+			rx = new ResultXml(-1, "masukan nomor", null);
 		}
 		
 		if (money != null) {
@@ -369,7 +369,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			accountDao.insertAccount(account);
 			
 			memberDao.plusMinusBalance(userId, money);
-			rx = new ResultXml(0, "직충전 되었습니다", null);
+			rx = new ResultXml(0, "sudah di isi langsung", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -391,14 +391,14 @@ public class AdminAccountController extends XwinController implements MessageSou
 		try {
 			money = Long.parseLong(_money);
 		} catch (Exception e) {
-			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+			rx = new ResultXml(-1, "masukan nomor", null);
 		}
 		
 		if (money != null) {
 			Member member = memberDao.selectMember(userId, null);
 			
 			if (member.getBalance() < money) {
-				rx = new ResultXml(-1, "잔액을 초과하였습니다", null);
+				rx = new ResultXml(-1, "melewati batas uang", null);
 			} 
 			else {
 				MoneyOut moneyOut = new MoneyOut();
@@ -422,7 +422,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				accountDao.insertAccount(account);
 				
 				memberDao.plusMinusBalance(userId, money * -1);
-				rx = new ResultXml(0, "직차감 되었습니다", null);
+				rx = new ResultXml(0, "sudah deduksi langsung", null);
 			}
 		}	
 		
@@ -444,7 +444,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyInDao.deleteMoneyIn(id[i]);
 		}
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -464,7 +464,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyOutDao.deleteMoneyOut(id[i]);
 		}
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -526,12 +526,12 @@ public class AdminAccountController extends XwinController implements MessageSou
 		String id = request.getParameter("id");		
 		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
 		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false)
-			rx = new ResultXml(0, "충전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "bmasih belum bias di isi", null);
 		else {
 			moneyIn.setStatus(Code.MONEY_IN_CANCEL);
 			moneyIn.setProcDate(new Date());
 			moneyInDao.updateMoneyIn(moneyIn);			
-			rx = new ResultXml(0, "충전 신청이 취소되었습니다", null);
+			rx = new ResultXml(0, "permintaan isi telah di batalkan", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -550,14 +550,14 @@ public class AdminAccountController extends XwinController implements MessageSou
 		String id = request.getParameter("id");
 		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);		
 		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST) == false)
-			rx = new ResultXml(0, "환전요청 상태가 아닙니다", null);
+			rx = new ResultXml(0, "masih belum bias di tukar", null);
 		else {
 			Member member = memberDao.selectMember(moneyOut.getUserId(), null);
 			
 			moneyOut.setStatus(Code.MONEY_OUT_CANCEL);
 			moneyOut.setProcDate(new Date());
 			moneyOutDao.updateMoneyOut(moneyOut);			
-			rx = new ResultXml(0, "환전 신청이 취소되었습니다", null);
+			rx = new ResultXml(0, "permintaan tukar telah di batalkan", null);
 			
 			Account account = new Account();
 			account.setUserId(moneyOut.getUserId());

@@ -28,7 +28,7 @@ public class AdminLoginController extends XwinController
 			request.getSession().setAttribute("Admin", admin);
 			rx = ResultXml.SUCCESS;
 		} else {
-			rx = new ResultXml(-1, "관리자 정보가 잘못되었습니다", null);
+			rx = new ResultXml(-1, "informasi pengawas berbedah", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

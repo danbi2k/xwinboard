@@ -60,7 +60,7 @@
  
 
 <tr>
- <td align=right class=menubar>회원아이디</td>
+ <td align=right class=menubar>anggota idenditas</td>
  <td></td>
  <td><%=member.getUserId()%></td>
 </tr>
@@ -174,7 +174,8 @@
 <%
 if (needBank) {
 %>
-alert("환전계좌를 등록해 주십시오\n환전업무는 등록된 환전계좌로만 가능하며 환전계좌 변경시에는\n고객센터로 문의해주시면 본인인증절차를 거쳐 변경해드립니다");
+alert("mohon daftar rekening tukar uang. pelayanan tukar uang hanya bisa dengan rekening tukar uang yang sudah di daftar dan kalau ingin ganti rekening tukar uang kasih tau servis langganan dan stelah proses pemeriksaan kita akan ganti rekening anda 
+");
 <%
 }
 %>
@@ -182,7 +183,7 @@ alert("환전계좌를 등록해 주십시오\n환전업무는 등록된 환전�
 <%
 if (needExpire) {
 %>
-alert("비밀번호가 만료되었습니다\n비밀번호를 변경해 주십시오\n");
+alert("sandi anda sudah berakhir mohon ganti sandi");
 <%
 }
 %>
@@ -190,12 +191,12 @@ alert("비밀번호가 만료되었습니다\n비밀번호를 변경해 주십�
 function sendAuthNumber(){
 	var f = document.frm_mem;
 	if (!f.phone2.value && f.phone2.value.length < 3) {
-		alert("전화번호를 확인하시고 다시 넣어주세요");
+		alert("cek nomor telpon dan masukan lagi");
 		return;
 	}
 
 	if (!f.phone3.value && f.phone3.value.length < 4) {
-		alert("전화번호를 확인하시고 다시 넣어주세요");
+		alert("cek nomor telpon dan masukan lagi");
 		return;
 	}
 	

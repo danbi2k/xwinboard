@@ -183,7 +183,7 @@
 <script>
 function deleteMyBetting(id)
 {
-	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
+	if (confirm("ingin hapuskan rekor taruhan?")) {
 		var query = "mode=deleteMyBetting";
 		query += "&bettingId=" + id;
 		var http = new JKL.ParseXML("myBet.aspx", query);

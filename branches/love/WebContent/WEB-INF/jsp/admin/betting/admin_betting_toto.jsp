@@ -44,8 +44,8 @@
 	<option value='<%=Code.BET_STATUS_CANCEL%>' <%=runStatus.equals(Code.BET_STATUS_CANCEL)?"selected":""%>><%=Code.getValue(Code.BET_STATUS_CANCEL)%></option>	
  </select>
 <select name='search'>
-	<option value='userIdLike' <%=search.equals("userIdLike")?"selected":""%>>회원아이디</option>
-	<option value='nickNameLike' <%=search.equals("nickNameLike")?"selected":""%>>회원닉네임</option>
+	<option value='userIdLike' <%=search.equals("userIdLike")?"selected":""%>>anggota idenditas</option>
+	<option value='nickNameLike' <%=search.equals("nickNameLike")?"selected":""%>>anggota nama pangilan</option>
 </select>
 <input type='text' name='keyword' value='<%=keyword%>'>
 <input type='submit' value='검 색'>
@@ -210,7 +210,7 @@ function loadCard(formString)
 
 function endToto()
 {
-	if (confirm("입력하신 내역으로 토토를 처리하시겠습니까?")) {
+	if (confirm("inggin mengatur toto dengan informasi yang termasuk?")) {
 		var resultString = confirmMarking();
 		if (resultString) {
 			var query = "mode=endToto";
@@ -230,7 +230,7 @@ function endToto()
 
 function cancelToto()
 {
-	if (confirm("토토를 취소하시겠습니까?")) {
+	if (confirm("ingin baralkan toto?")) {
 		var query = "mode=cancelToto";
 		query += "&id=<%=toto.getId()%>";
 
@@ -246,7 +246,7 @@ function cancelToto()
 
 function cancelBetToto(id)
 {
-	if (confirm("구매를 취소하시겠습니까?")) {
+	if (confirm("ingin batalkan pembelian?")) {
 		var query = "mode=cancelBetToto";
 		query += "&id=" + id;
 
@@ -275,7 +275,7 @@ function confirmMarking()
 					markId.push(cobjList[x].id);
 			}
 			if (flag == false) {
-				alert("선택되지 않은 항목이 있습니다");
+				alert("ada hal tang belum terpilih");
 				return;
 			}
 		}

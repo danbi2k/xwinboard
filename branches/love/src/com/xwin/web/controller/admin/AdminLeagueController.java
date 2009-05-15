@@ -149,7 +149,7 @@ public class AdminLeagueController extends XwinController
 		
 		leagueDao.removeLeague(id);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml",XmlUtil.toXml(rx));
 		

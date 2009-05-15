@@ -115,7 +115,7 @@ public class AdminQnaController extends XwinController
 			reuseCommentDao.insertReuseComment(reuseComment);
 		}
 		
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -133,7 +133,7 @@ public class AdminQnaController extends XwinController
 		for (int i = 0 ; i < id.length ; i++)
 			boardDao.deleteBoardItem(id[i]);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

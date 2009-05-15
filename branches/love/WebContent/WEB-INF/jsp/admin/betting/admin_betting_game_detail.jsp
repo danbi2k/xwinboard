@@ -49,8 +49,8 @@
 </select>
 <BR>
 <select name='search'>
-	<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
-	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
+	<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
+	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>anggota nama pangilan</option>
 </select>
 <input type='text' name='keyword' value='<%=keyword%>'>
 배팅시각
@@ -179,7 +179,7 @@ function goPage(index)
 
 function cancelBetting(id)
 {
-	if (confirm("취소하시겠습니까?")) {
+	if (confirm("inigin di batalkan?")) {
 		var query = "mode=cancelBetting";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminBetting.aspx", query);

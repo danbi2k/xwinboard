@@ -33,7 +33,7 @@
 <script>
 <%
 if (admin == null) {
-	out.print("alert('로그인이 필요합니다');");
+	out.print("alert('memperlukan login');");
 	out.print("location.href='admin';");	
 }
 %>
@@ -128,11 +128,11 @@ setInterval("playSound()", 3000);
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
-			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
-			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
-			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a><span style='font-size:12;' id='qnaPlay' onclick='changeQnaPlay()'><%=QNA_PLAY%></span></li>
+			<li class="active">pengisian <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
+			<li>pertukaran <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
+			<li>Pusat langganan  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a><span style='font-size:12;' id='qnaPlay' onclick='changeQnaPlay()'><%=QNA_PLAY%></span></li>
 			<!-- li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a><span style='font-size:12;' id='qnaPlay' onclick='changeQnaPlay()'><%=QNA_PLAY%></span></li -->
-			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
+			<li>memarang <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 		</ul>
 	</div>
 	<div id="content">

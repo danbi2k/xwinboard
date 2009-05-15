@@ -12,9 +12,9 @@
 <!--
 function checkIT() {
 	var d=document.regist;
-	if(!d.userId.value) { alert('아이디를 입력하세요'); d.userId.focus(); return false; }
-	if(!d.password.value) { alert('비밀번호를 입력하세요'); d.password.focus(); return false; }
-	if(!d.pin.value) { alert('환전비밀번호를 입력하세요'); d.pin.focus(); return false; }
+	if(!d.userId.value) { alert('masukan ID'); d.userId.focus(); return false; }
+	if(!d.password.value) { alert('masukan sandi'); d.password.focus(); return false; }
+	if(!d.pin.value) { alert('masukan sandi tukar uang'); d.pin.focus(); return false; }
 	
 	var query = "mode=processLogin";
 	query += "&userId=" + d.userId.value;

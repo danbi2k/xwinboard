@@ -47,7 +47,7 @@ public class BettingCartController extends XwinController
 		BettingCart bettingCart = (BettingCart) request.getSession().getAttribute("BettingCart");
 		bettingCart.removeIndex(folderIndex);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -73,7 +73,7 @@ public class BettingCartController extends XwinController
 		if (gameFolder.size() == 0)
 			bettingCart.removeIndex(folderIndex);
 		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -91,7 +91,7 @@ public class BettingCartController extends XwinController
 		BettingCart bettingCart = (BettingCart) request.getSession().getAttribute("BettingCart");
 		bettingCart.clear();
 		
-		ResultXml rx = new ResultXml(0, "전체 삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus semua", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -132,16 +132,16 @@ public class BettingCartController extends XwinController
 		}
 		
 		if (keepGoing == false) {
-			rx = new ResultXml(0, "배팅이 불가능한 내역이 있습니다.\n해당 내역은 배팅카트에서 자동 삭제됩니다.", null);
+			rx = new ResultXml(0, "ada taruhan yang tidak bisa terjadi. Taruhan yang sesuai akan di hapus otomtis", null);
 		} else if (member.getBalance() - sum < 0) {
-			rx = new ResultXml(0, "잔액이 부족합니다.", null);
+			rx = new ResultXml(0, "uangnya tidak cukup", null);
 		} else {
 			for (GameFolder gameFolder : selectList) {
 				bettingService.processBetting(gameFolder, member);
 				bettingCart.remove(gameFolder);
 			}
 			
-			rx = new ResultXml(0, "배팅 하셨습니다", null);
+			rx = new ResultXml(0, "sudah bertaruhan", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

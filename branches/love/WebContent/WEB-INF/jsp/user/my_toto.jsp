@@ -125,7 +125,7 @@
 <script>
 function deleteMyToto(id)
 {
-	if (confirm("구매 기록을 삭제하시겠습니까?")) {
+	if (confirm("ingin hapuskan rekor pembelian?")) {
 		var query = "mode=deleteMyToto";
 		query += "&betTotoId=" + id;
 		var http = new JKL.ParseXML("myBet.aspx", query);
@@ -137,7 +137,7 @@ function deleteMyToto(id)
 }
 
 function removeMoneyInRequestLog(id) {
-	if (confirm("충전  기록을 삭제 하시겠습니까?")) {
+	if (confirm("ingin hapuskan rekor isi?")) {
 		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("moneyIn.aspx", query);

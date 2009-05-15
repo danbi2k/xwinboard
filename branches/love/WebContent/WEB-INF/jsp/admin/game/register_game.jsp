@@ -22,23 +22,23 @@
 		<%} else {%>
 		gameType = '<%=type%>';
 		<%}%>
-		if(!d.leagueName.value) { alert('리그명을 선택하세요'); d.leagueName.focus(); return false; }
+		if(!d.leagueName.value) { alert('pilih nama liga'); d.leagueName.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
-		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
-		if(!d.gameHour.value) { alert('경기 시작 시각(시)을 선택하세요'); d.gameHour.focus(); return false; }
+		if(!d.gameDate.value) { alert('pilih waktu(tanggal) mulai pertandingan'); d.gameDate.focus(); return false; }
+		if(!d.gameHour.value) { alert('pilih waktu(jam) mulai pertandingan'); d.gameHour.focus(); return false; }
 		if(!d.gameMinute.value) { alert('경기 시작 시각(분)을 선택하세요'); d.gameMinute.focus(); return false; }
-		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
-		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }		
-		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
+		//if(!d.gametime4.value) { alert('pilih waktu(detik) mulai pertandingan'); d.gametime4.focus(); return false; }
+		if(!d.homeTeam.value) { alert('masukan nama home team'); d.homeTeam.focus(); return false; }		
+		if(!d.awayTeam.value) { alert('masukan nama team kunjungan'); d.awayTeam.focus(); return false; }
 		if(!d.winRate.value) { d.winRate.value = 0.0; }
 		if(!d.loseRate.value) { d.loseRate.value = 0.0; }
 		if(!d.drawRate.value) { d.drawRate.value = 0.0; }
-		if (!gameType) { alert('종류를 선택하세요');  return false;}
+		if (!gameType) { alert('masukan jenis');  return false;}
 		<%if (type.equals("handy")){ %>
 		if (d.uoCheck.checked) {
-			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
-			if(!d.handyRate.value) { alert('핸디 배당률을 입력하세요'); d.handyRate.focus(); return false; }
-			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
+			if(!d.underRate.value) { alert('masukan tarip deviden under'); d.underRate.focus(); return false; }
+			if(!d.handyRate.value) { alert('masukan tarip deviden rintanggan'); d.handyRate.focus(); return false; }
+			if(!d.overRate.value) { alert('masukan tarip deviden rintangan'); d.overRate.focus(); return false; }
 		}
 		<%}%>
 

@@ -88,7 +88,7 @@
 
 	function cancelGame(id)
 	{
-		if (confirm("" + id + "번 경기를 취소 하시겠습니까?")) {
+		if (confirm("ingin batalkan pertandingan nomor " + id + "?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
 			
@@ -103,7 +103,7 @@
 
 	function removeGame(id)
 	{
-		if (confirm("" + id + "번 경기를 삭제 하시겠습니까?")) {
+		if (confirm("ingin hapuskan pertandingan nomor " + id + "?")) {
 			var query = "mode=removeGame";
 			query += "&id=" + id;
 			query += "&type=" + '<%=type%>';
@@ -152,7 +152,7 @@
 				endGame(c[i].value);
 			//} 
 		}
-		alert("저장되었습니다");
+		alert("sudah di save");
 		location.reload();
 	}
 

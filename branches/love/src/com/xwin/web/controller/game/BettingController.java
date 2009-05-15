@@ -59,36 +59,36 @@ public class BettingController extends XwinController
 		
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList.size() == 0) {
-			rx = new ResultXml(-1, "경기를 선택 하십시오", null);
+			rx = new ResultXml(-1, "pilih pertandingan", null);
 		}
 		else if (bettingService.checkBettingAccept(gameFolder) == false) {
-			rx = new ResultXml(-2, "배팅 가능한 상태가 아닌 경기가 포함되어 있습니다", null);
+			rx = new ResultXml(-2, "ada pertandingan yang tidak bisa bertaruhan", null);
 		}
 		else if (fc.getMoney() < 5000) {
-			rx = new ResultXml(-1, "최소 배팅 금액은 5,000원 입니다", null);
+			rx = new ResultXml(-1, "taruhan yang paling kecil 5,000", null);
 		}
 		else if (fc.getMoney() > 1000000) {
-			rx = new ResultXml(-1, "최대 배팅 금액은 1000,000원 입니다", null);
+			rx = new ResultXml(-1, "taruhan paling besar 1,000,000", null);
 		}
 		else if (fc.getExpect() > MAX_EXPECT) {
-			rx = new ResultXml(-1, "배당금이 300만원을 초과 하였습니다", null);
+			rx = new ResultXml(-1, "taruhan telah melewati 3juta", null);
 		}
 		else if (_action.equals("betting") && fc.getAfter() < 0) {
-			rx = new ResultXml(-1, "잔액이 부족합니다", null);
+			rx = new ResultXml(-1, "uangnya tidak cukup", null);
 		}
 		else if (_action.equals("betting")) {
 			bettingService.processBetting(gameFolder, member);
 			
 			session.removeAttribute("gameFolder_" + _type);
 			
-			rx = new ResultXml(0, "배팅 하셨습니다", null);
+			rx = new ResultXml(0, "sudah beertaruh", null);
 			Member betMember = (Member) session.getAttribute("Member");
 			betMember.setBettingDate(new Date());
 		}
 		else if (_action.equals("cart")) {
 			bettingCart.add(gameFolder);
 			
-			rx = new ResultXml(0, "배팅카트에 추가 되었습니다", null);
+			rx = new ResultXml(0, "sudah di tambah di gerobak taruhan", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -150,7 +150,7 @@ public class BettingController extends XwinController
 		else if (XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money) > MAX_EXPECT) {
 			gameFolder.remove(game.getId());
 			retCode = -1;
-			message = "배당금이 300만원을 초과 하였습니다";
+			message = "taruhan telah melewati 3juta";
 		} else {
 			GameFolderItem gfi = new GameFolderItem();
 			gfi.setId(gameId);

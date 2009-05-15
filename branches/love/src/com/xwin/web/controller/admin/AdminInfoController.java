@@ -45,7 +45,7 @@ public class AdminInfoController extends XwinController
 		
 		Admin.ADMIN_EMAIL = admin.getEmail();
 		
-		ResultXml rx = new ResultXml(0, "관리자 정보가 변경 되었습니다", null);		
+		ResultXml rx = new ResultXml(0, "informasi pengawas berubah", null);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -98,7 +98,7 @@ public class AdminInfoController extends XwinController
 		
 		
 		
-		ResultXml rx = new ResultXml(0, "변경 되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -116,7 +116,7 @@ public class AdminInfoController extends XwinController
 		
 		memberDao.updateMemberPasswordExpire(member);
 		
-		ResultXml rx = new ResultXml(0, "요청 되었습니다", null);
+		ResultXml rx = new ResultXml(0, "permintaan di terima", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -186,9 +186,9 @@ public class AdminInfoController extends XwinController
 			adminDao.updateAdmin("BETTING_POINT_USE", BETTING_POINT_USE);
 			adminDao.updateAdmin("BETTING_POINT_RATE", BETTING_POINT_RATE);
 			
-			rx = new ResultXml(0, "변경 되었습니다", null);
+			rx = new ResultXml(0, "di berubah", null);
 		} catch (Exception e) {
-			rx = new ResultXml(0, "숫자를 입력하세요", null);
+			rx = new ResultXml(0, "masukan nomor", null);
 		}		
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

@@ -218,7 +218,7 @@ public class AdminGameController extends XwinController
 			gameDao.insertGame(game);
 		}
 		
-		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
+		ResultXml rx = new ResultXml(0, "Sudah di daftar", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -268,9 +268,9 @@ public class AdminGameController extends XwinController
 				reuseCommentDao.insertReuseComment(reuseComment);
 			} 
 			
-			rx = new ResultXml(0, "수정되었습니다", null);
+			rx = new ResultXml(0, "sudah di koreksi", null);
 		} catch (Exception e) {
-			rx = new ResultXml(-1, "서버오류", null);
+			rx = new ResultXml(-1, "server error", null);
 			throw e;
 		}
 		
@@ -296,7 +296,7 @@ public class AdminGameController extends XwinController
 		
 		processService.judgeGameResult(game);		
 		
-		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		rx = new ResultXml(0, "pertandingan di batalkan", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -317,14 +317,14 @@ public class AdminGameController extends XwinController
 		Integer bettingCount = bettingDao.selectBettingCount(param);
 
 		if (bettingCount > 0) {
-			rx = new ResultXml(-1, "배팅이 진행된 경기는 삭제할수 없습니다", null);			
+			rx = new ResultXml(-1, "pertandingan yang sudah bertaruhan tidak bias di hapus", null);			
 		} else {
 			Game game = new Game();
 			game.setId(id);
 			game.setStatus(Code.GAME_STATUS_DELETE);			
 			gameDao.updateGame(game);
 			
-			rx = new ResultXml(0, "경기가 삭제 되었습니다", null);
+			rx = new ResultXml(0, "pertandingan telah di hapus", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -354,9 +354,9 @@ public class AdminGameController extends XwinController
 		
 		Game game = gameDao.selectGame(id);
 		if (homeScore == null && awayScore == null) {
-			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+			rx = new ResultXml(-1, "masukan nomor", null);
 		} else if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
-			rx = new ResultXml(-1, "경기진행 상태가 아닙니다", null);
+			rx = new ResultXml(-1, "bukan situasi pertandingan", null);
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
@@ -367,10 +367,10 @@ public class AdminGameController extends XwinController
 			
 			try {
 				processService.judgeGameResult(game);				
-				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
+				rx = new ResultXml(0, "pertandingan selesai", null);
 			} catch (Exception e) {
 				e.printStackTrace();
-				rx = new ResultXml(0, "경기 처리중 오류가 발생하였습니다!!", null);
+				rx = new ResultXml(0, "pertandingan selesai!!", null);
 			}
 		}
 		
@@ -401,9 +401,9 @@ public class AdminGameController extends XwinController
 		
 		Game game = gameDao.selectGame(id);
 		if (homeScore == null && awayScore == null) {
-			rx = new ResultXml(-1, "숫자를 입력하세요", null);
+			rx = new ResultXml(-1, "masukan nomor", null);
 		} else if (game.getStatus().equals(Code.GAME_STATUS_END) == false) {
-			rx = new ResultXml(-1, "경기종료 상태가 아닙니다", null);
+			rx = new ResultXml(-1, "pertandingan belum selesai", null);
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
@@ -414,10 +414,10 @@ public class AdminGameController extends XwinController
 			
 			try {
 				processService.judgeGameResult(game);				
-				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
+				rx = new ResultXml(0, "pertandingan mulai kembali", null);
 			} catch (Exception e) {
 				e.printStackTrace();
-				rx = new ResultXml(0, "경기 재처리중 오류가 발생하였습니다!!", null);
+				rx = new ResultXml(0, "ada masalah selama pertandingan mulai kembali!!", null);
 			}
 		}
 		
@@ -441,7 +441,7 @@ public class AdminGameController extends XwinController
 		
 		gameDao.updateGame(game);
 		
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ResultXml rx = new ResultXml(0, "di berubah", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

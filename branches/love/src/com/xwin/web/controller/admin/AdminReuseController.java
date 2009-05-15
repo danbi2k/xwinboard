@@ -38,7 +38,7 @@ public class AdminReuseController extends XwinController
 		
 		reuseCommentDao.insertReuseComment(reuseComment);
 		
-		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di save", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -54,7 +54,7 @@ public class AdminReuseController extends XwinController
 		String id = request.getParameter("id");
 		reuseCommentDao.deleteReuseComment(id);
 
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

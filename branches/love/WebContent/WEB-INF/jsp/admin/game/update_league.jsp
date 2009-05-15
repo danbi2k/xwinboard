@@ -9,20 +9,10 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.regist;
-		if(!d.name.value) { alert('리그명을 입력하세요'); d.name.focus(); return false; }
-		alert("이미지 업로드 준비중입니다");
+		if(!d.name.value) { alert('masukan nama liga'); d.name.focus(); return false; }
+		alert("sedang persiapkan upload gambar");
 		d.submit();
 	}
-
-	function delIT() {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='/admin_mode/game/index.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
 </SCRIPT>
 
 <form name='regist' action="adminLeague.aspx" method='post' enctype="multipart/form-data">
