@@ -90,6 +90,12 @@
 				<entry key="memberDao">
 					<ref bean="memberDao"/>
 				</entry>
+				<entry key="moneyInDao">
+					<ref bean="moneyInDao"/>
+				</entry>
+				<entry key="moneyOutDao">
+					<ref bean="moneyOutDao"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -138,7 +144,7 @@
 				<!-- ref bean="autoMoneyInTrigger"/ --> <!-- 충전시키는부분 -->
 				<!-- ref bean="transactionTrigger"/ --> <!-- SMS가져오는 부분 -->
 				<!-- ref bean="sendSmsTrigger"/ -->
-				<!-- ref bean="dailyBatchTrigger"/ -->
+				<ref bean="dailyBatchTrigger"/>
 			</list>
 		</property>
 		<property name="quartzProperties">
