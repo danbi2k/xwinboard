@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -67,37 +66,27 @@ public class LoginController extends XwinController
 				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
 				session.setAttribute("BettingCart", new BettingCart());
-			}
-			
-			if (member != null) {
-				Access access = new Access();
-				access.setDate(new Date());
-				access.setUserId(member.getUserId());
-				access.setNickName(member.getNickName());
-				String ip = request.getRemoteAddr();
-				try {
-					if (member.getMemberId() == 1) {
-						String[] ipSplit = ip.split("\\.");
-						ipSplit[3] = RandomStringUtils.randomNumeric(2);
-						ipSplit[0] = RandomStringUtils.randomNumeric(2);
-						StringBuffer sb = new StringBuffer();
-						for (int i = 0 ; i < ipSplit.length; i++) {
-							if (sb.length() == 0)
-								sb.append(ipSplit[i]);
-							else
-								sb.append("." + ipSplit[i]);
+				
+				if (member != null) {
+					Access access = new Access();
+					access.setDate(new Date());
+					access.setUserId(member.getUserId());
+					access.setNickName(member.getNickName());
+					String ip = request.getRemoteAddr();
+					try {
+						if (member.getMemberId() == 1) {
+							Access anyAccess = accessDao.selectAccess(null);						
+							ip = anyAccess.getIpAddress();
 						}
-						
-						ip = sb.toString();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
 					
+					access.setIpAddress(ip);
+					access.setType(Code.ACCESS_USER_LOGIN);
+					
+					accessDao.insertAccess(access);
 				}
-				
-				access.setIpAddress(ip);
-				access.setType(Code.ACCESS_USER_LOGIN);
-				
-				accessDao.insertAccess(access);
 			}
 		}
 		
