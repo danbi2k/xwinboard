@@ -82,7 +82,7 @@ function playSound()
 		playIt(player3);
 	//if (vipVal > 0)
 	//	playIt(player3);
-	if (hackVal > 0)
+	if (hackVal > 30)
 		playIt(player4);
 	if (wdlVal+handyVal > 0)
 		playIt(player5);

@@ -27,6 +27,7 @@
 		<th width=5%>번호</th>
 		<th width=10%>아이디</th>
 		<th width=15%>닉네임</th>
+		<th width=10%>아이피</th>
 		<th width=10%>시각</th>
 		<th width=15%>모드</th>
 		<th width=*>내용</th>
@@ -43,6 +44,7 @@ if (hackingLogList != null) {
 			<a href='javascript:goMemberDetail("<%=hackingLog.getUserId()%>")'><%=XwinUtil.nvl(hackingLog.getUserId())%></a>
 		</td>
 		<td width=15%><%=XwinUtil.nvl(hackingLog.getNickName())%></td>
+		<td width=10%><%=XwinUtil.nvl(hackingLog.getIpAddress())%></td>
 		<td width=10%><%=XwinUtil.toDateStr(hackingLog.getDate(), 1)%></td>
 		<td width=15%><%=XwinUtil.nvl(hackingLog.getMode())%></td>
 		<td width=45% style='word-break:break-all;'><%=XwinUtil.nvl(hackingLog.getValue())%>
