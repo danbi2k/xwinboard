@@ -17,6 +17,15 @@
 				<entry key="totoDao">
 					<ref bean="totoDao"/>
 				</entry>
+				<entry key="memberDao">
+					<ref bean="memberDao"/>
+				</entry>
+				<entry key="moneyOutDao">
+					<ref bean="moneyOutDao"/>
+				</entry>
+				<entry key="accountDao">
+					<ref bean="accountDao"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
