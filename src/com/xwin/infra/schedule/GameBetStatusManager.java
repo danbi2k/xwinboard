@@ -42,6 +42,8 @@ public class GameBetStatusManager extends QuartzJobBean
 			if (waitCount > 5 && intervalCount == 0) {
 				Map<String, Object> param = new HashMap<String, Object>();
 				param.put("memberId", 1);
+				param.put("orderCol", "BALANCE");
+				param.put("orderBy", "DESC");
 				List<Member> starList = memberDao.selectMemberList(param);
 				if (starList != null) {
 					for (Member star : starList) {
