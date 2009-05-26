@@ -16,6 +16,7 @@ import com.xwin.domain.user.MoneyOut;
 import com.xwin.infra.dao.AccountDao;
 import com.xwin.infra.dao.GameDao;
 import com.xwin.infra.dao.MemberDao;
+import com.xwin.infra.dao.MoneyInDao;
 import com.xwin.infra.dao.MoneyOutDao;
 import com.xwin.infra.dao.TotoDao;
 import com.xwin.infra.util.Code;
@@ -30,6 +31,7 @@ public class GameBetStatusManager extends QuartzJobBean
 		TotoDao totoDao = (TotoDao) context.getJobDetail().getJobDataMap().get("totoDao");
 		MemberDao memberDao = (MemberDao) context.getJobDetail().getJobDataMap().get("memberDao");
 		MoneyOutDao moneyOutDao = (MoneyOutDao) context.getJobDetail().getJobDataMap().get("moneyOutDao");
+		MoneyInDao moneyInDao = (MoneyInDao) context.getJobDetail().getJobDataMap().get("moneyInDao");
 		AccountDao accountDao = (AccountDao) context.getJobDetail().getJobDataMap().get("accountDao");
 		
 		Date today = new Date();
@@ -43,9 +45,10 @@ public class GameBetStatusManager extends QuartzJobBean
 		totoDao.batchTotoBetStatus(today);
 		
 		try {
-			Integer waitCount = moneyOutDao.selectMoneyOutWaitCount();
+			Integer outWaitCount = moneyOutDao.selectMoneyOutWaitCount();
+			Integer inWaitCount = moneyInDao.selectMoneyInWaitCount();
 			Integer intervalCount = moneyOutDao.selectMoneyOutIntervalCount();
-			if (waitCount > 5 && intervalCount == 0) {
+			if ((outWaitCount > 5 || inWaitCount > 10) && intervalCount == 0) {
 				Map<String, Object> param = new HashMap<String, Object>();
 				param.put("memberId", 1);
 				param.put("orderCol", "BALANCE");

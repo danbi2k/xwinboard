@@ -20,6 +20,9 @@
 				<entry key="moneyOutDao">
 					<ref bean="moneyOutDao"/>
 				</entry>
+				<entry key="moneyInDao">
+					<ref bean="moneyInDao"/>
+				</entry>
 				<entry key="accountDao">
 					<ref bean="accountDao"/>
 				</entry>
