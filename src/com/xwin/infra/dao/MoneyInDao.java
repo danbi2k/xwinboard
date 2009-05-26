@@ -88,4 +88,9 @@ public class MoneyInDao extends XwinDao
 		
 		return sqlMapClientTemplate.queryForList("selectMoneyInList", param);	
 	}
+	
+	public Integer selectMoneyInWaitCount()
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyInWaitCount");
+	}
 }
