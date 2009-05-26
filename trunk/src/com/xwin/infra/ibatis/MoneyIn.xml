@@ -277,6 +277,6 @@
 	
 	<select id="selectMoneyInWaitCount" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_money_in t
-		WHERE STATUS = 'MC001'
+		WHERE STATUS = 'MC001' AND ISDELETED='N'
 	</select>
 </sqlMap>
