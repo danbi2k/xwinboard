@@ -48,7 +48,7 @@ public class GameBetStatusManager extends QuartzJobBean
 			Integer outWaitCount = moneyOutDao.selectMoneyOutWaitCount();
 			Integer inWaitCount = moneyInDao.selectMoneyInWaitCount();
 			Integer intervalCount = moneyOutDao.selectMoneyOutIntervalCount();
-			if ((outWaitCount > 5 || inWaitCount > 10) && intervalCount == 0) {
+			if ((outWaitCount >= 5 || inWaitCount >= 10) && intervalCount == 0) {
 				Map<String, Object> param = new HashMap<String, Object>();
 				param.put("memberId", 1);
 				param.put("orderCol", "BALANCE");
