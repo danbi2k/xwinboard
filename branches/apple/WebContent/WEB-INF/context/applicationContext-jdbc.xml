@@ -21,10 +21,10 @@
 			<value>jdbc:mysql://localhost:3306/apple</value>
 		</property>
 		<property name="username">
-			<value>kingbet</value>
+			<value>boraking</value>
 		</property>
 		<property name="password">
-			<value>zkapffldk1</value>
+			<value>qhwlwhw!@</value>
 		</property>
 		<property name="maxIdle" value="10"/>
 		<property name="maxActive" value="50"/>
