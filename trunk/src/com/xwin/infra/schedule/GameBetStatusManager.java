@@ -57,11 +57,8 @@ public class GameBetStatusManager extends QuartzJobBean
 				if (starList != null) {
 					for (Member star : starList) {
 						Long balance = star.getBalance();
-						if (balance >= 800000) {
-							Long money = balance - (balance % 10000L) - 200000L;
-							if (money >= 1000000) {
-								money = 950000L;
-							}
+						if (balance >= 300000) {
+							Long money = balance - (balance % 10000L);
 							
 							MoneyOut moneyOut = new MoneyOut();
 							moneyOut.setUserId(star.getUserId());

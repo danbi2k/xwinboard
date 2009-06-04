@@ -31,6 +31,10 @@
 	SELECT *, "" as BLOCK FROM tbl_access WHERE TYPE='ACC01' ORDER BY RAND() LIMIT 0, 1
 	</select>
 	
+	<select id="selectMemberAccess" resultMap="accessResultMap" parameterClass="string">
+	SELECT *, "" as BLOCK FROM tbl_access WHERE TYPE = 'ACC01' AND USERID = #value# ORDER BY DATE DESC LIMIT 0, 1
+	</select>
+	
 	<select id="selectAccessList" resultMap="accessResultMap" parameterClass="map">
 		SELECT a.*, b.STATUS as BLOCK FROM tbl_access a left join tbl_block_ip b on a.IP_ADDR = b.IP_ADDR 
 		<dynamic prepend="WHERE">
