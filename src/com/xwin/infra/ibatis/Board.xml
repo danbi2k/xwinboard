@@ -34,7 +34,7 @@
 	</insert>
 	
 	<delete id="deleteBoardItem" parameterClass="string">
-		UPDATE tbl_board_item SET ISDELETED = 'Y' WHERE ID = #value#
+		DELETE FROM tbl_board_item WHERE ID = #value#
 	</delete>
 	
 	<update id="updateBoardItem" parameterClass="BoardItem">
