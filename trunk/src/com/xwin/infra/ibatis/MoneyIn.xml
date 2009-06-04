@@ -61,9 +61,13 @@
 		WHERE ID = #id#
 	</update>
 	
-	<update id="deleteMoneyIn" parameterClass="string">
-		UPDATE tbl_money_in SET ISDELETED = 'Y' WHERE ID = #value#
-	</update>
+	<delete id="deleteMoneyIn" parameterClass="string">
+		DELETE FROM tbl_money_in WHERE ID = #value#
+	</delete>
+	
+	<delete id="deleteMoneyInByBankBookId" parameterClass="string">
+		DELETE FROM tbl_money_in WHERE BANKBOOK_ID = #value#
+	</delete>
 	
 	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
 		SELECT * FROM tbl_money_in WHERE ID = #value#

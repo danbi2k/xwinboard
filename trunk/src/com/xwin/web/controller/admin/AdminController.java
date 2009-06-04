@@ -161,12 +161,9 @@ public class AdminController extends XwinController
 		
 		String[] id = request.getParameterValues("id");
 		
-		BankBook bankBook = new BankBook();
-		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
-		
 		for (int i = 0 ; i < id.length ; i++) {
-			bankBook.setId(id[i]);
-			bankBookDao.updateBankBook(bankBook);
+			moneyInDao.deleteMoneyInByBankBookId(id[0]);
+			bankBookDao.deleteBankBook(id[0]);
 		}
 		
 		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
