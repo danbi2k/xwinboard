@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.AccountSum;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
@@ -666,6 +667,32 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		return mv;
 	}
+	
+	public ModelAndView inspectMember(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId").trim();
+		
+		List<AccountSum> accountSumList = accountDao.selectAccountSum(userId);
+		Long total = 0L;
+		if (accountSumList != null) {
+			for (AccountSum accountSum : accountSumList) {
+				total += accountSum.getSum();
+				
+				accountSum.setType(Code.getValue(accountSum.getType()));
+			}
+		}
+		
+		ResultXml rx = new ResultXml(0, XwinUtil.comma3(total), accountSumList);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}	
 	
 	private MessageSource msgSrc = null;
 

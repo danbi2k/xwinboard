@@ -7,6 +7,7 @@
 <sqlMap namespace="Account">
 
 	<typeAlias alias="Account" type="com.xwin.domain.admin.Account" />
+	<typeAlias alias="AccountSum" type="com.xwin.domain.admin.AccountSum" />
 	
 	<resultMap id="accountResultMap" class="Account">
 		<result property="id" column="ID"/>		
@@ -21,6 +22,11 @@
 		<result property="moneyInId" column="MONEYIN_ID"/>
 		<result property="moneyOutId" column="MONEYOUT_ID"/>
 		<result property="isDeleted" column="ISDELETED"/>
+	</resultMap>
+	
+	<resultMap id="accountSumResultMap" class="AccountSum">
+		<result property="type" column="TYPE"/>		
+		<result property="sum" column="SUM"/>
 	</resultMap>
 	
 	<insert id="insertAccount" parameterClass="Account">
@@ -106,5 +112,9 @@
 				]]>
 			</isNotNull>
 		</dynamic>
+	</select>	
+	
+	<select id="selectAccountSum" resultMap="accountSumResultMap" parameterClass="string">
+		SELECT TYPE, SUM(MONEY) AS SUM FROM tbl_account WHERE USERID=#value# GROUP BY TYPE
 	</select>
 </sqlMap>
