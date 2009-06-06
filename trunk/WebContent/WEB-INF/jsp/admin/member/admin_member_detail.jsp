@@ -444,6 +444,9 @@ if (accountList != null) {
 %>		
 </table>
 </form>
+
+<input type="button" value="검사" onclick="inspectMember()"/>
+
 <div class="pages">
 <%
 	int pIdx = 0;
@@ -797,6 +800,24 @@ function minus_charging()
 		alert(result.resultXml.message);
 		location.reload();
 	}
+}
+
+function inspectMember()
+{
+	var query = "mode=inspectMember";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	var object = Xwin.ToArray(result.resultXml.object.accountSum);
+	var str = "";
+	for (var i = 0 ; i < object.length ; i++) {
+		str += object[i].type + " : " + Xwin.Currency(object[i].sum) + "\n";
+	}
+
+	str += "\n총계 : " + result.resultXml.message;
+	str += "\n잔고 : <%=XwinUtil.comma3(member.getBalance())%>";
+
+	alert(str);
 }
 </script>
 
