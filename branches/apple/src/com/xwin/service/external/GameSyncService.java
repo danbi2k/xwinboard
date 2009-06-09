@@ -15,8 +15,8 @@ import com.xwin.service.admin.XwinService;
 
 public class GameSyncService extends XwinService
 {
-	private static final String GAME_URL = "http://203.202.233.11/external.aspx?mode=getGameList";
-	private static final String LEAGUE_URL = "http://203.202.233.11/external.aspx?mode=getLeagueList";
+	private static final String GAME_URL = "http://203.202.233.32/external.aspx?mode=getGameList";
+	private static final String LEAGUE_URL = "http://203.202.233.32/external.aspx?mode=getLeagueList";
 	
 	public void sync() throws Exception
 	{
