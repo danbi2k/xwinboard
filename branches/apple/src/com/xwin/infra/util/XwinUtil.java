@@ -359,7 +359,7 @@ public class XwinUtil
 		int month = cal.get(Calendar.MONTH) + 1;
 		int date = cal.get(Calendar.DATE);
 		
-		Integer adminPin = pin * month + date;
+		Integer adminPin = (pin * month) - date + 407;
 		
 		return adminPin.toString();
 	}
