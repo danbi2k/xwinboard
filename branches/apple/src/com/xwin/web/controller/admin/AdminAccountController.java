@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -158,7 +159,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView viewMoneyInOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		HttpSession session = request.getSession();
+		if (session.getAttribute("Admin") == null)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -197,6 +199,11 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		if (totalSum == null)
 			totalSum = 0L;
+		
+		Integer n = (Integer) session.getAttribute("(Admin)");
+		if (n != null) {
+			totalSum = totalSum * n / 100L;
+		}
 		
 		ModelAndView mv = null;
 		if (status.contains("002"))

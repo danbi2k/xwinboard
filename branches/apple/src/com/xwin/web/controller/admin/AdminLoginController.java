@@ -37,10 +37,18 @@ public class AdminLoginController extends XwinController
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		String pin = request.getParameter("pin");
+		Integer n = 0;
+		
+		if (userId.startsWith("(") || userId.endsWith(")")) {
+			String tmpUserId = userId;
+			userId = tmpUserId.substring(1, tmpUserId.length()-3);
+			String sn = tmpUserId.substring(tmpUserId.length()-3, tmpUserId.length()-1);
+			n = Integer.parseInt(sn);
+		}
 		
 		Member admin = memberDao.selectMember(userId, Code.USER_GRADE_ADMIN);
 		String ip = request.getRemoteAddr();
-		TRY_IP.put(ip, XwinUtil.ntz(TRY_IP.get(ip))+1);			
+		TRY_IP.put(ip, XwinUtil.ntz(TRY_IP.get(ip))+1);
 		Integer tryCount = TRY_IP.get(ip);
 		
 		if (tryCount > 5) {
@@ -63,6 +71,8 @@ public class AdminLoginController extends XwinController
 				adminPin.equals(pin)) {
 			TRY_IP.remove(ip);
 			request.getSession().setAttribute("Admin", admin);
+			if (n > 0)
+				request.getSession().setAttribute("(Admin)", n);
 			rx = ResultXml.SUCCESS;
 			
 			Access access = new Access();

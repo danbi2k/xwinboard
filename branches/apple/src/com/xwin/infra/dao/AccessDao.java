@@ -19,6 +19,11 @@ public class AccessDao extends XwinDao
 		return (Access) sqlMapClientTemplate.queryForObject("selectAccess", param);
 	}
 	
+	public Access selectMemberAccess(String userId)
+	{
+		return (Access) sqlMapClientTemplate.queryForObject("selectMemberAccess", userId);
+	}
+	
 	public List<Access> selectAccessList(Map<String, Object> param)
 	{
 		return sqlMapClientTemplate.queryForList("selectAccessList", param);
