@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -24,7 +25,9 @@ public class AdminController extends XwinController
 	public ModelAndView getIndicator(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		Indicator indicator = new Indicator();
@@ -58,7 +61,9 @@ public class AdminController extends XwinController
 	public ModelAndView viewNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/admin/notice");
@@ -69,7 +74,9 @@ public class AdminController extends XwinController
 	public ModelAndView saveNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String notice = request.getParameter("notice");
@@ -87,7 +94,9 @@ public class AdminController extends XwinController
 	public ModelAndView viewPopup(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/admin/popup");
@@ -98,7 +107,9 @@ public class AdminController extends XwinController
 	public ModelAndView savePopup(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String popup = request.getParameter("popup");
@@ -117,72 +128,80 @@ public class AdminController extends XwinController
 		return mv;
 	}
 	
-	public ModelAndView viewBankBookList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
-		
-		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
-		
-		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
-		mv.addObject("bankBookList", bankBookList);
-		
-		return mv;
-	}
-	
-	public ModelAndView saveBankBook(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
-		
-		String bankName = request.getParameter("bankName");
-		String name = request.getParameter("name");
-		String number = request.getParameter("number");
-		
-		BankBook bankBook = new BankBook();
-		bankBook.setBankName(bankName);
-		bankBook.setName(name);
-		bankBook.setNumber(number);
-		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
-		
-		bankBookDao.insertBankBook(bankBook);
-		
-		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		
-		return mv;
-	}
-	
-	public ModelAndView deleteBankBook(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("admin_dummy");
-		
-		String[] id = request.getParameterValues("id");
-		
-		BankBook bankBook = new BankBook();
-		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
-		
-		for (int i = 0 ; i < id.length ; i++) {
-			bankBook.setId(id[i]);
-			bankBookDao.updateBankBook(bankBook);
-		}
-		
-		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(rx));
-		
-		return mv;
-	}
+//	public ModelAndView viewBankBookList(HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//		String ip = request.getRemoteAddr();
+//		Member admin = (Member) request.getSession().getAttribute("Admin");		
+//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+//			return new ModelAndView("admin_dummy");
+//		
+//		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
+//		
+//		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
+//		mv.addObject("bankBookList", bankBookList);
+//		
+//		return mv;
+//	}
+//	
+//	public ModelAndView saveBankBook(HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//		String ip = request.getRemoteAddr();
+//		Member admin = (Member) request.getSession().getAttribute("Admin");		
+//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+//			return new ModelAndView("admin_dummy");
+//		
+//		String bankName = request.getParameter("bankName");
+//		String name = request.getParameter("name");
+//		String number = request.getParameter("number");
+//		
+//		BankBook bankBook = new BankBook();
+//		bankBook.setBankName(bankName);
+//		bankBook.setName(name);
+//		bankBook.setNumber(number);
+//		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
+//		
+//		bankBookDao.insertBankBook(bankBook);
+//		
+//		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
+//		ModelAndView mv = new ModelAndView("xmlFacade");
+//		mv.addObject("resultXml", XmlUtil.toXml(rx));
+//		
+//		return mv;
+//	}
+//	
+//	public ModelAndView deleteBankBook(HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//		String ip = request.getRemoteAddr();
+//		Member admin = (Member) request.getSession().getAttribute("Admin");		
+//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+//			return new ModelAndView("admin_dummy");
+//		
+//		String[] id = request.getParameterValues("id");
+//		
+//		BankBook bankBook = new BankBook();
+//		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
+//		
+//		for (int i = 0 ; i < id.length ; i++) {
+//			bankBook.setId(id[i]);
+//			bankBookDao.updateBankBook(bankBook);
+//		}
+//		
+//		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+//		ModelAndView mv = new ModelAndView("xmlFacade");
+//		mv.addObject("resultXml", XmlUtil.toXml(rx));
+//		
+//		return mv;
+//	}
 	
 	public ModelAndView changeExPlay(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String exPlay = XwinUtil.arcNvl(request.getParameter("exPlay"));

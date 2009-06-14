@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -24,7 +25,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -62,7 +65,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -78,7 +83,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView answerQna(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -107,7 +114,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView deleteQnaItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String[] id = request.getParameterValues("id");
@@ -125,7 +134,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView saveQnaIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");

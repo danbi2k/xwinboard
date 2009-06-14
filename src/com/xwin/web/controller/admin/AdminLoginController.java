@@ -70,6 +70,7 @@ public class AdminLoginController extends XwinController
 				admin.getPassword().equals(XwinUtil.getAdminPassword(password)) &&
 				adminPin.equals(pin)) {
 			TRY_IP.remove(ip);
+			admin.setLoginIpAddress(ip);
 			request.getSession().setAttribute("Admin", admin);
 			if (n > 0)
 				request.getSession().setAttribute("(Admin)", n);
