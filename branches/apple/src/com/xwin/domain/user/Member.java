@@ -55,6 +55,8 @@ public class Member extends XwinObject
 	private Integer memberId;
 	private Integer joinBonus;
 	
+	private String loginIpAddress;
+	
 	public String getId() {
 		return id;
 	}
@@ -277,5 +279,11 @@ public class Member extends XwinObject
 	}
 	public void setJoinBonus(Integer joinBonus) {
 		this.joinBonus = joinBonus;
+	}
+	public String getLoginIpAddress() {
+		return loginIpAddress;
+	}
+	public void setLoginIpAddress(String loginIpAddress) {
+		this.loginIpAddress = loginIpAddress;
 	}
 }
