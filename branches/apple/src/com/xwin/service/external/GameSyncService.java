@@ -15,8 +15,8 @@ import com.xwin.service.admin.XwinService;
 
 public class GameSyncService extends XwinService
 {
-	private static final String GAME_URL = "http://203.202.233.32/external.aspx?mode=getGameList";
-	private static final String LEAGUE_URL = "http://203.202.233.32/external.aspx?mode=getLeagueList";
+	private static final String GAME_URL = "http://203.202.232.20/external.aspx?mode=getGameList";
+	private static final String LEAGUE_URL = "http://203.202.232.20/external.aspx?mode=getLeagueList";
 	
 	public void sync() throws Exception
 	{
@@ -24,7 +24,7 @@ public class GameSyncService extends XwinService
 		String dateStr = XwinUtil.getBoardItemDate(date);
 		String gameXml = null;
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(300000);
 		
 		PostMethod post = new PostMethod(GAME_URL);		
 		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
