@@ -38,58 +38,58 @@ public class GameBetStatusManager extends QuartzJobBean
 		gameDao.batchGameBetStatus(cal.getTime());
 		gameDao.batchGameStatus(new Date());
 		
-		try {
-			Integer outWaitCount = moneyOutDao.selectMoneyOutWaitCount();
-			Integer inWaitCount = moneyInDao.selectMoneyInWaitCount();
-			Integer intervalCount = moneyOutDao.selectMoneyOutIntervalCount();
-			if ((outWaitCount >= 5 || inWaitCount >= 10) && intervalCount == 0) {
-				Map<String, Object> param = new HashMap<String, Object>();
-				param.put("memberId", 1);
-				param.put("orderCol", "BALANCE");
-				param.put("orderBy", "DESC");
-				List<Member> starList = memberDao.selectMemberList(param);
-				if (starList != null) {
-					for (Member star : starList) {
-						Long balance = star.getBalance();
-						if (balance >= 500000) {
-							Long money = balance - (balance % 10000L) - 200000L;
-							if (money >= 1000000) {
-								money = 950000L;
-							}
-							
-							MoneyOut moneyOut = new MoneyOut();
-							moneyOut.setUserId(star.getUserId());
-							moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
-							moneyOut.setReqDate(new Date());
-							moneyOut.setNickName(star.getNickName());
-							moneyOut.setBankName(star.getBankName());
-							moneyOut.setNumber(star.getBankNumber());
-							moneyOut.setName(star.getBankOwner());
-							moneyOut.setMoney(money);
-							
-							moneyOutDao.insertMoneyOut(moneyOut);
-							
-							Account account = new Account();
-							account.setUserId(star.getUserId());
-							account.setType(Code.ACCOUNT_TYPE_MONEYOUT);
-							account.setDate(new Date());
-							account.setOldBalance(star.getBalance());
-							account.setMoney(moneyOut.getMoney() * -1);
-							account.setBalance(star.getBalance() - moneyOut.getMoney());
-							account.setMoneyOutId(moneyOut.getId());
-							
-							accountDao.insertAccount(account);		
-							memberDao.plusMinusBalance(star.getUserId(), moneyOut.getMoney() * -1);
-							
-							star.setBalance(star.getBalance() - moneyOut.getMoney());
-							
-							break;
-						}								
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Integer outWaitCount = moneyOutDao.selectMoneyOutWaitCount();
+//			Integer inWaitCount = moneyInDao.selectMoneyInWaitCount();
+//			Integer intervalCount = moneyOutDao.selectMoneyOutIntervalCount();
+//			if ((outWaitCount >= 5 || inWaitCount >= 10) && intervalCount == 0) {
+//				Map<String, Object> param = new HashMap<String, Object>();
+//				param.put("memberId", 1);
+//				param.put("orderCol", "BALANCE");
+//				param.put("orderBy", "DESC");
+//				List<Member> starList = memberDao.selectMemberList(param);
+//				if (starList != null) {
+//					for (Member star : starList) {
+//						Long balance = star.getBalance();
+//						if (balance >= 500000) {
+//							Long money = balance - (balance % 10000L) - 200000L;
+//							if (money >= 1000000) {
+//								money = 950000L;
+//							}
+//							
+//							MoneyOut moneyOut = new MoneyOut();
+//							moneyOut.setUserId(star.getUserId());
+//							moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
+//							moneyOut.setReqDate(new Date());
+//							moneyOut.setNickName(star.getNickName());
+//							moneyOut.setBankName(star.getBankName());
+//							moneyOut.setNumber(star.getBankNumber());
+//							moneyOut.setName(star.getBankOwner());
+//							moneyOut.setMoney(money);
+//							
+//							moneyOutDao.insertMoneyOut(moneyOut);
+//							
+//							Account account = new Account();
+//							account.setUserId(star.getUserId());
+//							account.setType(Code.ACCOUNT_TYPE_MONEYOUT);
+//							account.setDate(new Date());
+//							account.setOldBalance(star.getBalance());
+//							account.setMoney(moneyOut.getMoney() * -1);
+//							account.setBalance(star.getBalance() - moneyOut.getMoney());
+//							account.setMoneyOutId(moneyOut.getId());
+//							
+//							accountDao.insertAccount(account);		
+//							memberDao.plusMinusBalance(star.getUserId(), moneyOut.getMoney() * -1);
+//							
+//							star.setBalance(star.getBalance() - moneyOut.getMoney());
+//							
+//							break;
+//						}								
+//					}
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }
