@@ -79,11 +79,11 @@
 			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			//alert(result.resultXml.message);
-			//if (result.resultXml.code == 0) {
-			//	location.reload();
-			//}
+			var func = function (result) {
+		        alert(result.resultXml.message);
+		    }
+			http.async(func);		
+			http.parse();
 		//}
 	}
 
@@ -154,7 +154,7 @@
 				endGame(c[i].value);
 			//} 
 		}
-		alert("저장되었습니다");
+		alert("스코어 저장이 요청되었습니다. 잠시후 결과를 확인하십시오");
 		location.reload();
 	}
 

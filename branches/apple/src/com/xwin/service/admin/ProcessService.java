@@ -21,7 +21,7 @@ import com.xwin.infra.util.XwinUtil;
 
 public class ProcessService extends XwinService implements MessageSourceAware
 {	
-	public void judgeGameResult(Game game, Boolean all)
+	public synchronized void judgeGameResult(Game game, Boolean all)
 	{
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
