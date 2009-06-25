@@ -412,10 +412,10 @@ public class AdminGameController extends XwinController
 			
 			try {
 				processService.judgeGameResult(game, false);				
-				rx = new ResultXml(0, "경기가 종료 되었습니다", null);
+				rx = new ResultXml(0, game.getHomeTeam() + " vs " + game.getAwayTeam() + "\n경기가 처리 완료 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
-				rx = new ResultXml(0, "경기 처리중 오류가 발생하였습니다!!", null);
+				rx = new ResultXml(0, game.getHomeTeam() + " vs " + game.getAwayTeam() + "\n경기 처리중 오류가 발생하였습니다!!", null);
 			}
 		}
 		
