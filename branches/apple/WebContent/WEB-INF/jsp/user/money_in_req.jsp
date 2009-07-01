@@ -11,7 +11,11 @@
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
 	BankBook bankBook = null;
 	if (bankBookList != null) {
-		bankBook = bankBookList.get(0);
+		int size = bankBookList.size();
+		String mobile = member.getMobile();
+		String lastDigit = mobile.substring(mobile.length()-1);
+		int digit = Integer.parseInt(lastDigit);
+		bankBook = bankBookList.get(digit % size);
 	}
 %>
 
