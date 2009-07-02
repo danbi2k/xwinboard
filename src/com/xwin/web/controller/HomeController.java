@@ -20,6 +20,8 @@ public class HomeController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
 		
 		Map<String, Object> param = new HashMap<String, Object>(3);
 		param.put("fromRow", 0);

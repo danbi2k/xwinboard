@@ -18,6 +18,7 @@ import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
+import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -48,11 +49,11 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 //		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 //			return new ModelAndView("block");
-//		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
-//		if (invitation == null)
-//			return new ModelAndView("dummy");
-//		
-//		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+		if (invitation == null)
+			return new ModelAndView("dummy");
+		
+		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
@@ -98,8 +99,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												
 												String WelcomeMsg = "환영합니다";
 												
-												Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-												if (cnt == 0) {
+//												Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
+//												if (cnt == 0) {
 													//memberDao.loggingGetEvent(member.getMobile());
 													//member.setBalance(5000L);
 													//member.setJoinBonus(5000);
@@ -107,36 +108,36 @@ public class MemberController extends XwinController implements MessageSourceAwa
 													member.setBalance(0L);
 													member.setJoinBonus(0);
 													
-												} else {
-													member.setBalance(30000L);
-													member.setJoinBonus(30000);
-													WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
-												}
+//												} else {
+//													member.setBalance(30000L);
+//													member.setJoinBonus(30000);
+//													WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
+//												}
 												
 												memberDao.insertMember(member);
 												
 		
-	//											invitation.setJoinId(member.getUserId());
-	//											invitationDao.updateInvitation(invitation);
-	//											
-												if (introducer != null) {
-													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-													memberDao.updateMember(introducer);
-													
-													Long intro_bonus = 5000L;
-													
-													Account account = new Account();
-													account.setUserId(introducer.getUserId());
-													account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
-													account.setDate(new Date());
-													account.setOldBalance(introducer.getBalance());
-													account.setMoney(intro_bonus);
-													account.setBalance(introducer.getBalance() + intro_bonus);
-													accountDao.insertAccount(account);
-													
-													memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
-													memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
-												}
+												invitation.setJoinId(member.getUserId());
+												invitationDao.updateInvitation(invitation);
+												
+//												if (introducer != null) {
+//													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+//													memberDao.updateMember(introducer);
+//													
+//													Long intro_bonus = 5000L;
+//													
+//													Account account = new Account();
+//													account.setUserId(introducer.getUserId());
+//													account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
+//													account.setDate(new Date());
+//													account.setOldBalance(introducer.getBalance());
+//													account.setMoney(intro_bonus);
+//													account.setBalance(introducer.getBalance() + intro_bonus);
+//													accountDao.insertAccount(account);
+//													
+//													memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
+//													memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
+//												}
 												
 												rx = new ResultXml(0, WelcomeMsg, null);
 											}

@@ -25,8 +25,7 @@
 	<bean id="aboutHandyController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="etc/about_handy"/>
 		
-	<bean id="mainController"  class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="main"/>
+	<bean id="mainController"  class="com.xwin.web.controller.MainController"/>
 		
 	<bean id="homeController"  class="com.xwin.web.controller.HomeController"
 		p:boardDao-ref="boardDao"/>

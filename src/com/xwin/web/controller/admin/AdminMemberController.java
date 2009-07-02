@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.AccountSum;
 import com.xwin.domain.admin.BankBook;
-import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
@@ -530,25 +531,18 @@ public class AdminMemberController extends XwinController implements MessageSour
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
-		String number = request.getParameter("number");
+
+		String inviteKey = RandomStringUtils.randomAlphanumeric(5).toUpperCase();
 		
-		Integer introLetter = 0;
-		try {
-			introLetter = Integer.parseInt(number);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Invitation invitation = new Invitation();
+		invitation.setInviteKey(inviteKey);
+		invitation.setUserId(userId);
+		invitation.setSendDate(new Date());
+		invitation.setMobile("");
 		
-		ResultXml rx = null;
+		invitationDao.insertInvitation(invitation);
 		
-		memberDao.plusMinusIntroLeter(userId, introLetter);
-		
-		if (introLetter == 0)		
-			rx = new ResultXml(0, "잘못 입력하셨습니다", null);
-		else if (introLetter > 0)
-			rx = new ResultXml(0, "지급 되었습니다", null);
-		else
-			rx = new ResultXml(0, "차감 되었습니다", null);
+		ResultXml rx = new ResultXml(0, "지급 되었습니다", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -753,6 +747,32 @@ public class AdminMemberController extends XwinController implements MessageSour
 		}
 		
 		ResultXml rx = new ResultXml(0, "", null);		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView inspectMember(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		if (request.getSession().getAttribute("Admin") == null)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId").trim();
+		
+		List<AccountSum> accountSumList = accountDao.selectAccountSum(userId);
+		Long total = 0L;
+		if (accountSumList != null) {
+			for (AccountSum accountSum : accountSumList) {
+				total += accountSum.getSum();
+				
+				accountSum.setType(Code.getValue(accountSum.getType()));
+			}
+		}
+		
+		ResultXml rx = new ResultXml(0, XwinUtil.comma3(total), accountSumList);
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
