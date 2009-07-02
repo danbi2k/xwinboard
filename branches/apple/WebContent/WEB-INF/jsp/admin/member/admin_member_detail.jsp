@@ -79,6 +79,7 @@
 </SCRIPT>
 
 <div class="title">회원정보</div>
+<input type="button" value="검사" onclick="inspectMember()"/>&nbsp;
 <input type="button" value="<%=member.getUserId()%> (<%=member.getNickName()%>) 로 로그인" onclick="memberLogin('<%=member.getUserId()%>')"/>
 <BR>
 <span style='font-size:18'>충전 : <%=XwinUtil.comma3(chargeSum)%> 환전 : <%=XwinUtil.comma3(exchangeSum)%> 합계 : <%=XwinUtil.comma3(chargeSum - exchangeSum)%></span>
@@ -154,10 +155,34 @@
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천해준회원</td>
+		<td width=20%>미사용초대장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<a href='javascript:goMemberDetail("<%=XwinUtil.nvl(member.getIntroducerId())%>")'><%=XwinUtil.nvl(member.getIntroducerId())%></a>
+		<input type="button" value="초대장지급" onclick="giveIntroLetter()"/><br>
+		<table class="prettytable">
+		<%
+		if (noJoinList != null) {
+		%>
+		<tr>
+			<th>초대장</th>
+			<th>지급일</th>
+		</tr>
+		<%
+			for (Invitation invitation : noJoinList) {
+		%>
+			<tr>
+			<td><%=invitation.getInviteKey()%></a>	</td>
+			<td><%=XwinUtil.toDateStr(invitation.getSendDate(), 1)%></td>
+			</tr>
+		<%
+			}
+		}
+		%>
+		</table>
 		</td>
+ 	</tr>
+	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>추천해준회원</td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getIntroducerId())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>추천한회원</td>
@@ -377,6 +402,7 @@ if (accountList != null) {
 %>		
 </table>
 </form>
+
 <div class="pages">
 <%
 	int pIdx = 0;
@@ -415,7 +441,6 @@ function giveIntroLetter()
 {
 	var query = "mode=giveIntroLetter";
 	query += "&userId=<%=member.getUserId()%>";
-	query += "&number=" + document.regist.introLetter.value;
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
@@ -749,12 +774,30 @@ function memberLogin(userId)
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
-		var sUrl = "/";
+		var sUrl = "/home.php";
 		var sTarget = "Member";
 		var sStatus = "toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=1024,height=768,top=100,left=100";
 
 		window.open(sUrl, sTarget, sStatus);
 	}
+}
+
+function inspectMember()
+{
+	var query = "mode=inspectMember";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	var object = Xwin.ToArray(result.resultXml.object.accountSum);
+	var str = "";
+	for (var i = 0 ; i < object.length ; i++) {
+		str += object[i].type + " : " + Xwin.Currency(object[i].sum) + "\n";
+	}
+
+	str += "\n총계 : " + result.resultXml.message;
+	str += "\n잔고 : <%=XwinUtil.comma3(member.getBalance())%>";
+
+	alert(str);
 }
 </script>
 

@@ -26,6 +26,13 @@ public class LoginController extends XwinController
 	 */
 	private static final Logger logger = Logger
 			.getLogger(LoginController.class);
+	
+	public ModelAndView viewUserLogin(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		ModelAndView mv = new ModelAndView("user_login");
+		return mv;
+	}
 
 	public ModelAndView processLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception

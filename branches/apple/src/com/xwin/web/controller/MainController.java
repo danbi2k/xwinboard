@@ -5,13 +5,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public class IndexController extends XwinController
+public class MainController extends XwinController
 {
 
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("user_login");
+		String url = request.getRequestURL().toString();
+		String retView = "";
+		
+		//if (url.contains("vip"))
+			retView = "main_vip";
+		//else
+		//	retView = "main";
+		
+		ModelAndView mv = new ModelAndView(retView);
 		
 		return mv;
 	}

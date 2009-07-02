@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.AccountSum;
 
 public class AccountDao extends XwinDao
 {
@@ -40,5 +41,9 @@ public class AccountDao extends XwinDao
 	public void updateAccount(Account account) {
 		sqlMapClientTemplate.update("updateAccount", account);
 		
+	}
+
+	public List<AccountSum> selectAccountSum(String userId) {
+		return (List<AccountSum>) sqlMapClientTemplate.queryForList("selectAccountSum", userId);		
 	}
 }
