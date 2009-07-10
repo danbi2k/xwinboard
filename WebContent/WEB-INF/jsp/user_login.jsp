@@ -32,7 +32,7 @@
             <p></p>
         </td>
         <td width="186" height="23">
-            <p><input name="userId" type="text" class="input1" id="m_id"></p>
+            <p><input name="userId" type="text" id="m_id"></p>
         </td>
         <td width="99" height="77" rowspan="3" align="center" valign="top">
             <p><img src="img/lbin.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
@@ -46,7 +46,7 @@
             <p>&nbsp;</p>
         </td>
         <td width="186" height="32">
-            <p><input name="password" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
+            <p><input name="password" type="password" id="m_passwd" onkeydown="goButton()"></p>
         </td>
     </tr>
     <tr>

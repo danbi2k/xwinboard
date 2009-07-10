@@ -88,7 +88,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
 												member.setPin(phonePin);
 												member.setStatus(Code.USER_STATUS_NORMAL);
-												member.setGrade(Code.USER_GRADE_NORMAL);
+												member.setGrade(Code.USER_GRADE_VIP);
 												member.setJoinDate(new Date());
 												member.setBankName(command.getBankName());
 												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
