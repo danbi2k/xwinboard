@@ -229,11 +229,11 @@ label{height:18px;}
 .m_login .login_after_txt{margin:10px 0px 0px 20px; _margin:10px 0px 0px 20px; font-family:'µ¸¿ò'; font-size:12px; color:#ffc1c1;}
 .m_login .login_after_txt span{font-family:'µ¸¿ò'; font-weight:400; font-size:11px; color:#ffffff;}
 .m_login .login_after_txt .name{display:inline; font-weight:900; margin:10px 5px 0px 5px; font-family:'µ¸¿ò'; font-size:12px; color:#FBCA71;}
-.m_login .login_after_txt .cash{float:left; margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
+.m_login .login_after_txt .cash{margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
 .m_login .login_after_txt .val{font-family:'verdana'; font-weight:900; font-size:11px; color:#FBCA71;}
-.m_login .login_after_txt .apple{float:left; margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
+.m_login .login_after_txt .apple{margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
 .m_login .login_after_txt .val2{font-family:'verdana'; font-weight:900; font-size:11px; color:#FBCA71;}
-.m_login .login_after_txt .grade{float:left; margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
+.m_login .login_after_txt .grade{margin:5px 10px 3px 10px; font-family:'verdana'; font-size:11px; color:#ffffff;}
 .m_login .login_after_txt .val3{font-family:'verdana'; font-weight:900; font-size:11px; color:#FBCA71;}
 .m_login .login_after_txt .link {clear:both;margin:5px 0px 5px 75px;}
 .m_login .login_after_txt .link a{text-decoration:none !important; color:#ffc1c1;   font-family:'µ¸¿ò'; letter-spacing:-1px;}
