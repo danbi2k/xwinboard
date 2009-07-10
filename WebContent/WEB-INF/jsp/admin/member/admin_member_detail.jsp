@@ -181,11 +181,11 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천해준회원</td>
+		<td width=20%>초대해준회원</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getIntroducerId())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천한회원</td>
+		<td width=20%>초대한회원</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 		<table class="prettytable">
 		<%
