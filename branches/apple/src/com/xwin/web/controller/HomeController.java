@@ -27,8 +27,7 @@ public class HomeController extends XwinController
 		param.put("fromRow", 0);
 		param.put("rowSize", 7);
 		param.put("boardName", "user");
-		//if (member != null)
-		//	param.put("grade", member.getGrade());
+		param.put("grade", member.getGrade());
 		
 		param.put("type", Code.BOARDITEM_TYPE_NOTICE);
 		List<BoardItem> noticeList = boardDao.selectBoardItemList(param);

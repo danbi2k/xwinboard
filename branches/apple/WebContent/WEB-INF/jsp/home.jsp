@@ -17,9 +17,11 @@
 		<%if (login) { %>
 			<div class='m_login'>
 				<div class='login_after_txt'>
-					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br>
-					<div class='cash'>· 캐쉬:</div> <div class='val'><%=XwinUtil.comma3(member.getBalance())%> <span>원</span></div>
-					<div class='apple'>· 애플:</div> <div class='val2'><%=XwinUtil.comma3(member.getPoint())%> <span>ap</span></div>
+					<br>
+					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br><br>
+					<div class='cash'>· 캐쉬 : <span class='val'><%=XwinUtil.comma3(member.getBalance())%></span> 원</div>
+					<div class='apple'>· 애플 : <span class='val2'><%=XwinUtil.comma3(member.getPoint())%></span> ap</div>
+					<div class='grade'>· 등급 : <span class='val3'><%=Code.getValue(member.getGrade())%></span></div>
 					<div class='link'><a href='betlog.php?mode=viewMyBettingList' target='_self'>배팅내역</a> | <a href='user.php?mode=viewModifyForm'>정보변경</a></div>
 				</div>
 			</div>
