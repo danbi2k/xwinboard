@@ -128,8 +128,6 @@ public class AdminLoginController extends XwinController
 			int pin = (int) (Math.random() * 10000);
 			session.setAttribute("OTP", pin);
 			String pinStr = "" + pin;
-			sendSmsConnector.sendSms(pinStr, value, "0000");
-			//System.out.println(pinStr);
 			
 			OtpLog otpLog = new OtpLog();
 			otpLog.setDate(new Date());
@@ -137,6 +135,8 @@ public class AdminLoginController extends XwinController
 			otpLog.setPin(pinStr);
 			otpLog.setIpAddress(request.getRemoteAddr());
 			otpLogDao.insertOtpLog(otpLog);
+			
+			sendSmsConnector.sendSms(pinStr, value, "0000");
 		}
 		
 		ModelAndView mv = new ModelAndView("redirect:/");
