@@ -116,7 +116,7 @@ setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=1">Apple</a></h1>
+		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10">Apple</a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>
