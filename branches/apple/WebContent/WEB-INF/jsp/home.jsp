@@ -18,7 +18,7 @@
 			<div class='m_login'>
 				<div class='login_after_txt'>
 					<br>
-					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br><br>
+					<div class='name'><%=member.getNickName()%></div> 님 반갑습니다.<br>
 					<div class='cash'>· 캐쉬 : <span class='val'><%=XwinUtil.comma3(member.getBalance())%></span> 원</div>
 					<div class='apple'>· 애플 : <span class='val2'><%=XwinUtil.comma3(member.getPoint())%></span> ap</div>
 					<div class='grade'>· 등급 : <span class='val3'><%=Code.getValue(member.getGrade())%></span></div>
