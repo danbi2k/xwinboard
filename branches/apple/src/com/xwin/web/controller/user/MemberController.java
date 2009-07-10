@@ -57,7 +57,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
-		String introducerId = XwinUtil.arcNvl(command.getIntroducerId());
+		String introducerId = invitation.getUserId();
 		Member introducer = null;
 		if (introducerId != null)
 			introducer = memberDao.selectMember(introducerId, null);
