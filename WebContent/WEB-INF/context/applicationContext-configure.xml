@@ -18,7 +18,7 @@
 		    
 	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector">
 		<property name="userId" value="qnwkdhkd"/>
-		<property name="password" value="dmsdn18"/>
+		<property name="password" value="tnqkr79"/>
 		<property name="returnUrl" value="apple-v.net/munja.aspx"/>
 	</bean>
 	
