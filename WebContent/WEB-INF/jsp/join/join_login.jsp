@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.admin.*" %>
+
+
 <html>
 <head>
 <title>환영합니다</title>
@@ -43,17 +45,17 @@ function goButton(form)
 //-->
 </SCRIPT>
 
-<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<body bgcolor="#000000" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <form name="regist">
-<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/invi.jpg" style="background-repeat:no-repeat;" align="center">
+<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/index_i.gif" style="background-repeat:no-repeat;" align="center">
     <tr>
-        <td width="122" height="230">
+        <td width="122" height="460">
             <p>&nbsp;</p>
         </td>
-        <td width="575" height="230" colspan="3">
+        <td width="575" height="460" colspan="3">
             <p>&nbsp;</p>
         </td>
-        <td width="204" height="230">
+        <td width="204" height="460">
             <p>&nbsp;</p>
         </td>
  
@@ -68,10 +70,10 @@ function goButton(form)
             <p></p>
         </td>
         <td width="191" height="26">
-            <p><input name="inviteKey" type="text" id="m_passwd"></p>
+            <p><input name="inviteKey" type="text" class="input1" id="m_passwd"></p>
         </td>
         <td width="78" height="72" rowspan="3" align="center" valign="top">
-            <p><input type="button" value="등록" onclick="checkIT()"></p>
+            <p><img src="img/lbin3.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
         </td>
         <td width="204" height="72" rowspan="3">
             <p>&nbsp;</p>
@@ -83,7 +85,7 @@ function goButton(form)
             <p>&nbsp;</p>
         </td>
         <td width="191" height="26">
-            <p><input name="userId" type="text" id="m_id"></p>
+            <p><input name="userId" type="text" class="input1" id="m_id"></p>
         </td>
         <td width="123" height="26"></td>
     </tr>
@@ -104,7 +106,7 @@ function goButton(form)
             <p>&nbsp;</p>
         </td>
         <td width="473" height="34" colspan="3">
-           <p>문의 : <%=Admin.ADMIN_EMAIL%></p>
+           <p></p>
         </td>
     </tr>
 

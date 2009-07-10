@@ -10,17 +10,17 @@
 <script language="javascript" src="script/jkl-parsexml.js"></script>
 <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
-<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<body bgcolor="#7a0606" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <form name="regist">
-<table cellpadding="0" cellspacing="0" width="1024" height="768" style="background-repeat:no-repeat;" align="center">
+<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/index.gif" style="background-repeat:no-repeat;" align="center">
     <tr>
-        <td width="339" height="130">
+        <td width="339" height="460">
             <p>&nbsp;</p>
         </td>
-        <td width="370" height="130" colspan="3">
+        <td width="370" height="460" colspan="3">
             <p>&nbsp;</p>
         </td>
-        <td width="315" height="130">
+        <td width="315" height="460">
             <p>&nbsp;</p>
         </td>
     </tr>
@@ -32,21 +32,29 @@
             <p></p>
         </td>
         <td width="186" height="23">
-            <p><input name="userId" type="text" id="m_id"></p>
+            <p><input name="userId" type="text" class="input1" id="m_id"></p>
         </td>
         <td width="99" height="77" rowspan="3" align="center" valign="top">
-            <p><input type="button" value="로그인" onclick="checkIT()"></p>
+            <p><img src="img/lbin.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
         </td>
         <td width="315" height="77" rowspan="3">
             <p>&nbsp;</p>
         </td>
     </tr>
     <tr>
-        <td width="85" height="23">
+        <td width="85" height="32">
             <p>&nbsp;</p>
         </td>
-        <td width="186" height="23">
-            <p><input name="password" type="password" id="m_passwd" onkeydown="goButton()"></p>
+        <td width="186" height="32">
+            <p><input name="password" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="85" height="22">
+            <p>&nbsp;</p>
+        </td>
+        <td width="186" height="22">
+            <p><input name="pin" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
         </td>
     </tr>
     <tr>
@@ -65,7 +73,7 @@
             <p>&nbsp;</p>
         </td>
         <td width="186" height="38" align="center">
-            <p><a href="userform.php?mode=viewJoinLoginForm">초대장등록</a></p>
+            <p><a href="userform.php?mode=viewJoinLoginForm"><img src="img/entry00.gif" border="0"></a></p>
         </td>
         <td width="99" height="38">
             <p>&nbsp;</p>
@@ -73,7 +81,7 @@
     </tr>
     <tr>
         <td width="370" height="190" colspan="3" align="center">
-            <p><%=Admin.ADMIN_EMAIL%></p>
+            <p></p>
         </td>
     </tr>
 </table>
