@@ -50,8 +50,8 @@ function checkIndiCallBack(result)
 	
 		chargingVal = chargingIndi.innerHTML = (data.chargingIndi);
 		exchangeVal = exchangeIndi.innerHTML = (data.exchangeIndi);
-		centerVal = centerIndi.innerHTML = (data.centerIndi);
-		//vipVal = vipIndi.innerHTML = (data.vipIndi);
+		//centerVal = centerIndi.innerHTML = (data.centerIndi);
+		vipVal = vipIndi.innerHTML = (data.vipIndi);
 		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
 		wdlVal = wdlIndi.innerHTML = (data.wdlIndi);
 		handyVal = handyIndi.innerHTML = (data.handyIndi);
@@ -128,7 +128,6 @@ setInterval("playSound()", 3000);
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 			<li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
 			<li>핸디캡  <a id="handyIndi" href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
-			<li><input type="button" value="경기퍼오기" onclick="gameSync()"></li>
 		</ul>
 	</div>
 	<div id="content">
