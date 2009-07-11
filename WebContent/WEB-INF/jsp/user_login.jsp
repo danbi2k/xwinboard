@@ -32,10 +32,10 @@
             <p></p>
         </td>
         <td width="186" height="23">
-            <p><input name="userId" type="text" id="m_id"></p>
+            <p><input style="width:138pt;" name="userId" type="text" id="m_id"></p>
         </td>
         <td width="99" height="77" rowspan="3" align="center" valign="top">
-            <p><img src="img/lbin.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
+            <p><img src="img/lbin3222.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
         </td>
         <td width="315" height="77" rowspan="3">
             <p>&nbsp;</p>
@@ -46,7 +46,7 @@
             <p>&nbsp;</p>
         </td>
         <td width="186" height="32">
-            <p><input name="password" type="password" id="m_passwd" onkeydown="goButton()"></p>
+            <p><input style="width:138pt;" name="password" type="password" id="m_passwd" onkeydown="goButton()"></p>
         </td>
     </tr>
     <tr>
@@ -54,7 +54,7 @@
             <p>&nbsp;</p>
         </td>
         <td width="186" height="22">
-            <p><input name="pin" type="password" class="input1" id="m_passwd" onkeydown="goButton()"></p>
+            <p></p>
         </td>
     </tr>
     <tr>
