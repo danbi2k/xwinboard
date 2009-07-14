@@ -23,9 +23,10 @@
 	<tr>
 		<th width="5%"></th>
 		<th width="10%">번호</th>
-		<th width="20%">은행</th>
+		<th width="10%">은행</th>
 		<th width="45%">계좌번호</th>
 		<th width="20%">예금주</th>
+		<th width="10%">등급</th>
 	</tr>
 <%
 	if (bankBookList != null) {
@@ -37,6 +38,7 @@
 		<td align='center'><%=bankBook.getBankName()%></td>
 		<td align='center'><%=bankBook.getNumber()%></td>
 		<td align='center'><%=bankBook.getName()%></td>
+		<td align='center'><%=Code.getValue(bankBook.getGrade())%></td>
 	</tr>
 <%		
 		}
@@ -72,6 +74,15 @@
 	<input type="text" name="name" size="40"/>
 	</td>
 </tr>
+<tr>
+	<td>등급</td>
+	<td width="*">
+	<select name="grade">
+		<option value="<%=Code.USER_GRADE_NORMAL%>" selected>일반</option>
+		<option value="<%=Code.USER_GRADE_VIP%>">VIP</option>
+	</select>
+	</td>
+</tr>
 </table>
 </form>
 <BR>
@@ -88,6 +99,7 @@ function saveBankBook()
 	query += "&bankName=" + frm.bankName.value;
 	query += "&number=" + frm.number.value;
 	query += "&name=" + frm.name.value;
+	query += "&grade=" + frm.grade.value;
 
 	var http = new JKL.ParseXML("admin.aspx", query);
 	var result = http.parse();

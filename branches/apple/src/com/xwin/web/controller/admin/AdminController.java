@@ -155,12 +155,14 @@ public class AdminController extends XwinController
 //		String bankName = request.getParameter("bankName");
 //		String name = request.getParameter("name");
 //		String number = request.getParameter("number");
+//		String grade = request.getParameter("grade");
 //		
 //		BankBook bankBook = new BankBook();
 //		bankBook.setBankName(bankName);
 //		bankBook.setName(name);
 //		bankBook.setNumber(number);
 //		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
+//		bankBook.setGrade(grade);
 //		
 //		bankBookDao.insertBankBook(bankBook);
 //		
