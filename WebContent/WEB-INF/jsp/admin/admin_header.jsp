@@ -53,8 +53,8 @@ function checkIndiCallBack(result)
 		//centerVal = centerIndi.innerHTML = (data.centerIndi);
 		vipVal = vipIndi.innerHTML = (data.vipIndi);
 		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
-		wdlVal = wdlIndi.innerHTML = (data.wdlIndi);
-		handyVal = handyIndi.innerHTML = (data.handyIndi);
+		//wdlVal = wdlIndi.innerHTML = (data.wdlIndi);
+		//handyVal = handyIndi.innerHTML = (data.handyIndi);
 	}
 }
 
@@ -84,8 +84,8 @@ function playSound()
 		playIt(player3);
 	//if (hackVal > 30)
 	//	playIt(player4);
-	if (wdlVal+handyVal > 0)
-		playIt(player5);
+	//if (wdlVal+handyVal > 0)
+	//	playIt(player5);
 }
 
 function changeExPlay()
@@ -126,8 +126,8 @@ setInterval("playSound()", 3000);
 			<!-- li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li -->
 			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
-			<li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
-			<li>핸디캡  <a id="handyIndi" href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li>
+			<!--li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li-->
+			<!--li>핸디캡  <a id="handyIndi" href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li-->
 		</ul>
 	</div>
 	<div id="content">
