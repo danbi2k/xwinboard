@@ -31,11 +31,12 @@ public class MoneyInController extends XwinController
 			return new ModelAndView("illegal");
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
 			return new ModelAndView("dummy");
 		
 		List<BankBook> bankBookList =
-			bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
+			bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL, member.getGrade());
 		
 		ModelAndView mv = new ModelAndView("user/money_in_req");
 		mv.addObject("bankBookList", bankBookList);
