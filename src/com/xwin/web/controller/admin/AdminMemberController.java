@@ -338,29 +338,29 @@ public class AdminMemberController extends XwinController implements MessageSour
 //		return mv;
 //	}
 	
-//	public ModelAndView changeGrade(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String grade = request.getParameter("grade");
-//		String userId = request.getParameter("userId");
-//		
-//		Member member = new Member();
-//		member.setGrade(grade);
-//		member.setUserId(userId);
-//		
-//		memberDao.updateMember(member);		
-//	
-//		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
+	public ModelAndView changeGrade(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String grade = request.getParameter("grade");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setGrade(grade);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 	
 //	public ModelAndView changeEmail(HttpServletRequest request,
 //			HttpServletResponse response) throws Exception
