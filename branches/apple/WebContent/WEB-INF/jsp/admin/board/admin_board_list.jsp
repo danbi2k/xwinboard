@@ -24,7 +24,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판 (일반)" %></div>
 
 <form name='search' method='get' action='adminBoard.aspx'>
 <input type='hidden' name='mode' value='viewBoardList'/>

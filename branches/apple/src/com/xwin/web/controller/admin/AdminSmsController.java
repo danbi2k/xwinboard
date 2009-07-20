@@ -69,9 +69,12 @@ public class AdminSmsController extends XwinController
 		
 		String message = request.getParameter("message");
 		String callback = request.getParameter("callback");
+		String grade = request.getParameter("grade");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("status", Code.USER_STATUS_NORMAL);
+		param.put("grade", grade);
+		
 		List<Member> memberList = memberDao.selectMemberList(param);
 		if (memberList != null) {
 			List<String> phoneList = new ArrayList<String>(memberList.size());

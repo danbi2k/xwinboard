@@ -154,6 +154,7 @@
 		<td width=20%>상태</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
+	<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>미사용초대장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
@@ -213,6 +214,7 @@
 		</table>
 		</td>
  	</tr>
+	<%} %>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>환전계좌번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>

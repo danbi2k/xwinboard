@@ -277,66 +277,66 @@ public class AdminMemberController extends XwinController implements MessageSour
 		return mv;
 	}
 	
-//	public ModelAndView changeBankInfo(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String bankName = request.getParameter("bankName");
-//		String bankNumber = request.getParameter("bankNumber");
-//		String bankOwner = request.getParameter("bankOwner");
-//		String userId = request.getParameter("userId");
-//		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("bankName", bankName);
-//		param.put("bankNumber", bankNumber);
-//		param.put("bankOwner", bankOwner);
-//		
-//		ResultXml rx = null;
-//		List <Member> dupList = memberDao.selectMemberList(param);
-//		if (bankName == null || bankName.length() < 2)
-//			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
-//		else if (bankNumber == null || bankNumber.length() < 5)
-//			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
-//		else if (bankOwner == null || bankOwner.length() < 2)
-//			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
-//		else if (dupList.size() > 0) {
-//			if (dupList.size() == 1 && dupList.get(0).getUserId().equals(userId))
-//				rx = new ResultXml(-1, "기존 환전계좌번호 입니다", null);
-//			else
-//				rx = new ResultXml(-2, "다른 아이디에 등록된 환전계좌번호 입니다", dupList);
-//		}
-//		else {		
-//			Member member = memberDao.selectMember(userId, null);
-//			
-//			BankBook bankBook = new BankBook();
-//			bankBook.setBankName(member.getBankName());
-//			bankBook.setNumber(member.getBankNumber());
-//			bankBook.setName(member.getBankOwner());
-//			bankBook.setStatus(userId);
-//			bankBook.setDate(member.getBankDate());
-//			
-//			bankBookDao.insertMemberBankBook(bankBook);
-//			
-//			member = new Member();
-//			member.setBankName(bankName);
-//			member.setBankNumber(XwinUtil.bankTrim(bankNumber));
-//			member.setBankOwner(XwinUtil.bankTrim(bankOwner));
-//			member.setUserId(userId);
-//			member.setBankDate(new Date());
-//			
-//			memberDao.updateMember(member);		
-//		
-//			rx = new ResultXml(0, "변경되었습니다", null);
-//		}
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
+	public ModelAndView changeBankInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String bankName = request.getParameter("bankName");
+		String bankNumber = request.getParameter("bankNumber");
+		String bankOwner = request.getParameter("bankOwner");
+		String userId = request.getParameter("userId");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);
+		
+		ResultXml rx = null;
+		List <Member> dupList = memberDao.selectMemberList(param);
+		if (bankName == null || bankName.length() < 2)
+			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
+		else if (bankNumber == null || bankNumber.length() < 5)
+			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
+		else if (bankOwner == null || bankOwner.length() < 2)
+			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
+		else if (dupList.size() > 0) {
+			if (dupList.size() == 1 && dupList.get(0).getUserId().equals(userId))
+				rx = new ResultXml(-1, "기존 환전계좌번호 입니다", null);
+			else
+				rx = new ResultXml(-2, "다른 아이디에 등록된 환전계좌번호 입니다", dupList);
+		}
+		else {		
+			Member member = memberDao.selectMember(userId, null);
+			
+			BankBook bankBook = new BankBook();
+			bankBook.setBankName(member.getBankName());
+			bankBook.setNumber(member.getBankNumber());
+			bankBook.setName(member.getBankOwner());
+			bankBook.setStatus(userId);
+			bankBook.setDate(member.getBankDate());
+			
+			bankBookDao.insertMemberBankBook(bankBook);
+			
+			member = new Member();
+			member.setBankName(bankName);
+			member.setBankNumber(XwinUtil.bankTrim(bankNumber));
+			member.setBankOwner(XwinUtil.bankTrim(bankOwner));
+			member.setUserId(userId);
+			member.setBankDate(new Date());
+			
+			memberDao.updateMember(member);		
+		
+			rx = new ResultXml(0, "변경되었습니다", null);
+		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 	
 	public ModelAndView changeGrade(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
@@ -362,60 +362,60 @@ public class AdminMemberController extends XwinController implements MessageSour
 		return mv;
 	}
 	
-//	public ModelAndView changeEmail(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String email = request.getParameter("email");
-//		String userId = request.getParameter("userId");
-//		
-//		Member member = new Member();
-//		if (email.equals("qnwkdhkd0@qnwkehlwk")) {
-//			member.setMemberId(0);
-//		} else if (email.equals("qnwkdhkd1@qnwkehlwk")) {
-//			member.setMemberId(1);
-//		} else {
-//			member.setEmail(email);
-//		}		
-//
-//		member.setUserId(userId);
-//		
-//		memberDao.updateMember(member);		
-//	
-//		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
+	public ModelAndView changeEmail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String email = request.getParameter("email");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		if (email.equals("qnwkdhkd0@qnwkehlwk")) {
+			member.setMemberId(0);
+		} else if (email.equals("qnwkdhkd1@qnwkehlwk")) {
+			member.setMemberId(1);
+		} else {
+			member.setEmail(email);
+		}		
+
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
 	
-//	public ModelAndView changeMobile(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String mobile = request.getParameter("mobile");
-//		String userId = request.getParameter("userId");
-//		
-//		Member member = new Member();
-//		member.setMobile(mobile);
-//		member.setUserId(userId);
-//		
-//		memberDao.updateMember(member);		
-//	
-//		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView changeMobile(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String mobile = request.getParameter("mobile");
+		String userId = request.getParameter("userId");
+		
+		Member member = new Member();
+		member.setMobile(mobile);
+		member.setUserId(userId);
+		
+		memberDao.updateMember(member);		
+	
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 	
 	public ModelAndView changeDenyrity(HttpServletRequest request,
 			HttpServletResponse response) throws Exception

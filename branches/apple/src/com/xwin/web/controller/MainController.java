@@ -11,13 +11,7 @@ public class MainController extends XwinController
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		String url = request.getRequestURL().toString();
-		String retView = "";
-		
-		//if (url.contains("vip"))
-			retView = "main_vip";
-		//else
-		//	retView = "main";
+		String retView = "main";
 		
 		ModelAndView mv = new ModelAndView(retView);
 		

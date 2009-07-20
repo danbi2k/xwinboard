@@ -14,7 +14,7 @@
 	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판 (일반)" %></div>
 
 <form method='post' name='update' action='adminBoard.aspx'>
 	<input type='hidden' name='mode' value='updateBoardItem'/>

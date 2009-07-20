@@ -42,8 +42,9 @@ var targetCheck = 0;
 	<tr>
 		<td width="36%">송신대상</td>
 		<td>
-			<input type="radio" name="target" checked onclick="targetCheck=0;document.SMSFORM.phone.disabled=false"> 단일송신
-			<input type="radio" name="target" onclick="targetCheck=1;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true"> 전체송신
+			<input type="radio" name="target" checked onclick="targetCheck=0;document.SMSFORM.phone.disabled=false;document.SMSFORM.keyword.disabled=false"> 단일송신
+			<input type="radio" name="target" onclick="targetCheck=1;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true;document.SMSFORM.keyword.disabled=true"> VIP송신
+			<input type="radio" name="target" onclick="targetCheck=2;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true;document.SMSFORM.keyword.disabled=true"> 일반송신
 		</td>
 	</tr>
 	<tr>
@@ -90,8 +91,10 @@ var targetCheck = 0;
 		if (result.resultXml.code == 0) {
 			if (result.resultXml.message)
 				SMSFORM.phone.value = result.resultXml.message;
-			else
+			else {
+				alert("등록되지 않은 아이디 입니다");
 				SMSFORM.phone.value = "";
+			}
 		}
 	}
 
@@ -216,8 +219,11 @@ var targetCheck = 0;
 		var query = "";
 		if (targetCheck == 0)
 			query += "mode=sendSms";
-		else
-			query += "mode=sendSmsAllMember";
+		else if (targetCheck == 1)
+			query += "mode=sendSmsAllMember&grade=10";
+		else if (targetCheck == 2)
+			query += "mode=sendSmsAllMember&grade=1";
+		
 		query += "&message=" + Obj.msg.value;
 		query += "&phone=" + Obj.phone.value;
 		query += "&callback=" + Obj.callback.value;

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
@@ -30,7 +31,11 @@ public class LoginController extends XwinController
 	public ModelAndView viewUserLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
-		ModelAndView mv = new ModelAndView("user_login");
+		ModelAndView mv = null;
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP))
+			mv = new ModelAndView("vip_login");
+		else
+			mv = new ModelAndView("nom_login");
 		return mv;
 	}
 
@@ -58,7 +63,10 @@ public class LoginController extends XwinController
 			
 			Member member = memberDao.selectMember(userId, null);
 			
-			if (member == null || member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) || member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
+			if (member == null ||
+					member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) ||
+					member.getStatus().equals(Code.USER_STATUS_SECEDE) ||
+					Admin.SITE_GRADE.equals(member.getGrade()) == false) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 아이디 입니다.\n아이디를 확인해 주세요");
 			} else if (comparePassword(member.getPassword(), password) == false) {
@@ -67,12 +75,6 @@ public class LoginController extends XwinController
 			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
 				rx.setCode(-1);
 				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
-			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
-				rx.setCode(-1);
-				rx.setMessage("탈퇴 요청 중입니다");
-			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
-				rx.setCode(-1);
-				rx.setMessage("탈퇴한 사용자 입니다");
 			} else {
 				rx.setCode(0);
 				HttpSession session = request.getSession();
