@@ -13,7 +13,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.xwin.domain.admin.Admin;
-import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.Code;
@@ -48,8 +47,14 @@ public class XwinInitServlet extends HttpServlet
 		
 		AdminDao adminDao = (AdminDao) wac.getBean("adminDao");
 		Admin.NOTICE = adminDao.selectAdmin("NOTICE");
-		Admin.POPUP = adminDao.selectAdmin("POPUP");
-		Admin.POPUPFLAG = adminDao.selectAdmin("POPUPFLAG");
+		
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+			Admin.POPUP = adminDao.selectAdmin("VIP_POPUP");
+			Admin.POPUPFLAG = adminDao.selectAdmin("VIP_POPUPFLAG");
+		} else {
+			Admin.POPUP = adminDao.selectAdmin("NOM_POPUP");
+			Admin.POPUPFLAG = adminDao.selectAdmin("NOM_POPUPFLAG");
+		}
 		
 		Admin.DENY_JOIN = adminDao.selectAdmin("DENY_JOIN");
 		Admin.DENY_BOARD = adminDao.selectAdmin("DENY_BOARD");
@@ -79,7 +84,5 @@ public class XwinInitServlet extends HttpServlet
 	public void service(ServletRequest arg0, ServletResponse arg1)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 	}
-
 }

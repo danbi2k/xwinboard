@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.join.Invitation;
@@ -49,15 +50,17 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 //		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 //			return new ModelAndView("block");
-		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
-		if (invitation == null)
-			return new ModelAndView("dummy");
-		
-		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+		Invitation invitation = null;
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+			invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+			if (invitation == null)
+				return new ModelAndView("dummy");			 
+			invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+		}
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
-		String introducerId = invitation.getUserId();
+		String introducerId = invitation != null ? invitation.getUserId() : null;
 		Member introducer = null;
 		if (introducerId != null)
 			introducer = memberDao.selectMember(introducerId, null);
@@ -88,7 +91,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
 												member.setPin(phonePin);
 												member.setStatus(Code.USER_STATUS_NORMAL);
-												member.setGrade(Code.USER_GRADE_VIP);
+												member.setGrade(Admin.SITE_GRADE);
 												member.setJoinDate(new Date());
 												member.setBankName(command.getBankName());
 												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
@@ -116,9 +119,10 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												
 												memberDao.insertMember(member);
 												
-		
-												invitation.setJoinId(member.getUserId());
-												invitationDao.updateInvitation(invitation);
+												if (invitation != null) {
+													invitation.setJoinId(member.getUserId());
+													invitationDao.updateInvitation(invitation);
+												}
 												
 //												if (introducer != null) {
 //													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
@@ -378,7 +382,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
 		}
 		else {
-			String phonePin = RandomStringUtils.randomAlphanumeric(5);
+			String phonePin = RandomStringUtils.randomAlphabetic(5).toUpperCase();
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {

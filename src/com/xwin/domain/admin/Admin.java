@@ -15,6 +15,8 @@ public class Admin extends XwinObject
 	
 	public static MemberDao memberDao = null;
 	
+	public static String SITE_GRADE = "";
+	
 	public static String NOTICE = "";
 	public static String POPUP = "";
 	public static String POPUPFLAG = "";
@@ -47,4 +49,8 @@ public class Admin extends XwinObject
 	}
 	
 	public static Map<String, HttpSession> loginMap = new HashMap<String, HttpSession>();
+
+	public void setSITE_GRADE(String site_grade) {
+		Admin.SITE_GRADE = site_grade;
+	}
 }

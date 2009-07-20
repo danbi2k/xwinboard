@@ -8,7 +8,7 @@
 </head>
 <frameset rows="0,100%" border="0">
 	<frame name=left src="" border=0 scrolling="yes" noresize>
-	<frame name=mainFrame src="home.php" border=0 scrolling="yes" noresize>
+	<frame name=mainFrame src="login.php?mode=viewUserLogin" border=0 scrolling="yes" noresize>
 </frameset>
 <body>
 </body>

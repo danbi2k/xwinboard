@@ -99,7 +99,24 @@ public class AdminController extends XwinController
 		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
+		String grade = request.getParameter("grade");
+		if (grade == null)
+			grade = Code.USER_GRADE_VIP;
+		
+		String popup = "";
+		String popupFlag = "";
+		
+		if (grade.equals(Code.USER_GRADE_VIP)) {
+			popup = adminDao.selectAdmin("VIP_POPUP");
+			popupFlag = adminDao.selectAdmin("VIP_POPUPFLAG");
+		} else {
+			popup = adminDao.selectAdmin("NOM_POPUP");
+			popupFlag = adminDao.selectAdmin("NOM_POPUPFLAG");
+		}
+		
 		ModelAndView mv = new ModelAndView("admin/admin/popup");
+		mv.addObject("popup", popup);
+		mv.addObject("popupFlag", popupFlag);
 		
 		return mv;
 	}
@@ -114,9 +131,15 @@ public class AdminController extends XwinController
 		
 		String popup = request.getParameter("popup");
 		String popupFlag = request.getParameter("popupFlag");
+		String grade = request.getParameter("grade");
 		
-		adminDao.updateAdmin("POPUP", popup);
-		adminDao.updateAdmin("POPUPFLAG", popupFlag);
+		if (grade.equals(Code.USER_GRADE_VIP)) {
+			adminDao.updateAdmin("VIP_POPUP", popup);
+			adminDao.updateAdmin("VIP_POPUPFLAG", popupFlag);
+		} else {
+			adminDao.updateAdmin("NOM_POPUP", popup);
+			adminDao.updateAdmin("NOM_POPUPFLAG", popupFlag);
+		}
 		
 		Admin.POPUP = popup;
 		Admin.POPUPFLAG = popupFlag;
@@ -128,75 +151,75 @@ public class AdminController extends XwinController
 		return mv;
 	}
 	
-//	public ModelAndView viewBankBookList(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
-//		
-//		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
-//		mv.addObject("bankBookList", bankBookList);
-//		
-//		return mv;
-//	}
-//	
-//	public ModelAndView saveBankBook(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String bankName = request.getParameter("bankName");
-//		String name = request.getParameter("name");
-//		String number = request.getParameter("number");
-//		String grade = request.getParameter("grade");
-//		
-//		BankBook bankBook = new BankBook();
-//		bankBook.setBankName(bankName);
-//		bankBook.setName(name);
-//		bankBook.setNumber(number);
-//		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
-//		bankBook.setGrade(grade);
-//		
-//		bankBookDao.insertBankBook(bankBook);
-//		
-//		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
-//	
-//	public ModelAndView deleteBankBook(HttpServletRequest request,
-//			HttpServletResponse response) throws Exception
-//	{
-//		String ip = request.getRemoteAddr();
-//		Member admin = (Member) request.getSession().getAttribute("Admin");		
-//		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
-//			return new ModelAndView("admin_dummy");
-//		
-//		String[] id = request.getParameterValues("id");
-//		
-//		BankBook bankBook = new BankBook();
-//		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
-//		
-//		for (int i = 0 ; i < id.length ; i++) {
-//			bankBook.setId(id[i]);
-//			bankBookDao.updateBankBook(bankBook);
-//		}
-//		
-//		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
-//		ModelAndView mv = new ModelAndView("xmlFacade");
-//		mv.addObject("resultXml", XmlUtil.toXml(rx));
-//		
-//		return mv;
-//	}
+	public ModelAndView viewBankBookList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		List<BankBook> bankBookList = bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL);
+		
+		ModelAndView mv = new ModelAndView("admin/admin/admin_bankbook");
+		mv.addObject("bankBookList", bankBookList);
+		
+		return mv;
+	}
+	
+	public ModelAndView saveBankBook(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String bankName = request.getParameter("bankName");
+		String name = request.getParameter("name");
+		String number = request.getParameter("number");
+		String grade = request.getParameter("grade");
+		
+		BankBook bankBook = new BankBook();
+		bankBook.setBankName(bankName);
+		bankBook.setName(name);
+		bankBook.setNumber(number);
+		bankBook.setStatus(Code.BANKBOOK_STATUS_NORMAL);
+		bankBook.setGrade(grade);
+		
+		bankBookDao.insertBankBook(bankBook);
+		
+		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView deleteBankBook(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String[] id = request.getParameterValues("id");
+		
+		BankBook bankBook = new BankBook();
+		bankBook.setStatus(Code.BANKBOOK_STATUS_UNUSED);
+		
+		for (int i = 0 ; i < id.length ; i++) {
+			bankBook.setId(id[i]);
+			bankBookDao.updateBankBook(bankBook);
+		}
+		
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
 	
 	public ModelAndView changeExPlay(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
