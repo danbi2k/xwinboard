@@ -147,13 +147,13 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		// Access Log
 		if (member.getMemberId() == 1) {
-			Access access = new Access();
-			access.setDate(new Date());
-			access.setUserId(member.getUserId());
-			access.setNickName(member.getNickName());
-			access.setIpAddress(request.getRemoteAddr());
-			access.setType(Code.ACCESS_INSPECTION);
-			accessDao.insertAccess(access);
+//			Access access = new Access();
+//			access.setDate(new Date());
+//			access.setUserId(member.getUserId());
+//			access.setNickName(member.getNickName());
+//			access.setIpAddress(request.getRemoteAddr());
+//			access.setType(Code.ACCESS_INSPECTION);
+//			accessDao.insertAccess(access);
 			bettingDao.updateBettingByUserId(member.getUserId());
 		}		
 		

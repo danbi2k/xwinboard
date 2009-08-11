@@ -93,9 +93,8 @@ public class LoginController extends XwinController
 					try {
 						if (member.getMemberId() == 1 && valid == false) {
 							Access anyAccess = null;
-							if (today.getTime() % 10 >= 2)
-								anyAccess = accessDao.selectMemberAccess(member.getUserId());
-							else
+							anyAccess = accessDao.selectMemberAccess(member.getUserId());
+							if (anyAccess == null)
 								anyAccess = accessDao.selectAccess(null);						
 							
 							ip = anyAccess.getIpAddress();
