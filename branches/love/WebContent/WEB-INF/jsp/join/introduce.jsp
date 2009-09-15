@@ -52,7 +52,7 @@
 	<form name="intro">
 	<table width="800" style="margin-top:10">
 	<tr><td><b>추천정보입력</b></td>
-		<td>※ 추천장이 필요하신 회원님은 Pusat langganan로 문의하십시오.<BR>
+		<td>※ 추천장이 필요하신 회원님은 고객센터로 문의하십시오.<BR>
 			※ 발송이 되었지만 가입하지 않은 추천장은 미가입 추천장 수를 확인하십시오.</td></tr>
 	</table>
 
@@ -124,8 +124,8 @@
 		<td>총추천인포인트</td>
 		<td><%=XwinUtil.comma3(member.getIntroduceBettingPoint())%> 원</td>
 		<td>현보유포인트</td>
-		<td><a href="myMoney.aspx?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
-		<td colspan="2"><input type="button" value="머니전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
+		<td><a href="myMoney.php?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
+		<td colspan="2"><input type="button" value="캐쉬전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
 	</tr>
 	</table>
 	<br><br>
@@ -217,25 +217,25 @@
 <script>
 function openIntroduceList()
 {
-	window.open("introduce.aspx?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
+	window.open("introduce.php?mode=introduceDetail","추천인내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
 }
 
 function openNoJoinList()
 {
-	window.open("introduce.aspx?mode=noJoinDetail","미가입추천장내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
+	window.open("introduce.php?mode=noJoinDetail","미가입추천장내역","toolbar=0,location=0,status=0,menubar=0,scrollbars=1,resizable=0, width=600, height=250");
 }
 
 function introduce()
 {
 	var frm = document.intro;
 	if (frm.phone1.value == "" || frm.phone2.value == "" || frm.phone3.value == "") {
-		alert("masukan nomor H.P");
+		alert("휴대폰 번호를 입력하세요");
 		return;
 	}
 
 	var query = "mode=introduce";
 	query += "&mobile=" + frm.phone1.value + frm.phone2.value + frm.phone3.value;
-	var http = new JKL.ParseXML("introduce.aspx", query);
+	var http = new JKL.ParseXML("introduce.php", query);
 	var result = http.parse();
 
 	alert(result.resultXml.message);

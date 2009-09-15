@@ -108,6 +108,15 @@ public class MemberDao extends XwinDao implements Serializable
 		sqlMapClientTemplate.update("plusMinusPoint", param);
 	}
 	
+	public void plusMinusJoinBonus(String userId, Long joinBonus)
+	{
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("joinBonus", joinBonus);
+		
+		sqlMapClientTemplate.update("plusMinusJoinBonus", param);
+	}	
+	
 	public void plusMinusIntroLeter(String userId, Integer introLetter)
 	{
 		Map<String, Object> param = new HashMap<String, Object>();

@@ -8,17 +8,17 @@
 </head>
 <body>
 <h3>admin</h3>
-<a href="admin/adminGame.aspx?mode=getLeagueList">getLeagueList</a><br>
+<a href="admin/adminGame.php?mode=getLeagueList">getLeagueList</a><br>
 <h3>board</h3>
-<a href="board.aspx?mode=createBoardItem&type=free">createBoardItem</a><br>
-<a href="board.aspx?mode=getBoardItemList&type=free">getBoardItemList</a><br>
-<a href="board.aspx?mode=getBoardItem&id=9">getBoardItem</a><br>
+<a href="bbs.php?mode=createBoardItem&type=free">createBoardItem</a><br>
+<a href="bbs.php?mode=getBoardItemList&type=free">getBoardItemList</a><br>
+<a href="bbs.php?mode=getBoardItem&id=9">getBoardItem</a><br>
 <h3>betting</h3>
 <h3>mybet</h3>
-<a href="myBet.aspx?mode=getMyBettingList">getMyBettingList</a><br>
+<a href="betlog.php?mode=getMyBettingList">getMyBettingList</a><br>
 <h3>account</h3>
-<a href="moneyIn.aspx?mode=moneyOutRequest&money=100">moneyOutRequest</a><br>
-<a href="moneyIn.aspx?mode=moneyInRequest&money=100">moneyInRequest</a><br>
-<a href="moneyIn.aspx?mode=getAccountInfo">getAccountInfo</a><br>
+<a href="earncache.php?mode=moneyOutRequest&money=100">moneyOutRequest</a><br>
+<a href="earncache.php?mode=moneyInRequest&money=100">moneyInRequest</a><br>
+<a href="earncache.php?mode=getAccountInfo">getAccountInfo</a><br>
 </body>
 </html>

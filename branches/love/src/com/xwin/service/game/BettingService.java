@@ -1,9 +1,14 @@
 package com.xwin.service.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Point;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
@@ -11,6 +16,7 @@ import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.service.admin.XwinService;
 
 public class BettingService extends XwinService
@@ -18,6 +24,7 @@ public class BettingService extends XwinService
 	public void processBetting(GameFolder gameFolder, Member member)
 	{
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
+		String signature = makeBettingSignature(itemList);
 		
 		Betting betting = new Betting();
 		
@@ -31,6 +38,7 @@ public class BettingService extends XwinService
 		betting.setNickName(member.getNickName());
 		betting.setIntroducerId(member.getIntroducerId());
 		betting.setMemberId(member.getMemberId());
+		betting.setSignature(signature);
 		
 		String bettingId = bettingDao.insertBetting(betting);
 		
@@ -65,6 +73,52 @@ public class BettingService extends XwinService
 					.info("betting(HttpServletRequest, HttpServletResponse) - betting=\n"
 							+ betting);
 		}
+		
+		
+		//애플 지급
+		Double betting_point_rate = 0.01;
+		int size = itemList.size();
+		if (size >= 4)
+			betting_point_rate = 0.05;
+		
+		Double point = betting.getMoney() * betting_point_rate;
+		memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+		
+		Point pointLog = new Point();
+		pointLog.setUserId(member.getUserId());
+		pointLog.setType(Code.POINT_TYPE_BETTING);
+		pointLog.setDate(new Date());
+		pointLog.setOldBalance(member.getPoint());
+		pointLog.setMoney(point.longValue());
+		pointLog.setBalance(member.getPoint() + point.longValue());
+		pointLog.setBettingId(betting.getId());
+		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 애플");
+		pointLog.setBettingUserId(member.getUserId());
+		
+		pointDao.insertPoint(pointLog);
+		
+		//추천인 애플지급
+		String introducerId = member.getIntroducerId();
+		if (introducerId != null) {
+			Member introducer = memberDao.selectMember(introducerId, null);
+			Double intro_point_rate = 0.03;
+			
+			Double intro_point = betting.getMoney() * intro_point_rate;
+			memberDao.plusMinusPoint(introducerId, intro_point.longValue());
+			
+			Point introPointLog = new Point();
+			introPointLog.setUserId(introducer.getUserId());
+			introPointLog.setType(Code.POINT_TYPE_BETTING);
+			introPointLog.setDate(new Date());
+			introPointLog.setOldBalance(introducer.getPoint());
+			introPointLog.setMoney(intro_point.longValue());
+			introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
+			introPointLog.setBettingId(betting.getId());
+			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(intro_point_rate*100) + "% 애플");
+			introPointLog.setBettingUserId(member.getUserId());
+			
+			pointDao.insertPoint(introPointLog);
+		}
 	}
 
 	public boolean checkBettingAccept(GameFolder gameFolder)
@@ -87,5 +141,44 @@ public class BettingService extends XwinService
 		}
 			
 		return accept;
+	}
+
+	public Integer checkDuplicateBetting(GameFolder gameFolder, String userId)
+	{
+		Integer duplicate = 1;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("signature", makeBettingSignature(gameFolder.getGameFolderItemList()));
+		param.put("status", Code.BET_STATUS_RUN);
+//		Integer count = bettingDao.selectBettingCount(param);
+//		
+//		if (count > 0)
+//			duplicate = true;
+		
+		Integer moneySum = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		Integer expectSum = XwinUtil.ntz(bettingDao.selectBettingExpectSum(param));
+		
+		if (moneySum + gameFolder.getMoney() > 1000000)
+			duplicate = -1;
+		else if (expectSum + gameFolder.getExpect() > 3000000)
+			duplicate = -2;
+			
+		return duplicate;
+	}
+	
+	public String makeBettingSignature(List<GameFolderItem> itemList)
+	{
+		List<String> idGuessList = new ArrayList<String>(itemList.size());
+		for (GameFolderItem gfi : itemList) {
+			idGuessList.add(gfi.getId() + gfi.getGuess());
+		}
+		Collections.sort(idGuessList);
+		String signature = "";
+		for (String idGuess : idGuessList) {
+			signature += idGuess;
+		}
+		
+		return signature;
 	}
 }

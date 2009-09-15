@@ -11,25 +11,23 @@ import org.springframework.context.MessageSourceAware;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Admin;
-import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.user.Member;
-import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 
 public class ProcessService extends XwinService implements MessageSourceAware
 {	
-	public void judgeGameResult(Game game)
+	public synchronized void judgeGameResult(Game game, Boolean all)
 	{
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
-		param.put("notCalcStatus", Code.BET_CALC_COMMIT);
+		if (all == false)
+			param.put("notCalcStatus", Code.BET_CALC_COMMIT);
 		List<Betting> bettingList = bettingDao.selectBettingList(param);
 		
 		if (bettingList != null) {
@@ -61,22 +59,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 							String result = judgeGameScore(betGame);							
 							betGame.setResult(result);
 							
-							try {
-								if (isIt) {
-									if ((betGame.getType().equals("handy") && result.equals("D")) == false) {
-										betGame.setGuess(result);
-										if (result.equals("W"))
-											betGame.setSelRate(betGame.getWinRate());
-										else if (result.equals("D"))
-											betGame.setSelRate(betGame.getDrawRate());
-										else if (result.equals("L"))
-											betGame.setSelRate(betGame.getLoseRate());
-										
-										thisRate = betGame.getSelRate();
-									}
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
+							if (isIt) {
+								betGame.setGuess(result);
 							}
 							
 							if (betGame.getType().equals("wdl")) {
@@ -108,6 +92,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 							betGame.setResultStatus(Code.RESULT_STATUS_CANCEL);
 							thisRate = 1.0;
 							cancelCount++;
+						} else if (betGame.getStatus().equals(Code.GAME_STATUS_RUN)) {
+							betGame.setResultStatus(Code.RESULT_STATUS_RUN);
 						}
 						
 						if (totalRate == 0.0)
@@ -129,6 +115,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 					betting.setStatus(Code.BET_STATUS_RETURN);
 				} else if (totalCount == (successCount + cancelCount + drawCount)) {
 					betting.setStatus(Code.BET_STATUS_SUCCESS);
+				} else {
+					betting.setStatus(Code.BET_STATUS_RUN);
 				}
 				
 				Double cutRate = XwinUtil.doubleCut(totalRate); 
@@ -140,6 +128,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 					calcuateBetting(betting);
 					betting.setEndDate(new Date());
 					betting.setCalcStatus(Code.BET_CALC_COMMIT);
+				} else {
+					betting.setCalcStatus(Code.BET_CALC_DISABLE);
 				}
 				
 				bettingDao.updateBetting(betting);
@@ -193,70 +183,52 @@ public class ProcessService extends XwinService implements MessageSourceAware
 			memberDao.plusMinusBalance(userId, betting.getExpect());
 			
 			// 보너스 지급
-			if (AccessUtil.checkDeny(member, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(member, Code.DENY_WRITE_QNA) == false) {
-				try {
-					if (betting.getGameGrade() == null)
-						betting.setGameGrade(Code.USER_GRADE_NORMAL);
-					
-					if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
-						if (betting.getSuccessCount() >= Admin.WDL_BONUS_LIMIT) {
-							Double wdl_bonus_rate = Admin.WDL_BONUS_RATE.doubleValue() * 0.01;
-							Long wdl_bonus_point = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
-							
-							Point pointLog = new Point();
-							pointLog.setUserId(userId);
-							pointLog.setType(Code.POINT_TYPE_BONUS);
-							pointLog.setDate(new Date());
-							pointLog.setOldBalance(member.getPoint());
-							pointLog.setMoney(wdl_bonus_point);
-							pointLog.setBalance(member.getPoint() + wdl_bonus_point);
-							pointLog.setBettingId(betting.getId());
-							pointLog.setNote("승무패 " + Admin.WDL_BONUS_LIMIT + "폴더 이상 " + Admin.WDL_BONUS_RATE + "%");
-							pointDao.insertPoint(pointLog);
-							
-							memberDao.plusMinusPoint(userId, wdl_bonus_point);
-						}
-					} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
-						if (betting.getSuccessCount() >= Admin.HANDY_BONUS_LIMIT) {
-							Double handy_bonus_rate = Admin.HANDY_BONUS_RATE.doubleValue() * 0.01;
-							Long handy_bonus_point = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());
-							
-							Point pointLog = new Point();
-							pointLog.setUserId(userId);
-							pointLog.setType(Code.POINT_TYPE_BONUS);
-							pointLog.setDate(new Date());
-							pointLog.setOldBalance(member.getPoint());
-							pointLog.setMoney(handy_bonus_point);
-							pointLog.setBalance(member.getPoint() + handy_bonus_point);
-							pointLog.setBettingId(betting.getId());
-							pointLog.setNote("핸디캡 " + Admin.HANDY_BONUS_LIMIT + "폴더 이상 " + Admin.HANDY_BONUS_RATE + "%");
-							pointDao.insertPoint(pointLog);
-							
-							memberDao.plusMinusPoint(userId, handy_bonus_point);
-						}
-					} else if (Admin.MIX_BONUS_USE && betting.getGameType().equals("mix") && betting.getGameGrade().equals(Code.USER_GRADE_VIP)) {
-						if (betting.getSuccessCount() >= Admin.MIX_BONUS_LIMIT) {
-							Double mix_bonus_rate = Admin.MIX_BONUS_RATE.doubleValue() * 0.01;
-							Long mix_bonus_point = XwinUtil.calcExpectMoney(mix_bonus_rate, betting.getExpect());
-							
-							Point pointLog = new Point();
-							pointLog.setUserId(userId);
-							pointLog.setType(Code.POINT_TYPE_BONUS);
-							pointLog.setDate(new Date());
-							pointLog.setOldBalance(member.getPoint());
-							pointLog.setMoney(mix_bonus_point);
-							pointLog.setBalance(member.getPoint() + mix_bonus_point);
-							pointLog.setBettingId(betting.getId());
-							pointLog.setNote("하프타임" + Admin.MIX_BONUS_LIMIT + "폴더 이상 " + Admin.MIX_BONUS_RATE + "%");
-							pointDao.insertPoint(pointLog);
-							
-							memberDao.plusMinusPoint(userId, mix_bonus_point);
-						}
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+//			if (AccessUtil.checkDeny(member, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(member, Code.DENY_WRITE_QNA) == false) {
+//				try {
+//					if (betting.getGameGrade() == null)
+//						betting.setGameGrade(Code.USER_GRADE_NORMAL);
+//					
+//					if (Admin.WDL_BONUS_USE && betting.getGameType().equals("wdl") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
+//						if (betting.getSuccessCount() >= Admin.WDL_BONUS_LIMIT) {
+//							Double wdl_bonus_rate = Admin.WDL_BONUS_RATE.doubleValue() * 0.01;
+//							Long wdl_bonus_point = XwinUtil.calcExpectMoney(wdl_bonus_rate, betting.getExpect());
+//							
+//							Point pointLog = new Point();
+//							pointLog.setUserId(userId);
+//							pointLog.setType(Code.POINT_TYPE_BONUS);
+//							pointLog.setDate(new Date());
+//							pointLog.setOldBalance(member.getPoint());
+//							pointLog.setMoney(wdl_bonus_point);
+//							pointLog.setBalance(member.getPoint() + wdl_bonus_point);
+//							pointLog.setBettingId(betting.getId());
+//							pointLog.setNote("승무패 " + Admin.WDL_BONUS_LIMIT + "폴더 이상 " + Admin.WDL_BONUS_RATE + "%");
+//							pointDao.insertPoint(pointLog);
+//							
+//							memberDao.plusMinusPoint(userId, wdl_bonus_point);
+//						}
+//					} else if (Admin.HANDY_BONUS_USE && betting.getGameType().equals("handy") && betting.getGameGrade().equals(Code.USER_GRADE_NORMAL)) {
+//						if (betting.getSuccessCount() >= Admin.HANDY_BONUS_LIMIT) {
+//							Double handy_bonus_rate = Admin.HANDY_BONUS_RATE.doubleValue() * 0.01;
+//							Long handy_bonus_point = XwinUtil.calcExpectMoney(handy_bonus_rate, betting.getExpect());
+//							
+//							Point pointLog = new Point();
+//							pointLog.setUserId(userId);
+//							pointLog.setType(Code.POINT_TYPE_BONUS);
+//							pointLog.setDate(new Date());
+//							pointLog.setOldBalance(member.getPoint());
+//							pointLog.setMoney(handy_bonus_point);
+//							pointLog.setBalance(member.getPoint() + handy_bonus_point);
+//							pointLog.setBettingId(betting.getId());
+//							pointLog.setNote("핸디캡 " + Admin.HANDY_BONUS_LIMIT + "폴더 이상 " + Admin.HANDY_BONUS_RATE + "%");
+//							pointDao.insertPoint(pointLog);
+//							
+//							memberDao.plusMinusPoint(userId, handy_bonus_point);
+//						}
+//					}
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
 			
 			// 문자발송
 			try {
@@ -278,52 +250,52 @@ public class ProcessService extends XwinService implements MessageSourceAware
 			}
 		}
 		
-		if (afterProcess) {
-			// 포인트지급
-			Double point = 0.0;
-			if (Admin.BETTING_POINT_USE) {
-				Double betting_point_rate = Admin.BETTING_POINT_RATE.doubleValue() * 0.01;
-				point = betting.getMoney() * betting_point_rate;
+//		if (afterProcess) {
+//			// 포인트지급
+//			Double point = 0.0;
+//			if (Admin.BETTING_POINT_USE) {
+//				Double betting_point_rate = Admin.BETTING_POINT_RATE.doubleValue() * 0.01;
+//				point = betting.getMoney() * betting_point_rate;
+//				
+//				Member receiver = null;
+//				if (member.getIntroducerId() == null) {
+//					receiver = member;
+//				}
+//				else {
+//					receiver = memberDao.selectMember(member.getIntroducerId(), null);
+//				}
+//				
+//				if (AccessUtil.checkDeny(receiver, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(receiver, Code.DENY_WRITE_QNA) == false) {				
+//					memberDao.plusMinusPoint(receiver.getUserId(), point.longValue());
+//					
+//					Point pointLog = new Point();
+//					pointLog.setUserId(receiver.getUserId());
+//					pointLog.setType(Code.POINT_TYPE_BETTING);
+//					pointLog.setDate(new Date());
+//					pointLog.setOldBalance(receiver.getPoint());
+//					pointLog.setMoney(point.longValue());
+//					pointLog.setBalance(receiver.getPoint() + point.longValue());
+//					pointLog.setBettingId(betting.getId());
+//					pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
+//					pointLog.setBettingUserId(member.getUserId());
+//					
+//					pointDao.insertPoint(pointLog);
+//				} else {
+//					point = 0.0;
+//				}
+//			}
 				
-				Member receiver = null;
-				if (member.getIntroducerId() == null) {
-					receiver = memberDao.selectMember(member.getUserId(), null);
-				}
-				else {
-					receiver = memberDao.selectMember(member.getIntroducerId(), null);
-				}
-				
-				if (AccessUtil.checkDeny(receiver, Code.DENY_WRITE_BOARD) == false && AccessUtil.checkDeny(receiver, Code.DENY_WRITE_QNA) == false) {				
-					memberDao.plusMinusPoint(receiver.getUserId(), point.longValue());
-					
-					Point pointLog = new Point();
-					pointLog.setUserId(receiver.getUserId());
-					pointLog.setType(Code.POINT_TYPE_BETTING);
-					pointLog.setDate(new Date());
-					pointLog.setOldBalance(receiver.getPoint());
-					pointLog.setMoney(point.longValue());
-					pointLog.setBalance(receiver.getPoint() + point.longValue());
-					pointLog.setBettingId(betting.getId());
-					pointLog.setNote(member.getNickName() + "(" + member.getUserId() + ")");
-					pointLog.setBettingUserId(member.getUserId());
-					
-					pointDao.insertPoint(pointLog);
-				} else {
-					point = 0.0;
-				}
-			}
-				
-			//소개인 정보 갱신
-			if (member.getIntroducerId() != null) {
-				Member introducer = new Member();
-				introducer.setUserId(member.getIntroducerId());
-				introducer.setIntroduceBettingCount(1);
-				introducer.setIntroduceBettingMoney(betting.getMoney());
-				introducer.setIntroduceBettingPoint(point.longValue());
-				
-				memberDao.updateMemberIntroduce(introducer);
-			}
-		}
+//			//소개인 정보 갱신
+//			if (member.getIntroducerId() != null) {
+//				Member introducer = new Member();
+//				introducer.setUserId(member.getIntroducerId());
+//				introducer.setIntroduceBettingCount(1);
+//				introducer.setIntroduceBettingMoney(betting.getMoney());
+//				introducer.setIntroduceBettingPoint(point.longValue());
+//				
+//				memberDao.updateMemberIntroduce(introducer);
+//			}
+//		}
 	}
 
 	public String judgeGameScore(Game game) {

@@ -108,8 +108,8 @@
 									%>
 								</td>
 								<td align="center" rowspan="<%=betGameCount%>" nowrap>
-									<img style='margin:5px 5px 5px 5px' src="img/btn_board.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
-									<img style='margin:5px 5px 5px 5px' src="img/btn_qna.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+									<img style='margin:5px 5px 5px 5px' src="img/btn_board.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
+									<img style='margin:5px 5px 5px 5px' src="img/btn_qna.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
 								</td>
 								<%
 								count++;
@@ -183,10 +183,10 @@
 <script>
 function deleteMyBetting(id)
 {
-	if (confirm("ingin hapuskan rekor taruhan?")) {
+	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyBetting";
 		query += "&bettingId=" + id;
-		var http = new JKL.ParseXML("myBet.aspx", query);
+		var http = new JKL.ParseXML("betlog.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -196,7 +196,7 @@ function deleteMyBetting(id)
 
 function goPage(pageIndex)
 {
-	location.href = "myBet.aspx?mode=viewMyBettingList&pageIndex=" + pageIndex;
+	location.href = "betlog.php?mode=viewMyBettingList&pageIndex=" + pageIndex;
 }
 </script>          
 <%@include file="../footer.jsp"%>

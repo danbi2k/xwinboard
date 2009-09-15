@@ -27,11 +27,18 @@ public class MyBettingController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");		
-		Member member = (Member) request.getSession().getAttribute("Member");
+			//return new ModelAndView("block");
+		if (request.getSession().getAttribute("Member") == null)
+			return new ModelAndView("dummy");
 		
-		if (member == null)
-			return new ModelAndView("dummy");		
+		ModelAndView mv = null;
+		
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null) {
+			mv = new ModelAndView("dummy");
+			return mv;
+		}
+		
 
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		int pIdx = 0;
@@ -48,7 +55,7 @@ public class MyBettingController extends XwinController
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
 		
-		ModelAndView mv = new ModelAndView("user/my_betting");
+		mv = new ModelAndView("user/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
 		return mv;
@@ -72,11 +79,11 @@ public class MyBettingController extends XwinController
 		
 		if (betting != null) {
 			if (betting.getStatus().equals(Code.BET_STATUS_RUN)) {
-				rx = new ResultXml(0, "taruhan yang sedang berlaku tidak bisa di hapus", betting);
+				rx = new ResultXml(0, "진행중인 배팅은 삭제하실수 없습니다", betting);
 			} else {
 				betting.setIsDeleted("Y");
 				bettingDao.updateBetting(betting);
-				rx = new ResultXml(0, "rekor taruhan telah di hapus", betting);
+				rx = new ResultXml(0, "배팅 기록이 삭제되었습니다", betting);
 			}
 		} else {
 			rx = new ResultXml(0, "taruhan yang tidak berlaku", betting);

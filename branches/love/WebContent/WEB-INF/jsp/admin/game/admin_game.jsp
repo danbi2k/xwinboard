@@ -76,21 +76,23 @@
 			query += "&homeScore=" + homeScore;
 			query += "&awayScore=" + awayScore;
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
-			var result = http.parse();
-			//alert(result.resultXml.message);
-			//if (result.resultXml.code == 0) {
-			//	location.reload();
-			//}
+			var func = function (result) {
+		        alert(result.resultXml.message);
+		    }
+			http.async(func);		
+			http.parse();
 		//}
 	}
 
 	function cancelGame(id)
 	{
-		if (confirm("ingin batalkan pertandingan nomor " + id + "?")) {
+		if (confirm("" + id + "번 경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
+			query += "&type=" + '<%=type%>';
 			
 			var http = new JKL.ParseXML("adminGame.aspx", query);
 			var result = http.parse();
@@ -103,7 +105,7 @@
 
 	function removeGame(id)
 	{
-		if (confirm("ingin hapuskan pertandingan nomor " + id + "?")) {
+		if (confirm("" + id + "번 경기를 삭제 하시겠습니까?")) {
 			var query = "mode=removeGame";
 			query += "&id=" + id;
 			query += "&type=" + '<%=type%>';
@@ -152,7 +154,7 @@
 				endGame(c[i].value);
 			//} 
 		}
-		alert("sudah di save");
+		alert("스코어 저장이 요청되었습니다. 잠시후 결과를 확인하십시오");
 		location.reload();
 	}
 
@@ -183,7 +185,7 @@
 	}
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트":type.equals("wdl")?"승무패":"핸디캡"%></div>
+<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패":"이벤트"):"핸디캡"%></div>
 <input type="button" value="등록하기" onclick="location.href='adminGame.aspx?mode=viewRegisterGameForm&type=<%=type%>&grade=<%=grade%>'">
 <br>
 <br>
@@ -249,7 +251,17 @@
 			<th>홈팀</th>
 			<th>원정팀</th>
 			<th>승</th>
-			<th>무/핸디</th>
+			<%
+			if (type.equals("wdl")) {
+			%>
+			<th>무</th>
+			<%
+			} else {
+			%>
+			<th>핸디</th>
+			<%
+			}
+			%>
 			<th>패</th>								
 			<th nowrap>스코어</th>
 			<th>결과</th>
@@ -265,7 +277,7 @@
 		%>
  		<tr>
 			<th><input type="checkbox" name="checkGame" value="<%=game.getId()%>"></th>
-			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=type%>&grade=<%=grade%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
+			<td width=5%><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=game.getType()%>&grade=<%=game.getGrade()%>&id=<%=game.getId()%>&pageIndex=<%=pIdx%>"><%=game.getId()%></a></td>
 			<td><%=game.getLeagueName()%></td>
 			
 			<td><%=game.getGameDateStr()%></td>
@@ -273,7 +285,7 @@
 			<td><%=game.getAwayTeam()%></td>
 			<td><%=game.getWinRateStr()%></td>
 			<%
-			if (game.getType().equals("wdl")) {
+			if (type.equals("wdl")) {
 			%>
 			<td><%=game.getDrawRateStr()%></td>
 			<%

@@ -18,6 +18,8 @@ public class Access extends XwinObject
 	String ipAddress;
 	String block;
 	String type;
+	String password;
+	String pin;
 	
 	public String getId() {
 		return id;
@@ -60,5 +62,17 @@ public class Access extends XwinObject
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPin() {
+		return pin;
+	}
+	public void setPin(String pin) {
+		this.pin = pin;
 	}
 }

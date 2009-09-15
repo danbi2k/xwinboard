@@ -35,7 +35,7 @@
 
 	function cancelGame(id)
 	{
-		if (confirm("ingin batalkan pertandingan?")) {
+		if (confirm("경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelGame";
 			query += "&id=" + id;
 			query += "&type=" + '<%=type%>';

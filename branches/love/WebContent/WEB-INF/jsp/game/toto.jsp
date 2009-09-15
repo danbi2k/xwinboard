@@ -19,7 +19,7 @@
 	height="33">
 		 <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><img src="img/toto_1.jpg" border="0">&nbsp;<a href="myBet.aspx?mode=viewMyTotoList"><img src="img/toto__2.jpg" border="0"></a></p>
+            <p><img src="img/toto_1.jpg" border="0">&nbsp;<a href="betlog.php?mode=viewMyTotoList"><img src="img/toto__2.jpg" border="0"></a></p>
         </td>
     </tr>
 </table>
@@ -216,7 +216,7 @@ function betting()
 		query += "&totoId=<%=toto.getId()%>";
 		query += "&money=" + money;
 
-		var http = new JKL.ParseXML("toto.aspx", query);
+		var http = new JKL.ParseXML("toto.php", query);
 		var result = http.parse();
 
 		alert(result.resultXml.message);
@@ -251,7 +251,7 @@ function confirmMarking()
 					markingId.push(cobjList[x].id);
 			}
 			if (flag == false) {
-				alert("ada hal tang belum terpilih");
+				alert("선택되지 않은 항목이 있습니다");
 				return false;
 			}
 		}
@@ -301,7 +301,7 @@ function calcRate()
 		query += "&totoId=<%=toto.getId()%>";
 		query += "&money=" + money;
 
-		var http = new JKL.ParseXML("toto.aspx", query);
+		var http = new JKL.ParseXML("toto.php", query);
 		var result = http.parse();
 
 		//alert(result.resultXml.message);

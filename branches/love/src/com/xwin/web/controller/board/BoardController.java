@@ -169,7 +169,7 @@ public class BoardController extends XwinController
 		boardComment.setUserId(member.getUserId());
 		boardDao.insertBoardComment(boardComment);
 		
-		ModelAndView mv = new ModelAndView("redirect:/board.aspx?mode=viewBoardDetail&boardName="+boardName+"&addComment=true&id=" + boardId);
+		ModelAndView mv = new ModelAndView("redirect:/bbs.php?mode=viewBoardDetail&boardName="+boardName+"&addComment=true&id=" + boardId);
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		
@@ -215,7 +215,7 @@ public class BoardController extends XwinController
 		boardDao.insertBoardItem(boardItem);
 	
 		ModelAndView mv = null;
-		mv = new ModelAndView("redirect:/board.aspx?mode=viewBoard&boardName=" + boardName);
+		mv = new ModelAndView("redirect:/bbs.php?mode=viewBoard&boardName=" + boardName);
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		
@@ -241,10 +241,10 @@ public class BoardController extends XwinController
 			boardDao.deleteBoardCommentList(id);
 			boardDao.deleteBoardItem(id);
 			
-			rx = new ResultXml(0, "sudah di hapus", null);
+			rx = new ResultXml(0, "삭제되었습니다", null);
 		}
 		else {
-			rx = new ResultXml(-1, "tidak ada hak", null);
+			rx = new ResultXml(-1, "권한이 없습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -270,10 +270,10 @@ public class BoardController extends XwinController
 			//boardDao.deleteBoardCommentList(id);
 			boardDao.deleteBoardComment(id);
 			
-			rx = new ResultXml(0, "sudah di hapus", null);
+			rx = new ResultXml(0, "삭제되었습니다", null);
 		}
 		else {
-			rx = new ResultXml(-1, "tidak ada hak", null);
+			rx = new ResultXml(-1, "권한이 없습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

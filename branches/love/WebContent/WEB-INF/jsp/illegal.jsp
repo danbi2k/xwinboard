@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-alert("tidak ada hak untuk mendekati");
-location.href = "main.aspx";
+alert("접근 권한이 없습니다");
+location.href = "center.php";
 </script>
 </body>
 </html>

@@ -47,7 +47,7 @@
                                 src="img/info/icn_arrow1.gif" width=8 
                                 align=absMiddle></TD>
                                 <TD width=80><A 
-                                href="http://hk.7m.cn:10001/Pk_live_en.aspx?view=all&amp;line=no" 
+                                href="http://hk.7m.cn:10001/Pk_live_en.php?view=all&amp;line=no" 
                                 target=_blank><IMG height=21 
                                 src="img/info/7m.gif" width=80 
                                 border=0></A></TD>

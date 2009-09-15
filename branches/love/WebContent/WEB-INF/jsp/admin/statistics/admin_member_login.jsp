@@ -52,7 +52,14 @@
 if (sessionArray != null) {
 	for (int i = pIdx * ROWSIZE, j = 0 ; i < totalCount && j < ROWSIZE ; i++) {
 		HttpSession loginSession = sessionArray[i];
-		Member member = (Member) loginSession.getAttribute("Member");
+		Member member = null;
+		try {
+			member = (Member) loginSession.getAttribute("Member");
+		} catch (Exception e) {
+			sessionCol.remove(loginSession);
+			continue;
+		}
+		
 		if (grade.length() > 0 && member.getGrade().equals(grade) == false) {
 			continue;
 		}

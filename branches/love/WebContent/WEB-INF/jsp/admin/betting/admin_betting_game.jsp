@@ -90,7 +90,7 @@
 		<tr>
 		<td width=5%><a href="adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=game.getId()%>"><%=game.getId()%></a></td>
 		<td nowrap><font color=<%=game.getType().equals("wdl")?"blue":"green"%>><%=Code.getValue(game.getType())%></font></td>
-		<td><%=game.getLeagueName()%></td>			
+		<td><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=game.getType()%>&grade=<%=game.getGrade()%>&id=<%=game.getId()%>&pageIndex=0"><%=game.getLeagueName()%></a></td>			
 		<td><%=game.getGameDateStr()%></td>
 		<td><%=game.getHomeTeam()%></td>
 		<td><%=game.getAwayTeam()%></td>

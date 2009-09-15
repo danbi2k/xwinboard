@@ -49,8 +49,8 @@
 		<option value='DESC' <%=orderBy.equals("DESC")?"selected":""%>>수익역순</option>
  	</select>
 	<select name='search'>
-		<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
-		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>anggota nama pangilan</option>
+		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
 		<option value='mobile' <%=search.equals("mobile")?"selected":""%>>휴대전화</option>
 		<option value='email' <%=search.equals("email")?"selected":""%>>EMAIL</option>
 	</select>

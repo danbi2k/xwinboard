@@ -56,39 +56,46 @@ public class BettingController extends XwinController
 		
 		Long money = Long.parseLong(_money);		
 		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
+		Integer retVal = 0;
 		
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList.size() == 0) {
-			rx = new ResultXml(-1, "pilih pertandingan", null);
+			rx = new ResultXml(-1, "선택하신 게임이 없습니다", null);
 		}
 		else if (bettingService.checkBettingAccept(gameFolder) == false) {
-			rx = new ResultXml(-2, "ada pertandingan yang tidak bisa bertaruhan", null);
+			rx = new ResultXml(-2, "일부 게임이 배팅 마감 상태 입니다", null);
 		}
 		else if (fc.getMoney() < 5000) {
-			rx = new ResultXml(-1, "taruhan yang paling kecil 5,000", null);
+			rx = new ResultXml(-1, "5,000캐쉬 이상 배팅 하셔야 합니다", null);
 		}
 		else if (fc.getMoney() > 1000000) {
-			rx = new ResultXml(-1, "taruhan paling besar 1,000,000", null);
+			rx = new ResultXml(-1, "1,000,000캐쉬 이상은 배팅 하실 수 없습니다", null);
 		}
 		else if (fc.getExpect() > MAX_EXPECT) {
-			rx = new ResultXml(-1, "taruhan telah melewati 3juta", null);
+			rx = new ResultXml(-1, "예상 배당금은 3000,000캐쉬 이하만 허용 됩니다", null);
 		}
 		else if (_action.equals("betting") && fc.getAfter() < 0) {
-			rx = new ResultXml(-1, "uangnya tidak cukup", null);
+			rx = new ResultXml(-1, "캐쉬 잔고가 부족합니다", null);
+		}
+		else if ((retVal = bettingService.checkDuplicateBetting(gameFolder, member.getUserId())) < 0) {
+			if (retVal == -1)
+				rx = new ResultXml(-1, "중복배팅입니다\n배팅금액 1,000,000캐쉬 초과", null);
+			else
+				rx = new ResultXml(-1, "중복배팅입니다\n배당금액 3,000,000캐쉬 초과", null);
 		}
 		else if (_action.equals("betting")) {
 			bettingService.processBetting(gameFolder, member);
 			
 			session.removeAttribute("gameFolder_" + _type);
 			
-			rx = new ResultXml(0, "sudah beertaruh", null);
+			rx = new ResultXml(0, "배팅에 성공하였습니다\n회원님의 대박을 기원합니다", null);
 			Member betMember = (Member) session.getAttribute("Member");
 			betMember.setBettingDate(new Date());
 		}
 		else if (_action.equals("cart")) {
 			bettingCart.add(gameFolder);
 			
-			rx = new ResultXml(0, "sudah di tambah di gerobak taruhan", null);
+			rx = new ResultXml(0, "배팅카트에 추가 되었습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -134,23 +141,22 @@ public class BettingController extends XwinController
 		if (gameFolder.size() >= 10 && gameFolder.containsKey(gameId) == false) {
 			gameFolder.remove(game.getId());
 			retCode = -1;
-			message = "게임은 10개까지 선택 하실 수 있습니다";
+			message = "10 폴더를 초과하였습니다";
+		} else if (XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money) > MAX_EXPECT) {
+			gameFolder.remove(game.getId());
+			retCode = -1;
+			message = "예상 배당금은 3,000,000캐쉬 이하만 허용 됩니다";
 		} else if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false ||
 				game.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT) == false) {
 			gameFolder.remove(game.getId());
 			retCode = -2;
-			message = "배팅 가능 상태가 아닙니다";
+			message = "게임이 배팅 마감 상태 입니다";
 		} else if ((guess.equals("W") && game.getWinDeny().equals("Y") == false) ||
 				(guess.equals("D") && game.getDrawDeny().equals("Y") == false) ||
 				(guess.equals("L") && game.getLoseDeny().equals("Y") == false)) {
 			gameFolder.remove(game.getId());
 			retCode = -1;
-			message = "배팅 가능 상태가 아닙니다";
-		}
-		else if (XwinUtil.calcExpectMoney(thisRate * fc.getRate(), money) > MAX_EXPECT) {
-			gameFolder.remove(game.getId());
-			retCode = -1;
-			message = "taruhan telah melewati 3juta";
+			message = "게임이 배팅 금지 상태 입니다";
 		} else {
 			GameFolderItem gfi = new GameFolderItem();
 			gfi.setId(gameId);

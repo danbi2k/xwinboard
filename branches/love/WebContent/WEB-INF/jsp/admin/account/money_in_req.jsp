@@ -44,7 +44,7 @@
 	<input type='hidden' name='status' value='<%=status%>'/>
  	<select name='search'>
 		<option value='name' <%=search.equals("name")?"selected":""%>>예금주</option>
- 		<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
+ 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
  		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
  	</selec>
  	<input type='text' name='keyword' value='<%=keyword%>'>
@@ -157,7 +157,7 @@ function saveMoneyInIsChecked(cobj)
 
 function deleteCheckedItem()
 {
-	if (confirm("ingin di hapus?")) {
+	if (confirm("삭제하시겠습니까?")) {
 		var query = "mode=deleteMoneyInList";
 		var c = document.list.checkCheck;
 		c = Xwin.ToArray(c);
@@ -177,7 +177,7 @@ function deleteCheckedItem()
 
 function cancelMoneyInRequest(id)
 {
-	if (confirm("ingin batalkan permintaan isi ulang?")) {
+	if (confirm("충전 요청을 취소하시겠습니까?")) {
 		var query = "mode=cancelMoneyInRequest";
 		query += "&id=" + id;
 		
@@ -185,7 +185,7 @@ function cancelMoneyInRequest(id)
 		var result = http.parse();
 	
 		if (result.resultXml.code == 0) {
-			alert("isi telah di batal");
+			alert("충전이 취소되었습니다");
 			location.reload();
 		}
 	

@@ -17,6 +17,7 @@ public class HackingLog extends XwinObject
 	private Date date;
 	private String value;
 	private String mode;
+	private String ipAddress;
 	private String isChecked;
 	
 	public String getId() {
@@ -54,6 +55,12 @@ public class HackingLog extends XwinObject
 	}
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+	public String getIpAddress() {
+		return ipAddress;
+	}
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 	public String getIsChecked() {
 		return isChecked;

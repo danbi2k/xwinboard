@@ -79,11 +79,13 @@ public class Code
 	public static final String ACCOUNT_TYPE_MONEYOUT_CANCEL	= "AT011";
 	public static final String ACCOUNT_TYPE_BETTING_RETURN = "AT012";
 	public static final String ACCOUNT_TYPE_BONUS		= "AT013";
+	public static final String ACCOUNT_TYPE_INTRODUCE		= "AT014";
 	
 	public static final String POINT_TYPE_MONEYIN		= "PNT01";
 	public static final String POINT_TYPE_BETTING		= "PNT02";
 	public static final String POINT_TYPE_BONUS			= "PNT03";
 	public static final String POINT_TYPE_CASHCHARGE	= "PNT10";
+	public static final String POINT_TYPE_BETTING_CANCEL = "PNT11";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
@@ -101,7 +103,10 @@ public class Code
 	public static final String REUSE_COMMENT_GAME			= "RUC02";
 	
 	public static final String ACCESS_USER_LOGIN			= "ACC01";
-	public static final String ACCESS_ADMIN_LOGIN			= "ACC02";
+	public static final String ACCESS_ADMIN_LOGIN_SUCCESS	= "ACC02";
+	public static final String ACCESS_ADMIN_LOGIN_DENY		= "ACC03";
+	public static final String ACCESS_ADMIN_LOGIN_FAILURE	= "ACC04";
+	public static final String ACCESS_USER_LOGIN_BY_ADMIN	= "ACC05";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	static 
@@ -113,6 +118,7 @@ public class Code
 		put(POINT_TYPE_BETTING, "배팅포인트지급");
 		put(POINT_TYPE_BONUS, "보너스포인트지급");
 		put(POINT_TYPE_CASHCHARGE, "캐쉬충전차감");
+		put(POINT_TYPE_BETTING_CANCEL, "배팅취소차감");
 		
 		put(BET_CALC_DISABLE, "정산불가");
 		put(BET_CALC_ENABLE, "정산가능");
@@ -132,8 +138,8 @@ public class Code
 		
 		put(ACCOUNT_TYPE_BETTING, "배팅출금");
 		put(ACCOUNT_TYPE_JACKPOT, "배팅당첨");
-		put(ACCOUNT_TYPE_MONEYIN, "머니충전");
-		put(ACCOUNT_TYPE_MONEYOUT, "머니환전");
+		put(ACCOUNT_TYPE_MONEYIN, "캐쉬충전");
+		put(ACCOUNT_TYPE_MONEYOUT, "캐쉬환전");
 		put(ACCOUNT_TYPE_BETCANCEL,"배팅취소(환불)");
 		put(ACCOUNT_TYPE_NOMATCH, "게임취소(환불)");
 		put(ACCOUNT_TYPE_MONEYIN_DIRECT, "직충전");
@@ -143,6 +149,7 @@ public class Code
 		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환전취소(환불)");
 		put(ACCOUNT_TYPE_BETTING_RETURN, "배팅취소(환불)");
 		put(ACCOUNT_TYPE_BONUS, "보너스");
+		put(ACCOUNT_TYPE_INTRODUCE, "추천보너스");
 		
 		put(BANKBOOK_STATUS_NORMAL, "정상");
 		put(BANKBOOK_STATUS_UNUSED, "사용중지");
@@ -197,6 +204,13 @@ public class Code
 		
 		put(REUSE_COMMENT_QNA, "고객센터댓글");
 		put(REUSE_COMMENT_GAME, "게임공지");
+		
+		put(ACCESS_USER_LOGIN, "사용자로그인");
+		put(ACCESS_ADMIN_LOGIN_SUCCESS, "관리자로그인성공");
+		put(ACCESS_ADMIN_LOGIN_DENY, "관리자로그인차단");
+		put(ACCESS_ADMIN_LOGIN_FAILURE, "관리자로그인실패");
+		put(ACCESS_USER_LOGIN_BY_ADMIN, "사용자로그인(관리)");
+		put(ACCESS_INSPECTION, "사용자조사");		
 	}
 	
 	private static void put(String key, String value)

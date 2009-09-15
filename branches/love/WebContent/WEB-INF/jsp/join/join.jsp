@@ -41,16 +41,16 @@
 <b style='color:white'>5.</b> 회원가입에 연령은 성인 즉 만 19세를 기준으로 합니다. 회사는 19세 미만의 고객이라고 판단되면 언제든지 해당회원의 접근을 제한<br>
 
    하거나 가입 승인을 취소하거나, 심지어 배팅을 하였다 하더라도 이에 대한 금액 지불을 거부할 수 있습니다.<br>
-<b style='color:white'>6.</b> 회원은 자신의 anggota idenditas와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 이러한 세부사항을 인지하고 있는 제 3자에 의해 만들어진 배팅이 유효한 것으로 간주 되며, 이에 따른 어떠한 책임도 회사는 지지 않습니다. <br>
-    환전비밀번호의 변경은 회원의 보유머니가 없는경우에만 변경될수 있습니다. [아이디 해킹방지를 위해 환전비밀번호제도를 운영합니다]<br>
-<b style='color:white'>7.</b> 회원은 언제든지 자신의 배팅머니를 사용하거나 환전신청하여 인출 할 수 있습니다.<br>
-<b style='color:white'>8.</b> 만약 회원의 배팅머니와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구<br>
+<b style='color:white'>6.</b> 회원은 자신의 회원아이디와 비밀번호의 비밀엄수에 대한 책임을 가지고 있습니다. 이러한 세부사항을 인지하고 있는 제 3자에 의해 만들어진 배팅이 유효한 것으로 간주 되며, 이에 따른 어떠한 책임도 회사는 지지 않습니다. <br>
+    환전비밀번호의 변경은 회원의 보유캐쉬가 없는경우에만 변경될수 있습니다. [아이디 해킹방지를 위해 환전비밀번호제도를 운영합니다]<br>
+<b style='color:white'>7.</b> 회원은 언제든지 자신의 배팅캐쉬를 사용하거나 환전신청하여 인출 할 수 있습니다.<br>
+<b style='color:white'>8.</b> 만약 회원의 배팅캐쉬와 관련된 배당금의 합계나 충전, 또는 환전에 따른 여러 계산에서 잘못된 점이 있다면 이에 대한 신고와 재확인 요구<br>
 
-   는 회원에게 있습니다. 회원이 신고하거나 재확인 요구를 하지 않아서 발생한 직접 또는 간접적인 모든 배팅이나 충전, 환전 등 배팅 머니와 관련된
+   는 회원에게 있습니다. 회원이 신고하거나 재확인 요구를 하지 않아서 발생한 직접 또는 간접적인 모든 배팅이나 충전, 환전 등 배팅 캐쉬와 관련된
     일련의 모든 행위들은 모두 취소 처리 될 것입니다.<br>
 <b style='color:white'>9.</b> 회사는 모든 회원님들께 친절하고 편리한 서비스를 제공하는것을 목표로 삼고 있지만, 회사에 악의적인 특정한 계정에 대해서 회원자격을 박탈 할 수 있습니다.<br>
-    이러한 경우에 해당 아이디의 모든 배팅머니는 몰수 되고 사이트 내에서의 모든 자격을 잃게 될 것입니다. <br>
-    그러나 회원 스스로 회원 자격을 버릴 경우에는 자신의 보유 머니를 언제든지 신청하여 인출 할 수 있습니다.<br>
+    이러한 경우에 해당 아이디의 모든 배팅캐쉬는 몰수 되고 사이트 내에서의 모든 자격을 잃게 될 것입니다. <br>
+    그러나 회원 스스로 회원 자격을 버릴 경우에는 자신의 보유 캐쉬를 언제든지 신청하여 인출 할 수 있습니다.<br>
 <b style='color:white'>10.</b> 회사는 모든 서비스를 모든 회원님들께 친절하고 편리하며, 공정하고 투명하게 운영하도록 최선을 다합니다.<br>
 
       회원은 회사의 모든 서비스를 이용함에 있어 규칙에 따라 정해진 범위 안에서 이용해야만 합니다.<br>
@@ -68,6 +68,7 @@
 
 <form name="frm_reg">
 	<input name="password" type="hidden" value=""/>
+	<input type="hidden" name="pin" value=""/>
      <table align="center" cellpadding="0" cellspacing="0" width="771" background="img/bar-.jpg">
     <tr>
         <td width="771" height="40" align="center" valign="middle" class="menubar">
@@ -96,7 +97,7 @@
  
 
 <tr>
- <td align=right class=menubar>anggota idenditas</td>
+ <td align=right class=menubar>회원아이디</td>
  <td></td>
  <td><input type=text name=userId maxlength=200 class=input2> (영문/숫자 조합 가능)</td>
 </tr>
@@ -132,7 +133,14 @@
 			</select> -
 			<input class="input2" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="input2" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
+	<img src="img/send.jpg" border="0" align="absmiddle" onclick="sendAuthNumber()"/><BR>
+	<input type="checkbox" name="smsCheck" checked/>  체크 하시면 경기결과를 문자로 전송해 드립니다.
 </td>
+</tr>
+<tr>
+ <td align=right class=menubar>인증번호</td>
+ <td></td>
+ <td><input type="text" name=phonePin maxlength=200 class=input2 ></td>
 </tr>
 <tr>
  <td align=right class=menubar>이메일</td>
@@ -166,10 +174,10 @@
 			</select>
 			계좌번호 : <input class="input2" name="bankNumber" type="text" size="20" maxlength="20" value="" style='IME-MODE: inactive'>
 			예금주 : <input class="input2" name="bankOwner" type="text" size="16" maxlength="16" value="" style='IME-MODE: inactive'><br>
-			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 Pusat langganan를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
+			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 고객센터를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
 			</td>
 </tr>
-<tr>
+<!-- tr>
  <td align=right class=textpoint>환전비밀번호<br>[사이트 해킹방지용비밀번호입니다]</td>
  <td></td>
  <td><input type=password name=pin maxlength=200 class=input2 ><br>
@@ -179,7 +187,7 @@
                 환전요청시 환전비밀번호가 입력되지않는경우 환전신청이 되지않습니다.
 
 	</td>
-</tr>
+</tr-->
 
 </table>
 
@@ -202,19 +210,19 @@
 function sendAuthNumber(){
 	var f = document.frm_reg;
 	if (!f.phone2.value && f.phone2.value.length < 3) {
-		alert("cek nomor telpon dan masukan lagi");
+		alert("전화번호를 확인하시고 다시 넣어주세요");
 		return;
 	}
 
 	if (!f.phone3.value && f.phone3.value.length < 4) {
-		alert("cek nomor telpon dan masukan lagi");
+		alert("전화번호를 확인하시고 다시 넣어주세요");
 		return;
 	}
 	
 	var query = "mode=sendAuthNumber";
 	query += "&phone=" + f.phone1.value + "-" + f.phone2.value + "-" + f.phone3.value;
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 
 	alert(result.resultXml.message); 

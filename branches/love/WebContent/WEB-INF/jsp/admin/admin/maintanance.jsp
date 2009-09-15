@@ -34,7 +34,7 @@
 <script>
 function deleteData(mode, iobj)
 {	
-	if (!iobj.value) { alert("masukan tanggal standar untuk di hapus"); return; }
+	if (!iobj.value) { alert("삭제 기준일을 입력하세요"); return; }
 	
 	var query = "mode=" + mode;
 	query += "&date=" + iobj.value;

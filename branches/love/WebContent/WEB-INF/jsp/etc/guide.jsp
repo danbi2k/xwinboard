@@ -24,12 +24,12 @@
 <tr><td valign="top" align="center">
 
 	<table width="800" style="margin-top:10;">
-	<tr><td colspan="2"><font color="orange"><b>1. 머니충전하기</td></tr>
+	<tr><td colspan="2"><font color="orange"><b>1. 캐쉬충전하기</td></tr>
 	<tr><td width="410"><img src="images/guide1.jpg"></td>
 		<td valign="top" style="line-height:30px;">
-			A. 머니충전 페이지로 이동합니다. [<a href="member/inmoney.asp">☞ 바로가기</a>]<br>
+			A. 캐쉬충전 페이지로 이동합니다. [<a href="member/inmoney.asp">☞ 바로가기</a>]<br>
 
-			B. 입금하실 금액과 입금자명을 입력하고 [머니충전] 신청을 합니다.<br>
+			B. 입금하실 금액과 입금자명을 입력하고 [캐쉬충전] 신청을 합니다.<br>
 			C. 입금하실 계좌 번호를 꼭! 확인합니다. <br>
 			D. 인터넷뱅킹, 폰뱅킹, 무통장입금등의 방법으로 입금을 합니다.<br>
 			E. 입금후 5분~10분 이내에 입금확인 처리가 됩니다.<br>
@@ -69,7 +69,7 @@
 		<td valign="top" style="line-height:30px;">
 			A. 환전요청 페이지로 이동합니다. [<a href="member/outmoney.asp">☞ 바로가기</a>]<br>
 
-			B. 보유한 머니잔액 만큼	환전 요청이 가능합니다.<br>
+			B. 보유한 캐쉬잔액 만큼	환전 요청이 가능합니다.<br>
 			C. 환전 받으실 은행/게좌번호/수취인 명을 정확히 기재하여 주세요.<br>
 			D. 환전 요청시 10분이내로 환전을 해드립니다.<br>
 			<br>

@@ -18,7 +18,7 @@
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="246">
     <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><img src="img/8-.jpg" border="0">&nbsp;<a href="moneyIn.aspx?mode=viewMoneyInRequestList"><img src="img/10.jpg" border="0"></a></p>
+            <p><img src="img/8-.jpg" border="0">&nbsp;<a href="earncache.php?mode=viewMoneyInRequestList"><img src="img/10.jpg" border="0"></a></p>
         </td>
     </tr>
     <tr>

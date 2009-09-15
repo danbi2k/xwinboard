@@ -99,4 +99,14 @@ public class MoneyOutDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyOutGroupByBankCount", param);
 	}
+	
+	public Integer selectMoneyOutIntervalCount()
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyOutIntervalCount");
+	}
+	
+	public Integer selectMoneyOutWaitCount()
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectMoneyOutWaitCount");
+	}
 }

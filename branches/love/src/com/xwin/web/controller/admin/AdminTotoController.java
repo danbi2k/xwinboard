@@ -293,7 +293,7 @@ public class AdminTotoController extends XwinController
 		
 		totoDao.updateToto(toto);
 		
-		ModelAndView mv = new ModelAndView("redirect:/adminToto.aspx?mode=viewTotoList");
+		ModelAndView mv = new ModelAndView("redirect:/adminToto.php?mode=viewTotoList");
 		return mv;
 	}
 	
@@ -336,7 +336,7 @@ public class AdminTotoController extends XwinController
 		toto.setStatus(Code.GAME_STATUS_CANCEL);
 		totoDao.updateToto(toto);
 		
-		ResultXml rx = new ResultXml(0, "toto sudah di batalkan", null);
+		ResultXml rx = new ResultXml(0, "토토가 취소 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -443,7 +443,7 @@ public class AdminTotoController extends XwinController
 //		toto.setEarnMoney(earnMoney);
 		totoDao.updateToto(toto);		
 		
-		ResultXml rx = new ResultXml(0, "hasil sudah di atur", null);
+		ResultXml rx = new ResultXml(0, "토토가 종료 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -477,7 +477,7 @@ public class AdminTotoController extends XwinController
 		
 		ResultXml rx = null;
 		if (existCount > 0 && displayStatus.equals(Code.GAME_DISPLAY_OPEN)) {
-			rx = new ResultXml(-1, "sudah ada toto yang laku", null);
+			rx = new ResultXml(-1, "진행중인 토토가 있습니다", null);
 		}
 		else {		
 			Toto toto = new Toto();

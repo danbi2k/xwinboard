@@ -2,6 +2,7 @@ package com.xwin.infra.util;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.xwin.domain.admin.AccountSum;
 import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
@@ -10,6 +11,7 @@ import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.game.League;
+import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.web.command.FolderCalc;
 import com.xwin.web.command.Indicator;
@@ -34,6 +36,8 @@ public class XmlUtil
 		xstream.alias("indicator", Indicator.class);
 		xstream.alias("transaction", Transaction.class);
 		xstream.alias("smsWait", Transaction.class);
+		xstream.alias("member", Member.class);
+		xstream.alias("accountSum", AccountSum.class);
 	}
 	
 	public static String toXml(Object object)

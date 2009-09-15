@@ -30,7 +30,7 @@
 
 	function cancelToto(id)
 	{
-		if (confirm("ingin batalkan pertandingan nomor " + id + "?")) {
+		if (confirm("" + id + "번 경기를 취소 하시겠습니까?")) {
 			var query = "mode=cancelToto";
 			query += "&id=" + id;
 			

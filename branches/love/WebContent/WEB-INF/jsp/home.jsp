@@ -37,7 +37,7 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-	<META HTTP-EQUIV="Refresh" Content="900; URL=login.aspx?mode=processLogout">
+	<META HTTP-EQUIV="Refresh" Content="900; URL=login.php?mode=processLogout">
 	
 	<script language="JavaScript" src="script/code.js"></script>
 	<script language="JavaScript" src="script/default.js"></script>
@@ -55,9 +55,9 @@
 </head>
 <body bgcolor="#1a1a1a" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <map name="ImageMap1">
-<area shape="rect" coords="25, 22, 65, 42" href="provision.aspx" onfocus="this.blur()">
-<area shape="rect" coords="86, 23, 128, 41" href="rules.aspx" onfocus="this.blur()">
-<area shape="rect" coords="153, 21, 203, 41" href="aboutHandy.aspx" onfocus="this.blur()">
+<area shape="rect" coords="25, 22, 65, 42" href="yakwan.php" onfocus="this.blur()">
+<area shape="rect" coords="86, 23, 128, 41" href="kyujung.php" onfocus="this.blur()">
+<area shape="rect" coords="153, 21, 203, 41" href="handicap.php" onfocus="this.blur()">
 <area shape="rect" coords="232, 22, 383, 43" href="http://www.kofree.net/DNSFree/Setup.exe" onfocus="this.blur()">
 </map>
 <center>
@@ -122,7 +122,7 @@
 			<table id="logo" width="958" height="81" border="0" cellpadding="0" cellspacing="0">
 			   <tr>
 		         <td width="308" height="81" align="left">
-			     	<a href="home.aspx"><img src="img/logo.jpg" border="0"></a>
+			     	<a href="home.php"><img src="img/logo.jpg" border="0"></a>
 			     </td>
 				 <td width="650" height="81" align="right" style="padding-right:13;padding-top:50;">
 				 	<%if (login) { %>
@@ -145,9 +145,9 @@
 					    </table>    
 					            </td>
 					            <td width="199" height="25" align="right" valign="middle">
-					                <a href='login.aspx?mode=processLogout' target='_self'><img src="img/login/out.jpg" border="0"></a>&nbsp;
-									<a href='member.aspx?mode=viewModifyForm'><img src="img/login/info.jpg" border="0">&nbsp;</a>
-									<a href='myBet.aspx?mode=viewMyBettingList'><img src="img/login/sp.jpg" border="0"></a>
+					                <a href='login.php?mode=processLogout' target='_self'><img src="img/login/out.jpg" border="0"></a>&nbsp;
+									<a href='user.php?mode=viewModifyForm'><img src="img/login/info.jpg" border="0">&nbsp;</a>
+									<a href='betlog.php?mode=viewMyBettingList'><img src="img/login/sp.jpg" border="0"></a>
 					            </td>
 					        </tr>
 					    </table>
@@ -169,7 +169,7 @@
 					    </table>    
 					            </td>
 					            <td width="125" height="25" align="right" valign="bottom">
-					                <img src="img/login/login.jpg" border="0" onclick="FnLogin_Submit(document.login)">&nbsp;<img src="img/login/join.jpg" border="0" onclick="location.href='join.aspx?mode=viewJoinForm'">
+					                <img src="img/login/login.jpg" border="0" onclick="FnLogin_Submit(document.login)">&nbsp;<img src="img/login/join.jpg" border="0" onclick="location.href='userform.php?mode=viewJoinForm'">
 					            </td>
 					        </tr>
 					    </table>
@@ -401,7 +401,7 @@ var memoId;
 function receiveMemo()
 {
 	var query = "mode=receiveMemo";
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0 && result.resultXml.object) {
 		var span = document.getElementById("memoContents");
@@ -424,7 +424,7 @@ function memoClose()
 	if (isReaded.checked) {
 		var query = "mode=readMemo";
 		query += "&id=" + memoId;
-		var http = new JKL.ParseXML("member.aspx", query);
+		var http = new JKL.ParseXML("user.php", query);
 		var result = http.parse();
 	}
 	

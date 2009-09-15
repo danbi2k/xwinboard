@@ -32,6 +32,21 @@
 	<update id="updateMoneyOut" parameterClass="MoneyOut">
 		UPDATE tbl_money_out
 		<dynamic prepend="SET">
+			<isNotNull prepend="," property="userId">
+			USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="," property="name">
+			NAME = #name#
+			</isNotNull>
+			<isNotNull prepend="," property="nickName">
+			NICKNAME = #nickName#
+			</isNotNull>			
+			<isNotNull prepend="," property="bankName">
+			BANKNAME = #bankName#
+			</isNotNull>
+			<isNotNull prepend="," property="number">
+			NUMBER = #number#
+			</isNotNull>
 			<isNotNull prepend="," property="status">
 			STATUS = #status#
 			</isNotNull>
@@ -284,5 +299,16 @@
 		<isNotNull prepend="AND" property="numberLike">
 			NUMBER LIKE #numberLike#
 		</isNotNull>
+	</select>
+	
+	<select id="selectMoneyOutIntervalCount" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_money_out t
+		WHERE USERID in (SELECT USERID FROM tbl_member WHERE MEMBERID=1)
+		AND REQ_DATE > DATE_SUB(SYSDATE(),INTERVAL 10 MINUTE)
+	</select>
+	
+	<select id="selectMoneyOutWaitCount" resultClass="integer">
+		SELECT COUNT(*) FROM tbl_money_out t
+		WHERE STATUS = 'ME001'
 	</select>
 </sqlMap>

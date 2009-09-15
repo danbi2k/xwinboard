@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-alert("lagi menyiapkan");
-location.href = "main.aspx";
+alert("준비중입니다");
+location.href = "center.php";
 </script>
 </body>
 </html>

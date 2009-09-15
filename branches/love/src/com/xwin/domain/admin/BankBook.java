@@ -17,6 +17,7 @@ public class BankBook extends XwinObject
 	private String name;
 	private String status;
 	private Date date;
+	private String grade;
 	
 	public String getId() {
 		return id;
@@ -53,5 +54,11 @@ public class BankBook extends XwinObject
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}	
 }
