@@ -30,25 +30,25 @@ setInterval(thisReload, 180000);
        <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
    		 <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>Date</p>
+            <p>경기일시</p>
         </td>
         <td width="135" height="40" align="center" valign="middle" class="menubar">
-            <p>League</p>
+            <p>리그</p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>Win (Home)</p>
+            <p>승(홈팀)</p>
         </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p><%=type.equals("mix")?"Draw/Handy":type.equals("wdl")?"Draw":"Handy" %></p>
+            <p><%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %></p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>Lose(Away)</p>
+            <p>패(원정팀)</p>
         </td>
         <td width="40" height="40" align="center" valign="middle" class="menubar">
-            <p>Status</p>
+            <p>상태</p>
         </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>berita umum</p>
+            <p>공지</p>
         </td>
     </tr>
 </table>
@@ -119,7 +119,7 @@ if (gameList != null) {
   <table align="center" cellpadding="0" cellspacing="0" width="469">
     <tr>
         <td width="469" align="right" height="40" background="img/carthead.jpg">
-            <a href='bettingCart.aspx?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
+            <a href='cart.php?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
 			<img src="img/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
         </td>
     </tr>
@@ -134,7 +134,7 @@ if (gameList != null) {
 		   <table cellpadding="0" cellspacing="0" width="469" height="91" border="0">
 			    <tr>
 			        <td width="100" height="31">
-			            <p>uang taruhan</p>
+			            <p>배팅금액</p>
 			        </td>
 			        <td width="299" height="31">
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
@@ -145,7 +145,7 @@ if (gameList != null) {
 			    </tr>
 			    <tr>
 			        <td width="100" height="30">
-			            <p>deviden kemungkinan</p>
+			            <p>예상배당율</p>
 			        </td>
 			        <td width="299" height="30">
 			            <p id='rateDiv'>0.00</p>
@@ -156,7 +156,7 @@ if (gameList != null) {
 			    </tr>
 			    <tr>
 			        <td width="100" height="30">
-			            <p>uang tepat kemungkinan</p>
+			            <p>예상적중금</p>
 			        </td>
 			        <td width="299" height="30">
 			            <p id='expectDiv'>0</p>
@@ -175,7 +175,7 @@ function getNote(gameId)
 {
 	var query = "mode=getNote";
 	query += "&gameId=" + gameId;
-	var http = new JKL.ParseXML("game.aspx", query);
+	var http = new JKL.ParseXML("play.php", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0)
 		alert(result.resultXml.message);

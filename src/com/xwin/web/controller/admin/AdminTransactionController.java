@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Transaction;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
@@ -22,7 +23,9 @@ public class AdminTransactionController extends XwinController
 	public ModelAndView viewTransactionList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -76,7 +79,9 @@ public class AdminTransactionController extends XwinController
 	public ModelAndView cancelIsCharge(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -89,7 +94,7 @@ public class AdminTransactionController extends XwinController
 		transactionDao.updateTransaction(tran);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
-		ResultXml rx = new ResultXml(0, "sudah isi sebagai pengawas", null);
+		ResultXml rx = new ResultXml(0, "관리자충전 되었습니다", null);
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;

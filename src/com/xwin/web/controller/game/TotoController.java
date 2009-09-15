@@ -73,17 +73,17 @@ public class TotoController extends XwinController
 		}
 		
 		if (money < toto.getMinMoney()) {
-			rx = new ResultXml(-1, "pembelian paling murah " + XwinUtil.comma3(toto.getMinMoney()), null);
+			rx = new ResultXml(-1, "최소 구입액은" + XwinUtil.comma3(toto.getMinMoney()) + " 입니다", null);
 		}
 		else if (money > member.getBalance()) {
-			rx = new ResultXml(-1, "uangnya tidak cukup", null);
+			rx = new ResultXml(-1, "잔액이 부족합니다", null);
 		}
 		else if (toto.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
-			rx = new ResultXml(-1, "tidak ada toto yang lagi di lanjutkan", null);
+			rx = new ResultXml(-1, "토토가 이미 진행 중입니다", null);
 			
 		}
 		else if (toto.getBetStatus().equals(Code.BETTING_STATUS_DENY)) {
-			rx = new ResultXml(-1, "toto yang sudah selesai", null);
+			rx = new ResultXml(-1, "토토가 구입 가능 상태가 아닙니다", null);
 		}
 		else {		
 			BetToto betToto = new BetToto();
@@ -110,7 +110,7 @@ public class TotoController extends XwinController
 			accountDao.insertAccount(account);			
 			memberDao.plusMinusBalance(member.getUserId(), betToto.getMoney() * -1);
 			
-			rx = new ResultXml(0, "sudah di beli", null);
+			rx = new ResultXml(0, "구입 하셨습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

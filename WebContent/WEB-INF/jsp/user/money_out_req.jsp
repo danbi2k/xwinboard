@@ -11,7 +11,7 @@
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="246">
     <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><img src="img/9-.jpg" border="0">&nbsp;<a href="moneyOut.aspx?mode=viewMoneyOutRequestList"><img src="img/11.jpg" border="0"></a></p>
+            <p><img src="img/9-.jpg" border="0">&nbsp;<a href="sendcache.php?mode=viewMoneyOutRequestList"><img src="img/11.jpg" border="0"></a></p>
         </td>
     </tr>
     <tr>
@@ -37,7 +37,7 @@
  
 
 <tr>
- <td align=right class=menubar>머니잔액</td>
+ <td align=right class=menubar>캐쉬잔액</td>
  <td></td>
  <td><%=XwinUtil.comma3(member.getBalance())%> 원</td>
 </tr>
@@ -65,9 +65,9 @@
  <td><%=member.getBankOwner()%></td>
 </tr>
 <tr>
- <td align=right class=menubar>환전비밀번호</td>
+ <td align=right class=menubar>비밀번호</td>
  <td></td>
- <td><input type=password name=pin maxlength=200 class=input2 ><BR>(회원가입시 입력하신 환전 비밀번호를 입력하세요!) </td>
+ <td><input type=password name=password maxlength=200 class=input2 ><BR>(로그인 비밀번호를 입력하세요!) </td>
 </tr>
 
 

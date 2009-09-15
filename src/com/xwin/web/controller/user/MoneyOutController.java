@@ -88,19 +88,26 @@ public class MoneyOutController extends XwinController
 		
 		member = memberDao.selectMember(member.getUserId(), null);
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userId", member.getUserId());
+		Integer sum = XwinUtil.ntz(bettingDao.selectBettingMoneySum(param));
+		
 		ResultXml rx = null;
-		String pin = request.getParameter("pin");
+		String password = request.getParameter("password");
 		
 		if (moneyOut.getMoney() <= 0)
-			rx = new ResultXml(-1, "harus masukan nomor lebih dari pada 0", null);
+			rx = new ResultXml(-1, "환전 신청액을 다시 확인해 주세요", null);
 		else if ((moneyOut.getMoney() % 10000) > 0) {
-			rx = new ResultXml(-1, "pemakaian satuan dari 10,000", null);
+			rx = new ResultXml(-1, "10,000캐쉬 단위로 신청해 주세요", null);
 		}
-		else if (member.getPin().equals(pin) == false) {
-			rx = new ResultXml(-1, "sandi tukar uand anda telah salah", null);
+		else if (member.getPassword().equals(XwinUtil.getUserPassword(password)) == false) {
+			rx = new ResultXml(-1, "로그인 패스워드를 입력해 주세요", null);
 		}
 		else if (member.getBalance() < moneyOut.getMoney()) {
-			rx = new ResultXml(-1, "uangnya tidak cukup", null);
+			rx = new ResultXml(-1, "캐쉬 잔고가 부족합니다", null);
+		}
+		else if (sum < member.getJoinBonus()) {
+			rx = new ResultXml(-1, "회원님께서는 가입보너스 및 프랜드보너스로 받으신 " + XwinUtil.comma3(member.getJoinBonus()) + "캐쉬를 \n배팅에 사용하신 후에 환전이 가능합니다. \n현배팅액 : " + XwinUtil.comma3(sum), null);
 		}
 		else {
 			moneyOut.setUserId(member.getUserId());
@@ -127,7 +134,7 @@ public class MoneyOutController extends XwinController
 			
 			member.setBalance(member.getBalance() - moneyOut.getMoney());
 			
-			rx = new ResultXml(0, "permintaan tukar uang sudah di daftar", null);
+			rx = new ResultXml(0, "캐쉬 환전이 접수 되었습니다.", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -150,11 +157,11 @@ public class MoneyOutController extends XwinController
 		String id = request.getParameter("id");		
 		MoneyOut moneyOut = moneyOutDao.selectMoneyOut(id);		
 		if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST))
-			rx = new ResultXml(0, "bukan situasi bisa di hapus", null);
+			rx = new ResultXml(0, "진행중인 내역은 삭제가 되지 않습니다", null);
 		else {
 			moneyOut.setIsRemoved("Y");
 			moneyOutDao.updateMoneyOut(moneyOut);			
-			rx = new ResultXml(0, "rekor tukar uang telah di hapus", null);
+			rx = new ResultXml(0, "환전 내역이 삭제되었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

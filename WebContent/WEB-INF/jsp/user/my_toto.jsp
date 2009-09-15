@@ -23,7 +23,7 @@
 	height="33">
 		 <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><a href="toto.aspx?mode=viewToto"><img src="img/toto_2.jpg" border="0"></a>&nbsp;<img src="img/toto__1.jpg" border="0"></p>
+            <p><a href="toto.php?mode=viewToto"><img src="img/toto_2.jpg" border="0"></a>&nbsp;<img src="img/toto__1.jpg" border="0"></p>
         </td>
     </tr>
 	
@@ -63,7 +63,7 @@
 		<p><%=XwinUtil.getBoardItemDate(betToto.getDate())%></p>
 		</td>
 		<td width="450" class="tablebg2" align="center" valign="middle">
-		<p><a href="myBet.aspx?mode=viewMyTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getTitle()%></a></p>
+		<p><a href="betlog.php?mode=viewMyTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getTitle()%></a></p>
 		</td>
 		<td width="80" class="tablebg1" align="center" valign="middle">
 		<p><%=XwinUtil.comma3(betToto.getMoney())%></p>
@@ -125,10 +125,10 @@
 <script>
 function deleteMyToto(id)
 {
-	if (confirm("ingin hapuskan rekor pembelian?")) {
+	if (confirm("구매 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyToto";
 		query += "&betTotoId=" + id;
-		var http = new JKL.ParseXML("myBet.aspx", query);
+		var http = new JKL.ParseXML("betlog.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -137,10 +137,10 @@ function deleteMyToto(id)
 }
 
 function removeMoneyInRequestLog(id) {
-	if (confirm("ingin hapuskan rekor isi?")) {
+	if (confirm("충전  기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyIn.aspx", query);
+		var http = new JKL.ParseXML("earncache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -150,7 +150,7 @@ function removeMoneyInRequestLog(id) {
 
 function goPage(pageIndex)
 {
-	location.href = "myBet.aspx?mode=viewMyTotoList&pageIndex=" + pageIndex;
+	location.href = "betlog.php?mode=viewMyTotoList&pageIndex=" + pageIndex;
 }
 </script>
 

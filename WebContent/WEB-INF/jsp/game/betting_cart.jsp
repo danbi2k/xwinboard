@@ -10,7 +10,7 @@
 			<tr><td><img src="img/menu15.jpg" border="0"></td></tr>
 		
 </table>
-<form name="frm" action="bettingCart.aspx">
+<form name="frm" action="cart.php">
 <table align="center" cellpadding="0" cellspacing="0" width="771">
 <%
 	if (bettingCart != null) {
@@ -129,11 +129,11 @@
 <script>
 function deleteGameInGameFolder(index, gameId)
 {
-	if (confirm("ingin menghapus pertandingan?")) {
+	if (confirm("경기를 삭제하시겠습니까?")) {
 		var query = "mode=deleteGameInGameFolder";
 		query += "&folderIndex=" + index;
 		query += "&gameId=" + gameId;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -143,10 +143,10 @@ function deleteGameInGameFolder(index, gameId)
 
 function deleteGameFolder(id)
 {
-	if (confirm("ingin di hapus dari kart taruhan?")) {
+	if (confirm("배팅카트에서 삭제하시겠습니까?")) {
 		var query = "mode=deleteGameFolder";
 		query += "&folderIndex=" + id;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -156,9 +156,9 @@ function deleteGameFolder(id)
 
 function deleteAllGameFolder(id)
 {
-	if (confirm("ingin hapus semua?")) {
+	if (confirm("전체 삭제하시겠습니까?")) {
 		var query = "mode=deleteAllGameFolder";
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -181,7 +181,7 @@ function calcTotalMoney()
 
 function betting()
 {
-	if (confirm("ingin menaruh taruhan?")) {
+	if (confirm("배팅하시겠습니까?")) {
 		var cartCheck = document.getElementsByName("cartCheck");
 		var count = 0;
 		var query = "mode=betting"
@@ -193,11 +193,11 @@ function betting()
 		}
 
 		if (count == 0) {
-			alert("tidak ada taruhan yang di pilih");
+			alert("선택된 배팅이 없습니다");
 			return;
 		}
 
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

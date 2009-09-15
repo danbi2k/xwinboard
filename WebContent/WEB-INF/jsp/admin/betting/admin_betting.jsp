@@ -26,7 +26,7 @@
 <script>
 function cancelBetting(id, gameType)
 {
-	if (confirm("inigin di batalkan?")) {
+	if (confirm("취소하시겠습니까?")) {
 		var query = "mode=cancelBetting";
 		query += "&id=" + id;
 		query += "&gameType=" + gameType;

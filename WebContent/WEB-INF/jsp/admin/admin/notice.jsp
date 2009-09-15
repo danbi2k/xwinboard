@@ -34,7 +34,7 @@
 function saveNotice()
 {
 	if (havingSqlKeyword(document.notice.text.value)) {
-		alert("ada senar kata yang tidak bisa di pakai"); document.notice.text.focus(); return false;
+		alert("내용에 사용할수 없는 문자열이 있습니다"); document.notice.text.focus(); return false;
 	}
 	
 	var query = "mode=saveNotice";

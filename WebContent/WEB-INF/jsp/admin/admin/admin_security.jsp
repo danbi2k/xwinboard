@@ -22,7 +22,7 @@
 			<td width=80% bgcolor='#ffffff' align='left'><input type="checkbox" name="DENY_BOARD" <%=Admin.DENY_BOARD.equals("Y") == false ? "checked":""%>></td>
 		</tr>	
 	     <tr align="center" bgcolor="#E4E4E4" height=20>
-			<td width=20%>Pusat langganan쓰기금지</td>
+			<td width=20%>고객센터쓰기금지</td>
 			<td width=80% bgcolor='#ffffff' align='left'><input type="checkbox" name="DENY_QNA" <%=Admin.DENY_QNA.equals("Y") == false ? "checked":""%>></td>
 		</tr>		
 		<tr align="center" bgcolor="#E4E4E4" height=20>

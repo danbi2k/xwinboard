@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-alert("memperlukan login");
-location.href = "main.aspx";
+alert("로그인이 필요합니다");
+location.href = "center.php";
 </script>
 </body>
 </html>

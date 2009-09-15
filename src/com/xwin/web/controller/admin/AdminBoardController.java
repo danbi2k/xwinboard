@@ -27,7 +27,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -65,7 +67,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -87,7 +91,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewWriteNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/board/admin_board_write");
@@ -98,10 +104,10 @@ public static final int ROWSIZE = 30;
 	public ModelAndView writeNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
-		
-		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
@@ -129,10 +135,10 @@ public static final int ROWSIZE = 30;
 	public ModelAndView updateBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
-		
-		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
@@ -145,7 +151,7 @@ public static final int ROWSIZE = 30;
 		boardItem.setContext(context);
 		
 		boardDao.updateBoardItem(boardItem);
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardDetail&id=" + boardItem.getId());
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.php?mode=viewBoardDetail&id=" + boardItem.getId());
 		
 		return mv;
 	}
@@ -153,7 +159,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -162,14 +170,16 @@ public static final int ROWSIZE = 30;
 		boardDao.deleteBoardCommentList(id);
 		boardDao.deleteBoardItem(id);
 		
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList&grade=" + grade);
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.php?mode=viewBoardList&grade=" + grade);
 		return mv;
 	}
 	
 	public ModelAndView writeBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -179,11 +189,11 @@ public static final int ROWSIZE = 30;
 		boardComment.setBoardId(id);
 		boardComment.setComment(comment);
 		boardComment.setDate(new Date());
-		boardComment.setNickName("Admin");
+		boardComment.setNickName("관리자");
 		boardComment.setUserId("secadmin");
 		boardDao.insertBoardComment(boardComment);
 		
-		ResultXml rx = new ResultXml(0, "sudah di save", null);
+		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -194,14 +204,16 @@ public static final int ROWSIZE = 30;
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
 		
 		boardDao.deleteBoardComment(id);
 		
-		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

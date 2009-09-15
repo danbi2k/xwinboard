@@ -63,17 +63,17 @@ public class TransactionManager extends QuartzJobBean
 					ktfSmsDao.insertMessage(message);
 				}
 				
-				if (transaction != null) {
-					transactionList.add(transaction);
-				}
+//				if (transaction != null) {
+//					transactionList.add(transaction);
+//				}
 			}	
 		}
 		
-		try {
-			transactionService.sendTransaction(transactionList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			transactionService.sendTransaction(transactionList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	private Transaction shinhanBankProcess(KtfSmsMessage message) {
@@ -145,6 +145,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		} else if (message.getMsg().indexOf("지급") > 0) {
 			try {
@@ -208,6 +209,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		}
 		
@@ -271,6 +273,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		} else if (message.getMsg().indexOf("출금") > 0) {
 			try {
@@ -323,6 +326,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		}
 		else {
@@ -398,6 +402,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		} else if (message.getMsg().indexOf("지급") > 0) {
 			try {
@@ -454,6 +459,7 @@ public class TransactionManager extends QuartzJobBean
 				e.printStackTrace();
 				System.out.println("트랜젝션을 넣지 못했습니다");
 				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
 			}
 		}
 		else {

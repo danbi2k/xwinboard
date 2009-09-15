@@ -25,6 +25,16 @@ public class BankBookDao extends XwinDao
 		return sqlMapClientTemplate.queryForList("selectBankBookList", param);		
 	}
 	
+
+	public List<BankBook> selectBankBookList(String status, String grade)
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("status", status);
+		param.put("grade", grade);
+		
+		return sqlMapClientTemplate.queryForList("selectBankBookList", param);		
+	}
+	
 	public BankBook selectBankBook(String id)
 	{
 		return (BankBook) sqlMapClientTemplate.queryForObject("selectBankBook", id);		

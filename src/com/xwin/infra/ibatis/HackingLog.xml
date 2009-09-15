@@ -15,12 +15,13 @@
 		<result property="date" column="DATE"/>
 		<result property="value" column="VALUE"/>
 		<result property="mode" column="MODE"/>
+		<result property="ipAddress" column="IP_ADDR"/>
 		<result property="isChecked" column="ISCHECKED"/>
 	</resultMap>
 	
 	<insert id="insertHackingLog" parameterClass="HackingLog">
-		INSERT INTO tbl_log_hack(USERID, NICKNAME, DATE, VALUE, MODE)
-		VALUES(#userId#, #nickName#, #date#, #value#, #mode#)
+		INSERT INTO tbl_log_hack(USERID, NICKNAME, DATE, VALUE, MODE, IP_ADDR)
+		VALUES(#userId#, #nickName#, #date#, #value#, #mode#, #ipAddress#)
 	</insert>
 	
 	<select id="selectHackingLogList" resultMap="hackingLogResultMap" parameterClass="map">

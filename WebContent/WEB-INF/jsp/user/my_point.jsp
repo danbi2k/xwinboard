@@ -21,7 +21,7 @@
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
     <tr>
         <td width="887" height="33" align="left" valign="top">
-            <p><a href="myMoney.aspx?mode=viewMyMoneyList"><img src="img/10.jpg" border="0"></a>&nbsp;<img src="img/12-.jpg" border="0"></p>
+            <p><a href="myMoney.php?mode=viewMyMoneyList"><img src="img/10.jpg" border="0"></a>&nbsp;<img src="img/12-.jpg" border="0"></p>
         </td>
     </tr>
     
@@ -110,15 +110,15 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.aspx?mode=viewMyPointList&pageIndex=" + index;
+	location.href="myMoney.php?mode=viewMyPointList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
 {
-	if (confirm("ingin hapuskan rekor jumlah uang?")) {
+	if (confirm("캐쉬기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("myMoney.aspx", query);
+		var http = new JKL.ParseXML("myMoney.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

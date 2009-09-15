@@ -33,7 +33,7 @@ function BetListView(BetNo){
 	var h = 500;
 	var window_left = (screen.width-w)/2;
 	var window_top  = (screen.height-h)/2;
-	window.open("myBet.aspx?mode=viewMyBettingDetail&bettingId="+ BetNo, "BetDetail",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
+	window.open("betlog.php?mode=viewMyBettingDetail&bettingId="+ BetNo, "BetDetail",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
 }
 
 function showNotice(id) {

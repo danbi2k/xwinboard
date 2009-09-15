@@ -67,7 +67,7 @@ public class MyMoneyController extends XwinController
 		account.setIsDeleted("Y");
 		accountDao.updateAccount(account);
 		
-		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

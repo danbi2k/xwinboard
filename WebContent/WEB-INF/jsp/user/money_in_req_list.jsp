@@ -26,7 +26,7 @@
 	height="33">
 	<tr>
 		<td width="771" height="33" align="left" valign="top">
-		<p><a href="moneyIn.aspx?mode=viewMoneyInRequest"><img
+		<p><a href="earncache.php?mode=viewMoneyInRequest"><img
 			src="img/8.jpg" border="0"></a>&nbsp;<img src="img/10-.jpg"
 			border="0"></p>
 		</td>
@@ -151,15 +151,15 @@
 
 <script>
 	function goPage(index) {
-		location.href = "moneyIn.aspx?mode=viewMoneyInRequestList&pageIndex="
+		location.href = "earncache.php?mode=viewMoneyInRequestList&pageIndex="
 				+ index;
 	}
 
 	function cancelMoneyInRequest(id) {
-		if (confirm("ingin batalkan permintaan isi?")) {
+		if (confirm("충전 신청을 취소 하시겠습니까?")) {
 			var query = "mode=cancelMoneyInRequest";
 			query += "&id=" + id;
-			var http = new JKL.ParseXML("moneyIn.aspx", query);
+			var http = new JKL.ParseXML("earncache.php", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
 			if (result.resultXml.code == 0)
@@ -168,10 +168,10 @@
 	}
 
 	function removeMoneyInRequestLog(id) {
-		if (confirm("ingin hapuskan rekor isi?")) {
+		if (confirm("충전  기록을 삭제 하시겠습니까?")) {
 			var query = "mode=removeMoneyInRequestLog";
 			query += "&id=" + id;
-			var http = new JKL.ParseXML("moneyIn.aspx", query);
+			var http = new JKL.ParseXML("earncache.php", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
 			if (result.resultXml.code == 0)

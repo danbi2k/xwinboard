@@ -84,7 +84,7 @@
 <script>
 function cancelBetting(id)
 {
-	if (confirm("inigin di batalkan?")) {
+	if (confirm("취소하시겠습니까?")) {
 		var query = "mode=cancelBetting";
 		query += "&id=" + id;
 		var http = new JKL.ParseXML("adminBetting.aspx", query);

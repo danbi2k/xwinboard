@@ -78,7 +78,7 @@ public class IntroduceController extends XwinController
 		ResultXml rx = null;
 		
 		if (member.getIntroLetter() <= 0) {
-			rx = new ResultXml(-1, "tidak cukup rekomendasi", null);
+			rx = new ResultXml(-1, "초대장 수가 부족합니다", null);
 		} else {		
 			String mobile = request.getParameter("mobile");
 			
@@ -100,13 +100,13 @@ public class IntroduceController extends XwinController
 			//smsWait.setMsg(inviteKey + " " + userId);
 			//smsWaitDao.insertSmsWait(smsWait);
 			
-			smsWait.setMsg("[추천] http://" + SiteConfig.SITE_DOMAIN + "\n소개인ID : " + userId + "\n추천장 : " + inviteKey);
+			smsWait.setMsg("[추천] http://" + SiteConfig.SITE_DOMAIN + "\n소개인ID : " + userId + "\n초대장 : " + inviteKey);
 			smsWaitDao.insertSmsWait(smsWait);		
 			
 			member.setIntroLetter(member.getIntroLetter()-1);
 			memberDao.updateMember(member);
 			
-			rx = new ResultXml(0, "rekomendasi sudah di kirim", null);
+			rx = new ResultXml(0, "초대장이 발송 되었습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

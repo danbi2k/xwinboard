@@ -24,7 +24,21 @@
 		p:boardDao-ref="boardDao"
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>
+		p:accessDao-ref="accessDao"
+		p:otpLogDao-ref="otpLogDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:methodNameResolver-ref="controllerNameResolver"
+	>
+		<property name="authPhone">
+			<map>
+				<entry key="r" value="01097973490"/>
+				<entry key="g" value="0100000001"/>
+				<entry key="9" value="01033273490"/>
+				<entry key="p" value="01040479189"/>
+				<entry key="e" value="01074407954"/>
+			</map>
+		</property>
+	</bean>
 		
 	<bean id="adminMainController"
 		class="com.xwin.web.controller.admin.AdminMainController"
@@ -52,6 +66,8 @@
 		p:moneyInDao-ref="moneyInDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:invitationDao-ref="invitationDao"
+		p:smsWaitDao-ref="smsWaitDao"
+		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminAccountController"
@@ -80,6 +96,7 @@
 		p:processService-ref="processService"
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
+		p:gameSyncService-ref="gameSyncService"
 		p:reuseCommentDao-ref="reuseCommentDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
@@ -120,6 +137,7 @@
 		class="com.xwin.web.controller.admin.AdminSmsController"
 		p:memberDao-ref="memberDao"
 		p:smsWaitDao-ref="smsWaitDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminQnaController"

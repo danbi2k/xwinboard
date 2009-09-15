@@ -75,6 +75,7 @@ public class XwinHackFilter implements Filter
 						hackingLog.setUserId(userId);
 						hackingLog.setValue(str);
 						hackingLog.setMode(mode);
+						hackingLog.setIpAddress(request.getRemoteAddr());
 						
 						hackingLogDao.insertHackingLog(hackingLog);
 					}

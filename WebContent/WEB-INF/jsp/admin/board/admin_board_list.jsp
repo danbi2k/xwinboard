@@ -24,18 +24,18 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"게시판 (VIP)":"게시판 (일반)" %></div>
 
 <form name='search' method='get' action='adminBoard.aspx'>
 <input type='hidden' name='mode' value='viewBoardList'/>
 <input type='hidden' name='grade' value='<%=grade%>'/>
 <input type='hidden' name='pageIndex'/>
 <select name='search'>
-	<option value='userId' <%=search.equals("userId")?"selected":""%>>anggota idenditas</option>
-	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>anggota nama pangilan</option>
+	<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
+	<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
 </select>
 <input type='text' name='keyword' value='<%=keyword%>'>
-tanggal menulis
+작성일
 <input type='text' name='fromDate' value='<%=fromDate%>' size=10 readonly onClick="popUpCalendar(this,fromDate,'yyyy-mm-dd');" style="cursor:hand"> ~
 <input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this,toDate,'yyyy-mm-dd');" style="cursor:hand">
 <input type='submit' value='검 색'>

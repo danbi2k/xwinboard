@@ -21,6 +21,11 @@ public class GameDao extends XwinDao
 		return (Game) sqlMapClientTemplate.queryForObject("selectGameById", id);
 	}
 	
+	public Game selectSyncGame(String syncId)
+	{
+		return (Game) sqlMapClientTemplate.queryForObject("selectGameBySyncId", syncId);
+	}
+	
 	public List<Game> selectGameList(Map<String, Object> param)
 	{
 		return sqlMapClientTemplate.queryForList("selectGameList", param);

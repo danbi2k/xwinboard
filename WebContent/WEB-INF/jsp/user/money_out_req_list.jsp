@@ -20,7 +20,7 @@
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
     <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><a href="moneyOut.aspx?mode=viewMoneyOutRequest"><img src="img/9.jpg" border="0"></a>&nbsp;<img src="img/11-.jpg" border="0"></p>
+            <p><a href="sendcache.php?mode=viewMoneyOutRequest"><img src="img/9.jpg" border="0"></a>&nbsp;<img src="img/11-.jpg" border="0"></p>
         </td>
     </tr>
 	</table>
@@ -120,15 +120,15 @@
 <script>
 function goPage(index)
 {
-	location.href="moneyOut.aspx?mode=viewMoneyOutRequestList&pageIndex=" + index;
+	location.href="sendcache.php?mode=viewMoneyOutRequestList&pageIndex=" + index;
 }
 
 function removeMoneyOutRequestLog(id)
 {
-	if (confirm("ingin hapuskan rekor tukar uang?")) {
+	if (confirm("환전 기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyOutRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyOut.aspx", query);
+		var http = new JKL.ParseXML("sendcache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

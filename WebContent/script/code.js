@@ -20,6 +20,10 @@ CODE_TABLE["W"] = "승";
 CODE_TABLE["D"] = "무";
 CODE_TABLE["L"] = "패";
 
+CODE_TABLE["US001"] = "정상";
+CODE_TABLE["US002"] = "탈퇴요청";
+CODE_TABLE["US003"] = "탈퇴";
+
 function C(key)
 {
 	var value =  CODE_TABLE[key];

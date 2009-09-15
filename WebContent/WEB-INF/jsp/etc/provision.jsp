@@ -13,54 +13,55 @@
             <p>
 			<table>
 			<tr bgcolor="#202020"><td valign="top"><b>1</b></td><td>
-				taruhan bisa di campur selama 1~10 pertandingan. <br>
-				Uang jasa di sedia kalau pertandingan pilihan menang semua dan uang jasa di kali dengan tarip deviden sama biaya taruhan(3 angka di bawah titik di potong)
+				배팅은 1~10경기까지 조합을 할 수 있다. <br>
+				선택한 경기를 모두 맞힌 경우에만 배당금을 지급 하며, 배당금은 배당률과 배팅금액을 곱하여 계산한다. (소수점 3자리 이하 절사)
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>2</b></td><td>
-				tarip deviden yang umum bisa berubah atas hal-hal tertentu. Tarip deviden bisa berubah oleh factor tak tetap dan hal-hal yang bisa mengaruh hasil pertandingan
-				(seperti kecelakaan atau tidak hadir dari pemain penting) dan kalau tarip deviden berubah teruhan  sebelum perubahan memakai tarip sebelum perubahan.
+				공지된 배당률은 사항에 따라 변동될 수 있다. 배당률은 경기결과에 영향을 미칠 수 있는(주요 선수의 부상 및 결장)등 여러 가 지 예기치 못한 
+				변수에 의해서 변경되며, 배당률이 변경될 경우 변경시점 이전에 배팅은 변경이전 배당률로 그대로 적용 받는다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>3</b></td><td>
-				kalau taruhan terlalu berkonsenterasi kepada spesifik campuran taruhan bisa di berhentikan.
+				특정조합에 지나치게 배팅이 집중될 경우 배팅을 차단할 수 있다.
 			</td></tr>
 		
 			<tr bgcolor="#202020"><td valign="top"><b>4</b></td><td>
-				pertandingan yang batal dalam pertandingan akan di atur dengan tarip deviden 1.0kali<br>
-				dan kalau pertandingan pilihan satu pun yang berhasil taruhan akan laku.<br>
-				Tapi kalau semua pertandingan di batal taruhan akan di kembali semua.<br>
+				배팅한 경기중 취소된 경기는 배당률을 모두 1.0배로 처리하며, <br>
+				선택한 경기 중 한 경기라도 결과가 확정되었을 경우 그 배팅은 유효하게 처리된다. <br>
+				단, 선택한 경기가 모두 취소가 되었을 경우는 환불한다. 
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>5</b></td><td>
-				jam pertandingan pokok memakai hasil dari jam pertandingan langganan. <br>
+				대상경기 시간은 정규 경기시간까지의 결과를 적용한다. <br>
 		
-				Sepak bola – memakai sampai hasil babak 1 dan 2(perpanjangan dan PK tidak termasuk)
+				축구 - 전/후반까지의 결과 적용(연장전 및 승부차기 제외)
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>6</b></td><td>
-				jam selesai memakai standar jam Korea dan taruhan selesai setiap waktu dan urutan, 5 menit sebulum pertandingan mulai dan bisa berubah atas direksi hal-hal yang lain
+				마감시각은 한국시각을 기준으로 배팅은 경기시작 5분전에 순서와 시간별로 마감하며, 기타 운영상의 사유에 따라 변경될 수 있다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>7</b></td><td>
-				anggota bisa ambil uang taruhan 24 jam dimana saja dan perusahaan akan mengatur secepatnya
+				회원은 자신에 배팅캐쉬를 24시간 언제든지 인출을 요구할 수 있으며, 회사는 이러한 일들을 신속하게 처리할 것이다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>8</b></td><td>
 		
-				taruahan bisa terjadi dalam batasan taruhan(paling kecil 5000 sampai 1juta won)dan kalau melewati batasan taruhan bisa tahan taruhannya.<br>
-				Jumlah pendapatan taruhan adalah 3juta dan kalau lebih taruhan bisa di tahan
+				배팅금제한(최저 5,000부터/최고 100만원)내에서 배팅이 가능하며 배팅상한선을 초과 배팅 할 경우 배팅이 제한된다.<br>
+				최대 예상배당금은 300만원이며, 이를 초과할 경우 배팅이 제한된다. 
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>9</b></td><td>
-				kalau isi kerata taruhan di negaskan dan beli dengan biasa tidak bisa di batalkan dan di ubah.<br>
-				Anggota bisa menegas sekali lagi sebelum membeli isi dan setelah membeli bisa tau apakah pembeliannya tepat.
+				배팅카트 내용을 확인하고 정상적으로 구매되었다면, 취소되거나 변경되지 않는다.<br>
+				회원은 구매전 배팅카트의 내용을 다시 한번 확인하고, 구매후 구매가 정상적으로 완료 되었는지 확인한다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>10</b></td><td>
 		
-				perusahaan mempunyai hak untuk batalkan rekening kapansaja untuk sebagian anggota yang dendam dan waktu rekening di batalkan semua uang simpanan akan menghilang semuanya,<br>
-				tapi kalau anggota menggundur sendiri dari rekening bisa berminta untuk ambil uang simpanan sendiri kapan saja 
+				회사는 일부 악의 적인 회원에 대해 언제든지 계정을 취소 또는 정지 시킬 수 있는 권리가 있으며, 이때 보유 캐쉬는 모두 소진될 것이다.<br>
+				그러나 회원 스스로 회원 자격을 버릴 경우 자신의 보유 캐쉬를 언제든지 신청하여 인출 할 수 있다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>11</b></td><td>
-				perusahaan tidak tanggung jawab untuk masalah gagal teruhan yang terjadi karna informasi dan komunikasi
+				회사는 어떠한 정보통신 문제 때문에 발생되는 배팅 실패에 대한 책임은 지지 않는다.
 			</td></tr>
 			<tr bgcolor="#202020"><td valign="top"><b>12</b></td><td>
-				perusahaan mempunyai hak untuk berubah atau batalkan taruhan dari masalah dan kesalahan yang tidak bisa di hindari sebab sistem dan alat elektronik.<br>
-				Kalau kalkulasi dalam semua taruhan dan rekening taruhan mempunyai masalah, anggota mempunyai tanggung jawab untuk melapor langsung kepada perusahaan.<br>
-				Perusahaan tidak bertanggung jawab untuk kerugian yang terjadi karna anggota tidak melaporkan.
+				시스템 및 전산장비의 오류로 인하여 불가피하게 실수가 생기면 회사는 이를 변경, 취소할 권리를 갖는다.<br>
+		
+				배팅 및 정산과 관련된 일련의 모든 계산이 잘못된 부분이 있다면, 회원은 이를 회사에 즉시 알려야 할 책임이 있다.<br>
+				회사에 알리지 않아 발생되는 회원의 손해를 회사는 책임지지 않는다.
 			</td></tr>
 			</table>
 			</p>

@@ -11,36 +11,35 @@
 		        <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
 		            <p>
 			<div class='handicap'>
-<h3>· Penjelasan istilah</h3>
+<h3>· 용어설명</h3>
 <div class='box'>
 	<dl>
-	<dt>Home team</dt>
-	<dd>Team atau individu yang bertanding di pangkalan sendiri.</dd>
-	<dt>Team kunjungan</dt>
-	<dd>Team atau individu yang bertanding di pangkalan lawan.</dd>
+	<dt>홈 팀</dt>
+	<dd>자신의 근거지에서 경기를 치루는 팀 또는 개인.</dd>
+	<dt>원정팀</dt>
+	<dd>상대팀의 근거지에서 경기를 치루는 팀 이나 개인.</dd>
 	<dt>Player1,Player2</dt>
-	<dd>Perbedaan dalam Team atau individu dalam Pertandingan yang tidak ada perbedaan pangkalan.</dd>
-	<dt>Rintangan</dt>
+	<dd>홈과 원정 구분이 없는 경기에서 각 팀이나 개인을 구분.</dd>
+	<dt>핸디캡</dt>
 	<dd>
-	Kondisi kerugian yang disediakan kepada team yang mempunyai tenaga unggul
+	전력이 우수한 팀에게 주어지는 불리한 조건.<br>
+	상대적으로 전력이 우수한 팀에게 불리한 조건을 주어 경기의 균형을 맞춤.
 	</dd>
-	<dt>Tarip deviden</dt>
+	<dt>배당율</dt>
 	<dd>
-	Laba yang tersedia setelah perhitungan tentang Jumlah uang taruhan anggota, kalau berhasil memperhitungkan hasil pertandingan 
-Seperti contoh berikut<br>
-waktu taruhannya 10000won dan tarip deviden 90% setelah perhitungan anggota bisa mendapat uang deviden total 19000won
-
+	회원이 배팅한 금액에 대한 경기 종료 후 결과를 맞췄을 때 받아 가는 정산 시 이익율.<br>
+	예를 들어 10,000원을 배팅했을 때 배당율이 90% 이라면 정산 후 회원은 총 19,000 원의 배당금을 수령할 수 있음을 의미함.
 	</dd>
 	</dl>
 </div>
-<h3>· Jenis rintangan</h3>
+<h3>· 핸디캡의 종류</h3>
 <div class='box'>
 	<ul>
-	<li>- team A : asumsi team yang menyediakan rintangan berarti team A lebih unggul</li>
-	<li>- team B : asumsi team yang mendapat rintangan berarti team B yang rendah mutunya</li>
-	<li>- kita asumsi tarip deviden team A 90% dan tarip deviden team B 100%.</li>
-	<li>- di depan team yang menyediakan rintangan di tanda dengan “-“, dan team yang mendapat rintangan di tanda dengan “+”</li>
-	<li>- dengan 4 pokok yang di atas kami akan menjelaskan waktu taruhannya 10000won</li>
+	<li>- A팀 : 핸디를 준 팀으로 가정하여 핸디를 주었다는 것은 실력이 월등한 팀을 이야기합니다.</li>
+	<li>- B팀 : 핸드리르 받은 팀으로 가정하며, 핸디를 받았다는 것은 실력이 열등한 팀을 이야기 합니다.</li>
+	<li>- A팀의 배당률은 90% B팀의 배당률은 100%로 가정합니다.</li>
+	<li>- 핸디를 준 팀에는 핸디 앞에 "-"로 표시하고, 핸디를 받은 팀에는 핸디 앞에 "+"로 표시합니다.</li>
+	<li>- 위의 4개 항목과 함께 10,000원을 배팅했을 경우 가정하여 설명합니다.</li>
 	</ul>
 </div>
 

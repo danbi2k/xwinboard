@@ -12,14 +12,14 @@
 <!--
 function checkIT() {
 	var d=document.regist;
-	if(!d.inviteKey.value) { alert('masukan rekomendasi'); d.inviteKey.focus(); return false; }
-	if(!d.userId.value) { alert('masukan ID perkenalan'); d.userId.focus(); return false; }
+	if(!d.inviteKey.value) { alert('추천장을 입력하세요'); d.inviteKey.focus(); return false; }
+	if(!d.userId.value) { alert('소개인ID를 입력하세요'); d.userId.focus(); return false; }
 	
 	var query = "mode=processJoinLogin";
 	query += "&inviteKey=" + d.inviteKey.value;
 	query += "&userId=" + d.userId.value;
 	
-	var http = new JKL.ParseXML("join.aspx", query);
+	var http = new JKL.ParseXML("userform.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
@@ -27,7 +27,7 @@ function checkIT() {
 		return;
 	}
 	
-	location.href = "join.aspx?mode=viewJoinForm";
+	location.href = "userform.php?mode=viewJoinForm";
 }
 
 function goButton(form)

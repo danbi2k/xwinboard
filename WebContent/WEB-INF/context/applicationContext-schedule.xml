@@ -14,6 +14,18 @@
 				<entry key="gameDao">
 					<ref bean="gameDao"/>
 				</entry>
+				<entry key="memberDao">
+					<ref bean="memberDao"/>
+				</entry>
+				<entry key="moneyOutDao">
+					<ref bean="moneyOutDao"/>
+				</entry>
+				<entry key="moneyInDao">
+					<ref bean="moneyInDao"/>
+				</entry>
+				<entry key="accountDao">
+					<ref bean="accountDao"/>
+				</entry>
 				<entry key="totoDao">
 					<ref bean="totoDao"/>
 				</entry>
@@ -25,8 +37,8 @@
 		<property name="jobClass" value="com.xwin.infra.schedule.GameSyncManager"/>
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="gameDao">
-					<ref bean="gameDao"/>
+				<entry key="gameSyncService">
+					<ref bean="gameSyncService"/>
 				</entry>
 			</map>
 		</property>
@@ -90,6 +102,12 @@
 				<entry key="memberDao">
 					<ref bean="memberDao"/>
 				</entry>
+				<entry key="moneyInDao">
+					<ref bean="moneyInDao"/>
+				</entry>
+				<entry key="moneyOutDao">
+					<ref bean="moneyOutDao"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -114,8 +132,8 @@
 	
 	<bean id="transactionTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="transactionJob"/>
-		<property name="startDelay" value="10000"/>
-		<property name="repeatInterval" value="30000"/>
+		<property name="startDelay" value="5000"/>
+		<property name="repeatInterval" value="10000"/>
 	</bean>
 	
 	<bean id="sendSmsTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
@@ -133,7 +151,7 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
 		<property name="triggers">
 			<list>
-				<ref bean="gameBetStatusTrigger"/>
+				<!-- ref bean="gameBetStatusTrigger"/ -->
 				<!-- ref bean="gameSyncTrigger"/ -->
 				<!-- ref bean="autoMoneyInTrigger"/ --> <!-- 충전시키는부분 -->
 				<!-- ref bean="transactionTrigger"/ --> <!-- SMS가져오는 부분 -->

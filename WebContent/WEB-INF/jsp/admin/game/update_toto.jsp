@@ -178,12 +178,12 @@ function loadForm(formString)
 function submitTotoForm()
 {
 	var frm = document.totoFrm;
-	if (!frm.title.value) { alert("masukan judul"); return false;}
-	if (!frm.gameDate.value) { alert("masukan waktu selesai"); return false;}
-	if (!frm.earnRate.value) { alert("masukan rata daya pendapatan"); return false;}
-	if (!frm.minMoney.value) { alert("masukan jumlah pembelian paling rendah"); return false;}
-	if (!frm.carryOver.value) { alert("masukan uang yang tersisa dari bulan lalu"); return false;}
-	if (frm.rowNum.value < 1) { alert("buat format toto lebih dari 1baris"); return false;}
+	if (!frm.title.value) { alert("제목을 입력하세요"); return false;}
+	if (!frm.gameDate.value) { alert("마감시각을 입력하세요"); return false;}
+	if (!frm.earnRate.value) { alert("수익비율을 입력하세요"); return false;}
+	if (!frm.minMoney.value) { alert("최소구매액을 입력하세요"); return false;}
+	if (!frm.carryOver.value) { alert("이월잔액을 입력하세요"); return false;}
+	if (frm.rowNum.value < 1) { alert("토토폼을 1줄 이상 생성하세요"); return false;}
 
 	frm.submit();
 }

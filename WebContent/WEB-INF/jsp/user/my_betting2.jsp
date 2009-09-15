@@ -17,7 +17,7 @@
 
 -->
 
-<form name="frm" action="myBet.aspx">
+<form name="frm" action="betlog.php">
 <input type="hidden" name="mode" value="viewMyBettingList"/>
 <table width="960" style="margin-top:7;margin-bottom:7;border:1 solid #909090;" bgcolor="#0a0a0a">
 <tr><td align="center">

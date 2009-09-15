@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.common.ReuseComment;
+import com.xwin.domain.admin.Admin;
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -29,7 +32,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
@@ -46,6 +51,11 @@ public class AdminGameController extends XwinController
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
+		
+		if (type.equals("wdl"))
+			Admin.SYNC_COUNT_WDL = 0;
+		else if (type.equals("handy"))
+			Admin.SYNC_COUNT_HANDY = 0;
 		
 		if (type != null && type.equals("mix"))
 			type = null;
@@ -76,7 +86,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewEndGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
@@ -130,7 +142,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewRegisterGameForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		List<League> leagueList = leagueDao.selectLeagueList();
@@ -143,7 +157,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewUpdateGameForm(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -162,7 +178,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView viewReprocessGame(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -176,7 +194,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView registerGame(HttpServletRequest request,
 			HttpServletResponse response, GameCommand command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String type = (String) request.getParameter("type");
@@ -212,13 +232,13 @@ public class AdminGameController extends XwinController
 			game.setDrawRate(Math.abs(command.getHandyRate()) * -1);
 			game.setLoseRate(command.getUnderRate());
 			
-			game.setHomeTeam(game.getHomeTeam() + "[Over]");
-			game.setAwayTeam(game.getAwayTeam() + "[Under]");
+			game.setHomeTeam(game.getHomeTeam() + "(↑오버)");
+			game.setAwayTeam(game.getAwayTeam() + "(↓언더)");
 			
 			gameDao.insertGame(game);
 		}
 		
-		ResultXml rx = new ResultXml(0, "Sudah di daftar", null);
+		ResultXml rx = new ResultXml(0, "등록되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;
@@ -227,51 +247,54 @@ public class AdminGameController extends XwinController
 	public ModelAndView updateGame(HttpServletRequest request,
 			HttpServletResponse response, GameCommand command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
 		
-		try {
-			League league = leagueDao.selectLeagueByName(command.getLeagueName());
-			
-			Game game = new Game();
-			game.setId(command.getGameId());
-			game.setLeagueId(league.getId());
-			game.setLeagueName(league.getName());
-			game.setLeagueImage(league.getImage());
-			game.setHomeTeam(command.getHomeTeam());
-			game.setAwayTeam(command.getAwayTeam());
-			game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
-			game.setWinRate(command.getWinRate());
-			game.setDrawRate(command.getDrawRate());
-			game.setLoseRate(command.getLoseRate());
-			game.setNote(command.getNote());
-			
-			//game.setStatus(Code.GAME_STATUS_RUN);
-			Date now = new Date();
-			long timeDiff = game.getGameDate().getTime() - now.getTime();
-			if (timeDiff >= FIVEMINUTE) {
-				game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+		Game dbGame = gameDao.selectGame(command.getGameId());
+		if (dbGame.getBetStatus().equals(Code.BETTING_STATUS_ACCEPT)) {		
+			try {
+				League league = leagueDao.selectLeagueByName(command.getLeagueName());
+				String type = (String) request.getParameter("type");
+				
+				Game game = new Game();
+				game.setId(command.getGameId());
+				game.setLeagueId(league.getId());
+				game.setLeagueName(league.getName());
+				game.setLeagueImage(league.getImage());
+				game.setHomeTeam(command.getHomeTeam());
+				game.setAwayTeam(command.getAwayTeam());
+				game.setGameDate(XwinUtil.getDate(command.getGameDate(), command.getGameHour(), command.getGameMinute()));
+				game.setWinRate(command.getWinRate());
+				game.setDrawRate(command.getDrawRate());
+				game.setLoseRate(command.getLoseRate());
+				game.setNote(command.getNote());
+				
+				//game.setStatus(Code.GAME_STATUS_RUN);
+				Date now = new Date();
+				long timeDiff = game.getGameDate().getTime() - now.getTime();
+				if (timeDiff >= FIVEMINUTE) {
+					game.setBetStatus(Code.BETTING_STATUS_ACCEPT);
+				}
+				
+				game.setType(type);
+				game.setWinDeny(command.getWinDeny());
+				game.setDrawDeny(command.getDrawDeny());
+				game.setLoseDeny(command.getLoseDeny());
+				game.setSyncDeny(command.getSyncDeny());
+				
+				gameDao.updateGame(game);
+				
+				rx = new ResultXml(0, "수정되었습니다", null);
+			} catch (Exception e) {
+				rx = new ResultXml(-1, "서버오류", null);
+				throw e;
 			}
-			
-			game.setWinDeny(command.getWinDeny());
-			game.setDrawDeny(command.getDrawDeny());
-			game.setLoseDeny(command.getLoseDeny());
-			
-			gameDao.updateGame(game);
-			
-			if (command.getReuse().equals("true")) {
-				ReuseComment reuseComment = new ReuseComment();
-				reuseComment.setComment(command.getNote());
-				reuseComment.setType(Code.REUSE_COMMENT_GAME);
-				reuseCommentDao.insertReuseComment(reuseComment);
-			} 
-			
-			rx = new ResultXml(0, "sudah di koreksi", null);
-		} catch (Exception e) {
-			rx = new ResultXml(-1, "server error", null);
-			throw e;
+		} else {
+			rx = new ResultXml(-1, "마감된 경기는 수정할 수 없습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -282,7 +305,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView cancelGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;		
@@ -294,9 +319,35 @@ public class AdminGameController extends XwinController
 		
 		gameDao.updateGame(game);
 		
-		processService.judgeGameResult(game);		
+		processService.judgeGameResult(game, false);		
 		
-		rx = new ResultXml(0, "pertandingan di batalkan", null);
+		rx = new ResultXml(0, "경기가 취소 되었습니다", null);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView recoverGame(HttpServletRequest request,
+			HttpServletResponse response, League command) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;		
+		String id = request.getParameter("id");
+		
+		Game game = new Game();
+		game.setId(id);
+		game.setStatus(Code.GAME_STATUS_RUN);
+		
+		gameDao.updateGame(game);
+		
+		processService.judgeGameResult(game, true);		
+		
+		rx = new ResultXml(0, "경기가 복구 되었습니다", null);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -306,7 +357,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView removeGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;		
@@ -317,14 +370,14 @@ public class AdminGameController extends XwinController
 		Integer bettingCount = bettingDao.selectBettingCount(param);
 
 		if (bettingCount > 0) {
-			rx = new ResultXml(-1, "pertandingan yang sudah bertaruhan tidak bias di hapus", null);			
+			rx = new ResultXml(-1, "배팅이 진행된 경기는 삭제할수 없습니다", null);			
 		} else {
 			Game game = new Game();
 			game.setId(id);
 			game.setStatus(Code.GAME_STATUS_DELETE);			
 			gameDao.updateGame(game);
 			
-			rx = new ResultXml(0, "pertandingan telah di hapus", null);
+			rx = new ResultXml(0, "경기가 삭제 되었습니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -335,7 +388,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView endGame(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -354,9 +409,9 @@ public class AdminGameController extends XwinController
 		
 		Game game = gameDao.selectGame(id);
 		if (homeScore == null && awayScore == null) {
-			rx = new ResultXml(-1, "masukan nomor", null);
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
 		} else if (game.getStatus().equals(Code.GAME_STATUS_RUN) == false) {
-			rx = new ResultXml(-1, "bukan situasi pertandingan", null);
+			rx = new ResultXml(-1, "경기진행 상태가 아닙니다", null);
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
@@ -366,11 +421,11 @@ public class AdminGameController extends XwinController
 			gameDao.updateGame(game);
 			
 			try {
-				processService.judgeGameResult(game);				
-				rx = new ResultXml(0, "pertandingan selesai", null);
+				processService.judgeGameResult(game, false);				
+				rx = new ResultXml(0, game.getHomeTeam() + " vs " + game.getAwayTeam() + "\n경기가 처리 완료 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
-				rx = new ResultXml(0, "pertandingan selesai!!", null);
+				rx = new ResultXml(0, game.getHomeTeam() + " vs " + game.getAwayTeam() + "\n경기 처리중 오류가 발생하였습니다!!", null);
 			}
 		}
 		
@@ -382,7 +437,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView reprocessGame(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -401,9 +458,9 @@ public class AdminGameController extends XwinController
 		
 		Game game = gameDao.selectGame(id);
 		if (homeScore == null && awayScore == null) {
-			rx = new ResultXml(-1, "masukan nomor", null);
+			rx = new ResultXml(-1, "숫자를 입력하세요", null);
 		} else if (game.getStatus().equals(Code.GAME_STATUS_END) == false) {
-			rx = new ResultXml(-1, "pertandingan belum selesai", null);
+			rx = new ResultXml(-1, "경기종료 상태가 아닙니다", null);
 		} else {			
 			game.setHomeScore(homeScore);
 			game.setAwayScore(awayScore);
@@ -413,11 +470,11 @@ public class AdminGameController extends XwinController
 			gameDao.updateGame(game);
 			
 			try {
-				processService.judgeGameResult(game);				
-				rx = new ResultXml(0, "pertandingan mulai kembali", null);
+				processService.judgeGameResult(game, false);				
+				rx = new ResultXml(0, "경기가 재처리 되었습니다", null);
 			} catch (Exception e) {
 				e.printStackTrace();
-				rx = new ResultXml(0, "ada masalah selama pertandingan mulai kembali!!", null);
+				rx = new ResultXml(0, "경기 재처리중 오류가 발생하였습니다!!", null);
 			}
 		}
 		
@@ -429,7 +486,9 @@ public class AdminGameController extends XwinController
 	public ModelAndView changeDisplayStatus(HttpServletRequest request,
 			HttpServletResponse response, League command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -441,7 +500,29 @@ public class AdminGameController extends XwinController
 		
 		gameDao.updateGame(game);
 		
-		ResultXml rx = new ResultXml(0, "di berubah", null);
+		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		return mv;
+	}
+	
+	public ModelAndView gameSync(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;
+		
+		try {
+			gameSyncService.sync();
+			rx = new ResultXml(0, "경기를 동기화 하였습니다", null);
+		} catch (Exception e) {
+			rx = new ResultXml(-1, "동기화에 실패하였습니다", null);
+		}
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		return mv;

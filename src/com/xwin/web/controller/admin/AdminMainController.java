@@ -18,7 +18,9 @@ public class AdminMainController extends XwinController
 	public ModelAndView viewAdminMain(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		List<Member> memberList = memberDao.selectRecentlyJoinMemberList();

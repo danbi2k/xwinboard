@@ -14,6 +14,7 @@ import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
 import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.game.Betting;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
@@ -27,7 +28,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -65,7 +68,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView viewQnaDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -88,7 +93,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView answerQna(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -115,7 +122,7 @@ public class AdminQnaController extends XwinController
 			reuseCommentDao.insertReuseComment(reuseComment);
 		}
 		
-		ResultXml rx = new ResultXml(0, "sudah di save", null);
+		ResultXml rx = new ResultXml(0, "저장되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -125,7 +132,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView deleteQnaItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String[] id = request.getParameterValues("id");
@@ -133,7 +142,7 @@ public class AdminQnaController extends XwinController
 		for (int i = 0 ; i < id.length ; i++)
 			boardDao.deleteBoardItem(id[i]);
 		
-		ResultXml rx = new ResultXml(0, "sudah di hapus", null);
+		ResultXml rx = new ResultXml(0, "삭제되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -143,7 +152,9 @@ public class AdminQnaController extends XwinController
 	public ModelAndView saveQnaIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");

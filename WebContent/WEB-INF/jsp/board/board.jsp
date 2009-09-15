@@ -44,7 +44,7 @@
             <p>작성자</p>
        </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>tanggal menulis</p>
+            <p>작성일</p>
         </td>
         <td width="50" height="40" align="center" valign="middle" class="menubar">
             <p>조회수</p>
@@ -67,7 +67,7 @@
             		<p><%=head%></p>
         		</td>
 				 <td width="527" height="35" align="left" valign="middle">
-					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
 					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 					</b>
 					</a>
@@ -124,7 +124,7 @@
 %>
 			    </td>
 			    <td width="100" height="40" align="right">
-				<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
+				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
 				</td>
 			</tr>
 		    
@@ -133,7 +133,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
+	location.href="bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

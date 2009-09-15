@@ -13,7 +13,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.xwin.domain.admin.Admin;
-import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.Code;
@@ -46,13 +45,16 @@ public class XwinInitServlet extends HttpServlet
 		WebApplicationContext wac = 
 			WebApplicationContextUtils.getRequiredWebApplicationContext(ctx);
 		
-		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
-		Admin.memberDao = memberDao;
-		
 		AdminDao adminDao = (AdminDao) wac.getBean("adminDao");
 		Admin.NOTICE = adminDao.selectAdmin("NOTICE");
-		Admin.POPUP = adminDao.selectAdmin("POPUP");
-		Admin.POPUPFLAG = adminDao.selectAdmin("POPUPFLAG");
+		
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+			Admin.POPUP = adminDao.selectAdmin("VIP_POPUP");
+			Admin.POPUPFLAG = adminDao.selectAdmin("VIP_POPUPFLAG");
+		} else {
+			Admin.POPUP = adminDao.selectAdmin("NOM_POPUP");
+			Admin.POPUPFLAG = adminDao.selectAdmin("NOM_POPUPFLAG");
+		}
 		
 		Admin.DENY_JOIN = adminDao.selectAdmin("DENY_JOIN");
 		Admin.DENY_BOARD = adminDao.selectAdmin("DENY_BOARD");
@@ -68,21 +70,19 @@ public class XwinInitServlet extends HttpServlet
 		Admin.WDL_BONUS_USE = adminDao.selectAdmin("WDL_BONUS_USE").equals("Y");
 		Admin.WDL_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_LIMIT").trim());
 		Admin.WDL_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("WDL_BONUS_RATE").trim());
-		Admin.MIX_BONUS_USE = adminDao.selectAdmin("MIX_BONUS_USE").equals("Y");
-		Admin.MIX_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("MIX_BONUS_LIMIT").trim());
-		Admin.MIX_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("MIX_BONUS_RATE").trim());
 		
 		Admin.BETTING_POINT_USE = adminDao.selectAdmin("BETTING_POINT_USE").equals("Y");
 		Admin.BETTING_POINT_RATE = Integer.parseInt(adminDao.selectAdmin("BETTING_POINT_RATE").trim());
 		
-		Member admin = memberDao.selectMember("secadmin", null);
-		Admin.ADMIN_EMAIL = admin.getEmail();
+		MemberDao memberDao = (MemberDao) wac.getBean("memberDao");
+		Admin.memberDao = memberDao;
+		
+//		Member admin = memberDao.selectMember("Qkfrksdntks", null);
+		Admin.ADMIN_EMAIL = "";//admin.getEmail();
 	}
 
 	public void service(ServletRequest arg0, ServletResponse arg1)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 	}
-
 }

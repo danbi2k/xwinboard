@@ -57,13 +57,15 @@
 </SCRIPT>
 
 <div class="title">회원정보</div>
+<input type="button" value="검사" onclick="inspectMember()"/>&nbsp;
+<input type="button" value="<%=member.getUserId()%> (<%=member.getNickName()%>) 로 로그인" onclick="memberLogin('<%=member.getUserId()%>')"/>
 <BR>
 <span style='font-size:18'>충전 : <%=XwinUtil.comma3(chargeSum)%> 환전 : <%=XwinUtil.comma3(exchangeSum)%> 합계 : <%=XwinUtil.comma3(chargeSum - exchangeSum)%></span>
 <form method=post name='regist'>
 <input type='hidden' name='mode' value='updateMember'/>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>anggota idenditas</td>
+		<td width=20%>회원아이디</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 			<a href='adminBetting.aspx?mode=viewBettingList&focusSearch=userId&keyword=<%=member.getUserId()%>'><%=member.getUserId()%></a>
 		</td>
@@ -92,7 +94,7 @@
     <tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>비밀번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="password" type="text" value="<%=member.getPassword()%>"/>
+			<input name="password" type="text" value=""/>
 			<input type="button" value="변경" onclick="changePassword()"/>
 		</td>
  	</tr>
@@ -123,13 +125,6 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>환전비밀번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="pin" type="text" value="<%=member.getPin()%>"/>
-			<input type="button" value="변경" onclick="changePin()"/>
-		</td>
- 	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>가입일</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=member.getJoinDateStr()%>:<%=member.getMemberId()%></td>
  	</tr>
@@ -137,33 +132,24 @@
 		<td width=20%>상태</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
+	<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천장</td>
+		<td width=20%>미사용초대장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-			<%=member.getIntroLetter()%> 장
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text" name="introLetter" value="1" size="2" maxLength="2"/>
-			<input type="button" value="추천장지급" onclick="giveIntroLetter()"/>
-		</td>
- 	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>미사용추천장</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
+		<input type="button" value="초대장지급" onclick="giveIntroLetter()"/><br>
 		<table class="prettytable">
 		<%
 		if (noJoinList != null) {
 		%>
 		<tr>
-			<th>추천장</th>
-			<th>휴대폰</th>
-			<th>발송일</th>
+			<th>초대장</th>
+			<th>지급일</th>
 		</tr>
 		<%
 			for (Invitation invitation : noJoinList) {
 		%>
 			<tr>
 			<td><%=invitation.getInviteKey()%></a>	</td>
-			<td><%=invitation.getMobile()%></td>
 			<td><%=XwinUtil.toDateStr(invitation.getSendDate(), 1)%></td>
 			</tr>
 		<%
@@ -174,11 +160,11 @@
 		</td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천해준회원</td>
+		<td width=20%>초대해준회원</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getIntroducerId())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>추천한회원</td>
+		<td width=20%>초대한회원</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
 		<table class="prettytable">
 		<%
@@ -206,6 +192,7 @@
 		</table>
 		</td>
  	</tr>
+	<%} %>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>환전계좌번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
@@ -275,7 +262,7 @@
 		<td>금지해제일 : <input type='text' name='board_deny_date' value='<%=XwinUtil.toDateStr(member.getBoardDenyDate(), 2)%>' size=10 readonly onClick="popUpCalendar(this,board_deny_date,'yyyy-mm-dd');" style="cursor:hand"></td>
 		</tr>
 		<tr>
-		<td><input onclick="resetQnaDenyDate(this)" type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> Pusat langganan 쓰기 금지</td>
+		<td><input onclick="resetQnaDenyDate(this)" type="checkbox" name="deny_qna" value="<%=Code.DENY_WRITE_QNA%>" <%=(member.getDenyrity()&Code.DENY_WRITE_QNA) > 0 ? "checked":""%>/> 고객센터 쓰기 금지</td>
 		<td>
 			<span onclick="setQnaDenyDate(5)">5일</span>&nbsp;&nbsp;
 			<span onclick="setQnaDenyDate(10)">10일</span>&nbsp;&nbsp;
@@ -287,23 +274,6 @@
 		<input type="button" value="변경" onclick="changeDenyrity()"/> ※ 금지 해제일을 넣지 않으면 수동으로 금지 해제 하셔야 합니다.
 		</td>
  	</tr>
-	<!-- 
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>회원상태</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_NORMAL%>' <%=member.getStatus().equals(Code.USER_STATUS_NORMAL)?"checked":""%>> 정상 
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_SECEDE%>' <%=member.getStatus().equals(Code.USER_STATUS_SECEDE)?"checked":""%>> 탈퇴
-			<input type='radio' name='status' value='<%=Code.USER_STATUS_SECEDE_REQ%>' <%=member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)?"checked":""%>> 탈퇴요청
-		</td>
-	</tr>
-	<tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>회원종류</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input type='radio' name='grade' value='<%=Code.USER_GRADE_NORMAL%>' <%=member.getGrade().equals(Code.USER_GRADE_NORMAL)?"checked":""%>> 일반 
-			<input type='radio' name='grade' value='<%=Code.USER_GRADE_VIP%>' <%=member.getGrade().equals(Code.USER_GRADE_VIP)?"checked":""%>> VIP
-		</td>
-	</tr>
-	 -->
 </table>
 <BR>													
 <table border=0 width=100% cellpadding=0 cellspacing=0 id='uploadform'>
@@ -354,16 +324,6 @@
 		</td>
 	</tr>
 </table>
-</form>
-
-<form name="memo">
-<table class="list">
-	<tr>
-		<th width="10%">쪽지</th>
-		<td><textarea name="memo" style='width=100%;height=200px'></textarea></td>
-	</tr>
-</table>
-<input type="button" value="발송" onclick="sendMemo()"/>
 </form>
 
 <form name="note">
@@ -422,6 +382,7 @@ if (accountList != null) {
 %>		
 </table>
 </form>
+
 <div class="pages">
 <%
 	int pIdx = 0;
@@ -460,7 +421,6 @@ function giveIntroLetter()
 {
 	var query = "mode=giveIntroLetter";
 	query += "&userId=<%=member.getUserId()%>";
-	query += "&number=" + document.regist.introLetter.value;
 	var http = new JKL.ParseXML("adminMember.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
@@ -578,7 +538,7 @@ function changeBankInfo()
 	var frm = document.regist;
 	if (frm.bankName != undefined) {
 		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
-			alert("masukan informasi rekening tukar uang");
+			alert("환전계좌정보를 입력해 주십시오");
 			return;
 		}
 	}
@@ -594,6 +554,16 @@ function changeBankInfo()
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0)
 		location.reload();
+	else if (result.resultXml.code == -2) {
+		var dupList = Xwin.ToArray(result.resultXml.object.member);
+		var dupId = "중복아이디목록 : ";
+		for (var i in dupList) {
+			if (dupList[i].userId == '<%=member.getUserId()%>')
+				continue;
+			dupId = dupId + dupList[i].userId + " ";
+		}
+		alert(dupId);
+	}
 }
 
 function changePassword()
@@ -601,7 +571,7 @@ function changePassword()
 	var frm = document.regist;
 	if (frm.password != undefined) {
 		if (!frm.password.value) {
-			alert("masukan sandi");
+			alert("비밀번호를 입력해 주십시오");
 			return;
 		}
 	}
@@ -622,7 +592,7 @@ function changePin()
 	var frm = document.regist;
 	if (frm.pin!= undefined) {
 		if (!frm.pin.value) {
-			alert("masukan sandi tukar uang");
+			alert("환전비밀번호를 입력해 주십시오");
 			return;
 		}
 	}
@@ -674,7 +644,7 @@ function changePasswordExpire()
 
 function secedeMember()
 {
-	if (confirm("ingin mengeluarkan anggota <%=member.getUserId()%>(<%=member.getNickName()%>)?")) {
+	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n탈퇴시키시겠습니까?")) {
 		var query = "mode=secedeMember";
 		query += "&userId=<%=member.getUserId()%>";
 		var http = new JKL.ParseXML("adminMember.aspx", query);
@@ -687,7 +657,7 @@ function secedeMember()
 
 function recorverMember()
 {
-	if (confirm("ingin memperoleh kembali anggota <%=member.getUserId()%>(<%=member.getNickName()%>)?")) {
+	if (confirm("<%=member.getUserId()%>(<%=member.getNickName()%>) 회원을\n복구시키시겠습니까?")) {
 		var query = "mode=recorverMember";
 		query += "&userId=<%=member.getUserId()%>";
 		var http = new JKL.ParseXML("adminMember.aspx", query);
@@ -741,11 +711,11 @@ function plus_charging()
 {
 	var f = document.charging;
 	if (!f.plus) {
-		alert("masukan nomor");
+		alert("숫자를 입력하세요");
 		return false;
 	}
 	
-	if (confirm("ingin isi langsung " + f.plus.value + "rp kepada <%=member.getNickName()%>?")) {
+	if (confirm("<%=member.getNickName()%>님께 " + f.plus.value + " 원을 직충전 하시겠습니까?")) {
 		var query = "mode=directCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.plus.value;
@@ -761,11 +731,11 @@ function minus_charging()
 {
 	var f = document.charging;
 	if (!f.minus) {
-		alert("masukan nomor");
+		alert("숫자를 입력하세요");
 		return false;
 	}
 	
-	if (confirm("ingin potong langsung " + f.minus.value + "rp dari <%=member.getNickName()%>?")) {
+	if (confirm("<%=member.getNickName()%>님께 " + f.minus.value + " 원을 직차감 하시겠습니까?")) {
 		var query = "mode=directMinusCharging";
 		query += "&userId=<%=member.getUserId()%>";
 		query += "&money=" + f.minus.value;
@@ -775,6 +745,39 @@ function minus_charging()
 		alert(result.resultXml.message);
 		location.reload();
 	}
+}
+
+function memberLogin(userId)
+{
+	var query = "mode=memberLogin";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0) {
+		var sUrl = "/home.php";
+		var sTarget = "Member";
+		var sStatus = "toolbar=yes,location=no,status=yes,menubar=yes,scrollbars=yes,resizable=yes,width=1024,height=768,top=100,left=100";
+
+		window.open(sUrl, sTarget, sStatus);
+	}
+}
+
+function inspectMember()
+{
+	var query = "mode=inspectMember";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+	var object = Xwin.ToArray(result.resultXml.object.accountSum);
+	var str = "";
+	for (var i = 0 ; i < object.length ; i++) {
+		str += object[i].type + " : " + Xwin.Currency(object[i].sum) + "\n";
+	}
+
+	str += "\n총계 : " + result.resultXml.message;
+	str += "\n잔고 : <%=XwinUtil.comma3(member.getBalance())%>";
+
+	alert(str);
 }
 </script>
 

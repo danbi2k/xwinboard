@@ -166,10 +166,10 @@ if (betting != null) {
           <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
 			    <td width="671" height="40" align="left">
-					<a href='board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src="img/list.jpg" border="0" align="absmiddle"></a>
+					<a href='bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src="img/list.jpg" border="0" align="absmiddle"></a>
 			    </td>
 			    <td width="100" height="40" align="right">
-					<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0" align="absmiddle"></a>
+					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0" align="absmiddle"></a>
 				</td>
 				<%if (boardItem.getUserId().equals(member.getUserId())) {%>
 				<td width="100" height="40" align="right">
@@ -248,12 +248,12 @@ if (boardCommentList != null) {
 </form>
 <script>
 function comment_add(){
-	if (havingSqlKeyword(comment_frm.name.value)) { alert("ada huruf atau kata yang tidak bisa memakai untuk nama"); comment_frm.name.focus(); return false; }
-	if (havingSqlKeyword(comment_frm.comment.value)) { alert("ada huruf atau kata yang tidak bisa memakai untuk blasan"); comment_frm.comment.focus(); return false; }
+	if (havingSqlKeyword(comment_frm.name.value)) { alert("이름에 사용할수 없는 문자열이 있습니다"); comment_frm.name.focus(); return false; }
+	if (havingSqlKeyword(comment_frm.comment.value)) { alert("댓글에 사용할수 없는 문자열이 있습니다"); comment_frm.comment.focus(); return false; }
 	
-    if(comment_frm.name.value    ==""){ alert("masukan nama");      comment_frm.name.focus(); return false; }
-    if(comment_frm.comment.value ==""){ alert("masukan isi balasan."); comment_frm.comment.focus(); return false; }
-    comment_frm.action = "board.aspx";
+    if(comment_frm.name.value    ==""){ alert("이름을 입력하세요.");      comment_frm.name.focus(); return false; }
+    if(comment_frm.comment.value ==""){ alert("댓글 내용을 입력하세요."); comment_frm.comment.focus(); return false; }
+    comment_frm.action = "bbs.php";
     comment_frm.method = "post";
     comment_frm.submit();
 
@@ -261,25 +261,25 @@ function comment_add(){
 
 function deleteItem()
 {
-	if (confirm("ingin di hapus?")) {
+	if (confirm("삭제하시겠습니까?")) {
 		var query = "mode=deleteBoardItem";
 		query += "&id=<%=boardItem.getId()%>";
 		query += "&boardName=<%=boardName%>";
-		var http = new JKL.ParseXML("board.aspx", query);
+		var http = new JKL.ParseXML("bbs.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "board.aspx?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>";
+			location.href = "bbs.php?mode=viewBoard&boardName=<%=boardItem.getBoardName()%>&grade=<%=boardItem.getGrade()%>";
 		}
 	}
 }
 
 function deleteComment(id)
 {
-	if (confirm("ingin di hapus?")) {
+	if (confirm("삭제하시겠습니까?")) {
 		var query = "mode=deleteBoardComment";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("board.aspx", query);
+		var http = new JKL.ParseXML("bbs.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {

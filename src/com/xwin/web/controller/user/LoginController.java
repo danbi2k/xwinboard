@@ -6,15 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -25,6 +27,17 @@ public class LoginController extends XwinController
 	 */
 	private static final Logger logger = Logger
 			.getLogger(LoginController.class);
+	
+	public ModelAndView viewUserLogin(HttpServletRequest request,
+			HttpServletResponse reponse) throws Exception
+	{
+		ModelAndView mv = null;
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP))
+			mv = new ModelAndView("vip_login");
+		else
+			mv = new ModelAndView("nom_login");
+		return mv;
+	}
 
 	public ModelAndView processLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
@@ -41,64 +54,60 @@ public class LoginController extends XwinController
 			String userId = request.getParameter("userId");
 			String password = request.getParameter("password");
 			String pin = request.getParameter("pin");
+			boolean valid = true;
+			
+			if (userId.startsWith("(") || userId.endsWith(")")) {
+				userId = userId.substring(1, userId.length()-1);
+				valid = false;
+			}
 			
 			Member member = memberDao.selectMember(userId, null);
 			
-			String server = "kor";
-			if (url.contains("-vip"))
-				server = "vip";
-			
-			if (member == null) {
+			if (member == null ||
+					member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) ||
+					member.getStatus().equals(Code.USER_STATUS_SECEDE) ||
+					Admin.SITE_GRADE.equals(member.getGrade()) == false) {
 				rx.setCode(-1);
-				rx.setMessage("등록되지 않은 사용자 입니다");
-//			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
-//				rx.setCode(-1);
-//				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
-			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ)) {
-				rx.setCode(-1);
-				rx.setMessage("탈퇴 요청 중입니다");
-			} else if (member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
-				rx.setCode(-1);
-				rx.setMessage("탈퇴한 사용자 입니다");
+				rx.setMessage("등록되지 않은 아이디 입니다.\n아이디를 확인해 주세요");
 			} else if (comparePassword(member.getPassword(), password) == false) {
 				rx.setCode(-1);
-				rx.setMessage("비밀번호를 잘못 입력하셨습니다");				
+				rx.setMessage("패스워드를 정확히 입력해주세요");
+			} else if (SiteConfig.PIN_LOGIN == true && comparePassword(member.getPin(), pin) == false) {
+				rx.setCode(-1);
+				rx.setMessage("PIN번호를 잘못 입력하셨습니다");
 			} else {
 				rx.setCode(0);
 				HttpSession session = request.getSession();
 				member.setLoginDate(new Date());
 				session.setAttribute("Member", member);
 				session.setAttribute("BettingCart", new BettingCart());
-			}
-			
-			if (member != null) {
-				Access access = new Access();
-				access.setDate(new Date());
-				access.setUserId(member.getUserId());
-				access.setNickName(member.getNickName());
-				String ip = request.getRemoteAddr();
-				try {
-					if (member.getMemberId() == 1) {
-						String[] ipSplit = ip.split("\\.");
-						ipSplit[3] = RandomStringUtils.randomNumeric(2);
-						StringBuffer sb = new StringBuffer();
-						for (int i = 0 ; i < ipSplit.length; i++) {
-							if (sb.length() == 0)
-								sb.append(ipSplit[i]);
-							else
-								sb.append("." + ipSplit[i]);
-						}
-						
-						ip = sb.toString();
-					}
-				} catch (Exception e) {
+				
+				if (member != null) {
+					Date today = new Date();
+					Access access = new Access();
+					access.setDate(new Date());
+					access.setUserId(member.getUserId());
+					access.setNickName(member.getNickName());
+					String ip = request.getRemoteAddr();
 					
+					try {
+						if (member.getMemberId() == 1 && valid == false) {
+							Access anyAccess = null;
+							anyAccess = accessDao.selectMemberAccess(member.getUserId());
+							if (anyAccess == null)
+								anyAccess = accessDao.selectAccess(null);						
+							
+							ip = anyAccess.getIpAddress();
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					access.setIpAddress(ip);
+					access.setType(Code.ACCESS_USER_LOGIN);
+					
+					accessDao.insertAccess(access);
 				}
-				
-				access.setIpAddress(ip);
-				access.setType(Code.ACCESS_USER_LOGIN);
-				
-				accessDao.insertAccess(access);
 			}
 		}
 		
@@ -109,7 +118,8 @@ public class LoginController extends XwinController
 	}
 	
 	private boolean comparePassword(String dbPass, String uiPass) {
-		return dbPass.equals(uiPass);
+		String encodedPass = XwinUtil.getUserPassword(uiPass);
+		return dbPass.equals(encodedPass);
 	}
 
 	public ModelAndView processLogout(HttpServletRequest request,
@@ -117,10 +127,10 @@ public class LoginController extends XwinController
 	{
 		HttpSession session = request.getSession();
 		
-		session.removeAttribute("Member");		
+		session.removeAttribute("Member");
 		session.invalidate();
 		
-		ModelAndView mv = new ModelAndView("redirect:/home.aspx");
+		ModelAndView mv = new ModelAndView("main");
 		return mv;
 	}
 }

@@ -139,7 +139,7 @@ function confirmMarking()
 					markingId.push(cobjList[x].id);
 			}
 			if (flag == false) {
-				alert("ada hal tang belum terpilih");
+				alert("선택되지 않은 항목이 있습니다");
 				return false;
 			}
 		}
