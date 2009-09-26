@@ -23,7 +23,10 @@ import com.xwin.service.external.TransactionService;
 public class TransactionManager extends QuartzJobBean
 {
 	private static final SimpleDateFormat smsDateFormat = new SimpleDateFormat("MM/dd HH:mm");
-	private static final String[] bankList = {"국민","기업","농협","신한","조흥","외환","우체국",
+	private static final SimpleDateFormat smsTimeFormat = new SimpleDateFormat("HH:mm");
+	private static final SimpleDateFormat smsInDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	
+	private static final String[] bankList = {"국민","기업","농협","신한","조흥","외환","우체",
 		"SC제일","하나","한국시티","한미","우리","경남","광주","대구","도이치","부산",
 		"산업","	수협","전북","제주","새마을","신협","	HSBC","상호저축"};
 	
@@ -59,6 +62,8 @@ public class TransactionManager extends QuartzJobBean
 					transaction = wooriBankProcess(message);
 				else if (message.getMsg().startsWith("신한"))
 					transaction = shinhanBankProcess(message);
+				else if (message.getMsg().startsWith("우체국"))
+					transaction = postOfficeProcess(message);
 				else {
 					ktfSmsDao.insertMessage(message);
 				}
@@ -469,14 +474,173 @@ public class TransactionManager extends QuartzJobBean
 		return null;
 	}
 	
+	private Transaction postOfficeProcess(KtfSmsMessage message) {		
+		Transaction transaction = new Transaction();
+		
+		if (message.getMsg().indexOf("입금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String first[] = msg[0].trim().split(",");
+				Date theDate = null;
+				try {
+					theDate = smsTimeFormat.parse(first[1]);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+					cal.set(Calendar.DATE, now.get(Calendar.DATE));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				Long money = null;
+				if (msg[2].startsWith("입금")) {
+					String moneyStr = msg[2].replaceAll("원", "");
+					moneyStr = moneyStr.replaceAll("입금", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				Long balance = null;
+				if (msg[3].startsWith("잔액")) {
+					String balanceStr = msg[3].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}		
+				
+				String userName = msg[4].trim();
+				int len = userName.length();
+				if (len > 3) {
+					for (int i = 0 ; i < bankList.length ; i++) {
+						userName = userName.replaceAll(bankList[i], "");
+						if (userName.length() != len)
+							break;
+					}
+				}		
+
+				transaction.setType(Code.TRAN_TYPE_MONEYIN);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("N");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		} else if (message.getMsg().indexOf("출금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String first[] = msg[0].trim().split(",");
+				Date theDate = null;
+				try {
+					theDate = smsTimeFormat.parse(first[1]);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+					cal.set(Calendar.DATE, now.get(Calendar.DATE));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				Long money = null;
+				if (msg[2].startsWith("출금")) {
+					String moneyStr = msg[2].replaceAll("원", "");
+					moneyStr = moneyStr.replaceAll("출금", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				Long balance = null;
+				if (msg[3].startsWith("잔액")) {
+					String balanceStr = msg[3].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}		
+				
+				String userName = msg[4].trim();
+				int len = userName.length();
+				if (len > 3) {
+					for (int i = 0 ; i < bankList.length ; i++) {
+						userName = userName.replaceAll(bankList[i], "");
+						if (userName.length() != len)
+							break;
+					}
+				}
+
+				transaction.setType(Code.TRAN_TYPE_MONEYOUT);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money * -1);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("-");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		}
+		else {
+			ktfSmsDao.insertMessage(message);
+		}
+		
+		return null;
+	}
+	
 	public static void main(String args[]) {
 		KtfSmsMessage message = new KtfSmsMessage();
 		//message.setMsg("신한 12/23 16:32[110-257-306***]입금      19,000잔액   6,121,400안민강");
 		//message.setMsg("신한 12/23 16:31[110-257-306***]지급         100잔액   6,102,40002480104300750");
 		//message.setMsg("신한 12/23 18:22[110-257-306***]입금     100,000잔액  21,840,368 이훈희");
-		message.setMsg("신한 12/23 17:01[110-257-306***]입금     250,000잔액  14,326,400제주:진경훈");
-		
+		//message.setMsg("신한 12/23 17:01[110-257-306***]입금     250,000잔액  14,326,400제주:진경훈");
+		//message.setMsg("우체국,23:47\n610********249\n입금39,000원\n잔액74,495,645원\n고정복");		
+		//message.setInDate("20090926234743");
 		TransactionManager tm = new TransactionManager();
-		tm.shinhanBankProcess(message);
+		//tm.postOfficeProcess(message);
+		message.setMsg("우체국,23:44\n610********249\n출금1,250,000원\n잔액74,456,645원\n이성호");
+		message.setInDate("20090926234424");
+		tm.postOfficeProcess(message);
 	}
 }
