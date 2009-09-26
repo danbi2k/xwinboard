@@ -79,6 +79,10 @@ public class BettingService extends XwinService
 		Double betting_point_rate = 0.01;
 		int size = itemList.size();
 		if (size >= 4)
+			betting_point_rate = 0.02;
+		if (size >= 7)
+			betting_point_rate = 0.03;
+		if (size >= 10)
 			betting_point_rate = 0.05;
 		
 		Double point = betting.getMoney() * betting_point_rate;
@@ -101,7 +105,7 @@ public class BettingService extends XwinService
 		String introducerId = member.getIntroducerId();
 		if (introducerId != null) {
 			Member introducer = memberDao.selectMember(introducerId, null);
-			Double intro_point_rate = 0.03;
+			Double intro_point_rate = 0.02;
 			
 			Double intro_point = betting.getMoney() * intro_point_rate;
 			memberDao.plusMinusPoint(introducerId, intro_point.longValue());
