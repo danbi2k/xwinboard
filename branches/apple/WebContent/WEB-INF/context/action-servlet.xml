@@ -44,6 +44,12 @@
 				<prop key="/adminTran.aspx">adminTransactionController</prop>
 				<prop key="/adminLog.aspx">adminLogController</prop>
 				
+				<prop key="/index.wap">wapIndexController</prop>
+				<prop key="/login.wap">wapLoginController</prop>
+				<prop key="/main.wap">wapMainController</prop>
+				<prop key="/betlog.wap">wapMyBettingController</prop>
+				<prop key="/sendcache.wap">wapMoneyOutController</prop>
+				
 				<prop key="/anne.php">guideController</prop>
 				<prop key="/yakwan.php">provisionController</prop>
 				<prop key="/kyujung.php">rulesController</prop>
