@@ -202,6 +202,9 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="mobile">
+				MOBILE = #mobile#
+			</isNotNull>
 		</dynamic>
 	</select>
 	
