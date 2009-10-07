@@ -17,7 +17,6 @@
 				<div class='box'>
 					<form name='frm_reg'>
 						<input name="password" type="hidden" value=""/>
-						<input name="pin" type="hidden" value=""/>
 						<table>
 						<tr>
 							<th>아이디</th>
@@ -34,6 +33,11 @@
 						<tr>
 							<th>별명</th>
 							<td><input type='text' name='nickName' class='input_text w100'></td>
+						</tr>
+						<tr>
+							<th>모바일PIN번호</th>
+							<td><input type='text' name='pin' class='input_text w100' onfocusout='only123(this)' onkeyup='only123(this)'> <font color="yellow">★ 숫자 6자리를 입력해주세요.</font> <br>
+							</td>
 						</tr>
 						<tr>
 							<th>핸드폰번호</th>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.user.Member;
@@ -29,7 +30,7 @@ public class WapLoginController extends XwinController
 			String connectedMobile = adjustMobileFormat(http_phone_number);
 			
 			Member member = selectValidMemberByMobile(connectedMobile);
-			if (member != null && member.getPin().equals(pin)) {
+			if (member != null && StringUtils.isNumeric(pin) && pin.length() == 6 && member.getPin().equals(pin)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("Member", member);
 				
