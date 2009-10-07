@@ -51,7 +51,6 @@
 					<input type="hidden" name="phone3" value="<%=phone[2]%>"/>
 					<input type="hidden" name="email1" value="<%=email[0]%>"/>
 					<input type="hidden" name="email2" value="<%=email[1]%>">
-					<input type="hidden" name="pin" value="<%=member.getPin()%>"/>
 						<table>
 						<tr>
 							<th>아이디</th>
@@ -81,6 +80,10 @@
 						<tr>
 							<th>새 패스워드 확인 </th>
 							<td><input type='password' name='password2' class='input_text w100'></td>
+						</tr>
+						<tr>
+							<th>새 모바일PIN번호 </th>
+							<td><input type='text' name='pin' class='input_text w100' onfocusout='only123(this)' onkeyup='only123(this)'> <font color="yellow">★ 숫자 6자리를 입력해주세요.</font></td>
 						</tr>
 						<tr>
 							<th>인증번호</th>

@@ -28,7 +28,7 @@ public class WapIndexController extends XwinController
 			Member member = selectValidMemberByMobile(connectedMobile);
 			if (member != null) {
 				mv = new ModelAndView("wap/index");
-				mv.addObject("nickName", member.getNickName());
+				mv.addObject("member", member);
 			}
 			else {
 				mv = new ModelAndView("wap/error");

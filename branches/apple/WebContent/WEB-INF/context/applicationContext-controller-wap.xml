@@ -18,7 +18,8 @@
 		
 	<bean id="wapMyBettingController" class="com.xwin.web.controller.wap.WapMyBettingController"
 		p:memberDao-ref="memberDao"
-		p:bettingDao-ref="bettingDao"/>
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="wapMoneyOutController" class="com.xwin.web.controller.wap.WapMoneyOutController"
 		p:memberDao-ref="memberDao"

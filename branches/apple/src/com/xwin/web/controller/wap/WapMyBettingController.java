@@ -16,7 +16,7 @@ import com.xwin.web.controller.XwinController;
 
 public class WapMyBettingController extends XwinController
 {
-	public ModelAndView handleRequest(HttpServletRequest request,
+	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
 		Member member = (Member) request.getSession().getAttribute("Member");
@@ -28,7 +28,7 @@ public class WapMyBettingController extends XwinController
 		param.put("notStatus", Code.BET_STATUS_CANCEL);
 		param.put("isDeleted", "N");
 		param.put("fromRow", 0);
-		param.put("rowSize", 5);
+		param.put("rowSize", 10);
 		
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
@@ -36,6 +36,21 @@ public class WapMyBettingController extends XwinController
 		ModelAndView mv = new ModelAndView("wap/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
+		return mv;
+	}
+	
+	public ModelAndView viewMyBettingDetail(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("redirect:/index.wap");
+		
+		String bettingId = request.getParameter("bettingId");
+		Betting betting = bettingDao.selectBetting(bettingId);
+		
+		ModelAndView mv = new ModelAndView("wap/my_betting_detail");
+		mv.addObject("betting", betting);
 		return mv;
 	}
 }

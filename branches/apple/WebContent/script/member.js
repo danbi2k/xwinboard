@@ -7,6 +7,11 @@ function FnMemReg(frm)
 		}
 	}
 	
+	if (!frm.pin.value || frm.pin.value.length != 6) {
+		alert("모바일PIN번호를 입력해 주세요");
+		return;
+	}
+	
 	if (havingSqlKeyword(frm.userId.value)) {
 		alert("아이디에 사용할수 없는 문자열이 있습니다");
 		return;

@@ -17,7 +17,7 @@
 <br>
 <br>
 * 배팅내역<br>
-* 최근 5개 만 보입니다.
+* 최근 10개 만 보입니다.
 <br><br>
 <%
 if (bettingList != null && bettingList.size() > 0) {
@@ -35,46 +35,7 @@ else
 	out.print(0);							
 %>
 <br>
-	<%
-	List<BetGame> betGameList = betting.getBetGameList();
-	if (betGameList != null && betGameList.size() > 0) {
-		for (BetGame betGame : betGameList) {
-	%>
-		<table border=1>
-			<tr>
-				<td>경기일시</td>
-				<td><%=betGame.getGameDateStr()%></td>
-			</tr>
-			<tr>
-				<td>(승) 홈팀</td>
-				<td><%=betGame.getHomeTeam()%>&nbsp;(<%=betGame.getWinRateStr()%>)</td>
-			</tr>
-			<tr>
-				<td>무/핸디캡</td>
-				<td>(<%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>)</td>
-			</tr>
-			<tr>
-				<td>(패) 원정팀</td>
-				<td><%=betGame.getAwayTeam()%>&nbsp;(<%=betGame.getLoseRateStr()%>)</td>
-			</tr>
-			<tr>
-				<td>배팅팀</td>
-				<td><%=Code.getValue(betGame.getGuess())%></td>
-			</tr>
-			<tr>
-				<td>경기결과</td>
-				<td><%=Code.getValue(betGame.getResult())%> <%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%></td>
-			</tr>
-			<tr>
-				<td>적중유무</td>
-				<td><%=Code.getValue(betGame.getResultStatus())%></td>
-			</tr>
-		</table>
-	<%
-		}
-	}
-	%>
-	<br><br>
+<a href="betlog.wap?mode=viewMyBettingDetail&bettingId=<%=betting.getId()%>">상세보기</a><br><br>
 <%
 	}
 } else {

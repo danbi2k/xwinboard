@@ -20,6 +20,6 @@
 <br>
 <a href="sendcache.wap?mode=viewMoneyOutRequest">환전신청</a><br>
 <a href="sendcache.wap?mode=viewMoneyOutRequestList">환전신청내역</a><br>
-<a href="betlog.wap">배팅내역</a>
+<a href="betlog.wap?mode=viewMyBettingList">배팅내역</a>
 </body>
 </html>
