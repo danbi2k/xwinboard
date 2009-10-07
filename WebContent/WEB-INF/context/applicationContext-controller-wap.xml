@@ -21,12 +21,31 @@
 		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
+	<bean id="wapMoneyInController" class="com.xwin.web.controller.wap.WapMoneyInController"
+		p:memberDao-ref="memberDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:bettingDao-ref="bettingDao"
+		p:accountDao-ref="accountDao"
+		p:bankBookDao-ref="bankBookDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
 	<bean id="wapMoneyOutController" class="com.xwin.web.controller.wap.WapMoneyOutController"
 		p:memberDao-ref="memberDao"
 		p:moneyOutDao-ref="moneyOutDao"
 		p:bettingDao-ref="bettingDao"
 		p:accountDao-ref="accountDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapGameController" class="com.xwin.web.controller.wap.WapGameController"
+		p:memberDao-ref="memberDao"
+		p:gameDao-ref="gameDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapBettingController" class="com.xwin.web.controller.wap.WapBettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:accountDao-ref="accountDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 	
 	<!-- >bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
 		p:invitationDao-ref="invitationDao"

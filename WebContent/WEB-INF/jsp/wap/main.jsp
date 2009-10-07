@@ -18,8 +18,12 @@
 <br>
 <br>
 <br>
-<a href="sendcache.wap?mode=viewMoneyOutRequest">환전신청</a><br>
+<a href="play.wap?mode=viewGameList&type=wdl">승무패</a>&nbsp;
+<a href="play.wap?mode=viewGameList&type=handy">핸디캡</a>&nbsp;
+<a href="betlog.wap?mode=viewMyBettingList">배팅내역</a><br>
+<a href="sendcache.wap?mode=viewMoneyOutRequest">환전신청</a>&nbsp;
 <a href="sendcache.wap?mode=viewMoneyOutRequestList">환전신청내역</a><br>
-<a href="betlog.wap?mode=viewMyBettingList">배팅내역</a>
+<a href="earncache.wap?mode=viewMoneyInRequest">충전신청</a>&nbsp;
+<a href="earncache.wap?mode=viewMoneyInRequestList">충전신청내역</a><br>
 </body>
 </html>
