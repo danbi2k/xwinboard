@@ -1,6 +1,8 @@
 package com.xwin.web.controller.wap;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +26,8 @@ public class WapGameController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
@@ -51,7 +54,44 @@ public class WapGameController extends XwinController
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		
-		ModelAndView mv = new ModelAndView("wap/game");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/game");
+		mv.addObject("gameList", gameList);
+
+		return mv; 
+	}
+	
+	public ModelAndView viewGameResultList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
+		if (member == null)
+			return new ModelAndView("redirect:/index.wap");
+		
+		String type = XwinUtil.arcNvl(request.getParameter("type"));
+		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		
+		if (gameDate == null)
+			gameDate = XwinUtil.toDateStr(new Date(), 2);
+	
+		Date[] datePair = XwinUtil.getDatePair(gameDate);
+		Date fromDate = datePair[0];
+		Date toDate = datePair[1];
+	
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("type", type);
+		List<String> statusList = new ArrayList<String>();
+		statusList.add(Code.GAME_STATUS_END);
+		statusList.add(Code.GAME_STATUS_CANCEL);
+		param.put("statusList", statusList);
+		param.put("fromDate", fromDate);
+		param.put("toDate", toDate);
+		param.put("ORDERBY", "DESC");
+		param.put("gradeLess", member.getGrade());
+		
+		List<Game> gameList = gameDao.selectGameList(param);
+		
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/game_result");
 		mv.addObject("gameList", gameList);
 
 		return mv; 

@@ -24,7 +24,8 @@ public class WapBettingController extends XwinController
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		

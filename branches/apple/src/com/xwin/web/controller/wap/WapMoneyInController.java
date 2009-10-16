@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.infra.util.Code;
-import com.xwin.infra.util.XwinUtil;
+import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultWap;
+import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
 public class WapMoneyInController extends XwinController
@@ -23,14 +25,15 @@ public class WapMoneyInController extends XwinController
 	public ModelAndView viewMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member =	(Member) request.getSession().getAttribute("Member");		
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member =	(Member) request.getAttribute("Member");			
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
 		List<BankBook> bankBookList =
 			bankBookDao.selectBankBookList(Code.BANKBOOK_STATUS_NORMAL, member.getGrade());
 		
-		ModelAndView mv = new ModelAndView("wap/money_in_request");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/money_in_request");
 		mv.addObject("bankBookList", bankBookList);
 		return mv;
 	}
@@ -38,7 +41,11 @@ public class WapMoneyInController extends XwinController
 	public ModelAndView moneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member =	(Member) request.getSession().getAttribute("Member");		
+		String token = request.getParameter("token");
+		String UP_URL = "earncache.wap?mode=viewMoneyInRequest&token=" + token;
+		
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member =	(Member) request.getAttribute("Member");			
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
@@ -58,11 +65,11 @@ public class WapMoneyInController extends XwinController
 			Long money = Long.parseLong(_money);
 			
 			if (money <= 0)
-				rw = new ResultWap(-1, "충전 신청액을 다시 확인해 주세요", "earncache.wap?mode=viewMoneyInRequest", null);
+				rw = new ResultWap(-1, "충전 신청액을 다시 확인해 주세요", UP_URL, null);
 			else if (_name == null || _name.length() == 0)
-				rw = new ResultWap(-1, "예금주를 입력하세요", "earncache.wap?mode=viewMoneyInRequest", null);
+				rw = new ResultWap(-1, "예금주를 입력하세요", UP_URL, null);
 			else if (existCnt > 0) {
-				rw = new ResultWap(-1, "충전신청은 1건씩 가능합니다.", "earncache.wap?mode=viewMoneyInRequest", null);
+				rw = new ResultWap(-1, "충전신청은 1건씩 가능합니다.", UP_URL, null);
 			}
 			else {			
 				MoneyIn moneyIn = new MoneyIn();
@@ -75,28 +82,23 @@ public class WapMoneyInController extends XwinController
 				moneyIn.setNickName(member.getNickName());
 				moneyInDao.insertMoneyIn(moneyIn);
 		
-				rw = new ResultWap(0, "캐쉬충전이 접수 되었습니다", "earncache.wap?mode=viewMoneyInRequestList", null);
+				rw = new ResultWap(0, "캐쉬충전이 접수 되었습니다", "earncache.wap?mode=viewMoneyInRequestList&token=" + token, null);
 			}
 		} catch (NumberFormatException e) {
-			rw = new ResultWap(-1, "충전 신청액을 다시 확인해 주세요", "earncache.wap?mode=viewMoneyInRequest", null);
+			rw = new ResultWap(-1, "충전 신청액을 다시 확인해 주세요", UP_URL, null);
 		}
-		ModelAndView mv = new ModelAndView("wap/error");		
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/message");		
 		mv.addObject("resultWap", rw);
 		return mv;
 	}
 	
 	public ModelAndView viewMoneyInRequestList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
-	{		
-		Member member = (Member) request.getSession().getAttribute("Member");
+	{	
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
 		if (member == null)
 			return new ModelAndView("dummy");
-		
-		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-		
-		int pIdx = 0;
-		if (pageIndex != null)
-			pIdx = Integer.parseInt(pageIndex);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
@@ -108,9 +110,38 @@ public class WapMoneyInController extends XwinController
 		List<MoneyIn> moneyInList =	moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);
 		
-		ModelAndView mv = new ModelAndView("wap/money_in_request_list");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/money_in_request_list");
 		mv.addObject("moneyInList", moneyInList);
 		mv.addObject("moneyInCount", moneyInCount);
 		return mv;
+	}
+	
+	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String token = request.getParameter("token");
+		String UP_URL = "earncache.wap?mode=viewMoneyInRequest&token=" + token;
+		
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
+		if (member == null)
+			return new ModelAndView("dummy");
+		
+		ResultWap rw = null;
+		
+		String id = request.getParameter("id");		
+		MoneyIn moneyIn = moneyInDao.selectMoneyIn(id);		
+		if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false)
+			rw = new ResultWap(0, "취소할수 없는 충전 신청 입니다", UP_URL, null);
+		else {
+			moneyIn.setStatus(Code.MONEY_IN_CANCEL);
+			moneyIn.setProcDate(new Date());
+			moneyInDao.updateMoneyIn(moneyIn);			
+			rw = new ResultWap(0, "충전 신청이 정상적으로 취소되었습니다", UP_URL, null);
+		}
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/message");		
+		mv.addObject("resultWap", rw);
+		
+		return mv;	
 	}
 }

@@ -7,16 +7,4 @@
 	if (rw == null)
 		rw = ResultWap.FAILURE;
 %>
-<html>
-<head>
-<title>APPLE</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
-<body>
-<br>
-<br>
 <%=rw.getMessage()%>
-<br><br><br><br>
-<a href="<%=rw.getReturnUrl()%>">돌아가기</a>
-</body>
-</html>
