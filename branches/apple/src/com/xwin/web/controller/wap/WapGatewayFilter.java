@@ -875,6 +875,8 @@ public class WapGatewayFilter implements Filter
 	        redirect = "mw2";
 	    }
 	    
+	    phoneno="01099923385";
+	    
 		if (redirect != null) {
 			request.setAttribute("LANG_TYPE", redirect);
 			
@@ -909,7 +911,7 @@ public class WapGatewayFilter implements Filter
 
 	protected Member selectValidMemberByMobile(String mobile) {
 		String formetedMobile = mobile;
-		if (mobile.indexOf("-") > 0) {
+		if (mobile.indexOf("-") < 0) {
 			formetedMobile = adjustMobileFormat(mobile);
 		}
 		
