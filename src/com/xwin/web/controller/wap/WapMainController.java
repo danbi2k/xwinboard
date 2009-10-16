@@ -14,12 +14,13 @@ public class WapMainController extends XwinController
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
 		member = memberDao.selectMember(member.getUserId(), member.getGrade());
-		ModelAndView mv = new ModelAndView("wap/main");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/main");
 		mv.addObject("Member", member);
 				
 		return mv;

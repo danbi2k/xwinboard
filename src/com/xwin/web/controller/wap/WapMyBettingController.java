@@ -19,7 +19,8 @@ public class WapMyBettingController extends XwinController
 	public ModelAndView viewMyBettingList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
@@ -33,7 +34,7 @@ public class WapMyBettingController extends XwinController
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
 		
-		ModelAndView mv = new ModelAndView("wap/my_betting");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
 		return mv;
@@ -42,14 +43,15 @@ public class WapMyBettingController extends XwinController
 	public ModelAndView viewMyBettingDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		Member member = (Member) request.getSession().getAttribute("Member");
+		String LANG_TYPE = (String) request.getAttribute("LANG_TYPE");
+		Member member = (Member) request.getAttribute("Member");	
 		if (member == null)
 			return new ModelAndView("redirect:/index.wap");
 		
 		String bettingId = request.getParameter("bettingId");
 		Betting betting = bettingDao.selectBetting(bettingId);
 		
-		ModelAndView mv = new ModelAndView("wap/my_betting_detail");
+		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/my_betting_detail");
 		mv.addObject("betting", betting);
 		return mv;
 	}
