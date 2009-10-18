@@ -650,8 +650,8 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		ResultXml rx = null;
 		
-		if (pin == null || pin.length() < 4)
-			rx = new ResultXml(-1, "환전패스워드를 4자 이상 입력 하세요", null);
+		if (pin == null || pin.length() != 6)
+			rx = new ResultXml(-1, "모바일PIN번호를 6자   입력 하세요", null);
 		else {
 			Member member = new Member();
 			member.setPin(XwinUtil.getUserPassword(pin));

@@ -31,7 +31,7 @@
 							<td><input type='password' name='password2' class='input_text w100'></td>
 						</tr>
 						<tr>
-							<th>별명</th>
+							<th>닉네임</th>
 							<td><input type='text' name='nickName' class='input_text w100'></td>
 						</tr>
 						<tr>
