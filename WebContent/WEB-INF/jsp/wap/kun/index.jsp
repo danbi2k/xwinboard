@@ -37,8 +37,8 @@ if (StringUtils.isNumeric(pin) && pin.length() == 6) {
                     <td align="left" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
                         <div>※ PIN 번호를 입력해 주세요<br/>
                         &nbsp;</div>
-                        <div>▶PIN번호</div>
-                        <div><input type="text" name="pin" maxlength="6" value="" format="1" style="width:98%;text-align:center;" /></div>
+                        <div><img src="file:////images/magicn/option_next.sis" alt=""/>PIN번호</div>
+                        <div><input type="password" name="pin" maxlength="6" value="" format="1" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div style="text-align:center;margin:5 0 5 0;"><input type="submit" value="전송"/></div>
                     </td>

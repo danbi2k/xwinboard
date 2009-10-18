@@ -60,7 +60,7 @@
                         ■ 입금액과 입금자명을 입력해주세요.<br/>
                         &nbsp;</div>
                         <div><img localsrc="pict:///core/arrow/right_2" alt=""/>입금액</div>
-                        <div><input type="text" name="money" value="" emptyok="true" style="width:98%;text-align:center;" /></div>
+                        <div><input type="text" name="money" value="" format="N*N" emptyok="true" style="width:98%;text-align:center;" /></div>
                         <div><img localsrc="pict:///core/arrow/right_2" alt=""/>신청자명</div>
                         <div><input type="text" name="name" value="" emptyok="true" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>

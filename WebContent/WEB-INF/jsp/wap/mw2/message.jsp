@@ -19,7 +19,7 @@
     <div style="width:<%=lcdlx%>px">
         <div><table width="100%" cellspacing="0" cellpadding="0">
             <tr><td style="background-color:#D9D9FF;height:1px;"></td></tr>
-            <tr><td align="center" valign="middle" style="background-color:#8EC7FF;color:#000000;height:19px;">?message?</td></tr>
+            <tr><td align="center" valign="middle" style="background-color:#8EC7FF;color:#000000;height:19px;">?알림?</td></tr>
             <tr><td style="background-color:#D9D9FF;height:1px;"></td></tr>
             <tr><td style="background-color:#D9D9FF;height:1px;"></td></tr>
         </table></div>

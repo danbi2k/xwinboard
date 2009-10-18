@@ -12,7 +12,7 @@
     <head>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
-    <card id ="card1" title="message">
+    <card id ="card1" title="¾Ë¸²">
 <%
 	ResultWap rw = (ResultWap) request.getAttribute("resultWap");
 	if (rw == null)

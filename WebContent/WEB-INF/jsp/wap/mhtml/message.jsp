@@ -10,11 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <html>
     <head>
-    <title>【message】</title>
+    <title>【알림】</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
-        <div><center>【message】</center></div>
+        <div><center>【알림】</center></div>
 <%
 	ResultWap rw = (ResultWap) request.getAttribute("resultWap");
 	if (rw == null)

@@ -53,10 +53,10 @@ if (gameList != null) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div>리그</div>
                 </td>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div><%=game.getLeagueName()%></div>
                 </td>
             </tr>
@@ -109,6 +109,20 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 	}
 }
 %>
+<%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
+if (pIdx > 0) {
+%>
+        <div><a href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx-1%>&token=<%=token%>" accesskey="2">이전</a></div>
+<%
+}
+%>
+        <div><a href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx+1%>&token=<%=token%>" accesskey="3">다음</a></div>
         <btn name="상위" href="main.wap?token=<%=token%>">
         <hr size="1" color="#BBBBBB">
         <table cellpadding="0" cellspacing="1">

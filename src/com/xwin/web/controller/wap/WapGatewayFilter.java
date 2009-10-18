@@ -875,7 +875,10 @@ public class WapGatewayFilter implements Filter
 	        redirect = "mw2";
 	    }
 	    
-	    phoneno="01099923385";
+	    if (redirect.equals("mw2") && (phoneno == null || phoneno.length() == 0))
+	    	phoneno = "010-1111-9999";
+	    
+	    System.out.println("&&&&&&&&& " + redirect + " " + phoneno + " &&&&&&&&&");
 	    
 		if (redirect != null) {
 			request.setAttribute("LANG_TYPE", redirect);
@@ -925,13 +928,11 @@ public class WapGatewayFilter implements Filter
 	
 	protected String adjustMobileFormat(String phoneNumber)
 	{
-		String mobile = phoneNumber.substring(2);
+		String mobile = phoneNumber;
 		if (mobile.length() == 11) {
 			mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 7) + "-" + mobile.substring(7);
 		} else if (mobile.length() == 10) {
 			mobile = mobile.substring(0, 3) + "-" + mobile.substring(3, 6) + "-" + mobile.substring(6);
-		} else {
-			return phoneNumber;
 		}
 		
 		return mobile;

@@ -52,6 +52,20 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 	}
 }
 %>
+<%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
+if (pIdx > 0) {
+%>
+        <p mode="wrap"><a title="확인" href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx-1%>&amp;token=<%=token%>" accesskey="2">이전</a></p>
+<%
+}
+%>
+        <p mode="wrap"><a title="확인" href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx+1%>&amp;token=<%=token%>" accesskey="3">다음</a></p>
         <do type="options" label="상위"><go href="main.wap?token=<%=token%>"/></do>
         <do type="accept" label="확인" name="VX"><go href=""/></do>
     </card>
