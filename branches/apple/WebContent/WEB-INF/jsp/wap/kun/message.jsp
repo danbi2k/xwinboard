@@ -19,7 +19,7 @@
 } %>
 <html>
     <head>
-    <title>?message?</title>
+    <title>?알림?</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
@@ -27,7 +27,7 @@
         <div>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr><td width="100%" height="1" bgcolor="#D9D9FF"></td></tr>
-            <tr><td height="19" align="center" bgcolor="#8EC7FF"><font color="#000000">?message?</font></td></tr>
+            <tr><td height="19" align="center" bgcolor="#8EC7FF"><font color="#000000">?알림?</font></td></tr>
             <tr><td height="1" bgcolor="#D9D9FF"></td></tr>
             <tr><td height="1" bgcolor="#D9D9FF"></td></tr>
         </table>

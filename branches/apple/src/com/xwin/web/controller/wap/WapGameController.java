@@ -22,7 +22,7 @@ import com.xwin.web.controller.XwinController;
 
 public class WapGameController extends XwinController
 {
-
+	private final static int ROWSIZE = 10;
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -70,6 +70,7 @@ public class WapGameController extends XwinController
 		
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		if (gameDate == null)
 			gameDate = XwinUtil.toDateStr(new Date(), 2);
@@ -77,6 +78,10 @@ public class WapGameController extends XwinController
 		Date[] datePair = XwinUtil.getDatePair(gameDate);
 		Date fromDate = datePair[0];
 		Date toDate = datePair[1];
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
 	
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
@@ -88,6 +93,8 @@ public class WapGameController extends XwinController
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
 		param.put("gradeLess", member.getGrade());
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		

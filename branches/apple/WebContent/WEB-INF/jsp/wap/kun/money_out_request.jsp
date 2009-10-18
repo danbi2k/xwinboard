@@ -45,7 +45,7 @@
                         ■ 신청액과 PIN번호를 입력해주세요.<br/>
                         &nbsp;</div>
                         <div><img src="file:////images/magicn/option_next.sis" alt=""/>신청액</div>
-                        <div><input type="text" name="money" value="" format="k" style="width:98%;text-align:center;" /></div>
+                        <div><input type="text" name="money" value="" format="1" style="width:98%;text-align:center;" /></div>
                         <div><img src="file:////images/magicn/option_next.sis" alt=""/>PIN번호</div>
                         <div><input type="password" name="pin" value="" format="k" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>

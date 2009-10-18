@@ -11,13 +11,13 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/wml20.dtd">
 <html>
     <head>
-    <title>?message?</title>
+    <title>?알림?</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body id ="card1">
         <div><table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr><td height="1" style="background-color:#D9D9FF"></td></tr>
-            <tr><td height="19" align="center" valign="middle" style="background-color:#8EC7FF;color:#000000">?message?</td></tr>
+            <tr><td height="19" align="center" valign="middle" style="background-color:#8EC7FF;color:#000000">?알림?</td></tr>
             <tr><td height="1" style="background-color:#D9D9FF"></td></tr>
         </table></div>
 <%

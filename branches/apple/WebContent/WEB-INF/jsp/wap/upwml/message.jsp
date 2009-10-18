@@ -14,7 +14,7 @@
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <card id ="card1">
-        <p align="center" mode="wrap">&lt;message&gt;</p>
+        <p align="center" mode="wrap">&lt;¾Ë¸²&gt;</p>
 <%
 	ResultWap rw = (ResultWap) request.getAttribute("resultWap");
 	if (rw == null)
