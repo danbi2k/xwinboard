@@ -36,7 +36,7 @@
 						</tr>
 						<tr>
 							<th>모바일PIN번호</th>
-							<td><input type='text' name='pin' class='input_text w100' onfocusout='only123(this)' onkeyup='only123(this)'> <font color="yellow">★ 숫자 6자리를 입력해주세요.</font> <br>
+							<td><input type='text' name='pin' class='input_text w100' onfocusout='only123(this)' onkeyup='only123(this)'> <font color="yellow">★ 원하시는 숫자 6자리를 입력해주세요.</font> <br>
 							</td>
 						</tr>
 						<tr>
