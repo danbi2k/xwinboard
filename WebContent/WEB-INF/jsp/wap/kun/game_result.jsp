@@ -36,6 +36,12 @@
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</div>
         <hr width="100%" color="#000000"/>
 <%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 %>
 <%
@@ -108,12 +114,6 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 <%
 	}
 }
-%>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 %>
 <%
 if (pIdx > 0) {
