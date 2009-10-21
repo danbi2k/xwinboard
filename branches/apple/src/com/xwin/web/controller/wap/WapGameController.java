@@ -22,7 +22,8 @@ import com.xwin.web.controller.XwinController;
 
 public class WapGameController extends XwinController
 {
-	private final static int ROWSIZE = 10;
+	private final static int ROWSIZE = 3;
+	
 	public ModelAndView viewGameList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -33,8 +34,13 @@ public class WapGameController extends XwinController
 		
 		String type = request.getParameter("type");
 		String grade = XwinUtil.nvl(request.getParameter("grade"));
-		HttpSession session = request.getSession();
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
+		HttpSession session = request.getSession();		
 		session.setAttribute("gameFolder_" + type, new GameFolder(type));
 		
 		Calendar cal = Calendar.getInstance();
@@ -52,10 +58,20 @@ public class WapGameController extends XwinController
 		else
 			param.put("grade", Code.USER_GRADE_NORMAL);
 		
+		Map<String, List<Game>> gameListMap = new HashMap<String, List<Game>>();
 		List<Game> gameList = gameDao.selectGameList(param);
+		for (Game game : gameList) {
+			String leagueId = game.getLeagueId();
+			List<Game> leagueGameList = gameListMap.get(leagueId);
+			if (leagueGameList == null) {
+				leagueGameList = new ArrayList<Game>();
+				gameListMap.put(leagueId, leagueGameList);
+			}
+			leagueGameList.add(game);
+		}
 		
 		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/game");
-		mv.addObject("gameList", gameList);
+		mv.addObject("gameListMap", gameListMap);
 
 		return mv; 
 	}

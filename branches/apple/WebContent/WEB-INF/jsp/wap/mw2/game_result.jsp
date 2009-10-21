@@ -27,6 +27,12 @@
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</div>
         <hr style="color:#000000;width:100%;"/>
 <%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 %>
 <%
@@ -99,12 +105,6 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 <%
 	}
 }
-%>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 %>
 <%
 if (pIdx > 0) {
