@@ -293,7 +293,7 @@
 	<insert id="insertDailyMemberMoneyStatistics">
 	<![CDATA[
 		INSERT INTO tbl_member_money_stat(DATE, BALANCE, MONEY)
-		SELECT SYSDATE(), A.BALANCE, B.MONEY FROM
+		SELECT CURDATE(), A.BALANCE, B.MONEY FROM
 		(SELECT SUM(BALANCE) as BALANCE
 		FROM tbl_member
 		WHERE STATUS = 'US001') as A,
