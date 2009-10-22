@@ -14,9 +14,108 @@
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <card id ="card1">
-        <p mode="wrap">서비스 준비중입니다.</p>
+        <p mode="wrap">닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
+        잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</p>
+        <p>----------------</p>
+<%
+if (weblike.equals("true")) {
+%>
+<%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
+	String type = request.getParameter("type");
+	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");
+	Collection<List<Game>> gameListCol = gameListMap.values();
+%>
+        <p mode="wrap">금액</p>
+        <p><input type="text" name="money" value="5000" format="N*N" emptyok="true" /></p>
+        <p mode="wrap">배당</p>
+        <p><input type="text" name="rate" value="0.00" format="x*x" emptyok="true" /></p>
+        <p mode="wrap">예상</p>
+        <p><input type="text" name="expect" value="0" format="x*x" emptyok="true" /></p>
+        <p mode="nowrap"><do type="accept" label="배팅" name="submit1">
+            <go href="bet.wap" method="post">
+                <postfield name="token" value="<%=token%>"/>
+            </go>
+        </do></p>
+<%
+	for (List<Game> gameList : gameListCol) {
+		int i = 0;
+		Game tgame = gameList.get(0);
+		String leagueId = tgame.getLeagueId();
+		String leagueName = tgame.getLeagueName();
+%>
+<%
+	if (i == 0) {
+%>
+        <p mode="wrap"><a title="확인" href="javascript:vx_contents('<%=leagueId%>')"><%=leagueName%></a></p>
+<%
+}
+%>
+<%
+if (gameList != null) {
+	for (Game game : gameList) {
+%>
+        <p mode="wrap"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></p>
+        <p mode="wrap"><%=game.getLeagueName()%></p>
+        <p mode="wrap">(승) x<%=game.getWinRateStr()%></p>
+        <p mode="wrap"><%=game.getHomeTeam()%></p>
+<%
+out.print(game.getType().equals("wdl")?"(무) ":"(핸디) ");
+if (game.getType().equals("wdl")) {
+	out.print("x" + game.getDrawRateStr());
+	} else {
+		out.print(game.getDrawRate()>0?"+":"");
+		out.print(game.getDrawRate());
+	}
+%>
+        <p mode="wrap">(패) x<%=game.getLoseRateStr()%></p>
+        <p mode="wrap"><%=game.getAwayTeam()%></p>
+        <p><select name="game_list" ivalue="1">
+            <option value="0" title="선택" >선택</option>
+<%
+if (game.getWinDeny().equals("Y")) {
+%>
+            <option value="W_<%=game.getId()%>_<%=game.getWinRateStr()%>" title="승" >승</option>
+<%
+}
+%>
+<%
+if (game.getType().equals("wdl") && game.getDrawDeny().equals("Y") && game.getDrawRate() != 0.0) {
+%>
+            <option value="D_<%=game.getId()%>_<%=game.getDrawRateStr()%>" title="무/핸디" >무</option>
+<%
+}
+%>
+<%
+if (game.getLoseDeny().equals("Y")) {
+%>
+            <option value="L_<%=game.getId()%>_<%=game.getLoseRateStr()%>" title="패" >패</option>
+<%
+}
+%>
+        </select></p>
+<%
+	}
+}
+%>
+<%
+	i++;
+}
+%>
+        <p mode="nowrap"><do type="accept" label="배팅" name="submit2">
+            <go href="bet.wap" method="post">
+                <postfield name="token" value="<%=token%>"/>
+            </go>
+        </do></p>
+<%
+}
+%>
         <do type="options" label="상위"><go href="main.wap?token=<%=token%>"/></do>
-        <do type="accept" label="확인" name="VX"><go href=""/></do>
     </card>
 </wml>
 

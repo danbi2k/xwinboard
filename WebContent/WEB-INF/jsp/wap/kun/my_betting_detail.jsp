@@ -52,34 +52,39 @@ if (betGameList != null && betGameList.size() > 0) {
         <table width="100%" border="1" style="border-width:1;border-style:solid;">
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>경기일시</div>
+                    <div><%=XwinUtil.getBoardItemDate(betGame.getGameDate())%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=betGame.getGameDateStr()%></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="border-width:1;border-style:solid;">
-                    <div>(승) 홈팀</div>
-                </td>
-                <td style="border-width:1;border-style:solid;">
-                    <div><%=betGame.getHomeTeam()%>&nbsp;(<%=betGame.getWinRateStr()%>)</div>
+                    <div><%=betGame.getLeagueName()%></div>
                 </td>
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>무/핸디캡</div>
+                    <div>(승) x<%=betGame.getWinRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(<%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>)</div>
+                    <div><%=betGame.getHomeTeam()%></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-width:1;border-style:solid;">
+<%
+out.print(betGame.getType().equals("wdl")?"(무) ":"(핸디) ");
+if (betGame.getType().equals("wdl")) {
+	out.print("x" + betGame.getDrawRateStr());
+	} else {
+		out.print(betGame.getDrawRate()>0?"+":"");
+		out.print(betGame.getDrawRate());
+	}
+%>
                 </td>
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(패) 원정팀</div>
+                    <div>(패) x<%=betGame.getLoseRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=betGame.getAwayTeam()%>&nbsp;(<%=betGame.getLoseRateStr()%>)</div>
+                    <div><%=betGame.getAwayTeam()%></div>
                 </td>
             </tr>
             <tr>
@@ -91,18 +96,23 @@ if (betGameList != null && betGameList.size() > 0) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div>경기결과</div>
                 </td>
-                <td>
-                    <div><%=Code.getValue(betGame.getResult())%>&nbsp;<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%></div>
+                <td style="border-width:1;border-style:solid;">
+<%
+if (betGame.getStatus().equals(Code.GAME_STATUS_END)) {
+	out.print(betGame.getHomeScore() + " : " + betGame.getAwayScore() + " " + Code.getValue(betGame.getResult()));
+} else {
+	out.print(Code.getValue(betGame.getStatus()));
+}%>	
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div>적중유무</div>
                 </td>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div><%=Code.getValue(betGame.getResultStatus())%></div>
                 </td>
             </tr>
