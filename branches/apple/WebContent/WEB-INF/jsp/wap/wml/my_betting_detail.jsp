@@ -29,18 +29,30 @@ List<BetGame> betGameList = betting.getBetGameList();
 if (betGameList != null && betGameList.size() > 0) {
 	for (BetGame betGame : betGameList) {
 %>
-        <p mode="wrap">경기일시</p>
-        <p mode="wrap"><%=betGame.getGameDateStr()%></p>
-        <p mode="wrap">(승) 홈팀</p>
-        <p mode="wrap"><%=betGame.getHomeTeam()%>&nbsp;(<%=betGame.getWinRateStr()%>)</p>
-        <p mode="wrap">무/핸디캡</p>
-        <p mode="wrap">(<%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>)</p>
-        <p mode="wrap">(패) 원정팀</p>
-        <p mode="wrap"><%=betGame.getAwayTeam()%>&nbsp;(<%=betGame.getLoseRateStr()%>)</p>
+        <p mode="wrap"><%=XwinUtil.getBoardItemDate(betGame.getGameDate())%></p>
+        <p mode="wrap"><%=betGame.getLeagueName()%></p>
+        <p mode="wrap">(승) x<%=betGame.getWinRateStr()%></p>
+        <p mode="wrap"><%=betGame.getHomeTeam()%></p>
+<%
+out.print(betGame.getType().equals("wdl")?"(무) ":"(핸디) ");
+if (betGame.getType().equals("wdl")) {
+	out.print("x" + betGame.getDrawRateStr());
+	} else {
+		out.print(betGame.getDrawRate()>0?"+":"");
+		out.print(betGame.getDrawRate());
+	}
+%>
+        <p mode="wrap">(패) x<%=betGame.getLoseRateStr()%></p>
+        <p mode="wrap"><%=betGame.getAwayTeam()%></p>
         <p mode="wrap">배팅팀</p>
         <p mode="wrap"><%=Code.getValue(betGame.getGuess())%></p>
         <p mode="wrap">경기결과</p>
-        <p mode="wrap"><%=Code.getValue(betGame.getResult())%>&nbsp;<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%></p>
+<%
+if (betGame.getStatus().equals(Code.GAME_STATUS_END)) {
+	out.print(betGame.getHomeScore() + " : " + betGame.getAwayScore() + " " + Code.getValue(betGame.getResult()));
+} else {
+	out.print(Code.getValue(betGame.getStatus()));
+}%>	
         <p mode="wrap">적중유무</p>
         <p mode="wrap"><%=Code.getValue(betGame.getResultStatus())%></p>
 <%

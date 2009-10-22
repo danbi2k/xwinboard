@@ -19,28 +19,33 @@
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</p>
         <p>----------------</p>
 <%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 %>
 <%
 if (gameList != null) {
 	for (Game game : gameList) {
 %>
-        <p mode="wrap">경기일시</p>
         <p mode="wrap"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></p>
-        <p mode="wrap">리그</p>
         <p mode="wrap"><%=game.getLeagueName()%></p>
-        <p mode="wrap">(승) 홈팀</p>
-        <p mode="wrap"><%=game.getHomeTeam()%>&nbsp;x<%=game.getWinRateStr()%></p>
-        <p mode="wrap">무/핸디캡</p>
-<%if (game.getType().equals("wdl")) {
+        <p mode="wrap">(승) x<%=game.getWinRateStr()%></p>
+        <p mode="wrap"><%=game.getHomeTeam()%></p>
+<%
+out.print(game.getType().equals("wdl")?"(무) ":"(핸디) ");
+if (game.getType().equals("wdl")) {
 	out.print("x" + game.getDrawRateStr());
 	} else {
 		out.print(game.getDrawRate()>0?"+":"");
 		out.print(game.getDrawRate());
 	}
 %>
-        <p mode="wrap">(패) 원정팀</p>
-        <p mode="wrap"><%=game.getAwayTeam()%>&nbsp;x<%=game.getLoseRateStr()%></p>
+        <p mode="wrap">(패) x<%=game.getLoseRateStr()%></p>
+        <p mode="wrap"><%=game.getAwayTeam()%></p>
         <p mode="wrap">경기결과</p>
 <%
 if (game.getStatus().equals(Code.GAME_STATUS_END)) {
@@ -51,12 +56,6 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 <%
 	}
 }
-%>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 %>
 <%
 if (pIdx > 0) {

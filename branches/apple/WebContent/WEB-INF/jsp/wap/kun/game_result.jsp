@@ -52,15 +52,7 @@ if (gameList != null) {
         <table width="100%" border="1" style="border-width:1;border-style:solid;">
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>경기일시</div>
-                </td>
-                <td style="border-width:1;border-style:solid;">
                     <div><%=XwinUtil.getBoardItemDate(game.getGameDate())%></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="border-width:1;border-style:solid;">
-                    <div>리그</div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
                     <div><%=game.getLeagueName()%></div>
@@ -68,18 +60,17 @@ if (gameList != null) {
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(승) 홈팀</div>
+                    <div>(승) x<%=game.getWinRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=game.getHomeTeam()%>&nbsp;x<%=game.getWinRateStr()%></div>
+                    <div><%=game.getHomeTeam()%></div>
                 </td>
             </tr>
             <tr>
-                <td style="border-width:1;border-style:solid;">
-                    <div>무/핸디캡</div>
-                </td>
-                <td style="border-width:1;border-style:solid;">
-<%if (game.getType().equals("wdl")) {
+                <td colspan="2" style="border-width:1;border-style:solid;">
+<%
+out.print(game.getType().equals("wdl")?"(무) ":"(핸디) ");
+if (game.getType().equals("wdl")) {
 	out.print("x" + game.getDrawRateStr());
 	} else {
 		out.print(game.getDrawRate()>0?"+":"");
@@ -90,17 +81,17 @@ if (gameList != null) {
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(패) 원정팀</div>
+                    <div>(패) x<%=game.getLoseRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=game.getAwayTeam()%>&nbsp;x<%=game.getLoseRateStr()%></div>
+                    <div><%=game.getAwayTeam()%></div>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div>경기결과</div>
                 </td>
-                <td>
+                <td style="border-width:1;border-style:solid;">
 <%
 if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 	out.print(game.getHomeScore() + " : " + game.getAwayScore() + " " + Code.getValue(game.getResult()));

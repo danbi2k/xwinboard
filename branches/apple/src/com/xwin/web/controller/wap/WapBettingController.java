@@ -11,7 +11,6 @@ import com.xwin.domain.game.Game;
 import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.game.GameFolderItem;
 import com.xwin.domain.user.Member;
-import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.FolderCalc;
 import com.xwin.web.command.ResultWap;
 import com.xwin.web.controller.XwinController;
@@ -84,6 +83,7 @@ public class WapBettingController extends XwinController
 		
 		for (int i = 0 ; i < selectList.length ; i++) {
 			if (selectList[i].equals("0") == false) {
+				System.out.println(selectList[i]);
 				String selectItem[] = selectList[i].split("_");
 				String guess = selectItem[0];
 				String gameId = selectItem[1];

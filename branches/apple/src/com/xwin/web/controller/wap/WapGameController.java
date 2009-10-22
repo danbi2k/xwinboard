@@ -33,24 +33,15 @@ public class WapGameController extends XwinController
 			return new ModelAndView("redirect:/index.wap");
 		
 		String type = request.getParameter("type");
-		String grade = XwinUtil.nvl(request.getParameter("grade"));
-		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-		
-		int pIdx = 0;
-		if (pageIndex != null)
-			pIdx = Integer.parseInt(pageIndex);
-		
-		HttpSession session = request.getSession();		
-		session.setAttribute("gameFolder_" + type, new GameFolder(type));
-		
+		String grade = XwinUtil.nvl(request.getParameter("grade"));		
+	
 		Calendar cal = Calendar.getInstance();
-		cal = XwinUtil.getOnlyDate(cal);
-		cal.add(Calendar.DATE, 3);
-		cal.add(Calendar.MILLISECOND, -1);
+		cal.add(Calendar.HOUR, 12);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("status", Code.GAME_STATUS_RUN);
+		param.put("betStatus", Code.BETTING_STATUS_ACCEPT);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("toDate", cal.getTime());
 		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))

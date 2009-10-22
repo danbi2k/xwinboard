@@ -24,6 +24,12 @@
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</div>
         <hr width="100%" style="color:#000000;width:100%;"/>
 <%
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+%>
+<%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
 %>
 <%
@@ -34,15 +40,7 @@ if (gameList != null) {
         <table width="100%" style="border-width:1;border-style:solid;">
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>°æ±âÀÏ½Ã</div>
-                </td>
-                <td style="border-width:1;border-style:solid;">
                     <div><%=XwinUtil.getBoardItemDate(game.getGameDate())%></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="border-width:1;border-style:solid;">
-                    <div>¸®±×</div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
                     <div><%=game.getLeagueName()%></div>
@@ -50,18 +48,17 @@ if (gameList != null) {
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(½Â) È¨ÆÀ</div>
+                    <div>(½Â) x<%=game.getWinRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=game.getHomeTeam()%>&nbsp;x<%=game.getWinRateStr()%></div>
+                    <div><%=game.getHomeTeam()%></div>
                 </td>
             </tr>
             <tr>
-                <td style="border-width:1;border-style:solid;">
-                    <div>¹«/ÇÚµðÄ¸</div>
-                </td>
-                <td style="border-width:1;border-style:solid;">
-<%if (game.getType().equals("wdl")) {
+                <td colspan="2" style="border-width:1;border-style:solid;">
+<%
+out.print(game.getType().equals("wdl")?"(¹«) ":"(ÇÚµð) ");
+if (game.getType().equals("wdl")) {
 	out.print("x" + game.getDrawRateStr());
 	} else {
 		out.print(game.getDrawRate()>0?"+":"");
@@ -72,17 +69,17 @@ if (gameList != null) {
             </tr>
             <tr>
                 <td style="border-width:1;border-style:solid;">
-                    <div>(ÆÐ) ¿øÁ¤ÆÀ</div>
+                    <div>(ÆÐ) x<%=game.getLoseRateStr()%></div>
                 </td>
                 <td style="border-width:1;border-style:solid;">
-                    <div><%=game.getAwayTeam()%>&nbsp;x<%=game.getLoseRateStr()%></div>
+                    <div><%=game.getAwayTeam()%></div>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-width:1;border-style:solid;">
                     <div>°æ±â°á°ú</div>
                 </td>
-                <td>
+                <td style="border-width:1;border-style:solid;">
 <%
 if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 	out.print(game.getHomeScore() + " : " + game.getAwayScore() + " " + Code.getValue(game.getResult()));
@@ -96,12 +93,6 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 <%
 	}
 }
-%>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
 %>
 <%
 if (pIdx > 0) {
