@@ -25,7 +25,7 @@
 	</resultMap>
 	
 	<select id="selectMoneyInOutList" resultMap="moneyInOutResultMap" parameterClass="map">
-		SELECT * FROM view_money_in_out
+		SELECT * FROM tbl_money_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
@@ -87,7 +87,7 @@
 	</select>
 	
 	<select id="selectMoneyInOutCount" resultClass="integer" parameterClass="map">
-		SELECT COUNT(*) FROM view_money_in_out
+		SELECT COUNT(*) FROM tbl_money_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
@@ -145,7 +145,7 @@
 	</select>
 	
 	<select id="selectMoneyInOutSum" resultClass="long" parameterClass="map">
-		SELECT SUM(MONEY) FROM view_money_in_out
+		SELECT SUM(MONEY) FROM tbl_money_out
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
