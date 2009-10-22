@@ -36,7 +36,7 @@ public class WapGameController extends XwinController
 		String grade = XwinUtil.nvl(request.getParameter("grade"));		
 	
 		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.HOUR, 12);
+		cal.add(Calendar.HOUR, 8);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);

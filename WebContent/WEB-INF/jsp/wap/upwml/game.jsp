@@ -20,12 +20,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
-%>
+        <p mode="wrap">※ 8시간 이내 경기만 표시됨</p>
 <%
 	String type = request.getParameter("type");
 	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");
@@ -107,11 +102,6 @@ if (game.getLoseDeny().equals("Y")) {
 	i++;
 }
 %>
-        <p mode="nowrap"><do type="accept" label="배팅" name="submit2">
-            <go href="bet.wap" method="post">
-                <postfield name="token" value="<%=token%>"/>
-            </go>
-        </do></p>
 <%
 }
 %>
