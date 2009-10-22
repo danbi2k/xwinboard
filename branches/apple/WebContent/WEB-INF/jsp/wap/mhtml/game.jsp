@@ -19,12 +19,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
-%>
+        <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
         <div><form name="game_form" method="post" action="bet.wap">
 <%
 	String type = request.getParameter("type");
@@ -106,7 +101,6 @@ if (game.getLoseDeny().equals("Y")) {
 	i++;
 }
 %>
-            <div><input type="submit" value="배팅"/></div>
         </form></div>
 <%
 }

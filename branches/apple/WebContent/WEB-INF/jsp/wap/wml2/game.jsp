@@ -118,36 +118,40 @@
 		return ret;
 	}
 
-	function comma3(value)
-	{
+	function comma3(value) {
 		var strvalue = "" + value;
-	    var minus = false;
-	    if(strvalue.indexOf("-") != -1)
-	        minus = true;
-
-	    var sMoney = strvalue.replace(/(,|-)/g,"");
-	    var tMoney = "";
-
-	    var rMoney = "";
-	    var rCheck = false;
-	    if(sMoney.indexOf(".") != -1){
-	        rMoney = sMoney.substring(sMoney.indexOf("."));
-	        sMoney = sMoney.substring(0, sMoney.indexOf("."));
-	        rCheck = true;
-	    }
-
-	    var len = sMoney.length;
-
-	    if ( sMoney.length <= 3 ) return sMoney;
-
-	    for(i = 0; i < len; i++){
-	        if(i != 0 && ( i % 3 == len % 3) ) tMoney += ",";
-	        if(i < len ) tMoney += sMoney.charAt(i);
-	    }
-	    if(minus) tMoney = "-" + tMoney;
-	    if(rCheck) tMoney = tMoney + rMoney;
-
-	    return tMoney;
+		var minus = false;
+		if (strvalue.indexOf("-") != -1)
+			minus = true;
+	
+		var sMoney = strvalue.replace(/(,|-)/g, "");
+		var tMoney = "";
+	
+		var rMoney = "";
+		var rCheck = false;
+		if (sMoney.indexOf(".") != -1) {
+			rMoney = sMoney.substring(sMoney.indexOf("."));
+			sMoney = sMoney.substring(0, sMoney.indexOf("."));
+			rCheck = true;
+		}
+	
+		var len = sMoney.length;
+	
+		if (sMoney.length <= 3)
+			return sMoney;
+	
+		for (i = 0; i < len; i++) {
+			if (i != 0 && (i % 3 == len % 3))
+				tMoney += ",";
+			if (i < len)
+				tMoney += sMoney.charAt(i);
+		}
+		if (minus)
+			tMoney = "-" + tMoney;
+		if (rCheck)
+			tMoney = tMoney + rMoney;
+	
+		return tMoney;
 	}
 	
 	function getInt(value) {
@@ -157,6 +161,49 @@
 		var num = str.split(".");
 	
 		return num[0];
+	}
+	
+	function betting() {
+		var sel_count = 0
+		var list = document.game_form.game_list;
+		for ( var x = 0; x < list.length; x++) {
+			if (list[x].value != undefined && list[x].value != 0) {
+				sel_count++;
+			}
+		}
+		if (sel_count <= 0) {
+			alert("선택하신 게임이 없습니다");
+			return;
+		}	
+		var msg = "배팅하시겠습니까? \n";
+		msg += summary();
+		if (confirm(msg))
+			document.game_form.submit();
+	}
+
+	function summary() {
+		var msg = "";
+		var list = document.game_form.game_list;
+		for ( var x = 0; x < list.length; x++) {
+			if (list[x].value != undefined && list[x].value != 0) {
+				var svalue = list[x].value.split("_");
+				var homeTeam = document.getElementById("W_"+svalue[1]).innerHTML;
+				var awayTeam = document.getElementById("L_"+svalue[1]).innerHTML;
+
+				var guess = "";
+				if (svalue[0] == "W")
+					guess = "승";
+				else if (svalue[0] == "D")
+					guess = "무";
+				else
+					guess = "패";
+
+				msg += homeTeam + " vs " + awayTeam + " " + guess + " " + svalue[2] + "\n" ;
+			}
+		}
+		msg += "\n배당 : " + document.game_form.rate.value + "\n예상 : " + document.game_form.expect.value;
+		
+		return msg;
 	}
         -->
     </script>
@@ -179,6 +226,7 @@
             } else {
                 obj.style.display = "none";
             }
+	document.game_form.bet_button.focus();
         }
         -->
     </script>
@@ -189,12 +237,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-<%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
-%>
+        <div><span style="color:#CC00FF;">※ 8시간 이내 경기만 표시됨</span></div>
         <div><form name="game_form" method="post" action="bet.wap">
 <%
 	String type = request.getParameter("type");
@@ -228,7 +271,9 @@ if (weblike.equals("true")) {
                     <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
                         <div><input type="text" name="expect" value="0" format="x*x" emptyok="true" disabled /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
-                        <div><input type="submit" value="배팅"/></div>
+                        <div style="display:none;"><input type="submit" value="배팅"/></div>
+                        <div style="display:inline;"><input type="button" name="bet_button" value="배팅" onclick="javascript:betting();"/></div>
+                        <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
                     </td>
                 </tr>
             </table>
@@ -336,7 +381,8 @@ if (game.getLoseDeny().equals("Y")) {
 	i++;
 }
 %>
-            <div><input type="submit" value="배팅"/></div>
+            <div style="display:inline;"><input type="button" value="배팅" onclick="javascript:betting();"/></div>
+            <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
         </form></div>
 <%
 }
