@@ -22,7 +22,7 @@ if (weblike.equals("true")) {
         <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
 <%
 	String type = request.getParameter("type");
-	String money = XwinUtil.nvl(request.getParameter("_money"), "5000");
+	String money = XwinUtil.nvl(request.getParameter("money"), "5000");
 	String rate =  XwinUtil.nvl(request.getParameter("_rate"), "0.00");
 	String expect =  XwinUtil.nvl(request.getParameter("_expect"), "0");
 	String league_id = XwinUtil.nvl(request.getParameter("league_id"));
@@ -133,10 +133,14 @@ if (game.getLoseDeny().equals("Y")) {
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList != null) {
 			for (GameFolderItem item : itemList) {
+				if (item.getLeagueId().equals(league_id))
+					continue;
 %>
             <div><%=item.getHomeTeam()%></div>
             <div><%=item.getAwayTeam()%></div>
-            <div><input type="hidden" name="game_list" value="<%=item.getGuess() + "_" + item.getId() + "_" + item.getSelRate()%>" /></div>
+            <div><select name="game_list">
+                <option value="<%=item.getGuess() + "_" + item.getId() + "_" + item.getSelRate()%>" selected >선택</option>
+            </select></div>
 <%
 			}
 		}
