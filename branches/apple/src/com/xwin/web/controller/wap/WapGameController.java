@@ -261,6 +261,7 @@ public class WapGameController extends XwinController
 				gfi.setSelRate(thisRate);
 				gfi.setGuess(guess);
 				gfi.setLeagueName(game.getLeagueName());
+				gfi.setLeagueId(game.getLeagueId());
 				gfi.setType(game.getType());
 				gfi.setGameDate(game.getGameDate());
 				
