@@ -236,8 +236,8 @@ public class WapGameController extends XwinController
 		GameFolder gameFolder = new GameFolder(type);
 		
 		for (int i = 0 ; i < selectList.length ; i++) {
+			System.out.println(i + " : " + selectList[i]);
 			if (selectList[i].equals("0") == false) {
-				System.out.println(selectList[i]);
 				String selectItem[] = selectList[i].split("_");
 				String guess = selectItem[0];
 				String gameId = selectItem[1];

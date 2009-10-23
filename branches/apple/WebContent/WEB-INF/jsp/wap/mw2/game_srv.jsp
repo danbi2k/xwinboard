@@ -24,7 +24,7 @@
 		}
 	
 		var rate = 0.0;
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		var sel_count = 0;
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
@@ -47,7 +47,7 @@
 		}
 	
 		document.game_form.rate.value = rate_digit2;
-		document.game_form.expect.value = comma3(expect);
+		document.game_form.expect.value = expect;
 	}
 	
 	function select_game(tobj) {
@@ -56,7 +56,7 @@
 			money = 0;
 	
 		var rate = 0.0;
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		var sel_count = 0;
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
@@ -87,7 +87,7 @@
 		//vx_contents(anyvx.id);
 	
 		document.game_form.rate.value = rate_digit2;
-		document.game_form.expect.value = comma3(expect);
+		document.game_form.expect.value = expect;
 
 		var svalue = tobj.value.split("_");
 		var homeTeam = document.getElementById("W_"+svalue[1]).innerHTML;
@@ -119,23 +119,15 @@
 		return ret;
 	}
 
-	function comma3(value) {
-		return value;
-		var sMoney = "" + value;	
-		var len = sMoney.length;
-	
-		if (sMoney.length <= 3)
-			return sMoney;
-
-		var tMoney = "";
-		for (i = 0; i < len; i++) {
-			if (i != 0 && ((i % 3) == (len % 3)))
-				tMoney += ",";
-			if (i < len)
-				tMoney += sMoney.charAt(i);
+	function toArray(data) {
+		if (data == undefined)
+			data = [];
+		else if (data.length == undefined || data.name == "game_list") {
+			var tmp = [data];		
+			return tmp;
 		}
-	
-		return tMoney;
+		
+		return data;
 	}
 	
 	function getInt(value) {
@@ -149,7 +141,7 @@
 	
 	function betting() {
 		var sel_count = 0
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
 				sel_count++;
@@ -170,7 +162,7 @@
 
 	function summary() {
 		var msg = "";
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
 				var svalue = list[x].value.split("_");
@@ -242,7 +234,7 @@ if (weblike.equals("true")) {
         <div><form name="game_form" method="post">
 <%
 	String type = request.getParameter("type");
-	String money = XwinUtil.nvl(request.getParameter("_money"), "5000");
+	String money = XwinUtil.nvl(request.getParameter("money"), "5000");
 	String rate =  XwinUtil.nvl(request.getParameter("_rate"), "0.00");
 	String expect =  XwinUtil.nvl(request.getParameter("_expect"), "0");
 	String league_id = XwinUtil.nvl(request.getParameter("league_id"));
@@ -252,6 +244,8 @@ if (weblike.equals("true")) {
 	GameFolder gameFolder = (GameFolder) request.getAttribute("gameFolder");
 	Collection<List<Game>> gameListCol = gameListMap.values();
 %>
+            <div><input type="hidden" name="token" value="<%=token%>" /></div>
+            <div style="display:none;"><input type="submit" value="배팅"/></div>
 <%!
 	private String isSelected(String[] list, String val) {
 		String retVal = "";
@@ -293,15 +287,11 @@ if (weblike.equals("true")) {
                     </td>
                     <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
                         <div><input type="text" name="expect" value="<%=expect%>" disabled /></div>
-                        <div><input type="hidden" name="token" value="<%=token%>" /></div>
-                        <div style="display:none;"><input type="submit" value="배팅"/></div>
-                        <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());" style="display:inline;"/></div>
-                        <div style="display:inline;"><input type="button" name="bet_button" value="배팅" onclick="javascript:betting();" style="display:inline;"/></div>
                     </td>
                 </tr>
             </table>
             </div>
-            <div><select name="league_id" onchange="javascript:select_league();">
+            <div style="display:inline;"><select name="league_id" onchange="javascript:select_league();">
                 <option value="-1" >리그를선택하세요</option>
 <%
 	Set<String> keySet = leagueListMap.keySet();
@@ -313,6 +303,8 @@ if (weblike.equals("true")) {
 	}
 %>
             </select></div>
+            <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
+            <div style="display:inline;"><input type="button" name="bet_button" value="배팅" onclick="javascript:betting();"/></div>
 <%
 	for (List<Game> gameList : gameListCol) {
 		int i = 0;
@@ -369,7 +361,7 @@ if (game.getType().equals("wdl")) {
                             </tr>
                             <tr>
                                 <td colspan="2" style="border-width:1;border-style:solid;">
-                                    <div style="display:inline;"><select name="game_list" onchange="javascript:select_game(this)" style="display:inline;">
+                                    <div style="display:inline;"><select name="game_list" onchange="javascript:select_game(this)">
                                         <option value="0" >선택</option>
 <%
 if (game.getWinDeny().equals("Y")) {
@@ -396,8 +388,8 @@ if (game.getLoseDeny().equals("Y")) {
 }
 %>
                                     </select></div>
-                                    <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());" style="display:inline;"/></div>
-                                    <div style="display:inline;"><input type="button" value="배팅" onclick="javascript:betting();" style="display:inline;"/></div>
+                                    <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
+                                    <div style="display:inline;"><input type="button" value="배팅" onclick="javascript:betting();"/></div>
                                 </td>
                             </tr>
                         </table>
@@ -419,10 +411,14 @@ if (game.getLoseDeny().equals("Y")) {
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList != null) {
 			for (GameFolderItem item : itemList) {
+				if (item.getLeagueId().equals(league_id))
+					continue;
 %>
             <div id="W_<%=item.getId()%>" style="display:none;"><%=item.getHomeTeam()%></div>
             <div id="L_<%=item.getId()%>" style="display:none;"><%=item.getAwayTeam()%></div>
-            <div><input type="hidden" name="game_list" value="<%=item.getGuess() + "_" + item.getId() + "_" + item.getSelRate()%>" /></div>
+            <div style="display:none;"><select name="game_list">
+                <option value="<%=item.getGuess() + "_" + item.getId() + "_" + item.getSelRate()%>" selected >선택</option>
+            </select></div>
 <%
 			}
 		}

@@ -22,7 +22,7 @@ if (weblike.equals("true")) {
         <p mode="wrap">※ 8시간 이내 경기만 표시됨</p>
 <%
 	String type = request.getParameter("type");
-	String money = XwinUtil.nvl(request.getParameter("_money"), "5000");
+	String money = XwinUtil.nvl(request.getParameter("money"), "5000");
 	String rate =  XwinUtil.nvl(request.getParameter("_rate"), "0.00");
 	String expect =  XwinUtil.nvl(request.getParameter("_expect"), "0");
 	String league_id = XwinUtil.nvl(request.getParameter("league_id"));
@@ -32,6 +32,11 @@ if (weblike.equals("true")) {
 	GameFolder gameFolder = (GameFolder) request.getAttribute("gameFolder");
 	Collection<List<Game>> gameListCol = gameListMap.values();
 %>
+        <p mode="nowrap"><do type="accept" label="배팅" name="submit1">
+            <go href="" method="post">
+                <postfield name="token" value="<%=token%>"/>
+            </go>
+        </do></p>
 <%!
 	private String isSelected(String[] list, String val) {
 		String retVal = "";
@@ -51,11 +56,6 @@ if (weblike.equals("true")) {
         <p><input type="text" name="rate" value="<%=rate%>" format="x*x" emptyok="true" /></p>
         <p mode="wrap">예상</p>
         <p><input type="text" name="expect" value="<%=expect%>" format="x*x" emptyok="true" /></p>
-        <p mode="nowrap"><do type="accept" label="배팅" name="submit1">
-            <go href="" method="post">
-                <postfield name="token" value="<%=token%>"/>
-            </go>
-        </do></p>
         <p><select name="league_id" ivalue="2">
             <option value="-1" >리그를선택하세요</option>
 <%
@@ -134,9 +134,14 @@ if (game.getLoseDeny().equals("Y")) {
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		if (itemList != null) {
 			for (GameFolderItem item : itemList) {
+				if (item.getLeagueId().equals(league_id))
+					continue;
 %>
         <p mode="wrap"><%=item.getHomeTeam()%></p>
         <p mode="wrap"><%=item.getAwayTeam()%></p>
+        <p><select name="game_list" ivalue="1">
+            <option value="<%=item.getGuess() + "_" + item.getId() + "_" + item.getSelRate()%>" >선택</option>
+        </select></p>
 <%
 			}
 		}
