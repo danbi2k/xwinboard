@@ -77,6 +77,7 @@ public class WapMoneyInController extends XwinController
 				moneyIn.setBankBookId(_bankBookId);
 				moneyIn.setReqDate(new Date());
 				moneyIn.setNickName(member.getNickName());
+				moneyIn.setSource("WAP");
 				moneyInDao.insertMoneyIn(moneyIn);
 		
 				rw = new ResultWap(0, "캐쉬충전이 접수 되었습니다", "earncache.wap?mode=viewMoneyInRequestList&token=" + token, null);

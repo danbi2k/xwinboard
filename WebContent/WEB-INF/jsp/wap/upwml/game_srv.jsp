@@ -23,33 +23,58 @@ if (weblike.equals("true")) {
         <p mode="wrap">※ 8시간 이내 경기만 표시됨</p>
 <%
 	String type = request.getParameter("type");
+	String money = XwinUtil.nvl(request.getParameter("_money"), "5000");
+	String rate =  XwinUtil.nvl(request.getParameter("_rate"), "0.00");
+	String expect =  XwinUtil.nvl(request.getParameter("_expect"), "0");
+	String league_id = XwinUtil.nvl(request.getParameter("league_id"));
+	String[] game_list = (String[]) request.getParameterValues("game_list");
+	Map<String, String> leagueListMap = (Map<String, String>) request.getAttribute("leagueListMap");
 	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");
+	GameFolder gameFolder = (GameFolder) request.getAttribute("gameFolder");
 	Collection<List<Game>> gameListCol = gameListMap.values();
 %>
+<%!
+	private String isSelected(String[] list, String val) {
+		String retVal = "";
+		if (list == null)
+			return retVal;
+		
+		for (int i = 0 ; i < list.length ; i++) {
+			if (list[i].equals(val))
+				retVal = "selected";
+		}
+		return retVal;
+	}
+%>
         <p mode="wrap">금액</p>
-        <p><input type="text" name="money" value="5000" format="N*N" emptyok="true" /></p>
+        <p><input type="text" name="money" value="<%=money%>" format="N*N" emptyok="true" /></p>
         <p mode="wrap">배당</p>
-        <p><input type="text" name="rate" value="0.00" format="x*x" emptyok="true" /></p>
+        <p><input type="text" name="rate" value="<%=rate%>" format="x*x" emptyok="true" /></p>
         <p mode="wrap">예상</p>
-        <p><input type="text" name="expect" value="0" format="x*x" emptyok="true" /></p>
+        <p><input type="text" name="expect" value="<%=expect%>" format="x*x" emptyok="true" /></p>
         <p mode="nowrap"><do type="accept" label="배팅" name="submit1">
-            <go href="bet.wap" method="post">
+            <go href="" method="post">
                 <postfield name="token" value="<%=token%>"/>
             </go>
         </do></p>
+        <p><select name="league_id" ivalue="2">
+            <option value="-1" title="선택" >리그를선택하세요</option>
+<%
+	Set<String> keySet = leagueListMap.keySet();
+	for (String leagueId : keySet) {
+		String leagueName = leagueListMap.get(leagueId);
+%>
+            <option value="<%=leagueId%>" ><%=leagueName%></option>
+<%
+	}
+%>
+        </select></p>
 <%
 	for (List<Game> gameList : gameListCol) {
 		int i = 0;
 		Game tgame = gameList.get(0);
 		String leagueId = tgame.getLeagueId();
 		String leagueName = tgame.getLeagueName();
-%>
-<%
-	if (i == 0) {
-%>
-        <p mode="wrap"><a title="확인" href="javascript:vx_contents('<%=leagueId%>')"><%=leagueName%></a></p>
-<%
-}
 %>
 <%
 if (gameList != null) {
@@ -70,26 +95,29 @@ if (game.getType().equals("wdl")) {
 %>
         <p mode="wrap">(패) x<%=game.getLoseRateStr()%></p>
         <p mode="wrap"><%=game.getAwayTeam()%></p>
-        <p><select name="game_list" ivalue="1">
+        <p><select name="game_list" ivalue="2;3;4">
             <option value="0" title="선택" >선택</option>
 <%
 if (game.getWinDeny().equals("Y")) {
+	String optVal = "W_" + game.getId() + "_" + game.getWinRateStr();
 %>
-            <option value="W_<%=game.getId()%>_<%=game.getWinRateStr()%>" title="승" >승</option>
+            <option value="<%=optVal%>" title="승" >승</option>
 <%
 }
 %>
 <%
 if (game.getType().equals("wdl") && game.getDrawDeny().equals("Y") && game.getDrawRate() != 0.0) {
+	String optVal = "D_" + game.getId() + "_" + game.getDrawRateStr();
 %>
-            <option value="D_<%=game.getId()%>_<%=game.getDrawRateStr()%>" title="무/핸디" >무</option>
+            <option value="<%=optVal%>" title="무/핸디" >무</option>
 <%
 }
 %>
 <%
 if (game.getLoseDeny().equals("Y")) {
+	String optVal = "L_" + game.getId() + "_" + game.getLoseRateStr();
 %>
-            <option value="L_<%=game.getId()%>_<%=game.getLoseRateStr()%>" title="패" >패</option>
+            <option value="<%=optVal%>" title="패" >패</option>
 <%
 }
 %>
@@ -102,6 +130,23 @@ if (game.getLoseDeny().equals("Y")) {
 	i++;
 }
 %>
+<%
+	if (gameFolder != null) {
+		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
+		if (itemList != null) {
+			for (GameFolderItem item : itemList) {
+%>
+        <p mode="wrap"><%=item.getHomeTeam()%></p>
+        <p mode="wrap"><%=item.getAwayTeam()%></p>
+<%
+			}
+		}
+	}		
+%>
+<%
+} else {
+%>
+        <p mode="wrap">회원님의 휴대전화에서는 배팅 서비스가 지원되지 않습니다. 최신기종의 휴대전화로 교체하신후 사용해 주세요</p>
 <%
 }
 %>

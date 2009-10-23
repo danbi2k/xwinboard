@@ -26,8 +26,8 @@
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_out(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE, TYPE)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#, 'in')
+		INSERT INTO tbl_money_out(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
+		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#, 'in', #source#)
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">

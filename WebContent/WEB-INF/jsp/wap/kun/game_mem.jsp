@@ -8,7 +8,15 @@
 %>
 <%@ include file="../include/anybuilder.jsp"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/wml20.dtd">
+<% if (Integer.parseInt(lcdlx) >= 240) {
+    response.setHeader("KTF-Page-Resolution:","240x320");
+} else if (Integer.parseInt(lcdlx) >= 176) {
+    response.setHeader("KTF-Page-Resolution:","176x220");
+} else if (Integer.parseInt(lcdlx) >= 128) {
+    response.setHeader("KTF-Page-Resolution:","128x160");
+} else {
+    response.setHeader("KTF-Page-Resolution:","120x160");
+} %>
 <html>
     <head>
         <meta name="generator" content="AnyBuilder VX" />
@@ -42,7 +50,6 @@
 			tobj.value = 5000;
 			expect = getInt(rate_digit2 * 5000);
 			alert('예상 배당금은 3,000,000캐쉬 이하만 허용 됩니다');
-			return;
 		}
 	
 		document.game_form.rate.value = rate_digit2;
@@ -83,7 +90,7 @@
 			return;
 		}
 
-		vx_contents(anyvx.id);
+		//vx_contents(anyvx.id);
 	
 		document.game_form.rate.value = rate_digit2;
 		document.game_form.expect.value = comma3(expect);
@@ -119,37 +126,20 @@
 	}
 
 	function comma3(value) {
-		var strvalue = "" + value;
-		var minus = false;
-		if (strvalue.indexOf("-") != -1)
-			minus = true;
-	
-		var sMoney = strvalue.replace(/(,|-)/g, "");
-		var tMoney = "";
-	
-		var rMoney = "";
-		var rCheck = false;
-		if (sMoney.indexOf(".") != -1) {
-			rMoney = sMoney.substring(sMoney.indexOf("."));
-			sMoney = sMoney.substring(0, sMoney.indexOf("."));
-			rCheck = true;
-		}
-	
+		return value;
+		var sMoney = "" + value;	
 		var len = sMoney.length;
 	
 		if (sMoney.length <= 3)
 			return sMoney;
-	
+
+		var tMoney = "";
 		for (i = 0; i < len; i++) {
-			if (i != 0 && (i % 3 == len % 3))
+			if (i != 0 && ((i % 3) == (len % 3)))
 				tMoney += ",";
 			if (i < len)
 				tMoney += sMoney.charAt(i);
 		}
-		if (minus)
-			tMoney = "-" + tMoney;
-		if (rCheck)
-			tMoney = tMoney + rMoney;
 	
 		return tMoney;
 	}
@@ -205,11 +195,20 @@
 		
 		return msg;
 	}
+
+	function select_league() {
+		var leagueId = document.game_form.league_name.value;
+		if (leagueId < 0 && anyvx != undefined)
+			vx_contents(anyvx.id);
+		else
+			vx_contents(leagueId);
+	}
         -->
     </script>
 <% } %>
     </head>
-    <body id ="card1">
+    <body>
+        <% if (network.equals("wcdma")) { %><a href='#' accesskey='#'></a><% } %>
 <% if (weblike.equals("true")) { %>
     <script language="JavaScript" type="text/JavaScript">
         <!--
@@ -217,67 +216,82 @@
         function vx_contents(content)
         {
             var obj = document.getElementById(content);
-            if(obj.style.display=="none") {
-                obj.style.display = "";
+            if(obj.getAttribute("style")=="display:none") {
+                obj.setAttribute("style","");
                 if(anyvx != null && anyvx != obj) {
-                    anyvx.style.display = "none";
+                    anyvx.setAttribute("style","display:none");
                 }
                 anyvx = obj;
             } else {
-                obj.style.display = "none";
+                obj.setAttribute("style","display:none");
             }
-	document.game_form.bet_button.focus();
         }
         -->
     </script>
 <% } %>
         <div>닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</div>
-        <hr width="100%" style="color:#000000;width:100%;"/>
+        <hr width="100%" color="#000000"/>
 <%
 if (weblike.equals("true")) {
 %>
-        <div><span style="color:#CC00FF;">※ 8시간 이내 경기만 표시됨</span></div>
-        <div><form name="game_form" method="post" action="bet.wap">
+        <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
+        <div><form name="game_form" method="post" action="play.wap">
 <%
 	String type = request.getParameter("type");
 	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");
 	Collection<List<Game>> gameListCol = gameListMap.values();
 %>
+            <div><input type="hidden" name="token" value="<%=token%>" /></div>
+            <div style="display:none;"><input type="submit" value="배팅"/></div>
             <div><input type="hidden" name="mode" value="betting" /></div>
             <div><input type="hidden" name="type" value="<%=type%>" /></div>
             <div>
-            <table width="100%" style="background-color:#FFFFBB;border-width:0;border-color:#0000FF;border-collapse:collapse;">
+            <table width="100%" bgcolor="#FFFFBB" border="0" style="background-color:#FFFFBB;border-width:0;border-color:#0000FF;border-collapse:collapse;">
                 <tr>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
                         <div>금액</div>
                     </td>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
-                        <div><input type="text" name="money" value="5000" format="N*N" emptyok="true" onchange="change_money(this)" /></div>
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                        <div><input type="text" name="money" value="5000" format="1" onchange="change_money(this)" /></div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
                         <div>배당</div>
                     </td>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
-                        <div><input type="text" name="rate" value="0.00" format="x*x" emptyok="true" disabled /></div>
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                        <div><input type="text" name="rate" value="0.00" format="a" disabled /></div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
                         <div>예상</div>
                     </td>
-                    <td style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
-                        <div><input type="text" name="expect" value="0" format="x*x" emptyok="true" disabled /></div>
-                        <div><input type="hidden" name="token" value="<%=token%>" /></div>
-                        <div style="display:none;"><input type="submit" value="배팅"/></div>
-                        <div style="display:inline;"><input type="button" name="bet_button" value="배팅" onclick="javascript:betting();"/></div>
-                        <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
+                    <td bgcolor="#FFFFBB" style="border-width:0;border-color:#0000FF;background-color:#FFFFBB;">
+                        <div><input type="text" name="expect" value="0" format="a" disabled /></div>
                     </td>
                 </tr>
             </table>
             </div>
+            <div style="display:inline;"><select name="league_name" type="dropdown" onchange="javascript:select_league();" style="display:inline;">
+                <option value="-1" >리그를선택하세요</option>
+<%
+	for (List<Game> gameList : gameListCol) {
+		int i = 0;
+		Game tgame = gameList.get(0);
+		String leagueId = tgame.getLeagueId();
+		String leagueName = tgame.getLeagueName();
+		if (i == 0) {
+%>
+                <option value="<%=leagueId%>" ><%=leagueName%></option>
+<%
+		}
+	}
+%>
+            </select></div>
+            <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());" style="display:inline;"/></div>
+            <div style="display:inline;"><input type="button" name="bet_button" value="배팅" onclick="javascript:betting();" style="display:inline;"/></div>
 <%
 	for (List<Game> gameList : gameListCol) {
 		int i = 0;
@@ -285,15 +299,8 @@ if (weblike.equals("true")) {
 		String leagueId = tgame.getLeagueId();
 		String leagueName = tgame.getLeagueName();
 %>
-<%
-	if (i == 0) {
-%>
-            <div><a title="확인" href="javascript:vx_contents('<%=leagueId%>')"><%=leagueName%></a></div>
-<%
-}
-%>
             <div id="<%=leagueId%>" style="display:none">
-            <table width="100%" style="border-width:0;">
+            <table width="100%" border="0" style="border-width:0;">
                 <tr>
                     <td style="border-width:0;">
 <%
@@ -301,7 +308,7 @@ if (gameList != null) {
 	for (Game game : gameList) {
 %>
                         <div>
-                        <table width="100%" style="border-width:1;border-style:solid;">
+                        <table width="100%" border="1" style="border-width:1;border-style:solid;">
                             <tr>
                                 <td style="border-width:1;border-style:solid;">
                                     <div><%=XwinUtil.getBoardItemDate(game.getGameDate())%></div>
@@ -341,7 +348,7 @@ if (game.getType().equals("wdl")) {
                             </tr>
                             <tr>
                                 <td colspan="2" style="border-width:1;border-style:solid;">
-                                    <div><select name="game_list" onchange="javascript:select_game(this)">
+                                    <div style="display:inline;"><select name="game_list" type="dropdown" onchange="javascript:select_game(this)" style="display:inline;">
                                         <option value="0" >선택</option>
 <%
 if (game.getWinDeny().equals("Y")) {
@@ -365,6 +372,8 @@ if (game.getLoseDeny().equals("Y")) {
 }
 %>
                                     </select></div>
+                                    <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());" style="display:inline;"/></div>
+                                    <div style="display:inline;"><input type="button" value="배팅" onclick="javascript:betting();" style="display:inline;"/></div>
                                 </td>
                             </tr>
                         </table>
@@ -381,13 +390,22 @@ if (game.getLoseDeny().equals("Y")) {
 	i++;
 }
 %>
-            <div style="display:inline;"><input type="button" value="배팅" onclick="javascript:betting();"/></div>
-            <div style="display:inline;"><input type="button" value="선택확인" onclick="javascript:alert(summary());"/></div>
         </form></div>
+<%
+} else {
+%>
+        <div>회원님의 휴대전화에서는 배팅 서비스가 지원되지 않습니다. 최신기종의 휴대전화로 교체하신후 사용해 주세요</div>
 <%
 }
 %>
-        <wml:do type="vnd.up" label="상위"><wml:go href="main.wap?token=<%=token%>"/></wml:do>
+        <btn name="상위" href="main.wap?token=<%=token%>">
+        <hr size="1" color="#BBBBBB">
+        <table cellpadding="0" cellspacing="1">
+            <tr>
+                <td width="16" align="center"><img src="file:////images/magicn/number_square_0.sis"></td>
+                <td><a href="main.wap?token=<%=token%>" accesskey="0"><font color="#0000FF">상위</font></a></td>
+            </tr>
+        </table>
     </body>
 </html>
 

@@ -68,8 +68,18 @@
                     <div><img src="file:////images/magicn/number_square_8.sis"><a href="earncache.wap?mode=viewMoneyInRequestList&token=<%=token%>" accesskey="8"><marquee type="auto">충전내역</marquee></a></div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div><img src="file:////images/magicn/number_square_9.sis"><a href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="9"><marquee type="auto">승무패(저사양)</marquee></a></div>
+                </td>
+                <td>
+                    <div><img src="file:////images/magicn/number_square_0.sis"><a href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="0"><marquee type="auto">핸디캡(저사양)</marquee></a></div>
+                </td>
+            </tr>
         </table>
         </div>
+        <div><br/>
+        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</div>
     </body>
 </html>
 

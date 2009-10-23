@@ -878,7 +878,7 @@ public class WapGatewayFilter implements Filter
 	    if (redirect.equals("mw2") && (phoneno == null || phoneno.length() == 0))
 	    	phoneno = "010-1111-9999";
 	    
-	    System.out.println("&&&&&&&&& " + redirect + " " + phoneno + " &&&&&&&&&");
+	    System.out.println("&& " + redirect + " " + phoneno + " && " + carrier + " && " + model);
 	    
 		if (redirect != null) {
 			request.setAttribute("LANG_TYPE", redirect);

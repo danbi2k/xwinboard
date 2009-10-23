@@ -178,6 +178,14 @@ public class XwinUtil
 		return obj.toString();
 	}
 	
+	public static String nvl(Object obj, String defaultValue)
+	{
+		if (obj == null)
+			return defaultValue;
+		
+		return obj.toString();
+	}
+	
 	public static String arcNvl(String str)
 	{
 		if (str != null && str.length() == 0)
