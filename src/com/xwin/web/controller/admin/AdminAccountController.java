@@ -330,7 +330,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);
 				smsWait.setPhone(mobile);
-				smsWait.setCallback("SiteConfig.SITE_PHONE");
+				smsWait.setCallback(SiteConfig.SITE_PHONE);
 				
 				smsWaitDao.insertSmsWait(smsWait);
 			}
