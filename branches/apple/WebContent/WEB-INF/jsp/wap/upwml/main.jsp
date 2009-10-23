@@ -18,6 +18,8 @@
         <p mode="wrap">닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</p>
         <p>----------------</p>
+        <p mode="wrap"><br/>
+        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</p>
         <do type="accept" label="확인" name="VX"><go href=""/></do>
     </card>
 </wml>

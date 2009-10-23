@@ -18,6 +18,8 @@
         <div>닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</div>
         <div>----------------</div>
+        <div><br/>
+        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</div>
     </body>
 </html>
 

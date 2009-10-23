@@ -21,7 +21,7 @@ import com.xwin.service.admin.XwinService;
 
 public class BettingService extends XwinService
 {
-	public void processBetting(GameFolder gameFolder, Member member)
+	public void processBetting(GameFolder gameFolder, Member member, String source)
 	{
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		String signature = makeBettingSignature(itemList);
@@ -39,6 +39,7 @@ public class BettingService extends XwinService
 		betting.setIntroducerId(member.getIntroducerId());
 		betting.setMemberId(member.getMemberId());
 		betting.setSignature(signature);
+		betting.setSource(source);
 		
 		String bettingId = bettingDao.insertBetting(betting);
 		

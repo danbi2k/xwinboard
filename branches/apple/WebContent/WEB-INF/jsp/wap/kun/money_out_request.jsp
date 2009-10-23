@@ -47,7 +47,7 @@
                         <div><img src="file:////images/magicn/option_next.sis" alt=""/>신청액</div>
                         <div><input type="text" name="money" value="" format="1" style="width:98%;text-align:center;" /></div>
                         <div><img src="file:////images/magicn/option_next.sis" alt=""/>PIN번호</div>
-                        <div><input type="password" name="pin" value="" format="k" style="width:98%;text-align:center;" /></div>
+                        <div><input type="password" name="pin" value="" format="1" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="auto_login" value="$(auto_login)" /></div>
                         <div style="text-align:center;margin:5 0 5 0;"><input type="submit" value="전송"/></div>

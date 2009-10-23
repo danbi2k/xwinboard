@@ -32,6 +32,7 @@ public class Betting extends XwinObject
 	private String gameGrade;
 	private Integer memberId;
 	private String signature;
+	private String source;
 	
 	private List<BetGame> betGameList;
 	
@@ -157,6 +158,12 @@ public class Betting extends XwinObject
 	}
 	public void setSignature(String signature) {
 		this.signature = signature;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
 	}
 	public String toString()
 	{

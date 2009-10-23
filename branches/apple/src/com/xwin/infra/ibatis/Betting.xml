@@ -27,8 +27,8 @@
 	</resultMap>
 	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE, SOURCE)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#, #source#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			

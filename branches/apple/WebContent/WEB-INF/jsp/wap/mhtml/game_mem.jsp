@@ -20,12 +20,14 @@
 if (weblike.equals("true")) {
 %>
         <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
-        <div><form name="game_form" method="post" action="bet.wap">
+        <div><form name="game_form" method="post" action="play.wap">
 <%
 	String type = request.getParameter("type");
 	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");
 	Collection<List<Game>> gameListCol = gameListMap.values();
 %>
+            <div><input type="hidden" name="token" value="<%=token%>" /></div>
+            <div><input type="submit" value="배팅"/></div>
             <div><input type="hidden" name="mode" value="betting" /></div>
             <div><input type="hidden" name="type" value="<%=type%>" /></div>
         <div>금액</div>
@@ -34,21 +36,28 @@ if (weblike.equals("true")) {
         <div><input type="text" name="rate" value="0.00" format="a" /></div>
         <div>예상</div>
         <div><input type="text" name="expect" value="0" format="a" /></div>
-        <div><input type="hidden" name="token" value="<%=token%>" /></div>
-        <div><input type="submit" value="배팅"/></div>
+            <div><select name="league_name">
+                <option value="-1" >리그를선택하세요</option>
 <%
 	for (List<Game> gameList : gameListCol) {
 		int i = 0;
 		Game tgame = gameList.get(0);
 		String leagueId = tgame.getLeagueId();
 		String leagueName = tgame.getLeagueName();
+		if (i == 0) {
 %>
+                <option value="<%=leagueId%>" ><%=leagueName%></option>
 <%
-	if (i == 0) {
+		}
+	}
 %>
-            <div><a btn="확인" href="javascript:vx_contents('<%=leagueId%>')"><%=leagueName%></a></div>
+            </select></div>
 <%
-}
+	for (List<Game> gameList : gameListCol) {
+		int i = 0;
+		Game tgame = gameList.get(0);
+		String leagueId = tgame.getLeagueId();
+		String leagueName = tgame.getLeagueName();
 %>
 <%
 if (gameList != null) {
@@ -102,6 +111,10 @@ if (game.getLoseDeny().equals("Y")) {
 }
 %>
         </form></div>
+<%
+} else {
+%>
+        <div>회원님의 휴대전화에서는 배팅 서비스가 지원되지 않습니다. 최신기종의 휴대전화로 교체하신후 사용해 주세요</div>
 <%
 }
 %>

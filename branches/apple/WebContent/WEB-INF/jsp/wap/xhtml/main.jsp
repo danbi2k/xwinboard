@@ -57,8 +57,18 @@
                     <div><img localsrc="pict:///core/button/8"/><a title="확인" href="earncache.wap?mode=viewMoneyInRequestList&token=<%=token%>" accesskey="8" style="marquee-style:sktscroll;">충전내역</a></div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div><img localsrc="pict:///core/button/9"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="9" style="marquee-style:sktscroll;">승무패(저사양)</a></div>
+                </td>
+                <td>
+                    <div><img localsrc="pict:///core/button/0"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="0" style="marquee-style:sktscroll;">핸디캡(저사양)</a></div>
+                </td>
+            </tr>
         </table>
         </div>
+        <div><br/>
+        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</div>
     </body>
 </html>
 
