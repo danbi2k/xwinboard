@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
