@@ -11,6 +11,7 @@ import org.springframework.context.MessageSourceAware;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
@@ -23,6 +24,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 {	
 	public synchronized void judgeGameResult(Game game, Boolean all)
 	{
+		Admin.PROCESS_COUNT_JUDGE++;
+		
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
@@ -135,6 +138,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 				bettingDao.updateBetting(betting);
 			}
 		}
+		
+		Admin.PROCESS_COUNT_JUDGE--;
 	}
 	
 	public void calcuateBetting(Betting betting)
