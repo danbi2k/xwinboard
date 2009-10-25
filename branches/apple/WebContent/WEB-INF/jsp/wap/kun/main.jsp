@@ -38,10 +38,10 @@
         <table width="100%">
             <tr>
                 <td width="50%" bgcolor="#F5F5F5" style="background-color:#F5F5F5;">
-                    <div><img src="file:////images/magicn/number_square_1.sis"><a href="play.wap?mode=viewGameList&type=wdl&token=<%=token%>" accesskey="1"><marquee type="auto">승무패</marquee></a></div>
+                    <div><img src="file:////images/magicn/number_square_1.sis"><a href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="1"><marquee type="auto">승무패</marquee></a></div>
                 </td>
                 <td width="50%" bgcolor="#F5F5F5" style="background-color:#F5F5F5;">
-                    <div><img src="file:////images/magicn/number_square_2.sis"><a href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="2"><marquee type="auto">핸디캡</marquee></a></div>
+                    <div><img src="file:////images/magicn/number_square_2.sis"><a href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="2"><marquee type="auto">핸디캡</marquee></a></div>
                 </td>
             </tr>
             <tr>
@@ -70,16 +70,16 @@
             </tr>
             <tr>
                 <td>
-                    <div><img src="file:////images/magicn/number_square_9.sis"><a href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="9"><marquee type="auto">승무패(저사양)</marquee></a></div>
+                    <div><img src="file:////images/magicn/number_square_9.sis"><a href="play.wap?mode=viewGameList&type=wdl&token=<%=token%>" accesskey="9"><marquee type="auto">승무패(최신폰)</marquee></a></div>
                 </td>
                 <td>
-                    <div><img src="file:////images/magicn/number_square_0.sis"><a href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="0"><marquee type="auto">핸디캡(저사양)</marquee></a></div>
+                    <div><img src="file:////images/magicn/number_square_0.sis"><a href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0"><marquee type="auto">핸디캡(최신폰)</marquee></a></div>
                 </td>
             </tr>
         </table>
         </div>
         <div><br/>
-        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</div>
+        ※ 최신폰을 이용하시는 회원님은 승무패/핸디캡 최신폰 메뉴를 활용하시면 좀더 빠르게 배팅하실수 있습니다.</div>
     </body>
 </html>
 

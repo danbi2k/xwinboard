@@ -27,10 +27,10 @@
         <table width="100%">
             <tr>
                 <td width="50%" style="background-color:#F5F5F5;">
-                    <div><img localsrc="pict:///core/button/1"/><a title="확인" href="play.wap?mode=viewGameList&type=wdl&amp;token=<%=token%>" accesskey="1" style="marquee-style:sktscroll;">승무패</a></div>
+                    <div><img localsrc="pict:///core/button/1"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=wdl&amp;token=<%=token%>" accesskey="1" style="marquee-style:sktscroll;">승무패</a></div>
                 </td>
                 <td width="50%" style="background-color:#F5F5F5;">
-                    <div><img localsrc="pict:///core/button/2"/><a title="확인" href="play.wap?mode=viewGameList&type=handy&amp;token=<%=token%>" accesskey="2" style="marquee-style:sktscroll;">핸디캡</a></div>
+                    <div><img localsrc="pict:///core/button/2"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=handy&amp;token=<%=token%>" accesskey="2" style="marquee-style:sktscroll;">핸디캡</a></div>
                 </td>
             </tr>
             <tr>
@@ -59,16 +59,16 @@
             </tr>
             <tr>
                 <td>
-                    <div><img localsrc="pict:///core/button/9"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=wdl&amp;token=<%=token%>" accesskey="9" style="marquee-style:sktscroll;">승무패(저사양)</a></div>
+                    <div><img localsrc="pict:///core/button/9"/><a title="확인" href="play.wap?mode=viewGameList&type=wdl&amp;token=<%=token%>" accesskey="9" style="marquee-style:sktscroll;">승무패(최신폰)</a></div>
                 </td>
                 <td>
-                    <div><img localsrc="pict:///core/button/0"/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=handy&amp;token=<%=token%>" accesskey="0" style="marquee-style:sktscroll;">핸디캡(저사양)</a></div>
+                    <div><img localsrc="pict:///core/button/0"/><a title="확인" href="play.wap?mode=viewGameList&type=handy&amp;token=<%=token%>" accesskey="0" style="marquee-style:sktscroll;">핸디캡(최신폰)</a></div>
                 </td>
             </tr>
         </table>
         </div>
         <div><br/>
-        ※ 승무패/핸디캡에서 오류가 나시는 회원님은 저사양 메뉴를 이용 부탁드립니다.</div>
+        ※ 최신폰을 이용하시는 회원님은 승무패/핸디캡 최신폰 메뉴를 활용하시면 좀더 빠르게 배팅하실수 있습니다.</div>
     </body>
 </html>
 
