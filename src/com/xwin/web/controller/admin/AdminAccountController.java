@@ -375,6 +375,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			moneyIn.setUserId(userId);
 			moneyIn.setNickName(member.getNickName());
 			moneyIn.setNote(note);
+			moneyIn.setSource(Code.SOURCE_WEB);
 			moneyInDao.insertMoneyIn(moneyIn);
 			
 			Account account = new Account();
@@ -431,6 +432,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyOut.setUserId(userId);
 				moneyOut.setNickName(member.getNickName());
 				moneyOut.setNote(note);
+				moneyOut.setSource(Code.SOURCE_WEB);
 				moneyOutDao.insertMoneyOut(moneyOut);
 				
 				Account account = new Account();
