@@ -72,7 +72,7 @@
 				]]>
 			</isNotNull>
 		</dynamic>
-	ORDER BY DATE DESC
+	ORDER BY DATE DESC, ID DESC
 	<isNotNull prepend="LIMIT" property="fromRow">
 			#fromRow#, #rowSize#
 	</isNotNull>

@@ -218,7 +218,7 @@ public class WapGameController extends XwinController
 				rw = new ResultWap(-1, "중복배팅입니다\n배당금액 3,000,000캐쉬 초과", UP_URL, null);
 		}
 		else {
-			bettingService.processBetting(gameFolder, member, "WAP");			
+			bettingService.processBetting(gameFolder, member, Code.SOURCE_WAP);			
 			rw = new ResultWap(0, "배팅에 성공하였습니다\n회원님의 대박을 기원합니다", UP_URL, null);
 		}
 		

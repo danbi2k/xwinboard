@@ -88,7 +88,7 @@ public class WapMoneyOutController extends XwinController
 			moneyOut.setBankName(member.getBankName());
 			moneyOut.setNumber(member.getBankNumber());
 			moneyOut.setName(member.getBankOwner());
-			moneyOut.setSource("WAP");
+			moneyOut.setSource(Code.SOURCE_WAP);
 			
 			moneyOutDao.insertMoneyOut(moneyOut);
 			
