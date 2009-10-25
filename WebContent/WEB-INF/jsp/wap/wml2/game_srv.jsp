@@ -22,7 +22,7 @@
 		}
 	
 		var rate = 0.0;
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		var sel_count = 0;
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
@@ -45,7 +45,7 @@
 		}
 	
 		document.game_form.rate.value = rate_digit2;
-		document.game_form.expect.value = comma3(expect);
+		document.game_form.expect.value = expect;
 	}
 	
 	function select_game(tobj) {
@@ -54,7 +54,7 @@
 			money = 0;
 	
 		var rate = 0.0;
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		var sel_count = 0;
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
@@ -85,7 +85,7 @@
 		//vx_contents(anyvx.id);
 	
 		document.game_form.rate.value = rate_digit2;
-		document.game_form.expect.value = comma3(expect);
+		document.game_form.expect.value = expect;
 
 		var svalue = tobj.value.split("_");
 		var homeTeam = document.getElementById("W_"+svalue[1]).innerHTML;
@@ -117,23 +117,15 @@
 		return ret;
 	}
 
-	function comma3(value) {
-		return value;
-		var sMoney = "" + value;	
-		var len = sMoney.length;
-	
-		if (sMoney.length <= 3)
-			return sMoney;
-
-		var tMoney = "";
-		for (i = 0; i < len; i++) {
-			if (i != 0 && ((i % 3) == (len % 3)))
-				tMoney += ",";
-			if (i < len)
-				tMoney += sMoney.charAt(i);
+	function toArray(data) {
+		if (data == undefined)
+			data = [];
+		else if (data.length == undefined || data.name == "game_list") {
+			var tmp = [data];		
+			return tmp;
 		}
-	
-		return tMoney;
+		
+		return data;
 	}
 	
 	function getInt(value) {
@@ -147,7 +139,7 @@
 	
 	function betting() {
 		var sel_count = 0
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
 				sel_count++;
@@ -168,7 +160,7 @@
 
 	function summary() {
 		var msg = "";
-		var list = document.game_form.game_list;
+		var list = toArray(document.game_form.game_list);
 		for ( var x = 0; x < list.length; x++) {
 			if (list[x].value != undefined && list[x].value != 0) {
 				var svalue = list[x].value.split("_");

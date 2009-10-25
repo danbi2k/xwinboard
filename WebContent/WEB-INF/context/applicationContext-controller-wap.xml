@@ -11,7 +11,8 @@
 		p:memberDao-ref="memberDao"/>
 		
 	<bean id="wapLoginController" class="com.xwin.web.controller.wap.WapLoginController"
-		p:memberDao-ref="memberDao"/>
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="wapMainController" class="com.xwin.web.controller.wap.WapMainController"
 		p:memberDao-ref="memberDao"/>

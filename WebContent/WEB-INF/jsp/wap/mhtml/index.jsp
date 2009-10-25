@@ -21,8 +21,10 @@
 String pin = adhocMember.getPin();
 if (StringUtils.isNumeric(pin) && pin.length() == 6) {
 %>
+            <div><input type="hidden" name="mode" value="processPinLogin" /></div>
 <%}  else {%>
-        <div>모바일서비스를 이용하시려면 홈페이지 '정보수정' 에서 '모바일PIN번호' 6자리를 등록하셔야 합니다.</div>
+            <div><input type="hidden" name="mode" value="processUserLogin" /></div>
+        <div>홈페이지 '정보수정' 에서 '모바일PIN번호' 6자리를 등록하시면 보다 쉽게 로그인이 가능 합니다.</div>
 <%} %>
     </body>
 </html>
