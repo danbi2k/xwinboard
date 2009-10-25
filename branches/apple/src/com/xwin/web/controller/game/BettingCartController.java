@@ -137,7 +137,7 @@ public class BettingCartController extends XwinController
 			rx = new ResultXml(0, "잔액이 부족합니다.", null);
 		} else {
 			for (GameFolder gameFolder : selectList) {
-				bettingService.processBetting(gameFolder, member, "WEB");
+				bettingService.processBetting(gameFolder, member, Code.SOURCE_WEB);
 				bettingCart.remove(gameFolder);
 			}
 			

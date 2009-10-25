@@ -84,7 +84,7 @@ public class BettingController extends XwinController
 				rx = new ResultXml(-1, "중복배팅입니다\n배당금액 3,000,000캐쉬 초과", null);
 		}
 		else if (_action.equals("betting")) {
-			bettingService.processBetting(gameFolder, member, "WEB");
+			bettingService.processBetting(gameFolder, member, Code.SOURCE_WEB);
 			
 			session.removeAttribute("gameFolder_" + _type);
 			
