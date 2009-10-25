@@ -116,6 +116,7 @@ public class MoneyOutController extends XwinController
 			moneyOut.setBankName(member.getBankName());
 			moneyOut.setNumber(member.getBankNumber());
 			moneyOut.setName(member.getBankOwner());
+			moneyOut.setSource(Code.SOURCE_WEB);
 			
 			moneyOutDao.insertMoneyOut(moneyOut);
 			
