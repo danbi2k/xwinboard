@@ -51,9 +51,9 @@ if (StringUtils.isNumeric(pin) && pin.length() == 6) {
                         <div>※ 아이디와 패스워드를 입력해 주세요<br/>
                         &nbsp;</div>
                         <div><img localsrc="pict:///core/arrow/right_4" alt=""/>아이디</div>
-                        <div><input type="text" name="userId" value="" format="N*N" emptyok="true" style="width:98%;text-align:center;" /></div>
+                        <div><input type="text" name="userId" value="" format="x*x" emptyok="true" style="width:98%;text-align:center;" /></div>
                         <div><img localsrc="pict:///core/arrow/right_4" alt=""/>패스워드</div>
-                        <div><input type="text" name="password" value="" format="N*N" emptyok="true" style="width:98%;text-align:center;" /></div>
+                        <div><input type="text" name="password" value="" format="x*x" emptyok="true" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="name" value="$(name)" /></div>
                         <div><input type="hidden" name="auto_login" value="$(auto_login)" /></div>
