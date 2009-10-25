@@ -201,7 +201,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
 		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
-		Long totalSum = moneyInOutDao.selectMoneyInOutSum(param);
+		Long totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
 		
 		if (totalSum == null)
 			totalSum = 0L;

@@ -224,6 +224,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS like #statusLike#
+			</isNotNull>
 			<isNotNull prepend="AND" property="number">
 				NUMBER = #number#
 			</isNotNull>
