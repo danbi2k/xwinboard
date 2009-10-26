@@ -44,14 +44,11 @@ public class AdminStatisticsController extends XwinController
 		Integer betMoneyStatCount = bettingDao.selectDailyBettingMoneyStatCount(param);
 		
 		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics();
-		if (betMoneyStatToday != null) {
-			betMoneyStatList.add(0, betMoneyStatToday);
-			betMoneyStatCount++;
-		}
 		
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_daily_betting_money");
 		mv.addObject("betMoneyStatList", betMoneyStatList);
 		mv.addObject("betMoneyStatCount", betMoneyStatCount);
+		mv.addObject("betMoneyStatToday", betMoneyStatToday);
 		
 		return mv;
 	}
