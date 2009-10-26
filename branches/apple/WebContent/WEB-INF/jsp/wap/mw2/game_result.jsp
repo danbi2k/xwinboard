@@ -27,13 +27,8 @@
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</div>
         <hr style="color:#000000;width:100%;"/>
 <%
-	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
-	int pIdx = 0;
-	if (pageIndex != null)
-		pIdx = Integer.parseInt(pageIndex);
-%>
-<%
 	List<Game> gameList = (List<Game>) request.getAttribute("gameList");
+	Integer totalCount = (Integer) request.getAttribute("totalCount");
 %>
 <%
 if (gameList != null) {
@@ -98,13 +93,42 @@ if (game.getStatus().equals(Code.GAME_STATUS_END)) {
 }
 %>
 <%
-if (pIdx > 0) {
+	int SHOWPAGE = 5;
+	int ROWSIZE = 5;
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
 %>
-        <div><a title="확인" href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx-1%>&token=<%=token%>" accesskey="2">이전</a></div>
+<%	
+	if (startPage > 0) {
+%>
+        <div style="display:inline;"><a title="이전" href="javascript:goPage(<%=startPage - 1%>)?token=<%=token%>" accesskey="2">이전</a></div>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+%>
+<%
+		if (i == pIdx) {
+%>
+        <div style="display:inline;"><%=i+1%></div>
+<%
+		} else {
+%>	
+        <div style="display:inline;"><a title="<%=i+1%>" href="<a href='javascript:goPage(<%=i%>)'>?token=<%=token%>"><%=i+1%></a></div>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+        <div style="display:inline;"><a title="다음" href="javascript:goPage(<%=i%>)?token=<%=token%>" accesskey="3">다음</a></div>
 <%
 }
 %>
-        <div><a title="확인" href="play.wap?mode=viewGameResultList&pageIndex=<%=pIdx+1%>&token=<%=token%>" accesskey="3">다음</a></div>
         <div><a title="상위" href="main.wap?token=<%=token%>">상위</a></div>
     </div>
     </body>

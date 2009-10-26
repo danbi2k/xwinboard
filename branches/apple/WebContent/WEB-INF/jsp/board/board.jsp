@@ -87,7 +87,6 @@
 
 				<!-- end list_box -->
 
-<!-----[ 페이징 ]--------------------------------------------/-->
 				<div class='paginate'>    
 <%
 	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);

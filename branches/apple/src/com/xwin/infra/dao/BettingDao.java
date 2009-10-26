@@ -111,6 +111,11 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics");
 	}
 	
+	public BetMoneyStat selectTodayBettingMoneyStatistics()
+	{
+		return (BetMoneyStat) sqlMapClientTemplate.queryForObject("selectTodayBettingMoneyStatistics");
+	}
+	
 	public List<BetMoneyStat> selectDailyBettingMoneyStatList(Map<String, Object> param)
 	{
 		return (List<BetMoneyStat>) sqlMapClientTemplate.queryForList("selectDailyBettingMoneyStatList", param);
