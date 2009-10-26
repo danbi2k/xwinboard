@@ -106,13 +106,19 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateBettingByUserId", userId);
 	}
 	
-	public void insertDailyBettingMoneyStatistics()
+	public void insertDailyBettingMoneyStatistics(Date fromDate, Date toDate)
 	{
-		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics");
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("fromDate", fromDate);
+		param.put("toDate", toDate);
+		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics", param);
 	}
 	
-	public BetMoneyStat selectTodayBettingMoneyStatistics()
+	public BetMoneyStat selectTodayBettingMoneyStatistics(Date fromDate, Date toDate)
 	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("fromDate", fromDate);
+		param.put("toDate", toDate);
 		return (BetMoneyStat) sqlMapClientTemplate.queryForObject("selectTodayBettingMoneyStatistics");
 	}
 	

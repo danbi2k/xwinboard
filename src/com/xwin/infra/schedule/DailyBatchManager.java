@@ -16,6 +16,7 @@ import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
+import com.xwin.infra.util.XwinUtil;
 
 public class DailyBatchManager extends QuartzJobBean
 {
@@ -31,7 +32,14 @@ public class DailyBatchManager extends QuartzJobBean
 		// 일일유저보유액
 		bettingDao.insertDailyMemberMoneyStatistics();
 		// 일일정산내역
-		bettingDao.insertDailyBettingMoneyStatistics();
+		try {
+			Calendar yesterday = Calendar.getInstance();
+			yesterday.add(Calendar.DATE, -1);
+			Date[] yesterdayPair = XwinUtil.getDatePair(yesterday.getTime());
+			bettingDao.insertDailyBettingMoneyStatistics(yesterdayPair[0], yesterdayPair[1]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// 개인별 권한 해제
 		try {
 			Date today = new Date();
