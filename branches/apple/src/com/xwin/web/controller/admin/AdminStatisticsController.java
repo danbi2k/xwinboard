@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,8 @@ public class AdminStatisticsController extends XwinController
 		List<BetMoneyStat> betMoneyStatList = bettingDao.selectDailyBettingMoneyStatList(param);
 		Integer betMoneyStatCount = bettingDao.selectDailyBettingMoneyStatCount(param);
 		
-		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics();
+		Date[] todayPair = XwinUtil.getDatePair(new Date());
+		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
 		
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_daily_betting_money");
 		mv.addObject("betMoneyStatList", betMoneyStatList);
