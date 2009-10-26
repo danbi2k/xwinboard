@@ -26,6 +26,17 @@
 		<result property="signature" column="SIGNATURE"/>
 	</resultMap>
 	
+	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
+	
+	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
+		<result property="id" column="ID"/>
+		<result property="date" column="DATE"/>
+		<result property="inMoney" column="INMONEY"/>
+		<result property="outMoney" column="OUTMONEY"/>
+		<result property="bettingPoint" column="POINT_BETTING"/>
+		<result property="bonusPoint" column="POINT_BONUS"/>
+	</resultMap>
+	
 	<insert id="insertBetting" parameterClass="Betting">
 		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE, SOURCE)
 			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#, #source#)
@@ -267,9 +278,9 @@
 		SELECT SUM(money) FROM tbl_betting WHERE STATUS = 'BS001'
 	</select>
 	
-	<select id="selectTodayBettingMoneyStatistics">
+	<select id="selectTodayBettingMoneyStatistics" resultMap="betMoneyStatResultMap">
 	<![CDATA[
-		SELECT A.DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING FROM
+		SELECT 0 AS ID, CURDATE() AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, 0 AS POINT_BONUS FROM
 		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
 		FROM tbl_betting
 		WHERE STATUS in ('BS002', 'BS003') AND
@@ -324,17 +335,6 @@
 		WHERE STATUS in ('BS001') AND DATE >= ADDDATE(CURDATE(), INTERVAL -1 DAY) AND DATE < ADDDATE(CURDATE(), INTERVAL 0 DAY)) as B
 	]]>	
 	</insert>
-	
-	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
-	
-	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
-		<result property="id" column="ID"/>
-		<result property="date" column="DATE"/>
-		<result property="inMoney" column="INMONEY"/>
-		<result property="outMoney" column="OUTMONEY"/>
-		<result property="bettingPoint" column="POINT_BETTING"/>
-		<result property="bonusPoint" column="POINT_BONUS"/>
-	</resultMap>
 	
 	<select id="selectDailyBettingMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
 		SELECT * FROM tbl_betting_money_stat
