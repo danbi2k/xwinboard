@@ -50,7 +50,8 @@
 				<prop key="/betlog.wap">wapMyBettingController</prop>
 				<prop key="/earncache.wap">wapMoneyInController</prop>
 				<prop key="/sendcache.wap">wapMoneyOutController</prop>
-				<prop key="/play.wap">wapGameController</prop>
+				<prop key="/play.wap">wapGameController</prop>				
+				<prop key="/admin.wap">wapAdminController</prop>
 				
 				<prop key="/anne.php">guideController</prop>
 				<prop key="/yakwan.php">provisionController</prop>
