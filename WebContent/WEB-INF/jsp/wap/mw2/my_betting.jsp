@@ -88,6 +88,82 @@ if (bettingList != null && bettingList.size() > 0) {
 	out.println("배팅 내역이 없습니다");
 }
 %>
+<%
+		int SHOWPAGE = 5;
+		int ROWSIZE = 5;
+		Integer totalCount = (Integer) request.getAttribute("totalCount");
+	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+	int pIdx = 0;
+	if (pageIndex != null)
+		pIdx = Integer.parseInt(pageIndex);
+	int pageNum = (int) Math.ceil((double)totalCount / ROWSIZE);
+	int startPage = ((int)(pIdx / SHOWPAGE)) * SHOWPAGE;
+	int nextPage = startPage + SHOWPAGE;
+%>
+<%	
+	if (startPage > 0) {
+%>
+        <div style="display:inline;"><a title="이전" href="javascript:goPage(<%=startPage - 1%>)" accesskey="2">이전</a></div>
+<%
+	}
+	int i = 0, c = 0;
+	for (c = 0, i = startPage ; i < pageNum && c < SHOWPAGE ; i++, c++) {
+%>
+<%
+		if (i == pIdx) {
+%>
+        <div style="display:inline;"><%=i+1%></div>
+<%
+		} else {
+%>	
+        <div style="display:inline;"><a title="<%=i+1%>" href="<a href='javascript:goPage(<%=i%>)'>"><%=i+1%></a></div>
+<%			
+		}
+	}
+	if (i < pageNum) {
+%>
+        <div style="display:inline;"><a title="다음" href="javascript:goPage(<%=i%>)" accesskey="3">다음</a></div>
+<%
+}
+%>
+        <div>
+        <table width="100%" style="border-width:1;border-style:solid;">
+            <tr>
+                <td style="border-width:1;border-style:solid;">
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                </td>
+            </tr>
+<%
+if (bettingList != null && bettingList.size() > 0) {
+	for (Betting betting : bettingList) {
+%>
+            <tr>
+                <td style="border-width:1;border-style:solid;">
+                    <div><%=XwinUtil.getMMddDate(betting.getDate())%></div>
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                    <div><%=betting.getRateStr()%></div>
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                    <div><%=XwinUtil.comma3(betting.getMoney())%></div>
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                    <div><%=XwinUtil.comma3(betting.getExpect())%></div>
+                </td>
+            </tr>
+<%
+	}
+} else {
+	out.println("배팅 내역이 없습니다");
+}
+%>
+        </table>
+        </div>
         <div><a title="상위" href="main.wap?token=<%=token%>">상위</a></div>
     </div>
     </body>
