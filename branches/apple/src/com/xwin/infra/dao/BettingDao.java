@@ -119,7 +119,7 @@ public class BettingDao extends XwinDao
 		Map<String, Object> param = new HashMap<String, Object>(2);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
-		return (BetMoneyStat) sqlMapClientTemplate.queryForObject("selectTodayBettingMoneyStatistics");
+		return (BetMoneyStat) sqlMapClientTemplate.queryForObject("selectTodayBettingMoneyStatistics", param);
 	}
 	
 	public List<BetMoneyStat> selectDailyBettingMoneyStatList(Map<String, Object> param)
