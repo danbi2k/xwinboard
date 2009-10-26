@@ -24,7 +24,7 @@ import com.xwin.web.controller.XwinController;
 
 public class WapGameController extends XwinController
 {
-	private final static int ROWSIZE = 3;
+	private final static int ROWSIZE = 5;
 	private static final long MAX_EXPECT = 3000000;
 	
 	public ModelAndView viewGameList(HttpServletRequest request,
@@ -81,6 +81,7 @@ public class WapGameController extends XwinController
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		
 		if (gameDate == null)
 			gameDate = XwinUtil.toDateStr(new Date(), 2);
@@ -99,6 +100,7 @@ public class WapGameController extends XwinController
 		statusList.add(Code.GAME_STATUS_END);
 		statusList.add(Code.GAME_STATUS_CANCEL);
 		param.put("statusList", statusList);
+		param.put("leagueId", leagueId);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		param.put("ORDERBY", "DESC");
@@ -107,9 +109,11 @@ public class WapGameController extends XwinController
 		param.put("rowSize", ROWSIZE);
 		
 		List<Game> gameList = gameDao.selectGameList(param);
+		Integer totalCount = gameDao.selectGameCount(param);
 		
 		ModelAndView mv = new ModelAndView("wap/" + LANG_TYPE + "/game_result");
 		mv.addObject("gameList", gameList);
+		mv.addObject("totalCount", totalCount);
 
 		return mv; 
 	}
