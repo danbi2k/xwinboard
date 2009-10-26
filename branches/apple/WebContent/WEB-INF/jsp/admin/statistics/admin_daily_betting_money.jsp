@@ -37,7 +37,6 @@
 	<%
 		if (betMoneyStatToday != null) {
 			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint() + betMoneyStatToday.getBonusPoint());
-			System.out.println(betMoneyStatToday);
 	%>
 	<tr align='center' bgcolor='#FFEBCD'>
 		<td><%=XwinUtil.toDateStr(betMoneyStatToday.getDate(), 2)%></td>
