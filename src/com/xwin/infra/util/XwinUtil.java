@@ -62,6 +62,11 @@ public class XwinUtil
 		return boardNoticeFormat.format(date);
 	}
 	
+	public static String getMMddDate(Date date)
+	{
+		return boardNoticeFormat.format(date);
+	}
+	
 	public static Long calcExpectMoney(Double rate, Long money)
 	{
 		Double cutRate = doubleCut(rate);

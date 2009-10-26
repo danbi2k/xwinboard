@@ -14,11 +14,14 @@ import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.MoneyIn;
 import com.xwin.infra.util.Code;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultWap;
 import com.xwin.web.controller.XwinController;
 
 public class WapMoneyInController extends XwinController
 {
+	private final static int ROWSIZE = 5;
+	
 	public ModelAndView viewMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -98,12 +101,18 @@ public class WapMoneyInController extends XwinController
 		if (member == null)
 			return new ModelAndView("dummy");
 		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
 		param.put("notStatus", Code.MONEY_IN_DIRECT);
 		param.put("isRemoved", "N");
-		param.put("fromRow", 0);
-		param.put("rowSize", 5);
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<MoneyIn> moneyInList =	moneyInDao.selectMoneyInList(param);
 		Integer moneyInCount = moneyInDao.selectMoneyInCount(param);

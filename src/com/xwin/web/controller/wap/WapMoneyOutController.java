@@ -20,6 +20,8 @@ import com.xwin.web.controller.XwinController;
 
 public class WapMoneyOutController extends XwinController
 {
+	private final static int ROWSIZE = 5;
+	
 	public ModelAndView viewMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -122,12 +124,18 @@ public class WapMoneyOutController extends XwinController
 		if (member == null)
 			return new ModelAndView("dummy");
 		
+		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		
+		int pIdx = 0;
+		if (pageIndex != null)
+			pIdx = Integer.parseInt(pageIndex);
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("userId", member.getUserId());
 		param.put("notStatus", Code.MONEY_OUT_DIRECT);
 		param.put("isRemoved", "N");
-		param.put("fromRow", 0);
-		param.put("rowSize", 3);
+		param.put("fromRow", pIdx * ROWSIZE);
+		param.put("rowSize", ROWSIZE);
 		
 		List<MoneyOut> moneyOutList = moneyOutDao.selectMoneyOutList(param);
 		
