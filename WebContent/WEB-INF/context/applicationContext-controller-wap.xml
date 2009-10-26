@@ -42,6 +42,9 @@
 		p:gameDao-ref="gameDao"
 		p:bettingService-ref="bettingService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapAdminController" class="com.xwin.web.controller.wap.WapAdminController"
+		p:bettingDao-ref="bettingDao"/>
 	
 	<!-- >bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
 		p:invitationDao-ref="invitationDao"
