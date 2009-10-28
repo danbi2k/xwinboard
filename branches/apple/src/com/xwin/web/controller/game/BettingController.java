@@ -54,6 +54,8 @@ public class BettingController extends XwinController
 		GameFolder gameFolder =
 			(GameFolder)session.getAttribute("gameFolder_" + _type);
 		
+		if (_money != null)
+			_money = _money.trim();
 		Long money = Long.parseLong(_money);		
 		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
 		Integer retVal = 0;
