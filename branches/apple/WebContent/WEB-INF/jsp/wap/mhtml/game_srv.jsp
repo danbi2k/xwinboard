@@ -10,9 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <html>
     <head>
+    <title>¡¼<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>¡½</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
+        <div><center><a href>¡¼<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>¡½</a></center></div>
         <div>´Ð³×ÀÓ :&nbsp;<%=member.getNickName()%>&nbsp;´Ô<br/>
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</div>
         <div>----------------</div>

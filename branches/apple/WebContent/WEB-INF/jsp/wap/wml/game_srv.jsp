@@ -12,7 +12,7 @@
     <head>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
-    <card id ="card1">
+    <card id ="card1" title="<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>">
         <p mode="wrap">´Ð³×ÀÓ :&nbsp;<%=member.getNickName()%>&nbsp;´Ô<br/>
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</p>
         <p>----------------</p>

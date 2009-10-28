@@ -11,6 +11,7 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/wml20.dtd">
 <html>
     <head>
+    <title>?<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>?</title>
         <meta name="generator" content="AnyBuilder VX" />
 <% if (javascript.equals("true")) { %>
     <script language="JavaScript" type="text/JavaScript">
@@ -200,6 +201,11 @@
 <% } %>
     </head>
     <body id ="card1">
+        <div><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr><td height="1" style="background-color:#D9D9FF"></td></tr>
+            <tr><td height="19" align="center" valign="middle" style="background-color:#8EC7FF;color:#000000">?<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>?</td></tr>
+            <tr><td height="1" style="background-color:#D9D9FF"></td></tr>
+        </table></div>
 <% if (weblike.equals("true")) { %>
     <script language="JavaScript" type="text/JavaScript">
         <!--

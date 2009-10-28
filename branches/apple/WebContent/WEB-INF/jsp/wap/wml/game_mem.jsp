@@ -12,7 +12,7 @@
     <head>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
-    <card id ="card1">
+    <card id ="card1" title="<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":"핸디캡(최신폰)"%>">
         <p mode="wrap">닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</p>
         <p>----------------</p>
