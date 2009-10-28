@@ -43,8 +43,11 @@
 		p:bettingService-ref="bettingService"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
+	<bean id="wapAdminIndexController" class="com.xwin.web.controller.wap.WapAdminIndexController"/>
+		
 	<bean id="wapAdminController" class="com.xwin.web.controller.wap.WapAdminController"
-		p:bettingDao-ref="bettingDao"/>
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<!-- >bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
 		p:invitationDao-ref="invitationDao"

@@ -19,6 +19,7 @@
 } %>
 <html>
     <head>
+    <title>?<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":"핸디캡(최신폰)"%>?</title>
         <meta name="generator" content="AnyBuilder VX" />
 <% if (javascript.equals("true")) { %>
     <script language="JavaScript" type="text/JavaScript">
@@ -201,6 +202,14 @@
     </head>
     <body>
         <% if (network.equals("wcdma")) { %><a href='#' accesskey='#'></a><% } %>
+        <div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr><td width="100%" height="1" bgcolor="#D9D9FF"></td></tr>
+            <tr><td height="19" align="center" bgcolor="#8EC7FF"><font color="#000000">?<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":"핸디캡(최신폰)"%>?</font></td></tr>
+            <tr><td height="1" bgcolor="#D9D9FF"></td></tr>
+            <tr><td height="1" bgcolor="#D9D9FF"></td></tr>
+        </table>
+        </div>
 <% if (weblike.equals("true")) { %>
     <script language="JavaScript" type="text/JavaScript">
         <!--
