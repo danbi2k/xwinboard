@@ -31,11 +31,11 @@
 	>
 		<property name="authPhone">
 			<map>
-				<entry key="r" value="01097973490"/>
+				<entry key="r" value="0100000000"/>
 				<entry key="g" value="0100000001"/>
-				<entry key="9" value="01033273490"/>
-				<entry key="p" value="01040479189"/>
-				<entry key="e" value="01074407954"/>
+				<entry key="9" value="0100000002"/>
+				<entry key="p" value="0100000003"/>
+				<entry key="e" value="0100000004"/>
 			</map>
 		</property>
 	</bean>
