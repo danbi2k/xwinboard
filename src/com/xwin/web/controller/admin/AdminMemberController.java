@@ -219,11 +219,24 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String userId = request.getParameter("userId");
 		
 		Member member = memberDao.selectMember(userId, null);
-		member.setStatus(Code.USER_STATUS_SECEDE);
 		
-		memberDao.updateMember(member);
+		//잔여배팅확인
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("userId", userId);
+		param.put("status", Code.BET_STATUS_RUN);
+		Integer remainBettingCount = bettingDao.selectBettingCount(param);
 		
-		ResultXml rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		ResultXml rx = null;
+		if (remainBettingCount > 0) {
+			rx = new ResultXml(-1, "잔여 배팅이 " + remainBettingCount + "건 있습니다. 배팅을 취소해주세요", null);
+		} else if (member.getBalance() > 0) {
+			rx = new ResultXml(-1, "잔고가 남아있습니다. 직차감 해주세요", null);
+		} else {
+			member.setStatus(Code.USER_STATUS_SECEDE);
+			memberDao.updateMember(member);
+		
+			rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
