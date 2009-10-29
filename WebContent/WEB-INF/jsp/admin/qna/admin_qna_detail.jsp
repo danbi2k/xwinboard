@@ -28,7 +28,7 @@
 <table class="list">
 	<tr>
 		<th width="10%" height="30px">작성자</th>
-		<td width="*" style="padding-left:10px;"><%=boardItem.getNickName()%></td>
+		<td width="*" style="padding-left:10px;"><a href='javascript:goMemberDetail("<%=boardItem.getUserId()%>")'><%=boardItem.getUserId()%></a> (<%=boardItem.getNickName()%>)</td>
 	</tr>
 	<tr>
 		<th width="10%" height="30px">제목</th>
