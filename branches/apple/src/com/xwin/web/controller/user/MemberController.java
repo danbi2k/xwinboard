@@ -387,13 +387,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
-				SmsWait smsWait = new SmsWait();
 				String message = msgSrc.getMessage("SMS_JOIN_AUTH", new Object[]{SiteConfig.SITE_NAME, phonePin}, SiteConfig.SITE_LOCALE);
-				smsWait.setMsg(message);
-				smsWait.setPhone(phone);
-				smsWait.setCallback(SiteConfig.SITE_PHONE);
-				
-				smsWaitDao.insertSmsWait(smsWait);
+				sendSmsConnector.sendSms(message, phone, SiteConfig.SITE_PHONE);
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_SUCCESS", null, SiteConfig.SITE_LOCALE), null);
 			} catch (Exception e) {
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);
