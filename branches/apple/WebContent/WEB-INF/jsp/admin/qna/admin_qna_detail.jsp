@@ -35,6 +35,10 @@
 		<td width="*" style="padding-left:10px;"><%=boardItem.getTitle()%></td>
 	</tr>
 	<tr>
+		<th width="10%" height="30px">작성일</th>
+		<td width="*" style="padding-left:10px;"><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></td>
+	</tr>
+	<tr>
 		<th width="10%" height="30px">내용</th>
 		<td width="*" style="padding-left:10px;">
 		 <%
