@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
@@ -91,9 +92,14 @@ public class BoardController extends XwinController
 		if (addComment == null)
 			boardDao.plusBoardItemReadCout(id);
 		BoardItem boardItem = boardDao.selectBoardItem(id, boardName, member.getGrade());
+		Betting betting = null;
+		if (boardItem.getBettingId() != null)
+			betting = bettingDao.selectBetting(boardItem.getBettingId());
+			
 		
 		ModelAndView mv = new ModelAndView("board/boardDetail");
 		mv.addObject("boardItem", boardItem);
+		mv.addObject("betting", betting);
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		
@@ -104,6 +110,7 @@ public class BoardController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		String boardName = request.getParameter("boardName");
+		String bettingId = request.getParameter("bettingId");
 		
 		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
 				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
@@ -118,7 +125,12 @@ public class BoardController extends XwinController
 		if (AccessUtil.checkDeny(member, boardName.equals("user")?Code.DENY_WRITE_BOARD:Code.DENY_WRITE_QNA))
 			return new ModelAndView("illegal");
 		
+		Betting betting = null;
+		if (bettingId != null)
+			betting = bettingDao.selectUserBetting(bettingId, member.getUserId());
 		ModelAndView mv = new ModelAndView("board/boardWrite");
+		mv.addObject("betting", betting);
+		
 		if (boardName.equals("qna"))
 			mv.addObject("isModify", Boolean.TRUE);
 		
@@ -168,6 +180,7 @@ public class BoardController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		String boardName = request.getParameter("boardName");
+		String bettingId = request.getParameter("bettingId");
 		
 		if ((boardName.equals("user") && Admin.DENY_BOARD.equals("Y") == false) ||
 				(boardName.equals("qna") && Admin.DENY_QNA.equals("Y") == false))
@@ -198,6 +211,7 @@ public class BoardController extends XwinController
 		boardItem.setTitle(title);
 		boardItem.setType(Code.BOARDITEM_TYPE_USER);
 		boardItem.setGrade(member.getGrade());
+		boardItem.setBettingId(bettingId);
 		boardDao.insertBoardItem(boardItem);
 	
 		ModelAndView mv = null;

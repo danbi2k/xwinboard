@@ -243,7 +243,7 @@ public class Game extends XwinObject
 	}
 
 	public void setWinMoney(Long winMoney) {
-		this.winMoney = winMoney;
+		this.winMoney = XwinUtil.ntz(winMoney);
 	}
 
 	public Long getDrawMoney() {
@@ -251,7 +251,7 @@ public class Game extends XwinObject
 	}
 
 	public void setDrawMoney(Long drawMoney) {
-		this.drawMoney = drawMoney;
+		this.drawMoney = XwinUtil.ntz(drawMoney);
 	}
 
 	public Long getLoseMoney() {
@@ -259,7 +259,7 @@ public class Game extends XwinObject
 	}
 
 	public void setLoseMoney(Long loseMoney) {
-		this.loseMoney = loseMoney;
+		this.loseMoney = XwinUtil.ntz(loseMoney);
 	}
 
 	public String getDisplayStatus() {

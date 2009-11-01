@@ -26,6 +26,7 @@ public class BoardItem extends XwinObject
 	private String isDeleted;
 	private String isChecked;
 	private String grade;
+	private String bettingId;
 	
 	private List<BoardComment> boardCommentList;
 	
@@ -118,5 +119,11 @@ public class BoardItem extends XwinObject
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
+	}
+	public String getBettingId() {
+		return bettingId;
+	}
+	public void setBettingId(String bettingId) {
+		this.bettingId = bettingId;
 	}	
 }

@@ -83,7 +83,7 @@ public class MoneyInService extends XwinService
 							String nickName = member.getNickName();
 							String mobile = member.getMobile().replaceAll("-", "");
 							String message = "[" + SiteConfig.SITE_NAME + "]" + nickName + " 님께 " + money + "원이 충전 되었습니다.";
-							sendSmsConnector.sendSms(message, mobile, "SiteConfig.SITE_PHONE");
+							sendSmsConnector.sendSms(message, mobile, SiteConfig.SITE_PHONE);
 							*/
 						}
 					}

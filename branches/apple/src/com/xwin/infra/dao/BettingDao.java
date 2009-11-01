@@ -38,7 +38,16 @@ public class BettingDao extends XwinDao
 		Map<String, Object> param = new HashMap<String, Object>(1);
 		param.put("id", id);
 		
-		return (Betting) sqlMapClientTemplate.queryForObject("selectBettingList", param);
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBetting", param);
+	}
+	
+	public Betting selectUserBetting(String id, String userId)
+	{
+		Map<String, Object> param = new HashMap<String, Object>(1);
+		param.put("id", id);
+		param.put("userId", userId);
+		
+		return (Betting) sqlMapClientTemplate.queryForObject("selectBetting", param);
 	}
 	
 	public List<Betting> selectBettingList()

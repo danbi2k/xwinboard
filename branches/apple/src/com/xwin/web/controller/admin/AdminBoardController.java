@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.board.BoardComment;
 import com.xwin.domain.board.BoardItem;
+import com.xwin.domain.game.Betting;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -75,9 +76,14 @@ public static final int ROWSIZE = 30;
 		String grade = request.getParameter("grade");
 		
 		BoardItem boardItem = boardDao.selectBoardItem(id, "user", grade);
+		Betting betting = null;
+		if (boardItem.getBettingId() != null)
+			betting = bettingDao.selectBetting(boardItem.getBettingId());
+			
 		
 		ModelAndView mv = new ModelAndView("admin/board/admin_board_detail");
 		mv.addObject("boardItem", boardItem);
+		mv.addObject("betting", betting);
 		
 		return mv;
 	}
