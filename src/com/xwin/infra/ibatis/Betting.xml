@@ -45,6 +45,20 @@
 		</selectKey>			
 	</insert>
 	
+	<select id="selectBetting" resultMap="bettingResultMap"
+		parameterClass="map">
+		SELECT b.*
+		FROM tbl_betting b
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="id">
+			ID = #id#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userId">
+			USERID = #userId#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
 	<update id="updateBetting" parameterClass="Betting">
 		UPDATE tbl_betting b
 		<dynamic prepend="SET">
