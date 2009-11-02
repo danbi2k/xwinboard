@@ -98,6 +98,13 @@
 			<input type="button" value="변경" onclick="changePassword()"/>
 		</td>
  	</tr>
+    <tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>모바일PIN번호</td>
+		<td width=80% bgcolor='#ffffff' align='left'>
+			<input name="pin" type="text" value="<%=member.getPin()%>"/>
+			<input type="button" value="변경" onclick="changePin()"/>
+		</td>
+ 	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
