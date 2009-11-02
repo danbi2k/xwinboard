@@ -599,7 +599,7 @@ function changePin()
 	var frm = document.regist;
 	if (frm.pin!= undefined) {
 		if (!frm.pin.value) {
-			alert("환전비밀번호를 입력해 주십시오");
+			alert("모바일PIN번호를 입력해 주십시오");
 			return;
 		}
 	}

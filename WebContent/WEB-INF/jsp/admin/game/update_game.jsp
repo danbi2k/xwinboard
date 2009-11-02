@@ -78,7 +78,7 @@
 			document.registerGame.note.value = result.resultXml.message;	
 	}
 </SCRIPT>
-<div class="title"><%=game.getType().equals("wdl")?(game.getGrade().equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜":type.equals("wdl")?"승무패":"핸디캡"%>경기 수정</div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -165,13 +165,6 @@
 		<td bgcolor="#FFFFFF"  colspan=3>
 			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea><br>
 			<input type="checkbox" name="reuse">자주사용하는공지에저장								
-		</td>
-	</tr>
-	<tr bgcolor="E7E7E7">
-		<td align="center" bgcolor="E7E7E7" width="15%">자동퍼오기</td>
-		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type='checkbox' name='syncDeny' value="N" <%=game.getSyncDeny().equals("Y")?"checked":"" %>>
-			(체크를 해제하면 자동으로 퍼오지 않습니다, 수동으로 값을 수정한 경기는 체크를 해제하고 [등록하기]를 눌러주십시오)
 		</td>
 	</tr>
  </table>
