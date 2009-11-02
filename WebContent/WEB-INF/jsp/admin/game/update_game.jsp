@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.game.*"%>
+<%@ page import="com.xwin.domain.common.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
@@ -12,6 +13,7 @@
 	String type = request.getParameter("type");
 	String grade = request.getParameter("grade");	
 	String pageIndex = request.getParameter("pageIndex");
+	List<ReuseComment> reuseCommentList = (List<ReuseComment>) request.getAttribute("reuseCommentList");
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
@@ -40,6 +42,7 @@
 		query += "&loseRate=" + d.loseRate.value;
 		query += "&drawRate=" + d.drawRate.value;
 		query += "&note=" + Xwin.Escape(d.note.value);
+		query += "&reuse=" + d.reuse.checked;
 		if (d.winDeny.checked)
 			query += "&winDeny=N";
 		else
@@ -64,8 +67,18 @@
 			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=game.getGrade()%>&pageIndex=<%=pageIndex%>";
 		}
 	}
+	
+	function getReuseComment(id)
+	{
+		var query = "mode=getReuseComment";
+		query += "&id=" + id;
+		var http = new JKL.ParseXML("adminReuse.aspx", query);
+		var result = http.parse();
+		if (result.resultXml.code == 0)
+			document.registerGame.note.value = result.resultXml.message;	
+	}
 </SCRIPT>
-<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜":type.equals("wdl")?"승무패":"핸디캡"%>경기 수정</div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -130,7 +143,7 @@
 		<td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
 			승 <input type='text' name='winRate' size=5 value='<%=game.getWinRateStr()%>'/>
-			<%if (type.equals("wdl")) {%>
+			<%if (game.getType().equals("wdl")) {%>
 			무 <input type='text' name='drawRate' size=5 value='<%=game.getDrawRateStr()%>'/>
 			<%} else { %>
 			핸디<input type='text' name='drawRate' size=5 value='<%=game.getDrawRate()>0?"+"+game.getDrawRate():game.getDrawRate()%>'/>
@@ -150,14 +163,8 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">공지</td>
 		<td bgcolor="#FFFFFF"  colspan=3>
-			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea>								
-		</td>
-	</tr>
-	<tr bgcolor="E7E7E7">
-		<td align="center" bgcolor="E7E7E7" width="15%">자동퍼오기</td>
-		<td bgcolor="#FFFFFF"  colspan=3>
-			<input type='checkbox' name='syncDeny' value="N" <%=game.getSyncDeny().equals("Y")?"checked":"" %>>
-			(체크를 해제하면 자동으로 퍼오지 않습니다, 수동으로 값을 수정한 경기는 체크를 해제하고 [등록하기]를 눌러주십시오)
+			<textarea name="note" style="width:100%;height:100"><%=XwinUtil.nvl(game.getNote())%></textarea><br>
+			<input type="checkbox" name="reuse">자주사용하는공지에저장								
 		</td>
 	</tr>
  </table>
@@ -169,5 +176,30 @@
 	     <td><img src="images/admin/but_cancel.gif" border="0" onClick="history.back()" style="cursor:hand"></td>
 	</tr>
 </table>
+<BR>
+<h3>재사용공지</h3>
+<form name="reuse">
+<table class="list">
+<%
+if (reuseCommentList != null) {
+	for (ReuseComment reuseComment : reuseCommentList) {
+%>
+<tr>
+	<th width="20"><%=reuseComment.getId()%></th>
+	<td width="*" onclick='getReuseComment(<%=reuseComment.getId()%>)' style="cursor:hand">
+	<%
+		String comment = StringEscapeUtils.escapeHtml(reuseComment.getComment());
+		comment = comment.replaceAll("\n", "<BR>");
+		out.print(comment);
+	%>
+	</td>
+	<td width="20"  align=center><img src="images/btn_coment_del.gif" onclick="deleteReuseComment(<%=reuseComment.getId()%>)"></td>
+</tr>
+<%
+	}
+}
+%>
+</table>
+</form>
 <!-- 페이지 내용 -->
 <%@ include file="../admin_footer.jsp"%>

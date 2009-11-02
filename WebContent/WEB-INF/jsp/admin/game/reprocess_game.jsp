@@ -12,7 +12,7 @@
 %>
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
-<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기재처리":"이벤트경기재처리"):"핸디캡경기재처리"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜":type.equals("wdl")?"승무패":"핸디캡"%>경기 재처리</div>
 <form method='post' name='repGame'>
 <table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	<tr bgcolor="E7E7E7">

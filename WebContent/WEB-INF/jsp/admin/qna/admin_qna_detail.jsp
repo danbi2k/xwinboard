@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.xwin.domain.board.*"%>
+<%@ page import="com.xwin.domain.common.*"%>
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
@@ -13,6 +14,7 @@
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
 	Betting betting = (Betting) request.getAttribute("betting");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
+	List<ReuseComment> reuseCommentList = (List<ReuseComment>) request.getAttribute("reuseCommentList");
 	
 	String grade = XwinUtil.nvl(request.getParameter("grade"));
 %>
@@ -158,11 +160,48 @@ if (boardCommentList != null) {
 <td width="10%">답변</td>
 <td width="*"><textarea name="comment" style="width:100%;height:300;"></textarea></td>
 </tr>
+<td width="10%" colspan=2><input type="checkbox" name="reuse">자주사용하는답변에저장</td>
 </table>
 </form>
 <input type='button' value='답변저장' onclick="answerQna()"/>
 
+<BR>
+<h3>재사용답변</h3>
+<form name="reuse">
+<table class="list">
+<%
+if (reuseCommentList != null) {
+	for (ReuseComment reuseComment : reuseCommentList) {
+%>
+<tr>
+	<th width="20"><%=reuseComment.getId()%></th>
+	<td width="*" onclick='getReuseComment(<%=reuseComment.getId()%>)' style="cursor:hand">
+	<%
+		String comment = StringEscapeUtils.escapeHtml(reuseComment.getComment());
+		comment = comment.replaceAll("\n", "<BR>");
+		out.print(comment);
+	%>
+	</td>
+	<td width="20"  align=center><img src="images/btn_coment_del.gif" onclick="deleteReuseComment(<%=reuseComment.getId()%>)"></td>
+</tr>
+<%
+	}
+}
+%>
+</table>
+</form>
+
 <script>
+function getReuseComment(id)
+{
+	var query = "mode=getReuseComment";
+	query += "&id=" + id;
+	var http = new JKL.ParseXML("adminReuse.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0)
+		document.answer.comment.value = result.resultXml.message;	
+}
+
 function deleteBoardComment(id)
 {
 	if (confirm("삭제하시겠습니까?")) {
@@ -185,6 +224,7 @@ function answerQna()
 	var query = "mode=answerQna";
 	query += "&id=" + <%=boardItem.getId()%>;
 	query += "&comment=" + Xwin.Escape(document.answer.comment.value);
+	query += "&reuse=" + document.answer.reuse.checked;
 	var http = new JKL.ParseXML("adminQna.aspx", query);
 	var result = http.parse();
 	alert(result.resultXml.message);

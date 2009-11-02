@@ -97,6 +97,7 @@
 		p:smsWaitDao-ref="smsWaitDao"
 		p:accountDao-ref="accountDao"
 		p:gameSyncService-ref="gameSyncService"
+		p:reuseCommentDao-ref="reuseCommentDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 					
 	<bean id="adminController"
@@ -108,6 +109,7 @@
 		p:adminDao-ref="adminDao"
 		p:bankBookDao-ref="bankBookDao"
 		p:hackingLogDao-ref="hackingLogDao"
+		p:maintananceDao-ref="maintananceDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 	
 	<bean id="adminBettingController"
@@ -133,6 +135,7 @@
 		p:memberDao-ref="memberDao"
 		p:boardDao-ref="boardDao"
 		p:bettingDao-ref="bettingDao"
+		p:reuseCommentDao-ref="reuseCommentDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminBoardController"
@@ -141,6 +144,7 @@
 		p:boardDao-ref="boardDao"
 		p:adminDao-ref="adminDao"
 		p:bettingDao-ref="bettingDao"
+		p:reuseCommentDao-ref="reuseCommentDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="adminStatisticsController"
@@ -162,4 +166,9 @@
 		class="com.xwin.web.controller.admin.AdminLogController"
 		p:hackingLogDao-ref="hackingLogDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminReuseController"
+		class="com.xwin.web.controller.admin.AdminReuseController"
+		p:reuseCommentDao-ref="reuseCommentDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 </beans>

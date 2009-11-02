@@ -13,6 +13,15 @@
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.registerGame;
+		var gameType;
+		<%if (type.equals("mix")) {%>
+		if (d.gameType[0].checked)
+			gameType = d.gameType[0].value;
+		else if (d.gameType[1].checked)
+			gameType = d.gameType[1].value;
+		<%} else {%>
+		gameType = '<%=type%>';
+		<%}%>
 		if(!d.leagueName.value) { alert('리그명을 선택하세요'); d.leagueName.focus(); return false; }
 		//if(!d.gamedate.value) { alert('게시일을 선택하세요'); d.gamedate.focus(); return false; }f
 		if(!d.gameDate.value) { alert('경기 시작 시각(일자)을 선택하세요'); d.gameDate.focus(); return false; }
@@ -33,7 +42,7 @@
 		<%}%>
 
 		var query = "mode=registerGame";
-		query += "&type=<%=type%>";
+		query += "&type=" + gameType;
 		query += "&grade=<%=grade%>";
 		query += "&leagueName=" + d.leagueName.value;
 		query += "&gameDate=" + d.gameDate.value;
@@ -67,11 +76,24 @@
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.reload();
-		}
+			d.homeTeam.value = '';
+			d.awayTeam.value = '';
+			d.winRate.value = '';
+			d.loseRate.value = '';
+			d.drawRate.value = '';
+			d.winDeny.checked = false;
+			d.drawDeny.checked = false;
+			d.loseDeny.checked = false;
+			<%if (type.equals("handy")){ %>
+			d.underRate.value = '';
+			d.handyRate.value = '';
+			d.overRate.value = '';
+			d.uoCheck.checked = false;
+			<%}%>
+		}	
 	}
 </SCRIPT>
-<div class="title"><%=type.equals("wdl")?(grade.equals(Code.USER_GRADE_NORMAL)?"승무패경기등록":"이벤트경기등록"):"핸디캡경기등록"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -119,7 +141,18 @@
 			%>
 			</select>
 		</td>
-	</tr>		
+	</tr>
+	<%if (type.equals("mix")) { %>
+	<tr bgcolor="E7E7E7">
+		<td align="center" bgcolor="E7E7E7" width="15%">종류</td>
+		<td bgcolor="#FFFFFF" width=35% colspan='3'>
+			승무패 <input type='radio' name="gameType" value="wdl" checked/>
+			핸디캡<input type='radio' name="gameType" value="handy"/>
+		</td>
+	</tr>			
+	<%} else { %>
+		<input type='hidden' name="type" value="<%=type%>"/>
+	<%} %>
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">홈팀</td>
 		<td bgcolor="#FFFFFF" width=35%>팀명 <input type='text' name="homeTeam"/></td>
@@ -130,11 +163,7 @@
 		<td align="center" bgcolor="E7E7E7" width="15%">배당률</td>
 		<td bgcolor="#FFFFFF"  colspan="3">
 		승 <input type='text' name='winRate' size=5/>
-		<%if (type.equals("wdl")) {%>
-		무 <input type='text' name='drawRate' size=5/>
-		<%} else { %>
-		핸디	 <input type='text' name='drawRate' size=5/>
-		<%} %>
+		<%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %> <input type='text' name='drawRate' size=5/>
 		패 <input type='text' name='loseRate' size=5/>											
 		</td>
 	</tr>

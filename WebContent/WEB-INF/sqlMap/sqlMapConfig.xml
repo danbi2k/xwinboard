@@ -19,11 +19,15 @@
 	<sqlMap resource="com/xwin/infra/ibatis/Point.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Access.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Admin.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/ReuseComment.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Transaction.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/SmsWait.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Memo.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/HackingLog.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/OtpLog.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Invitation.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Maintanance.xml" />	
+	<sqlMap resource="com/xwin/infra/ibatis/Toto.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/BetToto.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/View_MoneyInOut.xml"/>
 </sqlMapConfig>
