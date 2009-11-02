@@ -1,5 +1,40 @@
 function FnMemReg(frm)
-{
+{	
+	if (!frm.userId.value || frm.userId.value.length < 2) {
+		alert('아이디를 2자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.password1.value || !frm.password2.value) {
+		alert('패스워드를 입력하십시오');
+		return;
+	}
+	
+	if (frm.password1.value != frm.password2.value) {
+		alert('패스워드가 일치하지 않습니다');
+		return;
+	}
+	
+	if (frm.password1.value.length < 4) {
+		alert('패스워드를 4자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.nickName.value || frm.nickName.value.length < 2) {
+		alert('닉네임을 2자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.pin.value || frm.pin.value.length != 6) {
+		alert("모바일PIN번호를 입력해 주십시오");
+		return;
+	}
+	
+	if (!frm.email1.value || !frm.email2.value) {
+		alert("이메일을 입력해 주십시오");
+		return;
+	}
+	
 	if (frm.bankName != undefined) {
 		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
 			alert("환전계좌정보를 입력해 주십시오");
@@ -66,6 +101,27 @@ function FnMemModify(frm)
 			return;
 		}
 	}
+	
+	if (!frm.password1.value || !frm.password2.value) {
+		alert('패스워드를 입력하십시오');
+		return;
+	}
+	
+	if (frm.password1.value != frm.password2.value) {
+		alert('패스워드가 일치하지 않습니다');
+		return;
+	}
+	
+	if (frm.password1.value.length < 4) {
+		alert('패스워드를 4자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.pin.value || frm.pin.value.length != 6) {
+		alert('모바일PIN번호는 숫자 6자리 입니다');
+		return;
+	}
+	
 	var query = "mode=modifyMember";
 	query += "&userId=" + frm.userId.value;
 	query += "&password1=" + frm.password1.value;
@@ -106,7 +162,7 @@ function FnMemOut(){
 		var result = http.parse();
 		if (result.resultXml.code == 0) {
 			alert(result.resultXml.message);
-			location.href = "home.php";
+			location.href = "default.php";
 		}
 	}
 }
@@ -191,7 +247,7 @@ function FnInMoneyCancle(idx){
 }
 function FnOutMoney_Submit(frm){
 	if(!frm.out_money.value) {alert("금액을 입력하세요"); frm.out_money.focus(); return; }
-	if(!frm.password.value) {alert("비밀번호를 입력하세요"); frm.password.focus(); return; }
+	if(!frm.password.value) {alert("패스워드를 입력하세요"); frm.password.focus(); return; }
 	if(frm.account_bank.value==""){ alert("환전받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
 	if(frm.account_num.value.length<7){ alert("환전받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
