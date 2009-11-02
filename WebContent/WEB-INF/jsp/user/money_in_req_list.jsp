@@ -25,48 +25,40 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
 	<tr>
-		<td width="771" height="33" align="left" valign="top">
-		<p><a href="earncache.php?mode=viewMoneyInRequest"><img
+		<td width="771" height="37" align="left" valign="top"  background="../../../img/bar_bg.gif">
+		<a href="earncache.php?mode=viewMoneyInRequest"><img
 			src="img/8.jpg" border="0"></a>&nbsp;<img src="img/10-.jpg"
-			border="0"></p>
-		</td>
+			border="0">	  </td>
 	</tr>
+
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40" background="img/bar-.jpg">
+	height="40"  background="img/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>신청일자</p>
-		</td>
+		<p style="font-weight: bold">신청일자</p>	  </td>
 		<td width="209" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금계좌</p>
-		</td>
+		<p style="font-weight: bold">입금계좌</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금자</p>
-		</td>
+		<p style="font-weight: bold">입금자</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금액</p>
-		</td>
+		<p style="font-weight: bold">입금액</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>상태</p>
-		</td>
+		<p style="font-weight: bold">상태</p>	  </td>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>처리일시</p>
-		</td>
+		<p style="font-weight: bold">처리일시</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>취소</p>
-		</td>
+		<p style="font-weight: bold">취소</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>삭제</p>
-		</td>
+		<p style="font-weight: bold">삭제</p>	  </td>
 	</tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771" border="0">

@@ -30,27 +30,23 @@
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40" background="img/bar-.jpg">
+	height="40"  background="img/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>구매일자</p>
-		</td>
+		<p style="font-weight: bold">구매일자</p>	  </td>
 		<td width="450" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>회차</p>
-		</td>
+		<p style="font-weight: bold">회차</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>구매액</p>
-		</td>
+		<p style="font-weight: bold">구매액</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>상태</p>
-		</td>
+		<p style="font-weight: bold">상태</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>삭제</p>
+		<p style="font-weight: bold">삭제</p>	
 	</tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771" border="0">

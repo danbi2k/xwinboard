@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BET-LOVE</title>
+<title>DRAGON-BET 환영합니다</title>
 </head>
 <frameset rows="0,100%" border="0">
-	<frame name=left src="" border=0 scrolling="yes" noresize>
-	<frame name=mainFrame src="home.php" border=0 scrolling="yes" noresize>
-</frameset>
+	<frame name=left src="UntitledFrame-5" border=0 scrolling="yes" noresize>
+	<frame name=mainFrame src="home.php" border=0 scrolling="yes" noresize> 
+</frameset><noframes></noframes>
 <body>
 </body>
 </html>

@@ -15,40 +15,25 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-			<tr><td><img src="img/menu10.jpg" border="0"></td></tr>
+			<tr><td><img src="../../../img/menu101.jpg" border="0"></td></tr>
 		
-            </table>
-            <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
-    <tr>
-        <td width="887" height="33" align="left" valign="top">
-            <p><img src="img/10-.jpg" border="0">&nbsp;<a href="account.php?mode=viewMyPointList"><img src="img/12.jpg" border="0"></a></p>
-        </td>
-    </tr>
-    
 </table>
-     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p>거래일자</p>
-        </td>
+            <p style="font-weight: bold">거래일자</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>기잔고</p>
-        </td>
+            <p style="font-weight: bold">기잔고</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>입출금</p>
-       </td>
+            <p style="font-weight: bold">입출금</p>      </td>
         <td width="148" height="40" align="center" valign="middle" class="menubar">
-            <p>잔액</p>
-        </td>
+            <p style="font-weight: bold">잔액</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>종류</p>
-        </td>
+            <p style="font-weight: bold">종류</p>      </td>
         <td width="150" height="40" align="center" valign="middle" class="menubar">
-            <p>비고</p>
-        </td>
+            <p style="font-weight: bold">비고</p>      </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>삭제</p>
-        </td>
+            <p style="font-weight: bold">삭제</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771">
@@ -83,7 +68,7 @@
 		}
 	}
 	%>
-     </table>
+</table>
    
 <br>
 <br>
@@ -122,7 +107,7 @@
 <script>
 function goPage(index)
 {
-	location.href="account.php?mode=viewMyMoneyList&pageIndex=" + index;
+	location.href="myMoney.php?mode=viewMyMoneyList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
@@ -130,7 +115,7 @@ function deleteMyMoneyLog(id)
 	if (confirm("캐쉬기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("account.php", query);
+		var http = new JKL.ParseXML("myMoney.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
