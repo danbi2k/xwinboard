@@ -101,16 +101,20 @@ if (betting != null) {
 
 <table class="list">
 	<tr>
-		<th width="10%">작성자</th>
-		<td width="*"><%=boardItem.getNickName()%></td>
+		<th width="10%" height="30px">작성자</th>
+		<td width="*" style="padding-left:10px;"><a href='javascript:goMemberDetail("<%=boardItem.getUserId()%>")'><%=boardItem.getUserId()%></a> (<%=boardItem.getNickName()%>)</td>
 	</tr>
 	<tr>
-		<th width="10%">제목</th>
-		<td width="*"><input type="text" name="title" style='width=100%' size='50' value='<%=boardItem.getTitle()%>'></input></td>
+		<th width="10%" height="30px">제목</th>
+		<td width="*" style="padding-left:10px;"><input type="text" name="title" style='width=100%' size='50' value='<%=boardItem.getTitle()%>'></input></td>
 	</tr>
 	<tr>
-		<th width="10%">내용</h>
-		<td width="*" valign="top">
+		<th width="10%" height="30px">작성일</th>
+		<td width="*" style="padding-left:10px;"><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></td>
+	</tr>
+	<tr>
+		<th width="10%" height="30px">내용</th>
+		<td width="*" style="padding-left:10px;">
 		<textarea name="context" style='width=100%;height=300px'><%
 	    String context = boardItem.getContext();
 	    out.print(context);

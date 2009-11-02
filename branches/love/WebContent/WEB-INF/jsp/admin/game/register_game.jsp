@@ -8,7 +8,7 @@
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	String type = request.getParameter("type");
-	String grade = request.getParameter("grade");
+	String grade = request.getParameter("grade");	
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
