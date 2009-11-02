@@ -36,11 +36,11 @@
 	<BR>
 	<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="CDCDCD">
 	     <tr align="center" bgcolor="#E4E4E4" height=20>
-			<td width=25%>하프타임 보너스 사용</td>
+			<td width=25%>스페셜 보너스 사용</td>
 			<td width=75% bgcolor='#ffffff' align='left'><input type="checkbox" name="MIX_BONUS_USE" <%=Admin.MIX_BONUS_USE ? "checked":""%>></td>
 		</tr>	
 		<tr align="center" bgcolor="#E4E4E4" height=20>
-			<td width=25%>하프타임 보너스 기준</td>
+			<td width=25%>스페셜 보너스 기준</td>
 			<td width=75% bgcolor='#ffffff' align='left'>
 				<input type="text" size="2" name="MIX_BONUS_LIMIT" value="<%=Admin.MIX_BONUS_LIMIT%>"> 폴더 이상
 				<input type="text" size="2" name="MIX_BONUS_RATE" value="<%=Admin.MIX_BONUS_RATE%>"> % 지급

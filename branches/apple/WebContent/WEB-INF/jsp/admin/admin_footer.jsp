@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.infra.util.*" %>
+<%@ page import="com.xwin.domain.admin.*" %>
+<%@ page import="com.xwin.domain.*" %>
 
  				</div>
 			</div>   
@@ -18,6 +20,7 @@
 					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판 (일반)</a></li>
 					<li><a href="admin.aspx?mode=viewPopup&grade=10">긴급공지</a></li>
 					<!--li><a href="admin.aspx?mode=viewNotice">Notice</a></li -->
+					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
 				</ul>
 			</div>
 		</div>
@@ -48,11 +51,12 @@
 				<ul>
 					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">승무패</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">핸디캡</a></li>
-					<!-- li><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">이벤트</a></li -->
+					<li><a href="adminGame.aspx?mode=viewGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">스페셜</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(승무패)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(핸디캡)</a></li>
-					<!-- li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_VIP%>">경기결과(이벤트)</a></li -->
+					<li><a href="adminGame.aspx?mode=viewEndGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">경기결과(스페셜)</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
+					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_GAME%>">공지관리</a></li>
 				</ul>
 			</div>
 		</div>
@@ -94,7 +98,7 @@
 	</div>
 	<div id="footer">
 		<BR><BR><BR>
-		<!-- p>Copyright &copy; 2008 Apple</strong></a></p -->
+		<!-- p>Copyright &copy; 2009 <%=SiteConfig.SITE_NAME%></strong></a></p -->
 	</div>
 </div>
 <script>

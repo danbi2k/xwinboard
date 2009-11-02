@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.game.Game;
@@ -55,6 +56,9 @@ public class AdminGameController extends XwinController
 			Admin.SYNC_COUNT_WDL = 0;
 		else if (type.equals("handy"))
 			Admin.SYNC_COUNT_HANDY = 0;
+		
+		if (type != null && type.equals("mix"))
+			type = null;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
@@ -101,6 +105,9 @@ public class AdminGameController extends XwinController
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
+		
+		if (type != null && type.equals("mix"))
+			type = null;
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
@@ -158,10 +165,13 @@ public class AdminGameController extends XwinController
 		String id = request.getParameter("id");
 		List<League> leagueList = leagueDao.selectLeagueList();
 		Game game = gameDao.selectGame(id);
+		List<ReuseComment> reuseCommentList = reuseCommentDao.selectReuseCommentList(Code.REUSE_COMMENT_GAME);
 		
 		ModelAndView mv = new ModelAndView("admin/game/update_game");
 		mv.addObject("leagueList", leagueList);
 		mv.addObject("game", game);
+		mv.addObject("reuseCommentList", reuseCommentList);
+		
 		return mv;
 	}
 	

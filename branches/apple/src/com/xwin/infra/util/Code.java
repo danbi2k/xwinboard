@@ -85,6 +85,7 @@ public class Code
 	public static final String POINT_TYPE_BETTING		= "PNT02";
 	public static final String POINT_TYPE_BONUS			= "PNT03";
 	public static final String POINT_TYPE_CASHCHARGE	= "PNT10";
+	public static final String POINT_TYPE_BETTING_CANCEL = "PNT11";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
@@ -97,6 +98,9 @@ public class Code
 	
 	public static final String BOARDITEM_STATUS_NORMAL		= "BIS01";
 	public static final String BOARDITEM_STATUS_REMOVE		= "BIS03";
+	
+	public static final String REUSE_COMMENT_QNA			= "RUC01";
+	public static final String REUSE_COMMENT_GAME			= "RUC02";
 	
 	public static final String ACCESS_USER_LOGIN			= "ACC01";
 	public static final String ACCESS_ADMIN_LOGIN_SUCCESS	= "ACC02";
@@ -118,6 +122,7 @@ public class Code
 		put(POINT_TYPE_BETTING, "배팅애플");
 		put(POINT_TYPE_BONUS, "보너스애플");
 		put(POINT_TYPE_CASHCHARGE, "캐쉬전환");
+		put(POINT_TYPE_BETTING_CANCEL, "배팅취소차감");
 		
 		put(BET_CALC_DISABLE, "정산불가");
 		put(BET_CALC_ENABLE, "정산가능");
@@ -200,6 +205,9 @@ public class Code
 		
 		put("wdl", "승무패");
 		put("handy", "핸디캡");
+		
+		put(REUSE_COMMENT_QNA, "고객센터댓글");
+		put(REUSE_COMMENT_GAME, "게임공지");
 		
 		put(ACCESS_USER_LOGIN, "사용자로그인");
 		put(ACCESS_ADMIN_LOGIN_SUCCESS, "관리자로그인성공");

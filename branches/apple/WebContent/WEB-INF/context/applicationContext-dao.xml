@@ -100,4 +100,20 @@
 	<bean id="invitationDao"
 		class="com.xwin.infra.dao.InvitationDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+	
+	<bean id="reuseCommentDao"
+		class="com.xwin.infra.dao.ReuseCommentDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="totoDao"
+		class="com.xwin.infra.dao.TotoDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="betTotoDao"
+		class="com.xwin.infra.dao.BetTotoDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />			
+		
+	<bean id="maintananceDao"
+		class="com.xwin.infra.dao.MaintananceDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />		
 </beans>
