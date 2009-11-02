@@ -10,6 +10,7 @@ topLink[8] = "earncache.php?mode=viewMoneyInRequest";
 topLink[9] = "sendcache.php?mode=viewMoneyOutRequest";
 topLink[10] = "account.php?mode=viewMyMoneyList";
 topLink[11] = "toto.php?mode=viewToto";
+topLink[12] = "account.php?mode=viewMyPointList";
 
 function goTopLink(index)
 {
