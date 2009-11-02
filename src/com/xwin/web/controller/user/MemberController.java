@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,7 +80,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 								if (rx.getCode() == 0) {
 									rx = checkEmail(command.getEmail1(), command.getEmail2());
 									if (rx.getCode() == 0) {
-										rx = checkPin(phonePin);
+										rx = checkPin(command.getPin());
 										if (rx.getCode() == 0) {
 											rx = checkExistBankBook(command.getBankName(), command.getBankNumber(), command.getBankOwner());
 											if (rx.getCode() == 0) {
@@ -89,7 +90,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												member.setNickName(command.getNickName());
 												member.setMobile(mobile);
 												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-												member.setPin(phonePin);
+												member.setPin(command.getPin());
 												member.setStatus(Code.USER_STATUS_NORMAL);
 												member.setGrade(Admin.SITE_GRADE);
 												member.setJoinDate(new Date());
@@ -256,8 +257,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 		ResultXml rx = null;
 		
-		if ((pin == null || pin.length() < 4))
-			rx = new ResultXml(-1, "환전패스워드는 4자 이상 입력하세요", null);
+		if ((pin == null || StringUtils.isNumeric(pin) == false || pin.length() != 6))
+			rx = new ResultXml(-1, "모바일PIN번호는 숫자 6자리 입니다", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -386,13 +387,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
-				SmsWait smsWait = new SmsWait();
 				String message = msgSrc.getMessage("SMS_JOIN_AUTH", new Object[]{SiteConfig.SITE_NAME, phonePin}, SiteConfig.SITE_LOCALE);
-				smsWait.setMsg(message);
-				smsWait.setPhone(phone);
-				smsWait.setCallback(SiteConfig.SITE_PHONE);
-				
-				smsWaitDao.insertSmsWait(smsWait);
+				sendSmsConnector.sendSms(message, phone, SiteConfig.SITE_PHONE);
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_SUCCESS", null, SiteConfig.SITE_LOCALE), null);
 			} catch (Exception e) {
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);

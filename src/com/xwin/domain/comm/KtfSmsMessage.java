@@ -72,4 +72,18 @@ public class KtfSmsMessage extends XwinObject
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("\nid = " + id);
+		sb.append("\nmsgSeq = " + msgSeq);
+		sb.append("\ninDate = " + inDate);
+		sb.append("\nmsg = " + msg);
+		sb.append("\nsm = " + sm);
+		sb.append("\ncallBack = " + callBack);
+		sb.append("\nstatus = " + status);
+		sb.append("\n");
+		
+		return sb.toString();
+	}
 }

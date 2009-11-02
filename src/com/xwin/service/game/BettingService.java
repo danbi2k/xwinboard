@@ -21,7 +21,7 @@ import com.xwin.service.admin.XwinService;
 
 public class BettingService extends XwinService
 {
-	public void processBetting(GameFolder gameFolder, Member member)
+	public void processBetting(GameFolder gameFolder, Member member, String source)
 	{
 		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 		String signature = makeBettingSignature(itemList);
@@ -39,6 +39,7 @@ public class BettingService extends XwinService
 		betting.setIntroducerId(member.getIntroducerId());
 		betting.setMemberId(member.getMemberId());
 		betting.setSignature(signature);
+		betting.setSource(source);
 		
 		String bettingId = bettingDao.insertBetting(betting);
 		
@@ -79,6 +80,10 @@ public class BettingService extends XwinService
 		Double betting_point_rate = 0.01;
 		int size = itemList.size();
 		if (size >= 4)
+			betting_point_rate = 0.02;
+		if (size >= 7)
+			betting_point_rate = 0.03;
+		if (size >= 10)
 			betting_point_rate = 0.05;
 		
 		Double point = betting.getMoney() * betting_point_rate;
@@ -96,12 +101,13 @@ public class BettingService extends XwinService
 		pointLog.setBettingUserId(member.getUserId());
 		
 		pointDao.insertPoint(pointLog);
+		member.setPoint(pointLog.getBalance());
 		
 		//추천인 애플지급
 		String introducerId = member.getIntroducerId();
 		if (introducerId != null) {
 			Member introducer = memberDao.selectMember(introducerId, null);
-			Double intro_point_rate = 0.03;
+			Double intro_point_rate = 0.02;
 			
 			Double intro_point = betting.getMoney() * intro_point_rate;
 			memberDao.plusMinusPoint(introducerId, intro_point.longValue());
@@ -118,6 +124,28 @@ public class BettingService extends XwinService
 			introPointLog.setBettingUserId(member.getUserId());
 			
 			pointDao.insertPoint(introPointLog);
+		}
+		
+		// 모바일 애플 지급
+		if (source.equals(Code.SOURCE_WAP)) {
+			Double mobile_point_rate = 0.01;
+			
+			Double mobile_point = betting.getMoney() * mobile_point_rate;
+			memberDao.plusMinusPoint(member.getUserId(), mobile_point.longValue());
+			
+			Point mobilePointLog = new Point();
+			mobilePointLog.setUserId(member.getUserId());
+			mobilePointLog.setType(Code.POINT_TYPE_BETTING);
+			mobilePointLog.setDate(new Date());
+			mobilePointLog.setOldBalance(member.getPoint());
+			mobilePointLog.setMoney(mobile_point.longValue());
+			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
+			mobilePointLog.setBettingId(betting.getId());
+			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 애플");
+			mobilePointLog.setBettingUserId(member.getUserId());
+			
+			pointDao.insertPoint(mobilePointLog);
+			member.setPoint(mobilePointLog.getBalance());
 		}
 	}
 

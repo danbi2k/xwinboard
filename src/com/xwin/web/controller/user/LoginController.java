@@ -130,7 +130,7 @@ public class LoginController extends XwinController
 		session.removeAttribute("Member");
 		session.invalidate();
 		
-		ModelAndView mv = new ModelAndView("main");
+		ModelAndView mv = new ModelAndView("redirect:/default.php");
 		return mv;
 	}
 }

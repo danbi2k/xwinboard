@@ -11,6 +11,7 @@ import org.springframework.context.MessageSourceAware;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
@@ -23,6 +24,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 {	
 	public synchronized void judgeGameResult(Game game, Boolean all)
 	{
+		Admin.PROCESS_COUNT_JUDGE++;
+		
 		String gameId = game.getId();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gameId", gameId);
@@ -135,6 +138,8 @@ public class ProcessService extends XwinService implements MessageSourceAware
 				bettingDao.updateBetting(betting);
 			}
 		}
+		
+		Admin.PROCESS_COUNT_JUDGE--;
 	}
 	
 	public void calcuateBetting(Betting betting)
@@ -232,7 +237,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 			
 			// 문자발송
 			try {
-				if (member.getGetSms().equals("Y")) {
+				if (member.getStatus().equals(Code.USER_STATUS_NORMAL) && member.getGetSms().equals("Y")) {
 //					String message = "[" + SiteConfig.SITE_NAME + "] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
 					String message = msgSrc.getMessage("SMS_SUCCESS",
 							new Object[]{SiteConfig.SITE_NAME, betting.getNickName(), betting.getId(), XwinUtil.comma3(betting.getExpect())},

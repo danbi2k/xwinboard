@@ -26,12 +26,12 @@
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_in(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#)
+		INSERT INTO tbl_money_out(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
+		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#, 'in', #source#)
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">
-		UPDATE tbl_money_in
+		UPDATE tbl_money_out
 		<dynamic prepend="SET">
 			<isNotNull prepend="," property="userId">
 			USERID = #userId#
@@ -62,16 +62,16 @@
 	</update>
 	
 	<update id="deleteMoneyIn" parameterClass="string">
-		UPDATE tbl_money_in SET ISDELETED = 'Y' WHERE ID = #value#
+		UPDATE tbl_money_out SET ISDELETED = 'Y' WHERE ID = #value#
 	</update>
 	
 	<select id="selectMoneyIn" resultMap="moneyInResultMap" parameterClass="string">
-		SELECT * FROM tbl_money_in WHERE ID = #value#
+		SELECT * FROM tbl_money_out WHERE ID = #value#
 	</select>
 	
 	<select id="selectMoneyInList" resultMap="moneyInResultMap" parameterClass="map">
-		SELECT * FROM tbl_money_in
-		<dynamic prepend="WHERE">
+		SELECT * FROM tbl_money_out
+		WHERE TYPE = 'in'
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
@@ -140,7 +140,6 @@
 				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
-		</dynamic>
 		ORDER BY ID DESC
 		<isNotNull property="fromRow">
 		LIMIT #fromRow#, #rowSize#
@@ -148,8 +147,8 @@
 	</select>
 	
 	<select id="selectMoneyInCount" resultClass="integer" parameterClass="map">
-		SELECT COUNT(*) FROM tbl_money_in
-		<dynamic prepend="WHERE">
+		SELECT COUNT(*) FROM tbl_money_out
+		WHERE TYPE = 'in'
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
@@ -208,12 +207,11 @@
 				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
-		</dynamic>
 	</select>
 	
 	<select id="selectMoneyInSum" resultClass="long" parameterClass="map">
-		SELECT SUM(MONEY) FROM tbl_money_in
-		<dynamic prepend="WHERE">
+		SELECT SUM(MONEY) FROM tbl_money_out
+		WHERE TYPE = 'in'
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
@@ -233,6 +231,9 @@
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
 				STATUS = #statusList[]#
 				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS like #statusLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#
@@ -272,11 +273,10 @@
 				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
-		</dynamic>
 	</select>
 	
 	<select id="selectMoneyInWaitCount" resultClass="integer">
-		SELECT COUNT(*) FROM tbl_money_in t
-		WHERE STATUS = 'MC001' AND ISDELETED='N'
+		SELECT COUNT(*) FROM tbl_money_out t
+		WHERE TYPE = 'in' AND STATUS = 'MC001' AND ISDELETED='N'
 	</select>
 </sqlMap>

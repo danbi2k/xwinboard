@@ -151,7 +151,7 @@ public static final int ROWSIZE = 30;
 		boardItem.setContext(context);
 		
 		boardDao.updateBoardItem(boardItem);
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.php?mode=viewBoardDetail&id=" + boardItem.getId());
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardDetail&id=" + boardItem.getId());
 		
 		return mv;
 	}
@@ -170,7 +170,7 @@ public static final int ROWSIZE = 30;
 		boardDao.deleteBoardCommentList(id);
 		boardDao.deleteBoardItem(id);
 		
-		ModelAndView mv = new ModelAndView("redirect:/adminBoard.php?mode=viewBoardList&grade=" + grade);
+		ModelAndView mv = new ModelAndView("redirect:/adminBoard.aspx?mode=viewBoardList&grade=" + grade);
 		return mv;
 	}
 	

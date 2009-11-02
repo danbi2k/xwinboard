@@ -80,11 +80,10 @@ public class MoneyOutController extends XwinController
 			return new ModelAndView("illegal");
 		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 			//return new ModelAndView("block");
-		if (request.getSession().getAttribute("Member") == null)
-			return new ModelAndView("dummy");
 		
-		Member member =
-			(Member) request.getSession().getAttribute("Member");
+		Member member =	(Member) request.getSession().getAttribute("Member");		
+		if (member == null)
+			return new ModelAndView("dummy");
 		
 		member = memberDao.selectMember(member.getUserId(), null);
 		
@@ -117,6 +116,7 @@ public class MoneyOutController extends XwinController
 			moneyOut.setBankName(member.getBankName());
 			moneyOut.setNumber(member.getBankNumber());
 			moneyOut.setName(member.getBankOwner());
+			moneyOut.setSource(Code.SOURCE_WEB);
 			
 			moneyOutDao.insertMoneyOut(moneyOut);
 			

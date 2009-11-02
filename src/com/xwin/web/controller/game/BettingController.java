@@ -54,6 +54,8 @@ public class BettingController extends XwinController
 		GameFolder gameFolder =
 			(GameFolder)session.getAttribute("gameFolder_" + _type);
 		
+		if (_money != null)
+			_money = _money.trim();
 		Long money = Long.parseLong(_money);		
 		FolderCalc fc = getFolderCalc(gameFolder, money, member.getBalance());
 		Integer retVal = 0;
@@ -84,7 +86,7 @@ public class BettingController extends XwinController
 				rx = new ResultXml(-1, "중복배팅입니다\n배당금액 3,000,000캐쉬 초과", null);
 		}
 		else if (_action.equals("betting")) {
-			bettingService.processBetting(gameFolder, member);
+			bettingService.processBetting(gameFolder, member, Code.SOURCE_WEB);
 			
 			session.removeAttribute("gameFolder_" + _type);
 			

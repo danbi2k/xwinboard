@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -137,7 +138,7 @@ public class BettingCartController extends XwinController
 			rx = new ResultXml(0, "잔액이 부족합니다.", null);
 		} else {
 			for (GameFolder gameFolder : selectList) {
-				bettingService.processBetting(gameFolder, member);
+				bettingService.processBetting(gameFolder, member, Code.SOURCE_WEB);
 				bettingCart.remove(gameFolder);
 			}
 			
