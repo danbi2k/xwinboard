@@ -24,31 +24,31 @@ function thisReload()
 
 setInterval(thisReload, 180000);
 </script>
-			<tr><td><img src="img/menu0<%=img%>.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu0<%=img%>1.jpg" border="0"></td></tr>
 		
-            </table>
-       <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
+</table>
+       <table align="center" cellpadding="0" cellspacing="0" width="887" height="40"  background="img/bar1.gif">
    		 <tr>
-        <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>경기일시</p>
+        <td width="90" height="40" font color="#1a1a1a" align="center" valign="middle" class="menubar">
+            <p><strong>경기일시</strong></p>
         </td>
         <td width="135" height="40" align="center" valign="middle" class="menubar">
-            <p>리그</p>
+            <p><strong>리그</strong></p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>승(홈팀)</p>
+            <p><strong>승(홈팀)</strong></p>
         </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p><%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %></p>
+            <p><strong><%=type.equals("mix")?"무/핸디":type.equals("wdl")?"무":"핸디" %></strong></p>
         </td>
         <td width="250" height="40" align="center" valign="middle" class="menubar">
-            <p>패(원정팀)</p>
+            <p><strong>패(원정팀)</strong></p>
         </td>
         <td width="40" height="40" align="center" valign="middle" class="menubar">
-            <p>상태</p>
+            <p><strong>상태</strong></p>
         </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>공지</p>
+            <p><strong>공지</strong></p>
         </td>
     </tr>
 </table>
@@ -118,7 +118,7 @@ if (gameList != null) {
   <div align="center">
   <table align="center" cellpadding="0" cellspacing="0" width="469">
     <tr>
-        <td width="469" align="right" height="40" background="img/carthead.jpg">
+        <td width="469" align="right" height="40" background="img/carthead1.jpg">
             <a href='cart.php?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
 			<img src="img/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
         </td>
@@ -140,7 +140,7 @@ if (gameList != null) {
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
 			        </td>
 			        <td width="70" height="31">
-			            <p>&nbsp;<img src="img/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
+			            <p>&nbsp;<img src="../../../img/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -151,7 +151,7 @@ if (gameList != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
+			            <p>&nbsp;<img src="../../../img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -165,7 +165,7 @@ if (gameList != null) {
 			            <p>&nbsp;</p>
 			        </td>
 			    </tr>
-			</table>
+		  </table>
         </td>
     </tr>
   </table>

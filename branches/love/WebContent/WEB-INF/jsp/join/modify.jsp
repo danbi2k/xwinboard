@@ -22,14 +22,12 @@
 %>
 
 			<tr><td><img src="img/menu14.jpg" border="0"></td></tr>
-            </table>
+</table>
      
-     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
     <tr>
-        <td width="771" height="40" align="center" valign="middle" class="menubar">
-           회원정보수정 
-        </td>
-        
+        <td width="771" height="40" align="center" valign="middle" class="menubar" style="font-weight: bold">
+           회원정보수정        </td>
     </tr>
 </table>
 	<form name="frm_mem">
@@ -139,12 +137,10 @@
      </table>
 
 
-	      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+	      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
     <tr>
-        <td width="771" height="40" align="center" valign="middle" class="menubar">
-           탈퇴신청 
-        </td>
-        
+        <td width="771" height="40" align="center" valign="middle" class="menubar" style="font-weight: bold">
+           탈퇴신청        </td>
     </tr>
 </table>
  <table align="center" cellpadding="0" cellspacing="0" width="771" height="50">

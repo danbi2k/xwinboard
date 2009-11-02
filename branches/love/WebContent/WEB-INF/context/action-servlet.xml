@@ -47,17 +47,6 @@
 				<prop key="/adminReuse.aspx">adminReuseController</prop>
 				<prop key="/adminToto.aspx">adminTotoController</prop>
 				
-				<prop key="/index.wap">wapIndexController</prop>
-				<prop key="/login.wap">wapLoginController</prop>
-				<prop key="/main.wap">wapMainController</prop>
-				<prop key="/betlog.wap">wapMyBettingController</prop>
-				<prop key="/earncache.wap">wapMoneyInController</prop>
-				<prop key="/sendcache.wap">wapMoneyOutController</prop>
-				<prop key="/play.wap">wapGameController</prop>
-								
-				<prop key="/admin.wap">wapAdminIndexController</prop>
-				<prop key="/adminCommon.wap">wapAdminController</prop>
-				
 				<prop key="/anne.php">guideController</prop>
 				<prop key="/yakwan.php">provisionController</prop>
 				<prop key="/kyujung.php">rulesController</prop>

@@ -28,28 +28,23 @@
 	int itemIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
-			<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>.jpg" border="0"></td></tr>
-		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
-            </table>
+			<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
+		    <tr><td>&nbsp;</td>
+		    </tr>
+</table>
      
-     <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar1.gif">
     <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>번호</p>
-        </td>
+            <p style="font-weight: bold">번호</p>      </td>
         <td width="527" height="40" align="center" valign="middle" class="menubar">
-            <p>제목</p>
-        </td>
+            <p style="font-weight: bold">제목</p>      </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>작성자</p>
-       </td>
+            <p style="font-weight: bold">작성자</p>      </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>작성일</p>
-        </td>
+            <p style="font-weight: bold">작성일</p>      </td>
         <td width="50" height="40" align="center" valign="middle" class="menubar">
-            <p>조회수</p>
-        </td>
-        
+            <p style="font-weight: bold">조회수</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="887" height="35">
@@ -67,7 +62,7 @@
             		<p><%=head%></p>
         		</td>
 				 <td width="527" height="35" align="left" valign="middle">
-					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<p><a <%=isNotice?"style=color:#d74545;'":""%> href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
 					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
 					</b>
 					</a>
@@ -90,7 +85,7 @@
 		}
 	}
 %>  
-     </table>
+</table>
           <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">
 	        <tr>
 			    <td width="787" height="40" align="center">
@@ -124,7 +119,7 @@
 %>
 			    </td>
 			    <td width="100" height="40" align="right">
-				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
+				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="../../../img/write.jpg" border="0"></a>
 				</td>
 			</tr>
 		    

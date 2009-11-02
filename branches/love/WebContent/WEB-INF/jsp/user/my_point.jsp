@@ -17,33 +17,19 @@
 
 			<tr><td><img src="img/menu10.jpg" border="0"></td></tr>
 		
-            </table>
-            <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
-    <tr>
-        <td width="887" height="33" align="left" valign="top">
-            <p><a href="account.php?mode=viewMyMoneyList"><img src="img/10.jpg" border="0"></a>&nbsp;<img src="img/12-.jpg" border="0"></p>
-        </td>
-    </tr>
-    
 </table>
-     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p>일자</p>
-        </td>
+            <p style="font-weight: bold">일자</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p>기포인트</p>
-        </td>
+            <p style="font-weight: bold">기포인트</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p>입출포인트</p>
-       </td>
+            <p style="font-weight: bold">입출포인트</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p>잔여포인트</p>
-        </td>
+            <p style="font-weight: bold">잔여포인트</p>      </td>
         <td width="220" height="40" align="center" valign="middle" class="menubar">
-            <p>배팅한사용자</p>
-        </td>
-     
+            <p style="font-weight: bold">배팅한사용자</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771">
@@ -73,7 +59,7 @@
 		}
 	}
 	%>
-     </table>
+</table>
 <br>
 <br>
 <%
@@ -110,7 +96,7 @@
 <script>
 function goPage(index)
 {
-	location.href="account.php?mode=viewMyPointList&pageIndex=" + index;
+	location.href="myMoney.php?mode=viewMyPointList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
@@ -118,7 +104,7 @@ function deleteMyMoneyLog(id)
 	if (confirm("캐쉬기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("account.php", query);
+		var http = new JKL.ParseXML("myMoney.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

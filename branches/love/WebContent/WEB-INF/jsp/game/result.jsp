@@ -29,7 +29,7 @@
 <%@include file="../header.jsp"%>
 			<tr><td><img src="img/menu06.jpg" border="0"></td></tr>
 		
-            </table>
+</table>
 			 <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">
 			<tr>
 			  <td class="scoretable" align="right">
@@ -39,7 +39,7 @@
 				<select name="type" onchange="frm.submit();">
 					<option value='wdl' <%=type.equals("wdl")?"selected":""%>>승무패</option>
 					<option value='handy' <%=type.equals("handy")?"selected":""%>>핸디캡</option>					
-					<option value='mix' <%=type.equals("mix")?"selected":""%>>스페셜</option>
+					<option value='mix' <%=type.equals("mix")?"selected":""%>>하프타임</option>
 				</select>
 				경기일자&nbsp;
 				<select name="gameDate" onchange="frm.submit();">
@@ -55,27 +55,20 @@
 			</td>	
 			</tr>  
 			
-             <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="	img/bar.jpg">
+             <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar1.gif">
     <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>경기일시</p>
-        </td>
+            <p style="font-weight: bold">경기일시</p>      </td>
         <td width="155" height="40" align="center" valign="middle" class="menubar">
-            <p>리그</p>
-        </td>
+            <p style="font-weight: bold">리그</p>      </td>
         <td width="240" height="40" align="center" valign="middle" class="menubar">
-            <p>승(홈팀)</p>
-        </td>
+            <p style="font-weight: bold">승(홈팀)</p>      </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p>무/핸디</p>
-        </td>
+            <p style="font-weight: bold">무/핸디</p>      </td>
         <td width="240" height="40" align="center" valign="middle" class="menubar">
-            <p>패(원정팀)</p>
-        </td>
+            <p style="font-weight: bold">패(원정팀)</p>      </td>
         <td width="80" height="40" align="center" valign="middle" class="menubar">
-            <p>경기결과</p>
-        </td>
-       
+            <p style="font-weight: bold">경기결과</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="887">

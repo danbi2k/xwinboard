@@ -125,7 +125,7 @@ function FnLogin_Submit(frm){
 	var query = "mode=processLogin";
 	query += "&userId=" + frm.userId.value;
 	query += "&password=" + frm.password.value;
-	query += "&pin=" + frm.pin.value;
+	//query += "&pin=" + frm.pin.value;
 	
 	var http = new JKL.ParseXML("login.php", query);
 	var result = http.parse();

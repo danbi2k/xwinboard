@@ -39,7 +39,7 @@
 				<select name="type" onchange="frm.submit();">
 					<option value='wdl' <%=type.equals("wdl")?"selected":""%>>승무패</option>
 					<option value='handy' <%=type.equals("handy")?"selected":""%>>핸디캡</option>					
-					<option value='mix' <%=type.equals("mix")?"selected":""%>>스페셜</option>
+					<option value='mix' <%=type.equals("mix")?"selected":""%>>하프타임</option>
 				</select>
 				경기일자&nbsp;
 				<select name="gameDate" onchange="frm.submit();">

@@ -166,7 +166,7 @@ if (toto != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick="calcRate()"></p>
+			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick="calcRate()"</p>
 			        </td>
 			    </tr>
 			    <tr>
