@@ -54,28 +54,6 @@
 		if (result.resultXml.code == 0)
 			alert(result.resultXml.message);
 	}
-
-	function delIT(userid) {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='member/index.php?mode=del_exe&userid='+userid+'&page=1&page_list=1&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-
-	function chargeIT() {
-		var d=document.charge;
-		if(!d.amt.value) { alert('금액을 입력하세요'); d.amt.focus(); return false; }
-		if(!d.msg.value) { alert('내역을 입력하세요'); d.msg.focus(); return false; }
-		if(!confirm('금액을 충전/삭감 하시겠습니까?')) {
-			return false;
-		}
-		else {
-			d.action='member/index.php?mode=recharge&userid=ori7907&page=1&page_list=1&search=&kwd=&type=';
-		}
-	}
 </SCRIPT>
 
 <div class="title">회원정보</div>

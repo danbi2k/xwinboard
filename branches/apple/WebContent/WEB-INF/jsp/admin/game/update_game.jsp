@@ -3,6 +3,7 @@
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="org.apache.commons.lang.*"%>
 
  <%@ include file="../admin_header.jsp"%>
 <%
@@ -26,13 +27,6 @@
 		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
-		/*
-		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
-		}
-		else {
-			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
-		}*/
 
 		var query = "mode=updateGame";
 		query += "&gameId=" + <%=game.getId()%>;

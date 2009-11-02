@@ -31,13 +31,6 @@
 			if(!d.overRate.value) { alert('오버 배당률을 입력하세요'); d.overRate.focus(); return false; }
 		}
 		<%}%>
-		/*
-		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
-		}
-		else {
-			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
-		}*/
 
 		var query = "mode=registerGame";
 		query += "&type=<%=type%>";

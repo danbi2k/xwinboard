@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.xwin.domain.board.*"%>
+<%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
@@ -10,6 +11,7 @@
 
 <%
 	BoardItem boardItem = (BoardItem) request.getAttribute("boardItem");
+	Betting betting = (Betting) request.getAttribute("betting");
 	List<BoardComment> boardCommentList = boardItem.getBoardCommentList();
 	
 	String grade = XwinUtil.nvl(request.getParameter("grade"));
@@ -19,7 +21,83 @@
 </SCRIPT>
 
 <div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터 (일반)" %></div>
-
+<%
+if (betting != null) {
+%>
+<table>
+<tr>
+		<td>
+						<table class='prettytable'>
+							<tbody><tr bgcolor="#EEEEEE" height="27">
+								<td  width="110"><b><nobr>배팅일시</nobr></b></td>
+								<td  width="110"><b><nobr>경기날짜</nobr></b></td>
+								<td  width="270"><b><nobr>(승)홈 팀</nobr></b></td>
+								<td  width="85"><b><nobr>무/핸디캡</nobr></b></td>
+								
+								<td  width="270"><b><nobr>(패)원정팀</nobr></b></td>
+								<td  width="60"><b><nobr>배팅팀</nobr></b></td>
+								<td  width="95"><b><nobr>경기결과</nobr></b></td>
+								<td  width="80"><b><nobr>적중유무</nobr></b></td>
+							</tr>
+							
+<%
+	List<BetGame> betGameList = betting.getBetGameList();
+	if (betGameList != null) {
+		int betGameCount = betGameList.size();
+		int count = 0;
+		for (BetGame betGame : betGameList) {
+%>
+							<tr height="25">
+								<td ><nobr><%=betting.getDateStr() %></nobr></td>
+								<td ><nobr><%=betGame.getGameDateStr()%></nobr></td>
+								<td align="right"><nobr>
+									
+									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;
+									</nobr></td>
+								<td ><nobr>
+									<%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>
+								</nobr></td>
+								
+								<td><nobr>&nbsp;
+									
+									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></nobr></td>
+								<td ><nobr><%=Code.getValue(betGame.getGuess())%></nobr></td>
+								<td ><nobr>&nbsp;
+								<%=Code.getValue(betGame.getResult())%>
+								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
+								</nobr></td>
+								<td ><nobr>
+									
+									<B><%=Code.getValue(betGame.getResultStatus())%></B></nobr>
+								</td>
+							</tr>
+<%
+		}	
+	}		
+%>	
+							<tr><td height="3" colspan="8"></td></tr>
+							<tr>
+								<td align="center" colspan="8">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%>원 / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%>원 /
+								적중금액 :
+								<%
+								if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+									out.print(XwinUtil.comma3(betting.getExpect()));
+								else
+									out.print(0);							
+								%>
+								 원
+								</td>
+							</tr>
+					
+						</tbody></table>
+			</td>
+		</tr>
+	<tr><td height="10"></td>
+	</tr>
+</table>
+<%
+}
+%>
 <form method='post' name='search' action='adminMember.aspx'>
 	<input type='hidden' name='mode' value=''/>
  </form>

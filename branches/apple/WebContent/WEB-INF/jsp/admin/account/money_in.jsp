@@ -18,29 +18,6 @@
 	int SHOWPAGE = 20;
 %>
 
-		  
-<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
-		var d=document.regist;
-		if(confirm('충전하시겠습니까?')) {			
-			d.action='calc/index.php';
-		}
-		else {
-			return false;
-		}
-	}
-
-	function delIT() {
-		if(confirm('해당 정보를 삭제하시겠습니까?\n\n삭제하셔도 해당 유저의 충전금액이 삭제되지는 않습니다.')) {
-			location='calc/index.php?mode=del_exe&idx=&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-</SCRIPT>
-
 <div class="title">충전내역</div>
 <font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>
 <form method='post' name='search' action='adminAccount.aspx'>
