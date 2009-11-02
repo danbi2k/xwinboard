@@ -53,11 +53,6 @@ public class MemberDao extends XwinDao implements Serializable
 		return (Member) sqlMapClientTemplate.queryForObject("selectMember", param);
 	}
 	
-	public List<Member> selectAdminList()
-	{
-		return sqlMapClientTemplate.queryForList("selectAdminList");
-	}
-	
 	public Member selectMember(Map<String, Object> param)
 	{
 		return (Member) sqlMapClientTemplate.queryForObject("selectMember", param);

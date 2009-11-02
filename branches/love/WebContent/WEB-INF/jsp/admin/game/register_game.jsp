@@ -93,7 +93,7 @@
 		}	
 	}
 </SCRIPT>
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -146,7 +146,7 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">종류</td>
 		<td bgcolor="#FFFFFF" width=35% colspan='3'>
-			승무패 <input type='radio' name="gameType" value="wdl"/>
+			승무패 <input type='radio' name="gameType" value="wdl" checked/>
 			핸디캡<input type='radio' name="gameType" value="handy"/>
 		</td>
 	</tr>			
