@@ -109,6 +109,10 @@ public class Code
 	public static final String ACCESS_USER_LOGIN_BY_ADMIN	= "ACC05";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
+	public static final String SOURCE_WEB	= "WEB";
+	public static final String SOURCE_WAP	= "WAP";
+	public static final String SOURCE_IPOD	= "POD";
+	
 	static 
 	{
 		put(TRAN_TYPE_MONEYIN, "입금");

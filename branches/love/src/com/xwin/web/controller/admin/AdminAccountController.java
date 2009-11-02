@@ -201,7 +201,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
 		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
-		Long totalSum = moneyInOutDao.selectMoneyInOutSum(param);
+		Long totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
 		
 		if (totalSum == null)
 			totalSum = 0L;
@@ -330,7 +330,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				SmsWait smsWait = new SmsWait();
 				smsWait.setMsg(message);
 				smsWait.setPhone(mobile);
-				smsWait.setCallback("SiteConfig.SITE_PHONE");
+				smsWait.setCallback(SiteConfig.SITE_PHONE);
 				
 				smsWaitDao.insertSmsWait(smsWait);
 			}
@@ -375,6 +375,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 			moneyIn.setUserId(userId);
 			moneyIn.setNickName(member.getNickName());
 			moneyIn.setNote(note);
+			moneyIn.setSource(Code.SOURCE_WEB);
+			moneyIn.setBankName("");
+			moneyIn.setName("");
+			moneyIn.setNumber("");
 			moneyInDao.insertMoneyIn(moneyIn);
 			
 			Account account = new Account();
@@ -431,6 +435,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyOut.setUserId(userId);
 				moneyOut.setNickName(member.getNickName());
 				moneyOut.setNote(note);
+				moneyOut.setSource(Code.SOURCE_WEB);
+				moneyOut.setBankName("");
+				moneyOut.setName("");
+				moneyOut.setNumber("");
 				moneyOutDao.insertMoneyOut(moneyOut);
 				
 				Account account = new Account();

@@ -30,6 +30,7 @@ public class MoneyInOut extends XwinObject
 	
 	private String bankName;
 	private String number;
+	private String source;
 	
 	public String getId() {
 		return id;
@@ -128,5 +129,11 @@ public class MoneyInOut extends XwinObject
 	}
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
 	}
 }

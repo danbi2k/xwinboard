@@ -47,6 +47,8 @@ public class Admin extends XwinObject
 	public static Integer SYNC_COUNT_WDL = 0;
 	public static Integer SYNC_COUNT_HANDY = 0;
 	
+	public static Integer PROCESS_COUNT_JUDGE = 0;
+	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}

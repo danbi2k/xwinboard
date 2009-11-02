@@ -26,9 +26,20 @@
 		<result property="signature" column="SIGNATURE"/>
 	</resultMap>
 	
+	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
+	
+	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
+		<result property="id" column="ID"/>
+		<result property="date" column="DATE"/>
+		<result property="inMoney" column="INMONEY"/>
+		<result property="outMoney" column="OUTMONEY"/>
+		<result property="bettingPoint" column="POINT_BETTING"/>
+		<result property="bonusPoint" column="POINT_BONUS"/>
+	</resultMap>
+	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE, SOURCE)
+			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#, #source#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -281,24 +292,47 @@
 		SELECT SUM(money) FROM tbl_betting WHERE STATUS = 'BS001'
 	</select>
 	
-	<insert id="insertDailyBettingMoneyStatistics">
+	<select id="selectTodayBettingMoneyStatistics" resultMap="betMoneyStatResultMap"
+		parameterClass="map">
 	<![CDATA[
-		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY, POINT_BETTING)
-		SELECT A.DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING FROM
-		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
+		SELECT 0 AS ID, #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, 0 AS POINT_BONUS FROM
+		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS001', 'BS002', 'BS003') AND
-		END_DATE >= CURDATE()-1 AND DATE < CURDATE()+0
-		GROUP BY date_format(DATE, '%Y%m%d')) as A,
-		(SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(EXPECT) as OUTMONEY
+		WHERE STATUS in ('BS002', 'BS003') AND
+		END_DATE >= #fromDate# AND END_DATE <= #toDate#
+		GROUP BY date_format(END_DATE, '%Y%m%d')) as A,
+		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(EXPECT) as OUTMONEY
 		FROM tbl_betting
 		WHERE STATUS in ('BS002') AND
-		END_DATE >= CURDATE()-1 AND END_DATE < CURDATE()+0
-		GROUP BY date_format(DATE, '%Y%m%d')) as B,
+		END_DATE >= #fromDate# AND END_DATE <= #toDate#
+		GROUP BY date_format(END_DATE, '%Y%m%d')) as B,
 	    (SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as POINT_BETTING
 	    FROM tbl_point
 	    WHERE TYPE = 'PNT02' AND
-	    DATE >= CURDATE()-1 AND DATE < CURDATE()+0
+	    DATE >= #fromDate# AND DATE <= #toDate#
+	    GROUP BY date_format(DATE, '%Y%m%d')) as C
+		WHERE A.DATE = B.DATE AND A.DATE = C.DATE
+	]]>	
+	</select>
+	
+	<insert id="insertDailyBettingMoneyStatistics" parameterClass="map">
+	<![CDATA[
+		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY, POINT_BETTING)
+		SELECT A.DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING FROM
+		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
+		FROM tbl_betting
+		WHERE STATUS in ('BS002', 'BS003') AND
+		END_DATE >= #fromDate# AND END_DATE <= #toDate#
+		GROUP BY date_format(END_DATE, '%Y%m%d')) as A,
+		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(EXPECT) as OUTMONEY
+		FROM tbl_betting
+		WHERE STATUS in ('BS002') AND
+		END_DATE >= #fromDate# AND END_DATE <= #toDate#
+		GROUP BY date_format(END_DATE, '%Y%m%d')) as B,
+	    (SELECT date_format(DATE, '%Y%m%d') as DATE, SUM(MONEY) as POINT_BETTING
+	    FROM tbl_point
+	    WHERE TYPE = 'PNT02' AND
+	    DATE >= #fromDate# AND DATE <= #toDate#
 	    GROUP BY date_format(DATE, '%Y%m%d')) as C
 		WHERE A.DATE = B.DATE AND A.DATE = C.DATE
 	]]>	
@@ -307,26 +341,15 @@
 	<insert id="insertDailyMemberMoneyStatistics">
 	<![CDATA[
 		INSERT INTO tbl_member_money_stat(DATE, BALANCE, MONEY)
-		SELECT SYSDATE(), A.BALANCE, B.MONEY FROM
+		SELECT CURDATE(), A.BALANCE, B.MONEY FROM
 		(SELECT SUM(BALANCE) as BALANCE
 		FROM tbl_member
 		WHERE STATUS = 'US001') as A,
 		(SELECT IFNULL(SUM(MONEY), 0) as MONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS001') AND DATE >= CURDATE()-1 AND DATE < CURDATE()+0) as B
+		WHERE STATUS in ('BS001') AND DATE >= ADDDATE(CURDATE(), INTERVAL -1 DAY) AND DATE < ADDDATE(CURDATE(), INTERVAL 0 DAY)) as B
 	]]>	
 	</insert>
-	
-	<typeAlias alias="BetMoneyStat" type="com.xwin.domain.statistics.BetMoneyStat" />
-	
-	<resultMap id="betMoneyStatResultMap" class="BetMoneyStat">
-		<result property="id" column="ID"/>
-		<result property="date" column="DATE"/>
-		<result property="inMoney" column="INMONEY"/>
-		<result property="outMoney" column="OUTMONEY"/>
-		<result property="bettingPoint" column="POINT_BETTING"/>
-		<result property="bonusPoint" column="POINT_BONUS"/>
-	</resultMap>
 	
 	<select id="selectDailyBettingMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
 		SELECT * FROM tbl_betting_money_stat

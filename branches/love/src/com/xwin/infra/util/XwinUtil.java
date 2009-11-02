@@ -73,6 +73,11 @@ public class XwinUtil
 		return boardNoticeFormat.format(date);
 	}
 	
+	public static String getMMddDate(Date date)
+	{
+		return boardNoticeFormat.format(date);
+	}
+	
 	public static Long calcExpectMoney(Double rate, Long money)
 	{
 		Double cutRate = doubleCut(rate);
@@ -185,6 +190,14 @@ public class XwinUtil
 	{
 		if (obj == null)
 			return "";
+		
+		return obj.toString();
+	}
+	
+	public static String nvl(Object obj, String defaultValue)
+	{
+		if (obj == null)
+			return defaultValue;
 		
 		return obj.toString();
 	}

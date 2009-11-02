@@ -118,6 +118,7 @@ public class MoneyInController extends XwinController
 				moneyIn.setBankBookId(_bankBookId);
 				moneyIn.setReqDate(new Date());
 				moneyIn.setNickName(member.getNickName());
+				moneyIn.setSource(Code.SOURCE_WEB);
 				moneyInDao.insertMoneyIn(moneyIn);
 		
 				rx = new ResultXml(0, "캐쉬충전이 접수 되었습니다", null);

@@ -37,7 +37,7 @@ public class KtfSmsConnector
 	 */
 	public List<Map<String, String>> parseKTF()
 	{
-		List<Map<String, String>> mapList = null;
+		List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();;
 			
 		DocumentBuilder getBuilder = null;
 		try {
@@ -62,7 +62,6 @@ public class KtfSmsConnector
 				NodeList nodeList = elem.getElementsByTagName("boxlist");
 				int node_length = nodeList.getLength();
 				
-				mapList = new ArrayList<Map<String, String>>(node_length);
 				for (int i = 0 ; i < node_length ; i++)
 				{
 					Node node = nodeList.item(i);
