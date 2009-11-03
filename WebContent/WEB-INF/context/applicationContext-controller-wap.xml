@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<bean id="wapIndexController" class="com.xwin.web.controller.wap.WapIndexController"
+		p:memberDao-ref="memberDao"/>
+		
+	<bean id="wapLoginController" class="com.xwin.web.controller.wap.WapLoginController"
+		p:memberDao-ref="memberDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapMainController" class="com.xwin.web.controller.wap.WapMainController"
+		p:memberDao-ref="memberDao"/>
+		
+	<bean id="wapMyBettingController" class="com.xwin.web.controller.wap.WapMyBettingController"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapMoneyInController" class="com.xwin.web.controller.wap.WapMoneyInController"
+		p:memberDao-ref="memberDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:bettingDao-ref="bettingDao"
+		p:accountDao-ref="accountDao"
+		p:bankBookDao-ref="bankBookDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapMoneyOutController" class="com.xwin.web.controller.wap.WapMoneyOutController"
+		p:memberDao-ref="memberDao"
+		p:moneyOutDao-ref="moneyOutDao"
+		p:bettingDao-ref="bettingDao"
+		p:accountDao-ref="accountDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapGameController" class="com.xwin.web.controller.wap.WapGameController"
+		p:memberDao-ref="memberDao"
+		p:gameDao-ref="gameDao"
+		p:bettingService-ref="bettingService"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="wapAdminIndexController" class="com.xwin.web.controller.wap.WapAdminIndexController"/>
+		
+	<bean id="wapAdminController" class="com.xwin.web.controller.wap.WapAdminController"
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<!-- >bean id="joinController"  class="com.xwin.web.controller.join.JoinController"
+		p:invitationDao-ref="invitationDao"
+		p:methodNameResolver-ref="controllerNameResolver"/-->
+</beans>

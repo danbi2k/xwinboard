@@ -91,4 +91,6 @@
 			  
 			</tr>
 		    
-</table>
+     </table>
+
+<%@include file="../footer.jsp"%>
