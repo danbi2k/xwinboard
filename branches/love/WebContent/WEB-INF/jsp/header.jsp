@@ -34,7 +34,7 @@
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 	<META HTTP-EQUIV="Refresh" Content="900; URL=login.php?mode=processLogout">
-    <script language="JavaScript" src="../../script/embed_patch.js"></script>
+    <script language="JavaScript" src="script/embed_patch.js"></script>
 	<script language="JavaScript" src="script/code.js"></script>
 	<script language="JavaScript" src="script/default.js"></script>
 	<script language="JavaScript" src="script/game.js"></script>
@@ -47,7 +47,7 @@
 	<script language="JavaScript" src="script/utf8.js"></script>
 	<script language="JavaScript" src="script/xwin_user.js"></script>
 	<script language="javascript" src="script/mEmbed.js"></script>
-	<link rel="stylesheet" type="text/css" href="../../style/style.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
     <style type="text/css">
 <!--
 .top_login {color: #ffff00;font-weight: bold;}
@@ -117,22 +117,22 @@ function memoClose()
 receiveMemo();
 <%}%>
 </script>
-<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(../../images/main/bg_top2.gif) no-repeat center top;">
+<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(images/main/bg_top2.gif) no-repeat center top;">
 <div style="position: absolute; left:expression((document.body.clientWidth) / 2 -493); top:expression((document.body.clienthheight) / 2 -170); z-index: 3; width: 968px; top: 25px; left:0px;"> 
   <div align="right" class="style1">
-  <a href="#"><img src="../../images/main/top_1.gif" border="0" ></a>&nbsp;
-  <img src="../../images/main/top_line.gif">&nbsp;
-  <a href="http://111.92.244.114:8080/earncache.php?mode=viewMoneyInRequest"><img src="../../images/main/top_2.gif" border="0"></a>&nbsp;
-    <img src="../../images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/sendcache.php?mode=viewMoneyOutRequest"><img src="../../images/main/top_3.gif" border="0" ></a>&nbsp;
-    <img src="../../images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/betlog.php?mode=viewMyBettingList"><img src="../../images/main/top_4.gif" border="0"></a>&nbsp;
-    <img src="../../images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/account.php?mode=viewMyMoneyList"><img src="../../images/main/top_5.gif" border="0"></a>&nbsp;
-    <img src="../../images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/account.php?mode=viewMyPointList"><img src="../../images/main/top_6.gif" border="0" ></a>&nbsp;
-    <img src="../../images/main/top_line.gif">&nbsp;
-    <a href="login.php?mode=processLogout"><img src="../../images/main/top_7.gif" border="0"></a> </div>
+  <a href="home.php"><img src="images/main/top_1.gif" border="0" ></a>&nbsp;
+  <img src="images/main/top_line.gif">&nbsp;
+  <a href="earncache.php?mode=viewMoneyInRequest"><img src="images/main/top_2.gif" border="0"></a>&nbsp;
+    <img src="images/main/top_line.gif">&nbsp;
+    <a href="sendcache.php?mode=viewMoneyOutRequest"><img src="images/main/top_3.gif" border="0" ></a>&nbsp;
+    <img src="images/main/top_line.gif">&nbsp;
+    <a href="betlog.php?mode=viewMyBettingList"><img src="images/main/top_4.gif" border="0"></a>&nbsp;
+    <img src="images/main/top_line.gif">&nbsp;
+    <a href="account.php?mode=viewMyMoneyList"><img src="images/main/top_5.gif" border="0"></a>&nbsp;
+    <img src="images/main/top_line.gif">&nbsp;
+    <a href="account.php?mode=viewMyPointList"><img src="images/main/top_6.gif" border="0" ></a>&nbsp;
+    <img src="images/main/top_line.gif">&nbsp;
+    <a href="login.php?mode=processLogout"><img src="images/main/top_7.gif" border="0"></a> </div>
 </div>
 <!-------------------------------------------------로그인&로그아웃 레이어 시작-------------------------------------------------------->
 <!-------------------------------------------------로그인&로그아웃 레이어 끝-------------------------------------------------------->
@@ -145,14 +145,14 @@ receiveMemo();
 classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
 
 codebase=" http://fpdownload.adobe.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="968" height="100" align="middle">
-<param name="movie" value="../../swf/main2.swf">
+<param name="movie" value="swf/main2.swf">
 <param name="wmode" value="transparent">
 <param name="allowScriptAccess" value="always">
 <embed type="application/x-shockwave-flash"
 pluginspage="http://www.adobe.com/go/getflashplayer"
 
 width="968" height="100" align="middle"
-src="../../swf/main2.swf"
+src="swf/main2.swf"
 
 allowScriptAccess="always"></embed>
 </object>
@@ -160,10 +160,10 @@ allowScriptAccess="always"></embed>
 <script language="javascript">WriteEmbed('emb_01')</script>
 </center>
 <!-------------------------------------------------플래쉬끝-------------------------------------------------------->
-
+<%if (login) {%>
 <table width="968" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px;">
   <tr>
-    <td height="97" valign="middle" background="../../images/main/notice_top_bg.gif"><table width="100%" height="97" border="0" cellpadding="0" cellspacing="0">
+    <td height="97" valign="middle" background="images/main/notice_top_bg.gif"><table width="100%" height="97" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td height="51" valign="top" style="padding-top:22px;padding-left:90px;"><table width="877" height="17" border="0" cellpadding="0" cellspacing="0">
           <tr>
@@ -176,10 +176,10 @@ allowScriptAccess="always"></embed>
             <td width="72">&nbsp;</td>
             <td width="56" padding-top:2px;"><div align="center"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></div></td>
             <td width="30">&nbsp;</td>
-            <td width="125"><a href="login.php?mode=processLogout"><img src="../../images/main/notice_top_bt.gif" border="0"></a></td>
+            <td width="125"><a href="login.php?mode=processLogout"><img src="images/main/notice_top_bt.gif" border="0"></a></td>
             <td width="113" valign="top" style="padding-top:10px;">
-			<a href="user.php?mode=viewModifyForm"><img src="../../images/main/notice_top_1.gif" border="0"></a>
-            <a href="betlog.php?mode=viewMyBettingList"><img src="../../images/main/notice_top_2.gif" border="0" style="margin-left:10px;"></a></td>
+			<a href="user.php?mode=viewModifyForm"><img src="images/main/notice_top_1.gif" border="0"></a>
+            <a href="betlog.php?mode=viewMyBettingList"><img src="images/main/notice_top_2.gif" border="0" style="margin-left:10px;"></a></td>
           </tr>
         </table></td>
       </tr>
@@ -196,6 +196,7 @@ allowScriptAccess="always"></embed>
     </table></td>
   </tr>
 </table>
+<%}%>
 <center>
 
 

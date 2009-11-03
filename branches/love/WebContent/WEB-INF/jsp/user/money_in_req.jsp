@@ -9,99 +9,68 @@
 
 <%
 	List<BankBook> bankBookList = (List<BankBook>) request.getAttribute("bankBookList");
+	BankBook bankBook = null;
+	if (bankBookList != null) {
+		int size = bankBookList.size();
+		String mobile = member.getMobile();
+		String lastDigit = mobile.substring(mobile.length()-1);
+		int digit = Integer.parseInt(lastDigit);
+		bankBook = bankBookList.get(digit % size);
+	}
 %>
 
-			<tr><td><img src="../../../img/menu081.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu081.jpg" border="0"></td></tr>
 			<tr><td align="center"><img src="img/moneynotice.jpg" border="0"></td></tr>
 
 </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771">
     <tr>
-        <td width="771" height="37" align="left" valign="top" background="../../../img/bar_bg.gif"><img src="img/8-.jpg" border="0">&nbsp;<a href="earncache.php?mode=viewMoneyInRequestList"><img src="img/10.jpg" border="0" /></a></td>
+        <td width="771" height="37" align="left" valign="top" background="img/bar_bg.gif"><img src="img/8-.jpg" border="0">&nbsp;<a href="earncache.php?mode=viewMoneyInRequestList"><img src="img/10.jpg" border="0" /></a></td>
     </tr>
  
     <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
+        <td width="771" height="5" background="img/minit_01.jpg">
             <p>&nbsp;</p>        </td>
     </tr>
     <tr>
         <td width="497" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
 <form name="frm" method="post">
+<input type='hidden' name='bankBookId' value='<%=bankBook.getId()%>'/>
 <table border=0 cellspacing=0 cellpadding=0 width=730 align="center">
 
-<col width=250></col>
-<col width=50></col>
+<col width=100></col>
+<col width=10></col>
 <col width=600></col>
 
-
-
- 
-
 <tr>
- <td align=right class=menubar>아이디</td>
+ <td align=right class=menubar height=40>은행명</td>
  <td></td>
- <td><%=member.getUserId()%></td>
-</tr>
-
-
-<tr>
- <td align=right class=menubar>입금계좌</td>
- <td></td>
- <td> <select name="bankBookId" style="credit">
-<%
-				if (bankBookList != null) {
-					for (BankBook bankBook : bankBookList) {
-				%>
-				<option value="<%=bankBook.getId()%>">[<%=bankBook.getBankName()%>] <%=bankBook.getNumber()%> (<%=bankBook.getName()%>)　　</option>				<%
-					}
-				}
-				%>								
-				</select> <font color="orange">☜ 계좌번호 꼭 확인하세요! </td>
+ <td><%=bankBook.getBankName()%></td>
 </tr>
 
 <tr>
- <td align=right class=menubar>입금예정액</td>
+ <td align=right class=menubar height=40>계좌번호</td>
  <td></td>
- <td><table width="100%" cellpadding="0" cellspacing="0"><tr>
-			<td width="200">
-				<input class="input2" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onKeyUp="only123(this); comma3Input(this);" onBlur="">원<BR>				
-				<font color="orange"><b>※ 직접입력가능</b></font>
-			<td>
-			<td>
+ <td> <%=bankBook.getNumber()%></td>
+</tr>
 
-				<table>
-				<tr>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='10,000';frm.name.focus();">1만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='20,000';frm.name.focus();">2만원</span></td>
+<tr>
+ <td align=right class=menubar height=40>예금주</td>
+ <td></td>
+ <td><%=bankBook.getName()%></td>
+</tr>
 
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='30,000';frm.name.focus();">3만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='50,000';frm.name.focus();">5만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='100,000';frm.name.focus();">10만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='150,000';frm.name.focus();">15만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='200,000';frm.name.focus();">20만원</span></td>
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='250,000';frm.name.focus();">25만원</span></td>
-
-				<td><span style="width:48;height:16;color:red;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='300,000';frm.name.focus();">30만원</span></td>
-				</tr>
-				<tr>
-				<td><span style="width:48;height:16;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand; color: orange" onClick="frm.money.value='500,000';frm.name.focus();">50만원</span></td>
-				<td><span style="width:48;height:16;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand; color: orange" onClick="frm.money.value='600,000';frm.name.focus();">60만원</span></td>
-				<td><span style="width:48;height:16;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand; color: orange" onClick="frm.money.value='700,000';frm.name.focus();">70만원</span></td>
-				<td><span style="width:48;height:16;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand; color: orange" onClick="frm.money.value='800,000';frm.name.focus();">80만원</span></td>
-
-				<td><span style="width:48;height:16;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand; color: orange" onClick="frm.money.value='900,000';frm.name.focus();">90만원</span></td>
-				<td><span style="width:48;height:16;color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='1,000,000';frm.name.focus();">100만원</span></td>
-				<td><span style="width:48;height:16;color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='2,000,000';frm.name.focus();">200만원</span></td>
-				<td><span style="width:48;height:16;color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='3,000,000';frm.name.focus();">300만원</span></td>
-				<td><span style="width:48;height:16;color:orange;font-size:11px;text-align:center;padding-top:2;margin-right:5;cursor:hand" onClick="frm.money.value='5,000,000';frm.name.focus();">500만원</span></td>
-				</tr>
-				</table>			</td></tr>
-			</table></td>
+<tr>
+ <td align=right class=menubar height=40>입금액</td>
+ <td></td>
+ <td>
+ 	<input class="input2" name="money" type="text" value="" maxlength="11" style="IME-MODE: disabled;text-align:right;" onKeyUp="only123(this); comma3Input(this);" onBlur=""> 원
+</td>
 </tr>
 <tr>
- <td align=right class=menubar>입금자</td>
+ <td align=right class=menubar height=40>입금자명</td>
  <td></td>
- <td><input type=text name=name maxlength=200 class="input2"> ☜ 이체시 '보내는분'과 동일해야 합니다.</td>
+ <td><input type=text name=name maxlength=200 class="input2"></td>
 </tr>
 
 <tr>
@@ -123,4 +92,3 @@
 			</tr>
 		    
 </table>
-<%@include file="../footer.jsp"%>

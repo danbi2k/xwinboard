@@ -3,7 +3,7 @@
 
 
 <%@include file="../header.jsp"%>
-			<tr><td><img src="../../../img/menu071.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu071.jpg" border="0"></td></tr>
 		
             </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">

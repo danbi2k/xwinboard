@@ -45,7 +45,20 @@ if (betting != null) {
 <tr>
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0">
-				<tbody><tr>
+				<tbody>
+ <tr bgcolor="darkred">
+	<td style="color:white;v-align:middle;align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getBoardItemDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
+	적중액 :
+	<%
+	if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+		out.print("<font color='#FFC602'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
+	else
+		out.print(0);							
+	%>
+	 원</b>
+	</td>
+</tr>				
+				<tr>
 					<td><table border="0" bgcolor="#424142" cellpadding="0" cellspacing="1" width="100%">
 					  <tbody>
 					    <tr bgcolor="#a6a6a6" height="27">
@@ -72,7 +85,7 @@ if (betting != null) {
 					      <td align="center"><nobr> <font color="#1a1a1a"><%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%></font></nobr></td>
 					      <td><nobr>&nbsp; <font color="#1a1a1a"> <%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
 					      <td align="center"><nobr><font color="#1a1a1a"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
-					      <td align="center"><nobr>&nbsp;<font color="#1a1a1a"> <%=Code.getValue(betGame.getResult())%> <%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%></font></nobr></td>
+					      <td align="center"><nobr>&nbsp;<font color="#1a1a1a"> <%=Code.getValue(betGame.getResult())%> <%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%></font></nobr>&nbsp;</td>
 					      <td align="center"><nobr> <font color="#1a1a1a"> <b><%=Code.getValue(betGame.getResultStatus())%></b></font></nobr></td>
 				        </tr>
 					    <%
@@ -83,18 +96,6 @@ if (betting != null) {
 				    </table></td>
 				</tr>
 				<tr><td height="3"></td></tr>
-				<tr>
-					<td align="center">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%>원 / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%>원 /
-					적중금액 :
-					<%
-					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-						out.print("<font color='#FFC602'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
-					else
-						out.print(0);							
-					%>
-					 원
-					</td>
-				</tr>
 				</tbody></table>
 		  </td>
 		</tr>

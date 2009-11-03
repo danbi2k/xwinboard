@@ -15,7 +15,7 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-			<tr><td><img src="../../../img/menu101.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu101.jpg" border="0"></td></tr>
 		
 </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
@@ -23,11 +23,11 @@
         <td width="131" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">거래일자</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">기잔고</p>      </td>
+            <p style="font-weight: bold">기존캐쉬</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">입출금</p>      </td>
+            <p style="font-weight: bold">거래캐쉬</p>      </td>
         <td width="148" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">잔액</p>      </td>
+            <p style="font-weight: bold">현존캐쉬</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">종류</p>      </td>
         <td width="150" height="40" align="center" valign="middle" class="menubar">

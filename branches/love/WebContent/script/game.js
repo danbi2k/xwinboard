@@ -39,3 +39,13 @@ function BetListView(BetNo){
 function showNotice(id) {
 	alert(notice[id]);
 }
+
+function getNote(gameId)
+{
+	var query = "mode=getNote";
+	query += "&gameId=" + gameId;
+	var http = new JKL.ParseXML("play.php", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0)
+		alert(result.resultXml.message);
+}

@@ -86,14 +86,14 @@
 	}
 %>
 </table>
-
 <table align="center" cellpadding="0" cellspacing="0" width="771">
 	<tr>
 		<td>
 			<table border=0 width=100% cellpadding=6 cellspacing=2 >
 				<tr>
 					<td align=center>
-						<div align="center"><img src="img/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;<bR />
+						<div align="center"><img src="img/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;
+<br><br>
 						선택 한 카트 배팅 금액 : 
 						  <input class="input2" type=text id="totalMoney" name="totalMoney" size="10" readonly="readonly" value="0">
 						  <img src="img/bett.jpg" onclick="betting()" style="cursor:pointer;" align=absmiddle>

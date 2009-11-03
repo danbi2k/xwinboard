@@ -4,7 +4,7 @@ topLink[2] = "play.php?mode=viewGameList&type=handy&grade=1";
 topLink[3] = "play.php?mode=viewGameList&type=mix&grade=10";
 topLink[4] = "bbs.php?mode=viewBoard&boardName=user";
 topLink[5] = "bbs.php?mode=viewBoard&boardName=qna";
-topLink[6] = "play.php?mode=viewGameResultList";
+topLink[6] = "play.php?mode=viewGameResultList&type=wdl";
 topLink[7] = "bettingInfo.php";
 topLink[8] = "earncache.php?mode=viewMoneyInRequest";
 topLink[9] = "sendcache.php?mode=viewMoneyOutRequest";

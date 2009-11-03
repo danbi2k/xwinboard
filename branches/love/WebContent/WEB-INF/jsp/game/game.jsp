@@ -140,7 +140,7 @@ if (gameList != null) {
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
 			        </td>
 			        <td width="70" height="31">
-			            <p>&nbsp;<img src="../../../img/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
+			            <p>&nbsp;<img src="img/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -151,7 +151,7 @@ if (gameList != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="../../../img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
+			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -170,16 +170,5 @@ if (gameList != null) {
     </tr>
   </table>
   </div>
-<script>
-function getNote(gameId)
-{
-	var query = "mode=getNote";
-	query += "&gameId=" + gameId;
-	var http = new JKL.ParseXML("play.php", query);
-	var result = http.parse();
-	if (result.resultXml.code == 0)
-		alert(result.resultXml.message);
-}
-</script>
 
 <%@include file="../footer.jsp"%>
