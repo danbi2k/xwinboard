@@ -1,4 +1,5 @@
 var topLink = [];
+topLink[0] = "home.php";
 topLink[1] = "play.php?mode=viewGameList&type=wdl&grade=1";
 topLink[2] = "play.php?mode=viewGameList&type=handy&grade=1";
 topLink[3] = "play.php?mode=viewGameList&type=mix&grade=10";
