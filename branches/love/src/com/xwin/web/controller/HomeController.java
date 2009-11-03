@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Game;
+import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 
@@ -20,6 +21,10 @@ public class HomeController extends XwinController
 	public ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
+		Member member = (Member) request.getSession().getAttribute("Member");
+		if (member == null)
+			return new ModelAndView("dummy");
+		
 		Calendar cal = Calendar.getInstance();
 		cal = XwinUtil.getOnlyDate(cal);
 		cal.add(Calendar.DATE, 3);
