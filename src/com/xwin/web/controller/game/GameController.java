@@ -107,6 +107,13 @@ public class GameController extends XwinController
 			toDate = datePair[1];
 		}
 		
+		String grade = Code.USER_GRADE_NORMAL;
+		
+		if (type.equals("mix")) {
+			type = null;
+			grade = Code.USER_GRADE_VIP;
+		}
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("leagueId", leagueId);
@@ -116,8 +123,8 @@ public class GameController extends XwinController
 		param.put("statusList", statusList);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
+		param.put("grade", grade);
 		param.put("ORDERBY", "DESC");
-		param.put("gradeLess", member.getGrade());
 		//param.put("fromRow", pIdx * ROWSIZE);
 		//param.put("rowSize", ROWSIZE);
 		
