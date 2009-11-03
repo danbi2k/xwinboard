@@ -59,7 +59,7 @@
 				<div class='write_bt'>
 					<a href='bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src='img/board_list_bt.gif' alt='글목록' class='img_bt'></a>
 					<%if (boardItem.getUserId().equals(member.getUserId())) {%>
-					<a href=''><img src='img/board_del_bt.gif' alt='글삭제' class='img_bt' onclick="deleteItem()"></a>
+					<a href='#'><img src='img/board_del_bt.gif' alt='글삭제' class='img_bt' onclick="deleteItem()"></a>
 					<%} %>
 					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src='img/board_write_bt.gif' alt='글쓰기' class='img_bt'></a>
 				</div>				
