@@ -129,7 +129,7 @@ if (betting != null) {
         </td>
     </tr>
     <tr>
-        <td width="497" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="750" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
             <p>
 			 <%
 			    String context = boardItem.getContext();

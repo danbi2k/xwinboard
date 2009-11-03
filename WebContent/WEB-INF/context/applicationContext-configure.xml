@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="admin" class="com.xwin.domain.admin.Admin">  
-		<property name="SITE_GRADE" value="1"/> 
+		<property name="SITE_GRADE" value="10"/> 
 	</bean>
 		
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
