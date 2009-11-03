@@ -14,12 +14,12 @@
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
-			<tr><td><img src="../../../img/menu091.jpg" border="0"></td></tr>
+			<tr><td><img src="img/menu091.jpg" border="0"></td></tr>
 		
 </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
     <tr>
-        <td width="771" height="37" align="left" valign="top" background="../../../img/bar_bg.gif">
+        <td width="771" height="37" align="left" valign="top" background="img/bar_bg.gif">
             <p><a href="sendcache.php?mode=viewMoneyOutRequest"><img src="img/9.jpg" border="0"></a>&nbsp;<img src="img/11-.jpg" border="0"></p>
         </td>
     </tr>
@@ -27,15 +27,15 @@
       <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar1.jpg">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">신청일자</p>      </td>
+            <p style="font-weight: bold">신청날짜</p>      </td>
         <td width="208" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">환전계좌</p>      </td>
+            <p style="font-weight: bold">계좌번호</p>      </td>
         <td width="120" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">환전액</p>      </td>
+            <p style="font-weight: bold">환전금액</p>      </td>
         <td width="120" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">상태</p>      </td>
         <td width="150" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">처리일시</p>      </td>
+            <p style="font-weight: bold">환전날짜</p>      </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">삭제</p>      </td>
     </tr>

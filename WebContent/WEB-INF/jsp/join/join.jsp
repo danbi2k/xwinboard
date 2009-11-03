@@ -7,14 +7,12 @@
 <%@include file="../header.jsp"%>
 
 			<tr><td><img src="img/menu16.jpg" border="0"></td></tr>
-            </table>
+</table>
      
-     <table align="center" cellpadding="0" cellspacing="0" width="771" background="img/bar-.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="771"   background="img/bar1.gif">
     <tr>
-        <td width="771" height="40" align="center" valign="middle" class="menubar">
-           회원이용약관 
-        </td>
-        
+        <td width="771" height="37" align="center" valign="middle" background="img/bar_bg.gif" class="menubar" style="font-weight: bold">
+           회원이용약관        </td>
     </tr>
 </table>
  <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
@@ -68,22 +66,13 @@
 
 <form name="frm_reg">
 	<input name="password" type="hidden" value=""/>
-	<input type="hidden" name="pin" value=""/>
-     <table align="center" cellpadding="0" cellspacing="0" width="771" background="img/bar-.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="771"   background="img/bar1.gif">
     <tr>
-        <td width="771" height="40" align="center" valign="middle" class="menubar">
-           회원가입양식 
-        </td>
-        
+        <td width="771" height="37" align="center" valign="middle" background="img/bar_bg.gif" class="menubar" style="font-weight: bold">
+           회원가입양식        </td>
     </tr>
 </table>
  <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
-   
-    <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
     <tr>
         <td width="771" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
            <table border=0 cellspacing=0 cellpadding=0 width=700 align="center">
@@ -97,30 +86,35 @@
  
 
 <tr>
- <td align=right class=menubar>회원아이디</td>
+ <td align=right class=menubar height=40height=40>아이디</td>
  <td></td>
- <td><input type=text name=userId maxlength=200 class=input2> (영문/숫자 조합 가능)</td>
+ <td><input type=text name=userId maxlength=200 class=input2> <font color="red">★ 영문과 숫자 조합이 가능합니다</font></td>
 </tr>
 
 
 <tr>
- <td align=right class=menubar>비밀번호</td>
+ <td align=right class=menubar height=40>패스워드</td>
  <td></td>
  <td> <input type=password name=password1 maxlength=200 class=input2 > </td>
 </tr>
 
 <tr>
- <td align=right class=menubar>비밀번호 확인</td>
+ <td align=right class=menubar height=40>패스워드 확인</td>
  <td></td>
  <td><input type=password name=password2 maxlength=200 class=input2 ></td>
 </tr>
 <tr>
- <td align=right class=menubar>닉네임</td>
+ <td align=right class=menubar height=40>닉네임</td>
  <td></td>
  <td><input type=text name=nickName maxlength=200 class=input2></td>
 </tr>
 <tr>
- <td align=right class=menubar>휴대폰번호</td>
+ <td align=right class=menubar height=40>모바일PIN번호</td>
+ <td></td>
+ <td><input type=text name=pin maxlength=200 class=input2 onfocusout='only123(this)' onkeyup='only123(this)'> <font color="red">★ 원하시는 숫자 6자리를 입력해주세요.</font></td>
+</tr>
+<tr>
+ <td align=right class=menubar height=40>핸드폰번호</td>
  <td></td>
  <td>
  	<select class="input2" name="phone1">
@@ -134,16 +128,16 @@
 			<input class="input2" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="input2" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
 	<img src="img/send.jpg" border="0" align="absmiddle" onclick="sendAuthNumber()"/><BR>
-	<input type="checkbox" name="smsCheck" checked/>  체크 하시면 경기결과를 문자로 전송해 드립니다.
+	배팅 결과 문자 수신 요청 <input type="checkbox" name="smsCheck" checked/>
 </td>
 </tr>
 <tr>
- <td align=right class=menubar>인증번호</td>
+ <td align=right class=menubar height=40>가입인증번호</td>
  <td></td>
  <td><input type="text" name=phonePin maxlength=200 class=input2 ></td>
 </tr>
 <tr>
- <td align=right class=menubar>이메일</td>
+ <td align=right class=menubar height=40>이메일</td>
  <td></td>
  <td><input class="input2" name="email1" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);"> @
 			<input class="input2" name="email2" type="text" value="" style='IME-MODE: inactive' onchange="han_clear(this);" onblur="han_clear(this);">
@@ -165,7 +159,7 @@
 			</select></td>
 </tr>
 <tr>
- <td align=right class=menubar>환전계좌번호</td>
+ <td align=right class=menubar height=40>계좌번호</td>
  <td></td>
  <td>은행명 :
 			<select class="input2" name="bankName">
@@ -174,21 +168,9 @@
 			</select>
 			계좌번호 : <input class="input2" name="bankNumber" type="text" size="20" maxlength="20" value="" style='IME-MODE: inactive'>
 			예금주 : <input class="input2" name="bankOwner" type="text" size="16" maxlength="16" value="" style='IME-MODE: inactive'><br>
-			<font color="orange">※ 환전은 가입시 등록하신 환전계좌로만 가능하며 환전계좌 변경시에는 고객센터를 이용해 요청해주시면 본인인증과정을 거쳐 변경해 드립니다.</font>
-			</td>
+			<font color="orange">
+		  </td>
 </tr>
-<!-- tr>
- <td align=right class=textpoint>환전비밀번호<br>[사이트 해킹방지용비밀번호입니다]</td>
- <td></td>
- <td><input type=password name=pin maxlength=200 class=input2 ><br>
-	     본 비밀번호는 최초 회원가입시 1회만 입력되며 이후 수정이 불가능합니다.<br>
-                신중하게 입력해주시고 개인 전화번호등 노출이 쉬운번호를 입력하여 피해가<br>
-                발생하는경우 책임지지않습니다.<br><b>
-                환전요청시 환전비밀번호가 입력되지않는경우 환전신청이 되지않습니다.
-
-	</td>
-</tr-->
-
 </table>
 
         </td>

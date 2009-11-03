@@ -21,15 +21,15 @@
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">일자</p>      </td>
+            <p style="font-weight: bold">날짜</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">기포인트</p>      </td>
+            <p style="font-weight: bold">기존포인트</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">입출포인트</p>      </td>
+            <p style="font-weight: bold">거래포인트</p>      </td>
         <td width="140" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">잔여포인트</p>      </td>
+            <p style="font-weight: bold">현존포인트</p>      </td>
         <td width="220" height="40" align="center" valign="middle" class="menubar">
-            <p style="font-weight: bold">배팅한사용자</p>      </td>
+            <p style="font-weight: bold">비고</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771">

@@ -383,7 +383,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
 		}
 		else {
-			String phonePin = RandomStringUtils.randomAlphabetic(5).toUpperCase();
+			String phonePin = RandomStringUtils.randomNumeric(5);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {

@@ -37,8 +37,10 @@
     <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">번호</p>      </td>
-        <td width="527" height="40" align="center" valign="middle" class="menubar">
+        <td width="500" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">제목</p>      </td>
+        <td width="27" height="40" align="center" valign="middle" class="menubar">
+            <p style="font-weight: bold"></p>      </td>    
         <td width="110" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">작성자</p>      </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
@@ -61,11 +63,14 @@
 				 <td width="90" height="35" align="center" valign="middle">
             		<p><%=head%></p>
         		</td>
-				 <td width="527" height="35" align="left" valign="middle">
+				 <td width="500" height="35" align="left" valign="middle">
 					<p><a <%=isNotice?"style=color:#d74545;'":""%> href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
-					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
+					<%=boardItem.getTitle()%><b>
 					</b>
 					</a>
+				</td>
+				<td width="27" height="35" align="center" valign="middle">
+					<p>[<%=boardItem.getCommentCount()%>]</p>
 				</td>
 				<td width="110" height="35" align="center" valign="middle">
 		            <p><%=boardItem.getNickName()%></p>
@@ -78,7 +83,7 @@
 		        </td>
 			</tr>
 			<tr>
-			   <td class="bbsline" colspan="5">
+			   <td class="bbsline" colspan="6">
 			   </td>
 			</tr>
 <%
@@ -119,7 +124,7 @@
 %>
 			    </td>
 			    <td width="100" height="40" align="right">
-				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="../../../img/write.jpg" border="0"></a>
+				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
 				</td>
 			</tr>
 		    

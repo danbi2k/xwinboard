@@ -97,7 +97,7 @@ public class BettingService extends XwinService
 		pointLog.setMoney(point.longValue());
 		pointLog.setBalance(member.getPoint() + point.longValue());
 		pointLog.setBettingId(betting.getId());
-		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 애플");
+		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 포인트");
 		pointLog.setBettingUserId(member.getUserId());
 		
 		pointDao.insertPoint(pointLog);
@@ -120,7 +120,7 @@ public class BettingService extends XwinService
 			introPointLog.setMoney(intro_point.longValue());
 			introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
 			introPointLog.setBettingId(betting.getId());
-			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(intro_point_rate*100) + "% 애플");
+			introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + (int)(intro_point_rate*100) + "% 포인트");
 			introPointLog.setBettingUserId(member.getUserId());
 			
 			pointDao.insertPoint(introPointLog);
@@ -141,7 +141,7 @@ public class BettingService extends XwinService
 			mobilePointLog.setMoney(mobile_point.longValue());
 			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
 			mobilePointLog.setBettingId(betting.getId());
-			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 애플");
+			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 포인트");
 			mobilePointLog.setBettingUserId(member.getUserId());
 			
 			pointDao.insertPoint(mobilePointLog);

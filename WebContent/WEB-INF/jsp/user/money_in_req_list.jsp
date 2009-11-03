@@ -25,7 +25,7 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
 	<tr>
-		<td width="771" height="37" align="left" valign="top"  background="../../../img/bar_bg.gif">
+		<td width="771" height="37" align="left" valign="top"  background="img/bar_bg.gif">
 		<a href="earncache.php?mode=viewMoneyInRequest"><img
 			src="img/8.jpg" border="0"></a>&nbsp;<img src="img/10-.jpg"
 			border="0">	  </td>

@@ -58,6 +58,10 @@
 <!--
 .style1 {font-size: 11px}
 .top_login {color: #ffff00;font-weight: bold;}
+.style2 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
 -->
     </style>
 </head>
@@ -66,88 +70,83 @@
  <div align="right" class="style1">
   <a href="#"><img src="images/main/top_1.gif" border="0" ></a>&nbsp;
   <img src="images/main/top_line.gif">&nbsp;
-  <a href="http://111.92.244.114:8080/earncache.php?mode=viewMoneyInRequest"><img src="images/main/top_2.gif" border="0"></a>&nbsp;
+  <a href="earncache.php?mode=viewMoneyInRequest"><img src="images/main/top_2.gif" border="0"></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/sendcache.php?mode=viewMoneyOutRequest"><img src="images/main/top_3.gif" border="0" ></a>&nbsp;
+    <a href="sendcache.php?mode=viewMoneyOutRequest"><img src="images/main/top_3.gif" border="0" ></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/betlog.php?mode=viewMyBettingList"><img src="images/main/top_4.gif" border="0"></a>&nbsp;
+    <a href="betlog.php?mode=viewMyBettingList"><img src="images/main/top_4.gif" border="0"></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/account.php?mode=viewMyMoneyList"><img src="images/main/top_5.gif" border="0"></a>&nbsp;
+    <a href="account.php?mode=viewMyMoneyList"><img src="images/main/top_5.gif" border="0"></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
-    <a href="http://111.92.244.114:8080/account.php?mode=viewMyPointList"><img src="images/main/top_6.gif" border="0" ></a>&nbsp;
+    <a href="account.php?mode=viewMyPointList"><img src="images/main/top_6.gif" border="0" ></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
     <a href="login.php?mode=processLogout"><img src="images/main/top_7.gif" border="0"></a> </div>
 </div>
 <!-------------------------------------------------로그인&로그아웃 레이어 시작-------------------------------------------------------->
 <div style="position: absolute; left:expression((document.body.clientWidth) / 2 -493); top:expression((document.body.clienthheight) / 2 -170); z-index: 3; width: 200px; top: 190px; left:0px;">
  	<%if (login) { %>
- 	<table width="246" height="166" border="0" cellpadding="0" cellspacing="0" background="images/main/1_sub1.gif"  >
+ 	<table width="246" height="166" border="0" cellpadding="0" cellspacing="0" background="images/main/logout_bg.gif"  >
       <tr>
-        <td valign="top"><table width="223" border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">
+        <td valign="top"><table width="85%" border="0"cellpadding="0" cellspacing="0" style="margin-left:20px;margin-top:20px;">
           <tr>
-            <td  style="padding-top:18px;"><table width="227" height="111" border="0" cellpadding="0" cellspacing="0" background="images/main/logout_bg.gif">
-                <tr>
-                  <td height="83" valign="top"><table width="85%" border="0" align="left" cellpadding="0" cellspacing="0" style="margin-left:18px;margin-top:6px;">
-                      <tr>
-                        <td height="27" >&nbsp;</td>
-                        <td><span class="top_login"><%=member.getNickName()%></span> </td>
-                      </tr>
-                      <tr>
-                        <td width="27%" height="26">&nbsp;</td>
-                        <td width="44%"><span class="top_login"><%=XwinUtil.comma3(member.getBalance())%></span></td>
-                      </tr>
-                      <tr>
-                        <td height="26" style="padding-top:6px;">&nbsp;</td>
-                        <td height="26" style="padding-top:6px;"><a href='javascript:exchangePoint(<%=member.getPoint()%>)'><span class="top_login"><%=XwinUtil.comma3(member.getPoint())%></span></a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2" style="padding-top:16px;"></td>
-                      </tr>
-                  </table></td>
-                </tr>
-                <tr>
-                  <td><table width="227" height="18" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td width="125" style="padding-left:15px;padding-top:12px;">
-					<a href='user.php?mode=viewModifyForm'><img src="images/main/logout_title01.gif" border="0" /></a> 
-			    	<a href='betlog.php?mode=viewMyBettingList'><img src="images/main/logout_title02.gif"style="margin-left:11px;" border="0" /></a></td>
-                        <td width="93" style="padding-top:3px;padding-left:2px;"><div align="right">
-						 <a href='login.php?mode=processLogout' target='_self'><img src="images/main/logout_bt.gif"border="0"></a></div></td>
-                      </tr>
-                  </table></td>
-                </tr>
-            </table></td>
+            <td><span class="top_login"><%=member.getNickName()%></span><span class="style2">&nbsp;님 반갑습니다</span></td>
           </tr>
-        </table></td>
+        </table>
+          <table width="100%" height="129" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="71%" valign="top" style="padding-top:20px;padding-left:15px;"><table width="100%" height="65" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="35%" height="19">&nbsp;</td>
+                  <td width="65%" valign="middle"><a href='javascript:exchangePoint(<%=member.getPoint()%>)'><span class="top_login"><%=XwinUtil.comma3(member.getPoint())%></a>&nbsp;PT</span></td>
+                </tr>
+                <tr>
+                  <td height="24">&nbsp;</td>
+                  <td valign="bottom"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td valign="bottom"><span class="top_login"><%=XwinUtil.comma3(member.getBalance())%></span></td>
+                </tr>
+              </table>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:22px;">
+                  <tr>
+                    <td>
+					<a href="user.php?mode=viewModifyForm"><img src="images/main/logout_title01.gif" border="0"></a>&nbsp;
+					<a href="betlog.php?mode=viewMyBettingList"><img src="images/main/logout_title02.gif" border="0"></a></td>
+                  </tr>
+                </table></td>
+              <td width="29%" valign="bottom"><div align="right"><a href="login.php?mode=processLogout"><img src="images/main/logout_bt.gif" width="70" height="66" border="0"></a></div></td>
+            </tr>
+          </table></td>
       </tr>
-    </table>
+  </table>
  	<%} else { %>
 		<form name="login">
       <table width="246" height="166" border="0" cellpadding="0" cellspacing="0" background="images/main/1_sub1.gif"  >
         <tr>
-          <td valign="top" style="padding-top:50px;"><table width="93%" border="0" align="left" cellpadding="0" cellspacing="0" style="margin-left:7px;">
+          <td valign="top" style="padding-top:50px;"><table width="93%" border="0" align="left" cellpadding="0" cellspacing="0" style="margin-left:9px;">
               <tr>
                 <td colspan="2"><img src="images/main/login_title_1.gif"></td>
               </tr>
               <tr>
                 <td width="69%" style="padding-top:10px;"><table width="159" height="25" border="0" cellpadding="0" cellspacing="0">
                   <tr>
-                    <td background="images/main/login_id.gif"><div align="right">
+                    <td background="images/main/login_id.gif" style="padding-left:50px;">
+                      <div align="left">
                         <input name='userId' onKeyDown="enter(document.login)" type="text" class="input1" id="m_id" >
-                    </div></td>
-                  </tr>
+                          </div></td></tr>
                 </table></td>
                 <td width="31%" style="padding-top:13px;">&nbsp;</td>
               </tr>
               <tr>
                 <td style="padding-top:6px;"><table width="159" height="24" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td background="images/main/login_pw.gif"><div align="right">
-                        <input name='password' onkeydown='enter(document.login)' type="password" class="input1" id="m_passwd">
-                      </div></td>
-                    </tr>
+                      <td background="images/main/login_pw.gif" style="padding-left:50px;">
+                        <div align="left">
+                          <input name='password' onkeydown='enter(document.login)' type="password" class="input1" id="m_passwd">
+                          </div></td></tr>
                 </table></td>
-                <td rowspan="2" valign="bottom" style="padding-top:24px;"><div align="center"><img src="images/main/login_go_bt.gif" onClick="FnLogin_Submit(document.login)" style="margin-left:6px;"></div></td>
+                <td rowspan="2" valign="bottom" style="padding-top:24px;padding-left:15px;"><div align="left"><img src="images/main/login_go_bt.gif" onClick="FnLogin_Submit(document.login)"></div></td>
               </tr>
               <tr>
                 <td style="padding-top:11px;"><img src="images/main/login_title01.gif" border="0"onClick="location.href='userform.php?mode=viewJoinForm'"></td>
@@ -186,17 +185,17 @@ allowScriptAccess="always"></embed>
 <!-------------------------------------------------플래쉬끝-------------------------------------------------------->
 
 <!-------------------------------------------------긴급공지사항시작-------------------------------------------------------->
-<div id="popup" style="position:absolute;left:50%;top:90px;width:950px;z-index:5;margin-left:-470px;visibility:hidden;background-color:#111111">
+<div id="popup" style="position:absolute;left:50%;top:150px;width:950px;z-index:5;margin-left:-470px;visibility:hidden;background-color:darkred">
 <table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"></td>
-<td width="*"><b style="color:white">긴급공지</td>
+<td width="*"><b style="color:white">공지사항</td>
 <td width="10"></td>
 </tr>
 </table>
 
-<table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #4a4a4a;">
-<tr height="100%" valign="top"><td style="padding:13px;" bgcolor="#555555" style="color:black;">
+<table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #a8a8a8;">
+<tr height="100%" valign="top"><td bgcolor="e0e0e0" style="padding:13px;">
 
     <%
     String context = Admin.POPUP;
@@ -205,11 +204,12 @@ allowScriptAccess="always"></embed>
     out.print(context);
     %>
 
-</td></tr>
-<tr><td bgcolor="#525252">
-    <table width="100%" style="color:#8b8b8b;">
+</td>
+</tr>
+<tr><td bgcolor="#a1a1a1">
+    <table width="100%" style="color:#a1a1a1;">
     <tr>
-        <td width="50%"><b style="color:black">작성자 : <b>관리자</b></td>
+        <td width="50%"><b style="color:black"></td>
         <td width="50%" align="right"><b style="color:black">
 			오늘하루이창을열지않음 <input type="checkbox" id="popupcheck">
 			닫기 <img src="img/x.gif" onClick="popupclose()">	
@@ -217,6 +217,7 @@ allowScriptAccess="always"></embed>
     </tr></table>
 </td></tr>
 </table>
+<br>
 </div>
 <!-------------------------------------------------긴급공지사항끝-------------------------------------------------------->
 
@@ -270,11 +271,39 @@ allowScriptAccess="always"></embed>
         </tr>
         <tr>
           <td background="images/main/title1_center.gif"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <%
+          for (Game game : wdlList) {
+          %>
               <tr>
-                <td align="center" class="maindate"></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"></td>
+                <td align="center" class="maindate"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getLeagueName()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getHomeTeam()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <%
+				if (game.getType().equals("wdl")) {
+					if (game.getDrawRate()==0||game.getDrawDeny().equals("N"))
+						out.print("x");
+					else
+						out.print(game.getDrawRateStr());
+				} else {
+					if (game.getDrawRate() > 0)
+						out.print("+");
+					out.print(game.getDrawRate());
+				}
+					
+				%>
+                </td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getAwayTeam()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=Code.getValue(game.getStatus())%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <%if (game.getNote() != null && game.getNote().length() > 0) { %>
+				<span onclick="getNote(<%=game.getId()%>)">공지</span>
+				<%} %>
+                </td>
               </tr>
+          <%
+          }
+          %>
           </table></td>
         </tr>
         <tr>
@@ -289,18 +318,46 @@ allowScriptAccess="always"></embed>
         </tr>
         <tr>
           <td background="images/main/title1_center.gif"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+         <%
+          for (Game game : handyList) {
+          %>
               <tr>
-                <td align="center" class="maindate"></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"></td>
+                <td align="center" class="maindate"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getLeagueName()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getHomeTeam()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <%
+				if (game.getType().equals("wdl")) {
+					if (game.getDrawRate()==0||game.getDrawDeny().equals("N"))
+						out.print("x");
+					else
+						out.print(game.getDrawRateStr());
+				} else {
+					if (game.getDrawRate() > 0)
+						out.print("+");
+					out.print(game.getDrawRate());
+				}
+					
+				%>
+                </td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getAwayTeam()%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=Code.getValue(game.getStatus())%></td>
+                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <%if (game.getNote() != null && game.getNote().length() > 0) { %>
+				<span onclick="getNote(<%=game.getId()%>)">공지</span>
+				<%} %>
+                </td>
               </tr>
+          <%
+          }
+          %>
           </table></td>
         </tr>
         <tr>
           <td><img src="images/main/title1_bottm.gif"></td>
         </tr>
       </table>
-    </td>
+    <DIV align=right></DIV></td>
   </tr>
 </table>
 <!-------------------------------------------------카피라이터--------------------------------------------------------->
