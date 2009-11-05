@@ -97,9 +97,7 @@
 	}
 %>
 			    </td>
-			    <td width="100" height="40" align="right">
-				<a href='javascript:exchangePoint(<%=member.getPoint()%>)'>[캐쉬로전환]</a>
-				</td>
+			    <td width="100" height="40" align="right"><a href="javascript:exchangePoint(<%=member.getPoint()%>)"><img src="img/cchange1.jpg" / border="0"></a></td>
 			</tr>
 		    
      </table>
