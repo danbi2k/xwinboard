@@ -6,7 +6,9 @@
 
 <%@include file="../header.jsp"%>
 			<tr><td><img src="img/menu091.jpg" border="0"></td></tr>
-		
+		<tr>
+	<td align="center"><img src="img/money_chagenotice.gif" border="0"></td>
+</tr>
             </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="246">
     <tr>

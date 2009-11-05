@@ -62,6 +62,9 @@
 </table>
 <br>
 <br>
+<table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
+	        <tr>
+			    <td width="750" height="40" align="center">
 <%
 	int pIdx = 0;
 	if (pageIndex != null)
@@ -93,6 +96,13 @@
 <%
 	}
 %>
+			    </td>
+			    <td width="100" height="40" align="right">
+				<a href='javascript:exchangePoint(<%=member.getPoint()%>)'>[캐쉬로전환]</a>
+				</td>
+			</tr>
+		    
+     </table>
 <script>
 function goPage(index)
 {

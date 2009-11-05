@@ -120,6 +120,7 @@ receiveMemo();
 <body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(images/main/bg_top2.gif) no-repeat center top;">
 <div style="position: absolute; left:expression((document.body.clientWidth) / 2 -493); top:expression((document.body.clienthheight) / 2 -170); z-index: 3; width: 968px; top: 25px; left:0px;"> 
   <div align="right" class="style1">
+  <%if (login) { %>
   <a href="home.php"><img src="images/main/top_1.gif" border="0" ></a>&nbsp;
   <img src="images/main/top_line.gif">&nbsp;
   <a href="earncache.php?mode=viewMoneyInRequest"><img src="images/main/top_2.gif" border="0"></a>&nbsp;
@@ -133,6 +134,7 @@ receiveMemo();
     <a href="account.php?mode=viewMyPointList"><img src="images/main/top_6.gif" border="0" ></a>&nbsp;
     <img src="images/main/top_line.gif">&nbsp;
     <a href="login.php?mode=processLogout"><img src="images/main/top_7.gif" border="0"></a> </div>
+   <%} %>
 </div>
 <!-------------------------------------------------로그인&로그아웃 레이어 시작-------------------------------------------------------->
 <!-------------------------------------------------로그인&로그아웃 레이어 끝-------------------------------------------------------->

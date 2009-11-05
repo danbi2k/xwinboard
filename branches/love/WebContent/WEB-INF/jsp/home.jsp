@@ -94,21 +94,21 @@
         </table>
           <table width="100%" height="129" border="0" cellpadding="0" cellspacing="0">
             <tr>
-              <td width="71%" valign="top" style="padding-top:20px;padding-left:15px;"><table width="100%" height="65" border="0" cellpadding="0" cellspacing="0">
+              <td width="71%" valign="top" style="padding-top:18px;padding-left:15px;"><table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td width="35%" height="19">&nbsp;</td>
-                  <td width="65%" valign="middle"><a href='javascript:exchangePoint(<%=member.getPoint()%>)'><span class="top_login"><%=XwinUtil.comma3(member.getPoint())%></a>&nbsp;PT</span></td>
+                  <td width="35%" height="22">&nbsp;</td>
+                  <td width="65%" valign="middle"><span class="top_login"><%=XwinUtil.comma3(member.getBalance())%></span></td>
                 </tr>
                 <tr>
                   <td height="24">&nbsp;</td>
-                  <td valign="bottom"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></td>
+                  <td valign="middle"><a href='javascript:exchangePoint(<%=member.getPoint()%>)'><span class="top_login"><%=XwinUtil.comma3(member.getPoint())%></a>&nbsp;PT</span></td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
-                  <td valign="bottom"><span class="top_login"><%=XwinUtil.comma3(member.getBalance())%></span></td>
+                  <td valign="bottom" style="padding-top:4px;"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></td>
                 </tr>
               </table>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:22px;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">
                   <tr>
                     <td>
 					<a href="user.php?mode=viewModifyForm"><img src="images/main/logout_title01.gif" border="0"></a>&nbsp;
@@ -261,7 +261,25 @@ allowScriptAccess="always"></embed>
 
 <table width="968" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:13px;">
   <tr>
-    <td width="235" valign="top"><iframe name="iframetoto" src="" width="235" height="503" marginwidth=0 marginheight=0 border=0 scrolling=no frameborder=0></iframe></td>
+    <td width="235" valign="top">
+	<img src="images/main/baner_title.jpg">
+	<a href="http://www.premierleague.com" target="_blank">
+	<img src="images/main/baner1.jpg" border="0"  style="margin-top:5px;"></a>
+	
+	<a href="http://mlb.mlb.com/index.jsp" target="_blank">
+	<img src="images/main/baner2.jpg" border="0"  style="margin-top:5px;"></a>
+	
+	<a href="http://www.nba.com" target="_blank">
+	<img src="images/main/baner3.jpg" border="0"  style="margin-top:5px;"></a>
+	
+	<a href="http://www.kleaguei.com" target="_blank">
+	<img src="images/main/baner4.jpg"  style="margin-top:5px;"border="0" ></a>
+	
+	<a href="http://www.koreabaseball.com" target="_blank">
+	<img src="images/main/baner5.jpg" border="0"  style="margin-top:5px;"></a>
+	
+	<a href="http://www.kbl.or.kr/" target="_blank">
+	<img src="images/main/baner6.jpg" border="0"  style="margin-top:5px;"></a></td>
     <td width="33">&nbsp;</td>
 	<!----------------------------승무패--------------------------->
     <td valign="top"><img src="images/main/title1.gif">
@@ -270,15 +288,16 @@ allowScriptAccess="always"></embed>
           <td><img src="images/main/title1_top.gif"></td>
         </tr>
         <tr>
-          <td background="images/main/title1_center.gif"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <td background="images/main/title1_center.gif">
+          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
           <%
           for (Game game : wdlList) {
           %>
               <tr>
-                <td align="center" class="maindate"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getLeagueName()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getHomeTeam()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <td class="mainlist" width="90" style="text-align:center"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
+                <td class="mainlist" width="130" style="text-align:center"><%=game.getLeagueName()%></td>
+                <td class="mainlist" width="180" style="text-align:right"><%=game.getHomeTeam()%></td>
+                <td class="mainlist" width="70" style="text-align:center">
                 <%
 				if (game.getType().equals("wdl")) {
 					if (game.getDrawRate()==0||game.getDrawDeny().equals("N"))
@@ -291,15 +310,9 @@ allowScriptAccess="always"></embed>
 					out.print(game.getDrawRate());
 				}
 					
-				%>
-                </td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getAwayTeam()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=Code.getValue(game.getStatus())%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
-                <%if (game.getNote() != null && game.getNote().length() > 0) { %>
-				<span onclick="getNote(<%=game.getId()%>)">공지</span>
-				<%} %>
-                </td>
+				%>                </td>
+                <td class="mainlist" width="180" style="text-align:left"><%=game.getAwayTeam()%></td>
+                <td class="mainlist" width="50" style="text-align:center"><%=Code.getValue(game.getStatus())%></td>
               </tr>
           <%
           }
@@ -322,10 +335,10 @@ allowScriptAccess="always"></embed>
           for (Game game : handyList) {
           %>
               <tr>
-                <td align="center" class="maindate"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getLeagueName()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getHomeTeam()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
+                <td class="mainlist" width="90" style="text-align:center"><%=XwinUtil.getBoardItemDate(game.getGameDate())%></td>
+                <td class="mainlist" width="130" style="text-align:center"><%=game.getLeagueName()%></td>
+                <td class="mainlist" width="180" style="text-align:right"><%=game.getHomeTeam()%></td>
+                <td class="mainlist" width="70" style="text-align:center">
                 <%
 				if (game.getType().equals("wdl")) {
 					if (game.getDrawRate()==0||game.getDrawDeny().equals("N"))
@@ -338,15 +351,9 @@ allowScriptAccess="always"></embed>
 					out.print(game.getDrawRate());
 				}
 					
-				%>
-                </td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=game.getAwayTeam()%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'"><%=Code.getValue(game.getStatus())%></td>
-                <td align="left" valign="middle" class="maint" onMouseOver="this.className='button_over'" onMouseOut="this.className='button_out'">
-                <%if (game.getNote() != null && game.getNote().length() > 0) { %>
-				<span onclick="getNote(<%=game.getId()%>)">공지</span>
-				<%} %>
-                </td>
+				%>                </td>
+                <td class="mainlist" width="180" style="text-align:left"><%=game.getAwayTeam()%></td>
+                <td class="mainlist" width="50" style="text-align:center"><%=Code.getValue(game.getStatus())%></td>
               </tr>
           <%
           }

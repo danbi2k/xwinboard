@@ -19,7 +19,7 @@
 					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
 					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판 (일반)</a></li>
 					<li><a href="admin.aspx?mode=viewPopup&grade=10">긴급공지</a></li>
-					<!--li><a href="admin.aspx?mode=viewNotice">Notice</a></li -->
+					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
 				</ul>
 			</div>
