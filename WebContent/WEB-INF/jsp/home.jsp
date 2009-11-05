@@ -300,6 +300,10 @@ allowScriptAccess="always"></embed>
   <tr>
     <td width="235" valign="top">
 	<img src="images/main/baner_title.jpg">
+    
+    <a href="http://www.dding-dong.com" target="_blank">
+	<img src="images/main/baner0.jpg" border="0"  style="margin-top:5px;"></a>
+    
 	<a href="http://www.premierleague.com" target="_blank">
 	<img src="images/main/baner1.jpg" border="0"  style="margin-top:5px;"></a>
 	
@@ -318,8 +322,9 @@ allowScriptAccess="always"></embed>
 	<a href="http://www.kbl.or.kr/" target="_blank">
 	<img src="images/main/baner6.jpg" border="0"  style="margin-top:5px;"></a></td>
     <td width="33">&nbsp;</td>
+    <td valign="top">
 	<!----------------------------승무패--------------------------->
-    <td valign="top"><img src="images/main/title1.gif">
+      <img src="images/main/title1.gif">
       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;">
         <tr>
           <td><img src="images/main/title1_top.gif"></td>
@@ -360,14 +365,15 @@ allowScriptAccess="always"></embed>
           <td><img src="images/main/title1_bottm.gif"></td>
         </tr>
       </table>
-	  	<!----------------------------핸디캡--------------------------->
-	  <img src="images/main/title2.gif" style="margin-top:16px;">
+	<!----------------------------핸디캡--------------------------->
+	  <img src="images/main/title2.gif">
       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;">
         <tr>
-          <td><img src="images/main/title1_top.gif"></td>
+          <td><img src="images/main/title2_top.gif"></td>
         </tr>
         <tr>
-          <td background="images/main/title1_center.gif"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <td background="images/main/title2_center.gif">
+          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
          <%
           for (Game game : handyList) {
           %>
