@@ -27,7 +27,7 @@ if (betting != null) {
 %>
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
     <tr>
-        <td width="771" height="40" align="center" valign="middle" class="menubar">
+        <td width="771" height="20" align="center" valign="middle" class="menubar">
         <strong>:: 배팅내역 ::</strong></td>
         
     </tr>

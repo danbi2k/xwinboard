@@ -45,78 +45,29 @@ function goButton(form)
 //-->
 </SCRIPT>
 
-<body bgcolor="#000000" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+<body bgcolor="#ffffff" topmargin="300" leftmargin="0" marginwidth='0' marginheight='0'style="background:url(images/main/intro_bg.gif) no-repeat center top;">
 <form name="regist">
-<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/index_i1.gif" style="background-repeat:no-repeat;" align="center">
-    <tr>
-        <td width="122" height="460">
-            <p>&nbsp;</p>
-        </td>
-        <td width="575" height="460" colspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="204" height="460">
-            <p>&nbsp;</p>
-        </td>
- 
-       
-        <td width="123"></td>
-    </tr>
-    <tr>
-        <td width="122" height="72" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="306" height="26">
-            <p></p>
-        </td>
-        <td width="191" height="26">
-            <p><input style="width:138pt;" name="inviteKey" type="text" class="input1" id="m_passwd"></p>
-        </td>
-        <td width="78" height="72" rowspan="3" align="center" valign="top">
-            <p><img src="img/lbin.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
-        </td>
-        <td width="204" height="72" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="123" height="26"></td>
-    </tr>
-    <tr>
-        <td width="306" height="26">
-            <p>&nbsp;</p>
-        </td>
-        <td width="191" height="26">
-            <p><input style="width:138pt;" name="userId" type="text" class="input1" id="m_id"></p>
-        </td>
-        <td width="123" height="26"></td>
-    </tr>
-
-    <tr>
-        <td width="306" height="242" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="473" height="14" colspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="123" height="242" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-    <tr>
-        <td width="122" height="242" rowspan="2">
-            <p>&nbsp;</p>
-        </td>
-        <td width="473" height="34" colspan="3">
-           <p></p>
-        </td>
-    </tr>
-
-    <tr>
-        <td width="473" height="208" colspan="3">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-
+  <table width="337" height="105" border="0" align="center" cellpadding="0" cellspacing="0" background="images/main/intro_login1_bg.gif">
+  <tr>
+    <td valign="top" style="padding-top:20px;"><table width="100%" height="65" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="68%" valign="top" style="padding-top:3px;padding-left:90px;">
+		<table width="72%" border="0" cellspacing="0" cellpadding="0" style="margin-top:3px;">
+          <tr>
+            <td><input style="width:85pt;" name="inviteKey" type="text" class="input1" id="m_passwd"></td>
+          </tr>
+        </table>
+          <table width="72%" border="0" cellspacing="0" cellpadding="0" style="margin-top:16px;">
+            <tr>
+              <td><input style="width:85pt;" name="userId" type="text" class="input1" id="m_id"></td>
+            </tr>
+          </table></td>
+        <td width="32%"><img src="images/main/intro_go1_bt.gif" name="login_bttn"  id="login_bttn" onClick="checkIT()"></td>
+      </tr>
+    </table></td>
+  </tr>
 </table>
+
 </form>
 </body>
 </html>

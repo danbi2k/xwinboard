@@ -10,81 +10,31 @@
 <script language="javascript" src="script/jkl-parsexml.js"></script>
 <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
-<body bgcolor="#7a0606" topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
+
+<body bgcolor="#ffffff" topmargin="300" leftmargin="0" marginwidth='0' marginheight='0'style="background:url(images/main/intro_bg.gif) no-repeat center top;">
 <form name="regist">
-<table cellpadding="0" cellspacing="0" width="1024" height="768" background="img/index.gif" style="background-repeat:no-repeat;" align="center">
+  <table width="334" height="131" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:30px;">
     <tr>
-        <td width="339" height="460">
-            <p>&nbsp;</p>
-        </td>
-        <td width="370" height="460" colspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="315" height="460">
-            <p>&nbsp;</p>
-        </td>
+      <td height="131" background="images/main/intro_login_bg.gif"><table width="100%" height="107" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="70%" valign="top" style="padding-top:35px;"><table width="100%" height="25" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="30%">&nbsp;</td>
+                  <td width="72%"><input style="width:100pt;font-family:verdana;font-size:9pt;border:solid 0; color:#1a1a1a;background-color:transparent;" name="userId" type="text" id="m_id"></td>
+                </tr>
+              </table>
+              <table width="100%" height="24" border="0" cellpadding="0" cellspacing="0" style="margin-top:12px;">
+                <tr>
+                  <td width="30%">&nbsp;</td>
+                  <td width="70%"><input style="width:100pt;font-family:verdana;font-size:9pt;border:solid 0; color:#1a1a1a;background-color:transparent;" name="password" type="password" id="m_passwd" onKeyDown="goButton()"></td>
+                </tr>
+              </table></td>
+            <td width="30%" valign="top" style="padding-top:36px;"><img src="images/main/intro_go_bt.gif"onClick="checkIT()"  id="login_bttn" ></td>
+          </tr>
+      </table></td>
     </tr>
-    <tr>
-        <td width="339" height="77" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="85" height="23">
-            <p></p>
-        </td>
-        <td width="186" height="23">
-            <p><input style="width:138pt;" name="userId" type="text" id="m_id"></p>
-        </td>
-        <td width="99" height="77" rowspan="3" align="center" valign="top">
-            <p><img src="img/lbin3222.gif" border="0" align="abstop" id="login_bttn" onclick="checkIT()"></p>
-        </td>
-        <td width="315" height="77" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-    <tr>
-        <td width="85" height="32">
-            <p>&nbsp;</p>
-        </td>
-        <td width="186" height="32">
-            <p><input style="width:138pt;" name="password" type="password" id="m_passwd" onkeydown="goButton()"></p>
-        </td>
-    </tr>
-    <tr>
-        <td width="85" height="22">
-            <p>&nbsp;</p>
-        </td>
-        <td width="186" height="22">
-            <p></p>
-        </td>
-    </tr>
-    <tr>
-        <td width="339" height="242" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="370" height="14" colspan="3">
-            <p>&nbsp;</p>
-        </td>
-        <td width="315" height="242" rowspan="3">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-    <tr>
-        <td width="85" height="38">
-            <p>&nbsp;</p>
-        </td>
-        <td width="186" height="38" align="center">
-            <p><a href="userform.php?mode=viewJoinLoginForm"><img src="img/entry00.gif" border="0"></a></p>
-        </td>
-        <td width="99" height="38">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-    <tr>
-        <td width="370" height="190" colspan="3" align="center">
-            <p></p>
-        </td>
-    </tr>
-</table>
+  </table>
+  <div align="center"><a href="userform.php?mode=viewJoinLoginForm"><img src="images/main/intro_member_bt.gif" style="margin-top:15px;" border="0"></a></div> 
 </form>
 </body>
 </html>
