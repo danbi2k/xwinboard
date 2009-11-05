@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.domain.*"%>
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
@@ -18,7 +19,7 @@
     
       <tr>
         <td width="3%" valign="top">1.</td>
-        <td width="97%"><span style="padding-top:12px;">Dragon(이하 회사)은 회원님이 계정을 가지고 있을 때 아래의 내용에 대해 동의 한다고 가정합니다.</span></td>
+        <td width="97%"><span style="padding-top:12px;"><%=SiteConfig.SITE_NAME%>(이하 회사)은 회원님이 계정을 가지고 있을 때 아래의 내용에 대해 동의 한다고 가정합니다.</span></td>
       </tr>
       <tr>
         <td valign="top" style="padding-top:12px;">2.</td>

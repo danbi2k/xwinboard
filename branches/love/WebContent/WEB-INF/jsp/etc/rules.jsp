@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.domain.*"%>
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.domain.admin.*"%>
 <%@ page import="org.apache.commons.lang.*"%>
@@ -48,11 +49,11 @@
       </tr>
 	   <tr>
         <td valign="top" style="padding-top:12px;">8.</td>
-        <td style="padding-top:12px;">회원은 자신에 베팅머니를 24시간 언제든지 인출을 요구할 수 있으며, [드래곤벳]은 회원의 인출요구를 신속하게 처리 합니다. </td>
+        <td style="padding-top:12px;">회원은 자신에 베팅머니를 24시간 언제든지 인출을 요구할 수 있으며, [<%=SiteConfig.SITE_NAME%>]은 회원의 인출요구를 신속하게 처리 합니다. </td>
       </tr>
 	   <tr>
         <td valign="top" style="padding-top:12px;">9.</td>
-        <td style="padding-top:12px;">베팅금액은(\5,000 ~ \1,000,000)이며 베팅상한선을 초과 베팅 할 경우 베팅이 제한됩니다. 최대 적중금 상한가는 3백만원이며,   적중배당률과 구입금액의 곱이 3백만원을 초과할 경우 3백만원까지 지급됩니다.(드래곤벳의 공지에 의해 변동가능) </td>
+        <td style="padding-top:12px;">베팅금액은(\5,000 ~ \1,000,000)이며 베팅상한선을 초과 베팅 할 경우 베팅이 제한됩니다. 최대 적중금 상한가는 3백만원이며,   적중배당률과 구입금액의 곱이 3백만원을 초과할 경우 3백만원까지 지급됩니다.(<%=SiteConfig.SITE_NAME%>의 공지에 의해 변동가능) </td>
       </tr>
 	   <tr>
         <td valign="top" style="padding-top:12px;">10.</td>
@@ -60,11 +61,11 @@
       </tr>
 	   <tr>
         <td valign="top" style="padding-top:12px;">11.</td>
-        <td style="padding-top:12px;">[드래곤벳]은 운영에 지장을 초래 하는 회원에 한해 계정을 취소 또는 정지 시킬 수 있는 권리가 있으며, 보유 머니 삭제 될수 있습니다. </td>
+        <td style="padding-top:12px;">[<%=SiteConfig.SITE_NAME%>]은 운영에 지장을 초래 하는 회원에 한해 계정을 취소 또는 정지 시킬 수 있는 권리가 있으며, 보유 머니 삭제 될수 있습니다. </td>
       </tr>
 	   <tr>
         <td valign="top" style="padding-top:12px;">12.</td>
-        <td style="padding-top:12px;">시스템 및 전산장비의 오류 또는 천재지변으로 인한 장애 발생시 [드래곤벳]은 이를 변경, 취소할 수 있습니다. 베팅 및 정산과 관련된 오류 발생시, 회원은 이를 [드래곤벳]에 즉시 알려야 할 책임이 있습니다. [드래곤벳]이 인지 못한 오류로 발생되는 회원의 손실은 [드래곤벳]이 책임지지 않습니다. </td>
+        <td style="padding-top:12px;">시스템 및 전산장비의 오류 또는 천재지변으로 인한 장애 발생시 [<%=SiteConfig.SITE_NAME%>]은 이를 변경, 취소할 수 있습니다. 베팅 및 정산과 관련된 오류 발생시, 회원은 이를 [<%=SiteConfig.SITE_NAME%>]에 즉시 알려야 할 책임이 있습니다. [<%=SiteConfig.SITE_NAME%>]이 인지 못한 오류로 발생되는 회원의 손실은 [<%=SiteConfig.SITE_NAME%>]이 책임지지 않습니다. </td>
       </tr>
     </table>
       <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">
