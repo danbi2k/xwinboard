@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><%=SiteConfig.SITE_NAME%> 환영합니다</title>
+<title>환상의 세계로 오신것을 환영합니다</title>
 </head>
 <frameset rows="0,100%" border="0">
-	<frame name=left src="UntitledFrame-5" border=0 scrolling="yes" noresize>
+	<frame name=left src="" border=0 scrolling="yes" noresize>
 	<frame name=mainFrame src="default.php" border=0 scrolling="yes" noresize> 
 </frameset><noframes></noframes>
 <body>
