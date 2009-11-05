@@ -76,8 +76,42 @@
 </form>
 </div>
 <script>
-var memoId;
+if (parent.frames.length <= 0) {
+	top.location.href="/";
+}
 
+function click() {
+	if ((event.button==2) || (event.button==2)) {
+		alert('죄송합니다. 오른쪽 마우스 금지입니다');
+		return;
+	}
+
+	if((event.ctrlKey) || (event.shiftKey)) { 
+		alert('키를 사용할 수 없습니다.');
+		return;
+	}		
+}
+function processKey() 
+{ 
+
+		if((event.ctrlKey) || (event.shiftKey)) { 
+			alert('키를 사용할 수 없습니다.');
+			return;
+		}
+		
+        if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || 
+        (event.keyCode >= 112 && event.keyCode <= 123) || event.keyCode == 8) 
+            { 
+        event.keyCode = 0; 
+        event.cancelBubble = true; 
+        event.returnValue = false; 
+            } 
+} 
+
+document.onkeydown = processKey;
+document.onmousedown=click;
+
+var memoId;
 function receiveMemo()
 {
 	var query = "mode=receiveMemo";

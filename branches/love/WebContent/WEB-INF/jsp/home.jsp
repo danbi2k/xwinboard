@@ -67,6 +67,42 @@
     </style>
 </head>
 <body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(images/main/bg_top1.gif) no-repeat center top;">
+<script>
+if (parent.frames.length <= 0) {
+	top.location.href="/";
+}
+
+function click() {
+	if ((event.button==2) || (event.button==2)) {
+		alert('죄송합니다. 오른쪽 마우스 금지입니다');
+		return;
+	}
+
+	if((event.ctrlKey) || (event.shiftKey)) { 
+		alert('키를 사용할 수 없습니다.');
+		return;
+	}		
+}
+function processKey() 
+{ 
+
+		if((event.ctrlKey) || (event.shiftKey)) { 
+			alert('키를 사용할 수 없습니다.');
+			return;
+		}
+		
+        if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || 
+        (event.keyCode >= 112 && event.keyCode <= 123) || event.keyCode == 8) 
+            { 
+        event.keyCode = 0; 
+        event.cancelBubble = true; 
+        event.returnValue = false; 
+            } 
+} 
+
+document.onkeydown = processKey;
+document.onmousedown=click;
+</script>
 <div style="position: absolute; left:expression((document.body.clientWidth) / 2 -493); top:expression((document.body.clienthheight) / 2 -170); z-index: 3; width: 968px; top: 25px; left:0px;"> 
  <div align="right" class="style1">
   <a href="#"><img src="images/main/top_1.gif" border="0" ></a>&nbsp;
