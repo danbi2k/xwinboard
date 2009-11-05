@@ -20,6 +20,7 @@ A:hover  {color:#1a1a1a;text-decoration:none;}
 .notice {font-family:verdana;font-size:12pt;color:#1a1a1a;font-weight:bold;}
 .maindate {font-family:verdana;font-size:7pt;color:#1a1a1a;line-height:100%;width:90;height:24;}
 .maint {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;width:185;height:24;letter-spacing:-1}
+.mainlist {style:word-break:break-all;vertical-align:middle;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;height:24;letter-spacing:-1}
 .button_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .mbutton_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;height:26;} 

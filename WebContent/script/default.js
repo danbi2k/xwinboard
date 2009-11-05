@@ -1,3 +1,4 @@
+var global_login = true;
 var topLink = [];
 topLink[0] = "home.php";
 topLink[1] = "play.php?mode=viewGameList&type=wdl&grade=1";
@@ -15,8 +16,8 @@ topLink[12] = "account.php?mode=viewMyPointList";
 
 function goTopLink(index)
 {
-	//alert(index);
-	location.href = topLink[index];
+	if (global_login)
+		location.href = topLink[index];		
 }
 
 function exchangePoint(point)
