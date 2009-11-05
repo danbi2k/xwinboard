@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.user.*"%>
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.domain.admin.*"%>
@@ -31,7 +32,7 @@
 
 <html>
 <head>
-<title>DRAGON-BET 환영합니다</title>
+<title><%=SiteConfig.SITE_NAME%> 환영합니다</title>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=UTF-8">
     <Meta Http-Equiv="Imagetoolbar" Content="No">

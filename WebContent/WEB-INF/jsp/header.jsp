@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.admin.*" %>
 <%@ page import="com.xwin.domain.user.*" %>
 <%@ page import="com.xwin.infra.dao.*" %>
@@ -27,7 +27,7 @@
 %>
 <html>
 <head>
-<title>DRAGON-BET 환영합니다</title>
+<title><%=SiteConfig.SITE_NAME%> 환영합니다</title>
 	<Meta Http-Equiv="Content-Type" Content="Text/Html; Charset=UTF-8">
     <Meta Http-Equiv="Imagetoolbar" Content="No">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
