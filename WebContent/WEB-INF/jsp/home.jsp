@@ -171,7 +171,7 @@ document.onmousedown=click;
                     <td background="images/main/login_id.gif" style="padding-left:50px;">
                       <div align="left">
                         <input name='userId' onKeyDown="enter(document.login)" type="text" class="input1" id="m_id" >
-                          </div></td></tr>
+                      </div></td></tr>
                 </table></td>
                 <td width="31%" style="padding-top:13px;">&nbsp;</td>
               </tr>
@@ -181,7 +181,7 @@ document.onmousedown=click;
                       <td background="images/main/login_pw.gif" style="padding-left:50px;">
                         <div align="left">
                           <input name='password' onkeydown='enter(document.login)' type="password" class="input1" id="m_passwd">
-                          </div></td></tr>
+                        </div></td></tr>
                 </table></td>
                 <td rowspan="2" valign="bottom" style="padding-top:24px;padding-left:15px;"><div align="left"><img src="images/main/login_go_bt.gif" onClick="FnLogin_Submit(document.login)"></div></td>
               </tr>
@@ -302,25 +302,52 @@ allowScriptAccess="always"></embed>
 	<img src="images/main/baner_title.jpg">
     
     <a href="http://www.dding-dong.com" target="_blank">
-	<img src="images/main/baner0.jpg" border="0"  style="margin-top:5px;"></a>
-    
+	<img src="images/main/baner0.jpg" border="0"  style="margin-top:8px;"></a>
+    <table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
+
 	<a href="http://www.premierleague.com" target="_blank">
-	<img src="images/main/baner1.jpg" border="0"  style="margin-top:5px;"></a>
-	
+	<img src="images/main/baner1.jpg" border="0"  style="margin-top:8px;"></a>
+	   <table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
 	<a href="http://mlb.mlb.com/index.jsp" target="_blank">
-	<img src="images/main/baner2.jpg" border="0"  style="margin-top:5px;"></a>
-	
+	<img src="images/main/baner2.jpg" border="0"  style="margin-top:8px;"></a>
+	   <table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
 	<a href="http://www.nba.com" target="_blank">
-	<img src="images/main/baner3.jpg" border="0"  style="margin-top:5px;"></a>
-	
+	<img src="images/main/baner3.jpg" border="0"  style="margin-top:8px;"></a>
+	   <table width="235" border="0" cellpadding="0" cellspacing="0" bgcolor="#e0e0e0" style="margin-top:5px;">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
 	<a href="http://www.kleaguei.com" target="_blank">
-	<img src="images/main/baner4.jpg"  style="margin-top:5px;"border="0" ></a>
-	
+	<img src="images/main/baner4.jpg"  style="margin-top:8px;"border="0" ></a>
+	   <table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
 	<a href="http://www.koreabaseball.com" target="_blank">
-	<img src="images/main/baner5.jpg" border="0"  style="margin-top:5px;"></a>
+	<img src="images/main/baner5.jpg" border="0"  style="margin-top:8px;"></a>
+	<table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
+  <tr>
+    <td height="1"></td>
+  </tr>
+</table>
+	<a href="http://www.kbl.or.kr/" target="_blank"><img src="images/main/baner6.jpg" border="0"  style="margin-top:8px;"></a>
+	<img src="images/main/baner_bg.jpg">
 	
-	<a href="http://www.kbl.or.kr/" target="_blank">
-	<img src="images/main/baner6.jpg" border="0"  style="margin-top:5px;"></a></td>
+	</td>
     <td width="33">&nbsp;</td>
     <td valign="top">
 	<!----------------------------승무패--------------------------->
@@ -372,8 +399,8 @@ allowScriptAccess="always"></embed>
           <td><img src="images/main/title2_top.gif"></td>
         </tr>
         <tr>
-          <td background="images/main/title2_center.gif">
-          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+          <td background="images/main/title1_center1.gif">
+          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;"background="images/main/title1_center.gif">
          <%
           for (Game game : handyList) {
           %>

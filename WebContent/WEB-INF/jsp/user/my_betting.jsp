@@ -30,7 +30,7 @@
 	적중액 :
 	<%
 	if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-		out.print("<font color='#FFC602'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
+		out.print("<font color='#1000e2'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
 	else
 		out.print(0);							
 	%>
@@ -71,7 +71,7 @@
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
@@ -87,7 +87,7 @@
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
@@ -103,7 +103,7 @@
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
 									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
