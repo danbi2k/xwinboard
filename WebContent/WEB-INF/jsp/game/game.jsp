@@ -133,6 +133,17 @@ if (gameList != null) {
         <td width="469">
 		   <table cellpadding="0" cellspacing="0" width="469" height="91" border="0">
 			    <tr>
+			        <td width="100" height="30">
+			            <p>배당율</p>
+			        </td>
+			        <td width="299" height="30">
+			            <p id='rateDiv'>0.00</p>
+			        </td>
+			        <td width="70" height="30">
+			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
+			        </td>
+			    </tr>
+			    <tr>
 			        <td width="100" height="31">
 			            <p>배팅금액</p>
 			        </td>
@@ -145,18 +156,7 @@ if (gameList != null) {
 			    </tr>
 			    <tr>
 			        <td width="100" height="30">
-			            <p>예상배당율</p>
-			        </td>
-			        <td width="299" height="30">
-			            <p id='rateDiv'>0.00</p>
-			        </td>
-			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
-			        </td>
-			    </tr>
-			    <tr>
-			        <td width="100" height="30">
-			            <p>예상적중금</p>
+			            <p>예상적중액</p>
 			        </td>
 			        <td width="299" height="30">
 			            <p id='expectDiv'>0</p>

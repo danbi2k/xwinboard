@@ -23,15 +23,10 @@ if (betting != null) {
 <table align="center" cellpadding="0" cellspacing="0" width="771">
    
     <tr>
-        <td width="771" background="img/minit_01.jpg">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
-    <tr>
-        <td width="771" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="771" background="img/minit_02.jpg" valign="top">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td height="30"><font color="red">※ 배팅내역은 게시물에 자동 첨부 됩니다</font></td>
+<td height=""><span style="color:darkred;weight:bold">★ 배팅내역은 본문 상단에 자동 표시 됩니다.</span></td>
 </tr>
 <tr>
 		<td><table border="0" cellpadding="0" cellspacing="0">
@@ -85,22 +80,12 @@ if (betting != null) {
 		          </tbody>
 		        </table></td>
 		      </tr>
-		    <tr>
-		      <td height="3"></td>
-		      </tr>
 		    </tbody>
 		  </table></td>
 		</tr>
-	<tr><td height="10"></td>
-	</tr>
 </table>
 </td>
 	</tr>
-	<tr>
-        <td width="771" background="img/minit_03.jpg">
-            <p>&nbsp;</p>
-        </td>
-    </tr>
 </table>
 <%
 }
@@ -116,7 +101,7 @@ if (betting != null) {
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
    
     <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
+        <td width="771" height="15" background="img/minit_01.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
@@ -148,7 +133,7 @@ if (betting != null) {
 <tr>
  <td align=right class=menubar font color:#000000><strong>내용</strong></td>
  <td></td>
- <td><textarea name=context rows=15 class=textarea></textarea></td>
+ <td><textarea name=context rows=25 class=textarea></textarea></td>
 </tr>
 
 </table>

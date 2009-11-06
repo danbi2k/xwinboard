@@ -13,8 +13,8 @@ import com.xwin.infra.sms.SendSmsConnector;
 
 public class SendSmsManager extends QuartzJobBean
 {
-//	private static final String SERVER_URL = "http://apbet.net/external.aspx?mode=getSmsWaitList";
-//	private static final String ALLUSER_URL = "http://apbet.net/external.aspx?mode=getAllNormalPhoneNumber";
+//	private static final String SERVER_URL = "http://" + SiteConfig.SITE_DOMAIN + "/external.aspx?mode=getSmsWaitList";
+//	private static final String ALLUSER_URL = "http://" + SiteConfig.SITE_DOMAIN + "/external.aspx?mode=getAllNormalPhoneNumber";
 //	private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
 //	private static final String ALLUSER_URL = "http://localhost:8080/xwin/external.aspx?mode=getAllNormalPhoneNumber";
 	

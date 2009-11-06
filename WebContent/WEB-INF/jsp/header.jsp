@@ -82,12 +82,12 @@ if (parent.frames.length <= 0) {
 
 function click() {
 	if ((event.button==2) || (event.button==2)) {
-		alert('죄송합니다. 오른쪽 마우스 금지입니다');
+		alert('오른쪽 마우스는 사용할 수 업습니다.');
 		return;
 	}
 
 	if((event.ctrlKey) || (event.shiftKey)) { 
-		alert('키를 사용할 수 없습니다.');
+		alert('Ctrl/Shift 키를 사용할 수 없습니다.');
 		return;
 	}		
 }
@@ -95,7 +95,7 @@ function processKey()
 { 
 
 		if((event.ctrlKey) || (event.shiftKey)) { 
-			alert('키를 사용할 수 없습니다.');
+			alert('Ctrl/Shift 키를 사용할 수 없습니다.');
 			return;
 		}
 		

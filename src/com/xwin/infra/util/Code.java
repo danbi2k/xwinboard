@@ -149,7 +149,7 @@ public class Code
 		put(ACCOUNT_TYPE_MONEYIN_DIRECT, "관리자(+)충전");
 		put(ACCOUNT_TYPE_MONEYOUT_DIRECT, "관리자(-)충전");
 		put(ACCOUNT_TYPE_HANDYDRAW, "환불(무승부)");
-		put(ACCOUNT_TYPE_POINTCHARGE, "애플전환");
+		put(ACCOUNT_TYPE_POINTCHARGE, "포인트전환");
 		put(ACCOUNT_TYPE_MONEYOUT_CANCEL, "환불(환전취소)");
 		put(ACCOUNT_TYPE_BETTING_RETURN, "환불(배팅취소)");
 		put(ACCOUNT_TYPE_BONUS, "Bonus");

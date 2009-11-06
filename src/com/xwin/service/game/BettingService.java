@@ -76,7 +76,7 @@ public class BettingService extends XwinService
 		}
 		
 		
-		//애플 지급
+		//포인트 지급
 		Double betting_point_rate = 0.01;
 		int size = itemList.size();
 		if (size >= 4)
@@ -103,7 +103,7 @@ public class BettingService extends XwinService
 		pointDao.insertPoint(pointLog);
 		member.setPoint(pointLog.getBalance());
 		
-		//추천인 애플지급
+		//추천인 포인트지급
 		String introducerId = member.getIntroducerId();
 		if (introducerId != null) {
 			Member introducer = memberDao.selectMember(introducerId, null);
@@ -126,7 +126,7 @@ public class BettingService extends XwinService
 			pointDao.insertPoint(introPointLog);
 		}
 		
-		// 모바일 애플 지급
+		// 모바일 포인트 지급
 		if (source.equals(Code.SOURCE_WAP)) {
 			Double mobile_point_rate = 0.01;
 			

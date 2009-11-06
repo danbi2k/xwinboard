@@ -46,7 +46,7 @@ A:hover  {color:#1a1a1a;text-decoration:none;}
 
 .v7 {font-family:verdana;font-size:7pt;color:#000000;}
 .b7 {font-family:verdana;font-size:7pt;color:#000000;}
-.textarea {border:solid 1px #484848;background-color:#bcbcbc; overflow-x:hidden; overflow-y:auto;width:90%;}
+.textarea {border:solid 1px #484848;background-color:#efefef; overflow-x:hidden; overflow-y:auto;width:90%;}
 .submit {border:solid 1px #484848;font-family:verdana;font-size:7pt;color:#ffffff;background-color:#56000F;line-height:7;}
 
 .handicap {font-size:12px; margin:30px 0px 10px 0px;}
