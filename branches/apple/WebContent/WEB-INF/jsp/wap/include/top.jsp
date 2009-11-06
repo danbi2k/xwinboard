@@ -1,3 +1,4 @@
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.admin.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="com.xwin.domain.user.*" %>

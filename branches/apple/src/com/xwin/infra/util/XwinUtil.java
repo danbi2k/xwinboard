@@ -25,6 +25,7 @@ public class XwinUtil
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static final SimpleDateFormat boardNoticeFormat = new SimpleDateFormat("MM/dd");
 	private static final SimpleDateFormat boardItemFormat = new SimpleDateFormat("MM/dd HH:mm");
+	private static final SimpleDateFormat myBettingFormat = new SimpleDateFormat("MM-dd HH:mm");
 	
 	public static String comma3(Integer num)
 	{
@@ -75,7 +76,7 @@ public class XwinUtil
 	
 	public static String getMMddDate(Date date)
 	{
-		return boardNoticeFormat.format(date);
+		return myBettingFormat.format(date);
 	}
 	
 	public static Long calcExpectMoney(Double rate, Long money)
