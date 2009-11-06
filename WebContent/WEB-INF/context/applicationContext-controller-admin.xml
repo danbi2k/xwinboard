@@ -31,11 +31,11 @@
 	>
 		<property name="authPhone">
 			<map>
-				<entry key="r" value="01097973490"/>
+				<entry key="r" value="0100000000"/>
 				<entry key="g" value="0100000001"/>
-				<entry key="9" value="01033273490"/>
-				<entry key="p" value="01040479189"/>
-				<entry key="e" value="01074407954"/>
+				<entry key="9" value="0100000002"/>
+				<entry key="p" value="0100000003"/>
+				<entry key="e" value="0100000004"/>
 			</map>
 		</property>
 	</bean>
@@ -99,16 +99,6 @@
 		p:gameSyncService-ref="gameSyncService"
 		p:reuseCommentDao-ref="reuseCommentDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
-		
-	<bean id="adminTotoController"
-		class="com.xwin.web.controller.admin.AdminTotoController"
-		p:memberDao-ref="memberDao"
-		p:smsWaitDao-ref="smsWaitDao"
-		p:accountDao-ref="accountDao"
-		p:leagueDao-ref="leagueDao"
-		p:totoDao-ref="totoDao"
-		p:betTotoDao-ref="betTotoDao"
-		p:methodNameResolver-ref="controllerNameResolver"/>	
 					
 	<bean id="adminController"
 		class="com.xwin.web.controller.admin.AdminController"
