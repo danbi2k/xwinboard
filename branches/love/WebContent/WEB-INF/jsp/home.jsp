@@ -74,12 +74,12 @@ if (parent.frames.length <= 0) {
 
 function click() {
 	if ((event.button==2) || (event.button==2)) {
-		alert('죄송합니다. 오른쪽 마우스 금지입니다');
+		alert('오른쪽 마우스는 사용할 수 업습니다.');
 		return;
 	}
 
 	if((event.ctrlKey) || (event.shiftKey)) { 
-		alert('키를 사용할 수 없습니다.');
+		alert('Ctrl/Shift 키를 사용할 수 없습니다.');
 		return;
 	}		
 }
@@ -87,7 +87,7 @@ function processKey()
 { 
 
 		if((event.ctrlKey) || (event.shiftKey)) { 
-			alert('키를 사용할 수 없습니다.');
+			alert('Ctrl/Shift 키를 사용할 수 없습니다.');
 			return;
 		}
 		
@@ -345,20 +345,20 @@ allowScriptAccess="always"></embed>
   </tr>
 </table>
 	<a href="http://www.kbl.or.kr/" target="_blank"><img src="images/main/baner6.jpg" border="0"  style="margin-top:8px;"></a>
-	<img src="images/main/baner_bg.jpg">
+	<!--img src="images/main/baner_bg.jpg"-->
 	
 	</td>
     <td width="33">&nbsp;</td>
     <td valign="top">
 	<!----------------------------승무패--------------------------->
       <img src="images/main/title1.gif">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;" onclick="goTopLink(1)">
         <tr>
           <td><img src="images/main/title1_top.gif"></td>
         </tr>
         <tr>
-          <td background="images/main/title1_center.gif">
-          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+          <td>
+          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;" background="images/main/title1_center.gif">
           <%
           for (Game game : wdlList) {
           %>
@@ -394,13 +394,13 @@ allowScriptAccess="always"></embed>
       </table>
 	<!----------------------------핸디캡--------------------------->
 	  <img src="images/main/title2.gif">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:4px;" onclick="goTopLink(2)">
         <tr>
           <td><img src="images/main/title2_top.gif"></td>
         </tr>
         <tr>
-          <td background="images/main/title1_center1.gif">
-          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;"background="images/main/title1_center.gif">
+          <td>
+          <table width="700" border="0" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed;"background="images/main/title1_center1.gif">
          <%
           for (Game game : handyList) {
           %>

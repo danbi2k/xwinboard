@@ -324,7 +324,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
 				String message = msgSrc.getMessage("SMS_EXCHANGE",
-						new Object[]{SiteConfig.SITE_NAME, nickName, XwinUtil.comma3(moneyOut.getMoney())},
+						new Object[]{SiteConfig.SITE_NICKSHORT, nickName, XwinUtil.comma3(moneyOut.getMoney())},
 						SiteConfig.SITE_LOCALE);
 				
 				SmsWait smsWait = new SmsWait();

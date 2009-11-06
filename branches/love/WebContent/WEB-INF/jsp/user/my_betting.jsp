@@ -26,7 +26,7 @@
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tbody><tr>
 		<td>&nbsp;<img src='img/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
-	<td width="670" style="color:white;vertical-align:middle;text-align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getBoardItemDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
+	<td width="670" style="color:white;vertical-align:middle;text-align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getMMddDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
 	적중액 :
 	<%
 	if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
@@ -48,14 +48,13 @@
 					<td>
 						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" style="table-layout:fixed;">
 							<tbody><tr bgcolor="#a6a6a6" height="27">
-								<td style='word-break:break-all;' align="center" width="90"><font color="#1a1a1a"><b><nobr>경기날짜</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="90"><font color="#1a1a1a"><b><nobr>경기일시</nobr></b></font></td>
 								<td style='word-break:break-all;' align="center" width="240"><font color="#1a1a1a"><b><nobr>(승)홈 팀</nobr></b></font></td>
-								<td style='word-break:break-all;' align="center" width="85"><font color="#1a1a1a"><b><nobr>무/핸디캡</nobr></b></font></td>
-								
+								<td style='word-break:break-all;' align="center" width="85"><font color="#1a1a1a"><b><nobr>무/핸디캡</nobr></b></font></td>								
 								<td style='word-break:break-all;' align="center" width="240"><font color="#1a1a1a"><b><nobr>(패)원정팀</nobr></b></font></td>
-								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>선택</nobr></b></font></td>
-								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>결과</nobr></b></font></td>
-								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>적중</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>배팅팀</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>경기결과</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>적중유무</nobr></b></font></td>
 							</tr>
 							
 <%

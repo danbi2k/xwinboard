@@ -175,16 +175,16 @@ if (boardCommentList != null) {
 	for (BoardComment boardComment : boardCommentList) {
 %>
     <tr>
-		<td width="50" background="img/minit_02.jpg" valign="top" style="padding:10;">
+		<td width="130" background="img/minit_02.jpg" valign="top" style="padding:10;">
             <p><%=boardComment.getNickName()%></p>
         </td>
-        <td width="332" background="img/minit_02.jpg" valign="top" style="padding:10">
+        <td width="526" background="img/minit_02.jpg" valign="top" style="padding:10">
             <p><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></p>
         </td>
-		<td width="100" background="img/minit_02.jpg" valign="top" style="padding:10">
+		<td width="100" background="img/minit_02.jpg" valign="top" style="padding:5">
             <p><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></p>
         </td>
-		<td width="15" align="center" background="img/minit_02.jpg" valign="top" style="padding:10">
+		<td width="15" align="center" background="img/minit_02.jpg" valign="top" style="padding:3">
             <p><%if (boardComment.getUserId().equals(member.getUserId())) {%>
 					<img onclick="deleteComment(<%=boardComment.getId()%>)" src="img/x.gif"></td>
 					<%}else { %>
