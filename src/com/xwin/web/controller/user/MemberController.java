@@ -19,7 +19,6 @@ import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
-import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;

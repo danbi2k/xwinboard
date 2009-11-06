@@ -240,7 +240,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 				if (member.getStatus().equals(Code.USER_STATUS_NORMAL) && member.getGetSms().equals("Y")) {
 //					String message = "[" + SiteConfig.SITE_NAME + "] " + betting.getNickName() + "님의 " + betting.getId() + "번 배팅이 적중 되었습니다. 배당금 : " + XwinUtil.comma3(betting.getExpect());
 					String message = msgSrc.getMessage("SMS_SUCCESS",
-							new Object[]{SiteConfig.SITE_NAME, betting.getNickName(), betting.getId(), XwinUtil.comma3(betting.getExpect())},
+							new Object[]{SiteConfig.SITE_NICKSHORT, betting.getNickName(), betting.getId(), XwinUtil.comma3(betting.getExpect())},
 							SiteConfig.SITE_LOCALE);
 					
 					SmsWait smsWait = new SmsWait();
