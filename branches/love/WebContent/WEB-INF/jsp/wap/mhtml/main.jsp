@@ -10,11 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <html>
     <head>
-    <title>¡¼Apple¡½</title>
+    <title>¡¼<%=SiteConfig.SITE_NICKNAME%>¡½</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
-        <div><center>¡¼Apple¡½</center></div>
+        <div><center><a href>¡¼<%=SiteConfig.SITE_NICKNAME%>¡½</a></center></div>
         <div>´Ð³×ÀÓ :&nbsp;<%=member.getNickName()%>&nbsp;´Ô<br/>
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</div>
         <div>----------------</div>

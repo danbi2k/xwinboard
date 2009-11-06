@@ -21,7 +21,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-        <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
+        <div><font color="#CC00FF">※ 12시간 이내 경기만 표시됨</font></div>
 <%
 	String type = request.getParameter("type");
 	String money = XwinUtil.nvl(request.getParameter("money"), "5000");

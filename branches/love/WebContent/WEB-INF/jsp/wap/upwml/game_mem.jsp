@@ -21,7 +21,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-        <p mode="wrap">※ 8시간 이내 경기만 표시됨</p>
+        <p mode="wrap">※ 12시간 이내 경기만 표시됨</p>
 <%
 	String type = request.getParameter("type");
 	Map<String, List<Game>> gameListMap = (Map<String, List<Game>>) request.getAttribute("gameListMap");

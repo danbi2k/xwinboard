@@ -14,7 +14,7 @@
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <card id ="card1">
-        <p align="center" mode="wrap">&lt;Apple&gt;</p>
+        <p align="center" mode="nowrap">&lt;<%=SiteConfig.SITE_NICKNAME%>&gt;</p>
 <%
 	Member adhocMember = (Member) request.getAttribute("adhocMember");
 %>

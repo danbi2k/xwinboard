@@ -236,7 +236,7 @@
 <%
 if (weblike.equals("true")) {
 %>
-        <div><font color="#CC00FF">※ 8시간 이내 경기만 표시됨</font></div>
+        <div><font color="#CC00FF">※ 12시간 이내 경기만 표시됨</font></div>
         <div><form name="game_form" method="post" action="play.wap">
 <%
 	String type = request.getParameter("type");

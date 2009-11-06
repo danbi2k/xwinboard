@@ -10,11 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <html>
     <head>
-    <title>ーApple―</title>
+    <title>ー<%=SiteConfig.SITE_NICKNAME%>―</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
-        <div><center>ーApple―</center></div>
+        <div><center><a href>ー<%=SiteConfig.SITE_NICKNAME%>―</a></center></div>
 <%
 	Member adhocMember = (Member) request.getAttribute("adhocMember");
 %>
