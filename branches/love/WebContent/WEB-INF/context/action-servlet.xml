@@ -23,7 +23,6 @@
 				<prop key="/friend.php">introduceController</prop>
 				<prop key="/protocol.php">externalController</prop>
 				<prop key="/userform.php">joinController</prop>
-				<prop key="/toto.php">totoController</prop>
 				
 				<prop key="/test.aspx">testController</prop>
 				<prop key="/munja.aspx">munjaBadaResponse</prop>
@@ -45,7 +44,6 @@
 				<prop key="/adminTran.aspx">adminTransactionController</prop>
 				<prop key="/adminLog.aspx">adminLogController</prop>
 				<prop key="/adminReuse.aspx">adminReuseController</prop>
-				<prop key="/adminToto.aspx">adminTotoController</prop>
 				
 				<prop key="/index.wap">wapIndexController</prop>
 				<prop key="/login.wap">wapLoginController</prop>
@@ -63,7 +61,6 @@
 				<prop key="/kyujung.php">rulesController</prop>
 				<prop key="/handicap.php">aboutHandyController</prop>
 				<prop key="/live.php">liveScoreController</prop>
-				<prop key="/bettingInfo.php">bettingInfoController</prop>
 			</props>
 		</property>
 	</bean>
