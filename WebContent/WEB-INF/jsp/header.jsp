@@ -85,30 +85,7 @@ function click() {
 		alert('오른쪽 마우스는 사용할 수 업습니다.');
 		return;
 	}
-
-	if((event.ctrlKey) || (event.shiftKey)) { 
-		alert('Ctrl/Shift 키를 사용할 수 없습니다.');
-		return;
-	}		
 }
-function processKey() 
-{ 
-
-		if((event.ctrlKey) || (event.shiftKey)) { 
-			alert('Ctrl/Shift 키를 사용할 수 없습니다.');
-			return;
-		}
-		
-        if( (event.ctrlKey == true && (event.keyCode == 78 || event.keyCode == 82)) || 
-        (event.keyCode >= 112 && event.keyCode <= 123) || event.keyCode == 8) 
-            { 
-        event.keyCode = 0; 
-        event.cancelBubble = true; 
-        event.returnValue = false; 
-            } 
-} 
-
-document.onkeydown = processKey;
 document.onmousedown=click;
 
 var memoId;

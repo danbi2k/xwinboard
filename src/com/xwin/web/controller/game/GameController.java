@@ -47,6 +47,11 @@ public class GameController extends XwinController
 		cal.add(Calendar.DATE, 3);
 		cal.add(Calendar.MILLISECOND, -1);
 		
+		if (type.equals("mix")) {
+			type = null;
+			grade = Code.USER_GRADE_VIP;
+		}
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("status", Code.GAME_STATUS_RUN);
@@ -77,14 +82,9 @@ public class GameController extends XwinController
 		String type = XwinUtil.arcNvl(request.getParameter("type"));
 		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
 		String gameDate = XwinUtil.arcNvl(request.getParameter("gameDate"));
-		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
 		if (gameDate == null)
 			gameDate = XwinUtil.toDateStr(new Date(), 2);
-		
-		int pIdx = 0;
-		if (pageIndex != null)
-			pIdx = Integer.parseInt(pageIndex);
 		
 		Date fromDate = null;
 		Date toDate = null;
