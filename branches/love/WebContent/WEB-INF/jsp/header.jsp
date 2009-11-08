@@ -76,10 +76,6 @@
 </form>
 </div>
 <script>
-if (parent.frames.length <= 0) {
-	top.location.href="/";
-}
-
 function click() {
 	if ((event.button==2) || (event.button==2)) {
 		alert('오른쪽 마우스는 사용할 수 업습니다.');
