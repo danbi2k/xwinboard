@@ -124,7 +124,7 @@
 		<td>총추천인포인트</td>
 		<td><%=XwinUtil.comma3(member.getIntroduceBettingPoint())%> 원</td>
 		<td>현보유포인트</td>
-		<td><a href="myMoney.php?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
+		<td><a href="account.php?mode=viewMyPointList"><%=XwinUtil.comma3(member.getPoint())%> 원</a></td>
 		<td colspan="2"><input type="button" value="캐쉬전환" onclick="exchangePoint(<%=member.getPoint()%>)"/></td>
 	</tr>
 	</table>
