@@ -104,7 +104,7 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.php?mode=viewMyPointList&pageIndex=" + index;
+	location.href="account.php?mode=viewMyPointList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
@@ -112,7 +112,7 @@ function deleteMyMoneyLog(id)
 	if (confirm("캐쉬기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("myMoney.php", query);
+		var http = new JKL.ParseXML("account.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
