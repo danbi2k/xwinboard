@@ -205,7 +205,7 @@ allowScriptAccess="always"></embed>
 </table>
 
 <table width="95%" border="0" align="center"  cellpadding="3" cellspacing="1" style="margin-top:7px;border:1 solid #a8a8a8;">
-<tr height="100%" valign="top"><td bgcolor="e0e0e0" style="padding:13px;">
+<tr height="100%" valign="top"><td bgcolor="f0f0f0" style="padding:13px;">
 
     <%
     String context = Admin.POPUP;
@@ -216,12 +216,12 @@ allowScriptAccess="always"></embed>
 
 </td>
 </tr>
-<tr><td bgcolor="#a1a1a1">
+<tr><td bgcolor="white">
     <table width="100%" style="color:#a1a1a1;">
     <tr>
         <td width="50%"><b style="color:black"></td>
         <td width="50%" align="right"><b style="color:black">
-			오늘하루이창을열지않음 <input type="checkbox" id="popupcheck">
+			오늘하루열지않기 <input type="checkbox" id="popupcheck">
 			닫기 <img src="img/x.gif" onClick="popupclose()">	
 		</td>
     </tr></table>
