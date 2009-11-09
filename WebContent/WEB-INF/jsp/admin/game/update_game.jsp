@@ -55,10 +55,8 @@
 			query += "&loseDeny=N";
 		else
 			query += "&loseDeny=Y";	
-		if (d.syncDeny.checked)
-			query += "&syncDeny=Y";
-		else
-			query += "&syncDeny=N";		
+
+		query += "&syncDeny=Y";
 
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
