@@ -104,9 +104,11 @@ if (gameList != null) {
         </td>
         <td width="80" class="tablebg2" align="center" valign="middle">
             <p><%if (game.getStatus().equals(Code.GAME_STATUS_END)) { %>
+            <span style="color:<%=game.getResult().equals("W")?"blue":game.getResult().equals("L")?"red":"green"%>;font-weight:bold;">
 			<%=game.getHomeScore()%> : <%=game.getAwayScore()%>
 			&nbsp;
 			<%=Code.getValue(game.getResult())%>
+			</span>
 			<%} else { %>
 			<%=Code.getValue(game.getStatus())%>
 			<%}%></p>
