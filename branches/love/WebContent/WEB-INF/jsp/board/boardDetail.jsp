@@ -141,6 +141,11 @@ if (betting != null) {
         </td>
     </tr>
     <tr>
+        <td width="771" height="44" align="right">
+            <p style="font-weight:bold;"><%=XwinUtil.getBoardItemDate(boardItem.getDate())%> <%=boardItem.getNickName()%></p>
+        </td>
+    </tr>
+    <tr>
         <td width="771" height="44" background="img/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
