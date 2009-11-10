@@ -138,11 +138,11 @@ function FnDrawFolder(data, type) {
 	var rate = "0.0";
 	var multi = 1.0;
 	
-    row.push("<table cellpadding='0' cellspacing='0' width='460'>");
+    row.push("<table cellpadding='0' cellspacing='0' width='560'>");
 	if (data != undefined && data.length > 0) {	
 		for (var i = 0 ; i < data.length ; i++) {
 			row.push("<tr>");
-			row.push("<td width='210' align='left' valign='middle' class='tablebg2'>");
+			row.push("<td width='350' align='left' valign='middle' class='tablebg2'>");
 			row.push("<p>" + data[i].homeTeam + " vs " + data[i].awayTeam + "</p>");
 			row.push("</td>");
 			row.push("<td width='50' align='center' valign='middle' class='tablebg1'>");

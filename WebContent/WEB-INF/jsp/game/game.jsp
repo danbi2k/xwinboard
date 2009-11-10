@@ -116,22 +116,22 @@ if (gameList != null) {
   </table>
 
   <div align="center">
-  <table align="center" cellpadding="0" cellspacing="0" width="469">
+  <table align="center" cellpadding="0" cellspacing="0" width="569">
     <tr>
-        <td width="469" align="right" height="40" background="img/carthead1.jpg">
+        <td width="569" align="right" height="40" background="img/carthead1.jpg">
             <a href='cart.php?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
 			<img src="img/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
         </td>
     </tr>
     <tr>
-        <td width="469" align="center">
+        <td width="569" align="center">
 		<div id="gameFolderDiv">
 		</div>
         </td>
     </tr>
     <tr>
-        <td width="469">
-		   <table cellpadding="0" cellspacing="0" width="469" height="91" border="0">
+        <td width="569">
+		   <table cellpadding="0" cellspacing="0" width="569" height="91" border="0">
 			    <tr>
 			        <td width="100" height="30">
 			            <p>배당율</p>
