@@ -30,7 +30,7 @@
 	적중액 :
 	<%
 	if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-		out.print("<font color='orange'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
+		out.print("<font color='ffff00'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
 	else
 		out.print(0);							
 	%>
