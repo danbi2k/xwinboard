@@ -143,7 +143,7 @@
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>미사용초대장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
-		<input type="button" value="초대장지급" onclick="giveIntroLetter()"/><br>
+		<input type="button" value="초대장지급" onclick="checkQualification()"/><br>
 		<table class="prettytable">
 		<%
 		if (noJoinList != null) {
@@ -433,6 +433,22 @@ function giveIntroLetter()
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0)
 		location.reload();	
+}
+
+function checkQualification()
+{
+	var query = "mode=checkQualification";
+	query += "&userId=<%=member.getUserId()%>";
+	var http = new JKL.ParseXML("adminMember.aspx", query);
+	var result = http.parse();
+
+	if (result.resultXml.code == 0) {
+		giveIntroLetter()
+	} else {
+		if (confirm("자격조건이 미흡합니다. 강제 지급 하시겠습니까?\n" + result.resultXml.message)) {
+			giveIntroLetter()
+		}
+	}
 }
 
 function sendMemo()

@@ -51,6 +51,11 @@
 			<isNotNull prepend="AND" property="joinIdNull">
 				JOINID IS NULL
 			</isNotNull>
+			<isNotNull prepend="AND" property="fromSendDate">
+				<![CDATA[
+				SEND_DATE >= #fromSendDate#
+				]]>
+			</isNotNull>
 		</dynamic>
 		ORDER BY ID DESC
 		<isNotNull prepend="LIMIT" property="fromRow">
@@ -69,6 +74,11 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="joinIdNull">
 				JOINID IS NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromSendDate">
+				<![CDATA[
+				SEND_DATE >= #fromSendDate#
+				]]>
 			</isNotNull>
 		</dynamic>
 	</select>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.xwin.domain.statistics.FriendBetMoneyStat;
 import com.xwin.domain.user.Member;
 
 public class MemberDao extends XwinDao implements Serializable
@@ -152,5 +153,10 @@ public class MemberDao extends XwinDao implements Serializable
 	public Long selectTotalBalance()
 	{
 		return (Long) sqlMapClientTemplate.queryForObject("selectTotalBalance");
+	}
+	
+	public List<FriendBetMoneyStat> selectFriendBettingMoneyStat(Map<String, Object> param)
+	{
+		return (List<FriendBetMoneyStat>) sqlMapClientTemplate.queryForList("selectFriendBettingMoneyStat", param);
 	}
 }
