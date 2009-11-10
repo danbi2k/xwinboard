@@ -24,6 +24,7 @@ public class Member extends XwinObject
 	private String status;
 	private String grade;
 	private Date joinDate;
+	private Date secedeDate;
 	private String joinDateStr;
 	private String bankName;
 	private String bankNumber;
@@ -135,6 +136,12 @@ public class Member extends XwinObject
 	}
 	public void setJoinDateStr(String joinDateStr) {
 		this.joinDateStr = joinDateStr;
+	}
+	public Date getSecedeDate() {
+		return secedeDate;
+	}
+	public void setSecedeDate(Date secedeDate) {
+		this.secedeDate = secedeDate;
 	}
 	public String getBankName() {
 		return bankName;

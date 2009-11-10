@@ -137,6 +137,9 @@
 			<isNotNull prepend="," property="memberId">
 				MEMBERID = #memberId#
 			</isNotNull>
+			<isNotNull prepend="," property="secedeDate">
+				SECEDE_DATE = #secedeDate#
+			</isNotNull>
 		</dynamic>
 		WHERE USERID = #userId#			
 	</update>
