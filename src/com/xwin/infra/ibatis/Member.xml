@@ -7,6 +7,7 @@
 <sqlMap namespace="Member">
 
 	<typeAlias alias="Member" type="com.xwin.domain.user.Member" />
+	<typeAlias alias="FriendBetMoneyStat" type="com.xwin.domain.statistics.FriendBetMoneyStat" />
 	
 	<resultMap id="memberResultMap" class="Member">
 		<result property="id" column="ID"/>
@@ -43,7 +44,7 @@
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
-	<result property="id" column="ID"/>
+		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
 		<result property="password" column="PASSWORD"/>
 		<result property="nickName" column="NICKNAME"/>
@@ -66,6 +67,12 @@
 		<result property="moneyOutSum" column="MONEYOUT_SUM"/>
 		<result property="bettingSum" column="BETTING_SUM"/>
 		<result property="profit" column="PROFIT"/>
+	</resultMap>
+	
+	<resultMap id="friendBettingMoneyStatResultMap" class="FriendBetMoneyStat">
+		<result property="userId" column="USERID"/>
+		<result property="betMoneySum" column="BET_MONEY_SUM"/>
+		<result property="betCount" column="BET_COUNT"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
@@ -384,5 +391,20 @@
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
 		</isNotNull>
+	</select>
+	
+	<select id="selectFriendBettingMoneyStat" resultMap="friendBettingMoneyStatResultMap"
+		parameterClass="map">
+		<![CDATA[
+		SELECT a.USERID, SUM(ABS(MONEY)) as BET_MONEY_SUM, COUNT(*) as BET_COUNT
+		FROM tbl_member m, tbl_account a
+		WHERE
+		m.INTRODUCER_ID = #introducerId# AND
+		m.JOIN_DATE >= #joinDate# AND
+		m.USERID = a.USERID AND
+		a.TYPE = #type#
+		GROUP BY a.USERID
+		HAVING (BET_MONEY_SUM < #betMoneySum# and BET_COUNT < #betCount#)
+		]]>
 	</select>
 </sqlMap>

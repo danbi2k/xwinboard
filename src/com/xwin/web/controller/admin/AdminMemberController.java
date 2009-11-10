@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.xwin.domain.admin.AccountSum;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.join.Invitation;
+import com.xwin.domain.statistics.FriendBetMoneyStat;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -529,6 +531,90 @@ public class AdminMemberController extends XwinController implements MessageSour
 		memoDao.insertMemo(memo);
 		
 		ResultXml rx = new ResultXml(0, "발송되었습니다", null);
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView checkQualification(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;
+		String userId = request.getParameter("userId");
+
+		Calendar weekAgo = Calendar.getInstance();
+		weekAgo = XwinUtil.getOnlyDate(weekAgo);
+		
+		Map<String, Object> param = null;
+		StringBuffer sb = new StringBuffer();
+		
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("joinIdNull", "");
+		
+		Integer unusedCount = invitationDao.selectInvitationCount(param);
+		
+		if (unusedCount > 0) {
+			sb.append("\n※ 미사용 초대장이 있습니다.\n");
+		}
+		
+		// 조건1 최근 3일 초대장 발급 없음
+		weekAgo.add(Calendar.DATE, -3);
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("fromSendDate", weekAgo.getTime());
+		
+		Integer invitationCount = invitationDao.selectInvitationCount(param);
+		
+		if (invitationCount > 0) {
+			sb.append("\n※ 최근 3일 이내 초대장 발급 이력이 있습니다.\n");
+		}
+		
+		// 조건2 최근 1주일 배팅액 30만 이상 또는 15회 이상 배팅
+		weekAgo.add(Calendar.DATE, -4);
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("fromDate", weekAgo.getTime());
+		param.put("type", Code.ACCOUNT_TYPE_BETTING);
+		
+		Integer bettingMoneySum = XwinUtil.ntz(accountDao.selectAccountMoneySum(param));
+		Integer bettingCount = accountDao.selectAccountCount(param);
+		
+		if (bettingMoneySum < 300000 || bettingCount < 15) {
+			sb.append("\n※ 최근 1주일 배팅액이 300,000캐쉬 미만 이거나 배팅횟수가 15회 미만입니다.\n");
+			sb.append("   배팅액 : " + XwinUtil.comma3(bettingMoneySum) + " 캐쉬 \n");
+			sb.append("   배팅횟수 : " + bettingCount + " 회\n");
+		}
+		
+		// 조건3 최근 2주일 가입한 추천인이 있다면 추천인 배팅액 30만 이상 또는 15회 이상 배팅
+		weekAgo.add(Calendar.DATE, -7);
+		param = new HashMap<String, Object>();
+		param.put("introducerId", userId);
+		param.put("joinDate", weekAgo.getTime());
+		param.put("type", Code.ACCOUNT_TYPE_BETTING);
+		param.put("betMoneySum", 300000);
+		param.put("betCount", 15);
+		List<FriendBetMoneyStat> friendBetMoneyStatList = memberDao.selectFriendBettingMoneyStat(param);
+		
+		if (friendBetMoneyStatList.size() > 0) {
+			sb.append("\n※ 최근 2주일 배팅액이 300,000캐쉬 미만 이고 배팅횟수가 15회 미만인 프랜드가 있습니다.\n");
+			for (FriendBetMoneyStat friendBetMoneyStat : friendBetMoneyStatList) {
+				sb.append("   " + friendBetMoneyStat.getUserId() + " : " + XwinUtil.comma3(friendBetMoneyStat.getBetMoneySum()) + "캐쉬 " + friendBetMoneyStat.getBetCount() + "회\n");
+			}
+		}
+		
+		if (sb.length() > 0) {
+			rx = new ResultXml(-1, sb.toString(), null);
+		} else {
+			rx = new ResultXml(0, "", null);
+		}
+		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
