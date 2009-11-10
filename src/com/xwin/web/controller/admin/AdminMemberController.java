@@ -587,8 +587,8 @@ public class AdminMemberController extends XwinController implements MessageSour
 		Integer bettingMoneySum = XwinUtil.ntz(accountDao.selectAccountMoneySum(param));
 		Integer bettingCount = accountDao.selectAccountCount(param);
 		
-		if (bettingMoneySum < 300000 || bettingCount < 15) {
-			sb.append("\n※ 최근 1주일 배팅액이 300,000캐쉬 미만 이거나 배팅횟수가 15회 미만입니다.\n");
+		if (bettingMoneySum < 300000 && bettingCount < 15) {
+			sb.append("\n※ 최근 1주일 배팅액이 300,000캐쉬 미만 이고 배팅횟수가 15회 미만입니다.\n");
 			sb.append("   배팅액 : " + XwinUtil.comma3(bettingMoneySum) + " 캐쉬 \n");
 			sb.append("   배팅횟수 : " + bettingCount + " 회\n");
 		}
