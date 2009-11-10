@@ -235,6 +235,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 			rx = new ResultXml(-1, "잔고가 남아있습니다. 직차감 해주세요", null);
 		} else {
 			member.setStatus(Code.USER_STATUS_SECEDE);
+			member.setSecedeDate(new Date());
 			memberDao.updateMember(member);
 		
 			rx = new ResultXml(0, "탈퇴시켰습니다", null);
