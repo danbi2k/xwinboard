@@ -22,7 +22,7 @@ function thisReload()
 	location.reload();
 }
 
-setInterval(thisReload, 600000);
+setInterval(thisReload, 900000);
 </script>
 			<tr><td><img src="img/menu0<%=img%>1.jpg" border="0"></td></tr>
 		
