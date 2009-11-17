@@ -76,6 +76,14 @@
                     <div><img src="file:////images/magicn/number_square_0.sis"><a href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0"><marquee type="auto">핸디캡(최신폰)</marquee></a></div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div><a href="play.wap?mode=viewGameListByLeague&type=mix&grade=10&token=<%=token%>" accesskey=""><marquee type="auto">스페셜</marquee></a></div>
+                </td>
+                <td>
+                    <div><a href="play.wap?mode=viewGameList&type=mix&grade=10&token=<%=token%>" accesskey=""><marquee type="auto">스페셜(최신폰)</marquee></a></div>
+                </td>
+            </tr>
         </table>
         </div>
         <div><br/>

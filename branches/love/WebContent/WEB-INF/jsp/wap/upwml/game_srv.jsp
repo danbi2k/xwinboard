@@ -14,7 +14,7 @@
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <card id ="card1">
-        <p align="center" mode="nowrap">&lt;<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":"ÇÚµðÄ¸"%>&gt;</p>
+        <p align="center" mode="nowrap">&lt;<%=request.getParameter("type").equals("wdl")?"½Â¹«ÆÐ":request.getParameter("type").equals("mix")?"½ºÆä¼È":"ÇÚµðÄ¸"%>&gt;</p>
         <p mode="wrap">´Ð³×ÀÓ :&nbsp;<%=member.getNickName()%>&nbsp;´Ô<br/>
         ÀÜ°í :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;¿ø</p>
         <p>----------------</p>

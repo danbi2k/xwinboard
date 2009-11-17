@@ -10,11 +10,11 @@
 <%@ include file="../include/header.jsp"%>
 <html>
     <head>
-    <title>【<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":"핸디캡(최신폰)"%>】</title>
+    <title>【<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":request.getParameter("type").equals("mix")?"스페셜(최신폰)":"핸디캡(최신폰)"%>】</title>
         <meta name="generator" content="AnyBuilder VX" />
     </head>
     <body>
-        <div><center><a href>【<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":"핸디캡(최신폰)"%>】</a></center></div>
+        <div><center><a href>【<%=request.getParameter("type").equals("wdl")?"승무패(최신폰)":request.getParameter("type").equals("mix")?"스페셜(최신폰)":"핸디캡(최신폰)"%>】</a></center></div>
         <div>닉네임 :&nbsp;<%=member.getNickName()%>&nbsp;님<br/>
         잔고 :&nbsp;<%=XwinUtil.comma3(member.getBalance())%>&nbsp;원</div>
         <div>----------------</div>

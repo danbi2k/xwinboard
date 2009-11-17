@@ -65,6 +65,14 @@
                     <div><img localsrc="pict:///core/button/0"/><a title="확인" href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0" style="marquee-style:sktscroll;">핸디캡(최신폰)</a></div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div><a title="확인" href="play.wap?mode=viewGameListByLeague&type=mix&grade=10&token=<%=token%>" accesskey="" style="marquee-style:sktscroll;">스페셜</a></div>
+                </td>
+                <td>
+                    <div><a title="확인" href="play.wap?mode=viewGameList&type=mix&grade=10&token=<%=token%>" accesskey="" style="marquee-style:sktscroll;">스페셜(최신폰)</a></div>
+                </td>
+            </tr>
         </table>
         </div>
         <div><br/>
