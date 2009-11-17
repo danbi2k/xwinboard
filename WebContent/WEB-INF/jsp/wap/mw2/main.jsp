@@ -68,6 +68,14 @@
                     <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-0.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0">핸디캡(최신폰)</a></div>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div style="white-space:nowrap;"><a title="확인" href="play.wap?mode=viewGameListByLeague&type=mix&grade=10&token=<%=token%>" accesskey="">스페셜</a></div>
+                </td>
+                <td>
+                    <div style="white-space:nowrap;"><a title="확인" href="play.wap?mode=viewGameList&type=mix&grade=10&token=<%=token%>" accesskey="">스페셜(최신폰)</a></div>
+                </td>
+            </tr>
         </table>
         </div>
         <div><br/>
