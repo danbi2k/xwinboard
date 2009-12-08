@@ -66,7 +66,7 @@
 -->
     </style>
 </head>
-<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(images/main/bg_top1.gif) no-repeat center top;">
+<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <script>
 function click() {
 	if ((event.button==2) || (event.button==2)) {
