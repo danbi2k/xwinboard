@@ -33,7 +33,7 @@
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
     <META HTTP-EQUIV="Expires" content="-1">
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-	<META HTTP-EQUIV="Refresh" Content="900; URL=login.php?mode=processLogout">
+	<META HTTP-EQUIV="Refresh" Content="1800; URL=login.php?mode=processLogout">
     <script language="JavaScript" src="script/embed_patch.js"></script>
 	<script language="JavaScript" src="script/code.js"></script>
 	<script language="JavaScript" src="script/default.js"></script>
@@ -124,7 +124,7 @@ function memoClose()
 receiveMemo();
 <%}%>
 </script>
-<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0' style="background:url(images/main/bg_top2.gif) no-repeat center top;">
+<body topmargin="0" leftmargin="0" marginwidth='0' marginheight='0'>
 <div style="position: absolute; left:expression((document.body.clientWidth) / 2 -493); top:expression((document.body.clienthheight) / 2 -170); z-index: 3; width: 968px; top: 25px; left:0px;"> 
   <div align="right" class="style1">
   <%if (login) { %>
