@@ -354,6 +354,27 @@ public class XwinUtil
 		return getEncoded(message, "SHA-1");
 	}
 	
+	public static String getKeyPassword(String message)
+	{
+		if (message == null)
+			return null;   
+        try{
+            MessageDigest md5 = MessageDigest.getInstance("SHA-256");
+            md5.update(message.getBytes());
+            byte[] md5Bytes = md5.digest(); 
+
+            BASE64Encoder base64 = new BASE64Encoder();
+            String encoded = base64.encode(md5Bytes); 
+            
+            return encoded.substring(6, 11).toLowerCase();           
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        return null;
+	}
+	
 	private static String getEncoded(String message, String algorithm)
 	{
 		if (message == null)
