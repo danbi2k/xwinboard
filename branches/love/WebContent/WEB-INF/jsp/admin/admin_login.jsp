@@ -89,9 +89,5 @@ function processCookie(tobj)
 		</table>
 	</form>
 	</div>
-	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span><BR><br><font color="white"><%=KEY%></font>
-	</div>
-
-
-</body>
+	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span><BR><br><span style="color:white;"><%=KEY%></span></div></body>
 </html>
