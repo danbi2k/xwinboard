@@ -12,6 +12,7 @@
 	String type = request.getParameter("type");
 	String grade = request.getParameter("grade");
 	String img = grade.equals("10")?"3":type.equals("wdl")?"1":"2";
+	boolean show = member.getMemberId().equals(1);
 %>
 
 <script>
@@ -69,7 +70,7 @@ if (gameList != null) {
             <p>&nbsp;&nbsp;&nbsp;&nbsp;<img width=22 height=14 src="images/league/<%=game.getLeagueImage()%>"> <%=game.getLeagueName()%></p>
         </td>
         <td width="250" class='<%=game.getWinDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="right" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'W')" id="checkW<%=game.getId()%>">
-            <p><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=game.getWinRateStr()%>&nbsp;</p>
+            <p><%=show?"("+XwinUtil.comma3(game.getWinMoney())+") ":""%><%=game.getHomeTeam()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=game.getWinRateStr()%>&nbsp;</p>
         </td>
         <td width="80" class='<%=game.getType().equals("handy")||game.getType().equals("wdl")&&(game.getDrawRate()==0||game.getDrawDeny().equals("N"))?"tablebg4":"tablebg"+y%>' align="center" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'D')" id="checkD<%=game.getId()%>">
             <p><%
@@ -84,10 +85,10 @@ if (gameList != null) {
 					out.print(game.getDrawRate());
 				}
 					
-			%></p>
+			%><%=show&&type.equals("wdl")?"<br>("+XwinUtil.comma3(game.getDrawMoney())+")":""%></p>
         </td>
         <td width="250" class='<%=game.getLoseDeny().equals("Y")?"tablebg"+x:"tablebg3"%>' align="left" valign="middle" onClick="FnGameBet(this, <%=game.getId()%>, '<%=type%>', 'L')" id="checkL<%=game.getId()%>">
-            <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%></p>
+            <p>&nbsp;&nbsp;&nbsp;<%=game.getLoseRateStr()%>&nbsp;&nbsp;&nbsp;<%=game.getAwayTeam()%><%=show?" ("+XwinUtil.comma3(game.getLoseMoney())+")":""%></p>
         </td>
         <td width="40" class="tablebg<%=y%>" align="center" valign="middle">
             <p><%=Code.getValue(game.getBetStatus())%></p>
