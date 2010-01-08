@@ -7,8 +7,8 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="adminIndexController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-		p:viewName="admin/admin_login"/>
+	<bean id="adminIndexController"
+	class="com.xwin.web.controller.admin.AdminIndexController"/>
 	
 	<bean id="testController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"
 		p:viewName="admin/test"/>

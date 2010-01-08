@@ -29,9 +29,9 @@ public class AdminLoginController extends XwinController
 			HttpServletResponse response) throws Exception
 	{
 		HttpSession session = request.getSession();
-		Integer sessionpin = (Integer) session.getAttribute("OTP");
-		session.removeAttribute("OTP");
-		String adminPin = XwinUtil.makeAdminPin(sessionpin);
+		String sessionpin = (String) session.getAttribute("KEY");
+		session.removeAttribute("KEY");
+		String adminPin = XwinUtil.getKeyPassword(sessionpin);
 		
 		ResultXml rx = null;
 		String userId = request.getParameter("userId");

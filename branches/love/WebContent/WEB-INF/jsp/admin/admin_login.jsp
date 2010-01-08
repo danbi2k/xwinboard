@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.*" %>
+
+<%
+	String KEY = (String) session.getAttribute("KEY");
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -40,6 +44,7 @@ function checkIT() {
 		location.href='adminQna.aspx?mode=viewQnaList&grade=10';
 	} else {
 		alert(result.resultXml.message);
+		location.reload();
 	}
 }
 
@@ -84,7 +89,7 @@ function processCookie(tobj)
 		</table>
 	</form>
 	</div>
-	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span>
+	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span><BR><br><font color="white"><%=KEY%></font>
 	</div>
 
 
