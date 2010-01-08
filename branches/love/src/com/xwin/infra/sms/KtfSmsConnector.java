@@ -17,7 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXParseException;
+import org.xml.sax.SAXException;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.infra.dao.KtfSmsDao;
@@ -29,6 +29,7 @@ public class KtfSmsConnector
 
 	private List<String> getUri = new ArrayList<String>();
 	private List<String> delUri = new ArrayList<String>();
+	private List<String> emptyUri = new ArrayList<String>();
 	
 	private KtfSmsDao ktfSmsDao = null;
 	
@@ -78,11 +79,13 @@ public class KtfSmsConnector
 					deleteSms(boxMap.get("msg_seq"), boxMap.get("in_date"), boxMap.get("sm"), x);				
 					mapList.add(boxMap);
 				}
-			} catch (SAXParseException e) {
+			} catch (SAXException e) {
+				e.printStackTrace();
 				System.out.println("잘못된 xml 입니다");
+				emptySms(x);				
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("SMS 서버에 연결하지 못하였습니다");
+				System.out.println("(GET) SMS 서버에 연결하지 못하였습니다");
 			}
 		}
 		
@@ -107,7 +110,20 @@ public class KtfSmsConnector
 //			hc.executeMethod(method);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("SMS 서버에 연결하지 못하였습니다");
+			System.out.println("(DELETE) SMS 서버에 연결하지 못하였습니다");
+		}
+		
+		return true;
+	}
+	
+	public boolean emptySms(int x)
+	{
+		try {
+			DocumentBuilder actBuilder = docBuilderFact.newDocumentBuilder();
+			actBuilder.parse(emptyUri.get(x));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("(EMPTY) SMS 서버에 연결하지 못하였습니다");			
 		}
 		
 		return true;
@@ -152,5 +168,13 @@ public class KtfSmsConnector
 
 	public void setDelUri(List<String> delUri) {
 		this.delUri = delUri;
+	}
+
+	public List<String> getEmptyUri() {
+		return emptyUri;
+	}
+
+	public void setEmptyUri(List<String> emptyUri) {
+		this.emptyUri = emptyUri;
 	}
 }
