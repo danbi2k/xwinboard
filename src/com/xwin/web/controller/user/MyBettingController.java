@@ -1,5 +1,7 @@
 package com.xwin.web.controller.user;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.Betting;
+import com.xwin.domain.statistics.BetMoneyStat;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -53,9 +56,13 @@ public class MyBettingController extends XwinController
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
 		
+		Date[] todayPair = XwinUtil.getDatePair(new Date());
+		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+		
 		mv = new ModelAndView("user/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
+		mv.addObject("betMoneyStatToday", betMoneyStatToday);
 		return mv;
 	}
 	
