@@ -41,6 +41,11 @@ public class WapGameController extends XwinController
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR, 8);
 		
+		if (type.equals("mix")) {
+			type = null;
+			grade = Code.USER_GRADE_VIP;
+		}
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
 		param.put("status", Code.GAME_STATUS_RUN);
@@ -134,6 +139,11 @@ public class WapGameController extends XwinController
 	
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR, 8);
+		
+		if (type.equals("mix")) {
+			type = null;
+			grade = Code.USER_GRADE_VIP;
+		}
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("type", type);
