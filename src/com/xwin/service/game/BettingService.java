@@ -71,7 +71,7 @@ public class BettingService extends XwinService
 
 		if (logger.isInfoEnabled()) {
 			logger
-					.info("betting(HttpServletRequest, HttpServletResponse) - betting=\n"
+					.info("betting\n"
 							+ betting);
 		}
 		
@@ -79,11 +79,11 @@ public class BettingService extends XwinService
 		//포인트 지급
 		Double betting_point_rate = 0.01;
 		int size = itemList.size();
-		if (size >= 4)
+		if (size >= 5)
 			betting_point_rate = 0.02;
 		if (size >= 7)
 			betting_point_rate = 0.03;
-		if (size >= 10)
+		if (size >= 9)
 			betting_point_rate = 0.05;
 		
 		Double point = betting.getMoney() * betting_point_rate;
@@ -107,7 +107,7 @@ public class BettingService extends XwinService
 		String introducerId = member.getIntroducerId();
 		if (introducerId != null) {
 			Member introducer = memberDao.selectMember(introducerId, null);
-			Double intro_point_rate = 0.02;
+			Double intro_point_rate = 0.01;
 			
 			Double intro_point = betting.getMoney() * intro_point_rate;
 			memberDao.plusMinusPoint(introducerId, intro_point.longValue());
