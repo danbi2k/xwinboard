@@ -81,10 +81,8 @@ public class BettingService extends XwinService
 		int size = itemList.size();
 		if (size >= 5)
 			betting_point_rate = 0.02;
-		if (size >= 7)
-			betting_point_rate = 0.03;
 		if (size >= 9)
-			betting_point_rate = 0.05;
+			betting_point_rate = 0.03;
 		
 		Double point = betting.getMoney() * betting_point_rate;
 		memberDao.plusMinusPoint(member.getUserId(), point.longValue());
