@@ -141,6 +141,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("N");
+				transaction.setBankName("SHINHAN");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -205,6 +206,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("-");
+				transaction.setBankName("SHINHAN");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -270,6 +272,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("N");
+				transaction.setBankName("KB");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -323,6 +326,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("-");
+				transaction.setBankName("KB");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -399,6 +403,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("N");
+				transaction.setBankName("WOORI");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -456,6 +461,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("-");
+				transaction.setBankName("WOORI");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -539,6 +545,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("N");
+				transaction.setBankName("POST");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -611,6 +618,7 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setMsgSeq(message.getMsgSeq());
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("-");
+				transaction.setBankName("POST");
 			
 				transactionDao.insertTransaction(transaction);
 				
@@ -639,8 +647,11 @@ public class TransactionManager extends QuartzJobBean
 		//message.setInDate("20090926234743");
 		TransactionManager tm = new TransactionManager();
 		//tm.postOfficeProcess(message);
-		message.setMsg("우체국,23:44\n610********249\n출금1,250,000원\n잔액74,456,645원\n이성호");
-		message.setInDate("20090926234424");
-		tm.postOfficeProcess(message);
+		//message.setMsg("우체국,23:44\n610********249\n출금1,250,000원\n잔액74,456,645원\n이성호");
+		//message.setInDate("20090926234424");
+		message.setMsg("신한 02/11 08:09[110-290-795***]지급      10,000잔액      15,600004.김미경");
+		//message.setMsg("신한 02/11 07:59[110-290-795***]입금      10,000잔액      25,600김미경");
+		message.setInDate("20100211074431");
+		tm.shinhanBankProcess(message);
 	}
 }

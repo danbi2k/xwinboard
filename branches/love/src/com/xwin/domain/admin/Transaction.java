@@ -23,6 +23,7 @@ public class Transaction extends XwinObject
 	private String moneyInId;
 	private String moneyOutId;
 	private String note;
+	private String bankName;
 	
 	public String getId() {
 		return id;
@@ -95,5 +96,11 @@ public class Transaction extends XwinObject
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 }
