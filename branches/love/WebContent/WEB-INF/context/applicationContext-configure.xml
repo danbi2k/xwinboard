@@ -31,16 +31,19 @@
 		<property name="getUri">
 			<list>
 				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01026688246&LogTime=20091111105749&ClientIP=125.152.12.25&MagicN_Id=cmxmanJsZGtRazc=&ALevel=2&boxType=1&pagesize=20&curpage=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&MagicN_Id=ZGxybXNnbWwy&ALevel=2&boxType=1&pagesize=20&curpage=1]]></value>
 			</list>
 		</property>
 		<property name="delUri">
 			<list>
 				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01026688246&LogTime=20091111105749&ClientIP=125.152.12.25&IsALL=N&boxType=1&ALevel=1&targetMsg=]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&IsALL=N&boxType=1&ALevel=1&targetMsg=]]></value>
 			</list>
 		</property>
 		<property name="emptyUri">
 			<list>
 				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Folder_Empty.asp?UserTel=01026688246&LogTime=20091111105749&ClientIP=125.152.12.25&ALevel=1&Msgbox_id=&Folder=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Folder_Empty.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&ALevel=1&Msgbox_id=&Folder=1]]></value>
 			</list>
 		</property>
 	</bean>
