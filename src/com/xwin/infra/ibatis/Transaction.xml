@@ -21,11 +21,12 @@
 		<result property="moneyInId" column="MONEYIN_ID"/>
 		<result property="moneyOutId" column="MONEYOUT_ID"/>
 		<result property="note" column="NOTE"/>
+		<result property="bankName" column="BANKNAME"/>
 	</resultMap>
 	
 	<insert id="insertTransaction" parameterClass="Transaction">
-		INSERT INTO tbl_transaction(DATE, TYPE, USERNAME, MONEY, BALANCE, MSG_SEQ, IN_DATE, ISCHARGE)
-		VALUES(#date#, #type#, #userName#, #money#, #balance#, #msgSeq#, #inDate#, #isCharge#)
+		INSERT INTO tbl_transaction(DATE, TYPE, USERNAME, MONEY, BALANCE, MSG_SEQ, IN_DATE, ISCHARGE, BANKNAME)
+		VALUES(#date#, #type#, #userName#, #money#, #balance#, #msgSeq#, #inDate#, #isCharge#, #bankName#)
 	</insert>
 	
 	<delete id="deleteTransaction" parameterClass="string">
@@ -85,6 +86,9 @@
 			<isNotNull prepend="AND" property="noteIsNotNull">
 				NOTE IS NOT NULL
 			</isNotNull>
+			<isNotNull prepend="AND" property="bankName">
+				BANKNAME = #bankName#
+			</isNotNull>
 		</dynamic>
 	ORDER BY DATE DESC
 	<isNotNull prepend="LIMIT" property="fromRow">
@@ -126,6 +130,9 @@
 			<isNotNull prepend="AND" property="noteIsNotNull">
 				NOTE IS NOT NULL
 			</isNotNull>
+			<isNotNull prepend="AND" property="bankName">
+				BANKNAME = #bankName#
+			</isNotNull>
 		</dynamic>
 	</select>
 	
@@ -162,6 +169,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="noteIsNotNull">
 				NOTE IS NOT NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="bankName">
+				BANKNAME = #bankName#
 			</isNotNull>
 		</dynamic>
 	</select>

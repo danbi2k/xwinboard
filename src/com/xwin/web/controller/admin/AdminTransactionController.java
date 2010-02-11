@@ -36,6 +36,7 @@ public class AdminTransactionController extends XwinController
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
 		String toDate = XwinUtil.arcNvl(request.getParameter("toDate"));
 		String note = XwinUtil.arcNvl(request.getParameter("note"));
+		String bankName = XwinUtil.arcNvl(request.getParameter("bankName"));
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 		
@@ -48,6 +49,7 @@ public class AdminTransactionController extends XwinController
 		
 		param.put("type", type);
 		param.put("isCharge", isCharge);
+		param.put("bankName", bankName);
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		

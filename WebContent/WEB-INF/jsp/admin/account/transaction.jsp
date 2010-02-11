@@ -20,6 +20,7 @@
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 	String note = XwinUtil.nvl(request.getParameter("note"));
+	String bankName = XwinUtil.nvl(request.getParameter("bankName"));
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
@@ -50,6 +51,14 @@
  		<option value='Y' <%=note.equals("Y")?"selected":""%>>있음</option>
  		<option value='N' <%=note.equals("N")?"selected":""%>>없음</option>
  	</select>
+ 	은행
+	<select name='bankName' onchange='this.form.submit()'>
+		<option value=''>전체</option>
+ 		<option value='KB' <%=bankName.equals("KB")?"selected":""%>>국민</option>
+ 		<option value='POST' <%=bankName.equals("POST")?"selected":""%>>우체국</option>
+ 		<option value='WOORI' <%=bankName.equals("WOORI")?"selected":""%>>우리</option>
+ 		<option value='SHINHAN' <%=bankName.equals("SHINHAN")?"selected":""%>>신한</option>
+ 	</select>
 	<BR>
  	<select name='search'>
  		<option value='money' <%=search.equals("money")?"selected":""%>>금액</option>
@@ -73,6 +82,7 @@
 		<th>충전여부</td>
 		<th>대기취소</td>
 		<th>비고</th>
+		<th>은행</th>
 	</tr>
 	<%
 	if (transactionList != null) {
@@ -100,6 +110,7 @@
 			<%}%>
 		</td>
 		<td><%=XwinUtil.nvl(transaction.getNote())%></td>
+		<td><%=XwinUtil.nvl(transaction.getBankName())%></td>
 	</tr>
 <%
 	}
