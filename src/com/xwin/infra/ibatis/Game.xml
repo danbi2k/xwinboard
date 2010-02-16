@@ -276,4 +276,16 @@
 			STATUS = 'GS002'
 		]]>			
 	</update>
+	
+	<select id="selectOverUnderWarning" resultClass="int" parameterClass="map">
+		SELECT
+			COUNT(*)
+		FROM tbl_game g
+		WHERE
+			g.STATUS = 'GS003' AND
+			g.HOME_TEAM like '%↑%' AND
+			ABS((SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') -
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001')) > 2000000
+
+	</select>
 </sqlMap>
