@@ -201,8 +201,11 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
 		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
-		Long totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
-		
+		Long totalSum = 0L;
+		if (status.contains("004"))
+			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) + XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
+		else
+			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
 		if (totalSum == null)
 			totalSum = 0L;
 		
@@ -369,7 +372,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			Member member = memberDao.selectMember(userId, null);
 			
 			MoneyIn moneyIn = new MoneyIn();
-			moneyIn.setMoney(money);
+			moneyIn.setMoney(money * -1);
 			moneyIn.setProcDate(new Date());
 			moneyIn.setStatus(Code.MONEY_IN_DIRECT);
 			moneyIn.setUserId(userId);
