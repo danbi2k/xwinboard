@@ -23,6 +23,7 @@ import com.xwin.service.external.TransactionService;
 public class TransactionManager extends QuartzJobBean
 {
 	private static final SimpleDateFormat smsDateFormat = new SimpleDateFormat("MM/dd HH:mm");
+	private static final SimpleDateFormat hanaDateFormat = new SimpleDateFormat("MM/dd,HH:mm");
 	private static final SimpleDateFormat smsTimeFormat = new SimpleDateFormat("HH:mm");
 	private static final SimpleDateFormat smsInDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	
@@ -64,6 +65,10 @@ public class TransactionManager extends QuartzJobBean
 					transaction = shinhanBankProcess(message);
 				else if (message.getMsg().startsWith("우체국"))
 					transaction = postOfficeProcess(message);
+				else if (message.getMsg().endsWith("기업은행"))
+					transaction = ibkProcess(message);
+				else if (message.getMsg().startsWith("하나"))
+					transaction = hanaBankProcess(message);
 				else {
 					ktfSmsDao.insertMessage(message);
 				}
@@ -619,6 +624,296 @@ public class TransactionManager extends QuartzJobBean
 				transaction.setInDate(message.getInDate());
 				transaction.setIsCharge("-");
 				transaction.setBankName("POST");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		}
+		else {
+			ktfSmsDao.insertMessage(message);
+		}
+		
+		return null;
+	}
+	
+	private Transaction ibkProcess(KtfSmsMessage message) {		
+		Transaction transaction = new Transaction();
+		
+		if (message.getMsg().indexOf("입금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String time = msg[0].substring(4, 9);
+				Date theDate = null;
+				try {
+					theDate = smsTimeFormat.parse(time);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+					cal.set(Calendar.DATE, now.get(Calendar.DATE));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				//둘째줄
+				Long money = null;
+				String moneyStr = msg[1].replaceAll("원", "");
+				moneyStr = moneyStr.replaceAll(",", "");
+				moneyStr = moneyStr.trim();
+				
+				money = Long.parseLong(moneyStr);
+				
+				//세째줄
+				String userName = msg[2].trim();
+				userName = userName.replaceAll("<", "");
+				userName = userName.replaceAll(">", "");
+				
+				//네째줄
+				Long balance = null;
+				if (msg[3].startsWith("잔액")) {
+					String balanceStr = msg[3].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액:", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}					
+
+				transaction.setType(Code.TRAN_TYPE_MONEYIN);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("N");
+				transaction.setBankName("IBK");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		} else if (message.getMsg().indexOf("출금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String time = msg[0].substring(4, 9);
+				Date theDate = null;
+				try {
+					theDate = smsTimeFormat.parse(time);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+					cal.set(Calendar.DATE, now.get(Calendar.DATE));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				//둘째줄
+				Long money = null;
+				String moneyStr = msg[1].replaceAll("원", "");
+				moneyStr = moneyStr.replaceAll(",", "");
+				moneyStr = moneyStr.trim();
+				
+				money = Long.parseLong(moneyStr);
+				
+				//세째줄
+				String userName = msg[2].trim();
+				userName = userName.replaceAll("<", "");
+				userName = userName.replaceAll(">", "");
+				
+				//네째줄
+				Long balance = null;
+				if (msg[3].startsWith("잔액")) {
+					String balanceStr = msg[3].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액:", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}
+
+				transaction.setType(Code.TRAN_TYPE_MONEYOUT);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money * -1);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("-");
+				transaction.setBankName("IBK");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		}
+		else {
+			ktfSmsDao.insertMessage(message);
+		}
+		
+		return null;
+	}
+	
+	private Transaction hanaBankProcess(KtfSmsMessage message) {		
+		Transaction transaction = new Transaction();
+		
+		if (message.getMsg().indexOf("입금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String date = msg[0].trim().replaceAll("하나,", "");
+				Date theDate = null;
+				try {
+					theDate = hanaDateFormat.parse(date);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				//세째줄
+				Long money = null;
+				if (msg[2].startsWith("입금") || msg[2].startsWith("출금")) {
+					String moneyStr = msg[2].replaceAll("원", "");
+					moneyStr = moneyStr.replaceAll("입금", "");
+					moneyStr = moneyStr.replaceAll("출금", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				//네째줄
+				String userName = msg[3].trim();
+				
+				//다섯째줄
+				Long balance = null;
+				if (msg[4].startsWith("잔액")) {
+					String balanceStr = msg[4].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}	
+
+				transaction.setType(Code.TRAN_TYPE_MONEYIN);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("N");
+				transaction.setBankName("HANA");
+			
+				transactionDao.insertTransaction(transaction);
+				
+				return transaction;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("트랜젝션을 넣지 못했습니다");
+				System.out.println(message);
+				ktfSmsDao.insertMessage(message);
+			}
+		} else if (message.getMsg().indexOf("출금") > 0) {
+			try {
+				String[] msg = message.getMsg().split("\n");
+				
+				//첫째줄
+				String date = msg[0].trim().replaceAll("하나,", "");
+				Date theDate = null;
+				try {
+					theDate = hanaDateFormat.parse(date);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(theDate);
+					Calendar now = Calendar.getInstance();
+					now.setTime(smsInDateFormat.parse(message.getInDate()));
+					cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+					
+					theDate = cal.getTime();
+					
+				} catch (ParseException e) {
+					e.printStackTrace();
+					theDate = new Date();
+				}
+
+				//세째줄
+				Long money = null;
+				if (msg[2].startsWith("입금") || msg[2].startsWith("출금")) {
+					String moneyStr = msg[2].replaceAll("원", "");
+					moneyStr = moneyStr.replaceAll("입금", "");
+					moneyStr = moneyStr.replaceAll("출금", "");
+					moneyStr = moneyStr.replaceAll(",", "");
+					moneyStr = moneyStr.trim();
+					
+					money = Long.parseLong(moneyStr);
+				}
+				
+				//네째줄
+				String userName = msg[3].trim();
+				
+				//다섯째줄
+				Long balance = null;
+				if (msg[4].startsWith("잔액")) {
+					String balanceStr = msg[4].replaceAll("원", "");
+					balanceStr = balanceStr.replaceAll("잔액", "");
+					balanceStr = balanceStr.replaceAll(",", "");
+					balanceStr = balanceStr.trim();
+					
+					balance = Long.parseLong(balanceStr);
+				}
+
+				transaction.setType(Code.TRAN_TYPE_MONEYOUT);
+				transaction.setUserName(userName);
+				transaction.setDate(theDate);
+				transaction.setMoney(money * -1);
+				transaction.setBalance(balance);
+				transaction.setMsgSeq(message.getMsgSeq());
+				transaction.setInDate(message.getInDate());
+				transaction.setIsCharge("-");
+				transaction.setBankName("HANA");
 			
 				transactionDao.insertTransaction(transaction);
 				
