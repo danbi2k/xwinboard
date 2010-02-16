@@ -34,7 +34,7 @@
 <%		
 	BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 	if (betMoneyStatToday != null) {
-			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint() + betMoneyStatToday.getBonusPoint());
+			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
 %>
 
         <div>
@@ -69,6 +69,14 @@
                 </td>
                 <td style="border-width:1;border-style:solid;">
                     <div><%=XwinUtil.comma3(betMoneyStatToday.getBettingPoint())%></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-width:1;border-style:solid;">
+                    <div>직충전차감</div>
+                </td>
+                <td style="border-width:1;border-style:solid;">
+                    <div><%=XwinUtil.comma3(betMoneyStatToday.getBonusPoint())%></div>
                 </td>
             </tr>
             <tr>
