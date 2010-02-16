@@ -26,7 +26,7 @@
 <%		
 	BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 	if (betMoneyStatToday != null) {
-			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint() + betMoneyStatToday.getBonusPoint());
+			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
 %>
 
         <div>날짜</div>
@@ -37,6 +37,8 @@
         <div><%=XwinUtil.comma3(betMoneyStatToday.getOutMoney())%></div>
         <div>총배팅포인트</div>
         <div><%=XwinUtil.comma3(betMoneyStatToday.getBettingPoint())%></div>
+        <div>직충전차감</div>
+        <div><%=XwinUtil.comma3(betMoneyStatToday.getBonusPoint())%></div>
         <div>순순익</div>
         <div><%=XwinUtil.comma3(benefit)%></div>
 <%

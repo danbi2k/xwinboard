@@ -295,7 +295,7 @@
 	<select id="selectTodayBettingMoneyStatistics" resultMap="betMoneyStatResultMap"
 		parameterClass="map">
 	<![CDATA[
-		SELECT 0 AS ID, #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, D,POINT_BONUS FROM
+		SELECT 0 AS ID, #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, D.POINT_BONUS FROM
 		(SELECT date_format(END_DATE, '%Y%m%d') as DATE, SUM(MONEY) as INMONEY
 		FROM tbl_betting
 		WHERE STATUS in ('BS002', 'BS003') AND
