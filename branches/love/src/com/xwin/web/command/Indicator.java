@@ -13,6 +13,7 @@ public class Indicator extends XwinObject
 	private String hackingIndi;
 	private String wdlIndi;
 	private String handyIndi;
+	private String overUnderWarn;
 	
 	public String getChargingIndi() {
 		return chargingIndi;
@@ -55,5 +56,11 @@ public class Indicator extends XwinObject
 	}
 	public void setHandyIndi(String handyIndi) {
 		this.handyIndi = handyIndi;
+	}
+	public String getOverUnderWarn() {
+		return overUnderWarn;
+	}
+	public void setOverUnderWarn(String overUnderWarn) {
+		this.overUnderWarn = overUnderWarn;
 	}
 }

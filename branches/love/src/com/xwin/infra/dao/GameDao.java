@@ -66,4 +66,9 @@ public class GameDao extends XwinDao
 	{	
 		sqlMapClientTemplate.update("batchGameStatus", date);
 	}
+	
+	public Integer selectOverUnderWarning()
+	{
+		return (Integer) sqlMapClientTemplate.queryForObject("selectOverUnderWarning");
+	}
 }
