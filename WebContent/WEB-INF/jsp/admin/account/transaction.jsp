@@ -58,6 +58,9 @@
  		<option value='POST' <%=bankName.equals("POST")?"selected":""%>>우체국</option>
  		<option value='WOORI' <%=bankName.equals("WOORI")?"selected":""%>>우리</option>
  		<option value='SHINHAN' <%=bankName.equals("SHINHAN")?"selected":""%>>신한</option>
+ 		<option value='IBK' <%=bankName.equals("IBK")?"selected":""%>>기업</option>
+ 		<option value='HANA' <%=bankName.equals("HANA")?"selected":""%>>하나</option>
+ 		<option value='NH' <%=bankName.equals("NH")?"selected":""%>>농협</option>
  	</select>
 	<BR>
  	<select name='search'>
