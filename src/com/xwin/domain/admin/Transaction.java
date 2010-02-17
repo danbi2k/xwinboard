@@ -103,4 +103,13 @@ public class Transaction extends XwinObject
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
 	}
+	
+	public String toString() {
+		return "Transaction [balance=" + balance + "\n bankName=" + bankName
+				+ "\n date=" + date + "\n id=" + id + "\n inDate=" + inDate
+				+ "\n isCharge=" + isCharge + "\n money=" + money
+				+ "\n moneyInId=" + moneyInId + "\n moneyOutId=" + moneyOutId
+				+ "\n msgSeq=" + msgSeq + "\n note=" + note + "\n type=" + type
+				+ "\n userName=" + userName + "]";
+	}
 }
