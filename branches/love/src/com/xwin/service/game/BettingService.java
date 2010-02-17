@@ -1,5 +1,6 @@
 package com.xwin.service.game;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -21,6 +22,7 @@ import com.xwin.service.admin.XwinService;
 
 public class BettingService extends XwinService
 {
+	private static final DecimalFormat pointFormat = new DecimalFormat("0.#");
 	private static final Long DAYS_30 = 30L * 24L * 60L * 60L * 1000L;
 	private static final Long DAYS_60 = DAYS_30 * 2L;
 	private static final Long DAYS_90 = DAYS_30 * 3L;
@@ -109,26 +111,15 @@ public class BettingService extends XwinService
 		String introducerId = member.getIntroducerId();
 		if (introducerId != null) {
 			Member introducer = memberDao.selectMember(introducerId, null);
-			if (introducer.getStatus().equals(Code.USER_STATUS_NORMAL)) {
-				Double intro_point_rate = 0.002;
-				String display_point_rate = "0.2";
-				
+			if (introducer.getStatus().equals(Code.USER_STATUS_NORMAL)) {				
 				Long differTime = new Date().getTime() - member.getJoinDate().getTime();
-				
-				if (differTime < DAYS_90) {
-					intro_point_rate = 0.005;
-					display_point_rate = "0.5";
-				}
-				
-				if (differTime < DAYS_60) {
+				Double intro_point_rate = 0.02;
+				if (differTime > DAYS_90)
+					intro_point_rate = 0.002;				
+				else if (differTime > DAYS_60)
+					intro_point_rate = 0.005;				
+				else if (differTime > DAYS_30)
 					intro_point_rate = 0.01;
-					display_point_rate = "1";
-				}
-				
-				if (differTime < DAYS_30) {
-					intro_point_rate = 0.02;
-					display_point_rate = "2";
-				}
 				
 				Double intro_point = betting.getMoney() * intro_point_rate;
 				memberDao.plusMinusPoint(introducerId, intro_point.longValue());
@@ -141,7 +132,7 @@ public class BettingService extends XwinService
 				introPointLog.setMoney(intro_point.longValue());
 				introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
 				introPointLog.setBettingId(betting.getId());
-				introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + display_point_rate + "% 포인트");
+				introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + pointFormat.format(intro_point_rate * 100) + "% 포인트");
 				introPointLog.setBettingUserId(member.getUserId());
 				
 				pointDao.insertPoint(introPointLog);
