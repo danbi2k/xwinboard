@@ -149,26 +149,26 @@ public class BettingService extends XwinService
 		}
 		
 		// 모바일 포인트 지급
-		if (source.equals(Code.SOURCE_WAP)) {
-			Double mobile_point_rate = 0.01;
-			
-			Double mobile_point = betting.getMoney() * mobile_point_rate;
-			memberDao.plusMinusPoint(member.getUserId(), mobile_point.longValue());
-			
-			Point mobilePointLog = new Point();
-			mobilePointLog.setUserId(member.getUserId());
-			mobilePointLog.setType(Code.POINT_TYPE_BETTING);
-			mobilePointLog.setDate(new Date());
-			mobilePointLog.setOldBalance(member.getPoint());
-			mobilePointLog.setMoney(mobile_point.longValue());
-			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
-			mobilePointLog.setBettingId(betting.getId());
-			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 포인트");
-			mobilePointLog.setBettingUserId(member.getUserId());
-			
-			pointDao.insertPoint(mobilePointLog);
-			member.setPoint(mobilePointLog.getBalance());
-		}
+//		if (source.equals(Code.SOURCE_WAP)) {
+//			Double mobile_point_rate = 0.01;
+//			
+//			Double mobile_point = betting.getMoney() * mobile_point_rate;
+//			memberDao.plusMinusPoint(member.getUserId(), mobile_point.longValue());
+//			
+//			Point mobilePointLog = new Point();
+//			mobilePointLog.setUserId(member.getUserId());
+//			mobilePointLog.setType(Code.POINT_TYPE_BETTING);
+//			mobilePointLog.setDate(new Date());
+//			mobilePointLog.setOldBalance(member.getPoint());
+//			mobilePointLog.setMoney(mobile_point.longValue());
+//			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
+//			mobilePointLog.setBettingId(betting.getId());
+//			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 포인트");
+//			mobilePointLog.setBettingUserId(member.getUserId());
+//			
+//			pointDao.insertPoint(mobilePointLog);
+//			member.setPoint(mobilePointLog.getBalance());
+//		}
 	}
 
 	public boolean checkBettingAccept(GameFolder gameFolder)
