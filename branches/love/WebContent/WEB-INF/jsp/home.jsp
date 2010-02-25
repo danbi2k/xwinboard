@@ -274,7 +274,7 @@ allowScriptAccess="always"></embed>
     <td width="235" valign="top">
 	<img src="images/main/baner_title.jpg">
     
-    <a href="http://www.dding-dong.com" target="_blank">
+    <a href="http://www.dding-dong1.com" target="_blank">
 	<img src="images/main/baner0.jpg" border="0"  style="margin-top:8px;"></a>
     <table width="235" border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;"bgcolor="#e0e0e0">
   <tr>
