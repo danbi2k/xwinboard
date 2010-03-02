@@ -233,16 +233,12 @@ public class TransactionManager extends QuartzJobBean
 			String userName = msg[2].trim();
 			
 			Long money = null;
-			if (msg[3].startsWith("입금")) {
-				String moneyStr = msg[3].replaceAll(MONEY_REG_EXP, "").trim();					
-				money = Long.parseLong(moneyStr);
-			}
+			String moneyStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();					
+			money = Long.parseLong(moneyStr);
 			
 			Long balance = null;
-			if (msg[4].startsWith("잔액")) {
-				String balanceStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();					
-				balance = Long.parseLong(balanceStr);
-			}				
+			String balanceStr = msg[5].replaceAll(MONEY_REG_EXP, "").trim();					
+			balance = Long.parseLong(balanceStr);
 
 			transaction.setType(Code.TRAN_TYPE_MONEYIN);
 			transaction.setUserName(userName);
@@ -787,6 +783,7 @@ public class TransactionManager extends QuartzJobBean
 		KtfSmsMessage message = new KtfSmsMessage();
 		TransactionManager tm = new TransactionManager();
 		Transaction transaction = null;
+		message.setMsg("[KB]03/02 16:36\n623102**064\n종흠\n인터넷입금이\n1,000,000\n잔액2,171,823");
 		//message.setMsg("신한 12/23 16:32[110-257-306***]입금      19,000잔액   6,121,400안민강");
 		//message.setMsg("신한 12/23 16:31[110-257-306***]지급         100잔액   6,102,40002480104300750");
 		//message.setMsg("신한 12/23 18:22[110-257-306***]입금     100,000잔액  21,840,368 이훈희");
