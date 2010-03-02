@@ -48,7 +48,7 @@ public class KtfSmsConnector
 		}
 		
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
 			
 		for (int x = 0 ; x < getUri.size() ; x++) {
 			try {
