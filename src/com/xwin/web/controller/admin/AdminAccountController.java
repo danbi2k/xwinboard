@@ -372,7 +372,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			Member member = memberDao.selectMember(userId, null);
 			
 			MoneyIn moneyIn = new MoneyIn();
-			moneyIn.setMoney(money * -1);
+			moneyIn.setMoney(money);
 			moneyIn.setProcDate(new Date());
 			moneyIn.setStatus(Code.MONEY_IN_DIRECT);
 			moneyIn.setUserId(userId);
@@ -389,8 +389,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 			account.setType(Code.ACCOUNT_TYPE_MONEYIN_DIRECT);
 			account.setDate(new Date());
 			account.setOldBalance(member.getBalance());
-			account.setMoney(moneyIn.getMoney());
-			account.setBalance(member.getBalance() + moneyIn.getMoney());
+			account.setMoney(money);
+			account.setBalance(member.getBalance() + money);
 			account.setMoneyInId(moneyIn.getId());
 			account.setNote(note);
 			
@@ -449,8 +449,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 				account.setType(Code.ACCOUNT_TYPE_MONEYOUT_DIRECT);
 				account.setDate(new Date());
 				account.setOldBalance(member.getBalance());
-				account.setMoney(moneyOut.getMoney() * -1);
-				account.setBalance(member.getBalance() - moneyOut.getMoney());
+				account.setMoney(money * -1);
+				account.setBalance(member.getBalance() - money);
 				account.setMoneyInId(moneyOut.getId());
 				
 				accountDao.insertAccount(account);
