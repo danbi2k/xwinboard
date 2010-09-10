@@ -17,6 +17,7 @@ import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.infra.dao.KtfSmsDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.KtfSmsConnector;
+import com.xwin.infra.sms.ShowSmsConnector;
 import com.xwin.infra.util.Code;
 import com.xwin.service.external.TransactionService;
 
@@ -37,6 +38,7 @@ public class TransactionManager extends QuartzJobBean
 	private KtfSmsDao ktfSmsDao = null;
 	private TransactionDao transactionDao = null;
 	private KtfSmsConnector ktfSmsConnector = null;
+	private ShowSmsConnector showSmsConnector = null;
 	private TransactionService transactionService = null;
 	
 	protected void executeInternal(JobExecutionContext context)
@@ -46,8 +48,12 @@ public class TransactionManager extends QuartzJobBean
 		transactionDao = (TransactionDao) context.getJobDetail().getJobDataMap().get("transactionDao");
 		ktfSmsConnector = (KtfSmsConnector) context.getJobDetail().getJobDataMap().get("ktfSmsConnector");
 		transactionService = (TransactionService) context.getJobDetail().getJobDataMap().get("transactionService");
+		showSmsConnector = (ShowSmsConnector) context.getJobDetail().getJobDataMap().get("showSmsConnector");
 		
-		List<Map<String, String>> smsList = ktfSmsConnector.parseKTF();
+		List<Map<String, String>> smsList = showSmsConnector.parseSHOW();
+		List<Map<String, String>> ktfList = ktfSmsConnector.parseKTF();
+		smsList.addAll(ktfList);
+		
 		List<Transaction> transactionList = new ArrayList<Transaction>();
 		if (smsList != null) {
 			for (Map<String, String> smsMap : smsList) {

@@ -6,6 +6,7 @@
 	
 <sqlMapConfig>
 	<sqlMap resource="com/xwin/infra/ibatis/KtfSms.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/ShowSms.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Game.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Member.xml" />

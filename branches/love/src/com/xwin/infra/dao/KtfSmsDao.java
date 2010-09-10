@@ -12,7 +12,7 @@ public class KtfSmsDao extends XwinDao
 
 	public void insertMessage(KtfSmsMessage message)
 	{
-		sqlMapClientTemplate.insert("insertMessage", message);
+		sqlMapClientTemplate.insert("insertKtfMessage", message);
 	}
 	
 	public List<KtfSmsMessage> selectList()

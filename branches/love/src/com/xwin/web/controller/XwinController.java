@@ -27,6 +27,7 @@ import com.xwin.infra.dao.MoneyOutDao;
 import com.xwin.infra.dao.OtpLogDao;
 import com.xwin.infra.dao.PointDao;
 import com.xwin.infra.dao.ReuseCommentDao;
+import com.xwin.infra.dao.ShowSmsDao;
 import com.xwin.infra.dao.SmsWaitDao;
 import com.xwin.infra.dao.TotoDao;
 import com.xwin.infra.dao.TransactionDao;
@@ -52,6 +53,7 @@ public class XwinController extends MultiActionController
 	protected PointDao pointDao = null;
 	protected AccessDao accessDao = null;
 	protected KtfSmsDao ktfSmsDao = null;
+	protected ShowSmsDao showSmsDao = null;
 	protected AdminDao adminDao = null;
 	protected SmsWaitDao smsWaitDao = null;
 	protected MemoDao memoDao = null;
@@ -121,6 +123,9 @@ public class XwinController extends MultiActionController
 
 	public void setKtfSmsDao(KtfSmsDao ktfSmsDao) {
 		this.ktfSmsDao = ktfSmsDao;
+	}
+	public void setShowSmsDao(ShowSmsDao showSmsDao) {
+		this.showSmsDao = showSmsDao;
 	}
 	public void setSendSmsConnector(SendSmsConnector sendSmsConnector) {
 		this.sendSmsConnector = sendSmsConnector;

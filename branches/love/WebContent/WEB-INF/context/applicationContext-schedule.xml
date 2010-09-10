@@ -65,6 +65,9 @@
 				<entry key="ktfSmsConnector">
 					<ref bean="ktfSmsConnector"/>
 				</entry>
+				<entry key="showSmsConnector">
+					<ref bean="showSmsConnector"/>
+				</entry>
 				<entry key="transactionService">
 					<ref bean="transactionService"/>
 				</entry>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="ShowSmsMessage">
+
+	<typeAlias alias="ShowSmsMessage" type="com.xwin.domain.comm.ShowSmsMessage" />
+	
+	<resultMap id="ShowSmsResultMap" class="ShowSmsMessage">
+		<result property="id" column="ID"/>
+		<result property="msgSeq" column="MSG_SEQ"/>
+		<result property="inDate" column="IN_DATE"/>
+		<result property="msg" column="MSG"/>
+		<result property="sm" column="SM"/>
+		<result property="callBack" column="CALL_BACK"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectShowSmsList" resultMap="ShowSmsResultMap"
+		parameterClass="map">
+		SELECT * FROM tbl_showsms
+		ORDER BY IN_DATE desc
+	</select>
+	
+	<insert id="insertShowMessage" parameterClass="ShowSmsMessage">
+		INSERT INTO tbl_showsms(MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES(#msgSeq#, #inDate#, #msg#, #sm#, #callBack#)
+	</insert>
+	
+	<delete id="deleteShowMessage" parameterClass="string">
+		DELETE FROM tbl_showsms WHERE ID = #value#
+	</delete>
+	
+	<update id="updateShowSmsMessage" parameterClass="map">
+		UPDATE tbl_showsms SET STATUS = #status# WHERE ID = #id#
+	</update>
+	
+</sqlMap>
