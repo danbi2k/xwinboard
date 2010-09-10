@@ -21,6 +21,10 @@
 		class="com.xwin.infra.dao.KtfSmsDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
+	<bean id="showSmsDao"
+		class="com.xwin.infra.dao.ShowSmsDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
+		
 	<bean id="leagueDao"
 		class="com.xwin.infra.dao.LeagueDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />

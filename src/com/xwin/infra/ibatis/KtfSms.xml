@@ -32,7 +32,7 @@
 			MSG LIKE #value#
 	</select>
 	
-	<insert id="insertMessage" parameterClass="KtfSmsMessage">
+	<insert id="insertKtfMessage" parameterClass="KtfSmsMessage">
 		INSERT INTO tbl_ktfsms(MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES(#msgSeq#, #inDate#, #msg#, #sm#, #callBack#)
 	</insert>
 	
