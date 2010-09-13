@@ -14,6 +14,7 @@ namespace ConsoleApplication1
     class Program
     {
         static string LOGIN_URL = "http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http%3A%2F%2Fwww%2Eshow%2Eco%2Ekr%2Findex%2Easp%3Fcode%3DFB00000";
+        static String DB_STR = "server=localhost;database=danmuji;user=kimchi;password=gjfEjr^RjfEjr;port=33406";
         static char[] SEPERATOR = { ' ', '|' };
         static WebBrowser webBrowser1 = new WebBrowser();
         static MySqlConnection conn;
@@ -32,7 +33,7 @@ namespace ConsoleApplication1
         public static void ThreadStart()
         {
             conn = new MySqlConnection();
-            conn.ConnectionString = "server=localhost;database=danmuji;user=kimchi;password=gjfEjr^RjfEjr;port=33406";
+            conn.ConnectionString = DB_STR;
             conn.Open();
 
             webBrowser1.Dock = DockStyle.Fill;
@@ -111,6 +112,10 @@ namespace ConsoleApplication1
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
+                conn = new MySqlConnection();
+                conn.ConnectionString = DB_STR;
+                conn.Open();
 
                 webBrowser1.Navigate(new Uri("http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http://www.show.co.kr/index.asp?code=FB00000"));
             }
