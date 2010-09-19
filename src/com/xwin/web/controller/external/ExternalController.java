@@ -1,6 +1,7 @@
 package com.xwin.web.controller.external;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -99,6 +100,23 @@ public class ExternalController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView getProcessedGameList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MINUTE, -30);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("processDate", cal.getTime());
+		
+		List<Game> gameList = gameDao.selectGameList(param);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(gameList));
+		
+		return mv;
+	}
+	
 	public ModelAndView getLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -106,6 +124,18 @@ public class ExternalController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(leagueList));
+		
+		return mv;
+	}
+	
+	public ModelAndView getLeague(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String leagueId = request.getParameter("leagueId");
+		League league = leagueDao.selectLeagueById(leagueId);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(league));
 		
 		return mv;
 	}

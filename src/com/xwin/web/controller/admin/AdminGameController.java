@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.admin.Admin;
-import com.xwin.domain.game.Betting;
+import com.xwin.domain.common.ReuseComment;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
 import com.xwin.domain.user.Member;
@@ -427,6 +426,11 @@ public class AdminGameController extends XwinController
 				e.printStackTrace();
 				rx = new ResultXml(0, game.getHomeTeam() + " vs " + game.getAwayTeam() + "\n경기 처리중 오류가 발생하였습니다!!", null);
 			}
+			
+			Game processedGame = new Game();
+			processedGame.setId(game.getId());
+			processedGame.setProcessDate(new Date());
+			gameDao.updateGame(processedGame);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -477,6 +481,11 @@ public class AdminGameController extends XwinController
 				rx = new ResultXml(0, "경기 재처리중 오류가 발생하였습니다!!", null);
 			}
 		}
+		
+		Game processedGame = new Game();
+		processedGame.setId(game.getId());
+		processedGame.setProcessDate(new Date());
+		gameDao.updateGame(processedGame);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

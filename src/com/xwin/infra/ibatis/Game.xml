@@ -35,6 +35,7 @@
 		<result property="grade" column="GRADE"/>
 		<result property="note" column="NOTE"/>
 		<result property="syncDeny" column="SYNC_DENY"/>
+		<result property="processDate" column="PROCESS_DATE"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -107,6 +108,11 @@
 			<isNotNull prepend="AND" property="toDate">
 				<![CDATA[
 				g.GAME_DATE <= #toDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="processDate">
+				<![CDATA[
+				g.PROCESS_DATE >= #processDate#
 				]]>
 			</isNotNull>
 			<isNotNull prepend="AND" property="betGameCount">
@@ -247,6 +253,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="syncDeny">
 			SYNC_DENY = #syncDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="processDate">
+			PROCESS_DATE = #processDate# 
 			</isNotNull>
 			<isNotNull prepend="," property="note">
 			NOTE = #note# 
