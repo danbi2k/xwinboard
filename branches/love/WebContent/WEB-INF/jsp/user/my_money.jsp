@@ -15,10 +15,10 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-			<tr><td><img src="img/menu101.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu101.jpg" border="0"></td></tr>
 		
 </table>
-            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="images/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">거래일자</p>      </td>
@@ -61,7 +61,7 @@
             <p><%=XwinUtil.nvl(account.getNote())%></p>
         </td>
         <td width="42" class="tablebg1" align="center" valign="middle">
-            <p><img src="img/x.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></p>
+            <p><img src="images/x.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></p>
         </td>
     </tr>
 	<%
@@ -82,7 +82,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -99,7 +99,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>

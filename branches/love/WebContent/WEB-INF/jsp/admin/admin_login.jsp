@@ -13,7 +13,7 @@
 <style type='text/css'>
 .login_out{text-align: center; margin-top:150px;}
 .login_out span{font-family:verdana; font-size:10px;}
-.login{margin: 0 auto;  width:337px; background:url(img/admin_login_bg.gif) no-repeat; width:337px; height:125px; padding-top:55px;}
+.login{margin: 0 auto;  width:337px; background:url(images/admin_login_bg.gif) no-repeat; width:337px; height:125px; padding-top:55px;}
 .login th{font-size:12px; color:#ffffff; text-align:right; padding-right:5px; font-weight:400;}
 
 </style>
@@ -74,7 +74,7 @@ function processCookie(tobj)
 		<td>
 		<input class="input" style="WIDTH: 120px; height:14px;" tabIndex="1" maxLength="20" name="userid" value=""></td>
 		<td style="PADDING-LEFT: 5px" rowSpan="3">							
-		<img src="img/admin_login_bt.gif" onclick="checkIT()"></td>
+		<img src="images/admin_login_bt.gif" onclick="checkIT()"></td>
 		</tr>
 		<tr>
 		<th>1차패스워드</th>

@@ -9,7 +9,7 @@
 
 
 
-			<tr><td><img src="img/menu_login2.jpg" width="143" height="51"></td>
+			<tr><td><img src="images/menu_login2.jpg" width="143" height="51"></td>
 			</tr>
 		
 </table>

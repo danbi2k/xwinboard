@@ -15,7 +15,7 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <tr>
-	<td><img src="img/menu18.jpg" border="0"></td>
+	<td><img src="images/menu18.jpg" border="0"></td>
 </tr>
 </table>
 
@@ -23,14 +23,14 @@
 	height="33">
 		 <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><a href="toto.php?mode=viewToto"><img src="img/toto_2.jpg" border="0"></a>&nbsp;<img src="img/toto__1.jpg" border="0"></p>
+            <p><a href="toto.php?mode=viewToto"><img src="images/toto_2.jpg" border="0"></a>&nbsp;<img src="images/toto__1.jpg" border="0"></p>
         </td>
     </tr>
 	
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40"  background="img/bar1.gif">
+	height="40"  background="images/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
@@ -72,7 +72,7 @@
 		<%
 		if (betToto.getRunStatus().equals(Code.BET_STATUS_RUN) == false) {
 		%>
-		<img src="img/x.gif" onclick="deleteMyToto(<%=betToto.getId()%>)">
+		<img src="images/x.gif" onclick="deleteMyToto(<%=betToto.getId()%>)">
 		<%
 		}
 		%>
@@ -96,7 +96,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -113,7 +113,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>

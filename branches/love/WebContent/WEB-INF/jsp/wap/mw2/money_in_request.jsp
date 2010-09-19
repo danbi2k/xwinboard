@@ -62,9 +62,9 @@
                         <div>&nbsp;<br/>
                         ■ 입금액과 입금자명을 입력해주세요.<br/>
                         &nbsp;</div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>입금액</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>입금액</div>
                         <div><input type="text" name="money" value="" style="width:98%;text-align:center;" /></div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>신청자명</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>신청자명</div>
                         <div><input type="text" name="name" value="" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="auto_login" value="$(auto_login)" /></div>

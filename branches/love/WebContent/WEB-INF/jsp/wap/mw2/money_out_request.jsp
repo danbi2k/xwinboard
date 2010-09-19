@@ -35,9 +35,9 @@
                         <div>&nbsp;<br/>
                         ■ 신청액과 PIN번호를 입력해주세요.<br/>
                         &nbsp;</div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>신청액</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>신청액</div>
                         <div><input type="text" name="money" value="" style="width:98%;text-align:center;" /></div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>PIN번호</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>PIN번호</div>
                         <div><input type="password" name="pin" value="" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="auto_login" value="$(auto_login)" /></div>

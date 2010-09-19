@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.board.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
@@ -12,7 +13,7 @@
 
 <%@include file="../header.jsp"%>
 
-			<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
+			<tr><td><img src="images/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
 		    <tr><td>&nbsp;</td>
 		    </tr>
             </table>
@@ -23,15 +24,15 @@ if (betting != null) {
 <table align="center" cellpadding="0" cellspacing="0" width="771">
    
     <tr>
-        <td width="771" background="img/minit_02.jpg" valign="top">
+        <td width="771" background="images/minit_02.jpg" valign="top">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-<td height=""><span style="color:darkred;weight:bold">★ 배팅내역은 본문 상단에 자동 표시 됩니다.</span></td>
+<td height=""><span style="color:<%=SiteConfig.SITE_COLOR%>;weight:bold">★ 배팅내역은 본문 상단에 자동 표시 됩니다.</span></td>
 </tr>
 <tr>
 		<td><table border="0" cellpadding="0" cellspacing="0">
 		  <tbody>
-		  <tr bgcolor="darkred">
+		  <tr bgcolor="<%=SiteConfig.SITE_COLOR%>">
 	<td style="color:white;v-align:middle;align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getBoardItemDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
 	적중액 :
 	<%
@@ -101,12 +102,12 @@ if (betting != null) {
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
    
     <tr>
-        <td width="771" height="15" background="img/minit_01.jpg">
+        <td width="771" height="15" background="images/minit_01.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
     <tr>
-        <td width="771" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="771" height="132" background="images/minit_02.jpg" valign="top" style="padding:20">
            <table border=0 cellspacing=0 cellpadding=0 width=731>
 
 <col width=60></col>
@@ -141,16 +142,16 @@ if (betting != null) {
         </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
 </table>
           <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
-			    <td width="671" height="40" align="left"><img src="img/list.jpg" border="0" align="absmiddle" onclick='history.back()'>
+			    <td width="671" height="40" align="left"><img src="images/list.jpg" border="0" align="absmiddle" onclick='history.back()'>
 			    </td>
-			    <td width="100" height="40" align="right"><img src="img/write.jpg" border="0" align="absmiddle" onclick='check_frm()'>
+			    <td width="100" height="40" align="right"><img src="images/write.jpg" border="0" align="absmiddle" onclick='check_frm()'>
 				</td>
 			</tr>
 		    

@@ -5,24 +5,24 @@
 <%@ page import="com.xwin.infra.util.*" %>
 
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu091.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu091.jpg" border="0"></td></tr>
 		<tr>
-	<td align="center"><img src="img/money_chagenotice.gif" border="0"></td>
+	<td align="center"><img src="images/money_chagenotice.gif" border="0"></td>
 </tr>
             </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="246">
     <tr>
-        <td width="771" height="37" align="left" valign="top" background="img/bar_bg.gif">
-            <p><img src="img/9-.jpg" border="0">&nbsp;<a href="sendcache.php?mode=viewMoneyOutRequestList"><img src="img/11.jpg" border="0"></a></p>
+        <td width="771" height="37" align="left" valign="top" background="images/bar_bg.gif">
+            <p><img src="images/9-.jpg" border="0">&nbsp;<a href="sendcache.php?mode=viewMoneyOutRequestList"><img src="images/11.jpg" border="0"></a></p>
       </td>
     </tr>
     <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
+        <td width="771" height="37" background="images/minit_01.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
     <tr>
-        <td width="497" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="497" height="132" background="images/minit_02.jpg" valign="top" style="padding:20">
 <form name="frm" method="post">
 
 <input type="hidden" name="account_bank" value="<%=member.getBankName()%>"/>
@@ -78,7 +78,7 @@
         </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
@@ -86,8 +86,8 @@
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
 			    <td width="771" height="40" align="center">
-					<img src="img/ok.jpg" border="0" align="absmiddle" onclick="FnOutMoney_Submit(frm);">&nbsp;
-					<img src="img/back.jpg" border="0" align="absmiddle" onclick="location.reload();">
+					<img src="images/ok.jpg" border="0" align="absmiddle" onclick="FnOutMoney_Submit(frm);">&nbsp;
+					<img src="images/back.jpg" border="0" align="absmiddle" onclick="location.reload();">
 			    </td>
 			  
 			</tr>

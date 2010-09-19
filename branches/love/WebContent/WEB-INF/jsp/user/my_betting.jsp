@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="com.xwin.domain.statistics.*" %>
 <%
@@ -14,7 +15,7 @@
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
 %>
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu151.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu151.jpg" border="0"></td></tr>
 		
 </table>
 <br>
@@ -23,10 +24,10 @@
 	if (bettingList != null) {
 		for (Betting betting : bettingList) {
 %>
-<tr bgcolor="darkred"><td>
+<tr bgcolor="<%=SiteConfig.SITE_COLOR%>"><td>
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tbody><tr>
-		<td>&nbsp;<img src='img/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
+		<td>&nbsp;<img src='images/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
 	<td width="670" style="color:white;vertical-align:middle;text-align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getMMddDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
 	적중액 :
 	<%
@@ -37,8 +38,8 @@
 	%>
 	 원</b>
 	</td><td>
-	<img src="img/btn_board.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand">
-	<img src="img/btn_qna.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+	<img src="images/btn_board.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+	<img src="images/btn_qna.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
 	</td>
 	</tr></tbody></table></td>
 </tr>
@@ -163,7 +164,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -180,7 +181,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>

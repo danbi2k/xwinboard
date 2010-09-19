@@ -15,25 +15,25 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <tr>
-	<td><img src="img/menu08.jpg" border="0"></td>
+	<td><img src="images/menu08.jpg" border="0"></td>
 </tr>
 <tr>
-	<td align="center"><img src="img/moneynotice.jpg" border="0"></td>
+	<td align="center"><img src="images/moneynotice.jpg" border="0"></td>
 </tr>
 
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
 	<tr>
-		<td width="771" height="37" align="left" valign="top"  background="img/bar_bg.gif">
+		<td width="771" height="37" align="left" valign="top"  background="images/bar_bg.gif">
 		<a href="earncache.php?mode=viewMoneyInRequest"><img
-			src="img/8.jpg" border="0"></a>&nbsp;<img src="img/10-.jpg"
+			src="images/8.jpg" border="0"></a>&nbsp;<img src="images/10-.jpg"
 			border="0">	  </td>
 	</tr>
 
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40"  background="img/bar1.gif">
+	height="40"  background="images/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
@@ -90,14 +90,14 @@
 		<td width="30" class="tablebg1" align="center" valign="middle">
 		<p>
 		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
-			<img src="img/x.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
+			<img src="images/x.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
 		<%}%>
 		</p>
 		</td>
 		<td width="30" class="tablebg2" align="center" valign="middle">
 		<p>
 		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false) { %>
-			<img src="img/x.gif" onclick="removeMoneyInRequestLog(<%=moneyIn.getId()%>)" title="충전기록삭제">
+			<img src="images/x.gif" onclick="removeMoneyInRequestLog(<%=moneyIn.getId()%>)" title="충전기록삭제">
 		<%} %>
 		</p>
 		</td>
@@ -119,7 +119,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -136,7 +136,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
