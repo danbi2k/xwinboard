@@ -168,16 +168,14 @@ public class ExternalController extends XwinController
 	{
 		String userId = request.getParameter("userId");
 		String inviteKey = request.getParameter("inviteKey");
-		String source = request.getParameter("source");
+		String joinId = request.getParameter("joinId");
 		
-		Invitation invitation = new Invitation();
-		invitation.setInviteKey(inviteKey);
-		invitation.setUserId(userId);
-		invitation.setSendDate(new Date());
-		invitation.setSource(source);
-		invitation.setMobile("");
+		Invitation invitation = invitationDao.selectInvitation(userId, inviteKey);
 		
-		invitationDao.insertInvitation(invitation);
+		if (invitation != null) {
+			invitation.setJoinId(joinId);
+			invitationDao.updateInvitation(invitation);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
