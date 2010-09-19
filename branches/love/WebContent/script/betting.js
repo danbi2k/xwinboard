@@ -152,7 +152,7 @@ function FnDrawFolder(data, type) {
 			row.push("<p>" + Xwin.Digit2(data[i].selRate) + "</p>");
 			row.push("</td>");
 			row.push("<td width='30' align='center' valign='middle' class='tablebg1'>");
-			row.push("<p><img src='img/x.gif' border='0' onclick='FnDeleteGameFolder(" + data[i].id + ",\"" + type + "\",\"" + data[i].guess + "\")'></p>");
+			row.push("<p><img src='images/x.gif' border='0' onclick='FnDeleteGameFolder(" + data[i].id + ",\"" + type + "\",\"" + data[i].guess + "\")'></p>");
 			row.push("</td>");
 			row.push("</tr>");
 			
