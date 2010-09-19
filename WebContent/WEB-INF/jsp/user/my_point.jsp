@@ -15,10 +15,10 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-			<tr><td><img src="img/menu10.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu10.jpg" border="0"></td></tr>
 		
 </table>
-            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="img/bar1.gif">
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="images/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
             <p style="font-weight: bold">날짜</p>      </td>
@@ -75,7 +75,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -92,12 +92,12 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
 			    </td>
-			    <td width="100" height="40" align="right"><a href="javascript:exchangePoint(<%=member.getPoint()%>)"><img src="img/cchange1.jpg" / border="0"></a></td>
+			    <td width="100" height="40" align="right"><a href="javascript:exchangePoint(<%=member.getPoint()%>)"><img src="images/cchange1.jpg" / border="0"></a></td>
 			</tr>
 		    
      </table>

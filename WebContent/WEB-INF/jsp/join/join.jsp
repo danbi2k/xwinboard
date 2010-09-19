@@ -1,28 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ page import="com.xwin.domain.user.*"%>
 <%@ page import="com.xwin.domain.*"%>
 
 <%@include file="../header.jsp"%>
 
-			<tr><td><img src="img/menu16.jpg" border="0"></td></tr>
-			<tr><td style="padding-left:27px;"><img src="img/member_title.gif"border="0"></td>
+			<tr><td><img src="images/menu16.jpg" border="0"></td></tr>
+			<tr><td style="padding-left:27px;"><img src="images/member_title.gif"border="0"></td>
 			</tr>
 </table>
 
 
 <form name="frm_reg">
 	<input name="password" type="hidden" value=""/>
-     <table align="center" cellpadding="0" cellspacing="0" width="771"   background="img/bar1.gif">
+     <table align="center" cellpadding="0" cellspacing="0" width="771"   background="images/bar1.gif">
     <tr>
-        <td width="771" height="37" align="center" valign="middle" background="img/bar_bg.gif" class="menubar" style="font-weight: bold">
+        <td width="771" height="37" align="center" valign="middle" background="images/bar_bg.gif" class="menubar" style="font-weight: bold">
            회원가입양식        </td>
     </tr>
 </table>
  <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
     <tr>
-        <td width="771" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="771" height="132" background="images/minit_02.jpg" valign="top" style="padding:20">
            <table border=0 cellspacing=0 cellpadding=0 width=700 align="center">
 
 <col width=100></col>
@@ -36,7 +35,7 @@
 <tr>
  <td align=right class=menubar height=40height=40>아이디</td>
  <td></td>
- <td><input type=text name=userId maxlength=200 class=input2> <font color="red">★ 영문과 숫자 조합이 가능합니다</font></td>
+ <td><input type=text name=userId maxlength=200 class=input2> <font color="<%=SiteConfig.SITE_COLOR%>">★ 영문과 숫자 조합이 가능합니다</font></td>
 </tr>
 
 
@@ -59,7 +58,7 @@
 <tr>
  <td align=right class=menubar height=40>모바일PIN번호</td>
  <td></td>
- <td><input type=text name=pin maxlength=200 class=input2 onfocusout='only123(this)' onkeyup='only123(this)'> <font color="red">★ 원하시는 숫자 6자리를 입력해주세요.</font></td>
+ <td><input type=text name=pin maxlength=200 class=input2 onfocusout='only123(this)' onkeyup='only123(this)'> <font color="<%=SiteConfig.SITE_COLOR%>">★ 원하시는 숫자 6자리를 입력해주세요.</font></td>
 </tr>
 <tr>
  <td align=right class=menubar height=40>핸드폰번호</td>
@@ -75,7 +74,7 @@
 			</select> -
 			<input class="input2" name="phone2" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'> -
 			<input class="input2" name="phone3" type="text" size="4" maxlength="4" value="" style='IME-MODE: inactive'>
-	<img src="img/send.jpg" border="0" align="absmiddle" onClick="sendAuthNumber()"/><BR>
+	<img src="images/send.jpg" border="0" align="absmiddle" onClick="sendAuthNumber()"/><BR>
 	배팅 결과 문자 수신 요청 <input type="checkbox" name="smsCheck" checked/>
 </td>
 </tr>
@@ -124,14 +123,14 @@
         </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
 </table>
           <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
-			    <td width="771" height="40" align="center"><img onClick="FnMemReg(frm_reg);" src="img/join.jpg" border="0" align="absmiddle">&nbsp;<img src="img/back.jpg" onClick="location.reload();" border="0" align="absmiddle">
+			    <td width="771" height="40" align="center"><img onClick="FnMemReg(frm_reg);" src="images/join.jpg" border="0" align="absmiddle">&nbsp;<img src="images/back.jpg" onClick="location.reload();" border="0" align="absmiddle">
 				</td>
 			</tr>
 		    

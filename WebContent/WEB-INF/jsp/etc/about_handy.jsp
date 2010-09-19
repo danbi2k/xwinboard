@@ -3,12 +3,12 @@
 
 
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu13.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu13.jpg" border="0"></td></tr>
 		
             </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">   
 		    <tr>
-		        <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
+		        <td width="680" background="images/minit_02.jpg" valign="top" style="padding:20">
 		            <p>
 			<div class='handicap'>
 <h3>· 용어설명</h3>

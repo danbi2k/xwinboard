@@ -25,10 +25,10 @@ function thisReload()
 
 setInterval(thisReload, 900000);
 </script>
-			<tr><td><img src="img/menu0<%=img%>1.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu0<%=img%>1.jpg" border="0"></td></tr>
 		
 </table>
-       <table align="center" cellpadding="0" cellspacing="0" width="887" height="40"  background="img/bar1.gif">
+       <table align="center" cellpadding="0" cellspacing="0" width="887" height="40"  background="images/bar1.gif">
    		 <tr>
         <td width="90" height="40" font color="#1a1a1a" align="center" valign="middle" class="menubar">
             <p><strong>경기일시</strong></p>
@@ -119,9 +119,9 @@ if (gameList != null) {
   <div align="center">
   <table align="center" cellpadding="0" cellspacing="0" width="569">
     <tr>
-        <td width="569" align="right" height="40" background="img/carthead1.jpg">
-            <a href='cart.php?mode=viewBettingCart'><img src="img/cartview.gif" border="0" align="absbottom"></a>&nbsp;
-			<img src="img/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
+        <td width="569" align="right" height="40" background="images/carthead1.jpg">
+            <a href='cart.php?mode=viewBettingCart'><img src="images/cartview.gif" border="0" align="absbottom"></a>&nbsp;
+			<img src="images/alldelete.gif" border="0" align="absbottom" onclick="FnDeleteFolder('<%=type%>')">&nbsp;&nbsp;
         </td>
     </tr>
     <tr>
@@ -141,7 +141,7 @@ if (gameList != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
+			            <p>&nbsp;<img src="images/cart.jpg" width="67" height="25" border="0" alt="cart.jpg" onclick="FnAddBettingCart()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -152,7 +152,7 @@ if (gameList != null) {
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='5,000' onkeyup='FnCalcFolder()'></p>
 			        </td>
 			        <td width="70" height="31">
-			            <p>&nbsp;<img src="img/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
+			            <p>&nbsp;<img src="images/bett.jpg" width="67" height="25" border="0" alt="bett.jpg" onclick="FnBetting()"></p>
 			        </td>
 			    </tr>
 			    <tr>

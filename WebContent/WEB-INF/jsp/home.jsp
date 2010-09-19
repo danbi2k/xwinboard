@@ -195,7 +195,7 @@ allowScriptAccess="always"></embed>
 <!-------------------------------------------------플래쉬끝-------------------------------------------------------->
 
 <!-------------------------------------------------긴급공지사항시작-------------------------------------------------------->
-<div id="popup" style="position:absolute;left:50%;top:150px;width:950px;z-index:5;margin-left:-470px;visibility:hidden;background-color:darkred">
+<div id="popup" style="position:absolute;left:50%;top:150px;width:950px;z-index:5;margin-left:-470px;visibility:hidden;background-color:<%=SiteConfig.SITE_COLOR%>">
 <table align="center" width="95%" cellpadding="0" cellspacing="0" style="margin-top:7px;">
 <tr align="center">
 <td width="10"></td>
@@ -222,7 +222,7 @@ allowScriptAccess="always"></embed>
         <td width="50%"><b style="color:black"></td>
         <td width="50%" align="right"><b style="color:black">
 			오늘하루열지않기 <input type="checkbox" id="popupcheck">
-			닫기 <img src="img/x.gif" onClick="popupclose()">	
+			닫기 <img src="images/x.gif" onClick="popupclose()">	
 		</td>
     </tr></table>
 </td></tr>
@@ -246,7 +246,7 @@ allowScriptAccess="always"></embed>
 <tr>
 <td align='right' style='color:#000000'>
 	다시보지않음<input type="checkbox" id="isReaded"/>
-	닫기 <img src="img/x.gif" onClick="memoClose()"/>
+	닫기 <img src="images/x.gif" onClick="memoClose()"/>
 </td>
 </tr>
 </table>

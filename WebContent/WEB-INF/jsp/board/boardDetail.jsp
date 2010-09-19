@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.board.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
 <%@ page import="com.xwin.infra.util.*" %>
@@ -18,8 +19,8 @@
 		pageIndex = "0";
 %>
 
-<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
-		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
+<tr><td><img src="images/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
+		    <tr><td><img src="images/bbs01.jpg" border="0"></td></tr>
 </table>
 
 <%
@@ -40,13 +41,13 @@ if (betting != null) {
         </td>
     </tr>
     <tr>
-        <td width="771" background="img/minit_021.jpg" valign="top" style="padding:20">
+        <td width="771" background="images/minit_021.jpg" valign="top" style="padding:20">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tbody>
- <tr bgcolor="darkred">
+ <tr bgcolor="<%=SiteConfig.SITE_COLOR%>">
 	<td style="color:white;v-align:middle;align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getBoardItemDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
 	적중액 :
 	<%
@@ -105,7 +106,7 @@ if (betting != null) {
 </td>
 	</tr>
 	<tr>
-        <td width="771" background="img/minit_03.jpg">
+        <td width="771" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
@@ -114,7 +115,7 @@ if (betting != null) {
 }
 %>
 <br>     
-     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar1.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="images/bar1.jpg">
     <tr>
       <td width="771" height="40" align="center" valign="middle">
            <strong><%=boardItem.getTitle()%></strong></td>
@@ -124,12 +125,12 @@ if (betting != null) {
  <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
    
     <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
+        <td width="771" height="37" background="images/minit_01.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
     <tr>
-        <td width="750" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="750" height="132" background="images/minit_02.jpg" valign="top" style="padding:20">
             <p>
 			 <%
 			    String context = boardItem.getContext();
@@ -146,7 +147,7 @@ if (betting != null) {
         </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
@@ -154,21 +155,21 @@ if (betting != null) {
           <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
 			    <td width="671" height="40" align="left">
-					<a href='bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src="img/list.jpg" border="0" align="absmiddle"></a>
+					<a href='bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=<%=pageIndex%>'><img src="images/list.jpg" border="0" align="absmiddle"></a>
 			    </td>
 			    <td width="100" height="40" align="right">
-					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0" align="absmiddle"></a>
+					<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="images/write.jpg" border="0" align="absmiddle"></a>
 				</td>
 				<%if (boardItem.getUserId().equals(member.getUserId())) {%>
 				<td width="100" height="40" align="right">
-					<img src="img/delete.jpg" border="0" align="absmiddle" onclick="deleteItem()">
+					<img src="images/delete.jpg" border="0" align="absmiddle" onclick="deleteItem()">
 				</td>
 				<%} %>
 			</tr>
 		    
      </table>
 
-<table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar1.jpg">
+<table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="images/bar1.jpg">
     <tr>
         <td width="771" height="40" align="center" valign="middle" class="menubar" style="font-weight: bold">
            코멘트        </td>
@@ -180,18 +181,18 @@ if (boardCommentList != null) {
 	for (BoardComment boardComment : boardCommentList) {
 %>
     <tr>
-		<td width="130" background="img/minit_02.jpg" valign="top" style="padding:10;">
+		<td width="130" background="images/minit_02.jpg" valign="top" style="padding:10;">
             <p><%=boardComment.getNickName()%></p>
         </td>
-        <td width="526" background="img/minit_02.jpg" valign="top" style="padding:10">
+        <td width="526" background="images/minit_02.jpg" valign="top" style="padding:10">
             <p><%=StringEscapeUtils.escapeHtml(boardComment.getComment())%></p>
         </td>
-		<td width="100" background="img/minit_02.jpg" valign="top" style="padding:5">
+		<td width="100" background="images/minit_02.jpg" valign="top" style="padding:5">
             <p><%=XwinUtil.getBoardItemDate(boardComment.getDate()) %></p>
         </td>
-		<td width="15" align="center" background="img/minit_02.jpg" valign="top" style="padding:3">
+		<td width="15" align="center" background="images/minit_02.jpg" valign="top" style="padding:3">
             <p><%if (boardComment.getUserId().equals(member.getUserId())) {%>
-					<img onclick="deleteComment(<%=boardComment.getId()%>)" src="img/x.gif"></td>
+					<img onclick="deleteComment(<%=boardComment.getId()%>)" src="images/x.gif"></td>
 					<%}else { %>
 					&nbsp;					
 					<%} %></p>
@@ -211,12 +212,12 @@ if (boardCommentList != null) {
 	  <table align="center" cellpadding="0" cellspacing="0" width="771" height="20">
    
     <tr>
-        <td width="771" height="37" background="img/minit_01.jpg">
+        <td width="771" height="37" background="images/minit_01.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>
     <tr>
-        <td width="771" height="20" background="img/minit_02.jpg" valign="top" style="padding:1">
+        <td width="771" height="20" background="images/minit_02.jpg" valign="top" style="padding:1">
            	<table border=0 width=100% align=center>
 
 	 <td align=left height="20"><textarea name="comment" cols=45 rows=5 class=textarea style=width:655></textarea></td>
@@ -226,7 +227,7 @@ if (boardCommentList != null) {
         </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>
         </td>
     </tr>

@@ -27,34 +27,34 @@
         <table width="100%">
             <tr>
                 <td style="width:50%;background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-1.gif" alt=""/><a title="확인" href="adminCommon.wap?mode=viewDailyBettingMoneySummary&token=<%=token%>" accesskey="1">일일정산내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-1.gif" alt=""/><a title="확인" href="adminCommon.wap?mode=viewDailyBettingMoneySummary&token=<%=token%>" accesskey="1">일일정산내역</a></div>
                 </td>
                 <td style="width:50%;background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-2.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="2">경기별배팅현황</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-2.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="2">경기별배팅현황</a></div>
                 </td>
             </tr>
             <tr>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-3.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="3">충전신청내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-3.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="3">충전신청내역</a></div>
                 </td>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-4.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="4">환전신청내역</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-5.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="5">충환전내역</a></div>
-                </td>
-                <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-6.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="6">입출금내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-4.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="4">환전신청내역</a></div>
                 </td>
             </tr>
             <tr>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-7.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="7">고객센터</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-5.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="5">충환전내역</a></div>
                 </td>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-8.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="8">게시판</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-6.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="6">입출금내역</a></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:#F5F5F5;">
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-7.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="7">고객센터</a></div>
+                </td>
+                <td style="background-color:#F5F5F5;">
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-8.gif" alt=""/><a title="확인" href="?token=<%=token%>" accesskey="8">게시판</a></div>
                 </td>
             </tr>
         </table>

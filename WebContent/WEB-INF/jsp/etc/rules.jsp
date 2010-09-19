@@ -9,7 +9,7 @@
 
 
 
-			<tr><td><img src="img/menu_batting2.jpg"></td>
+			<tr><td><img src="images/menu_batting2.jpg"></td>
 			</tr>
 		
 </table>

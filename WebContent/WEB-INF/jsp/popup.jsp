@@ -37,7 +37,7 @@
         <td width="50%"><b style="color:black">작성자 : <b>관리자</b></td>
         <td width="50%" align="right"><b style="color:black">
 			오늘하루이창을열지않음 <input type="checkbox" id="popupcheck">
-			닫기 <img src="img/x.gif" onclick="popupclose()">	
+			닫기 <img src="images/x.gif" onclick="popupclose()">	
 		</td>
     </tr></table>
 </td></tr>

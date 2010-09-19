@@ -159,12 +159,12 @@
 <%
 		for (int j = 0 ; j < colNum ; j++) {
 %>
-	<td align="center" class="totoBody left"><img src="img/check_blank.gif" id="<%=j%>A<%=i%>" name="<%=j%>A"/></td>
+	<td align="center" class="totoBody left"><img src="images/check_blank.gif" id="<%=j%>A<%=i%>" name="<%=j%>A"/></td>
 	<td align="center" class="totoBody mid"><span id="C<%=j%>L<%=i%>" name="C<%=j%>L<%=i%>"/></span></td>
-	<td align="center" class="totoBody right"><img src="img/check_blank.gif" id="<%=j%>B<%=i%>" name="<%=j%>B"/></td>
-	<td align="center" class="totoBody left"><img src="img/check_blank.gif" id="<%=j%>C<%=i%>" name="<%=j%>C"/></td>
+	<td align="center" class="totoBody right"><img src="images/check_blank.gif" id="<%=j%>B<%=i%>" name="<%=j%>B"/></td>
+	<td align="center" class="totoBody left"><img src="images/check_blank.gif" id="<%=j%>C<%=i%>" name="<%=j%>C"/></td>
 	<td align="center" class="totoBody mid"><span id="C<%=j%>R<%=i%>" name="C<%=j%>R<%=i%>"/></span></td>
-	<td align="center" class="totoBody right"><img src="img/check_blank.gif" id="<%=j%>D<%=i%>" name="<%=j%>D"/></td>
+	<td align="center" class="totoBody right"><img src="images/check_blank.gif" id="<%=j%>D<%=i%>" name="<%=j%>D"/></td>
 <%		
 		}
 %>
@@ -267,7 +267,7 @@ function loadMarking(markString)
 	var markId = markString.split("-");
 	for (var i = 0 ; i < markId.length ; i++) {
 		var iobj = document.getElementById(markId[i]);
-		iobj.src = "img/check_check.gif";
+		iobj.src = "images/check_check.gif";
 	}
 }
 
@@ -276,7 +276,7 @@ function loadResult(resultString)
 	var resultId = resultString.split("-");
 	for (var i = 0 ; i < resultId.length ; i++) {
 		var iobj = document.getElementById(resultId[i]);
-		iobj.src = "img/check_check_red.gif";
+		iobj.src = "images/check_check_red.gif";
 	}
 }
 

@@ -30,42 +30,42 @@
         <table width="100%">
             <tr>
                 <td style="width:50%;background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-1.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="1">승무패</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-1.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=wdl&token=<%=token%>" accesskey="1">승무패</a></div>
                 </td>
                 <td style="width:50%;background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-2.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="2">핸디캡</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-2.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameListByLeague&type=handy&token=<%=token%>" accesskey="2">핸디캡</a></div>
                 </td>
             </tr>
             <tr>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-3.gif" alt=""/><a title="확인" href="betlog.wap?mode=viewMyBettingList&token=<%=token%>" accesskey="3">배팅내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-3.gif" alt=""/><a title="확인" href="betlog.wap?mode=viewMyBettingList&token=<%=token%>" accesskey="3">배팅내역</a></div>
                 </td>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-4.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameResultList&token=<%=token%>" accesskey="4">경기결과</a></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-5.gif" alt=""/><a title="확인" href="sendcache.wap?mode=viewMoneyOutRequest&token=<%=token%>" accesskey="5">환전신청</a></div>
-                </td>
-                <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-6.gif" alt=""/><a title="확인" href="sendcache.wap?mode=viewMoneyOutRequestList&token=<%=token%>" accesskey="6">환전내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-4.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameResultList&token=<%=token%>" accesskey="4">경기결과</a></div>
                 </td>
             </tr>
             <tr>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-7.gif" alt=""/><a title="확인" href="earncache.wap?mode=viewMoneyInRequest&token=<%=token%>" accesskey="7">충전신청</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-5.gif" alt=""/><a title="확인" href="sendcache.wap?mode=viewMoneyOutRequest&token=<%=token%>" accesskey="5">환전신청</a></div>
                 </td>
                 <td style="background-color:#F5F5F5;">
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-8.gif" alt=""/><a title="확인" href="earncache.wap?mode=viewMoneyInRequestList&token=<%=token%>" accesskey="8">충전내역</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-6.gif" alt=""/><a title="확인" href="sendcache.wap?mode=viewMoneyOutRequestList&token=<%=token%>" accesskey="6">환전내역</a></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color:#F5F5F5;">
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-7.gif" alt=""/><a title="확인" href="earncache.wap?mode=viewMoneyInRequest&token=<%=token%>" accesskey="7">충전신청</a></div>
+                </td>
+                <td style="background-color:#F5F5F5;">
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-8.gif" alt=""/><a title="확인" href="earncache.wap?mode=viewMoneyInRequestList&token=<%=token%>" accesskey="8">충전내역</a></div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-9.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameList&type=wdl&token=<%=token%>" accesskey="9">승무패(최신폰)</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-9.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameList&type=wdl&token=<%=token%>" accesskey="9">승무패(최신폰)</a></div>
                 </td>
                 <td>
-                    <div style="white-space:nowrap;"><img src="../picto_img/gif/core-button-0.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0">핸디캡(최신폰)</a></div>
+                    <div style="white-space:nowrap;"><img src="../picto_images/gif/core-button-0.gif" alt=""/><a title="확인" href="play.wap?mode=viewGameList&type=handy&token=<%=token%>" accesskey="0">핸디캡(최신폰)</a></div>
                 </td>
             </tr>
             <tr>

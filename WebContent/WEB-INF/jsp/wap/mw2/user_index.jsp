@@ -39,7 +39,7 @@ if (StringUtils.isNumeric(pin) && pin.length() == 6) {
                     <td align="left" style="background-color:#FFFFFF;">
                         <div>※ PIN 번호를 입력해 주세요<br/>
                         &nbsp;</div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>PIN번호</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>PIN번호</div>
                         <div><input type="password" name="pin" maxlength="6" value="" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="name" value="$(name)" /></div>
@@ -59,9 +59,9 @@ if (StringUtils.isNumeric(pin) && pin.length() == 6) {
                     <td align="left" style="background-color:#FFFFFF;">
                         <div>※ 아이디와 패스워드를 입력해 주세요<br/>
                         &nbsp;</div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>아이디</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>아이디</div>
                         <div><input type="text" name="userId" value="" style="width:98%;text-align:center;" /></div>
-                        <div><img src="../picto_img/gif/core-arrow-right_2.gif" alt=""/>패스워드</div>
+                        <div><img src="../picto_images/gif/core-arrow-right_2.gif" alt=""/>패스워드</div>
                         <div><input type="text" name="password" value="" style="width:98%;text-align:center;" /></div>
                         <div><input type="hidden" name="token" value="<%=token%>" /></div>
                         <div><input type="hidden" name="name" value="$(name)" /></div>

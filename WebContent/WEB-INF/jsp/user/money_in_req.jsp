@@ -19,21 +19,21 @@
 	}
 %>
 
-			<tr><td><img src="img/menu081.jpg" border="0"></td></tr>
-			<tr><td align="center"><img src="img/moneynotice.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu081.jpg" border="0"></td></tr>
+			<tr><td align="center"><img src="images/moneynotice.jpg" border="0"></td></tr>
 
 </table>
             <table align="center" cellpadding="0" cellspacing="0" width="771">
     <tr>
-        <td width="771" height="37" align="left" valign="top" background="img/bar_bg.gif"><img src="img/8-.jpg" border="0">&nbsp;<a href="earncache.php?mode=viewMoneyInRequestList"><img src="img/10.jpg" border="0" /></a></td>
+        <td width="771" height="37" align="left" valign="top" background="images/bar_bg.gif"><img src="images/8-.jpg" border="0">&nbsp;<a href="earncache.php?mode=viewMoneyInRequestList"><img src="images/10.jpg" border="0" /></a></td>
     </tr>
  
     <tr>
-        <td width="771" height="5" background="img/minit_01.jpg">
+        <td width="771" height="5" background="images/minit_01.jpg">
             <p>&nbsp;</p>        </td>
     </tr>
     <tr>
-        <td width="497" height="132" background="img/minit_02.jpg" valign="top" style="padding:20">
+        <td width="497" height="132" background="images/minit_02.jpg" valign="top" style="padding:20">
 <form name="frm" method="post">
 <input type='hidden' name='bankBookId' value='<%=bankBook.getId()%>'/>
 <table border=0 cellspacing=0 cellpadding=0 width=730 align="center">
@@ -78,15 +78,15 @@
 </form>        </td>
     </tr>
     <tr>
-        <td width="771" height="44" background="img/minit_03.jpg">
+        <td width="771" height="44" background="images/minit_03.jpg">
             <p>&nbsp;</p>        </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="40">
 	        <tr>
 			    <td width="771" height="40" align="center">
-					<img src="img/chong.jpg" border="0" align="absmiddle" onClick="FnInMoney_Submit(frm);">&nbsp;
-					<img src="img/back.jpg" border="0" align="absmiddle" onClick="location.reload();">
+					<img src="images/chong.jpg" border="0" align="absmiddle" onClick="FnInMoney_Submit(frm);">&nbsp;
+					<img src="images/back.jpg" border="0" align="absmiddle" onClick="location.reload();">
 			    </td>
 			  
 			</tr>

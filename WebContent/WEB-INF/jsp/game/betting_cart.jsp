@@ -7,7 +7,7 @@
 	List<GameFolder> gameFolderList = bettingCart.getGameFolderList();
 %>
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu15.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu15.jpg" border="0"></td></tr>
 		
 </table>
 <form name="frm" action="cart.php">
@@ -52,11 +52,11 @@
 					      <td align="right"><nobr> <font color="#1a1a1a"> <%=folderItem.getHomeTeam()%>&nbsp;<%=folderItem.getWinRateStr()%>&nbsp; </font></nobr></td>
 					      <td align="center"><nobr> <font color="#1a1a1a"><%=folderItem.getType().equals("wdl")?"무 " + folderItem.getDrawRateStr():"핸디 " + (folderItem.getDrawRate()>0?"+":"") + folderItem.getDrawRate()%></font></nobr></td>
 					      <td><nobr>&nbsp; <font color="#1a1a1a"> <%=folderItem.getLoseRateStr()%>&nbsp;<%=folderItem.getAwayTeam()%></font></nobr></td>
-					      <td align="center"><nobr><font color="#1a1a1a"><%=Code.getValue(folderItem.getGuess())%></font></nobr> <img src="img/x.gif" onclick="deleteGameInGameFolder(<%=folderCount%>, <%=folderItem.getId()%>)"/></td>
+					      <td align="center"><nobr><font color="#1a1a1a"><%=Code.getValue(folderItem.getGuess())%></font></nobr> <img src="images/x.gif" onclick="deleteGameInGameFolder(<%=folderCount%>, <%=folderItem.getId()%>)"/></td>
 					      <%
 								if (count == 0) {
 								%>
-					      <td align="center" rowspan="<%=itemCount%>"><img src="img/x.gif" onclick="deleteGameFolder(<%=folderCount%>)" /></td>
+					      <td align="center" rowspan="<%=itemCount%>"><img src="images/x.gif" onclick="deleteGameFolder(<%=folderCount%>)" /></td>
 					      <%
 								count++;
 								}
@@ -92,11 +92,11 @@
 			<table border=0 width=100% cellpadding=6 cellspacing=2 >
 				<tr>
 					<td align=center>
-						<div align="center"><img src="img/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;
+						<div align="center"><img src="images/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;
 <br><br>
 						선택 한 카트 배팅 금액 : 
 						  <input class="input2" type=text id="totalMoney" name="totalMoney" size="10" readonly="readonly" value="0">
-						  <img src="img/bett.jpg" onclick="betting()" style="cursor:pointer;" align=absmiddle>
+						  <img src="images/bett.jpg" onclick="betting()" style="cursor:pointer;" align=absmiddle>
 					    </div></td>
 				</tr>
 				</form>

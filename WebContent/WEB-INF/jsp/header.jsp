@@ -70,7 +70,7 @@
 <tr>
 <td align='right' style='color:#000000'>
 	다시보지않음<input type="checkbox" id="isReaded"/>
-	닫기 <img src="img/x.gif" onClick="memoClose()"/></td>
+	닫기 <img src="images/x.gif" onClick="memoClose()"/></td>
 </tr>
 </table>
 </form>
