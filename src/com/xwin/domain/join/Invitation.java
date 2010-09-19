@@ -14,6 +14,7 @@ public class Invitation extends XwinObject
 	private String mobile;
 	private Date sendDate;
 	private String joinId;
+	private String source;
 	
 	public String getId() {
 		return id;
@@ -50,5 +51,11 @@ public class Invitation extends XwinObject
 	}
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
 	}
 }

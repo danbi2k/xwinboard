@@ -10,14 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.AccountSum;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.join.Invitation;
@@ -630,19 +635,42 @@ public class AdminMemberController extends XwinController implements MessageSour
 		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
+		ResultXml rx = null;
+		
 		String userId = request.getParameter("userId");
-
 		String inviteKey = RandomStringUtils.randomAlphanumeric(5).toUpperCase();
 		
-		Invitation invitation = new Invitation();
-		invitation.setInviteKey(inviteKey);
-		invitation.setUserId(userId);
-		invitation.setSendDate(new Date());
-		invitation.setMobile("");
+		HttpClient hc = new HttpClient();
+		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
 		
-		invitationDao.insertInvitation(invitation);
+		boolean isSend = false;
+		try {
+			if (Admin.SERVER_TYPE.equals("PARENT")) {
+				HttpMethod method = new GetMethod(Admin.CHILD_URL+"/protocol.php?mode=insertInvitation&userId=" + userId + "&inviteKey=" + inviteKey + "&source=" + SiteConfig.SITE_NICKSHORT);
+				hc.executeMethod(method);
+				String result = method.getResponseBodyAsString();
+				if (result != null && result.contains("SUCCESS"))
+					isSend = true;
+			} else {
+				isSend = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		ResultXml rx = new ResultXml(0, "지급 되었습니다", null);
+		if (isSend) {
+			Invitation invitation = new Invitation();
+			invitation.setInviteKey(inviteKey);
+			invitation.setUserId(userId);
+			invitation.setSendDate(new Date());
+			invitation.setMobile("");
+			
+			invitationDao.insertInvitation(invitation);
+			
+			rx = new ResultXml(0, "발급 되었습니다", null);
+		} else {
+			rx = new ResultXml(0, "초대장 발급중 오류가 발생하였습니다", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));

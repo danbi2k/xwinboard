@@ -16,6 +16,7 @@ import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -136,6 +137,50 @@ public class ExternalController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(league));
+		
+		return mv;
+	}
+	
+	public ModelAndView insertInvitation(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String userId = request.getParameter("userId");
+		String inviteKey = request.getParameter("inviteKey");
+		String source = request.getParameter("source");
+		
+		Invitation invitation = new Invitation();
+		invitation.setInviteKey(inviteKey);
+		invitation.setUserId(userId);
+		invitation.setSendDate(new Date());
+		invitation.setSource(source);
+		invitation.setMobile("");
+		
+		invitationDao.insertInvitation(invitation);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
+		
+		return mv;
+	}
+	
+	public ModelAndView updateInvitation(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String userId = request.getParameter("userId");
+		String inviteKey = request.getParameter("inviteKey");
+		String source = request.getParameter("source");
+		
+		Invitation invitation = new Invitation();
+		invitation.setInviteKey(inviteKey);
+		invitation.setUserId(userId);
+		invitation.setSendDate(new Date());
+		invitation.setSource(source);
+		invitation.setMobile("");
+		
+		invitationDao.insertInvitation(invitation);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
 		
 		return mv;
 	}
