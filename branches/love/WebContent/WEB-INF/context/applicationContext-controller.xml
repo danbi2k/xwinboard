@@ -142,6 +142,7 @@
 		p:memberDao-ref="memberDao"
 		p:gameDao-ref="gameDao"
 		p:leagueDao-ref="leagueDao"
+		p:invitationDao-ref="invitationDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
 		
 	<bean id="controllerNameResolver"

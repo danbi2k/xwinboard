@@ -64,6 +64,11 @@ public class XwinInitServlet extends HttpServlet
 		
 		Admin.SMS_REMAIN = adminDao.selectAdmin("SMS_REMAIN");
 		
+		Admin.SERVER_TYPE = adminDao.selectAdmin("SERVER_TYPE");
+		if (Admin.SERVER_TYPE.equals("PARENT")) {
+			Admin.CHILD_URL = adminDao.selectAdmin("CHILD_URL");
+		}
+		
 		Admin.HANDY_BONUS_USE = adminDao.selectAdmin("HANDY_BONUS_USE").equals("Y");
 		Admin.HANDY_BONUS_LIMIT = Integer.parseInt(adminDao.selectAdmin("HANDY_BONUS_LIMIT").trim());
 		Admin.HANDY_BONUS_RATE = Integer.parseInt(adminDao.selectAdmin("HANDY_BONUS_RATE").trim());
