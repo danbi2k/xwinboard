@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+배<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.xwin.domain.*" %>
@@ -27,7 +27,7 @@
 <tr bgcolor="<%=SiteConfig.SITE_COLOR%>"><td>
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tbody><tr>
-		<td>&nbsp;<img src='images/sub_betlist_del_bt.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
+		<td>&nbsp;<img src='images/x.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
 	<td width="670" style="color:white;vertical-align:middle;text-align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getMMddDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
 	적중액 :
 	<%
