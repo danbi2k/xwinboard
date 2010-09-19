@@ -15,8 +15,8 @@ import com.xwin.service.admin.XwinService;
 
 public class GameSyncService extends XwinService
 {
-	private static final String GAME_URL = "http://203.202.232.20/external.aspx?mode=getGameList";
-	private static final String LEAGUE_URL = "http://203.202.232.20/external.aspx?mode=getLeagueList";
+	private String syncUrl = null;
+//	private String leagueUrl = null;
 	
 	public void sync() throws Exception
 	{
@@ -24,31 +24,29 @@ public class GameSyncService extends XwinService
 		String dateStr = XwinUtil.getBoardItemDate(date);
 		String gameXml = null;
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(300000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(50000);
 		
-		PostMethod post = new PostMethod(GAME_URL);		
+		PostMethod post = new PostMethod(syncUrl + "?mode=getGameList");		
 		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
 		
 		try {	
 			hc.executeMethod(post);
 			gameXml = post.getResponseBodyAsString();
-			System.out.println(gameXml);
+//			System.out.println(gameXml);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 		
-		//List<SmsWait> smsWaitList = smsWaitDao.selectSmsWaitList();
-		
 		int wdl_count = 0, handy_count = 0;
 		List<Game> gameList = (List<Game>) XmlUtil.fromXml(gameXml);
 		if (gameList != null) {
 			for (Game game : gameList) {
-				if (game.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE))
-					continue;
+//				if (game.getDisplayStatus().equals(Code.GAME_DISPLAY_CLOSE))
+//					continue;
 				
 				game.setSyncId(game.getId());
-				game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
+//				game.setDisplayStatus(Code.GAME_DISPLAY_CLOSE);
 				if (game.getWinRate() <= 1.0 || game.getLoseRate() <= 1.0)
 					continue;
 				
@@ -82,6 +80,8 @@ public class GameSyncService extends XwinService
 					syncGame.setHomeTeam(game.getHomeTeam());
 					syncGame.setAwayTeam(game.getAwayTeam());
 					syncGame.setGameDate(game.getGameDate());
+					
+					syncGame.setDisplayStatus(game.getDisplayStatus());
 					
 					if (dbGame.getHomeTeam().equals(syncGame.getHomeTeam()) == false)
 						note += dateStr + " 홈팀명변경: " + dbGame.getHomeTeam() + " -> " + syncGame.getHomeTeam() + "\n";
@@ -129,21 +129,71 @@ public class GameSyncService extends XwinService
 		}
 		Admin.SYNC_COUNT_WDL = wdl_count;
 		Admin.SYNC_COUNT_HANDY = handy_count;
+		
+		post = new PostMethod(syncUrl + "?mode=getProcessedGameList");		
+		post.addRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+		
+		String processXml = null;
+		try {	
+			hc.executeMethod(post);
+			processXml = post.getResponseBodyAsString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		List<Game> processList = (List<Game>) XmlUtil.fromXml(processXml);
+		if (processList != null) {
+			for (Game game : processList) {
+				final Game dbGame = gameDao.selectSyncGame(game.getId());
+				
+				if (dbGame != null && dbGame.getStatus().equals(Code.GAME_STATUS_RUN)) {
+					dbGame.setHomeScore(game.getHomeScore());
+					dbGame.setAwayScore(game.getAwayScore());
+					dbGame.setResult(processService.judgeGameScore(dbGame));
+					dbGame.setStatus(Code.GAME_STATUS_END);
+						
+					gameDao.updateGame(dbGame);
+						
+					try {
+						Thread judge = new Thread() {
+							public void run() {
+								processService.judgeGameResult(dbGame, false);
+								
+								Game processedGame = new Game();
+								processedGame.setId(dbGame.getId());
+								processedGame.setProcessDate(new Date());
+								gameDao.updateGame(processedGame);
+							}
+						};
+						judge.start();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 	
 	public Double calcRate(Double x)
 	{
-		if (x <= 1.0)
-			return x;
+		return x;
 		
-		Double y = 0.0;
-		
-		if (x < 2.0) {
-			y = 1.0 + ((x - 1.0) * 1.05);
-		} else {
-			y = 1.0 + ((x - 1.0) * 1.05);
-		}
-		
-		return y;
+//		if (x <= 1.0)
+//			return x;
+//		
+//		Double y = 0.0;
+//		
+//		if (x < 2.0) {
+//			y = 1.0 + ((x - 1.0) * 1.05);
+//		} else {
+//			y = 1.0 + ((x - 1.0) * 1.05);
+//		}
+//		
+//		return y;
+	}
+
+	public void setSyncUrl(String syncUrl) {
+		this.syncUrl = syncUrl;
 	}
 }
