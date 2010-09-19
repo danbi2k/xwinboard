@@ -24,7 +24,7 @@ A:hover  {color:#1a1a1a;text-decoration:none;}
 .button_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
 .mbutton_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;height:26;} 
-.mbutton_out{background-image:url(../img/login/cbg011.jpg);font-size:8pt; font-family:verdana;color:#1a1a1a;line-height:160%;height:26;} 
+.mbutton_out{background-image:url(../images/login/cbg011.jpg);font-size:8pt; font-family:verdana;color:#1a1a1a;line-height:160%;height:26;} 
 .bettable {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:458;height:40;}
 .scoretable {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:887;height:40;}
 .bettd {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:500;height:24;}
@@ -34,7 +34,7 @@ A:hover  {color:#1a1a1a;text-decoration:none;}
 .tablebg2 {height:26;}
 .tablebg3 {height:26;}
 .tablebg4 {height:26;}
-.click {background-image:url(../img/cbg101.jpg);height:26;color:#FFFFFF;font-weight:bold;}
+.click {background-image:url(../images/cbg101.jpg);height:26;color:#FFFFFF;font-weight:bold;}
 .bbsline {height:1;background-color:#2F2F2F} 
 .menubar {font-size:8pt; font-family:µ¸¿ò;font-color:#FFFFFF;line-height:180%;}
 .textpoint {font-size:8pt; font-family:µ¸¿ò;color:#C36;line-height:160%;}
@@ -60,14 +60,14 @@ A:hover  {color:#1a1a1a;text-decoration:none;}
 .handicap .box td{border:1px solid #ffffff; text-align:center;}
 .handicap .alert{text-align:center; margin:10px 20px 10px 20px; padding:0px 10px 0px 10px; line-height:24px; color:#FAB842;}
 
-.totoHeader {color:ffffff;font-weight:bold;background-image:url(../img/totobar.jpg);height:25}
-.totoTeam {color:ffffff;background-image:url(../img/totobar2.jpg);height:22}
-.totoTeam1 {color:ffffff;background-image:url(../img/totobar4.jpg);height:22}
-.totoCategory {color:ffffff;background-image:url(../img/totobar3.jpg);height:22}
+.totoHeader {color:ffffff;font-weight:bold;background-image:url(../images/totobar.jpg);height:25}
+.totoTeam {color:ffffff;background-image:url(../images/totobar2.jpg);height:22}
+.totoTeam1 {color:ffffff;background-image:url(../images/totobar4.jpg);height:22}
+.totoCategory {color:ffffff;background-image:url(../images/totobar3.jpg);height:22}
 .totoBody {background-color:white;color:black;} 
 .totoBody .left {border-right-width:0px};
 .totoBody .mid {border-right-width:0px; border-left-width:0px};
 .totoBody .right {border-left-width:0px};                    
 
-.totoLeft {color:ffffff;background-image:url(../img/totobar5.jpg);width:15%;text-align:center}
-.totoRight {color:ffffff;background-image:url(../img/totobar6.jpg);width:35%;padding:0 0 0 10}
+.totoLeft {color:ffffff;background-image:url(../images/totobar5.jpg);width:15%;text-align:center}
+.totoRight {color:ffffff;background-image:url(../images/totobar6.jpg);width:35%;padding:0 0 0 10}
