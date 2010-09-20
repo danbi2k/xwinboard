@@ -16,8 +16,10 @@ namespace ConsoleApplication1
         static string LOGIN_URL = "http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http%3A%2F%2Fwww%2Eshow%2Eco%2Ekr%2Findex%2Easp%3Fcode%3DFB00000";
         static String DB_STR = "server=localhost;database=danmuji;user=kimchi;password=gjfEjr^RjfEjr;port=33406";
         static char[] SEPERATOR = { ' ', '|' };
-        static WebBrowser webBrowser1 = new WebBrowser();
+        static WebBrowser webBrowser1;
         static MySqlConnection conn;
+        static DateTime heart;
+        static Timer time;
 
         [STAThread]
         static void Main(string[] args)
@@ -26,8 +28,24 @@ namespace ConsoleApplication1
             t.SetApartmentState(System.Threading.ApartmentState.STA);
 
             t.Start();
+            heart = DateTime.Now;
 
-            Console.ReadLine();
+            while (true) {
+                DateTime now = DateTime.Now;
+                if (heart.AddMinutes(2.0) < now)
+                {
+                    if (t != null) {
+                        conn.Close();
+                        t.Abort();
+                        }
+
+                    t = new System.Threading.Thread(ThreadStart);
+                    t.SetApartmentState(System.Threading.ApartmentState.STA);
+
+                    t.Start();
+                }
+                System.Threading.Thread.Sleep(120000);
+            }
         }
 
         public static void ThreadStart()
@@ -36,6 +54,7 @@ namespace ConsoleApplication1
             conn.ConnectionString = DB_STR;
             conn.Open();
 
+            webBrowser1 = new WebBrowser(); 
             webBrowser1.Dock = DockStyle.Fill;
             webBrowser1.Name = "webBrowser";
             webBrowser1.ScrollBarsEnabled = false;
@@ -50,7 +69,7 @@ namespace ConsoleApplication1
             form.Controls.Add(webBrowser1);
             form.Name = "Browser";
 
-            Application.Run(form);   
+            Application.Run(form);
         }
 
         private static void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -75,8 +94,8 @@ namespace ConsoleApplication1
 
                 if (e.Url.AbsoluteUri == "http://www.show.co.kr/index.asp?code=FB00000")
                 {
-                    Timer time = new Timer();
-                    time.Interval = 10000;
+                    time = new Timer();
+                    time.Interval = 20000;
                     time.Tick += new EventHandler(Time_Tick);
                     time.Start();
                 }
@@ -85,6 +104,7 @@ namespace ConsoleApplication1
                 {
                     HtmlElement message_list = hw.Document.GetElementById("message_list");
                     HtmlElementCollection tr = message_list.Children[0].Children[0].Children;
+                    int count = 0;
                     for (int i = 1; i < tr.Count; i++)
                     {
                         if (tr[i].Children.Count <= 1)
@@ -101,23 +121,24 @@ namespace ConsoleApplication1
 
                         string query = String.Format("INSERT INTO tbl_showsms (MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');",
                             msg_seq, in_date, msg, "S", call_back);
-                        Console.WriteLine(query);
 
                         MySqlCommand cmd = new MySqlCommand(query, conn);
                         cmd.ExecuteNonQuery();
 
-                        hw.Navigate(new Uri("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/MsgDelete.asp?msg_seq=&in_date=&lock_i=&sm=&cid=&msgboxCd=&boxType=1"));
+                        count++;
                     }
+
+                    if (count > 0)
+                        hw.Navigate(new Uri("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/MsgDelete.asp?msg_seq=&in_date=&lock_i=&sm=&cid=&msgboxCd=&boxType=1"));
+
+                    heart = DateTime.Now;
                 }
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
-                conn = new MySqlConnection();
-                conn.ConnectionString = DB_STR;
-                conn.Open();
-
-                webBrowser1.Navigate(new Uri("http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http://www.show.co.kr/index.asp?code=FB00000"));
+                conn.Close();
+                time.Stop();
             }
         }
 
