@@ -24,6 +24,7 @@ namespace ConsoleApplication1
         [STAThread]
         static void Main(string[] args)
         {
+            Console.WriteLine("Main을 시작하자");
             System.Threading.Thread t = new System.Threading.Thread(ThreadStart);
             t.SetApartmentState(System.Threading.ApartmentState.STA);
 
@@ -31,18 +32,28 @@ namespace ConsoleApplication1
             heart = DateTime.Now;
 
             while (true) {
+                Console.WriteLine("심장박동이 오는지 보자");
                 DateTime now = DateTime.Now;
                 if (heart.AddMinutes(2.0) < now)
                 {
-                    if (t != null) {
+                    Console.WriteLine("심장박동이 2분넘게 안온다");
+                    if (t != null)
+                    {
                         conn.Close();
+                        Console.WriteLine("DB Close");
                         t.Abort();
-                        }
+                        Console.WriteLine("쓰레드 종료");
+                    }
 
                     t = new System.Threading.Thread(ThreadStart);
                     t.SetApartmentState(System.Threading.ApartmentState.STA);
 
                     t.Start();
+                    Console.WriteLine("새 쓰레드 시작 시도");
+                }
+                else
+                {
+                    Console.WriteLine("심장박동이 잘 온다");
                 }
                 System.Threading.Thread.Sleep(120000);
             }
@@ -50,9 +61,12 @@ namespace ConsoleApplication1
 
         public static void ThreadStart()
         {
+            Console.WriteLine("새 쓰레드 시작");
             conn = new MySqlConnection();
             conn.ConnectionString = DB_STR;
             conn.Open();
+
+            Console.WriteLine("DB Open");
 
             webBrowser1 = new WebBrowser(); 
             webBrowser1.Dock = DockStyle.Fill;
@@ -70,6 +84,8 @@ namespace ConsoleApplication1
             form.Name = "Browser";
 
             Application.Run(form);
+
+            Console.WriteLine("APP RUN");
         }
 
         private static void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -82,6 +98,7 @@ namespace ConsoleApplication1
 
                 if (e.Url.AbsoluteUri == "http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http://www.show.co.kr/index.asp?code=FB00000")
                 {
+                    Console.WriteLine("로그인 시작");
                     HtmlElement ID = hw.Document.GetElementById("ID");
                     HtmlElement PASSWORD = hw.Document.GetElementById("PASSWORD");
 
@@ -90,18 +107,23 @@ namespace ConsoleApplication1
 
                     HtmlElement loginForm = hw.Document.Forms[0];
                     loginForm.InvokeMember("submit");
+                    Console.WriteLine("로그인 시도");
                 }
 
                 if (e.Url.AbsoluteUri == "http://www.show.co.kr/index.asp?code=FB00000")
                 {
+                    Console.WriteLine("로그인 성공");
                     time = new Timer();
                     time.Interval = 20000;
                     time.Tick += new EventHandler(Time_Tick);
                     time.Start();
+                    Console.WriteLine("타이머 시작");
                 }
 
                 if (e.Url.AbsoluteUri == "http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/receiveList.asp")
                 {
+                    Console.WriteLine("받은문자함 열림");
+
                     HtmlElement message_list = hw.Document.GetElementById("message_list");
                     HtmlElementCollection tr = message_list.Children[0].Children[0].Children;
                     int count = 0;
@@ -117,7 +139,7 @@ namespace ConsoleApplication1
                         string call_back = tr[i].Children[4].InnerText;
                         string msg = tr[i].Children[5].GetElementsByTagName("TEXTAREA")[0].InnerText;
 
-                        Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
+                        //Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
 
                         string query = String.Format("INSERT INTO tbl_showsms (MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');",
                             msg_seq, in_date, msg, "S", call_back);
@@ -131,14 +153,18 @@ namespace ConsoleApplication1
                     if (count > 0)
                         hw.Navigate(new Uri("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/MsgDelete.asp?msg_seq=&in_date=&lock_i=&sm=&cid=&msgboxCd=&boxType=1"));
 
+                    Console.WriteLine("받은 문자 갯수 : " + count);
                     heart = DateTime.Now;
                 }
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
 
-                conn.Close();
                 time.Stop();
+                Console.WriteLine("타이머 스탑");
+                conn.Close();
+                Console.WriteLine("DB Close");
             }
         }
 
@@ -146,6 +172,7 @@ namespace ConsoleApplication1
         {
             HtmlWindow hw = webBrowser1.Document.Window;
             hw.Navigate("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/receiveList.asp");
+            Console.WriteLine("받은문자함 열기");
         }
     }
 }
