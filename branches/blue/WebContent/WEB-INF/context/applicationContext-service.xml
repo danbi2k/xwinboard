@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<bean id="moneyInService" class="com.xwin.service.admin.MoneyInService"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"
+		p:moneyInDao-ref="moneyInDao"
+		p:memberDao-ref="memberDao"
+		p:transactionDao-ref="transactionDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"/>
+		
+	<bean id="processService" class="com.xwin.service.admin.ProcessService"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:memberDao-ref="memberDao"
+		p:accountDao-ref="accountDao"
+		p:smsWaitDao-ref="smsWaitDao"
+		p:pointDao-ref="pointDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"/>
+		
+	<bean id="bettingService" class="com.xwin.service.game.BettingService"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:betGameDao-ref="betGameDao"
+		p:gameDao-ref="gameDao"
+		p:accountDao-ref="accountDao"
+		p:pointDao-ref="pointDao"/>	
+		
+	<bean id="gameSyncService" class="com.xwin.service.external.GameSyncService"
+		p:gameDao-ref="gameDao"
+		p:processService-ref="processService">
+		<property name="syncUrl">
+			<value><![CDATA[http://219.101.160.115/protocol.php]]></value>
+		</property>
+	</bean>	
+		
+	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>
+</beans>

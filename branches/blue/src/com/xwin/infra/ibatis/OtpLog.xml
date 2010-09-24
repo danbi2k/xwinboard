@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="OtpLog">
+
+	<typeAlias alias="OtpLog" type="com.xwin.domain.log.OtpLog" />
+	
+	<resultMap id="otpLogResultMap" class="OtpLog">
+		<result property="id" column="ID"/>		
+		<result property="phone" column="PHONE"/>
+		<result property="pin" column="PIN"/>
+		<result property="date" column="DATE"/>
+		<result property="ipAddress" column="IP_ADDR"/>
+	</resultMap>
+	
+	<insert id="insertOtpLog" parameterClass="OtpLog">
+		INSERT INTO tbl_log_otp(PHONE, PIN, DATE, IP_ADDR)
+		VALUES(#phone#, #pin#, #date#, #ipAddress#)
+	</insert>
+	
+	<select id="selectOtpLogList" resultMap="otpLogResultMap" parameterClass="map">
+		SELECT * FROM tbl_log_otp 
+		ORDER BY DATE DESC
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectOtpLogCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_log_otp
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
+	</select>
+</sqlMap>

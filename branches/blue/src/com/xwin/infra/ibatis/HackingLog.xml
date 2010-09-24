@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="HackingLog">
+
+	<typeAlias alias="HackingLog" type="com.xwin.domain.log.HackingLog" />
+	
+	<resultMap id="hackingLogResultMap" class="HackingLog">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="date" column="DATE"/>
+		<result property="value" column="VALUE"/>
+		<result property="mode" column="MODE"/>
+		<result property="ipAddress" column="IP_ADDR"/>
+		<result property="isChecked" column="ISCHECKED"/>
+	</resultMap>
+	
+	<insert id="insertHackingLog" parameterClass="HackingLog">
+		INSERT INTO tbl_log_hack(USERID, NICKNAME, DATE, VALUE, MODE, IP_ADDR)
+		VALUES(#userId#, #nickName#, #date#, #value#, #mode#, #ipAddress#)
+	</insert>
+	
+	<select id="selectHackingLogList" resultMap="hackingLogResultMap" parameterClass="map">
+		SELECT * FROM tbl_log_hack 
+		ORDER BY DATE DESC
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectHackingLogCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_log_hack
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<update id="updateHackingLog" parameterClass="HackingLog">
+		UPDATE tbl_log_hack <dynamic prepend="SET">
+			<isNotNull prepend="," property="isChecked">
+			ISCHECKED = #isChecked#
+			</isNotNull>
+		</dynamic>
+		WHERE ID = #id#
+	</update>
+</sqlMap>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="ReuseComment">
+	<typeAlias alias="ReuseComment" type="com.xwin.domain.common.ReuseComment" />
+	
+	<resultMap id="reuseCommentResultMap" class="ReuseComment">
+		<result property="id" column="ID"/>		
+		<result property="comment" column="COMMENT"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	
+	<insert id="insertReuseComment" parameterClass="ReuseComment">
+		INSERT INTO tbl_reuse_comment(COMMENT, TYPE)
+			VALUES(#comment#, #type#)
+	</insert>
+	
+	<delete id="deleteReuseComment" parameterClass="string">
+		DELETE FROM tbl_reuse_comment WHERE ID = #value#
+	</delete>
+	
+	<select id="selectReuseComment" resultMap="reuseCommentResultMap" parameterClass="string">
+		SELECT * FROM tbl_reuse_comment WHERE ID = #value#
+	</select>
+	
+	<select id="selectReuseCommentList" resultMap="reuseCommentResultMap" parameterClass="string">
+		SELECT * FROM tbl_reuse_comment WHERE TYPE = #value#		
+	</select>
+</sqlMap>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="BankBook">
+
+	<typeAlias alias="BankBook" type="com.xwin.domain.admin.BankBook" />
+	
+	<resultMap id="bankBookResultMap" class="BankBook">
+		<result property="id" column="ID"/>
+		<result property="bankName" column="BANKNAME"/>
+		<result property="number" column="NUMBER"/>
+		<result property="name" column="NAME"/>
+		<result property="status" column="STATUS"/>
+		<result property="date" column="DATE"/>
+		<result property="grade" column="GRADE"/>
+	</resultMap>
+	
+	<insert id="insertBankBook" parameterClass="BankBook">
+		INSERT INTO tbl_bankbook(BANKNAME, NUMBER, NAME, STATUS, GRADE)
+		VALUES(#bankName#, #number#, #name#, #status#, #grade#)
+	</insert>
+	
+	<delete id="deleteBankBook" parameterClass="string">
+		DELETE FROM tbl_bankbook WHERE ID = #value#
+	</delete>
+	
+	<select id="selectBankBookList" resultMap="bankBookResultMap" parameterClass="map">
+		SELECT * FROM tbl_bankbook
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="selectBankBook" resultMap="bankBookResultMap" parameterClass="string">
+		SELECT * FROM tbl_bankbook WHERE ID = #value#
+	</select>
+	
+	<update id="updateBankBook" parameterClass="BankBook">
+		UPDATE tbl_bankbook SET STATUS = #status#
+		WHERE ID = #id#
+	</update>
+	
+	<!--  MEMBER BANKBOOK  -->
+	<insert id="insertMemberBankBook" parameterClass="BankBook">
+		INSERT INTO tbl_member_bankbook(BANKNAME, NUMBER, NAME, STATUS, DATE)
+		VALUES(#bankName#, #number#, #name#, #status#, #date#)
+	</insert>
+	
+	<select id="selectMemberBankBookList" resultMap="bankBookResultMap" parameterClass="map">
+		SELECT * FROM tbl_member_bankbook
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+		</dynamic>
+		ORDER BY DATE DESC
+	</select>
+</sqlMap>

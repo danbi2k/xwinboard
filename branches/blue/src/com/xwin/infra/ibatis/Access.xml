@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap namespace="Access">
+
+	<typeAlias alias="Access" type="com.xwin.domain.admin.Access" />
+	
+	<resultMap id="accessResultMap" class="Access">
+		<result property="id" column="ID"/>		
+		<result property="userId" column="USERID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="date" column="DATE"/>
+		<result property="ipAddress" column="IP_ADDR"/>
+		<result property="block" column="BLOCK"/>
+		<result property="type" column="TYPE"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="pin" column="pin"/>
+	</resultMap>
+	
+	<insert id="insertAccess" parameterClass="Access">
+		INSERT INTO tbl_access(USERID, NICKNAME, DATE, IP_ADDR, TYPE, PASSWORD, PIN)
+		VALUES(#userId#, #nickName#, #date#, #ipAddress#, #type#, #password#, #pin#)
+	</insert>
+	
+	<delete id="deleteAccess" parameterClass="string">
+		DELETE FROM tbl_access WHERE ID = #value#
+	</delete>
+	
+	<select id="selectAccess" resultMap="accessResultMap" parameterClass="map">
+	SELECT *, "" as BLOCK FROM tbl_access WHERE TYPE='ACC01' ORDER BY RAND() LIMIT 0, 1
+	</select>
+	
+	<select id="selectMemberAccess" resultMap="accessResultMap" parameterClass="string">
+	SELECT *, "" as BLOCK FROM tbl_access WHERE TYPE = 'ACC01' AND USERID = #value# ORDER BY DATE DESC LIMIT 0, 1
+	</select>
+	
+	<select id="selectAccessList" resultMap="accessResultMap" parameterClass="map">
+		SELECT a.*, b.STATUS as BLOCK FROM tbl_access a left join tbl_block_ip b on a.IP_ADDR = b.IP_ADDR 
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="type">
+				a.TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+				a.USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+				a.NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="ipAddressLike">
+				a.IP_ADDR LIKE #ipAddressLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				a.DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				a.DATE <= #toDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="block">
+				b.STATUS IS NOT NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="noBlock">
+				b.STATUS IS NULL
+			</isNotNull>
+		</dynamic>		
+		ORDER BY DATE DESC
+		<isNotNull prepend="" property="fromRow">
+			LIMIT #fromRow#, #rowSize#
+		</isNotNull>
+	</select>
+	
+	<select id="selectAccessCount" resultClass="integer" parameterClass="map">
+		SELECT COUNT(*) FROM tbl_access a left join tbl_block_ip b on a.IP_ADDR = b.IP_ADDR
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="type">
+				a.TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+				a.USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+				a.NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="ipAddressLike">
+				a.IP_ADDR LIKE #ipAddressLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				a.DATE >= #fromDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+				<![CDATA[
+				a.DATE <= #toDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="block">
+				b.STATUS IS NOT NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="noBlock">
+				b.STATUS IS NULL
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<insert id="insertBlockIp" parameterClass="string">
+		INSERT INTO tbl_block_ip(IP_ADDR) VALUES(#value#)
+	</insert>
+	
+	<insert id="deleteBlockIp" parameterClass="string">
+		DELETE FROM tbl_block_ip WHERE IP_ADDR = #value#
+	</insert>
+	
+	<select id="selectBlockIpCount" resultClass="integer" parameterClass="string">
+		SELECT COUNT(*) FROM tbl_block_ip WHERE IP_ADDR = #value#
+	</select>
+</sqlMap>
