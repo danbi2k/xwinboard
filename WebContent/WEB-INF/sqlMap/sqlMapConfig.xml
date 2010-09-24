@@ -6,6 +6,7 @@
 	
 <sqlMapConfig>
 	<sqlMap resource="com/xwin/infra/ibatis/KtfSms.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/ShowSms.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Game.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Member.xml" />
@@ -24,6 +25,7 @@
 	<sqlMap resource="com/xwin/infra/ibatis/SmsWait.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Memo.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/HackingLog.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/OtpLog.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Invitation.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Maintanance.xml" />	
 	<sqlMap resource="com/xwin/infra/ibatis/Toto.xml" />

@@ -7,10 +7,10 @@
 	List<GameFolder> gameFolderList = bettingCart.getGameFolderList();
 %>
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu15.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu15.jpg" border="0"></td></tr>
 		
 </table>
-<form name="frm" action="bettingCart.aspx">
+<form name="frm" action="cart.php">
 <table align="center" cellpadding="0" cellspacing="0" width="771">
 <%
 	if (bettingCart != null) {
@@ -22,75 +22,53 @@
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tbody><tr>
-					<td>
-						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
-							<tbody><tr bgcolor="#212021" height="27">
-								<td align="center"><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
-								<td align="center" width="110"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
-								<td align="center" width="200"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
-								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
-								
-								<td align="center" width="200"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>배팅팀</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>								
-							</tr>
-							
-<%
+					<td><table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" width="100%">
+					  <tbody>
+					    <tr bgcolor="#a6a6a6" height="27">
+					      <td align="center"><font color="#1a1a1a"><b><nobr>선택</nobr></b></font></td>
+					      <td align="center" width="110"><font color="#1a1a1a"><b><nobr>경기날짜</nobr></b></font></td>
+					      <td align="center" width="200"><font color="#1a1a1a"><b><nobr>(승)홈 팀</nobr></b></font></td>
+					      <td align="center" width="85"><font color="#1a1a1a"><b><nobr>무/핸디캡</nobr></b></font></td>
+					      <td align="center" width="200"><font color="#1a1a1a"><b><nobr>(패)원정팀</nobr></b></font></td>
+					      <td align="center" width="60"><font color="#1a1a1a"><b><nobr>배팅팀</nobr></b></font></td>
+					      <td align="center" width="60"><font color="#1a1a1a"><b><nobr>삭제</nobr></b></font></td>
+				        </tr>
+					    <%
 	List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
 	if (itemList != null) {
 		int itemCount = itemList.size();
 		int count = 0;
 		for (GameFolderItem folderItem : itemList) {
 %>
-							<tr bgcolor="#000000" height="25">
-								<%
+					    <tr bgcolor="#ffffff" height="25">
+					      <%
 								if (count == 0) {
 								%>
-								<td align="center" rowspan="<%=itemCount%>">
-									<input type="checkbox" name="cartCheck" onclick="calcTotalMoney()" money="<%=gameFolder.getMoney()%>"/>
-								</td>
-								<%
+					      <td align="center" rowspan="<%=itemCount%>"><input type="checkbox" name="cartCheck" onclick="calcTotalMoney()" money="<%=gameFolder.getMoney()%>"/></td>
+					      <%
 								}
 								%>
-								<td align="center"><nobr><font color="#ffffff"><%=folderItem.getGameDateStr()%></font></nobr></td>
-								<td align="right"><nobr>
-									<font color="#ffffff">
-										<%=folderItem.getHomeTeam()%>&nbsp;<%=folderItem.getWinRateStr()%>&nbsp;
-									</font>
-									</nobr></td>
-								<td align="center"><nobr>
-									<font color="#ffffff"><%=folderItem.getType().equals("wdl")?"무 " + folderItem.getDrawRateStr():"핸디 " + (folderItem.getDrawRate()>0?"+":"") + folderItem.getDrawRate()%>
-								</font></nobr></td>
-								
-								<td><nobr>&nbsp;
-									<font color="#ffffff">
-										<%=folderItem.getLoseRateStr()%>&nbsp;<%=folderItem.getAwayTeam()%>
-									</font>
-									</nobr></td>
-								<td align="center">
-									<nobr><font color="#ffffff"><%=Code.getValue(folderItem.getGuess())%></font></nobr>
-									<img src="img/x.gif" onclick="deleteGameInGameFolder(<%=folderCount%>, <%=folderItem.getId()%>)"/>
-								</td>
-								<%
+					      <td align="center"><nobr><font color="#1a1a1a"><%=folderItem.getGameDateStr()%></font></nobr></td>
+					      <td align="right"><nobr> <font color="#1a1a1a"> <%=folderItem.getHomeTeam()%>&nbsp;<%=folderItem.getWinRateStr()%>&nbsp; </font></nobr></td>
+					      <td align="center"><nobr> <font color="#1a1a1a"><%=folderItem.getType().equals("wdl")?"무 " + folderItem.getDrawRateStr():"핸디 " + (folderItem.getDrawRate()>0?"+":"") + folderItem.getDrawRate()%></font></nobr></td>
+					      <td><nobr>&nbsp; <font color="#1a1a1a"> <%=folderItem.getLoseRateStr()%>&nbsp;<%=folderItem.getAwayTeam()%></font></nobr></td>
+					      <td align="center"><nobr><font color="#1a1a1a"><%=Code.getValue(folderItem.getGuess())%></font></nobr> <img src="images/x.gif" onclick="deleteGameInGameFolder(<%=folderCount%>, <%=folderItem.getId()%>)"/></td>
+					      <%
 								if (count == 0) {
 								%>
-								<td align="center" rowspan="<%=itemCount%>">
-									<img src="img/x.gif" onclick="deleteGameFolder(<%=folderCount%>)">
-								</td>
-								<%
+					      <td align="center" rowspan="<%=itemCount%>"><img src="images/x.gif" onclick="deleteGameFolder(<%=folderCount%>)" /></td>
+					      <%
 								count++;
 								}
 								%>
-								
-							</tr>
-<%
+				        </tr>
+					    <%
 		}
 		folderCount++;
 	}		
-%>				
-					
-						</tbody></table>		
-					</td>
+%>
+				      </tbody>
+				    </table></td>
 				</tr>
 				<tr><td height="3"></td></tr>
 				<tr>
@@ -108,17 +86,18 @@
 	}
 %>
 </table>
-
 <table align="center" cellpadding="0" cellspacing="0" width="771">
 	<tr>
-		<td bgcolor=000000>
+		<td>
 			<table border=0 width=100% cellpadding=6 cellspacing=2 >
 				<tr>
 					<td align=center>
-						<img src="img/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;
-						선택 한 카트 배팅 금액 : <input class="input3" type=text id="totalMoney" name="totalMoney" size="10" readonly="readonly" value="0">
-						<img src="img/bett.jpg" onclick="betting()" style="cursor:pointer;" align=absmiddle>
-					</td>
+						<div align="center"><img src="images/alldelete.gif" onclick="deleteAllGameFolder()" style="cursor:pointer" align=absmiddle>&nbsp;
+<br><br>
+						선택 한 카트 배팅 금액 : 
+						  <input class="input2" type=text id="totalMoney" name="totalMoney" size="10" readonly="readonly" value="0">
+						  <img src="images/bett.jpg" onclick="betting()" style="cursor:pointer;" align=absmiddle>
+					    </div></td>
 				</tr>
 				</form>
 			</table>
@@ -133,7 +112,7 @@ function deleteGameInGameFolder(index, gameId)
 		var query = "mode=deleteGameInGameFolder";
 		query += "&folderIndex=" + index;
 		query += "&gameId=" + gameId;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -146,7 +125,7 @@ function deleteGameFolder(id)
 	if (confirm("배팅카트에서 삭제하시겠습니까?")) {
 		var query = "mode=deleteGameFolder";
 		query += "&folderIndex=" + id;
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -158,7 +137,7 @@ function deleteAllGameFolder(id)
 {
 	if (confirm("전체 삭제하시겠습니까?")) {
 		var query = "mode=deleteAllGameFolder";
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -197,7 +176,7 @@ function betting()
 			return;
 		}
 
-		var http = new JKL.ParseXML("bettingCart.aspx", query);
+		var http = new JKL.ParseXML("cart.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

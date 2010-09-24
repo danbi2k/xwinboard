@@ -1,6 +1,7 @@
 package com.xwin.web.controller.external;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.Game;
 import com.xwin.domain.game.League;
+import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -99,6 +101,23 @@ public class ExternalController extends XwinController
 		return mv;
 	}
 	
+	public ModelAndView getProcessedGameList(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MINUTE, -30);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("processDate", cal.getTime());
+		
+		List<Game> gameList = gameDao.selectGameList(param);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(gameList));
+		
+		return mv;
+	}
+	
 	public ModelAndView getLeagueList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -106,6 +125,60 @@ public class ExternalController extends XwinController
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(leagueList));
+		
+		return mv;
+	}
+	
+	public ModelAndView getLeague(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String leagueId = request.getParameter("leagueId");
+		League league = leagueDao.selectLeagueById(leagueId);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(league));
+		
+		return mv;
+	}
+	
+	public ModelAndView insertInvitation(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String userId = request.getParameter("userId");
+		String inviteKey = request.getParameter("inviteKey");
+		String source = request.getParameter("source");
+		
+		Invitation invitation = new Invitation();
+		invitation.setInviteKey(inviteKey);
+		invitation.setUserId(userId);
+		invitation.setSendDate(new Date());
+		invitation.setSource(source);
+		invitation.setMobile("");
+		
+		invitationDao.insertInvitation(invitation);
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
+		
+		return mv;
+	}
+	
+	public ModelAndView updateInvitation(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String userId = request.getParameter("userId");
+		String inviteKey = request.getParameter("inviteKey");
+		String joinId = request.getParameter("joinId");
+		
+		Invitation invitation = invitationDao.selectInvitation(userId, inviteKey);
+		
+		if (invitation != null) {
+			invitation.setJoinId(joinId);
+			invitationDao.updateInvitation(invitation);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
 		
 		return mv;
 	}

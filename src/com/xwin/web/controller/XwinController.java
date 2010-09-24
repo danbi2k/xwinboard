@@ -24,13 +24,16 @@ import com.xwin.infra.dao.MemoDao;
 import com.xwin.infra.dao.MoneyInDao;
 import com.xwin.infra.dao.MoneyInOutDao;
 import com.xwin.infra.dao.MoneyOutDao;
+import com.xwin.infra.dao.OtpLogDao;
 import com.xwin.infra.dao.PointDao;
 import com.xwin.infra.dao.ReuseCommentDao;
+import com.xwin.infra.dao.ShowSmsDao;
 import com.xwin.infra.dao.SmsWaitDao;
 import com.xwin.infra.dao.TotoDao;
 import com.xwin.infra.dao.TransactionDao;
 import com.xwin.infra.sms.SendSmsConnector;
 import com.xwin.service.admin.ProcessService;
+import com.xwin.service.external.GameSyncService;
 import com.xwin.service.game.BettingService;
 
 public class XwinController extends MultiActionController
@@ -50,10 +53,12 @@ public class XwinController extends MultiActionController
 	protected PointDao pointDao = null;
 	protected AccessDao accessDao = null;
 	protected KtfSmsDao ktfSmsDao = null;
+	protected ShowSmsDao showSmsDao = null;
 	protected AdminDao adminDao = null;
 	protected SmsWaitDao smsWaitDao = null;
 	protected MemoDao memoDao = null;
 	protected HackingLogDao hackingLogDao = null;
+	protected OtpLogDao otpLogDao = null;
 	protected InvitationDao invitationDao = null;
 	protected ReuseCommentDao reuseCommentDao = null;
 	protected MaintananceDao maintananceDao = null;
@@ -63,6 +68,7 @@ public class XwinController extends MultiActionController
 	protected SendSmsConnector sendSmsConnector = null;
 	protected ProcessService processService = null;
 	protected BettingService bettingService = null;
+	protected GameSyncService gameSyncService = null;
 	
 	public Member getLoginMember(HttpServletRequest request) {
 		Member member = (Member) request.getSession().getAttribute("Member");
@@ -118,6 +124,9 @@ public class XwinController extends MultiActionController
 	public void setKtfSmsDao(KtfSmsDao ktfSmsDao) {
 		this.ktfSmsDao = ktfSmsDao;
 	}
+	public void setShowSmsDao(ShowSmsDao showSmsDao) {
+		this.showSmsDao = showSmsDao;
+	}
 	public void setSendSmsConnector(SendSmsConnector sendSmsConnector) {
 		this.sendSmsConnector = sendSmsConnector;
 	}
@@ -135,7 +144,7 @@ public class XwinController extends MultiActionController
 	public void setHackingLogDao(HackingLogDao hackingLogDao) {
 		this.hackingLogDao = hackingLogDao;
 	}
-
+	
 	public void setInvitationDao(InvitationDao invitationDao) {
 		this.invitationDao = invitationDao;
 	}
@@ -144,6 +153,10 @@ public class XwinController extends MultiActionController
 		this.totoDao = totoDao;
 	}
 
+	public void setOtpLogDao(OtpLogDao otpLogDao) {
+		this.otpLogDao = otpLogDao;
+	}
+	
 	public void setBetTotoDao(BetTotoDao betTotoDao) {
 		this.betTotoDao = betTotoDao;
 	}
@@ -156,6 +169,10 @@ public class XwinController extends MultiActionController
 		this.bettingService = bettingService;
 	}
 
+	public void setGameSyncService(GameSyncService gameSyncService) {
+		this.gameSyncService = gameSyncService;
+	}
+	
 	public void setReuseCommentDao(ReuseCommentDao reuseCommentDao) {
 		this.reuseCommentDao = reuseCommentDao;
 	}

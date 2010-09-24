@@ -1,51 +1,52 @@
-BODY { scrollbar-3dlight-color:#1A1A1A;
-scrollbar-arrow-color:#35596F;
-scrollbar-track-color:#1A1A1A;
-scrollbar-darkshadow-color:#1A1A1A;
-scrollbar-face-color:#1A1A1A;
-scrollbar-highlight-color:#1A1A1A;
+BODY { scrollbar-3dlight-color:#ffffff;
+scrollbar-arrow-color:#9C1710;
+scrollbar-track-color:#ffffff;
+scrollbar-darkshadow-color:#ffffff;
+scrollbar-face-color:#ffffff;
+scrollbar-highlight-color:#ffffff;
 scrollbar-shadow-color:#969696;
-background-color:#000000;}
+background-color:#ffffff;}
 
-BODY,TD,input,DIV,form,TEXTAREA,center,option,pre,blockquote {font-size:8pt; font-family:verdana; color:#ffffff; line-height:160%;}
+BODY,TD,input,DIV,form,TEXTAREA,center,option,pre,blockquote {font-size:8pt; font-family:verdana; color:#1a1a1a; line-height:160%;}
 body {overflow-x:hidden; overflow-y:auto;}
-SELECT {font-size:8pt;font-family:verdana;color:#ffffff;line-height:160%;background-color:#707070;}
+SELECT {font-size:8pt;font-family:verdana;color:#1a1a1a;line-height:160%;background-color:#ffffff;}
 
-A:link    {color:#ffffff;text-decoration:none; }
-A:visited {color:#ffffff;text-decoration:none; }
-A:active  {color:#ffffff;text-decoration:none; }
-A:hover  {color:#ffffff;text-decoration:none;}
+A:link    {color:#1a1a1a;text-decoration:none; }
+A:visited {color:#1a1a1a;text-decoration:none; }
+A:active  {color:#1a1a1a;text-decoration:none; }
+A:hover  {color:#1a1a1a;text-decoration:none;}
 
 
-.notice {font-family:verdana;font-size:12pt;color:#C0C0C0;font-weight:bold;}
-.maindate {font-family:verdana;font-size:7pt;color:#ffffff;line-height:100%;width:90;height:24;}
-.maint {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;width:185;height:24;letter-spacing:-1}
-.button_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
-.button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
-.mbutton_over{background-color:#FD9E4C;cursor:hand;font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;height:26;} 
-.mbutton_out{background-image:url(../img/cbg01.jpg);font-size:8pt; font-family:verdana;color:#ffffff;line-height:160%;height:26;} 
-.bettable {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:458;height:40;}
-.scoretable {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:887;height:40;}
-.bettd {font-size:8pt; font-family:verdana;color:#ffffff;font-weight:bold;line-height:160%;width:500;height:24;}
+.notice {font-family:verdana;font-size:12pt;color:#1a1a1a;font-weight:bold;}
+.maindate {font-family:verdana;font-size:7pt;color:#1a1a1a;line-height:100%;width:90;height:24;}
+.maint {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;width:185;height:24;letter-spacing:-1}
+.mainlist {style:word-break:break-all;vertical-align:middle;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;height:24;letter-spacing:-1}
+.button_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
+.button_out{background-color:transparent;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:185;height:24;letter-spacing:-1} 
+.mbutton_over{background-color:#C36;cursor:hand;font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;height:26;} 
+.mbutton_out{background-image:url(../images/login/cbg011.jpg);font-size:8pt; font-family:verdana;color:#1a1a1a;line-height:160%;height:26;} 
+.bettable {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:458;height:40;}
+.scoretable {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:887;height:40;}
+.bettd {font-size:8pt; font-family:verdana;color:#1a1a1a;font-weight:bold;line-height:160%;width:500;height:24;}
 .table887 {width:887;height:26;}
 .table771 {width:771;height:26;}
-.tablebg1 {background-image:url(../img/cbg03.jpg);height:26;}
-.tablebg2 {background-image:url(../img/cbg04.jpg);height:26;}
-.tablebg3 {background-image:url(../img/cbg01.jpg);height:26;}
-.tablebg4 {background-image:url(../img/cbg02.jpg);height:26;}
-.click {background-image:url(../img/cbg10.jpg);height:26;color:#000000;font-weight:bold;}
-.bbsline {height:1;background-color:#2f2f2f}
-.menubar {font-size:8pt; font-family:µ¸¿ò;color:#BAB4B4;line-height:180%;}
-.textpoint {font-size:8pt; font-family:µ¸¿ò;color:#FD9E4C;line-height:160%;}
-.input1 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:transparent;line-height:160%;width:116;height:25;font-weight:bold;}
-.input2 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:#313131;line-height:160%;width:116;height:24;}
-.input3 {font-family:verdana;font-size:9pt;border:solid 0; color:#ffffff;background-color:#313131;line-height:160%;width:150;height:24;}
+.tablebg1 {height:26;}
+.tablebg2 {height:26;}
+.tablebg3 {height:26;}
+.tablebg4 {height:26;}
+.click {background-image:url(../images/cbg101.jpg);height:26;color:#FFFFFF;font-weight:bold;}
+.bbsline {height:1;background-color:#2F2F2F} 
+.menubar {font-size:8pt; font-family:µ¸¿ò;font-color:#FFFFFF;line-height:180%;}
+.textpoint {font-size:8pt; font-family:µ¸¿ò;color:#C36;line-height:160%;}
+.input1 {font-family:verdana;font-size:9pt;border:solid 0; color:#1a1a1a;background-color:transparent;line-height:160%;width:80;height:16;font-weight:bold;}
+.input2 {font-family:verdana;font-size:9pt;border:solid 1; color:#1a1a1a;background-color:#ffffff;line-height:160%;width:116;height:24;}
+.input3 {font-family:verdana;font-size:9pt;border:solid 0; color:#1a1a1a;background-color:#ffffff;line-height:160%;width:150;height:24;}
 .inputmodify {font-family:verdana;font-size:9pt;border:solid 1; color:#484848;background-color:#313131;line-height:160%;width:300;height:24;}
-.credit {font-size:12px;font-weight:bold;color:orange;background-color:#000000;}
+.credit {font-size:12px;font-weight:bold;color:RED;background-color:#000000;}
 
 .v7 {font-family:verdana;font-size:7pt;color:#000000;}
 .b7 {font-family:verdana;font-size:7pt;color:#000000;}
-.textarea {border:solid 1px #484848;background-color:#313131; overflow-x:hidden; overflow-y:auto;width:90%;}
+.textarea {border:solid 1px #484848;background-color:#efefef; overflow-x:hidden; overflow-y:auto;width:90%;}
 .submit {border:solid 1px #484848;font-family:verdana;font-size:7pt;color:#ffffff;background-color:#56000F;line-height:7;}
 
 .handicap {font-size:12px; margin:30px 0px 10px 0px;}
@@ -59,14 +60,14 @@ A:hover  {color:#ffffff;text-decoration:none;}
 .handicap .box td{border:1px solid #ffffff; text-align:center;}
 .handicap .alert{text-align:center; margin:10px 20px 10px 20px; padding:0px 10px 0px 10px; line-height:24px; color:#FAB842;}
 
-.totoHeader {color:ffffff;font-weight:bold;background-image:url(../img/totobar.jpg);height:25}
-.totoTeam {color:ffffff;background-image:url(../img/totobar2.jpg);height:22}
-.totoTeam1 {color:ffffff;background-image:url(../img/totobar4.jpg);height:22}
-.totoCategory {color:ffffff;background-image:url(../img/totobar3.jpg);height:22}
+.totoHeader {color:ffffff;font-weight:bold;background-image:url(../images/totobar.jpg);height:25}
+.totoTeam {color:ffffff;background-image:url(../images/totobar2.jpg);height:22}
+.totoTeam1 {color:ffffff;background-image:url(../images/totobar4.jpg);height:22}
+.totoCategory {color:ffffff;background-image:url(../images/totobar3.jpg);height:22}
 .totoBody {background-color:white;color:black;} 
 .totoBody .left {border-right-width:0px};
 .totoBody .mid {border-right-width:0px; border-left-width:0px};
 .totoBody .right {border-left-width:0px};                    
 
-.totoLeft {color:ffffff;background-image:url(../img/totobar5.jpg);width:15%;text-align:center}
-.totoRight {color:ffffff;background-image:url(../img/totobar6.jpg);width:35%;padding:0 0 0 10}
+.totoLeft {color:ffffff;background-image:url(../images/totobar5.jpg);width:15%;text-align:center}
+.totoRight {color:ffffff;background-image:url(../images/totobar6.jpg);width:35%;padding:0 0 0 10}

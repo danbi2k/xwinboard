@@ -52,25 +52,6 @@ table.list td {
   font: normal .7em Tahoma, Arial, Helvetica, sans-serif;
 }
 
-table.toto {
-  width: 100%;
-  margin: 1em 0em 1em 0em;
-  background: whitesmoke;
-  border-collapse: collapse;
-}
-table.toto th {
-  border: 1px silver solid;
-  padding: 0.1em;
-  text-align: center;
-  font: normal .7em Tahoma, Arial, Helvetica, sans-serif;
-  background: gainsboro;
-}
-table.toto td {
-  border: 1px silver solid;
-  padding: 0.1em;
-  font: normal .7em Tahoma, Arial, Helvetica, sans-serif;
-}
-
 body {
 	margin: 20px;
 	padding: 0;

@@ -11,6 +11,7 @@
 	int SHOWPAGE = 20;
 	
 	List<BetMoneyStat> betMoneyStatList = (List<BetMoneyStat>) request.getAttribute("betMoneyStatList");
+	BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 	Integer totalCount = (Integer) request.getAttribute("betMoneyStatCount");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));	
 %>
@@ -30,14 +31,28 @@
 		<th>총배팅금액 ①</th>
 		<th>총당첨금액 ②</th>
 		<th>총배팅포인트 ③</th>
-		<th>총보너스포인트 ④</th>
-		<th>순순익  ①-(②+③+④)</th>
+		<th>직충전차감 ④</th>
+		<th>순순익  ①-(②+③)+④</th>
 	</tr>
-
+	<%
+		if (betMoneyStatToday != null) {
+			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
+	%>
+	<tr align='center' bgcolor='#FFEBCD'>
+		<td><%=XwinUtil.toDateStr(betMoneyStatToday.getDate(), 2)%></td>
+		<td><%=XwinUtil.comma3(betMoneyStatToday.getInMoney())%></td>
+		<td><%=XwinUtil.comma3(betMoneyStatToday.getOutMoney())%></td>
+		<td><%=XwinUtil.comma3(betMoneyStatToday.getBettingPoint())%></td>
+		<td><%=XwinUtil.comma3(betMoneyStatToday.getBonusPoint())%></td>
+		<td><B><font color='<%=benefit>0?"blue":"red"%>'><%=XwinUtil.comma3(benefit)%></font></B></td>
+	  </tr>
+	<%
+		}
+	%>
 	<%
 		if (betMoneyStatList != null) {
 			for (BetMoneyStat betMoneyStat : betMoneyStatList) {
-		Long benefit = betMoneyStat.getInMoney() - (betMoneyStat.getOutMoney() + betMoneyStat.getBettingPoint() + betMoneyStat.getBonusPoint());
+		Long benefit = betMoneyStat.getInMoney() - (betMoneyStat.getOutMoney() + betMoneyStat.getBettingPoint()) + betMoneyStat.getBonusPoint();
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><%=XwinUtil.toDateStr(betMoneyStat.getDate(), 2)%></td>

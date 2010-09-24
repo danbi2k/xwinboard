@@ -11,7 +11,7 @@
 %>
 
 <tr>
-	<td><img src="img/menu18.jpg" border="0"></td>
+	<td><img src="images/menu18.jpg" border="0"></td>
 </tr>
 </table>
 
@@ -19,14 +19,14 @@
 	height="33">
 		 <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><img src="img/toto_1.jpg" border="0">&nbsp;<a href="myBet.aspx?mode=viewMyTotoList"><img src="img/toto__2.jpg" border="0"></a></p>
+            <p><img src="images/toto_1.jpg" border="0">&nbsp;<a href="betlog.php?mode=viewMyTotoList"><img src="images/toto__2.jpg" border="0"></a></p>
         </td>
     </tr>
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771" height="213">
   <tr>
-     <td width="680" background="img/minit_02.jpg" valign="top" style="padding:20">
+     <td width="680" background="images/minit_02.jpg" valign="top" style="padding:20">
 <%
 if (toto != null) {
 	Long totalMoney = XwinUtil.ntz(toto.getTotalMoney());
@@ -155,7 +155,7 @@ if (toto != null) {
 			            <p><input id='moneyDiv' name="m_id" type="text" class="input3" id="11" value='<%=XwinUtil.comma3(toto.getMinMoney())%>' onkeyup="only123(this); comma3Input(this);"></p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/totobutton1.jpg" border="0" onclick="betting()"/></p>
+			            <p>&nbsp;<img src="images/totobutton1.jpg" border="0" onclick="betting()"/></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -166,7 +166,7 @@ if (toto != null) {
 			            <p id='rateDiv'>0.00</p>
 			        </td>
 			        <td width="70" height="30">
-			            <p>&nbsp;<img src="img/totobutton2.jpg" border="0" onclick="calcRate()"</p>
+			            <p>&nbsp;<img src="images/totobutton2.jpg" border="0" onclick="calcRate()"></p>
 			        </td>
 			    </tr>
 			    <tr>
@@ -216,7 +216,7 @@ function betting()
 		query += "&totoId=<%=toto.getId()%>";
 		query += "&money=" + money;
 
-		var http = new JKL.ParseXML("toto.aspx", query);
+		var http = new JKL.ParseXML("toto.php", query);
 		var result = http.parse();
 
 		alert(result.resultXml.message);
@@ -301,7 +301,7 @@ function calcRate()
 		query += "&totoId=<%=toto.getId()%>";
 		query += "&money=" + money;
 
-		var http = new JKL.ParseXML("toto.aspx", query);
+		var http = new JKL.ParseXML("toto.php", query);
 		var result = http.parse();
 
 		//alert(result.resultXml.message);

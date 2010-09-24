@@ -1,30 +1,36 @@
+var global_login = true;
 var topLink = [];
-topLink[1] = "game.aspx?mode=viewGameList&type=wdl&grade=1";
-topLink[2] = "game.aspx?mode=viewGameList&type=handy&grade=1";
-topLink[3] = "game.aspx?mode=viewGameList&type=mix&grade=10";
-topLink[4] = "board.aspx?mode=viewBoard&boardName=user";
-topLink[5] = "board.aspx?mode=viewBoard&boardName=qna";
-topLink[6] = "game.aspx?mode=viewGameResultList";
-topLink[7] = "introduce.aspx?mode=viewIntroduceForm";
-topLink[8] = "toto.aspx?mode=viewToto";
+topLink[0] = "home.php";
+topLink[1] = "play.php?mode=viewGameList&type=wdl&grade=1";
+topLink[2] = "play.php?mode=viewGameList&type=handy&grade=1";
+topLink[3] = "play.php?mode=viewGameList&type=mix&grade=10";
+topLink[4] = "bbs.php?mode=viewBoard&boardName=user";
+topLink[5] = "bbs.php?mode=viewBoard&boardName=qna";
+topLink[6] = "play.php?mode=viewGameResultList&type=wdl";
+topLink[7] = "bettingInfo.php";
+topLink[8] = "earncache.php?mode=viewMoneyInRequest";
+topLink[9] = "sendcache.php?mode=viewMoneyOutRequest";
+topLink[10] = "account.php?mode=viewMyMoneyList";
+topLink[11] = "toto.php?mode=viewToto";
+topLink[12] = "account.php?mode=viewMyPointList";
 
 function goTopLink(index)
 {
-	//alert(index);
-	location.href = topLink[index];
+	if (global_login)
+		location.href = topLink[index];		
 }
 
 function exchangePoint(point)
 {
 	var balance = point - (point % 10000);
 	if (balance < 10000) {
-		alert("포인트는 10,000원 단위로 충전이 가능합니다");
+		alert("포인트는 10,000원 단위로 전환이 가능합니다");
 		return;
 	}
 
-	if (confirm("포인트 " + comma3(balance) + "원 을 머니로 충전하시겠습니까?")) {
+	if (confirm("포인트 " + comma3(balance) + "pt  캐쉬로 충전하시겠습니까?")) {
 		var query = "mode=exchangePoint";
-		var http = new JKL.ParseXML("member.aspx", query);
+		var http = new JKL.ParseXML("user.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -117,27 +123,27 @@ function FnFlash(id,w,h,s,wmode) {
 
 function FnLogin_Submit(frm){	
 	if(frm.userId.value==""){ alert("아이디를 입력하세요"); frm.userId.focus(); return false; }
-	if(frm.password.value==""){ alert("비밀번호를 입력하세요"); frm.password.focus(); return false; }
+	if(frm.password.value==""){ alert("패스워드를 입력하세요"); frm.password.focus(); return false; }
 	
 	var query = "mode=processLogin";
 	query += "&userId=" + frm.userId.value;
 	query += "&password=" + frm.password.value;
-	query += "&pin=" + frm.pin.value;
+	//query += "&pin=" + frm.pin.value;
 	
-	var http = new JKL.ParseXML("login.aspx", query);
+	var http = new JKL.ParseXML("login.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code < 0) {
 		alert(result.resultXml.message);
-		location.href = "index.aspx";
+		location.href = "default.php";
 		return;
 	}
 	
-	location.href = "home.aspx";
+	location.href = "home.php";
 }
 
 function FnLogout(){	
 	if(!confirm("로그아웃 하시겠습니까?")){ return false; }
-	document.location.href = "login.aspx?mode=processLogout";
+	document.location.href = "login.php?mode=processLogout";
 }
 

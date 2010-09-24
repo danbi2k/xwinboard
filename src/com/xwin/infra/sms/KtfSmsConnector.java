@@ -1,6 +1,5 @@
 package com.xwin.infra.sms;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.w3c.dom.Document;
@@ -20,7 +18,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 import com.xwin.domain.comm.KtfSmsMessage;
 import com.xwin.infra.dao.KtfSmsDao;
@@ -41,7 +38,7 @@ public class KtfSmsConnector
 	 */
 	public List<Map<String, String>> parseKTF()
 	{
-		List<Map<String, String>> mapList = null;
+		List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();;
 			
 		DocumentBuilder getBuilder = null;
 		try {
@@ -51,7 +48,7 @@ public class KtfSmsConnector
 		}
 		
 		HttpClient hc = new HttpClient();
-		hc.getHttpConnectionManager().getParams().setSoTimeout(5000);
+		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
 			
 		for (int x = 0 ; x < getUri.size() ; x++) {
 			try {
@@ -66,7 +63,6 @@ public class KtfSmsConnector
 				NodeList nodeList = elem.getElementsByTagName("boxlist");
 				int node_length = nodeList.getLength();
 				
-				mapList = new ArrayList<Map<String, String>>(node_length);
 				for (int i = 0 ; i < node_length ; i++)
 				{
 					Node node = nodeList.item(i);
@@ -83,12 +79,13 @@ public class KtfSmsConnector
 					deleteSms(boxMap.get("msg_seq"), boxMap.get("in_date"), boxMap.get("sm"), x);				
 					mapList.add(boxMap);
 				}
-			} catch (HttpException e) {
+			} catch (SAXException e) {
 				e.printStackTrace();
-				System.out.println("SMS 서버에 연결하지 못하였습니다");
-			} catch (Exception e) {
 				System.out.println("잘못된 xml 입니다");
-				emptySms(x);
+				emptySms(x);				
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("(GET) SMS 서버에 연결하지 못하였습니다");
 			}
 		}
 		
@@ -123,7 +120,7 @@ public class KtfSmsConnector
 	{
 		try {
 			DocumentBuilder actBuilder = docBuilderFact.newDocumentBuilder();
-			actBuilder.parse(delUri.get(x));
+			actBuilder.parse(emptyUri.get(x));
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("(EMPTY) SMS 서버에 연결하지 못하였습니다");			

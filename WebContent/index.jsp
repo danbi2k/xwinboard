@@ -5,6 +5,6 @@
 <head>
 <META 
      HTTP-EQUIV="Refresh"
-     CONTENT="0; URL=main.aspx">
+     CONTENT="0; URL=center.php">
 </head>
 </html>

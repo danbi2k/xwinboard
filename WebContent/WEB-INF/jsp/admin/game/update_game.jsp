@@ -29,13 +29,6 @@
 		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
 		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
 		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
-		/*
-		if(d.gametype_set.value=='1x2') {
-			if(!d.x_by.value) { alert('무승부 배당률을 입력하세요'); d.x_by.focus(); return false; }
-		}
-		else {
-			if(!d.handicap_title.value) { alert('핸디캡을 입력하세요'); return false; }
-		}*/
 
 		var query = "mode=updateGame";
 		query += "&gameId=" + <%=game.getId()%>;
@@ -61,13 +54,15 @@
 		if (d.loseDeny.checked)
 			query += "&loseDeny=N";
 		else
-			query += "&loseDeny=Y";		
+			query += "&loseDeny=Y";	
+
+		query += "&syncDeny=Y";
 
 		var http = new JKL.ParseXML("adminGame.aspx", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0) {
-			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=grade%>&pageIndex=<%=pageIndex%>";
+			location.href = "adminGame.aspx?mode=viewGameList&type=<%=type%>&id=<%=game.getId()%>&grade=<%=game.getGrade()%>&pageIndex=<%=pageIndex%>";
 		}
 	}
 	
@@ -81,7 +76,7 @@
 			document.registerGame.note.value = result.resultXml.message;	
 	}
 </SCRIPT>
-<div class="title"><%=game.getType().equals("wdl")?(game.getGrade().equals(Code.USER_GRADE_NORMAL)?"승무패경기수정":"이벤트경기수정"):"핸디캡경기수정"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜":type.equals("wdl")?"승무패":"핸디캡"%>경기 수정</div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>

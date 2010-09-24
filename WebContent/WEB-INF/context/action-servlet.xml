@@ -6,29 +6,28 @@
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/main.aspx">mainController</prop>
-				<prop key="/home.aspx">homeController</prop>
-				<prop key="/index.aspx">indexController</prop>			
-				<prop key="/login.aspx">loginController</prop>
-				<prop key="/member.aspx">memberController</prop>
-				<prop key="/admin.aspx">adminController</prop>
-				<prop key="/game.aspx">gameController</prop>
-				<prop key="/betting.aspx">bettingController</prop>
-				<prop key="/bettingCart.aspx">bettingCartController</prop>
-				<prop key="/board.aspx">boardController</prop>
-				<prop key="/moneyIn.aspx">moneyInController</prop>
-				<prop key="/moneyOut.aspx">moneyOutController</prop>
-				<prop key="/myBet.aspx">myBettingController</prop>
-				<prop key="/myMoney.aspx">myMoneyController</prop>
-				<prop key="/introduce.aspx">introduceController</prop>
-				<prop key="/external.aspx">externalController</prop>
-				<prop key="/join.aspx">joinController</prop>
-				<prop key="/toto.aspx">totoController</prop>
+				<prop key="/winpopup.php">popupController</prop>
+				<prop key="/center.php">mainController</prop>
+				<prop key="/home.php">homeController</prop>
+				<prop key="/default.php">indexController</prop>			
+				<prop key="/login.php">loginController</prop>
+				<prop key="/user.php">memberController</prop>
+				<prop key="/play.php">gameController</prop>
+				<prop key="/bet.php">bettingController</prop>
+				<prop key="/cart.php">bettingCartController</prop>
+				<prop key="/bbs.php">boardController</prop>
+				<prop key="/earncache.php">moneyInController</prop>
+				<prop key="/sendcache.php">moneyOutController</prop>
+				<prop key="/betlog.php">myBettingController</prop>
+				<prop key="/account.php">myMoneyController</prop>
+				<prop key="/friend.php">introduceController</prop>
+				<prop key="/protocol.php">externalController</prop>
+				<prop key="/userform.php">joinController</prop>
 				
 				<prop key="/test.aspx">testController</prop>
 				<prop key="/munja.aspx">munjaBadaResponse</prop>
 				
-				<prop key="/adminIndex.aspx">adminIndexController</prop>
+				<prop key="/ahzkdndb$$.php">adminIndexController</prop>
 				<prop key="/adminLogin.aspx">adminLoginController</prop>
 				<prop key="/adminMain.aspx">adminMainController</prop>
 				<prop key="/adminInfo.aspx">adminInfoController</prop>
@@ -45,13 +44,23 @@
 				<prop key="/adminTran.aspx">adminTransactionController</prop>
 				<prop key="/adminLog.aspx">adminLogController</prop>
 				<prop key="/adminReuse.aspx">adminReuseController</prop>
-				<prop key="/adminToto.aspx">adminTotoController</prop>
 				
-				<prop key="/guide.aspx">guideController</prop>
-				<prop key="/provision.aspx">provisionController</prop>
-				<prop key="/rules.aspx">rulesController</prop>
-				<prop key="/aboutHandy.aspx">aboutHandyController</prop>
-				<prop key="/livescore.aspx">liveScoreController</prop>
+				<prop key="/index.wap">wapIndexController</prop>
+				<prop key="/login.wap">wapLoginController</prop>
+				<prop key="/main.wap">wapMainController</prop>
+				<prop key="/betlog.wap">wapMyBettingController</prop>
+				<prop key="/earncache.wap">wapMoneyInController</prop>
+				<prop key="/sendcache.wap">wapMoneyOutController</prop>
+				<prop key="/play.wap">wapGameController</prop>
+								
+				<prop key="/admin.wap">wapAdminIndexController</prop>
+				<prop key="/adminCommon.wap">wapAdminController</prop>
+				
+				<prop key="/anne.php">guideController</prop>
+				<prop key="/yakwan.php">provisionController</prop>
+				<prop key="/kyujung.php">rulesController</prop>
+				<prop key="/handicap.php">aboutHandyController</prop>
+				<prop key="/live.php">liveScoreController</prop>
 			</props>
 		</property>
 	</bean>

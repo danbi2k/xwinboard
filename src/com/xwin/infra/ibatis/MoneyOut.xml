@@ -25,8 +25,8 @@
 	</resultMap>
 	
 	<insert id="insertMoneyOut" parameterClass="MoneyOut">
-		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE, PROC_DATE, NICKNAME, NOTE)
-		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#, #procDate#, #nickName#, #note#)
+		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
+		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#, #procDate#, #nickName#, #note#, 'out', #source#)
 	</insert>
 	
 	<update id="updateMoneyOut" parameterClass="MoneyOut">
@@ -76,7 +76,7 @@
 	
 	<select id="selectMoneyOutList" resultMap="moneyOutResultMap" parameterClass="map">
 		SELECT * FROM tbl_money_out
-		<dynamic prepend="WHERE">
+		WHERE TYPE = 'out'
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
@@ -135,7 +135,6 @@
 				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
-		</dynamic>
 		ORDER BY ID DESC
 		<isNotNull property="fromRow">
 		LIMIT #fromRow#, #rowSize#
@@ -144,68 +143,7 @@
 	
 	<select id="selectMoneyOutCount" resultClass="integer" parameterClass="map">
 		SELECT COUNT(*) FROM tbl_money_out
-		<dynamic prepend="WHERE">
-			<isNotNull prepend="AND" property="userId">
-				USERID = #userId#
-			</isNotNull>
-			<isNotNull prepend="AND" property="userIdLike">
-				USERID LIKE #userIdLike#
-			</isNotNull>
-			<isNotNull prepend="AND" property="nickNameLike">
-				NICKNAME LIKE #nickNameLike#
-			</isNotNull>
-			<isNotNull prepend="AND" property="status">
-				STATUS = #status#
-			</isNotNull>
-			<isNotNull prepend="AND" property="c">
-				STATUS != #notStatus#
-			</isNotNull>
-			<isNotNull prepend="AND" property="statusList">
-				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
-				STATUS = #statusList[]#
-				</iterate>
-			</isNotNull>
-			<isNotNull prepend="AND" property="number">
-				NUMBER = #number#
-			</isNotNull>
-			<isNotNull prepend="AND" property="nameLike">
-				NAME LIKE #nameLike#
-			</isNotNull>
-			<isNotNull prepend="AND" property="isChecked">
-				ISCHECKED = #isChecked#
-			</isNotNull>
-			<isNotNull prepend="AND" property="isRemoved">
-				ISREMOVED = #isRemoved#
-			</isNotNull>
-			<isNotNull prepend="AND" property="isDeleted">
-				ISDELETED = #isDeleted#
-			</isNotNull>
-			<isNotNull prepend="AND" property="fromReqDate">
-				<![CDATA[
-				REQ_DATE >= #fromReqDate#
-				]]>
-			</isNotNull>
-			<isNotNull prepend="AND" property="toReqDate">
-				<![CDATA[
-				REQ_DATE <= #toReqDate#
-				]]>
-			</isNotNull>
-			<isNotNull prepend="AND" property="fromProcDate">
-				<![CDATA[
-				PROC_DATE >= #fromProcDate#
-				]]>
-			</isNotNull>
-			<isNotNull prepend="AND" property="toProcDate">
-				<![CDATA[
-				PROC_DATE <= #toProcDate#
-				]]>
-			</isNotNull>
-		</dynamic>
-	</select>
-	
-	<select id="selectMoneyOutSum" resultClass="long" parameterClass="map">
-		SELECT SUM(MONEY) FROM tbl_money_out
-		<dynamic prepend="WHERE">
+		WHERE TYPE = 'out'
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
 			</isNotNull>
@@ -235,6 +173,69 @@
 			<isNotNull prepend="AND" property="isChecked">
 				ISCHECKED = #isChecked#
 			</isNotNull>
+			<isNotNull prepend="AND" property="isRemoved">
+				ISREMOVED = #isRemoved#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isDeleted">
+				ISDELETED = #isDeleted#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromReqDate">
+				<![CDATA[
+				REQ_DATE >= #fromReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toReqDate">
+				<![CDATA[
+				REQ_DATE <= #toReqDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromProcDate">
+				<![CDATA[
+				PROC_DATE >= #fromProcDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="toProcDate">
+				<![CDATA[
+				PROC_DATE <= #toProcDate#
+				]]>
+			</isNotNull>
+	</select>
+	
+	<select id="selectMoneyOutSum" resultClass="long" parameterClass="map">
+		SELECT SUM(MONEY) FROM tbl_money_out
+		WHERE TYPE = 'out'
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="userIdLike">
+				USERID LIKE #userIdLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nickNameLike">
+				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="status">
+				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="notStatus">
+				STATUS != #notStatus#
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusList">
+				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
+				STATUS = #statusList[]#
+				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="statusLike">
+				STATUS like #statusLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="number">
+				NUMBER = #number#
+			</isNotNull>
+			<isNotNull prepend="AND" property="nameLike">
+				NAME LIKE #nameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="isChecked">
+				ISCHECKED = #isChecked#
+			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
 			</isNotNull>
@@ -261,7 +262,6 @@
 				PROC_DATE <= #toProcDate#
 				]]>
 			</isNotNull>
-		</dynamic>
 	</select>
 	
 	<typeAlias alias="MoneyOutStat" type="com.xwin.domain.statistics.MoneyOutStat" />
@@ -276,7 +276,8 @@
 	
 	<select id="selectMoneyOutGroupByBankList" resultMap="moneyOutStatResultMap" parameterClass="map">
 		SELECT BANKNAME, NAME, NUMBER, COUNT(*) AS OUT_COUNT, SUM(MONEY) AS OUT_SUM FROM tbl_money_out t
-		WHERE STATUS = 'ME002'
+		WHERE STATUS = 'ME002' AND
+		TYPE = 'out'
 		<isNotNull prepend="AND" property="nameLike">
 			NAME LIKE #nameLike#
 		</isNotNull>
@@ -292,7 +293,8 @@
 	
 	<select id="selectMoneyOutGroupByBankCount" resultClass="integer">
 		SELECT COUNT(distinct NUMBER, NAME, BANKNAME) FROM tbl_money_out t
-		WHERE STATUS = 'ME002'
+		WHERE STATUS = 'ME002' AND
+		TYPE = 'out'
 		<isNotNull prepend="AND" property="nameLike">
 			NAME LIKE #nameLike#
 		</isNotNull>
@@ -304,11 +306,13 @@
 	<select id="selectMoneyOutIntervalCount" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_money_out t
 		WHERE USERID in (SELECT USERID FROM tbl_member WHERE MEMBERID=1)
-		AND REQ_DATE > DATE_SUB(SYSDATE(),INTERVAL 5 MINUTE)
+		AND REQ_DATE > DATE_SUB(SYSDATE(),INTERVAL 10 MINUTE)
+		AND TYPE = 'out'
 	</select>
 	
 	<select id="selectMoneyOutWaitCount" resultClass="integer">
 		SELECT COUNT(*) FROM tbl_money_out t
 		WHERE STATUS = 'ME001'
+		AND TYPE = 'out'
 	</select>
 </sqlMap>

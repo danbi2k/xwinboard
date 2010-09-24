@@ -34,6 +34,8 @@
 		<result property="loseDeny" column="LOSE_DENY"/>
 		<result property="grade" column="GRADE"/>
 		<result property="note" column="NOTE"/>
+		<result property="syncDeny" column="SYNC_DENY"/>
+		<result property="processDate" column="PROCESS_DATE"/>
 	</resultMap>
 	
 	<select id="selectGameById" resultMap="GameResultMap" parameterClass="string">
@@ -44,6 +46,16 @@
 			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
 		FROM tbl_game g 
 		WHERE g.ID = #value#
+	</select>
+	
+	<select id="selectGameBySyncId" resultMap="GameResultMap" parameterClass="string">
+		SELECT
+			g.*,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') AS WIN_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'D' AND b.STATUS = 'BS001') AS DRAW_MONEY,
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001') AS LOSE_MONEY
+		FROM tbl_game g 
+		WHERE g.SYNC_ID = #value#
 	</select>
 	
 	<select id="selectGameList" resultMap="GameResultMap" parameterClass="map">
@@ -96,6 +108,11 @@
 			<isNotNull prepend="AND" property="toDate">
 				<![CDATA[
 				g.GAME_DATE <= #toDate#
+				]]>
+			</isNotNull>
+			<isNotNull prepend="AND" property="processDate">
+				<![CDATA[
+				g.PROCESS_DATE >= #processDate#
 				]]>
 			</isNotNull>
 			<isNotNull prepend="AND" property="betGameCount">
@@ -234,6 +251,12 @@
 			<isNotNull prepend="," property="loseDeny">
 			LOSE_DENY = #loseDeny# 
 			</isNotNull>
+			<isNotNull prepend="," property="syncDeny">
+			SYNC_DENY = #syncDeny# 
+			</isNotNull>
+			<isNotNull prepend="," property="processDate">
+			PROCESS_DATE = #processDate# 
+			</isNotNull>
 			<isNotNull prepend="," property="note">
 			NOTE = #note# 
 			</isNotNull>
@@ -262,4 +285,16 @@
 			STATUS = 'GS002'
 		]]>			
 	</update>
+	
+	<select id="selectOverUnderWarning" resultClass="int" parameterClass="map">
+		SELECT
+			COUNT(*)
+		FROM tbl_game g
+		WHERE
+			g.STATUS = 'GS003' AND
+			g.HOME_TEAM like '%↑%' AND
+			ABS((SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'W' AND b.STATUS = 'BS001') -
+			(SELECT SUM(MONEY) FROM tbl_betting_game bg, tbl_betting b WHERE bg.BETTING_ID = b.ID AND bg.GAME_ID = g.ID AND GUESS = 'L' AND b.STATUS = 'BS001')) > 2000000
+
+	</select>
 </sqlMap>

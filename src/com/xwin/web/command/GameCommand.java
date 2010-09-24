@@ -27,6 +27,7 @@ public class GameCommand extends XwinObject
 	private String winDeny;
 	private String drawDeny;
 	private String loseDeny;
+	private String syncDeny;
 	private String grade;
 	private String note;
 	private String reuse;
@@ -156,6 +157,12 @@ public class GameCommand extends XwinObject
 	}
 	public void setLoseDeny(String loseDeny) {
 		this.loseDeny = loseDeny;
+	}
+	public String getSyncDeny() {
+		return syncDeny;
+	}
+	public void setSyncDeny(String syncDeny) {
+		this.syncDeny = syncDeny;
 	}
 	public String getGrade() {
 		return grade;

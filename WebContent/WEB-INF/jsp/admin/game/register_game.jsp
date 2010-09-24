@@ -8,12 +8,12 @@
 <%
 	List<League> leagueList = (List<League>) request.getAttribute("leagueList");
 	String type = request.getParameter("type");
-	String grade = request.getParameter("grade");
+	String grade = request.getParameter("grade");	
 %>
 <SCRIPT LANGUAGE="JavaScript">
 	function checkIT() {
 		var d=document.registerGame;
-		var gameType
+		var gameType;
 		<%if (type.equals("mix")) {%>
 		if (d.gameType[0].checked)
 			gameType = d.gameType[0].value;
@@ -30,10 +30,9 @@
 		//if(!d.gametime4.value) { alert('경기 시작 시각(초)을 선택하세요'); d.gametime4.focus(); return false; }
 		if(!d.homeTeam.value) { alert('홈팀명을 입력하세요'); d.homeTeam.focus(); return false; }		
 		if(!d.awayTeam.value) { alert('원정팀명을 입력하세요'); d.awayTeam.focus(); return false; }
-		if(!d.winRate.value) { d.winRate.value = 0.0; }
-		if(!d.loseRate.value) { d.loseRate.value = 0.0; }
-		if(!d.drawRate.value) { d.drawRate.value = 0.0; }
-		if (!gameType) { alert('종류를 선택하세요');  return false;}
+		if(!d.winRate.value) { alert('홈팅 배당률을 입력하세요'); d.winRate.focus(); return false; }
+		if(!d.loseRate.value) { alert('원정팀명 배당률을 입력하세요'); d.loseRate.focus(); return false; }
+		if(!d.drawRate.value) { alert('무승부 배당률을 입력하세요'); d.drawRate.focus(); return false; }
 		<%if (type.equals("handy")){ %>
 		if (d.uoCheck.checked) {
 			if(!d.underRate.value) { alert('언더 배당률을 입력하세요'); d.underRate.focus(); return false; }
@@ -94,7 +93,7 @@
 		}	
 	}
 </SCRIPT>
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"이벤트경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"스페셜경기등록":type.equals("wdl")?"승무패경기등록":"핸디캡경기등록"%></div>
 
 ※ 팀명에 update, select, delete, create, alter 라는 문자열은 사용하지 마세요
 <form method='post' name='registerGame'>
@@ -147,7 +146,7 @@
 	<tr bgcolor="E7E7E7">
 		<td align="center" bgcolor="E7E7E7" width="15%">종류</td>
 		<td bgcolor="#FFFFFF" width=35% colspan='3'>
-			승무패 <input type='radio' name="gameType" value="wdl"/>
+			승무패 <input type='radio' name="gameType" value="wdl" checked/>
 			핸디캡<input type='radio' name="gameType" value="handy"/>
 		</td>
 	</tr>			

@@ -3,6 +3,7 @@
     
 <%@ page import="com.xwin.domain.game.*"%>
 <%@ page import="com.xwin.infra.util.*"%>
+<%@ page import="com.xwin.domain.*"%>
 <%@ page import="java.util.*"%>
 <%@page import="com.xwin.web.controller.admin.AdminGameController"%>
 <%
@@ -41,8 +42,9 @@ var targetCheck = 0;
 	<tr>
 		<td width="36%">송신대상</td>
 		<td>
-			<input type="radio" name="target" checked onclick="targetCheck=0;document.SMSFORM.phone.disabled=false"> 단일송신
-			<input type="radio" name="target" onclick="targetCheck=1;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true"> 전체송신
+			<input type="radio" name="target" checked onclick="targetCheck=0;document.SMSFORM.phone.disabled=false;document.SMSFORM.keyword.disabled=false"> 단일송신
+			<input type="radio" name="target" onclick="targetCheck=1;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true;document.SMSFORM.keyword.disabled=true"> VIP송신
+			<input type="radio" name="target" onclick="targetCheck=2;document.SMSFORM.phone.value='';document.SMSFORM.phone.disabled=true;document.SMSFORM.keyword.disabled=true"> 일반송신
 		</td>
 	</tr>
 	<tr>
@@ -66,7 +68,7 @@ var targetCheck = 0;
 	-->
 	<tr>
 		<td>발신번호</td>
-		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="0000000000"></td>
+		<td><input type="text" name="callback" size="15" maxlength="15" onKeyUp="onlyNumber(this)" value="<%=SiteConfig.SITE_PHONE%>"></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="button" name="submit1" value="전송" onClick="onSubmit();">	<input type="reset" name="Submit5" value="취소"></td>
@@ -89,8 +91,10 @@ var targetCheck = 0;
 		if (result.resultXml.code == 0) {
 			if (result.resultXml.message)
 				SMSFORM.phone.value = result.resultXml.message;
-			else
+			else {
+				alert("등록되지 않은 아이디 입니다");
 				SMSFORM.phone.value = "";
+			}
 		}
 	}
 
@@ -215,8 +219,11 @@ var targetCheck = 0;
 		var query = "";
 		if (targetCheck == 0)
 			query += "mode=sendSms";
-		else
-			query += "mode=sendSmsAllMember";
+		else if (targetCheck == 1)
+			query += "mode=sendSmsAllMember&grade=10";
+		else if (targetCheck == 2)
+			query += "mode=sendSmsAllMember&grade=1";
+		
 		query += "&message=" + Obj.msg.value;
 		query += "&phone=" + Obj.phone.value;
 		query += "&callback=" + Obj.callback.value;

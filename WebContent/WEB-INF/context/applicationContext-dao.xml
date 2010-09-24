@@ -21,6 +21,10 @@
 		class="com.xwin.infra.dao.KtfSmsDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
 		
+	<bean id="showSmsDao"
+		class="com.xwin.infra.dao.ShowSmsDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
+		
 	<bean id="leagueDao"
 		class="com.xwin.infra.dao.LeagueDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
@@ -92,6 +96,10 @@
 	<bean id="hackingLogDao"
 		class="com.xwin.infra.dao.HackingLogDao"
 		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />
+		
+	<bean id="otpLogDao"
+		class="com.xwin.infra.dao.OtpLogDao"
+		p:sqlMapClientTemplate-ref="sqlMapClientTemplate" />	
 		
 	<bean id="invitationDao"
 		class="com.xwin.infra.dao.InvitationDao"

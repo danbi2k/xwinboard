@@ -12,6 +12,7 @@ import com.xwin.domain.admin.Admin;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
+import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
@@ -20,7 +21,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView viewAdminInfo(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/admin/admin_info");
@@ -30,13 +33,13 @@ public class AdminInfoController extends XwinController
 	public ModelAndView updateAdminInfo(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
-		Member admin = (Member) request.getSession().getAttribute("Admin");
-		
-		admin.setPassword(command.getPassword());
-		admin.setPin(command.getPin());
+		admin.setPassword(XwinUtil.getAdminPassword(command.getPassword()));
+		admin.setPin(XwinUtil.getAdminPassword(command.getPin()));
 		admin.setNickName(command.getNickName());
 		admin.setMobile(command.getMobile());
 		admin.setEmail(command.getEmail());
@@ -54,7 +57,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView viewSecurity(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -75,7 +80,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView changeSecurity(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String DENY_JOIN = request.getParameter("DENY_JOIN");
@@ -107,7 +114,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView requestChangePassword(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		Member member = new Member();
@@ -125,7 +134,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView viewBonus(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/admin/admin_bonus");
@@ -135,7 +146,9 @@ public class AdminInfoController extends XwinController
 	public ModelAndView changeBonus(HttpServletRequest request, 
 			HttpServletResponse response, Member command) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String HANDY_BONUS_USE = request.getParameter("HANDY_BONUS_USE");

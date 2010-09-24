@@ -73,7 +73,7 @@
 		<th>아이디 (닉네임)</td>
 		<th>신청일자</td>
 		<th>상태</td>
-		<th>충전</th>
+		<th>환전</th>
 	</tr>
 	<%
 	if (moneyOutList != null) {
@@ -89,8 +89,11 @@
 		<td><a href='javascript:goMemberDetail("<%=moneyOut.getUserId()%>")'><%=moneyOut.getUserId()%></a> (<%=moneyOut.getNickName()%>)</B></td>
 		<td><%=moneyOut.getReqDateStr()%></td>
 		<td><%=Code.getValue(moneyOut.getStatus())%></td>
-		<td><input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'>	
-		<input type='button' value='취소' onclick='cancelMoneyOutRequest(<%=moneyOut.getId()%>)'></td>
+		<td>
+			<input type='button' value='환전' onclick='acceptMoneyOutRequest(<%=moneyOut.getId()%>)'>	
+			<input type='button' value='취소' onclick='cancelMoneyOutRequest(<%=moneyOut.getId()%>)'>
+			<input type='button' value='계좌확인' onclick='checkBankBookInfo("<%=moneyOut.getBankName()%>", "<%=moneyOut.getNumber()%>", "<%=moneyOut.getName()%>", "<%=moneyOut.getUserId()%>")'>
+		</td>
 	</tr>
 <%
 	}
@@ -188,6 +191,33 @@ function deleteCheckedItem()
 			location.reload();
 	} 
 }
+
+function checkBankBookInfo(bankName, bankNumber, bankOwner, userId)
+{
+	var query = "mode=checkBankBookInfo";
+	query += "&bankName=" + bankName;
+	query += "&bankNumber=" + bankNumber;
+	query += "&bankOwner=" + bankOwner;
+	
+	var http = new JKL.ParseXML("adminAccount.aspx", query);
+	var result = http.parse();
+	if (result.resultXml.code == 0) {
+		var dupList = Xwin.ToArray(result.resultXml.object.member);
+		if (dupList.length > 1) {
+			var x = 1;
+			var dupId = "환전계좌중복!! (" + bankName + " " + bankNumber + " " + bankOwner + ")\n중복된 다른 아이디/닉네임 목록\n\n";
+			for (i in dupList) {
+				if (userId == dupList[i].userId)
+					continue;
+				dupId += (x++) + ". " + dupList[i].userId + " " + dupList[i].nickName + " " + C(dupList[i].status) + "\n";
+			}
+			alert(dupId);
+		} else {
+			alert("환전 계좌 중복 없음");
+		}
+	}
+}
+
 
 function goPage(index)
 {

@@ -14,11 +14,11 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<!--li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터</a></li-->
 					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터 (VIP)</a></li>
-					<!--li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판</a></li-->
+					<!--li><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터 (일반)</a></li-->
 					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
-					<li><a href="admin.aspx?mode=viewPopup">긴급공지</a></li>
+					<!--li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판 (일반)</a></li-->
+					<li><a href="admin.aspx?mode=viewPopup&grade=10">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
 				</ul>
@@ -52,11 +52,9 @@
 					<li class="first"><a href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">승무패</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">핸디캡</a></li>
 					<li><a href="adminGame.aspx?mode=viewGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">스페셜</a></li>
-					<li><a href="adminToto.aspx?mode=viewTotoList">토토</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(승무패)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=handy&grade=<%=Code.USER_GRADE_NORMAL%>">경기결과(핸디캡)</a></li>
 					<li><a href="adminGame.aspx?mode=viewEndGameList&type=mix&grade=<%=Code.USER_GRADE_VIP%>">경기결과(스페셜)</a></li>
-					<li><a href="adminToto.aspx?mode=viewEndTotoList">경기결과(토토)</a></li>
 					<li><a href="adminLeague.aspx?mode=viewLeagueList">리그관리</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_GAME%>">공지관리</a></li>
 				</ul>
@@ -87,11 +85,9 @@
 			<h2 class="heading">서버관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li>
-					<li><a href="admin.aspx?mode=viewMaintanance">DB관리</a></li>
-					<li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li>
-					<li><a href="adminInfo.aspx?mode=viewAdminInfo">관리자정보</a></li>
-					<li><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
+					<!--li class="first"><a href="adminInfo.aspx?mode=viewSecurity">보안설정</a></li -->
+					<!--li><a href="adminInfo.aspx?mode=viewBonus">보너스설정</a></li-->
+					<li class="first"><a href="admin.aspx?mode=viewBankBookList">통장관리</a></li>
 					<li><a href="adminSms.aspx?mode=viewSendSms">SMS전송</a></li>
 					<li><a href="adminLog.aspx?mode=viewHackingLog">해킹탐지</a></li>
 					<!--li><a href="#">기본값관리</a></li -->
@@ -102,7 +98,7 @@
 	</div>
 	<div id="footer">
 		<BR><BR><BR>
-		<!-- p>Copyright &copy; 2008 <%=SiteConfig.SITE_NAME%></strong></a></p -->
+		<!-- p>Copyright &copy; 2009 <%=SiteConfig.SITE_NAME%></strong></a></p -->
 	</div>
 </div>
 <script>

@@ -32,5 +32,13 @@
 		p:accountDao-ref="accountDao"
 		p:pointDao-ref="pointDao"/>	
 		
+	<bean id="gameSyncService" class="com.xwin.service.external.GameSyncService"
+		p:gameDao-ref="gameDao"
+		p:processService-ref="processService">
+		<property name="syncUrl">
+			<value><![CDATA[http://219.101.160.115/protocol.php]]></value>
+		</property>
+	</bean>	
+		
 	<bean id="transactionService" class="com.xwin.service.external.TransactionService"/>
 </beans>

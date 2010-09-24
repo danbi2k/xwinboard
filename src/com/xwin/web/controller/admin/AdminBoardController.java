@@ -27,7 +27,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -65,7 +67,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewBoardDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -87,7 +91,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView viewWriteNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/board/admin_board_write");
@@ -98,10 +104,10 @@ public static final int ROWSIZE = 30;
 	public ModelAndView writeNotice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
-		
-		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
@@ -129,10 +135,10 @@ public static final int ROWSIZE = 30;
 	public ModelAndView updateBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
-		
-		Member admin = (Member) request.getSession().getAttribute("Admin");
 		
 		String context = request.getParameter("context");
 		String title = request.getParameter("title");
@@ -153,7 +159,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView deleteBoardItem(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -169,7 +177,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView writeBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -194,7 +204,9 @@ public static final int ROWSIZE = 30;
 	public ModelAndView deleteBoardComment(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");

@@ -5,7 +5,7 @@ function FnEmptyGameFolder(type)
 	var query = "mode=emptyGameFolder";
 	query += "&type=" + type;
 	
-	var http = new JKL.ParseXML("betting.aspx", query);
+	var http = new JKL.ParseXML("bet.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
@@ -18,7 +18,7 @@ function FnDrawFolderCheck(type)
 	var query = "mode=getGameFolder";
 	query += "&type=" + type;
 	
-	var http = new JKL.ParseXML("betting.aspx", query);
+	var http = new JKL.ParseXML("bet.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
@@ -47,7 +47,7 @@ function FnDeleteGameFolder(id, type, guess)
 	query += "&gameId=" + id;
 	query += "&type=" + type;
 	
-	var http = new JKL.ParseXML("betting.aspx", query);
+	var http = new JKL.ParseXML("bet.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
@@ -113,7 +113,7 @@ function FnGameBet(cobj, id, type, guess)
 		else
 			cobj.className = "tablebg2";
 	}
-	var http = new JKL.ParseXML("betting.aspx", query);
+	var http = new JKL.ParseXML("bet.php", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.gameFolderItem);
@@ -138,21 +138,21 @@ function FnDrawFolder(data, type) {
 	var rate = "0.0";
 	var multi = 1.0;
 	
-    row.push("<table cellpadding='0' cellspacing='0' width='569'>");
+    row.push("<table cellpadding='0' cellspacing='0' width='560'>");
 	if (data != undefined && data.length > 0) {	
 		for (var i = 0 ; i < data.length ; i++) {
 			row.push("<tr>");
-			row.push("<td width='320' align='left' valign='middle' class='tablebg2'>");
+			row.push("<td width='350' align='left' valign='middle' class='tablebg2'>");
 			row.push("<p>" + data[i].homeTeam + " vs " + data[i].awayTeam + "</p>");
 			row.push("</td>");
-			row.push("<td width='30' align='center' valign='middle' class='tablebg1'>");
+			row.push("<td width='50' align='center' valign='middle' class='tablebg1'>");
 			row.push("<p>" + C(data[i].guess) + "</p>");
 			row.push("</td>");
-			row.push("<td width='30' align='center' valign='middle' class='tablebg2'>");
+			row.push("<td width='60' align='center' valign='middle' class='tablebg2'>");
 			row.push("<p>" + Xwin.Digit2(data[i].selRate) + "</p>");
 			row.push("</td>");
 			row.push("<td width='30' align='center' valign='middle' class='tablebg1'>");
-			row.push("<p><img src='img/x.gif' border='0' onclick='FnDeleteGameFolder(" + data[i].id + ",\"" + type + "\",\"" + data[i].guess + "\")'></p>");
+			row.push("<p><img src='images/x.gif' border='0' onclick='FnDeleteGameFolder(" + data[i].id + ",\"" + type + "\",\"" + data[i].guess + "\")'></p>");
 			row.push("</td>");
 			row.push("</tr>");
 			
@@ -193,7 +193,7 @@ function FnBetting()
 		query += "&type=" + gameType;
 		query += "&money=" + money;
 		query += "&action=betting";
-		var http = new JKL.ParseXML("betting.aspx", query);
+		var http = new JKL.ParseXML("bet.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0 || result.resultXml.code == -2) {			
@@ -217,7 +217,7 @@ function FnAddBettingCart()
 		query += "&type=" + gameType;
 		query += "&money=" + money;
 		query += "&action=cart";
-		var http = new JKL.ParseXML("betting.aspx", query);
+		var http = new JKL.ParseXML("bet.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0 || result.resultXml.code == -2) {			
@@ -230,7 +230,7 @@ function FnDeleteFolder(type)
 {
 	var query = "mode=deleteFolder";
 	query += "&type=" + type;
-	var http = new JKL.ParseXML("game.aspx", query);
+	var http = new JKL.ParseXML("play.php", query);
 	var result = http.parse();
 	
 	location.reload();
@@ -262,7 +262,7 @@ function FnCalcFolder()
 //	var query = "mode=calculateCart";
 //	query += "&type=" + gameType;
 //	query += "&money=" + money;
-//	var http = new JKL.ParseXML("betting.aspx", query);
+//	var http = new JKL.ParseXML("bet.php", query);
 //	var result = http.parse();
 //	if (result.resultXml.code == 0) {
 //		var data = result.resultXml.object;

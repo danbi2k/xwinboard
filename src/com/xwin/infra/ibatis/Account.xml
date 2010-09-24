@@ -57,9 +57,6 @@
 			<isNotNull prepend="AND" property="type">
 				TYPE = #type#
 			</isNotNull>
-			<isNotNull prepend="AND" property="name">
-				NAME = #name#
-			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
 			</isNotNull>
@@ -92,9 +89,6 @@
 			<isNotNull prepend="AND" property="type">
 				TYPE = #type#
 			</isNotNull>
-			<isNotNull prepend="AND" property="name">
-				NAME = #name#
-			</isNotNull>
 			<isNotNull prepend="AND" property="isDeleted">
 				ISDELETED = #isDeleted#
 			</isNotNull>
@@ -112,7 +106,24 @@
 				]]>
 			</isNotNull>
 		</dynamic>
-	</select>	
+	</select>
+	
+	<select id="selectAccountMoneySum" resultClass="integer" parameterClass="map">
+		SELECT ABS(SUM(MONEY)) FROM tbl_account
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="userId">
+				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="type">
+				TYPE = #type#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+				<![CDATA[
+				DATE >= #fromDate#
+				]]>
+			</isNotNull>
+		</dynamic>
+	</select>
 	
 	<select id="selectAccountSum" resultMap="accountSumResultMap" parameterClass="string">
 		SELECT TYPE, SUM(MONEY) AS SUM FROM tbl_account WHERE USERID=#value# GROUP BY TYPE

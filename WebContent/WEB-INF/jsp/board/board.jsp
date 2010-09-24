@@ -28,28 +28,25 @@
 	int itemIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
-			<tr><td><img src="img/<%=boardName.equals("user")?"menu04":"menu05"%>.jpg" border="0"></td></tr>
-		    <tr><td><img src="img/bbs01.jpg" border="0"></td></tr>
-            </table>
+			<tr><td><img src="images/<%=boardName.equals("user")?"menu04":"menu05"%>1.jpg" border="0"></td></tr>
+		    <tr><td>&nbsp;</td>
+		    </tr>
+</table>
      
-     <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="img/bar.jpg">
+     <table align="center" cellpadding="0" cellspacing="0" width="887" height="40" background="images/bar1.gif">
     <tr>
         <td width="90" height="40" align="center" valign="middle" class="menubar">
-            <p>번호</p>
-        </td>
-        <td width="527" height="40" align="center" valign="middle" class="menubar">
-            <p>제목</p>
-        </td>
+            <p style="font-weight: bold">번호</p>      </td>
+        <td width="500" height="40" align="center" valign="middle" class="menubar">
+            <p style="font-weight: bold">제목</p>      </td>
+        <td width="27" height="40" align="center" valign="middle" class="menubar">
+            <p style="font-weight: bold"></p>      </td>    
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>작성자</p>
-       </td>
+            <p style="font-weight: bold">작성자</p>      </td>
         <td width="110" height="40" align="center" valign="middle" class="menubar">
-            <p>작성일</p>
-        </td>
+            <p style="font-weight: bold">작성일</p>      </td>
         <td width="50" height="40" align="center" valign="middle" class="menubar">
-            <p>조회수</p>
-        </td>
-        
+            <p style="font-weight: bold">조회수</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="887" height="35">
@@ -59,18 +56,21 @@
 			boolean isNotice = boardItem.getType().equals(Code.BOARDITEM_TYPE_NOTICE);
 			String classHead = isNotice?"notice":"";
 			String classSubject = isNotice?"notice subject":"subject";
-			String head = isNotice?"<img src='img/notice.jpg' border='0'>":""+itemIdx--;
+			String head = isNotice?"<img src='images/notice.jpg' border='0'>":""+itemIdx--;
 			String readCount = isNotice?"":""+boardItem.getReadCount();
 %>
 			<tr>
 				 <td width="90" height="35" align="center" valign="middle">
             		<p><%=head%></p>
         		</td>
-				 <td width="527" height="35" align="left" valign="middle">
-					<p><a <%=isNotice?"style=color:#45BCD7;'":""%> href="board.aspx?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
-					<%=boardItem.getTitle()%><b>&nbsp;&nbsp;[<%=boardItem.getCommentCount()%>]
+				 <td width="500" height="35" align="left" valign="middle">
+					<p><a <%=isNotice?"style=color:#d74545;'":""%> href="bbs.php?mode=viewBoardDetail&boardName=<%=boardName%>&id=<%=boardItem.getId()%>&pageIndex=<%=pageIndex%>">
+					<%=boardItem.getTitle()%><b>
 					</b>
 					</a>
+				</td>
+				<td width="27" height="35" align="center" valign="middle">
+					<p>[<%=boardItem.getCommentCount()%>]</p>
 				</td>
 				<td width="110" height="35" align="center" valign="middle">
 		            <p><%=boardItem.getNickName()%></p>
@@ -83,14 +83,14 @@
 		        </td>
 			</tr>
 			<tr>
-			   <td class="bbsline" colspan="5">
+			   <td class="bbsline" colspan="6">
 			   </td>
 			</tr>
 <%
 		}
 	}
 %>  
-     </table>
+</table>
           <table align="center" cellpadding="0" cellspacing="0" width="887" height="40">
 	        <tr>
 			    <td width="787" height="40" align="center">
@@ -101,7 +101,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -118,13 +118,13 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
 			    </td>
 			    <td width="100" height="40" align="right">
-				<a href='board.aspx?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="img/write.jpg" border="0"></a>
+				<a href='bbs.php?mode=viewBoardWriteForm&boardName=<%=boardName%>'><img src="images/write.jpg" border="0"></a>
 				</td>
 			</tr>
 		    
@@ -133,7 +133,7 @@
 <script>
 function goPage(pageIndex)
 {
-	location.href="board.aspx?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
+	location.href="bbs.php?mode=viewBoard&boardName=<%=boardName%>&pageIndex=" + pageIndex;
 }
 </script>
 <%@include file="../footer.jsp"%>

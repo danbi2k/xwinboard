@@ -21,12 +21,8 @@ public class MoneyInDao extends XwinDao
 	}
 	
 	public void deleteMoneyIn(String id) {
-		sqlMapClientTemplate.delete("deleteMoneyIn", id);
-	}
-	
-	public void deleteMoneyInByBankBookId(String bankBookId) {
-		sqlMapClientTemplate.delete("deleteMoneyInByBankBookId", bankBookId);
-	}
+		sqlMapClientTemplate.update("deleteMoneyIn", id);
+	}	
 	
 	public List<MoneyIn> selectMoneyInList(Map<String, Object> param)
 	{

@@ -60,7 +60,7 @@
 	<%
 	if (moneyInOutList != null) {
 		for (MoneyInOut moneyInOut : moneyInOutList) {
-			boolean plus = moneyInOut.getStatus().equals("MC004");
+			boolean plus = moneyInOut.getStatus().equals("ME004");
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><a href='javascript:goMemberDetail("<%=moneyInOut.getUserId()%>")'><%=moneyInOut.getUserId()%></a> (<%=moneyInOut.getNickName()%>)</td>

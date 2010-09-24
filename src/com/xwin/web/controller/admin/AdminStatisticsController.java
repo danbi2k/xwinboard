@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewDailyBettingMoneySummary(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -41,9 +44,13 @@ public class AdminStatisticsController extends XwinController
 		List<BetMoneyStat> betMoneyStatList = bettingDao.selectDailyBettingMoneyStatList(param);
 		Integer betMoneyStatCount = bettingDao.selectDailyBettingMoneyStatCount(param);
 		
+		Date[] todayPair = XwinUtil.getDatePair(new Date());
+		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+		
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_daily_betting_money");
 		mv.addObject("betMoneyStatList", betMoneyStatList);
 		mv.addObject("betMoneyStatCount", betMoneyStatCount);
+		mv.addObject("betMoneyStatToday", betMoneyStatToday);
 		
 		return mv;
 	}
@@ -51,7 +58,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewDailyMemberMoneySummary(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -79,7 +88,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewMoneyOutStat(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -109,7 +120,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -163,7 +176,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewMemberStat(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
@@ -201,7 +216,9 @@ public class AdminStatisticsController extends XwinController
 	public ModelAndView viewMemberLogin(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_member_login");

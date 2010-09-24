@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="com.xwin.domain.*" %>
 <%@ page import="com.xwin.domain.game.*" %>
+<%@ page import="com.xwin.domain.statistics.*" %>
 <%
 	int ROWSIZE = 10;
 	int SHOWPAGE = 10;
@@ -13,33 +15,48 @@
 	Integer totalCount = (Integer) request.getAttribute("bettingCount");
 %>
 <%@include file="../header.jsp"%>
-			<tr><td><img src="img/menu15.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu151.jpg" border="0"></td></tr>
 		
 </table>
+<br>
 <table align="center" cellpadding="0" cellspacing="0" width="841">
 <%
 	if (bettingList != null) {
 		for (Betting betting : bettingList) {
 %>
-
+<tr bgcolor="<%=SiteConfig.SITE_COLOR%>"><td>
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tbody><tr>
+		<td>&nbsp;<img src='images/x.gif' alt='삭제' class='img_bt ml5' onclick="deleteMyBetting(<%=betting.getId()%>)"></td>
+	<td width="670" style="color:white;vertical-align:middle;text-align:left;"><b>&nbsp;배팅일시 : <%=XwinUtil.getMMddDate(betting.getDate())%> / 배당 : <%=betting.getRateStr()%> / 배팅액 : <%=XwinUtil.comma3(betting.getMoney())%> / 예상적중액 : <%=XwinUtil.comma3(betting.getExpect())%> /
+	적중액 :
+	<%
+	if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
+		out.print("<font color='ffff00'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
+	else
+		out.print(0);							
+	%>
+	 원</b>
+	</td><td>
+	<img src="images/btn_board.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+	<img src="images/btn_qna.gif" onclick="location.href='bbs.php?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
+	</td>
+	</tr></tbody></table></td>
+</tr>
 <tr>
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tbody><tr>
 					<td>
-						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1">
-							<tbody><tr bgcolor="#212021" height="27">
-								<td align="center" width="90"><font color="#ffffff"><b><nobr>배팅일시</nobr></b></font></td>
-								<td align="center" width="90"><font color="#ffffff"><b><nobr>경기날짜</nobr></b></font></td>
-								<td align="center" width="210"><font color="#ffffff"><b><nobr>(승)홈 팀</nobr></b></font></td>
-								<td align="center" width="85"><font color="#ffffff"><b><nobr>무/핸디캡</nobr></b></font></td>
-								
-								<td align="center" width="210"><font color="#ffffff"><b><nobr>(패)원정팀</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>선택</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>결과</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>적중</nobr></b></font></td>
-								<td align="center" width="60"><font color="#ffffff"><b><nobr>삭제</nobr></b></font></td>
-								<td align="center" width="70"><font color="#ffffff"><b><nobr>복사</nobr></b></font></td>
+						<table bgcolor="#424142" border="0" cellpadding="0" cellspacing="1" style="table-layout:fixed;">
+							<tbody><tr bgcolor="#a6a6a6" height="27">
+								<td style='word-break:break-all;' align="center" width="90"><font color="#1a1a1a"><b><nobr>경기일시</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="230"><font color="#1a1a1a"><b><nobr>(승)홈 팀</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="85"><font color="#1a1a1a"><b><nobr>무/핸디캡</nobr></b></font></td>								
+								<td style='word-break:break-all;' align="center" width="230"><font color="#1a1a1a"><b><nobr>(패)원정팀</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>배팅팀</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="80"><font color="#1a1a1a"><b><nobr>경기결과</nobr></b></font></td>
+								<td style='word-break:break-all;' align="center" width="60"><font color="#1a1a1a"><b><nobr>적중유무</nobr></b></font></td>
 							</tr>
 							
 <%
@@ -49,14 +66,13 @@
 		int count = 0;
 		for (BetGame betGame : betGameList) {
 %>
-							<tr bgcolor="#000000" height="25">
-								<td align="center"><nobr><font color="#ffffff"><%=XwinUtil.getBoardItemDate(betting.getDate())%></font></nobr></td>
-								<td align="center"><nobr><font color="#ffffff"><%=XwinUtil.getBoardItemDate(betGame.getGameDate())%></font></nobr></td>
-								<td align="right"><nobr>
+							<tr bgcolor="#ffffff" height="25">
+								<td style='word-break:break-all;' align="center"><nobr><font color="#1a1a1a"><%=XwinUtil.getBoardItemDate(betGame.getGameDate())%></font></nobr></td>
+								<td style='word-break:break-all;' align="right"><nobr>
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
-									<font color="#ffffff">
+									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
@@ -64,31 +80,31 @@
 									<%} %>
 									<%=betGame.getHomeTeam()%>&nbsp;<%=betGame.getWinRateStr()%>&nbsp;</font>
 									</nobr></td>
-								<td align="center"><nobr>
-									<font color="#ffffff"><%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>
+								<td style='word-break:break-all;' align="center"><nobr>
+									<font color="#1a1a1a"><%=betGame.getType().equals("wdl")?"무 " + betGame.getDrawRateStr():"핸디 " + (betGame.getDrawRate()>0?"+":"") + betGame.getDrawRate()%>
 								</font></nobr></td>
 								
-								<td><nobr>&nbsp;
+								<td style='word-break:break-all;'><nobr>&nbsp;
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
-									<font color="#ffffff">
+									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
 									<font color="#DDDDDD"><STRIKE>
 									<%} %>
 									<%=betGame.getLoseRateStr()%>&nbsp;<%=betGame.getAwayTeam()%></font></nobr></td>
-								<td align="center"><nobr><font color="#ffffff"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
-								<td align="center"><nobr>&nbsp;<font color="#ffffff">
+								<td style='word-break:break-all;' align="center"><nobr><font color="#1a1a1a"><%=Code.getValue(betGame.getGuess())%></font></nobr></td>
+								<td style='word-break:break-all;' align="center"><nobr>&nbsp;<font color="#1a1a1a">
 								<%=Code.getValue(betGame.getResult())%>
 								<%=XwinUtil.nvl(betGame.getHomeScore())%><%=betGame.getHomeScore()!=null?" : ":"" %><%=XwinUtil.nvl(betGame.getAwayScore())%>
-								</font></nobr></td>
-								<td align="center"><nobr>
+								</font></nobr>&nbsp;</td>
+								<td style='word-break:break-all;' align="center"><nobr>
 									<%if (betGame.getResultStatus().equals(Code.RESULT_STATUS_RUN)) { %>
-									<font color="#ffffff">
+									<font color="#1a1a1a">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_SUCCESS)) { %>
-									<font color="#FFC602">
+									<font color="#1000e2">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_FAILURE)) {%>
 									<font color="#DD0000">
 									<%} else if (betGame.getResultStatus().equals(Code.RESULT_STATUS_DRAW) || betGame.getResultStatus().equals(Code.RESULT_STATUS_CANCEL)) {%>
@@ -98,19 +114,6 @@
 								<%
 								if (count == 0) {
 								%>
-								<td align="center" rowspan="<%=betGameCount%>">
-									<%
-									if (betting.getStatus().equals(Code.BET_STATUS_RUN) == false) {
-									%>
-									<img src="img/x.gif" onclick="deleteMyBetting(<%=betting.getId()%>)">
-									<%
-									}
-									%>
-								</td>
-								<td align="center" rowspan="<%=betGameCount%>" nowrap>
-									<img style='margin:5px 5px 5px 5px' src="img/btn_board.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=user&bettingId=<%=betting.getId()%>'" style="cursor:hand"><br>
-									<img style='margin:5px 5px 5px 5px' src="img/btn_qna.gif" onclick="location.href='board.aspx?mode=viewBoardWriteForm&boardName=qna&bettingId=<%=betting.getId()%>'" style="cursor:hand">
-								</td>
 								<%
 								count++;
 								}
@@ -126,18 +129,7 @@
 					</td>
 				</tr>
 				<tr><td height="3"></td></tr>
-				<tr>
-					<td align="center">배당율 : <%=betting.getRateStr()%> / 배팅금액 : <%=XwinUtil.comma3(betting.getMoney())%>원 / 예상적중금액 : <%=XwinUtil.comma3(betting.getExpect())%>원 /
-					적중금액 :
-					<%
-					if (betting.getStatus().equals(Code.BET_STATUS_SUCCESS))
-						out.print("<font color='#FFC602'>" + XwinUtil.comma3(betting.getExpect()) + "</font>");
-					else
-						out.print(0);							
-					%>
-					 원
-					</td>
-				</tr>
+				
 				</tbody></table>
 			</td>
 		</tr>
@@ -150,6 +142,19 @@
 %>
 </table>
 <%
+	if (member.getMemberId() == 1) {
+		BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
+		Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
+%>
+		배팅액: <%=XwinUtil.comma3(betMoneyStatToday.getInMoney())%><BR>
+		당첨액: <%=XwinUtil.comma3(betMoneyStatToday.getOutMoney())%><BR>
+		포인트액: <%=XwinUtil.comma3(betMoneyStatToday.getBettingPoint())%><BR>
+		직충전차감액: <%=XwinUtil.comma3(betMoneyStatToday.getBonusPoint())%><BR>
+		순순익 : <%=XwinUtil.comma3(benefit)%><BR>
+<%
+	}
+%>
+<%
 	int pIdx = 0;
 	if (pageIndex != null)
 		pIdx = Integer.parseInt(pageIndex);
@@ -159,7 +164,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -176,7 +181,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
@@ -186,7 +191,7 @@ function deleteMyBetting(id)
 	if (confirm("배팅 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyBetting";
 		query += "&bettingId=" + id;
-		var http = new JKL.ParseXML("myBet.aspx", query);
+		var http = new JKL.ParseXML("betlog.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -196,7 +201,7 @@ function deleteMyBetting(id)
 
 function goPage(pageIndex)
 {
-	location.href = "myBet.aspx?mode=viewMyBettingList&pageIndex=" + pageIndex;
+	location.href = "betlog.php?mode=viewMyBettingList&pageIndex=" + pageIndex;
 }
 </script>          
 <%@include file="../footer.jsp"%>

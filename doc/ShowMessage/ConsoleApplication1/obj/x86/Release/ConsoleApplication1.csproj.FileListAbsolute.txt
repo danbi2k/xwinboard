@@ -1,0 +1,5 @@
+C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\bin\Release\ConsoleApplication1.exe
+C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\bin\Release\ConsoleApplication1.pdb
+C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\obj\x86\Release\ResolveAssemblyReference.cache
+C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\obj\x86\Release\ConsoleApplication1.exe
+C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\obj\x86\Release\ConsoleApplication1.pdb

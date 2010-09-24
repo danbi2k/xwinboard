@@ -35,39 +35,6 @@
 	int memberIdx = totalCount - (pIdx * ROWSIZE);
 %>
 
-<SCRIPT LANGUAGE="JavaScript">
-	function checkIT() {
-		var d=document.regist;
-		if(!d.passwd.value) { alert('비밀번호를 입력하세요'); d.passwd.focus(); return false; }
-		d.action='/admin_mode/member/index.php?mode=modify_exe';
-		d.submit();
-	}
-
-	function delIT(userid) {
-		if(confirm('해당 정보를 삭제하시겠습니까?')) {
-			location='/admin_mode/member/index.php?mode=del_exe&userid='+userid+'&page=&page_list=&search=&kwd=&type=';
-		}
-		else {
-			return false;
-		}
-	}
-
-
-	function chargeIT() {
-		var d=document.charge;
-		if(!d.amt.value) { alert('금액을 입력하세요'); d.amt.focus(); return false; }
-		if(!d.msg.value) { alert('내역을 입력하세요'); d.msg.focus(); return false; }
-		if(!confirm('금액을 충전/삭감 하시겠습니까?')) {
-			return false;
-		}
-		else {
-			d.action='/admin_mode/member/index.php?mode=recharge&userid=&page=&page_list=&search=&kwd=&type=';
-		}
-	}
-
-
-</SCRIPT>
-
 <div class="title">회원현황</div>
 <form method='GET' name='search' action='adminStat.aspx'>
 	<input type='hidden' name='mode' value='viewMemberStat'/>

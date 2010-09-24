@@ -13,10 +13,10 @@ import com.xwin.infra.sms.SendSmsConnector;
 
 public class SendSmsManager extends QuartzJobBean
 {
-	//private static final String SERVER_URL = "http://222.122.219.82:10180/external.aspx?mode=getSmsWaitList";
-	//private static final String ALLUSER_URL = "http://222.122.219.82:10180/external.aspx?mode=getAllNormalPhoneNumber";
-	//private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
-	//private static final String ALLUSER_URL = "http://localhost:8080/xwin/external.aspx?mode=getAllNormalPhoneNumber";
+//	private static final String SERVER_URL = "http://" + SiteConfig.SITE_DOMAIN + "/external.aspx?mode=getSmsWaitList";
+//	private static final String ALLUSER_URL = "http://" + SiteConfig.SITE_DOMAIN + "/external.aspx?mode=getAllNormalPhoneNumber";
+//	private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=getSmsWaitList";
+//	private static final String ALLUSER_URL = "http://localhost:8080/xwin/external.aspx?mode=getAllNormalPhoneNumber";
 	
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException

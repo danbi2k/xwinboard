@@ -15,11 +15,12 @@
 		<result property="sendDate" column="SEND_DATE"/>
 		<result property="mobile" column="MOBILE"/>
 		<result property="joinId" column="JOINID"/>
+		<result property="source" column="SOURCE"/>
 	</resultMap>
 	
 	<insert id="insertInvitation" parameterClass="Invitation">
-		INSERT INTO tbl_invitation(USERID, INVITEKEY, SEND_DATE, MOBILE)
-		VALUES(#userId#, #inviteKey#, #sendDate#, #mobile#)
+		INSERT INTO tbl_invitation(USERID, INVITEKEY, SEND_DATE, MOBILE, SOURCE)
+		VALUES(#userId#, #inviteKey#, #sendDate#, #mobile#, #source#)
 	</insert>
 	
 	<update id="updateInvitation" parameterClass="Invitation">
@@ -51,6 +52,11 @@
 			<isNotNull prepend="AND" property="joinIdNull">
 				JOINID IS NULL
 			</isNotNull>
+			<isNotNull prepend="AND" property="fromSendDate">
+				<![CDATA[
+				SEND_DATE >= #fromSendDate#
+				]]>
+			</isNotNull>
 		</dynamic>
 		ORDER BY ID DESC
 		<isNotNull prepend="LIMIT" property="fromRow">
@@ -69,6 +75,11 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="joinIdNull">
 				JOINID IS NULL
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromSendDate">
+				<![CDATA[
+				SEND_DATE >= #fromSendDate#
+				]]>
 			</isNotNull>
 		</dynamic>
 	</select>

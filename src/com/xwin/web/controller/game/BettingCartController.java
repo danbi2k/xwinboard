@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.game.GameFolder;
 import com.xwin.domain.user.Member;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
@@ -132,16 +133,16 @@ public class BettingCartController extends XwinController
 		}
 		
 		if (keepGoing == false) {
-			rx = new ResultXml(0, "배팅이 불가능한 내역이 있습니다.\n해당 내역은 배팅카트에서 자동 삭제됩니다.", null);
+			rx = new ResultXml(0, "마감되거나 금지된 경기가 있습니다.\n해당 내역은 카트에서 자동 삭제됩니다.", null);
 		} else if (member.getBalance() - sum < 0) {
 			rx = new ResultXml(0, "잔액이 부족합니다.", null);
 		} else {
 			for (GameFolder gameFolder : selectList) {
-				bettingService.processBetting(gameFolder, member);
+				bettingService.processBetting(gameFolder, member, Code.SOURCE_WEB);
 				bettingCart.remove(gameFolder);
 			}
 			
-			rx = new ResultXml(0, "배팅 하셨습니다", null);
+			rx = new ResultXml(0, "배팅에 성공하였습니다\n회원님의 대박을 기원합니다", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");

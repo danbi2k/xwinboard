@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>500 Error</title>
 </head>
 <body>
-ERROR
+<h1>500 Error</h1>
 </body>
 </html>

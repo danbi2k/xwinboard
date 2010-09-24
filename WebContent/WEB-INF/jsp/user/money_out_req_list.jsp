@@ -14,37 +14,33 @@
 	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
-			<tr><td><img src="img/menu09.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu091.jpg" border="0"></td></tr>
+			<tr>
+	<td align="center"><img src="images/money_chagenotice.gif" border="0"></td>
+</tr>
 		
-            </table>
+</table>
             <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
     <tr>
-        <td width="771" height="33" align="left" valign="top">
-            <p><a href="moneyOut.aspx?mode=viewMoneyOutRequest"><img src="img/9.jpg" border="0"></a>&nbsp;<img src="img/11-.jpg" border="0"></p>
+        <td width="771" height="37" align="left" valign="top" background="images/bar_bg.gif">
+            <p><a href="sendcache.php?mode=viewMoneyOutRequest"><img src="images/9.jpg" border="0"></a>&nbsp;<img src="images/11-.jpg" border="0"></p>
         </td>
     </tr>
 	</table>
-      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+      <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="images/bar1.jpg">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p>신청일자</p>
-        </td>
+            <p style="font-weight: bold">신청날짜</p>      </td>
         <td width="208" height="40" align="center" valign="middle" class="menubar">
-            <p>환전계좌</p>
-        </td>
+            <p style="font-weight: bold">계좌번호</p>      </td>
         <td width="120" height="40" align="center" valign="middle" class="menubar">
-            <p>환전액</p>
-       </td>
+            <p style="font-weight: bold">환전금액</p>      </td>
         <td width="120" height="40" align="center" valign="middle" class="menubar">
-            <p>상태</p>
-        </td>
+            <p style="font-weight: bold">상태</p>      </td>
         <td width="150" height="40" align="center" valign="middle" class="menubar">
-            <p>처리일시</p>
-        </td>
+            <p style="font-weight: bold">환전날짜</p>      </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>삭제</p>
-        </td>
-       
+            <p style="font-weight: bold">삭제</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771">
@@ -72,7 +68,7 @@
             <p>
 				<%if (moneyOut.getStatus().equals(Code.MONEY_OUT_REQUEST)) { %>
 				<%} else {%>
-				<img src="img/x.gif" onclick="removeMoneyOutRequestLog(<%=moneyOut.getId()%>)" title="환전기록삭제">
+				<img src="images/x.gif" onclick="removeMoneyOutRequestLog(<%=moneyOut.getId()%>)" title="환전기록삭제">
 				<%} %>
 			</p>
         </td>
@@ -82,7 +78,7 @@
 			}
 		}
 	%>	 
-	</table>
+</table>
 <br>
 <br>
 <%
@@ -95,7 +91,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -112,7 +108,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
@@ -120,7 +116,7 @@
 <script>
 function goPage(index)
 {
-	location.href="moneyOut.aspx?mode=viewMoneyOutRequestList&pageIndex=" + index;
+	location.href="sendcache.php?mode=viewMoneyOutRequestList&pageIndex=" + index;
 }
 
 function removeMoneyOutRequestLog(id)
@@ -128,7 +124,7 @@ function removeMoneyOutRequestLog(id)
 	if (confirm("환전 기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyOutRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyOut.aspx", query);
+		var http = new JKL.ParseXML("sendcache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

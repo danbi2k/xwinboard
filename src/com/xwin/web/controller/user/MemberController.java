@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
-import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
@@ -47,19 +48,25 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	public ModelAndView registerMember(HttpServletRequest request,
 			HttpServletResponse response, MemberCommand command) throws Exception
 	{
-		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");
-		Invitation invitation = (Invitation) request.getSession().getAttribute("INVITATION");
-		if (invitation == null)
-			return new ModelAndView("dummy");
-		
-		invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+//		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+//			return new ModelAndView("block");
+		Invitation invitation = null;
+		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+			invitation = (Invitation) request.getSession().getAttribute("INVITATION");
+			if (invitation == null)
+				return new ModelAndView("dummy");			 
+			invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+		}
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
 		String phonePin = (String) request.getSession().getAttribute(mobile);
+		String introducerId = invitation != null ? invitation.getUserId() : null;
+		Member introducer = null;
+		if (introducerId != null)
+			introducer = memberDao.selectMember(introducerId, null);
 		
 		ResultXml rx = null;
-		if (invitation.getJoinId() == null) {
+		if (introducerId == null || introducerId.length() == 0 || (introducerId != null && introducer != null)) {
 			if (phonePin != null) {
 				if (phonePin.equals(command.getPhonePin())) {
 					rx = checkExistUserId(command.getUserId());
@@ -74,46 +81,70 @@ public class MemberController extends XwinController implements MessageSourceAwa
 									if (rx.getCode() == 0) {
 										rx = checkPin(command.getPin());
 										if (rx.getCode() == 0) {
-											Member member = new Member();
-											member.setUserId(command.getUserId());
-											member.setPassword(command.getPassword1());
-											member.setNickName(command.getNickName());
-											member.setMobile(mobile);
-											member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-											member.setPin(command.getPin());
-											member.setStatus(Code.USER_STATUS_NORMAL);
-											member.setGrade(Code.USER_GRADE_VIP);
-											member.setJoinDate(new Date());
-											member.setBankName(command.getBankName());
-											member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
-											member.setBankOwner(command.getBankOwner());
-											member.setBankDate(new Date());
-											member.setGetSms(command.getSmsCheck());
-											member.setIntroducerId(invitation.getUserId());
-											
-											String WelcomeMsg = "환영합니다";
-											
-											Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
-	//										if (cnt == 0) {
-	//											memberDao.loggingGetEvent(member.getMobile());
-	//											member.setBalance(5000L);
-	//											WelcomeMsg = "가입축하머니 5,000원이 지급되었습니다";
-	//											
-	//										} else {
-												member.setBalance(0L);
-	//										}
-											
-											memberDao.insertMember(member);
-											
-	
-											invitation.setJoinId(member.getUserId());
-											invitationDao.updateInvitation(invitation);
-											
-											Member introducer = memberDao.selectMember(invitation.getUserId(), null);
-											introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
-											memberDao.updateMember(introducer);
-											
-											rx = new ResultXml(0, WelcomeMsg, null);
+											rx = checkExistBankBook(command.getBankName(), command.getBankNumber(), command.getBankOwner());
+											if (rx.getCode() == 0) {
+												Member member = new Member();
+												member.setUserId(command.getUserId());
+												member.setPassword(XwinUtil.getUserPassword(command.getPassword1()));
+												member.setNickName(command.getNickName());
+												member.setMobile(mobile);
+												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+												member.setPin(command.getPin());
+												member.setStatus(Code.USER_STATUS_NORMAL);
+												member.setGrade(Admin.SITE_GRADE);
+												member.setJoinDate(new Date());
+												member.setBankName(command.getBankName());
+												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
+												member.setBankOwner(XwinUtil.bankTrim(command.getBankOwner()));
+												member.setBankDate(new Date());
+												member.setGetSms(command.getSmsCheck());
+												member.setIntroducerId(introducerId);
+												
+												String WelcomeMsg = "환영합니다";
+												
+//												Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
+//												if (cnt == 0) {
+													//memberDao.loggingGetEvent(member.getMobile());
+													//member.setBalance(5000L);
+													//member.setJoinBonus(5000);
+													//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+													member.setBalance(0L);
+													member.setJoinBonus(0);
+													
+//												} else {
+//													member.setBalance(30000L);
+//													member.setJoinBonus(30000);
+//													WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
+//												}
+												
+												memberDao.insertMember(member);
+												
+												if (invitation != null) {
+													invitation.setJoinId(member.getUserId());
+													invitationDao.updateInvitation(invitation);
+												}
+												
+//												if (introducer != null) {
+//													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
+//													memberDao.updateMember(introducer);
+//													
+//													Long intro_bonus = 5000L;
+//													
+//													Account account = new Account();
+//													account.setUserId(introducer.getUserId());
+//													account.setType(Code.ACCOUNT_TYPE_INTRODUCE);
+//													account.setDate(new Date());
+//													account.setOldBalance(introducer.getBalance());
+//													account.setMoney(intro_bonus);
+//													account.setBalance(introducer.getBalance() + intro_bonus);
+//													accountDao.insertAccount(account);
+//													
+//													memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
+//													memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
+//												}
+												
+												rx = new ResultXml(0, WelcomeMsg, null);
+											}
 										}
 									}
 								}
@@ -127,7 +158,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 				rx = new ResultXml(-1, "인증번호를 전송하십시오", null);
 			}
 		} else {
-			rx = new ResultXml(-2, "이미 가입된 추천장 입니다", null);
+			rx = new ResultXml(-1, "추천인 ID를 다시 확인하십시오", null);
 		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -155,7 +186,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 				if (rx.getCode() == 0) {
 					rx = checkPin(command.getPin());
 					if (rx.getCode() == 0) {
-						member.setPassword(command.getPassword1());
+						member.setPassword(XwinUtil.getUserPassword(command.getPassword1()));
 						member.setPin(command.getPin());
 						member.setGetSms(command.getSmsCheck());
 						member.setPasswordExpire("C");
@@ -189,12 +220,21 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 		ResultXml rx = null;
 		
+		String phone = phone1 + "-" + phone2 + "-" + phone3;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("mobile", phone);
+		Integer count = memberDao.selectMemberCount(param);
+		
 		if ((phone1 == null || phone1.length() < 3) ||
 				(phone2 == null || phone2.length() < 3) ||
 				(phone3 == null || phone3.length() < 4))
-			rx = new ResultXml(-1, "휴대폰 번호를 정확히 입력하세요", null);
-		else
+			rx = new ResultXml(-1, "핸드폰 번호를 정확히 입력하세요", null);
+		else if (count > 0) {
+			rx = new ResultXml(-1, "등록된 핸드폰 번호 입니다.", null);
+		} else {
 			rx = ResultXml.SUCCESS;
+		}
 		
 		return rx;
 	}
@@ -216,8 +256,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 	{
 		ResultXml rx = null;
 		
-		if ((pin == null || pin.length() < 4))
-			rx = new ResultXml(-1, "환전비밀번호는 4자 이상 입력하세요", null);
+		if ((pin == null || StringUtils.isNumeric(pin) == false || pin.length() != 6))
+			rx = new ResultXml(-1, "모바일PIN번호는 숫자 6자리 입니다", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -230,9 +270,9 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		if ((password1 == null || password1.length() < 4)
 				|| (password2 == null || password2.length() < 4))
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력하세요", null);
+			rx = new ResultXml(-1, "패스워드를 4자 이상 입력하세요", null);
 		else if (password1.equals(password2) == false)
-			rx = new ResultXml(-1, "비밀번호가 일치하지 않습니다", null);
+			rx = new ResultXml(-1, "패스워드가 일치하지 않습니다", null);
 		else
 			rx = ResultXml.SUCCESS;
 		
@@ -264,6 +304,27 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			rx = new ResultXml(-1, "닉네잉을 2자 이상 입력 하세요", null);
 		else if (memberDao.countMemberByNickName(nickName) > 0)			
 			rx = new ResultXml(-1, "등록된 닉네임 입니다", null);
+		
+		return rx;
+	}
+	
+	private ResultXml checkExistBankBook(String bankName, String bankNumber, String bankOwner) throws Exception
+	{
+		ResultXml rx = ResultXml.SUCCESS;
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);
+		
+		if (bankName == null || bankName.length() < 2)
+			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
+		else if (bankNumber == null || bankNumber.length() < 5)
+			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
+		else if (bankOwner == null || bankOwner.length() < 2)
+			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
+		else if (memberDao.selectMemberCount(param) > 0)			
+			rx = new ResultXml(-1, "이미 등록된 환전계좌번호 입니다", null);
 		
 		return rx;
 	}
@@ -312,31 +373,26 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		
 		String phone = request.getParameter("phone");
 		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("mobile", phone);
-//		Integer count = memberDao.selectMemberCount(param);
-//		Member member = (Member) request.getSession().getAttribute("Member");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("mobile", phone);
+		Integer count = memberDao.selectMemberCount(param);
+		Member member = (Member) request.getSession().getAttribute("Member");
 		
-//		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
-//			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
-//		}
-//		else {
-			String phonePin = RandomStringUtils.randomNumeric(4);
+		if ((member == null && count > 0) || (member != null && member.getMobile().equals(phone) == false)) {
+			rx = new ResultXml(0, msgSrc.getMessage("JOIN_PHONE_DUP", null, SiteConfig.SITE_LOCALE), null);
+		}
+		else {
+			String phonePin = RandomStringUtils.randomNumeric(5);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
-				SmsWait smsWait = new SmsWait();
 				String message = msgSrc.getMessage("SMS_JOIN_AUTH", new Object[]{SiteConfig.SITE_NAME, phonePin}, SiteConfig.SITE_LOCALE);
-				smsWait.setMsg(message);
-				smsWait.setPhone(phone);
-				smsWait.setCallback(SiteConfig.SITE_PHONE);
-				
-				smsWaitDao.insertSmsWait(smsWait);
+				sendSmsConnector.sendSms(message, phone, SiteConfig.SITE_PHONE);
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_SUCCESS", null, SiteConfig.SITE_LOCALE), null);
 			} catch (Exception e) {
 				rx = new ResultXml(0, msgSrc.getMessage("JOIN_AUTH_FAILURE", null, SiteConfig.SITE_LOCALE), null);
 			}
-//		}
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -381,6 +437,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			pointLog.setOldBalance(point);
 			pointLog.setMoney(balance * -1);
 			pointLog.setBalance(member.getPoint() - balance);
+			pointLog.setNote("캐쉬전환");
 			
 			pointDao.insertPoint(pointLog);
 			

@@ -15,6 +15,8 @@ public class Admin extends XwinObject
 	
 	public static MemberDao memberDao = null;
 	
+	public static String SITE_GRADE = "";
+	
 	public static String NOTICE = "";
 	public static String POPUP = "";
 	public static String POPUPFLAG = "";
@@ -28,6 +30,9 @@ public class Admin extends XwinObject
 	public static String SMS_REMAIN = "";
 	
 	public static String ADMIN_EMAIL = "";
+	
+	public static String SERVER_TYPE = "";
+	public static String CHILD_URL = "";
 
 	public static boolean HANDY_BONUS_USE = false;
 	public static Integer HANDY_BONUS_LIMIT = 100;
@@ -42,9 +47,18 @@ public class Admin extends XwinObject
 	public static boolean BETTING_POINT_USE = false;
 	public static Integer BETTING_POINT_RATE = 0;
 	
+	public static Integer SYNC_COUNT_WDL = 0;
+	public static Integer SYNC_COUNT_HANDY = 0;
+	
+	public static Integer PROCESS_COUNT_JUDGE = 0;
+	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
 	}
 	
 	public static Map<String, HttpSession> loginMap = new HashMap<String, HttpSession>();
+
+	public void setSITE_GRADE(String site_grade) {
+		Admin.SITE_GRADE = site_grade;
+	}
 }

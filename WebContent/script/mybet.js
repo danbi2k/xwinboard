@@ -6,7 +6,7 @@ function FnGetMyBetList(pageIndex)
 		query += "&status=" + frm.status.value;
 	if (frm.gameType.value.length > 0)
 		query += "&gameType=" + frm.gameType.value;
-	var http = new JKL.ParseXML("myBet.aspx", query);
+	var http = new JKL.ParseXML("betlog.php", query);
 	var result = http.parse();
 	if (result.resultXml.code == 0) {
 		var data = Xwin.ToArray(result.resultXml.object.betting);

@@ -26,7 +26,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터 (일반)" %></div>
 
 <form name='search' method='get' action='adminQna.aspx'>
 <input type='hidden' name='mode' value='viewQnaList'/>
@@ -72,7 +72,7 @@ if (qnaList != null) {
 </table>
 </form>
 
-<input type="button" onclick="deleteQnaItem()" value="삭제">
+<!-- input type="button" onclick="deleteQnaItem()" value="삭제" -->
 
 <div class="pages">
 <%

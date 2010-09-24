@@ -16,15 +16,21 @@ public class BankBookDao extends XwinDao
 		sqlMapClientTemplate.insert("insertBankBook", bankBook);
 	}
 	
-	public void deleteBankBook(String id)
-	{
-		sqlMapClientTemplate.delete("deleteBankBook", id);
-	}
 
 	public List<BankBook> selectBankBookList(String status)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(1);
 		param.put("status", status);
+		
+		return sqlMapClientTemplate.queryForList("selectBankBookList", param);		
+	}
+	
+
+	public List<BankBook> selectBankBookList(String status, String grade)
+	{
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("status", status);
+		param.put("grade", grade);
 		
 		return sqlMapClientTemplate.queryForList("selectBankBookList", param);		
 	}

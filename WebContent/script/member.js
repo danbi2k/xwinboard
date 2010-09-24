@@ -1,5 +1,40 @@
 function FnMemReg(frm)
-{
+{	
+	if (!frm.userId.value || frm.userId.value.length < 2) {
+		alert('아이디를 2자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.password1.value || !frm.password2.value) {
+		alert('패스워드를 입력하십시오');
+		return;
+	}
+	
+	if (frm.password1.value != frm.password2.value) {
+		alert('패스워드가 일치하지 않습니다');
+		return;
+	}
+	
+	if (frm.password1.value.length < 4) {
+		alert('패스워드를 4자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.nickName.value || frm.nickName.value.length < 2) {
+		alert('닉네임을 2자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.pin.value || frm.pin.value.length != 6) {
+		alert("모바일PIN번호를 입력해 주십시오");
+		return;
+	}
+	
+	if (!frm.email1.value || !frm.email2.value) {
+		alert("이메일을 입력해 주십시오");
+		return;
+	}
+	
 	if (frm.bankName != undefined) {
 		if (!frm.bankName.value || !frm.bankNumber.value || !frm.bankOwner.value) {
 			alert("환전계좌정보를 입력해 주십시오");
@@ -38,12 +73,13 @@ function FnMemReg(frm)
 	query += "&bankName=" + frm.bankName.value;
 	query += "&bankNumber=" + frm.bankNumber.value;
 	query += "&bankOwner=" + frm.bankOwner.value;
+	//query += "&introducerId=" + frm.introducerId.value;
 	if (frm.smsCheck.checked)
 		query += "&smsCheck=" + "Y";
 	else
 		query += "&smsCheck=" + "N";
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
@@ -53,7 +89,7 @@ function FnMemReg(frm)
 	} else {
 		alert(result.resultXml.message);
 		if (result.resultXml.code == -2)
-			location.href = "index.aspx";
+			location.href = "default.php";
 	}
 }
 
@@ -65,6 +101,27 @@ function FnMemModify(frm)
 			return;
 		}
 	}
+	
+	if (!frm.password1.value || !frm.password2.value) {
+		alert('패스워드를 입력하십시오');
+		return;
+	}
+	
+	if (frm.password1.value != frm.password2.value) {
+		alert('패스워드가 일치하지 않습니다');
+		return;
+	}
+	
+	if (frm.password1.value.length < 4) {
+		alert('패스워드를 4자 이상 입력하십시오');
+		return;
+	}
+	
+	if (!frm.pin.value || frm.pin.value.length != 6) {
+		alert('모바일PIN번호는 숫자 6자리 입니다');
+		return;
+	}
+	
 	var query = "mode=modifyMember";
 	query += "&userId=" + frm.userId.value;
 	query += "&password1=" + frm.password1.value;
@@ -88,12 +145,12 @@ function FnMemModify(frm)
 		query += "&bankOwner=" + frm.bankOwner.value
 	}
 	
-	var http = new JKL.ParseXML("member.aspx", query);
+	var http = new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	if (result.resultXml.code == 0) {
 		alert("수정되었습니다");
-		location.href ="home.aspx";
+		location.href ="home.php";
 	} else {
 		alert(result.resultXml.message);
 	}	
@@ -101,11 +158,11 @@ function FnMemModify(frm)
 function FnMemOut(){
 	if(confirm("탈퇴를 신청하시겠습니까?\n\n탈퇴를 신청하시면, 관리자가 확인후 탈퇴를 시켜드립니다.")){
 		var query = "mode=requestSecede";
-		var http = new JKL.ParseXML("member.aspx", query);
+		var http = new JKL.ParseXML("user.php", query);
 		var result = http.parse();
 		if (result.resultXml.code == 0) {
 			alert(result.resultXml.message);
-			location.href = "index.aspx";
+			location.href = "default.php";
 		}
 	}
 }
@@ -117,7 +174,7 @@ function FnMemOutCancle(){
 function check_id(frm){
 	var query = "mode=checkExistUserId";
 	query += "&userId=" + frm.id_input.value;
-	var http= new JKL.ParseXML("member.aspx", query);
+	var http= new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
@@ -138,7 +195,7 @@ function check_rid(frm){
 function check_nick(frm){
 	var query = "mode=checkExistNickName";
 	query += "&nickName=" + frm.nick_input.value;
-	var http= new JKL.ParseXML("member.aspx", query);
+	var http= new JKL.ParseXML("user.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
@@ -168,29 +225,29 @@ function out_pw_set(){
 	window.open("outmoney_pw_set.asp","checkNICKwin",'status=no,width='+ w +',height='+ h +',top=' + window_top + ',left=' + window_left + '');
 }
 
-//######### 머니충전신청 ##############
+//######### 캐쉬충전신청 ##############
 function FnInMoney_Submit(frm)
 {
 	var query = "mode=moneyInRequest";
 	query += "&money=" + trimComma3(frm.money.value);
 	query += "&name=" + frm.name.value;
 	query += "&bankBookId=" + frm.bankBookId.value;
-	var http = new JKL.ParseXML("moneyIn.aspx", query);
+	var http = new JKL.ParseXML("earncache.php", query);
 	var result = http.parse();
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0) {
-		location.href="moneyIn.aspx?mode=viewMoneyInRequestList";
+		location.href="earncache.php?mode=viewMoneyInRequestList";
 	}
 }
 
 function FnInMoneyCancle(idx){
-	if(confirm("머니충전신청을 취소하시겠습니까?")){
+	if(confirm("캐쉬충전신청을 취소하시겠습니까?")){
 		location.href="inmoney.asp?cancle="+ idx;
 	}
 }
 function FnOutMoney_Submit(frm){
 	if(!frm.out_money.value) {alert("금액을 입력하세요"); frm.out_money.focus(); return; }
-	if(!frm.pin.value) {alert("환전비밀번호를 입력하세요"); frm.pin.focus(); return; }
+	if(!frm.password.value) {alert("패스워드를 입력하세요"); frm.password.focus(); return; }
 	if(frm.account_bank.value==""){ alert("환전받으실 은행을 선택하세요!"); frm.account_bank.focus(); return; }
 	if(frm.account_num.value.length<7){ alert("환전받으실 계좌번호를 다시 한번 확인해주세요!"); frm.account_num.focus(); return; }
 	if(frm.account_name.value.length<2){ alert("수취인 이름을 정확히 입력해주세요!!"); frm.account_name.focus(); return; }
@@ -200,14 +257,14 @@ function FnOutMoney_Submit(frm){
 	query += "&bankName=" + frm.account_bank.value;
 	query += "&number=" + frm.account_num.value;
 	query += "&name=" + frm.account_name.value;
-	query += "&pin=" + frm.pin.value;
+	query += "&password=" + frm.password.value;
 	
-	var http = new JKL.ParseXML("moneyOut.aspx", query);
+	var http = new JKL.ParseXML("sendcache.php", query);
 	var result = http.parse();
 	
 	alert(result.resultXml.message);
 	if (result.resultXml.code == 0) {
-		location.href='moneyOut.aspx?mode=viewMoneyOutRequestList';
+		location.href='sendcache.php?mode=viewMoneyOutRequestList';
 	}
 }
 function FnOutMoneyCancle(idx){

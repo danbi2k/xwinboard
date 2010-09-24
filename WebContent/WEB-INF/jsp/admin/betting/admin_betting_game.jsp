@@ -85,18 +85,21 @@
 	<%
 	if (gameList != null) {
 		for (Game game : gameList) {
+			boolean blink = false;
+			if (Math.abs(game.getWinMoney() - game.getLoseMoney()) > 2000000 && game.getHomeTeam().indexOf("↑") > 0)
+				blink = true;
 			
 	%>
 		<tr>
 		<td width=5%><a href="adminBetting.aspx?mode=viewBettingMoneyDetail&id=<%=game.getId()%>"><%=game.getId()%></a></td>
 		<td nowrap><font color=<%=game.getType().equals("wdl")?"blue":"green"%>><%=Code.getValue(game.getType())%></font></td>
-		<td><%=game.getLeagueName()%></td>			
+		<td><a href="adminGame.aspx?mode=viewUpdateGameForm&type=<%=game.getType()%>&grade=<%=game.getGrade()%>&id=<%=game.getId()%>&pageIndex=0"><%=game.getLeagueName()%></a></td>			
 		<td><%=game.getGameDateStr()%></td>
 		<td><%=game.getHomeTeam()%></td>
 		<td><%=game.getAwayTeam()%></td>
-		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getWinMoney()))%></font> (<%=game.getWinRateStr()%>)</td>
+		<td><%=blink?"<BLINK>":""%><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getWinMoney()))%></font><%=blink?"</BLINK>":""%> (<%=game.getWinRateStr()%>)</td>
 		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getDrawMoney()))%></font> (<%=game.getType().equals("wdl")?game.getDrawRateStr():game.getHandyString()%>)</td>
-		<td><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getLoseMoney()))%></font> (<%=game.getLoseRateStr()%>)</td>
+		<td><%=blink?"<BLINK>":""%><font color='red'><%=XwinUtil.comma3(XwinUtil.numNvl(game.getLoseMoney()))%></font><%=blink?"</BLINK>":""%> (<%=game.getLoseRateStr()%>)</td>
 	<%
 		}
 	}
@@ -147,11 +150,19 @@
 </table>
 
 <script>
+function doBlink() {
+	var blink = document.all.tags("BLINK");
+	for (var i = 0 ; i < blink.length ; i++) {
+		blink[i].style.visibility = (blink[i].style.visibility == "visible") ? "hidden" : "visible";
+	}
+}
 function goPage(index)
 {
 	var frm = document.search;
 	frm.pageIndex.value = index;
 	frm.submit();
 }
+
+setInterval("doBlink()", 500);
 </script>
 <%@ include file="../admin_footer.jsp"%>

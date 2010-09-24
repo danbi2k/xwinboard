@@ -7,6 +7,7 @@
 <sqlMap namespace="Member">
 
 	<typeAlias alias="Member" type="com.xwin.domain.user.Member" />
+	<typeAlias alias="FriendBetMoneyStat" type="com.xwin.domain.statistics.FriendBetMoneyStat" />
 	
 	<resultMap id="memberResultMap" class="Member">
 		<result property="id" column="ID"/>
@@ -39,10 +40,11 @@
 		<result property="qnaDenyDate" column="QNA_DENY_DATE"/>
 		<result property="passwordExpire" column="PASSWORD_EXPIRE"/>
 		<result property="memberId" column="MEMBERID"/>
+		<result property="joinBonus" column="JOIN_BONUS"/>
 	</resultMap>
 	
 	<resultMap id="memberStatResultMap" class="Member">
-	<result property="id" column="ID"/>
+		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
 		<result property="password" column="PASSWORD"/>
 		<result property="nickName" column="NICKNAME"/>
@@ -67,9 +69,15 @@
 		<result property="profit" column="PROFIT"/>
 	</resultMap>
 	
+	<resultMap id="friendBettingMoneyStatResultMap" class="FriendBetMoneyStat">
+		<result property="userId" column="USERID"/>
+		<result property="betMoneySum" column="BET_MONEY_SUM"/>
+		<result property="betCount" column="BET_COUNT"/>
+	</resultMap>
+	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID, JOIN_BONUS)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#, #joinBonus#)
 	</insert>
 	
 	<update id="updateMember" parameterClass="Member">
@@ -128,6 +136,9 @@
 			</isNotNull>
 			<isNotNull prepend="," property="memberId">
 				MEMBERID = #memberId#
+			</isNotNull>
+			<isNotNull prepend="," property="secedeDate">
+				SECEDE_DATE = #secedeDate#
 			</isNotNull>
 		</dynamic>
 		WHERE USERID = #userId#			
@@ -201,6 +212,9 @@
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
 			</isNotNull>
+			<isNotNull prepend="AND" property="mobile">
+				MOBILE = #mobile#
+			</isNotNull>
 		</dynamic>
 	</select>
 	
@@ -237,6 +251,15 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="memberId">
 			MEMBERID = #memberId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankName">
+			BANKNAME = #bankName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankNumber">
+			BANKNUMBER = #bankNumber#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankOwner">
+			BANKOWNER = #bankOwner#
 		</isNotNull>
 		<isNotNull property="orderCol">
 			ORDER BY $orderCol$ $orderBy$
@@ -277,11 +300,14 @@
 		<isNotNull prepend="AND" property="passwordExpire">
 			PASSWORD_EXPIRE = #passwordExpire#
 		</isNotNull>
-		<isNotNull prepend="AND" property="introducerId">
-			INTRODUCER_ID = #introducerId#
+		<isNotNull prepend="AND" property="bankName">
+			BANKNAME = #bankName#
 		</isNotNull>
-		<isNotNull prepend="AND" property="denyrity">
-			DENYRITY > 0
+		<isNotNull prepend="AND" property="bankNumber">
+			BANKNUMBER = #bankNumber#
+		</isNotNull>
+		<isNotNull prepend="AND" property="bankOwner">
+			BANKOWNER = #bankOwner#
 		</isNotNull>
 	</select>
 	
@@ -313,6 +339,12 @@
 		WHERE USERID = #userId#
 	</update>
 	
+	<update id="plusMinusJoinBonus" parameterClass="map">
+		UPDATE tbl_member
+		SET JOIN_BONUS = JOIN_BONUS + (#joinBonus#)
+		WHERE USERID = #userId#
+	</update>
+	
 	<update id="plusMinusIntroLetter" parameterClass="map">
 		UPDATE tbl_member
 		SET INTRO_LETTER = INTRO_LETTER + (#introLetter#)
@@ -332,11 +364,6 @@
 		SET STATUS = #status#
 		WHERE USERID = #userId#
 	</update>
-	
-	<select id="selectAdminList" resultMap="memberResultMap" parameterClass="map">
-		SELECT * FROM tbl_member
-		WHERE GRADE = 100
-	</select>
 	
 	<select id="selectMemberStatList" resultMap="memberStatResultMap"
 		parameterClass="map">
@@ -367,5 +394,20 @@
 		<isNotNull prepend="" property="fromRow">
 			LIMIT #fromRow#, #rowSize#
 		</isNotNull>
+	</select>
+	
+	<select id="selectFriendBettingMoneyStat" resultMap="friendBettingMoneyStatResultMap"
+		parameterClass="map">
+		<![CDATA[
+		SELECT a.USERID, SUM(ABS(MONEY)) as BET_MONEY_SUM, COUNT(*) as BET_COUNT
+		FROM tbl_member m, tbl_account a
+		WHERE
+		m.INTRODUCER_ID = #introducerId# AND
+		m.JOIN_DATE >= #joinDate# AND
+		m.USERID = a.USERID AND
+		a.TYPE = #type#
+		GROUP BY a.USERID
+		HAVING (BET_MONEY_SUM < #betMoneySum# and BET_COUNT < #betCount#)
+		]]>
 	</select>
 </sqlMap>

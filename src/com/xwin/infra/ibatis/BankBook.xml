@@ -15,11 +15,12 @@
 		<result property="name" column="NAME"/>
 		<result property="status" column="STATUS"/>
 		<result property="date" column="DATE"/>
+		<result property="grade" column="GRADE"/>
 	</resultMap>
 	
 	<insert id="insertBankBook" parameterClass="BankBook">
-		INSERT INTO tbl_bankbook(BANKNAME, NUMBER, NAME, STATUS)
-		VALUES(#bankName#, #number#, #name#, #status#)
+		INSERT INTO tbl_bankbook(BANKNAME, NUMBER, NAME, STATUS, GRADE)
+		VALUES(#bankName#, #number#, #name#, #status#, #grade#)
 	</insert>
 	
 	<delete id="deleteBankBook" parameterClass="string">
@@ -31,6 +32,9 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 		</dynamic>
 	</select>

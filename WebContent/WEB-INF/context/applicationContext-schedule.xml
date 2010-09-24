@@ -14,9 +14,6 @@
 				<entry key="gameDao">
 					<ref bean="gameDao"/>
 				</entry>
-				<entry key="totoDao">
-					<ref bean="totoDao"/>
-				</entry>
 				<entry key="memberDao">
 					<ref bean="memberDao"/>
 				</entry>
@@ -37,8 +34,8 @@
 		<property name="jobClass" value="com.xwin.infra.schedule.GameSyncManager"/>
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="gameDao">
-					<ref bean="gameDao"/>
+				<entry key="gameSyncService">
+					<ref bean="gameSyncService"/>
 				</entry>
 			</map>
 		</property>
@@ -67,6 +64,9 @@
 				</entry>
 				<entry key="ktfSmsConnector">
 					<ref bean="ktfSmsConnector"/>
+				</entry>
+				<entry key="showSmsConnector">
+					<ref bean="showSmsConnector"/>
 				</entry>
 				<entry key="transactionService">
 					<ref bean="transactionService"/>

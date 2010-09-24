@@ -22,7 +22,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터" %></div>
+<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터 (일반)" %></div>
 <%
 if (betting != null) {
 %>
@@ -108,11 +108,15 @@ if (betting != null) {
 <table class="list">
 	<tr>
 		<th width="10%" height="30px">작성자</th>
-		<td width="*" style="padding-left:10px;"><%=boardItem.getNickName()%></td>
+		<td width="*" style="padding-left:10px;"><a href='javascript:goMemberDetail("<%=boardItem.getUserId()%>")'><%=boardItem.getUserId()%></a> (<%=boardItem.getNickName()%>)</td>
 	</tr>
 	<tr>
 		<th width="10%" height="30px">제목</th>
 		<td width="*" style="padding-left:10px;"><%=boardItem.getTitle()%></td>
+	</tr>
+	<tr>
+		<th width="10%" height="30px">작성일</th>
+		<td width="*" style="padding-left:10px;"><%=XwinUtil.getBoardItemDate(boardItem.getDate())%></td>
 	</tr>
 	<tr>
 		<th width="10%" height="30px">내용</th>

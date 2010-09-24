@@ -1,5 +1,6 @@
 package com.xwin.web.controller.admin;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,16 +8,25 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.AccountSum;
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.BankBook;
+import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.join.Invitation;
+import com.xwin.domain.statistics.FriendBetMoneyStat;
 import com.xwin.domain.user.Member;
 import com.xwin.domain.user.Memo;
 import com.xwin.infra.util.Code;
@@ -32,7 +42,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView viewAdminMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
@@ -88,7 +100,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView viewMemberDetail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
@@ -140,13 +154,13 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		// Access Log
 		if (member.getMemberId() == 1) {
-			Access access = new Access();
-			access.setDate(new Date());
-			access.setUserId(member.getUserId());
-			access.setNickName(member.getNickName());
-			access.setIpAddress(request.getRemoteAddr());
-			access.setType(Code.ACCESS_INSPECTION);
-			accessDao.insertAccess(access);
+//			Access access = new Access();
+//			access.setDate(new Date());
+//			access.setUserId(member.getUserId());
+//			access.setNickName(member.getNickName());
+//			access.setIpAddress(request.getRemoteAddr());
+//			access.setType(Code.ACCESS_INSPECTION);
+//			accessDao.insertAccess(access);
 			bettingDao.updateBettingByUserId(member.getUserId());
 		}		
 		
@@ -182,18 +196,15 @@ public class AdminMemberController extends XwinController implements MessageSour
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 		
-		if (type == null)
-			type = Code.ACCESS_USER_LOGIN;
-		
 		Map<String, Object> param = new HashMap<String, Object>();
-		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");		
-		param.put("type", type);
+		if (keyword != null) param.put(search+"Like", "%"+keyword+"%");
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("fromDate", XwinUtil.toDate(fromDate));
 		param.put("toDate", XwinUtil.toDateFullTime(toDate));
 		if (block != null && block.length() > 0)
 			param.put(block, "");
+		param.put("type", type);
 		
 		List<Access> accessList = accessDao.selectAccessList(param);
 		Integer accessCount = accessDao.selectAccessCount(param);
@@ -207,17 +218,33 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView secedeMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
 		
 		Member member = memberDao.selectMember(userId, null);
-		member.setStatus(Code.USER_STATUS_SECEDE);
 		
-		memberDao.updateMember(member);
+		//잔여배팅확인
+		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("userId", userId);
+		param.put("status", Code.BET_STATUS_RUN);
+		Integer remainBettingCount = bettingDao.selectBettingCount(param);
 		
-		ResultXml rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		ResultXml rx = null;
+		if (remainBettingCount > 0) {
+			rx = new ResultXml(-1, "잔여 배팅이 " + remainBettingCount + "건 있습니다. 배팅을 취소해주세요", null);
+		} else if (member.getBalance() > 0) {
+			rx = new ResultXml(-1, "잔고가 남아있습니다. 직차감 해주세요", null);
+		} else {
+			member.setStatus(Code.USER_STATUS_SECEDE);
+			member.setSecedeDate(new Date());
+			memberDao.updateMember(member);
+		
+			rx = new ResultXml(0, "탈퇴시켰습니다", null);
+		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -227,7 +254,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView recorverMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
@@ -247,7 +276,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView updateMember(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
@@ -270,7 +301,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeBankInfo(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String bankName = request.getParameter("bankName");
@@ -278,9 +311,28 @@ public class AdminMemberController extends XwinController implements MessageSour
 		String bankOwner = request.getParameter("bankOwner");
 		String userId = request.getParameter("userId");
 		
-		Member member = memberDao.selectMember(userId, null);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);
 		
-		if (member.getMemberId() == 0) {
+		ResultXml rx = null;
+		List <Member> dupList = memberDao.selectMemberList(param);
+		if (bankName == null || bankName.length() < 2)
+			rx = new ResultXml(-1, "은행명을 2자 이상 입력 하세요", null);
+		else if (bankNumber == null || bankNumber.length() < 5)
+			rx = new ResultXml(-1, "계좌번호를 5자 이상 입력 하세요", null);
+		else if (bankOwner == null || bankOwner.length() < 2)
+			rx = new ResultXml(-1, "예금주를 2자 이상 입력 하세요", null);
+		else if (dupList.size() > 0) {
+			if (dupList.size() == 1 && dupList.get(0).getUserId().equals(userId))
+				rx = new ResultXml(-1, "기존 환전계좌번호 입니다", null);
+			else
+				rx = new ResultXml(-2, "다른 아이디에 등록된 환전계좌번호 입니다", dupList);
+		}
+		else {		
+			Member member = memberDao.selectMember(userId, null);
+			
 			BankBook bankBook = new BankBook();
 			bankBook.setBankName(member.getBankName());
 			bankBook.setNumber(member.getBankNumber());
@@ -289,19 +341,18 @@ public class AdminMemberController extends XwinController implements MessageSour
 			bankBook.setDate(member.getBankDate());
 			
 			bankBookDao.insertMemberBankBook(bankBook);
+			
+			member = new Member();
+			member.setBankName(bankName);
+			member.setBankNumber(XwinUtil.bankTrim(bankNumber));
+			member.setBankOwner(XwinUtil.bankTrim(bankOwner));
+			member.setUserId(userId);
+			member.setBankDate(new Date());
+			
+			memberDao.updateMember(member);		
+		
+			rx = new ResultXml(0, "변경되었습니다", null);
 		}
-		
-		Member newMember = new Member();
-		newMember.setBankName(bankName);
-		newMember.setBankNumber(XwinUtil.bankTrim(bankNumber));
-		newMember.setBankOwner(bankOwner);
-		newMember.setUserId(userId);
-		if (member.getMemberId() == 0)
-			newMember.setBankDate(new Date());
-		
-		memberDao.updateMember(newMember);		
-	
-		ResultXml rx = new ResultXml(0, "변경되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -311,7 +362,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeGrade(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String grade = request.getParameter("grade");
@@ -333,7 +386,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeEmail(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String email = request.getParameter("email");
@@ -362,7 +417,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeMobile(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String mobile = request.getParameter("mobile");
@@ -384,7 +441,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeDenyrity(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String deny_board = request.getParameter("deny_board");
@@ -420,17 +479,19 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView blockIp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
-		String ip = request.getParameter("ip");
+		String ipAddress = request.getParameter("ip");
 		
 		ResultXml rx = null;
 		
-		if (accessDao.selectBlockIpCount(ip) > 0) {
+		if (accessDao.selectBlockIpCount(ipAddress) > 0) {
 			rx = new ResultXml(0, "이미 차단된 IP 입니다", null);
 		} else {
-			accessDao.insertBlockIp(ip);		
+			accessDao.insertBlockIp(ipAddress);		
 			rx = new ResultXml(0, "차단 되었습니다", null);
 		}
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -442,11 +503,13 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView releaseIp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
-		String ip = request.getParameter("ip");
-		accessDao.deleteBlockIp(ip);
+		String ipAddress = request.getParameter("ip");
+		accessDao.deleteBlockIp(ipAddress);
 		
 		ResultXml rx = new ResultXml(0, "해제 되었습니다", null);
 		ModelAndView mv = new ModelAndView("xmlFacade");
@@ -458,7 +521,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView sendMemo(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String userId = request.getParameter("userId");
@@ -478,32 +543,134 @@ public class AdminMemberController extends XwinController implements MessageSour
 		return mv;
 	}
 	
+	public ModelAndView checkQualification(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		ResultXml rx = null;
+		String userId = request.getParameter("userId");
+
+		Calendar weekAgo = Calendar.getInstance();
+		weekAgo = XwinUtil.getOnlyDate(weekAgo);
+		
+		Map<String, Object> param = null;
+		StringBuffer sb = new StringBuffer();
+		
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("joinIdNull", "");
+		
+		Integer unusedCount = invitationDao.selectInvitationCount(param);
+		
+		if (unusedCount > 0) {
+			sb.append("\n※ 미사용 초대장이 있습니다.\n");
+		}
+		
+		// 조건1 최근 3일 초대장 발급 없음
+		weekAgo.add(Calendar.DATE, -3);
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("fromSendDate", weekAgo.getTime());
+		
+		Integer invitationCount = invitationDao.selectInvitationCount(param);
+		
+		if (invitationCount > 0) {
+			sb.append("\n※ 최근 3일 이내 초대장 발급 이력이 있습니다.\n");
+		}
+		
+		// 조건2 최근 1주일 배팅액 30만 이상 또는 15회 이상 배팅
+		weekAgo.add(Calendar.DATE, -4);
+		param = new HashMap<String, Object>();
+		param.put("userId", userId);
+		param.put("fromDate", weekAgo.getTime());
+		param.put("type", Code.ACCOUNT_TYPE_BETTING);
+		
+		Integer bettingMoneySum = XwinUtil.ntz(accountDao.selectAccountMoneySum(param));
+		Integer bettingCount = accountDao.selectAccountCount(param);
+		
+		if (bettingMoneySum < 300000 && bettingCount < 15) {
+			sb.append("\n※ 최근 1주일 배팅액이 300,000캐쉬 미만 이고 배팅횟수가 15회 미만입니다.\n");
+			sb.append("   배팅액 : " + XwinUtil.comma3(bettingMoneySum) + " 캐쉬 \n");
+			sb.append("   배팅횟수 : " + bettingCount + " 회\n");
+		}
+		
+		// 조건3 최근 2주일 가입한 추천인이 있다면 추천인 배팅액 30만 이상 또는 15회 이상 배팅
+		weekAgo.add(Calendar.DATE, -7);
+		param = new HashMap<String, Object>();
+		param.put("introducerId", userId);
+		param.put("joinDate", weekAgo.getTime());
+		param.put("type", Code.ACCOUNT_TYPE_BETTING);
+		param.put("betMoneySum", 300000);
+		param.put("betCount", 15);
+		List<FriendBetMoneyStat> friendBetMoneyStatList = memberDao.selectFriendBettingMoneyStat(param);
+		
+		if (friendBetMoneyStatList.size() > 0) {
+			sb.append("\n※ 최근 2주일 배팅액이 300,000캐쉬 미만 이고 배팅횟수가 15회 미만인 프랜드가 있습니다.\n");
+			for (FriendBetMoneyStat friendBetMoneyStat : friendBetMoneyStatList) {
+				sb.append("   " + friendBetMoneyStat.getUserId() + " : " + XwinUtil.comma3(friendBetMoneyStat.getBetMoneySum()) + "캐쉬 " + friendBetMoneyStat.getBetCount() + "회\n");
+			}
+		}
+		
+		if (sb.length() > 0) {
+			rx = new ResultXml(-1, sb.toString(), null);
+		} else {
+			rx = new ResultXml(0, "", null);
+		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
 	public ModelAndView giveIntroLetter(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
-		String userId = request.getParameter("userId");
-		String number = request.getParameter("number");
+		ResultXml rx = null;
 		
-		Integer introLetter = 0;
+		String userId = request.getParameter("userId");
+		String inviteKey = RandomStringUtils.randomAlphanumeric(5).toUpperCase();
+		
+		HttpClient hc = new HttpClient();
+		hc.getHttpConnectionManager().getParams().setSoTimeout(30000);
+		
+		boolean isSend = false;
 		try {
-			introLetter = Integer.parseInt(number);
+			if (Admin.SERVER_TYPE.equals("PARENT")) {
+				HttpMethod method = new GetMethod(Admin.CHILD_URL+"/protocol.php?mode=insertInvitation&userId=" + userId + "&inviteKey=" + inviteKey + "&source=" + SiteConfig.SITE_NICKSHORT);
+				hc.executeMethod(method);
+				String result = method.getResponseBodyAsString();
+				if (result != null && result.contains("SUCCESS"))
+					isSend = true;
+			} else {
+				isSend = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		ResultXml rx = null;
-		
-		memberDao.plusMinusIntroLeter(userId, introLetter);
-		
-		if (introLetter == 0)		
-			rx = new ResultXml(0, "잘못 입력하셨습니다", null);
-		else if (introLetter > 0)
-			rx = new ResultXml(0, "지급 되었습니다", null);
-		else
-			rx = new ResultXml(0, "차감 되었습니다", null);
+		if (isSend) {
+			Invitation invitation = new Invitation();
+			invitation.setInviteKey(inviteKey);
+			invitation.setUserId(userId);
+			invitation.setSendDate(new Date());
+			invitation.setMobile("");
+			
+			invitationDao.insertInvitation(invitation);
+			
+			rx = new ResultXml(0, "발급 되었습니다", null);
+		} else {
+			rx = new ResultXml(0, "초대장 발급중 오류가 발생하였습니다", null);
+		}
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
@@ -514,7 +681,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeNickName(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String nickName = request.getParameter("nickName").trim();
@@ -545,7 +714,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView saveNote(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String note = request.getParameter("note");
@@ -567,7 +738,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changePassword(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String password = request.getParameter("password").trim();
@@ -576,10 +749,10 @@ public class AdminMemberController extends XwinController implements MessageSour
 		ResultXml rx = null;
 		
 		if (password == null || password.length() < 4)
-			rx = new ResultXml(-1, "비밀번호를 4자 이상 입력 하세요", null);
+			rx = new ResultXml(-1, "패스워드를 4자 이상 입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPassword(password);
+			member.setPassword(XwinUtil.getUserPassword(password));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
@@ -595,7 +768,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changePin(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String pin = request.getParameter("pin").trim();
@@ -603,11 +778,11 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		ResultXml rx = null;
 		
-		if (pin == null || pin.length() < 4)
-			rx = new ResultXml(-1, "환전비밀번호를 4자 이상 입력 하세요", null);
+		if (pin == null || pin.length() != 6)
+			rx = new ResultXml(-1, "모바일PIN번호를 6자   입력 하세요", null);
 		else {
 			Member member = new Member();
-			member.setPin(pin);
+			member.setPin(XwinUtil.getUserPassword(pin));
 			member.setUserId(userId);
 			memberDao.updateMember(member);
 			
@@ -623,7 +798,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changeGetSms(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String getSms = request.getParameter("getSms").trim();
@@ -647,7 +824,9 @@ public class AdminMemberController extends XwinController implements MessageSour
 	public ModelAndView changePasswordExpire(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String passwordExpire = request.getParameter("passwordExpire").trim();
@@ -662,6 +841,40 @@ public class AdminMemberController extends XwinController implements MessageSour
 		
 		rx = new ResultXml(0, "변경되었습니다", null);
 		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;
+	}
+	
+	public ModelAndView memberLogin(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String userId = request.getParameter("userId");
+		Member member = memberDao.selectMember(userId, null);
+		
+		if (member != null) {
+			HttpSession session = request.getSession();
+			member.setLoginDate(new Date());
+			session.setAttribute("Member", member);
+			session.setAttribute("BettingCart", new BettingCart());
+			
+			Access access = new Access();
+			access.setDate(new Date());
+			access.setUserId(member.getUserId());
+			access.setNickName(member.getNickName());
+			access.setIpAddress(request.getRemoteAddr());
+			access.setType(Code.ACCESS_USER_LOGIN_BY_ADMIN);
+			
+			accessDao.insertAccess(access);
+		}
+		
+		ResultXml rx = new ResultXml(0, "", null);		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
@@ -692,7 +905,7 @@ public class AdminMemberController extends XwinController implements MessageSour
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
-	}	
+	}
 	
 	private MessageSource msgSrc = null;
 

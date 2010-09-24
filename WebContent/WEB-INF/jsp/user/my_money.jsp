@@ -15,40 +15,25 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 
-			<tr><td><img src="img/menu10.jpg" border="0"></td></tr>
+			<tr><td><img src="images/menu101.jpg" border="0"></td></tr>
 		
-            </table>
-            <table align="center" cellpadding="0" cellspacing="0" width="771" height="33">
-    <tr>
-        <td width="887" height="33" align="left" valign="top">
-            <p><img src="img/10-.jpg" border="0">&nbsp;<a href="myMoney.aspx?mode=viewMyPointList"><img src="img/12.jpg" border="0"></a></p>
-        </td>
-    </tr>
-    
 </table>
-     <table align="center" cellpadding="0" cellspacing="0" width="771" height="40" background="img/bar-.jpg">
+            <table align="center" cellpadding="0" cellspacing="0" width="771" height="40"  background="images/bar1.gif">
     <tr>
         <td width="131" height="40" align="center" valign="middle" class="menubar">
-            <p>거래일자</p>
-        </td>
+            <p style="font-weight: bold">거래일자</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>기잔고</p>
-        </td>
+            <p style="font-weight: bold">기존캐쉬</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>입출금</p>
-       </td>
+            <p style="font-weight: bold">거래캐쉬</p>      </td>
         <td width="148" height="40" align="center" valign="middle" class="menubar">
-            <p>잔액</p>
-        </td>
+            <p style="font-weight: bold">현존캐쉬</p>      </td>
         <td width="100" height="40" align="center" valign="middle" class="menubar">
-            <p>종류</p>
-        </td>
+            <p style="font-weight: bold">종류</p>      </td>
         <td width="150" height="40" align="center" valign="middle" class="menubar">
-            <p>비고</p>
-        </td>
+            <p style="font-weight: bold">비고</p>      </td>
         <td width="42" height="40" align="center" valign="middle" class="menubar">
-            <p>삭제</p>
-        </td>
+            <p style="font-weight: bold">삭제</p>      </td>
     </tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771">
@@ -76,14 +61,14 @@
             <p><%=XwinUtil.nvl(account.getNote())%></p>
         </td>
         <td width="42" class="tablebg1" align="center" valign="middle">
-            <p><img src="img/x.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></p>
+            <p><img src="images/x.gif" onclick="deleteMyMoneyLog(<%=account.getId()%>)"></p>
         </td>
     </tr>
 	<%
 		}
 	}
 	%>
-     </table>
+</table>
    
 <br>
 <br>
@@ -97,7 +82,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -114,7 +99,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
@@ -122,15 +107,15 @@
 <script>
 function goPage(index)
 {
-	location.href="myMoney.aspx?mode=viewMyMoneyList&pageIndex=" + index;
+	location.href="account.php?mode=viewMyMoneyList&pageIndex=" + index;
 }
 
 function deleteMyMoneyLog(id)
 {
-	if (confirm("머니기록을 삭제하시겠습니까?")) {
+	if (confirm("캐쉬기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyMoneyLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("myMoney.aspx", query);
+		var http = new JKL.ParseXML("account.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)

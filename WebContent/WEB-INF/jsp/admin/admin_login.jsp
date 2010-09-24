@@ -1,13 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.xwin.domain.*" %>
+
+<%
+	String KEY = (String) session.getAttribute("KEY");
+%>
 <html>
 <head>
-<title>관리자인증</title>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
-	<link rel="stylesheet" href="style/admin.css">
-	<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title><%=SiteConfig.SITE_NICKNAME%></title>
+<style type='text/css'>
+.login_out{text-align: center; margin-top:150px;}
+.login_out span{font-family:verdana; font-size:10px;}
+.login{margin: 0 auto;  width:337px; background:url(images/admin_login_bg.gif) no-repeat; width:337px; height:125px; padding-top:55px;}
+.login th{font-size:12px; color:#ffffff; text-align:right; padding-right:5px; font-weight:400;}
+
+</style>
+<script LANGUAGE="JavaScript" src="script/jkl-parsexml.js"></script>
 </head>
+<body>
 <SCRIPT LANGUAGE="JavaScript">
 <!--
 function checkIT() {
@@ -32,6 +44,7 @@ function checkIT() {
 		location.href='adminQna.aspx?mode=viewQnaList&grade=10';
 	} else {
 		alert(result.resultXml.message);
+		location.reload();
 	}
 }
 
@@ -42,66 +55,39 @@ function goButton(form)
 	}
 }
 
+function processCookie(tobj)
+{
+	var query = "mode=processCookie";
+	query += "&cookie=" + tobj.innerHTML;
 
-	
-//-->
-</SCRIPT>
-
-<body onLoad="document.regist.userid.focus()">
-
-	<table height="100%" cellSpacing="0" cellPadding="0" width="100%" align="center" border="0" id="table1">
-		<tr>
-			<td align="center" valign="top"  style="padding-top:100px">
-			<table style="BORDER-RIGHT: #000000 5px solid; BORDER-TOP: #000000 5px solid; BORDER-LEFT: #000000 5px solid; BORDER-BOTTOM: #000000 5px solid" height="250" cellSpacing="0" cellPadding="0" width="480" bgColor="#d9d8d6" id="table2">
-				<tr>
-					<td style="PADDING-LEFT: 20px; FONT: bold 20pt verdana; COLOR: #ffffff" bgColor="#000000" height="70" align="center">
-					Admin_Tool</td>
-				</tr>
-				<form method='post' name='regist'">
-				<tr>
-					<td vAlign="center" align="middle">
-					<table cellSpacing="0" cellPadding="0" border="0" id="table3">
-						<tr>
-							<td>아이디</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="1" maxLength="20" name="userid" value=""></td>
-							<td style="PADDING-LEFT: 5px" rowSpan="3">							
-							<img src="images/admin/btn_login.gif" onclick="checkIT()" width="56" border="0" style="width:56px;height:61px" ID="login_bttn"></td>
-						</tr>
-						<tr>
-							<td>비밀번호</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
-						</tr>
-						<tr>
-							<td>PIN</td>
-							<td style="PADDING-LEFT: 5px">
-							<input class="input" style="WIDTH: 120px" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
-						</tr>
-					</table>
-					</td>
-				</tr>
-</form>
-			</table>
-			<table cellSpacing="0" cellPadding="0" width="480" border="0" id="table4" height="40">
-				<tr>
-					<td align="center">Copyright 2008 <%=SiteConfig.SITE_NAME%> All right 
-					reserved.</td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-	</table>
-</form>
-
-</body>
-
-</html>
-
-<SCRIPT LANGUAGE="JavaScript">
-<!--
-if((regist.userid.value != "") && (regist.password.value != "")){
-		document.getElementById("login_bttn").click();
+	var http = new JKL.ParseXML("adminLogin.aspx", query);
+	http.parse();
 }
-//-->
-</SCRIPT>
+
+</script>
+	<div class='login_out'>
+	<div class='login'>
+	<form name="regist">
+		<table>
+		<tr>
+		<th>아이디</th>
+		<td>
+		<input class="input" style="WIDTH: 120px; height:14px;" tabIndex="1" maxLength="20" name="userid" value=""></td>
+		<td style="PADDING-LEFT: 5px" rowSpan="3">							
+		<img src="images/admin_login_bt.gif" onclick="checkIT()"></td>
+		</tr>
+		<tr>
+		<th>1차패스워드</th>
+		<td>
+		<input class="input" style="WIDTH: 120px; height:14px;" tabIndex="2" type="password" maxLength="20"  value="" name="password" onkeydown="goButton()"></td>
+		</tr>
+		<tr>
+		<th>2차패스워드</th>
+		<td>
+		<input class="input" style="WIDTH: 120px; height:14px;" tabIndex="2" type="password" maxLength="20"  value="" name="pin" onkeydown="goButton()"></td>
+		</tr>
+		</table>
+	</form>
+	</div>
+	<span>Copy</span><span onclick="processCookie(this)">r</span><span>ight 200</span><span onclick="processCookie(this)">9</span> <span>A</span><span onclick="processCookie(this)">p</span><span>ple All ri</span><span onclick="processCookie(this)">g</span><span>ht reserv</span><span onclick="processCookie(this)">e</span><span>d.</span><BR><br><span style="color:white;"><%=KEY%></span></div></body>
+</html>

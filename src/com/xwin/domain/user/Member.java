@@ -24,6 +24,7 @@ public class Member extends XwinObject
 	private String status;
 	private String grade;
 	private Date joinDate;
+	private Date secedeDate;
 	private String joinDateStr;
 	private String bankName;
 	private String bankNumber;
@@ -53,6 +54,9 @@ public class Member extends XwinObject
 	private String passwordExpire;
 	
 	private Integer memberId;
+	private Integer joinBonus;
+	
+	private String loginIpAddress;
 	
 	public String getId() {
 		return id;
@@ -132,6 +136,12 @@ public class Member extends XwinObject
 	}
 	public void setJoinDateStr(String joinDateStr) {
 		this.joinDateStr = joinDateStr;
+	}
+	public Date getSecedeDate() {
+		return secedeDate;
+	}
+	public void setSecedeDate(Date secedeDate) {
+		this.secedeDate = secedeDate;
 	}
 	public String getBankName() {
 		return bankName;
@@ -270,5 +280,17 @@ public class Member extends XwinObject
 	}
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
+	}
+	public Integer getJoinBonus() {
+		return joinBonus;
+	}
+	public void setJoinBonus(Integer joinBonus) {
+		this.joinBonus = joinBonus;
+	}
+	public String getLoginIpAddress() {
+		return loginIpAddress;
+	}
+	public void setLoginIpAddress(String loginIpAddress) {
+		this.loginIpAddress = loginIpAddress;
 	}
 }

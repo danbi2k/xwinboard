@@ -15,7 +15,7 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <tr>
-	<td><img src="img/menu18.jpg" border="0"></td>
+	<td><img src="images/menu18.jpg" border="0"></td>
 </tr>
 </table>
 
@@ -23,34 +23,30 @@
 	height="33">
 		 <tr>
         <td width="771" height="33" align="left" valign="top">
-            <p><a href="toto.aspx?mode=viewToto"><img src="img/toto_2.jpg" border="0"></a>&nbsp;<img src="img/toto__1.jpg" border="0"></p>
+            <p><a href="toto.php?mode=viewToto"><img src="images/toto_2.jpg" border="0"></a>&nbsp;<img src="images/toto__1.jpg" border="0"></p>
         </td>
     </tr>
 	
 </table>
 
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40" background="img/bar-.jpg">
+	height="40"  background="images/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>구매일자</p>
-		</td>
+		<p style="font-weight: bold">구매일자</p>	  </td>
 		<td width="450" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>회차</p>
-		</td>
+		<p style="font-weight: bold">회차</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>구매액</p>
-		</td>
+		<p style="font-weight: bold">구매액</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>상태</p>
-		</td>
+		<p style="font-weight: bold">상태</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>삭제</p>
+		<p style="font-weight: bold">삭제</p>	
 	</tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771" border="0">
@@ -63,7 +59,7 @@
 		<p><%=XwinUtil.getBoardItemDate(betToto.getDate())%></p>
 		</td>
 		<td width="450" class="tablebg2" align="center" valign="middle">
-		<p><a href="myBet.aspx?mode=viewMyTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getTitle()%></a></p>
+		<p><a href="betlog.php?mode=viewMyTotoDetail&id=<%=betToto.getId()%>"><%=betToto.getTitle()%></a></p>
 		</td>
 		<td width="80" class="tablebg1" align="center" valign="middle">
 		<p><%=XwinUtil.comma3(betToto.getMoney())%></p>
@@ -76,7 +72,7 @@
 		<%
 		if (betToto.getRunStatus().equals(Code.BET_STATUS_RUN) == false) {
 		%>
-		<img src="img/x.gif" onclick="deleteMyToto(<%=betToto.getId()%>)">
+		<img src="images/x.gif" onclick="deleteMyToto(<%=betToto.getId()%>)">
 		<%
 		}
 		%>
@@ -100,7 +96,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -117,7 +113,7 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
@@ -128,7 +124,7 @@ function deleteMyToto(id)
 	if (confirm("구매 기록을 삭제하시겠습니까?")) {
 		var query = "mode=deleteMyToto";
 		query += "&betTotoId=" + id;
-		var http = new JKL.ParseXML("myBet.aspx", query);
+		var http = new JKL.ParseXML("betlog.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -140,7 +136,7 @@ function removeMoneyInRequestLog(id) {
 	if (confirm("충전  기록을 삭제 하시겠습니까?")) {
 		var query = "mode=removeMoneyInRequestLog";
 		query += "&id=" + id;
-		var http = new JKL.ParseXML("moneyIn.aspx", query);
+		var http = new JKL.ParseXML("earncache.php", query);
 		var result = http.parse();
 		alert(result.resultXml.message);
 		if (result.resultXml.code == 0)
@@ -150,7 +146,7 @@ function removeMoneyInRequestLog(id) {
 
 function goPage(pageIndex)
 {
-	location.href = "myBet.aspx?mode=viewMyTotoList&pageIndex=" + pageIndex;
+	location.href = "betlog.php?mode=viewMyTotoList&pageIndex=" + pageIndex;
 }
 </script>
 

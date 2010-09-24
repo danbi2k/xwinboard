@@ -2,7 +2,8 @@
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
-	<description>bravo</description>
+	<description>DragonWorld</description>
+	<distributable/>
 	<filter>
 		<filter-name>Encoding Filter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -12,16 +13,44 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Param Filter</filter-name>
+		<filter-name>Wap Encoding Filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>EUC-KR</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>HackingLog Filter</filter-name>
 		<filter-class>com.xwin.web.XwinHackFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>Wap Gateway Filter</filter-name>
+		<filter-class>com.xwin.web.controller.wap.WapGatewayFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>Encoding Filter</filter-name>
 		<url-pattern>*.aspx</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Param Filter</filter-name>
+		<filter-name>HackingLog Filter</filter-name>
 		<url-pattern>*.aspx</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Encoding Filter</filter-name>
+		<url-pattern>*.php</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>HackingLog Filter</filter-name>
+		<url-pattern>*.php</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Wap Encoding Filter</filter-name>
+		<url-pattern>*.wap</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Wap Gateway Filter</filter-name>
+		<url-pattern>*.wap</url-pattern>
 	</filter-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -48,6 +77,14 @@
 		<servlet-name>context/action</servlet-name>
 		<url-pattern>*.aspx</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>context/action</servlet-name>
+		<url-pattern>*.php</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>context/action</servlet-name>
+		<url-pattern>*.wap</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
@@ -61,6 +98,6 @@
 		<location>/500.jsp</location>
 	</error-page>
 	<session-config>
-        <session-timeout>15</session-timeout>
+        <session-timeout>30</session-timeout>
 	</session-config>
 </web-app>

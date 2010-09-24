@@ -18,13 +18,13 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://localhost:3306/bravo</value>
+			<value>jdbc:mysql://localhost:33406/danmuji</value>
 		</property>
 		<property name="username">
-			<value>kingbet</value>
+			<value>kimchi</value>
 		</property>
 		<property name="password">
-			<value>zkapffldk99</value>
+			<value>gjfEjr^RjfEjr</value>
 		</property>
 		<property name="maxIdle" value="10"/>
 		<property name="maxActive" value="50"/>

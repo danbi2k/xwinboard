@@ -6,13 +6,14 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Transaction;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.service.admin.XwinService;
 
 public class TransactionService extends XwinService
 {
-	private static final String SERVER_URL = "http://222.122.219.82:10180/external.aspx?mode=setTransaction";
+	private static final String SERVER_URL = "http:/" + SiteConfig.SITE_DOMAIN + "/external.aspx?mode=setTransaction";
 	//private static final String SERVER_URL = "http://localhost:8080/xwin/external.aspx?mode=setTransaction";
 	
 	public void sendTransaction(List<Transaction> transactionList)

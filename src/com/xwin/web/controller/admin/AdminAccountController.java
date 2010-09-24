@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -33,7 +34,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView viewMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -101,7 +104,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	{
 		int ROWSIZE = 50;
 		
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -158,7 +163,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView viewMoneyInOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		HttpSession session = request.getSession();
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
@@ -193,10 +201,18 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		List<MoneyInOut> moneyInOutList = moneyInOutDao.selectMoneyInOutList(param);
 		Integer moneyInOutCount = moneyInOutDao.selectMoneyInOutCount(param);
-		Long totalSum = moneyInOutDao.selectMoneyInOutSum(param);
-		
+		Long totalSum = 0L;
+		if (status.contains("004"))
+			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) + XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
+		else
+			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
 		if (totalSum == null)
 			totalSum = 0L;
+		
+		Integer n = (Integer) session.getAttribute("(Admin)");
+		if (n != null) {
+			totalSum = totalSum * n / 100L;
+		}
 		
 		ModelAndView mv = null;
 		if (status.contains("002"))
@@ -213,7 +229,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView viewMoneyCalculation(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ModelAndView mv = new ModelAndView("admin/account/money_calculation");
@@ -224,7 +242,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView acceptMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
@@ -287,7 +307,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView acceptMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
@@ -305,7 +327,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				String nickName = member.getNickName();
 				String mobile = member.getMobile().replaceAll("-", "");
 				String message = msgSrc.getMessage("SMS_EXCHANGE",
-						new Object[]{SiteConfig.SITE_NAME, nickName, XwinUtil.comma3(moneyOut.getMoney())},
+						new Object[]{SiteConfig.SITE_NICKSHORT, nickName, XwinUtil.comma3(moneyOut.getMoney())},
 						SiteConfig.SITE_LOCALE);
 				
 				SmsWait smsWait = new SmsWait();
@@ -329,7 +351,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView directCharging(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
@@ -354,6 +378,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 			moneyIn.setUserId(userId);
 			moneyIn.setNickName(member.getNickName());
 			moneyIn.setNote(note);
+			moneyIn.setSource(Code.SOURCE_WEB);
+			moneyIn.setBankName("");
+			moneyIn.setName("");
+			moneyIn.setNumber("");
 			moneyInDao.insertMoneyIn(moneyIn);
 			
 			Account account = new Account();
@@ -361,8 +389,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 			account.setType(Code.ACCOUNT_TYPE_MONEYIN_DIRECT);
 			account.setDate(new Date());
 			account.setOldBalance(member.getBalance());
-			account.setMoney(moneyIn.getMoney());
-			account.setBalance(member.getBalance() + moneyIn.getMoney());
+			account.setMoney(money);
+			account.setBalance(member.getBalance() + money);
 			account.setMoneyInId(moneyIn.getId());
 			account.setNote(note);
 			
@@ -379,7 +407,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView directMinusCharging(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
@@ -408,6 +438,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyOut.setUserId(userId);
 				moneyOut.setNickName(member.getNickName());
 				moneyOut.setNote(note);
+				moneyOut.setSource(Code.SOURCE_WEB);
+				moneyOut.setBankName("");
+				moneyOut.setName("");
+				moneyOut.setNumber("");
 				moneyOutDao.insertMoneyOut(moneyOut);
 				
 				Account account = new Account();
@@ -415,8 +449,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 				account.setType(Code.ACCOUNT_TYPE_MONEYOUT_DIRECT);
 				account.setDate(new Date());
 				account.setOldBalance(member.getBalance());
-				account.setMoney(moneyOut.getMoney() * -1);
-				account.setBalance(member.getBalance() - moneyOut.getMoney());
+				account.setMoney(money * -1);
+				account.setBalance(member.getBalance() - money);
 				account.setMoneyInId(moneyOut.getId());
 				
 				accountDao.insertAccount(account);
@@ -434,7 +468,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView deleteMoneyInList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String[] id = request.getParameterValues("id");
@@ -454,7 +490,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView deleteMoneyOutList(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String[] id = request.getParameterValues("id");
@@ -474,7 +512,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView saveMoneyInIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -496,7 +536,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView saveMoneyOutIsChecked(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
 			return new ModelAndView("admin_dummy");
 		
 		String id = request.getParameter("id");
@@ -518,8 +560,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView cancelMoneyInRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("dummy");
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
 		
@@ -542,8 +586,10 @@ public class AdminAccountController extends XwinController implements MessageSou
 	public ModelAndView cancelMoneyOutRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		if (request.getSession().getAttribute("Admin") == null)
-			return new ModelAndView("dummy");
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
 		
 		ResultXml rx = null;
 		
@@ -572,6 +618,32 @@ public class AdminAccountController extends XwinController implements MessageSou
 			
 			memberDao.plusMinusBalance(member.getUserId(), moneyOut.getMoney());
 		}
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml(rx));
+		
+		return mv;	
+	}
+	
+	public ModelAndView checkBankBookInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		String ip = request.getRemoteAddr();
+		Member admin = (Member) request.getSession().getAttribute("Admin");		
+		if (admin == null || admin.getLoginIpAddress().equals(ip) == false)
+			return new ModelAndView("admin_dummy");
+		
+		String bankName = request.getParameter("bankName");
+		String bankNumber = request.getParameter("bankNumber");
+		String bankOwner = request.getParameter("bankOwner");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("bankName", bankName);
+		param.put("bankNumber", bankNumber);
+		param.put("bankOwner", bankOwner);		
+		
+		List <Member> dupList = memberDao.selectMemberList(param);
+		
+		ResultXml rx = new ResultXml(0, null, dupList);
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		

@@ -1,3 +1,46 @@
+DROP TABLE IF EXISTS `love`.`tbl_betting_toto`;
+CREATE TABLE  `love`.`tbl_betting_toto` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `USERID` varchar(45) NOT NULL,
+  `TOTO_ID` int(10) unsigned NOT NULL,
+  `MARKING_STRING` varchar(64) NOT NULL,
+  `DATE` datetime NOT NULL,
+  `MONEY` int(10) unsigned NOT NULL,
+  `RUN_STATUS` varchar(45) NOT NULL,
+  `NICKNAME` varchar(45) NOT NULL,
+  `CALC_STATUS` varchar(45) NOT NULL DEFAULT 'BTC01',
+  `ISDELETED` varchar(8) NOT NULL DEFAULT 'N',
+  `END_DATE` datetime DEFAULT NULL,
+  `RATE` double NOT NULL,
+  `EXPECT` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_tbl_betting_toto_1` (`TOTO_ID`),
+  CONSTRAINT `FK_tbl_betting_toto_1` FOREIGN KEY (`TOTO_ID`) REFERENCES `tbl_toto` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `love`.`tbl_toto`;
+CREATE TABLE  `love`.`tbl_toto` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `GAME_DATE` datetime NOT NULL,
+  `TITLE` varchar(128) NOT NULL,
+  `LEAGUE_ID` int(10) unsigned NOT NULL,
+  `LEAGUE_NAME` varchar(45) NOT NULL,
+  `LEAGUE_IMAGE` varchar(45) NOT NULL,
+  `EARN_RATE` float NOT NULL,
+  `RESULT_STRING` varchar(64) DEFAULT NULL,
+  `CARD_STRING` text NOT NULL,
+  `ROW_NUM` int(10) unsigned NOT NULL,
+  `COL_NUM` int(10) unsigned NOT NULL,
+  `STATUS` varchar(16) NOT NULL,
+  `BET_STATUS` varchar(16) NOT NULL,
+  `DP_STATUS` varchar(16) NOT NULL,
+  `MIN_MONEY` int(10) unsigned NOT NULL,
+  `CARRY_OVER` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `SUCCESS_COUNT` int(10) unsigned DEFAULT NULL,
+  `SUCCESS_MONEY` bigint(20) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `xwin`.`tbl_access`;
 CREATE TABLE  `xwin`.`tbl_access` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,

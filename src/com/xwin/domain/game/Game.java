@@ -52,6 +52,9 @@ public class Game extends XwinObject
 	private String grade;
 	private String syncId;
 	private String note;
+	
+	private String syncDeny;
+	private Date processDate;
 
 	public String getId() {
 		return id;
@@ -314,5 +317,21 @@ public class Game extends XwinObject
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public String getSyncDeny() {
+		return syncDeny;
+	}
+
+	public void setSyncDeny(String syncDeny) {
+		this.syncDeny = syncDeny;
+	}
+
+	public Date getProcessDate() {
+		return processDate;
+	}
+
+	public void setProcessDate(Date processDate) {
+		this.processDate = processDate;
 	}
 }

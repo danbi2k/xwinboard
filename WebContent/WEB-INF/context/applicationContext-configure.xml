@@ -6,6 +6,10 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="admin" class="com.xwin.domain.admin.Admin">  
+		<property name="SITE_GRADE" value="10"/> 
+	</bean>
 		
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
 		<property name="basenames">  
@@ -17,30 +21,29 @@
 	</bean>	
 		    
 	<bean id="munjaBadaConnector" class="com.xwin.infra.sms.MunjaBadaConnector">
-		<property name="userId" value="vegas5004"/>
-		<property name="password" value="5004369"/>
-		<property name="returnUrl" value="222.122.219.82:10180/munja.aspx"/>
+		<property name="userId" value="qnwkdhkd"/>
+		<property name="password" value="tnqkr79"/>
+		<property name="returnUrl" value="apple-v.net/munja.aspx"/>
 	</bean>
 	
+	<bean id="showSmsConnector" class="com.xwin.infra.sms.ShowSmsConnector"
+		p:showSmsDao-ref="showSmsDao"/>
 			    
 	<bean id="ktfSmsConnector" class="com.xwin.infra.sms.KtfSmsConnector"
 		p:ktfSmsDao-ref="ktfSmsDao">
 		<property name="getUri">
 			<list>
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&MagicN_Id=Y2hsdGpyZ2g1OQ==&ALevel=2&boxType=1&pagesize=10&curpage=1]]></value>	
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&MagicN_Id=YW5ycmtmbDExMTE=&ALevel=2&boxType=1&pagesize=10&curpage=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_List.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&MagicN_Id=ZGxybXNnbWwy&ALevel=2&boxType=1&pagesize=20&curpage=1]]></value>
 			</list>
 		</property>
 		<property name="delUri">
 			<list>
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&IsALL=N&boxType=1&ALevel=1&targetMsg=]]></value>	
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&IsALL=N&boxType=1&ALevel=1&targetMsg=]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Del.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&IsALL=N&boxType=1&ALevel=1&targetMsg=]]></value>
 			</list>
 		</property>
 		<property name="emptyUri">
 			<list>
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Folder_Empty.asp?UserTel=01065591482&LogTime=20081007154021&ClientIP=10.100.29.205&ALevel=1&Msgbox_id=&Folder=1]]></value>	
-				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Folder_Empty.asp?UserTel=01043047455&LogTime=20081223164711&ClientIP=123.228.71.244&ALevel=1&Msgbox_id=&Folder=1]]></value>
+				<value><![CDATA[http://msgmgr.show.co.kr/Application/ASP/PremMessenger20/MsgrMsgBox_Folder_Empty.asp?UserTel=01042831800&LogTime=20100211073238&ClientIP=125.152.12.77&ALevel=1&Msgbox_id=&Folder=1]]></value>
 			</list>
 		</property>
 	</bean>

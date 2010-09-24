@@ -15,58 +15,50 @@
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 %>
 <tr>
-	<td><img src="img/menu08.jpg" border="0"></td>
+	<td><img src="images/menu08.jpg" border="0"></td>
 </tr>
 <tr>
-	<td align="center"><img src="img/moneynotice.jpg" border="0"></td>
+	<td align="center"><img src="images/moneynotice.jpg" border="0"></td>
 </tr>
 
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771"
 	height="33">
 	<tr>
-		<td width="771" height="33" align="left" valign="top">
-		<p><a href="moneyIn.aspx?mode=viewMoneyInRequest"><img
-			src="img/8.jpg" border="0"></a>&nbsp;<img src="img/10-.jpg"
-			border="0"></p>
-		</td>
+		<td width="771" height="37" align="left" valign="top"  background="images/bar_bg.gif">
+		<a href="earncache.php?mode=viewMoneyInRequest"><img
+			src="images/8.jpg" border="0"></a>&nbsp;<img src="images/10-.jpg"
+			border="0">	  </td>
 	</tr>
+
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771"
-	height="40" background="img/bar-.jpg">
+	height="40"  background="images/bar1.gif">
 	<tr>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>신청일자</p>
-		</td>
+		<p style="font-weight: bold">신청일자</p>	  </td>
 		<td width="209" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금계좌</p>
-		</td>
+		<p style="font-weight: bold">입금계좌</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금자</p>
-		</td>
+		<p style="font-weight: bold">입금자</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>입금액</p>
-		</td>
+		<p style="font-weight: bold">입금액</p>	  </td>
 		<td width="80" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>상태</p>
-		</td>
+		<p style="font-weight: bold">상태</p>	  </td>
 		<td width="131" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>처리일시</p>
-		</td>
+		<p style="font-weight: bold">처리일시</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>취소</p>
-		</td>
+		<p style="font-weight: bold">취소</p>	  </td>
 		<td width="30" height="40" align="center" valign="middle"
 			class="menubar">
-		<p>삭제</p>
-		</td>
+		<p style="font-weight: bold">삭제</p>	  </td>
 	</tr>
 </table>
 <table align="center" cellpadding="0" cellspacing="0" width="771" border="0">
@@ -98,14 +90,14 @@
 		<td width="30" class="tablebg1" align="center" valign="middle">
 		<p>
 		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST)) { %>
-			<img src="img/x.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
+			<img src="images/x.gif" onclick="cancelMoneyInRequest(<%=moneyIn.getId()%>)" title="충전신청취소">
 		<%}%>
 		</p>
 		</td>
 		<td width="30" class="tablebg2" align="center" valign="middle">
 		<p>
 		<%if (moneyIn.getStatus().equals(Code.MONEY_IN_REQUEST) == false) { %>
-			<img src="img/x.gif" onclick="removeMoneyInRequestLog(<%=moneyIn.getId()%>)" title="충전기록삭제">
+			<img src="images/x.gif" onclick="removeMoneyInRequestLog(<%=moneyIn.getId()%>)" title="충전기록삭제">
 		<%} %>
 		</p>
 		</td>
@@ -127,7 +119,7 @@
 	
 	if (startPage > 0) {
 %>
-		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="img/prev.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=startPage - 1%>)'><img src="images/prev.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 	int i = 0, c = 0;
@@ -144,14 +136,14 @@
 	}
 	if (i < pageNum) {
 %>
-		<a href='javascript:goPage(<%=i%>)'><img src="img/next.jpg" border="0" align="absmiddle"></a>
+		<a href='javascript:goPage(<%=i%>)'><img src="images/next.jpg" border="0" align="absmiddle"></a>
 <%
 	}
 %>
 
 <script>
 	function goPage(index) {
-		location.href = "moneyIn.aspx?mode=viewMoneyInRequestList&pageIndex="
+		location.href = "earncache.php?mode=viewMoneyInRequestList&pageIndex="
 				+ index;
 	}
 
@@ -159,7 +151,7 @@
 		if (confirm("충전 신청을 취소 하시겠습니까?")) {
 			var query = "mode=cancelMoneyInRequest";
 			query += "&id=" + id;
-			var http = new JKL.ParseXML("moneyIn.aspx", query);
+			var http = new JKL.ParseXML("earncache.php", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
 			if (result.resultXml.code == 0)
@@ -171,7 +163,7 @@
 		if (confirm("충전  기록을 삭제 하시겠습니까?")) {
 			var query = "mode=removeMoneyInRequestLog";
 			query += "&id=" + id;
-			var http = new JKL.ParseXML("moneyIn.aspx", query);
+			var http = new JKL.ParseXML("earncache.php", query);
 			var result = http.parse();
 			alert(result.resultXml.message);
 			if (result.resultXml.code == 0)
