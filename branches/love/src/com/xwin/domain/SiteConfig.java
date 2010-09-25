@@ -14,4 +14,5 @@ public class SiteConfig extends XwinObject
 	public static final boolean PIN_LOGIN = false;	
 	public static final String SITE_PHONE = "17317071";
 	public static final String SITE_COLOR = "darkred";
+	public static final String SITE_TYPE = "PARENT";
 }

@@ -21,7 +21,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.xwin.domain.admin.Admin;
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BettingDao;
@@ -125,7 +125,7 @@ public class DailyBatchManager extends QuartzJobBean {
 		}
 		
 		//리그 가져오기
-		if (Admin.SERVER_TYPE.equals("CHILD")) {
+		if (SiteConfig.SITE_TYPE.equals("CHILD")) {
 			try {
 				gameSyncService.leagueSync();
 			} catch (Exception e) {

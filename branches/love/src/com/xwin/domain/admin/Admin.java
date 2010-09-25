@@ -30,9 +30,6 @@ public class Admin extends XwinObject
 	public static String SMS_REMAIN = "";
 	
 	public static String ADMIN_EMAIL = "";
-	
-	public static String SERVER_TYPE = "";
-	public static String CHILD_URL = "";
 
 	public static boolean HANDY_BONUS_USE = false;
 	public static Integer HANDY_BONUS_LIMIT = 100;
