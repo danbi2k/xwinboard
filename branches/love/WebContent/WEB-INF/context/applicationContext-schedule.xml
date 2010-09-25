@@ -108,6 +108,9 @@
 				<entry key="moneyOutDao">
 					<ref bean="moneyOutDao"/>
 				</entry>
+				<entry key="gameSyncService">
+					<ref bean="gameSyncService"/>
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -121,7 +124,7 @@
 	<bean id="gameSyncTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
 		<property name="jobDetail" ref="gameSyncJob"/>
 		<property name="startDelay" value="20000"/>
-		<property name="repeatInterval" value="10800000"/>
+		<property name="repeatInterval" value="180000"/>
 	</bean>
 	
 	<bean id="autoMoneyInTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">

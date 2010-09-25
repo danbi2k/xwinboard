@@ -15,6 +15,11 @@ public class LeagueDao extends XwinDao
 		sqlMapClientTemplate.insert("insertLeague", league);
 	}
 	
+	public void insertSyncLeague(League league)
+	{
+		sqlMapClientTemplate.insert("insertSyncLeague", league);
+	}
+	
 	public List<League> selectLeagueList()
 	{
 		return sqlMapClientTemplate.queryForList("selectLeagueList");
@@ -57,5 +62,10 @@ public class LeagueDao extends XwinDao
 	public void removeLeague(String id)
 	{
 		sqlMapClientTemplate.delete("removeLeague", id);		
+	}
+
+	public void removeAllLeague()
+	{
+		sqlMapClientTemplate.delete("removeAllLeague");		
 	}
 }

@@ -21,6 +21,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BettingDao;
@@ -28,6 +29,7 @@ import com.xwin.infra.dao.MemberDao;
 import com.xwin.infra.util.AccessUtil;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
+import com.xwin.service.external.GameSyncService;
 
 public class DailyBatchManager extends QuartzJobBean {
 
@@ -39,6 +41,8 @@ public class DailyBatchManager extends QuartzJobBean {
 				.getJobDataMap().get("betGameDao");
 		MemberDao memberDao = (MemberDao) context.getJobDetail()
 				.getJobDataMap().get("memberDao");
+		GameSyncService gameSyncService = (GameSyncService) context.getJobDetail()
+				.getJobDataMap().get("gameSyncService");
 
 		// 일일유저보유액
 		bettingDao.insertDailyMemberMoneyStatistics();
@@ -118,6 +122,15 @@ public class DailyBatchManager extends QuartzJobBean {
 			System.out.println("SUCCESS");
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		//리그 가져오기
+		if (Admin.SERVER_TYPE.equals("CHILD")) {
+			try {
+				gameSyncService.leagueSync();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
