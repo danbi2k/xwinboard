@@ -53,12 +53,20 @@
 		INSERT INTO tbl_league(NAME, TYPE, IMAGE) VALUES(#name#, #type#, #image#)
 	</insert>
 	
+	<insert id="insertSyncLeague" parameterClass="League">
+		INSERT INTO tbl_league(ID, NAME, TYPE, IMAGE) VALUES(#id#, #name#, #type#, #image#)
+	</insert>
+	
 	<update id="updateLeague" parameterClass="League">
 		UPDATE tbl_league SET NAME = #name# WHERE ID = #id#
 	</update>
 	
 	<delete id="removeLeague" parameterClass="string">
 		DELETE FROM tbl_league WHERE ID = #value#
+	</delete>
+	
+	<delete id="removeAllLeague">
+		DELETE FROM tbl_league
 	</delete>
 	
 </sqlMap>

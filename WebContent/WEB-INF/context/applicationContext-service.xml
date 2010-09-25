@@ -34,9 +34,10 @@
 		
 	<bean id="gameSyncService" class="com.xwin.service.external.GameSyncService"
 		p:gameDao-ref="gameDao"
+		p:leagueDao-ref="leagueDao"
 		p:processService-ref="processService">
 		<property name="syncUrl">
-			<value><![CDATA[http://219.101.160.115/protocol.php]]></value>
+			<value><![CDATA[http://219.101.160.115]]></value>
 		</property>
 	</bean>	
 		
