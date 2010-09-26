@@ -164,7 +164,7 @@ public class GameSyncService extends XwinService {
 		Admin.SYNC_COUNT_WDL = wdl_count;
 		Admin.SYNC_COUNT_HANDY = handy_count;
 
-		post = new PostMethod(syncUrl + "?mode=getProcessedGameList");
+		post = new PostMethod(syncUrl + "/protocol.php?mode=getProcessedGameList");
 		post.addRequestHeader("Content-type",
 				"application/x-www-form-urlencoded; charset=utf-8");
 
