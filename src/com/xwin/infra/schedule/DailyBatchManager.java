@@ -125,7 +125,7 @@ public class DailyBatchManager extends QuartzJobBean {
 		}
 		
 		//리그 가져오기
-		if (SiteConfig.SITE_TYPE.equals("CHILD")) {
+		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {
 			try {
 				gameSyncService.leagueSync();
 			} catch (Exception e) {

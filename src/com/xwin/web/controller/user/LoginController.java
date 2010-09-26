@@ -6,12 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Access;
-import com.xwin.domain.admin.Admin;
 import com.xwin.domain.game.BettingCart;
 import com.xwin.domain.user.Member;
 import com.xwin.infra.util.Code;
@@ -22,30 +20,13 @@ import com.xwin.web.controller.XwinController;
 
 public class LoginController extends XwinController
 {
-	/**
-	 * Logger for this class
-	 */
-	private static final Logger logger = Logger
-			.getLogger(LoginController.class);
-	
-	public ModelAndView viewUserLogin(HttpServletRequest request,
-			HttpServletResponse reponse) throws Exception
-	{
-		ModelAndView mv = null;
-		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP))
-			mv = new ModelAndView("vip_login");
-		else
-			mv = new ModelAndView("nom_login");
-		return mv;
-	}
-
 	public ModelAndView processLogin(HttpServletRequest request,
 			HttpServletResponse reponse) throws Exception
 	{
 		ResultXml rx = new ResultXml();
 		
 		Integer blockIp = accessDao.selectBlockIpCount(request.getRemoteAddr());
-		String url = request.getRequestURL().toString();
+//		String url = request.getRequestURL().toString();
 		
 		if (blockIp > 0) {
 			rx.setCode(-1);
@@ -66,7 +47,7 @@ public class LoginController extends XwinController
 			if (member == null ||
 					member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) ||
 					member.getStatus().equals(Code.USER_STATUS_SECEDE) ||
-					Admin.SITE_GRADE.equals(member.getGrade()) == false) {
+					SiteConfig.SITE_GRADE.equals(member.getGrade()) == false) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 아이디 입니다.\n아이디를 확인해 주세요");
 			} else if (comparePassword(member.getPassword(), password) == false) {
@@ -83,7 +64,6 @@ public class LoginController extends XwinController
 				session.setAttribute("BettingCart", new BettingCart());
 				
 				if (member != null) {
-					Date today = new Date();
 					Access access = new Access();
 					access.setDate(new Date());
 					access.setUserId(member.getUserId());

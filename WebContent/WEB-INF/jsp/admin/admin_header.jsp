@@ -51,8 +51,11 @@ function checkIndiCallBack(result)
 	
 		chargingVal = chargingIndi.innerHTML = (data.chargingIndi);
 		exchangeVal = exchangeIndi.innerHTML = (data.exchangeIndi);
-//		centerVal = centerIndi.innerHTML = (data.centerIndi);
+		<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
+		centerVal = centerIndi.innerHTML = (data.centerIndi);
+		<%} else {%>
 		vipVal = vipIndi.innerHTML = (data.vipIndi);
+		<%}%>
 		hackVal = hackingIndi.innerHTML = (data.hackingIndi);
 		overUnderWarnVal = overUnderWarnIndi.innerHTML = (data.overUnderWarn);
 		//wdlVal = wdlIndi.innerHTML = (data.wdlIndi);
@@ -74,10 +77,13 @@ function playSound()
 	//	playIt(player1);
 	if (exchangePlay && exchangeVal > 0)
 		playIt(player2);
-//	if (centerVal > 0)
-//		playIt(player3);
+	<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
+	if (centerVal > 0)
+		playIt(player3);
+	<%} else {%> 
 	if (vipVal > 0)
 		playIt(player3);
+	<%}%>
 	//if (hackVal > 30)
 	//	playIt(player4);
 	//if (wdlVal+handyVal > 0)
@@ -112,15 +118,18 @@ setInterval("playSound()", 3000);
 </script>
 <div id="wrapper">
 	<div id="header">
-		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=10"><%=SiteConfig.SITE_NICKNAME%></a></h1>
+		<h1><a href="adminQna.aspx?mode=viewQnaList&grade=<%=SiteConfig.SITE_GRADE%>"><%=SiteConfig.SITE_NICKNAME%></a></h1>
 	</div>
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
 			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
 			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
+			<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
+			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
+			<%} else { %>
 			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
-			<!--li>일반센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li-->
+			<%} %>
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 			<li>오버언더  <a id="overUnderWarnIndi" href="adminBetting.aspx?mode=viewBettingMoneyList">0</a></li>
 			<!--li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li-->

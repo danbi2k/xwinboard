@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.xwin.domain.*" %>    
 <%@ page import="com.xwin.domain.admin.*" %>
+<%@ page import="com.xwin.infra.util.*" %>
 <html>
 <head>
 <title>환영합니다</title>
@@ -34,7 +36,7 @@
       </table></td>
     </tr>
   </table>
-  <div align="center"><a href="userform.php?mode=viewJoinLoginForm"><img src="images/main/intro_member_bt.gif" style="margin-top:15px;" border="0"></a></div> 
+  <div align="center"><a href="userform.php?mode=viewJoin<%=SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_VIP)?"Login":""%>Form"><img src="images/main/intro_member_bt.gif" style="margin-top:15px;" border="0"></a></div> 
 </form>
 </body>
 </html>

@@ -57,10 +57,11 @@ public class GameController extends XwinController
 		param.put("status", Code.GAME_STATUS_RUN);
 		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
 		param.put("toDate", cal.getTime());
-		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
-			param.put("grade", Code.USER_GRADE_VIP);
-		else
-			param.put("grade", Code.USER_GRADE_NORMAL);
+		param.put("grade", grade);
+//		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
+//			param.put("grade", Code.USER_GRADE_VIP);
+//		else
+//			param.put("grade", Code.USER_GRADE_NORMAL);
 		
 		List<Game> gameList = gameDao.selectGameList(param);
 		

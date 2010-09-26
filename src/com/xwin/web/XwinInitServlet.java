@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Admin;
 import com.xwin.infra.dao.AdminDao;
 import com.xwin.infra.dao.MemberDao;
@@ -48,7 +49,7 @@ public class XwinInitServlet extends HttpServlet
 		AdminDao adminDao = (AdminDao) wac.getBean("adminDao");
 		Admin.NOTICE = adminDao.selectAdmin("NOTICE");
 		
-		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
 			Admin.POPUP = adminDao.selectAdmin("VIP_POPUP");
 			Admin.POPUPFLAG = adminDao.selectAdmin("VIP_POPUPFLAG");
 		} else {

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xwin.domain.admin.Admin;
+import com.xwin.domain.SiteConfig;
 import com.xwin.domain.join.Invitation;
 import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XmlUtil;
@@ -53,13 +53,13 @@ public class JoinController extends XwinController
 		ModelAndView mv = null;
 		HttpSession session = request.getSession();
 		
-		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
 			Invitation invitation = (Invitation) session.getAttribute("INVITATION");
 			if (invitation != null)
 				mv = new ModelAndView("join/join");
 			else
 				mv = new ModelAndView("dummy");
-		} else if (Admin.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {
+		} else if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {
 			mv = new ModelAndView("join/join");
 		}
 		
