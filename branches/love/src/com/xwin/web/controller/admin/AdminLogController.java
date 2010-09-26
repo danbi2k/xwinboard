@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.log.HackingLog;
 import com.xwin.domain.user.Member;
-import com.xwin.domain.user.MoneyIn;
 import com.xwin.infra.util.XmlUtil;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;

@@ -206,8 +206,6 @@ public class AdminAccountController extends XwinController implements MessageSou
 			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) + XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
 		else
 			totalSum = XwinUtil.ntz(moneyInOutDao.selectMoneyInSum(param)) - XwinUtil.ntz(moneyInOutDao.selectMoneyOutSum(param));
-		if (totalSum == null)
-			totalSum = 0L;
 		
 		Integer n = (Integer) session.getAttribute("(Admin)");
 		if (n != null) {

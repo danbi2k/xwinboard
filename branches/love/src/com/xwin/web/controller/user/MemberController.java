@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
-import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Point;
 import com.xwin.domain.join.Invitation;
 import com.xwin.domain.user.Member;
@@ -51,7 +50,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 //		if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
 //			return new ModelAndView("block");
 		Invitation invitation = null;
-		if (Admin.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
+		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_VIP)) {
 			invitation = (Invitation) request.getSession().getAttribute("INVITATION");
 			if (invitation == null)
 				return new ModelAndView("dummy");			 
@@ -91,7 +90,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
 												member.setPin(command.getPin());
 												member.setStatus(Code.USER_STATUS_NORMAL);
-												member.setGrade(Admin.SITE_GRADE);
+												member.setGrade(SiteConfig.SITE_GRADE);
 												member.setJoinDate(new Date());
 												member.setBankName(command.getBankName());
 												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));

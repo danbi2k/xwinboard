@@ -14,11 +14,9 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터 (VIP)</a></li>
-					<!--li><a href="adminQna.aspx?mode=viewQnaList&grade=1">고객센터 (일반)</a></li-->
-					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판 (VIP)</a></li>
-					<!--li><a href="adminBoard.aspx?mode=viewBoardList&grade=1">게시판 (일반)</a></li-->
-					<li><a href="admin.aspx?mode=viewPopup&grade=10">긴급공지</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=<%=SiteConfig.SITE_GRADE%>">고객센터 (<%=Code.getValue(SiteConfig.SITE_GRADE)%>)</a></li>
+					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=<%=SiteConfig.SITE_GRADE%>">게시판 (<%=Code.getValue(SiteConfig.SITE_GRADE)%>)</a></li>
+					<li><a href="admin.aspx?mode=viewPopup&grade=<%=SiteConfig.SITE_GRADE%>">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
 				</ul>

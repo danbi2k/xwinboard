@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.game.BettingCart;
@@ -24,12 +23,6 @@ import com.xwin.web.controller.XwinController;
 
 public class BettingController extends XwinController
 {
-	/**
-	 * Logger for this class
-	 */
-	private static final Logger logger = Logger
-			.getLogger(BettingController.class);
-
 	private static final long MAX_EXPECT = 3000000;
 	
 	public synchronized ModelAndView betting(HttpServletRequest request,

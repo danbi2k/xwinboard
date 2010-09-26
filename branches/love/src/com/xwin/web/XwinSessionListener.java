@@ -1,7 +1,5 @@
 package com.xwin.web;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;

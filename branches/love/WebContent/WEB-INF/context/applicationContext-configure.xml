@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="admin" class="com.xwin.domain.admin.Admin">  
+	<bean id="siteConfig" class="com.xwin.domain.SiteConfig">  
 		<property name="SITE_GRADE" value="10"/> 
 	</bean>
 		

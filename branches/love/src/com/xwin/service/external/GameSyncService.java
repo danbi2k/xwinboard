@@ -30,7 +30,7 @@ public class GameSyncService extends XwinService {
 		HttpClient hc = new HttpClient();
 		hc.getHttpConnectionManager().getParams().setSoTimeout(50000);
 
-		PostMethod post = new PostMethod(syncUrl + "?mode=getGameList");
+		PostMethod post = new PostMethod(syncUrl + "/protocol.php?mode=getGameList");
 		post.addRequestHeader("Content-type",
 				"application/x-www-form-urlencoded; charset=utf-8");
 

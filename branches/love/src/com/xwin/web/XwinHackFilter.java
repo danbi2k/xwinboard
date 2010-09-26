@@ -38,7 +38,7 @@ public class XwinHackFilter implements Filter
 		
 		try {
 			String mode = request.getParameter("mode");
-			Map param = request.getParameterMap();
+			Map<String, String> param = request.getParameterMap();
 			Set<String> keySet = param.keySet();
 			for (String key : keySet) {
 				if (key.equals("mode"))

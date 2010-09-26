@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.admin.Access;
@@ -30,7 +28,7 @@ import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultXml;
 import com.xwin.web.controller.XwinController;
 
-public class AdminMemberController extends XwinController implements MessageSourceAware
+public class AdminMemberController extends XwinController
 {
 	public static final int ROWSIZE = 30;
 	
@@ -877,12 +875,5 @@ public class AdminMemberController extends XwinController implements MessageSour
 		mv.addObject("resultXml", XmlUtil.toXml(rx));
 		
 		return mv;
-	}
-	
-	private MessageSource msgSrc = null;
-
-	public void setMessageSource(MessageSource messageSource)
-	{
-		msgSrc = messageSource;
 	}
 }
