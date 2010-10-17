@@ -26,8 +26,11 @@ public class MunjaBadaConnector implements SendSmsConnector
 		method.setParameter("remote_phone", phone.replaceAll("-", ""));
 		method.setParameter("remote_callback", callback);
 		method.setParameter("remote_msg", message);
-				
+		try {		
 		hc.executeMethod(method);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void sendSmsList(String message, List<String> phoneList, String callback)
