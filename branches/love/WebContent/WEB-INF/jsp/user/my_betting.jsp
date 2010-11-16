@@ -144,6 +144,7 @@
 <%
 	if (member.getMemberId() == 1) {
 		BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
+		Long betMoneyStatTotal = XwinUtil.ntz((Long) request.getAttribute("betMoneyStatTotal"));
 		Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
 %>
 		배팅액: <%=XwinUtil.comma3(betMoneyStatToday.getInMoney())%><BR>
@@ -151,6 +152,7 @@
 		포인트액: <%=XwinUtil.comma3(betMoneyStatToday.getBettingPoint())%><BR>
 		직충전차감액: <%=XwinUtil.comma3(betMoneyStatToday.getBonusPoint())%><BR>
 		순순익 : <%=XwinUtil.comma3(benefit)%><BR>
+		이번달 총액 : <%=XwinUtil.comma3(betMoneyStatTotal) %>
 <%
 	}
 %>

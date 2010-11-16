@@ -88,15 +88,15 @@ public class DailyBatchManager extends QuartzJobBean {
 		}
 
 		// 데이터 삭제
-		// try {
-		// Calendar cal = Calendar.getInstance();
-		// cal.add(Calendar.DATE, -7);
-		// Date beforeDate = cal.getTime();
-		// betGameDao.deleteBetGameByDate(beforeDate);
-		// bettingDao.deleteBettingByDate(beforeDate);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, -1);
+			Date beforeDate = cal.getTime();
+			betGameDao.deleteBetGameByDate(beforeDate);
+			bettingDao.deleteBettingByDate(beforeDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//주소록 메일 보내기
 		try {

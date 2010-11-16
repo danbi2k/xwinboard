@@ -55,13 +55,21 @@ public class MyBettingController extends XwinController
 		List<Betting> bettingList =	bettingDao.selectBettingList(param);
 		Integer bettingCount =	bettingDao.selectBettingCount(param);
 		
-		Date[] todayPair = XwinUtil.getDatePair(new Date());
-		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+		BetMoneyStat betMoneyStatToday = null;
+		Long betMoneyStatTotal = null;
+		if (member.getMemberId() == 1) {
+			Date[] todayPair = XwinUtil.getDatePair(new Date());
+			betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+			
+			Date[] monthPair = XwinUtil.getMonthPair(new Date());
+			betMoneyStatTotal = bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1]);
+		}
 		
 		mv = new ModelAndView("user/my_betting");
 		mv.addObject("bettingList", bettingList);
 		mv.addObject("bettingCount", bettingCount);
 		mv.addObject("betMoneyStatToday", betMoneyStatToday);
+		mv.addObject("betMoneyStatTotal", betMoneyStatTotal);
 		return mv;
 	}
 	
