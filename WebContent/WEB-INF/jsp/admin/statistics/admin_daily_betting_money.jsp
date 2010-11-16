@@ -13,6 +13,7 @@
 	List<BetMoneyStat> betMoneyStatList = (List<BetMoneyStat>) request.getAttribute("betMoneyStatList");
 	BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 	Integer totalCount = (Integer) request.getAttribute("betMoneyStatCount");
+	Long betMoneyStatTotal = (Long) request.getAttribute("betMoneyStatTotal");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));	
 %>
 
@@ -21,7 +22,6 @@
 </SCRIPT>
 
 <div class="title">일일정산내역</div>
-
 <form method="get" name="list" action="adminStat.aspx">
 <input type="hidden" name="mode" value="viewDailyBettingMoneySummary"/>
 <input type="hidden" name="pageIndex"/>
@@ -67,6 +67,7 @@
 	}
 	%>
  </table>
+이번달 총액 : <%=XwinUtil.comma3(betMoneyStatTotal) %>
 </form>
 <BR>
 <BR>

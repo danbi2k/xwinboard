@@ -361,6 +361,13 @@
 		SELECT COUNT(*) FROM tbl_betting_money_stat
 	</select>
 	
+	<select id="selectDailyBettingMoneyStatSum" resultClass="long" parameterClass="map">
+	<![CDATA[
+		SELECT SUM(CAST(INMONEY - OUTMONEY - POINT_BETTING + POINT_BONUS as SIGNED)) FROM tbl_betting_money_stat	
+		WHERE DATE >= #fromDate# AND DATE <= #toDate#
+	]]>	
+	</select>
+	
 	<typeAlias alias="MemMoneyStat" type="com.xwin.domain.statistics.MemMoneyStat" />
 	
 	<resultMap id="memMoneyStatResultMap" class="MemMoneyStat">

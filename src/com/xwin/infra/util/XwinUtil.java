@@ -122,6 +122,24 @@ public class XwinUtil
 		return pair;
 	}
 	
+	public static Date[] getMonthPair(Date date) throws Exception
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal = getOnlyDate(cal);
+		cal.set(Calendar.DATE, 1);
+		
+		Date pair[] = new Date[2];
+		pair[0] = cal.getTime();
+		
+		cal.add(Calendar.MONTH, 1);
+		cal.add(Calendar.MILLISECOND, -1);
+		
+		pair[1] = cal.getTime();
+		
+		return pair;
+	}
+	
 	public static String getHour(Date date)
 	{
 		Calendar cal = Calendar.getInstance();
