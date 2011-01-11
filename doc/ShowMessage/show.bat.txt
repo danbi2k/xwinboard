@@ -1,0 +1,2 @@
+taskkill /IM show.exe /F
+D:\"Tomcat 6.0"\show.exe > D:\"Tomcat 6.0"\show_%date%_%time::=.%.log

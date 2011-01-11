@@ -102,8 +102,8 @@ namespace ConsoleApplication1
                     HtmlElement ID = hw.Document.GetElementById("ID");
                     HtmlElement PASSWORD = hw.Document.GetElementById("PASSWORD");
 
-                    ID.InnerText = "gjtkdantkdan";
-                    PASSWORD.InnerText = "xldkfk2";
+                    ID.InnerText = "rlska9";
+                    PASSWORD.InnerText = "tmakxm2";
 
                     HtmlElement loginForm = hw.Document.Forms[0];
                     loginForm.InvokeMember("submit");
