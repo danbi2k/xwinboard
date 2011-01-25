@@ -13,7 +13,7 @@ namespace ConsoleApplication1
 {
     class Program
     {
-        static string LOGIN_URL = "http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http%3A%2F%2Fwww%2Eshow%2Eco%2Ekr%2Findex%2Easp%3Fcode%3DFB00000";
+        static string LOGIN_URL = "http://mms.mobile.olleh.com/msgportal2/msgmgr/msgmgrInfo.asp";
         static String DB_STR = "server=localhost;database=danmuji;user=kimchi;password=gjfEjr^RjfEjr;port=33406";
         static char[] SEPERATOR = { ' ', '|' };
         static WebBrowser webBrowser1;
@@ -31,7 +31,8 @@ namespace ConsoleApplication1
             t.Start();
             heart = DateTime.Now;
 
-            while (true) {
+            while (true)
+            {
                 Console.WriteLine("심장박동이 오는지 보자");
                 DateTime now = DateTime.Now;
                 if (heart.AddMinutes(2.0) < now)
@@ -68,7 +69,7 @@ namespace ConsoleApplication1
 
             Console.WriteLine("DB Open");
 
-            webBrowser1 = new WebBrowser(); 
+            webBrowser1 = new WebBrowser();
             webBrowser1.Dock = DockStyle.Fill;
             webBrowser1.Name = "webBrowser";
             webBrowser1.ScrollBarsEnabled = false;
@@ -96,21 +97,21 @@ namespace ConsoleApplication1
             try
             {
 
-                if (e.Url.AbsoluteUri == "http://www.show.co.kr/common/user/cp_sub_login_frame.asp?RETURN_URL=http://www.show.co.kr/index.asp?code=FB00000")
+                if (e.Url.AbsoluteUri == "http://mms.mobile.olleh.com/msgportal2/msgmgr/msgmgrInfo.asp")
                 {
                     Console.WriteLine("로그인 시작");
                     HtmlElement ID = hw.Document.GetElementById("ID");
                     HtmlElement PASSWORD = hw.Document.GetElementById("PASSWORD");
+                    HtmlElement loginBtn = hw.Document.GetElementById("loginBtn");
 
                     ID.InnerText = "rlska9";
                     PASSWORD.InnerText = "tmakxm2";
-
-                    HtmlElement loginForm = hw.Document.Forms[0];
-                    loginForm.InvokeMember("submit");
+                    loginBtn.InvokeMember("OnClick");
+                    
                     Console.WriteLine("로그인 시도");
                 }
 
-                if (e.Url.AbsoluteUri == "http://www.show.co.kr/index.asp?code=FB00000")
+                if (e.Url.AbsoluteUri == "http://mobile.olleh.com/index.asp?code=FBA0000&urljump=http%3A%2F%2Fmms%2Emobile%2Eolleh%2Ecom%2Fmsgportal2%2Fmsgmgr%2FmsgmgrInfo%2Easp")
                 {
                     Console.WriteLine("로그인 성공");
                     time = new Timer();
@@ -120,24 +121,24 @@ namespace ConsoleApplication1
                     Console.WriteLine("타이머 시작");
                 }
 
-                if (e.Url.AbsoluteUri == "http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/receiveList.asp")
+                if (e.Url.AbsoluteUri == "http://mms.mobile.olleh.com/msgportal2/MsgMgr/msgBox/receiveList.asp")
                 {
                     Console.WriteLine("받은문자함 열림");
 
                     HtmlElement message_list = hw.Document.GetElementById("message_list");
-                    HtmlElementCollection tr = message_list.Children[0].Children[0].Children;
+                    HtmlElementCollection tr = message_list.Children[0].Children[2].Children;
                     int count = 0;
-                    for (int i = 1; i < tr.Count; i++)
+                    for (int i = 0; i < tr.Count; i++)
                     {
                         if (tr[i].Children.Count <= 1)
                             continue;
 
-                        string[] peace = tr[i].Children[1].InnerHtml.Split(SEPERATOR);
-                        string msg_seq = peace[4];
-                        string in_date = peace[6];
+                        string[] peace = tr[i].Children[0].InnerHtml.Split(SEPERATOR);
+                        string msg_seq = peace[5];
+                        string in_date = peace[7];
 
-                        string call_back = tr[i].Children[4].InnerText;
-                        string msg = tr[i].Children[5].GetElementsByTagName("TEXTAREA")[0].InnerText;
+                        string call_back = tr[i].Children[3].InnerText;
+                        string msg = tr[i].Children[4].GetElementsByTagName("TEXTAREA")[0].InnerText;
 
                         //Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
 
@@ -151,18 +152,22 @@ namespace ConsoleApplication1
                     }
 
                     if (count > 0)
-                        hw.Navigate(new Uri("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/MsgDelete.asp?msg_seq=&in_date=&lock_i=&sm=&cid=&msgboxCd=&boxType=1"));
+                        hw.Navigate(new Uri("http://mms.mobile.olleh.com/msgportal2/MsgMgr/msgBox/MsgDelete.asp?boxType=1"));
 
                     Console.WriteLine("받은 문자 갯수 : " + count);
                     heart = DateTime.Now;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
 
-                time.Stop();
-                Console.WriteLine("타이머 스탑");
+                if (time != null)
+                {
+                    time.Stop();
+                    Console.WriteLine("타이머 스탑");
+                }
                 conn.Close();
                 Console.WriteLine("DB Close");
             }
@@ -171,7 +176,7 @@ namespace ConsoleApplication1
         private static void Time_Tick(object obj, EventArgs e)
         {
             HtmlWindow hw = webBrowser1.Document.Window;
-            hw.Navigate("http://msgmgr.show.co.kr/msgportal/msgmgrTwo/msgBox/receiveList.asp");
+            hw.Navigate("http://mms.mobile.olleh.com/msgportal2/MsgMgr/msgBox/receiveList.asp");
             Console.WriteLine("받은문자함 열기");
         }
     }

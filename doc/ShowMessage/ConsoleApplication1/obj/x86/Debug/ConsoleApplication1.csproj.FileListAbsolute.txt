@@ -8,3 +8,8 @@ C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\obj\x86\Debug\ConsoleApp
 C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
 C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
 C:\D\workspace\java\doc\ShowMessage\ConsoleApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Workspace\love\doc\ShowMessage\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.exe
+D:\Workspace\love\doc\ShowMessage\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.pdb
+D:\Workspace\love\doc\ShowMessage\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Workspace\love\doc\ShowMessage\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Workspace\love\doc\ShowMessage\ConsoleApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
