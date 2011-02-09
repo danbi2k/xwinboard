@@ -154,7 +154,7 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
 		<property name="triggers">
 			<list>
-				<!-- ref bean="gameBetStatusTrigger"/ -->
+				<ref bean="gameBetStatusTrigger"/>
 				<!-- ref bean="gameSyncTrigger"/ -->
 				<!-- ref bean="autoMoneyInTrigger"/ --> <!-- 충전시키는부분 -->
 				<!-- ref bean="transactionTrigger"/ --> <!-- SMS가져오는 부분 -->
