@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.domain.admin.Transaction;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.Game;
@@ -176,6 +177,19 @@ public class ExternalController extends XwinController
 			invitation.setJoinId(joinId);
 			invitationDao.updateInvitation(invitation);
 		}
+		
+		ModelAndView mv = new ModelAndView("xmlFacade");
+		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));
+		
+		return mv;
+	}
+	
+	public ModelAndView autoChargeAlive(HttpServletRequest request,
+			HttpServletResponse response) throws Exception
+	{
+		Admin.AUTO_CHARGE_ALIVE = new Date();
+		
+		System.out.println("AUTO_CHARGE_ALIVE = " + Admin.AUTO_CHARGE_ALIVE);
 		
 		ModelAndView mv = new ModelAndView("xmlFacade");
 		mv.addObject("resultXml", XmlUtil.toXml("SUCCESS"));

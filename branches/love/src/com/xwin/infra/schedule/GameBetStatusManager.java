@@ -7,11 +7,13 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import com.xwin.domain.admin.Admin;
 import com.xwin.infra.dao.GameDao;
 
 public class GameBetStatusManager extends QuartzJobBean
 {
-
+	private final long FIVE_MINUTE = 5 * 60 * 1000;
+	
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException
 	{
@@ -22,5 +24,25 @@ public class GameBetStatusManager extends QuartzJobBean
 
 		gameDao.batchGameBetStatus(cal.getTime());
 		gameDao.batchGameStatus(new Date());
+		
+		try
+		{
+			Date now = new Date();
+			
+			if (Admin.AUTO_CHARGE_ALIVE == null || now.getTime() - Admin.AUTO_CHARGE_ALIVE.getTime() > FIVE_MINUTE)
+			{
+				System.out.println("자충박동이 오지 않는다. 재시작 한다.");
+				
+				Process p = Runtime.getRuntime().exec("D:\\Tomcat 6.0\\show.bat");
+			}
+			else
+			{
+				System.out.println("자충박동이 잘 온다.");
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package com.xwin.domain.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +47,8 @@ public class Admin extends XwinObject
 	public static Integer SYNC_COUNT_HANDY = 0;
 	
 	public static Integer PROCESS_COUNT_JUDGE = 0;
+	
+	public static Date AUTO_CHARGE_ALIVE = null;
 	
 	public static Member getDbMember(String userId) {
 		return memberDao.selectMember(userId, null);
