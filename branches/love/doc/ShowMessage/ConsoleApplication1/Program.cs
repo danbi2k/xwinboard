@@ -7,12 +7,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Web;
+using System.Net;
 using MySql.Data.MySqlClient;
 
 namespace ConsoleApplication1
 {
     class Program
     {
+        //static String SERVER_URL = "http://localhost:8080/love/protocol.php?mode=autoChargeAlive";
+        static String SERVER_URL = "http://localhost/protocol.php?mode=autoChargeAlive";
+
         static string LOGIN_URL = "http://mms.mobile.olleh.com/msgportal2/msgmgr/msgmgrInfo.asp";
         static String DB_STR = "server=localhost;database=danmuji;user=kimchi;password=gjfEjr^RjfEjr;port=33406";
         static char[] SEPERATOR = { ' ', '|' };
@@ -20,6 +25,9 @@ namespace ConsoleApplication1
         static MySqlConnection conn;
         static DateTime heart;
         static Timer time;
+
+        static String userId = "rlska9";
+        static String password = "tmakxm2";
 
         [STAThread]
         static void Main(string[] args)
@@ -30,6 +38,14 @@ namespace ConsoleApplication1
 
             t.Start();
             heart = DateTime.Now;
+
+            if (args.Length > 1)
+            {
+                userId = args[0];
+                password = args[1];
+            }
+
+            Console.WriteLine("{0}, {1}", userId, password);
 
             while (true)
             {
@@ -55,6 +71,8 @@ namespace ConsoleApplication1
                 else
                 {
                     Console.WriteLine("심장박동이 잘 온다");
+                    HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(SERVER_URL);
+                    myReq.GetResponse();
                 }
                 System.Threading.Thread.Sleep(120000);
             }
@@ -104,8 +122,8 @@ namespace ConsoleApplication1
                     HtmlElement PASSWORD = hw.Document.GetElementById("PASSWORD");
                     HtmlElement loginBtn = hw.Document.GetElementById("loginBtn");
 
-                    ID.InnerText = "rlska9";
-                    PASSWORD.InnerText = "tmakxm2";
+                    ID.InnerText = userId;
+                    PASSWORD.InnerText = password;
                     loginBtn.InvokeMember("OnClick");
                     
                     Console.WriteLine("로그인 시도");
