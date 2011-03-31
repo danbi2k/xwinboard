@@ -36,7 +36,7 @@
 	</tr>
 	<%
 		if (betMoneyStatToday != null) {
-			Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
+			Long benefit = betMoneyStatToday.getInMoney() - ((betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint());
 	%>
 	<tr align='center' bgcolor='#FFEBCD'>
 		<td><%=XwinUtil.toDateStr(betMoneyStatToday.getDate(), 2)%></td>
@@ -52,7 +52,7 @@
 	<%
 		if (betMoneyStatList != null) {
 			for (BetMoneyStat betMoneyStat : betMoneyStatList) {
-		Long benefit = betMoneyStat.getInMoney() - (betMoneyStat.getOutMoney() + betMoneyStat.getBettingPoint()) + betMoneyStat.getBonusPoint();
+		Long benefit = betMoneyStat.getInMoney() - ((betMoneyStat.getOutMoney() + betMoneyStat.getBettingPoint()) + betMoneyStat.getBonusPoint());
 	%>
 	<tr align='center' bgcolor='#ffffff'>
 		<td><%=XwinUtil.toDateStr(betMoneyStat.getDate(), 2)%></td>
