@@ -12,7 +12,7 @@ import com.xwin.infra.dao.GameDao;
 
 public class GameBetStatusManager extends QuartzJobBean
 {
-	private final long FIVE_MINUTE = 5 * 60 * 1000;
+	private final long THREE_MINUTE = 3 * 60 * 1000;
 	
 	protected void executeInternal(JobExecutionContext context)
 			throws JobExecutionException
@@ -29,7 +29,7 @@ public class GameBetStatusManager extends QuartzJobBean
 		{
 			Date now = new Date();
 			
-			if (Admin.AUTO_CHARGE_ALIVE == null || now.getTime() - Admin.AUTO_CHARGE_ALIVE.getTime() > FIVE_MINUTE)
+			if (Admin.AUTO_CHARGE_ALIVE == null || now.getTime() - Admin.AUTO_CHARGE_ALIVE.getTime() > THREE_MINUTE)
 			{
 				System.out.println("자충박동이 오지 않는다. 재시작 한다.");
 				
