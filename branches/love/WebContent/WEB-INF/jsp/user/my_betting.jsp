@@ -145,7 +145,7 @@
 	if (member.getMemberId() == 1) {
 		BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 		Long betMoneyStatTotal = XwinUtil.ntz((Long) request.getAttribute("betMoneyStatTotal"));
-		Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint()) + betMoneyStatToday.getBonusPoint();
+		Long benefit = betMoneyStatToday.getInMoney() - (betMoneyStatToday.getOutMoney() + betMoneyStatToday.getBettingPoint() + betMoneyStatToday.getBonusPoint());
 %>
 		배팅액: <%=XwinUtil.comma3(betMoneyStatToday.getInMoney())%><BR>
 		당첨액: <%=XwinUtil.comma3(betMoneyStatToday.getOutMoney())%><BR>
