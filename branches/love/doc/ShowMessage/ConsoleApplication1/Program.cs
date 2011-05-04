@@ -26,8 +26,8 @@ namespace ConsoleApplication1
         static DateTime heart;
         static Timer time;
 
-        static String userId = "rlska9";
-        static String password = "tmakxm2";
+        static String userId = "thflek2";
+        static String password = "rlatlsal";
 
         [STAThread]
         static void Main(string[] args)
@@ -95,6 +95,7 @@ namespace ConsoleApplication1
             webBrowser1.ScriptErrorsSuppressed = true;
             webBrowser1.Url = new Uri(LOGIN_URL);
 
+
             webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
 
             Form form = new Form();
@@ -107,10 +108,12 @@ namespace ConsoleApplication1
             Console.WriteLine("APP RUN");
         }
 
+
         private static void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             Console.WriteLine(e.Url.AbsoluteUri);
-            HtmlWindow hw = webBrowser1.Document.Window;
+            //HtmlWindow hw = webBrowser1.Document.Window;
+            WebBrowser hw = webBrowser1;
 
             try
             {
@@ -120,12 +123,13 @@ namespace ConsoleApplication1
                     Console.WriteLine("로그인 시작");
                     HtmlElement ID = hw.Document.GetElementById("ID");
                     HtmlElement PASSWORD = hw.Document.GetElementById("PASSWORD");
-                    HtmlElement loginBtn = hw.Document.GetElementById("loginBtn");
-
+                    HtmlElement login = PASSWORD.NextSibling;
+                
                     ID.InnerText = userId;
                     PASSWORD.InnerText = password;
-                    loginBtn.InvokeMember("OnClick");
-                    
+
+                    login.InvokeMember("OnClick");                    
+
                     Console.WriteLine("로그인 시도");
                 }
 
