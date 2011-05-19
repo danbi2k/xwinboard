@@ -133,7 +133,7 @@ namespace ConsoleApplication1
                     Console.WriteLine("로그인 시도");
                 }
 
-                if (e.Url.AbsoluteUri == "http://mobile.olleh.com/index.asp?code=FBA0000&urljump=http%3A%2F%2Fmms%2Emobile%2Eolleh%2Ecom%2Fmsgportal2%2Fmsgmgr%2FmsgmgrInfo%2Easp")
+                if (e.Url.AbsoluteUri == "http://mobile.olleh.com/index.asp?code=FBA0000&urljump=http%3A%2F%2Fmms%2Emobile%2Eolleh%2Ecom%2Fmsgportal2%2Fmsgmgr%2FmsgmgrInfo%2Easp%3Fcfmsvcadv%3Dolleh")
                 {
                     Console.WriteLine("로그인 성공");
                     time = new Timer();
