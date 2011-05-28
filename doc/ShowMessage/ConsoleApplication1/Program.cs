@@ -160,7 +160,7 @@ namespace ConsoleApplication1
                         string in_date = peace[7];
 
                         string call_back = tr[i].Children[3].InnerText;
-                        string msg = tr[i].Children[4].GetElementsByTagName("TEXTAREA")[0].InnerText;
+                        string msg = tr[i].Children[4].Children[1].InnerText;
 
                         //Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
 
