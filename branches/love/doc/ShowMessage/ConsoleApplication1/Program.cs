@@ -15,6 +15,8 @@ namespace ConsoleApplication1
 {
     class Program
     {
+        static Boolean RELEASE = true;
+
         //static String SERVER_URL = "http://localhost:8080/love/protocol.php?mode=autoChargeAlive";
         static String SERVER_URL = "http://localhost/protocol.php?mode=autoChargeAlive";
 
@@ -26,8 +28,8 @@ namespace ConsoleApplication1
         static DateTime heart;
         static Timer time;
 
-        static String userId = "thflek2";
-        static String password = "rlatlsal";
+        static String userId = "wogjs2121";
+        static String password = "dkflfkd12";
 
         [STAThread]
         static void Main(string[] args)
@@ -46,36 +48,6 @@ namespace ConsoleApplication1
             }
 
             Console.WriteLine("{0}, {1}", userId, password);
-
-            while (true)
-            {
-                Console.WriteLine("심장박동이 오는지 보자");
-                DateTime now = DateTime.Now;
-                if (heart.AddMinutes(2.0) < now)
-                {
-                    Console.WriteLine("심장박동이 2분넘게 안온다");
-                    if (t != null)
-                    {
-                        conn.Close();
-                        Console.WriteLine("DB Close");
-                        t.Abort();
-                        Console.WriteLine("쓰레드 종료");
-                    }
-
-                    t = new System.Threading.Thread(ThreadStart);
-                    t.SetApartmentState(System.Threading.ApartmentState.STA);
-
-                    t.Start();
-                    Console.WriteLine("새 쓰레드 시작 시도");
-                }
-                else
-                {
-                    Console.WriteLine("심장박동이 잘 온다");
-                    HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(SERVER_URL);
-                    myReq.GetResponse();
-                }
-                System.Threading.Thread.Sleep(120000);
-            }
         }
 
         public static void ThreadStart()
@@ -148,35 +120,49 @@ namespace ConsoleApplication1
                     Console.WriteLine("받은문자함 열림");
 
                     HtmlElement message_list = hw.Document.GetElementById("message_list");
-                    HtmlElementCollection tr = message_list.Children[0].Children[2].Children;
-                    int count = 0;
-                    for (int i = 0; i < tr.Count; i++)
+                    if (message_list != null)
                     {
-                        if (tr[i].Children.Count <= 1)
-                            continue;
+                        HtmlElementCollection tr = message_list.Children[0].Children[2].Children;
+                        int count = 0;
+                        for (int i = 0; i < tr.Count; i++)
+                        {
+                            if (tr[i].Children.Count <= 1)
+                                continue;
 
-                        string[] peace = tr[i].Children[0].InnerHtml.Split(SEPERATOR);
-                        string msg_seq = peace[5];
-                        string in_date = peace[7];
+                            string[] peace = tr[i].Children[0].InnerHtml.Split(SEPERATOR);
+                            string msg_seq = peace[5];
+                            string in_date = peace[7];
 
-                        string call_back = tr[i].Children[3].InnerText;
-                        string msg = tr[i].Children[4].Children[1].InnerText;
+                            string call_back = tr[i].Children[3].InnerText;
+                            string msg = tr[i].Children[4].Children[1].InnerText;
 
-                        //Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
+                            //Console.WriteLine(msg_seq + " " + in_date + " " + call_back + " " + msg);
 
-                        string query = String.Format("INSERT INTO tbl_showsms (MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');",
-                            msg_seq, in_date, msg, "S", call_back);
+                            string query = String.Format("INSERT INTO tbl_showsms (MSG_SEQ, IN_DATE, MSG, SM, CALL_BACK) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');",
+                                msg_seq, in_date, msg, "S", call_back);
 
-                        MySqlCommand cmd = new MySqlCommand(query, conn);
-                        cmd.ExecuteNonQuery();
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.ExecuteNonQuery();
 
-                        count++;
+                            count++;
+                        }
+
+                        if (count > 0 && RELEASE)
+                        {
+                            Console.WriteLine("" + count + "개 삭제 한다");
+                            hw.Navigate(new Uri("http://mms.mobile.olleh.com/msgportal2/MsgMgr/msgBox/MsgDelete.asp?boxType=1"));
+                        }
+
+                        if (RELEASE)
+                        {
+                            Console.WriteLine("자충 박동을 보낸다");
+
+                            HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(SERVER_URL);
+                            myReq.GetResponse();
+                        }
+
+                        Console.WriteLine("" + new DateTime() + " 받은 문자 갯수 : " + count);
                     }
-
-                    if (count > 0)
-                        hw.Navigate(new Uri("http://mms.mobile.olleh.com/msgportal2/MsgMgr/msgBox/MsgDelete.asp?boxType=1"));
-
-                    Console.WriteLine("받은 문자 갯수 : " + count);
                     heart = DateTime.Now;
                 }
             }
