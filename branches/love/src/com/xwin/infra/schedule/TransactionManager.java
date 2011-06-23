@@ -220,11 +220,11 @@ public class TransactionManager extends QuartzJobBean
 		Transaction transaction = new Transaction();
 		
 		if (message.getMsg().indexOf("입금") > 0) {
-			String[] msg = message.getMsg().split("\n");
+			String[] msg = message.getMsg().split(" ");
 			
 			Date theDate = null;
 			try {
-				theDate = smsDateFormat.parse(msg[0].substring(4));
+				theDate = smsDateFormat.parse(msg[0].substring(4) + " " + msg[1]);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(theDate);
 				Calendar now = Calendar.getInstance();
@@ -236,14 +236,14 @@ public class TransactionManager extends QuartzJobBean
 				theDate = new Date();
 			}
 
-			String userName = msg[2].trim();
+			String userName = msg[3].trim();
 			
 			Long money = null;
-			String moneyStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();					
+			String moneyStr = msg[5].replaceAll(MONEY_REG_EXP, "").trim();					
 			money = Long.parseLong(moneyStr);
 			
 			Long balance = null;
-			String balanceStr = msg[5].replaceAll(MONEY_REG_EXP, "").trim();					
+			String balanceStr = msg[6].replaceAll(MONEY_REG_EXP, "").trim();					
 			balance = Long.parseLong(balanceStr);
 
 			transaction.setType(Code.TRAN_TYPE_MONEYIN);
@@ -256,11 +256,11 @@ public class TransactionManager extends QuartzJobBean
 			transaction.setIsCharge("N");
 			transaction.setBankName("KB");
 		} else if (message.getMsg().indexOf("출금") > 0) {
-			String[] msg = message.getMsg().split("\n");
+			String[] msg = message.getMsg().split(" ");
 			
 			Date theDate = null;
 			try {
-				theDate = smsDateFormat.parse(msg[0].substring(4));
+				theDate = smsDateFormat.parse(msg[0].substring(4) + " " + msg[1]);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(theDate);
 				Calendar now = Calendar.getInstance();
@@ -272,15 +272,15 @@ public class TransactionManager extends QuartzJobBean
 				theDate = new Date();
 			}
 
-			String userName = msg[2].trim();
+			String userName = msg[3].trim();
 			
 			Long money = null;
-			String moneyStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();				
+			String moneyStr = msg[5].replaceAll(MONEY_REG_EXP, "").trim();				
 			money = Long.parseLong(moneyStr);
 			
 			Long balance = null;
-			if (msg[5].startsWith("잔액")) {
-				String balanceStr = msg[5].replaceAll(MONEY_REG_EXP, "").trim();					
+			if (msg[6].startsWith("잔액")) {
+				String balanceStr = msg[6].replaceAll(MONEY_REG_EXP, "").trim();					
 				balance = Long.parseLong(balanceStr);
 			}				
 
@@ -789,7 +789,8 @@ public class TransactionManager extends QuartzJobBean
 		KtfSmsMessage message = new KtfSmsMessage();
 		TransactionManager tm = new TransactionManager();
 		Transaction transaction = null;
-		message.setMsg("[KB]03/02 16:36\n623102**064\n종흠\n인터넷입금이\n1,000,000\n잔액2,171,823");
+		//message.setMsg("[KB]03/02 16:36\n623102**064\n종흠\n인터넷입금이\n1,000,000\n잔액2,171,823");
+		message.setMsg("[KB]05/28 21:32 131502**188 김종구 전자금융입금 1,000,000 잔액25,018,110     ");
 		//message.setMsg("신한 12/23 16:32[110-257-306***]입금      19,000잔액   6,121,400안민강");
 		//message.setMsg("신한 12/23 16:31[110-257-306***]지급         100잔액   6,102,40002480104300750");
 		//message.setMsg("신한 12/23 18:22[110-257-306***]입금     100,000잔액  21,840,368 이훈희");
@@ -800,7 +801,7 @@ public class TransactionManager extends QuartzJobBean
 		//message.setMsg("신한 02/11 07:59[110-290-795***]입금      10,000잔액      25,600김미경");
 		//message.setMsg("농협 2010/02/17 302-0080-1997-** 1,000원(성시원)입금.잔액1,000원");
 		//message.setMsg("농협 2010/02/17 302-0080-1997-** 1,000원(성시원)출금.잔액0원");		
-		message.setInDate("20100216084431");
+		message.setInDate("20110528084431");
 		
 		try {
 			if (message.getMsg().startsWith("[KB]"))
