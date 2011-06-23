@@ -64,8 +64,7 @@ public class AdminLoginController extends XwinController
 			
 			rx = new ResultXml(-1, "로그인 시도 횟수를 초과 하였습니다. 접속을 차단 합니다.", null);
 		} 
-		else if (true || 
-				adminPin != null &&
+		else if (adminPin != null &&
 				admin != null &&
 				admin.getPassword().equals(XwinUtil.getAdminPassword(password)) &&
 				adminPin.equals(pin)) {
