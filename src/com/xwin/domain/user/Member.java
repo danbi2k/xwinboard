@@ -35,6 +35,7 @@ public class Member extends XwinObject
 	private Date loginDate;
 	private Date bettingDate;
 	private String introducerId;
+	private String dealerId;
 	private Integer introLetter;
 	private String note;
 	
@@ -172,6 +173,12 @@ public class Member extends XwinObject
 	}
 	public void setIntroducerId(String introducerId) {
 		this.introducerId = introducerId;
+	}
+	public String getDealerId() {
+		return dealerId;
+	}
+	public void setDealerId(String dealerId) {
+		this.dealerId = dealerId;
 	}
 	public Integer getIntroLetter() {
 		return introLetter;

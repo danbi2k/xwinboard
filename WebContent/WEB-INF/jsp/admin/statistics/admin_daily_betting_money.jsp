@@ -14,14 +14,16 @@
 	BetMoneyStat betMoneyStatToday = (BetMoneyStat) request.getAttribute("betMoneyStatToday");
 	Integer totalCount = (Integer) request.getAttribute("betMoneyStatCount");
 	Long betMoneyStatTotal = (Long) request.getAttribute("betMoneyStatTotal");
+	
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));	
+	String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 %>
 
 		  
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">일일정산내역</div>
+<div class="title">일일정산내역  (<%=Code.getValue(grade)%>)</div>
 <form method="get" name="list" action="adminStat.aspx">
 <input type="hidden" name="mode" value="viewDailyBettingMoneySummary"/>
 <input type="hidden" name="pageIndex"/>

@@ -12,6 +12,7 @@
 		<result property="id" column="ID"/>
 		<result property="userId" column="USERID"/>
 		<result property="nickName" column="NICKNAME"/>
+		<result property="grade" column="GRADE"/>
 		<result property="date" column="DATE"/>
 		<result property="rate" column="RATE"/>
 		<result property="money" column="MONEY"/>
@@ -23,6 +24,7 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="betGameList" column="ID" select="selectBetGameListByBettingId"/>
 		<result property="memberId" column="MEMBERID"/>
+		<result property="dealerId" column="DEALERID"/>
 		<result property="signature" column="SIGNATURE"/>
 	</resultMap>
 	
@@ -37,9 +39,17 @@
 		<result property="bonusPoint" column="POINT_BONUS"/>
 	</resultMap>
 	
+	<typeAlias alias="DealerSummary" type="com.xwin.domain.statistics.DealerSummary" />
+	
+	<resultMap id="dealerSummaryResultMap" class="DealerSummary">
+		<result property="date" column="DAY"/>
+		<result property="totalBettingMoney" column="TOTAL"/>
+		<result property="failureBettingMoney" column="FAILURE"/>
+	</resultMap>
+	
 	<insert id="insertBetting" parameterClass="Betting">
-		INSERT INTO tbl_betting(USERID, NICKNAME, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, SIGNATURE, SOURCE)
-			VALUES(#userId#, #nickName#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #signature#, #source#)
+		INSERT INTO tbl_betting(USERID, NICKNAME, GRADE, DATE, RATE, MONEY, EXPECT, STATUS, GAME_TYPE, INTRODUCER_ID, MEMBERID, DEALERID, SIGNATURE, SOURCE)
+			VALUES(#userId#, #nickName#, #grade#, #date#, #rate#, #money#, #expect#, #status#, #gameType#, #introducerId#, #memberId#, #dealerId#, #signature#, #source#)
 		<selectKey keyProperty="id" resultClass="string">
 			SELECT LAST_INSERT_ID()
 		</selectKey>			
@@ -149,6 +159,15 @@
 			<isNotNull prepend="AND" property="nickNameLike">
 			NICKNAME LIKE #nickNameLike#
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerId">
+			DEALERID = #dealerId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerIdLike">
+			DEALERID LIKE #dealerIdLike#
+			</isNotNull>
 			<isNotNull prepend="AND" property="signature">
 			SIGNATURE = #signature#
 			</isNotNull>
@@ -221,6 +240,15 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nickNameLike">
 			NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerId">
+			DEALERID = #dealerId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerIdLike">
+			DEALERID LIKE #dealerIdLike#
 			</isNotNull>
 			<isNotNull prepend="AND" property="signature">
 			SIGNATURE = #signature#
@@ -298,43 +326,66 @@
 		SELECT 0 AS ID, #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, IFNULL(D.POINT_BONUS, 0) as POINT_BONUS FROM
 		(SELECT SUM(MONEY) as INMONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS002', 'BS003') AND
+		WHERE GRADE = #grade# AND STATUS in ('BS002', 'BS003') AND
 		END_DATE >= #fromDate# AND END_DATE <= #toDate#) as A,
 		(SELECT SUM(EXPECT) as OUTMONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS002') AND
+		WHERE GRADE = #grade# AND STATUS in ('BS002') AND
 		END_DATE >= #fromDate# AND END_DATE <= #toDate#) as B,
 		(SELECT SUM(MONEY) as POINT_BETTING
 		FROM tbl_point
-		WHERE TYPE = 'PNT02' AND
+		WHERE GRADE = #grade# AND TYPE = 'PNT02' AND
 		DATE >= #fromDate# AND DATE <= #toDate#) as C,
-		(SELECT SUM(MONEY) as POINT_BONUS
+		SELECT (SUM(CASE WHEN STATUS = 'MC004' THEN MONEY*-1 ELSE 0 END) + SUM(CASE WHEN STATUS = 'ME004' THEN MONEY ELSE 0 END)) as POINT_BONUS
 		FROM tbl_money_out
-		WHERE STATUS in ('MC004', 'ME004') AND PROC_DATE >= #fromDate# AND PROC_DATE <= #toDate#) as D
+		WHERE GRADE = #grade# AND STATUS in ('MC004', 'ME004') AND PROC_DATE >= #fromDate# AND PROC_DATE <= #toDate#) as D
 	]]>	
 	</select>
 	
 	<insert id="insertDailyBettingMoneyStatistics" parameterClass="map">
 	<![CDATA[
-		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY, POINT_BETTING, POINT_BONUS)
-		SELECT #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, IFNULL(D.POINT_BONUS, 0) as POINT_BONUS FROM
+		INSERT INTO tbl_betting_money_stat(DATE, INMONEY, OUTMONEY, POINT_BETTING, POINT_BONUS, GRADE)
+		SELECT #fromDate# AS DATE, A.INMONEY, B.OUTMONEY, C.POINT_BETTING, IFNULL(D.POINT_BONUS, 0) as POINT_BONUS, #grade# FROM
 		(SELECT SUM(MONEY) as INMONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS002', 'BS003') AND
+		WHERE GRADE = #grade# AND STATUS in ('BS002', 'BS003') AND
 		END_DATE >= #fromDate# AND END_DATE <= #toDate#) as A,
 		(SELECT SUM(EXPECT) as OUTMONEY
 		FROM tbl_betting
-		WHERE STATUS in ('BS002') AND
+		WHERE GRADE = #grade# AND STATUS in ('BS002') AND
 		END_DATE >= #fromDate# AND END_DATE <= #toDate#) as B,
 		(SELECT SUM(MONEY) as POINT_BETTING
 		FROM tbl_point
-		WHERE TYPE = 'PNT02' AND
+		WHERE GRADE = #grade# AND TYPE = 'PNT02' AND
 		DATE >= #fromDate# AND DATE <= #toDate#) as C,
-		(SELECT SUM(MONEY) as POINT_BONUS
+		SELECT (SUM(CASE WHEN STATUS = 'MC004' THEN MONEY*-1 ELSE 0 END) + SUM(CASE WHEN STATUS = 'ME004' THEN MONEY ELSE 0 END)) as POINT_BONUS
 		FROM tbl_money_out
-		WHERE STATUS in ('MC004', 'ME004') AND PROC_DATE >= #fromDate# AND PROC_DATE <= #toDate#) as D
+		WHERE GRADE = #grade# AND STATUS in ('MC004', 'ME004') AND PROC_DATE >= #fromDate# AND PROC_DATE <= #toDate#) as D
 	]]>	
 	</insert>
+	
+	<select id="selectDealerSummary" resultMap="dealerSummaryResultMap" parameterClass="map">
+		SELECT
+		DATE_FORMAT(DATE, '%Y-%m-%d') AS DAY,
+		SUM(CASE WHEN (STATUS = 'BS002' || STATUS = 'BS003') THEN money ELSE 0 END) AS TOTAL,
+		SUM(CASE WHEN STATUS = 'BS003' THEN money ELSE 0 END) AS FAILURE
+		FROM
+		tbl_betting
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="dealerId">
+			DEALERID = #dealerId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="fromDate">
+			DATE >= #fromDate#
+			</isNotNull>
+			<isNotNull prepend="AND" property="toDate">
+			<![CDATA[
+			DATE <= #toDate#
+			]]>
+			</isNotNull>
+		</dynamic>		
+		GROUP BY DAY
+	</select>
 	
 	<insert id="insertDailyMemberMoneyStatistics">
 	<![CDATA[
@@ -351,7 +402,12 @@
 	
 	<select id="selectDailyBettingMoneyStatList" resultMap="betMoneyStatResultMap" parameterClass="map">
 		SELECT * FROM tbl_betting_money_stat
-		ORDER BY DATE DESC
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="grade">
+			GRADE = #grade#
+			</isNotNull>
+		</dynamic>	
+		ORDER BY DATE DESC	
 		<isNotNull prepend="LIMIT" property="fromRow">
 			#fromRow#, #rowSize#
 		</isNotNull>

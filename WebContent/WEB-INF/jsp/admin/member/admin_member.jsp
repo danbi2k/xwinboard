@@ -85,6 +85,7 @@
 		<option value=''>전체</option>
 		<option value='<%=Code.USER_GRADE_NORMAL%>' <%=grade.equals(Code.USER_GRADE_NORMAL)?"selected":""%>>일반</option>
 		<option value='<%=Code.USER_GRADE_VIP%>' <%=grade.equals(Code.USER_GRADE_VIP)?"selected":""%>>VIP</option>
+		<option value='<%=Code.USER_GRADE_OTHER%>' <%=grade.equals(Code.USER_GRADE_OTHER)?"selected":""%>>총판</option>
  	</select>
  	<select name='status' onChange='this.form.submit()'>
 		<option value='<%=Code.USER_STATUS_NORMAL%>' <%=status.equals(Code.USER_STATUS_NORMAL)?"selected":""%>>정상</option>
@@ -102,6 +103,7 @@
 	<select name='search'>
 		<option value='userId' <%=search.equals("userId")?"selected":""%>>회원아이디</option>
 		<option value='nickName' <%=search.equals("nickName")?"selected":""%>>회원닉네임</option>
+		<option value='dealerId' <%=search.equals("dealerId")?"selected":""%>>총판아이디</option>
 		<option value='mobile' <%=search.equals("mobile")?"selected":""%>>휴대전화</option>
 		<option value='email' <%=search.equals("email")?"selected":""%>>EMAIL</option>
 	</select>

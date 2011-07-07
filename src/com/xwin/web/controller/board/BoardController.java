@@ -63,7 +63,7 @@ public class BoardController extends XwinController
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		param.put("boardName", boardName);
-		param.put("grade", grade);
+//		param.put("grade", grade);
 		param.put("userId", userId);
 		
 		List<BoardItem> boardItemList = boardDao.selectBoardItemList(param);

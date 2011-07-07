@@ -67,8 +67,9 @@ function cancelBetting(id, gameType)
 <input type='text' name='toDate' value='<%=toDate%>' size=10 readonly onClick="popUpCalendar(this, toDate,'yyyy-mm-dd');" style="cursor:hand">
 
  <select name='search'>
- <option value='userId'>아이디</option>
-<option value='nickName'>닉네임</option>
+ <option value='userId' <%=search.equals("userId")?"selected":""%>>아이디</option>
+ <option value='nickName' <%=search.equals("nickName")?"selected":""%>>닉네임</option>
+ <option value='dealerId' <%=search.equals("dealerId")?"selected":""%>>총판아이디</option>
 </select> 
 <input type='text' name='keyword' value='<%=keyword%>' size=12>
 <input type='submit' value='검 색'>

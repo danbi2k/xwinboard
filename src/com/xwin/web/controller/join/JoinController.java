@@ -31,10 +31,16 @@ public class JoinController extends XwinController
 		
 		ResultXml rx = null;
 		
-		Invitation invitation = invitationDao.selectInvitation(userId, inviteKey);
-		if (invitation != null && invitation.getJoinId() == null) {
+		Invitation userInvitation = invitationDao.selectUserInvitation(userId, inviteKey);
+		Invitation dealerInvitation = invitationDao.selectDealerInvitation(userId, inviteKey);
+		if (userInvitation != null && userInvitation.getJoinId() == null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("INVITATION", invitation);
+			session.setAttribute("INVITATION", userInvitation);
+			
+			rx = ResultXml.SUCCESS;
+		} if (dealerInvitation != null && dealerInvitation.getJoinId() == null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("INVITATION", dealerInvitation);
 			
 			rx = ResultXml.SUCCESS;
 		} else {

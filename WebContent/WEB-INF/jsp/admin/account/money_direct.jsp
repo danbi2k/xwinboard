@@ -14,6 +14,7 @@
 	String status = XwinUtil.nvl(request.getParameter("status"));	
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 	Integer totalCount = (Integer) request.getAttribute("totalCount");
 	Long totalSum = (Long) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
@@ -25,7 +26,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title">직충전차감내역</div>
+<div class="title">직충전차감내역 (<%=Code.getValue(grade)%>)</div>
 <font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>
 <form method='get' name='search' action='adminAccount.aspx'>
 	<input type='hidden' name='mode' value='viewMoneyInOutList'/>

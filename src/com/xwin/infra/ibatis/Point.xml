@@ -11,6 +11,7 @@
 	<resultMap id="pointResultMap" class="Point">
 		<result property="id" column="ID"/>		
 		<result property="userId" column="USERID"/>
+		<result property="grade" column="GRADE"/>
 		<result property="money" column="MONEY"/>
 		<result property="balance" column="BALANCE"/>
 		<result property="oldBalance" column="OLD_BALANCE"/>
@@ -25,8 +26,8 @@
 	</resultMap>
 	
 	<insert id="insertPoint" parameterClass="Point">
-		INSERT INTO tbl_point(USERID, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID, BETTING_USERID)
-		VALUES(#userId#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#, #bettingUserId#)
+		INSERT INTO tbl_point(USERID, GRADE, MONEY, BALANCE, OLD_BALANCE, NOTE, TYPE, DATE, BETTING_ID, MONEYIN_ID, MONEYOUT_ID, BETTING_USERID)
+		VALUES(#userId#, #grade#, #money#, #balance#, #oldBalance#, #note#, #type#, #date#, #bettingId#, #moneyInId#, #moneyOutId#, #bettingUserId#)
 	</insert>
 	
 	<delete id="deletePoint" parameterClass="string">
@@ -48,6 +49,9 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="type">
 				TYPE = #type#
@@ -83,6 +87,9 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="type">
 				TYPE = #type#

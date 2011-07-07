@@ -20,13 +20,22 @@ public class InvitationDao extends XwinDao
 		sqlMapClientTemplate.update("updateInvitation", invitation);
 	}
 	
-	public Invitation selectInvitation(String userId, String inviteKey)
+	public Invitation selectUserInvitation(String userId, String inviteKey)
 	{
 		Map<String, String> param = new HashMap<String, String>(2);
 		param.put("userId", userId);
 		param.put("inviteKey", inviteKey);
 		
-		return( Invitation) sqlMapClientTemplate.queryForObject("selectInvitation", param);
+		return( Invitation) sqlMapClientTemplate.queryForObject("selectUserInvitation", param);
+	}
+	
+	public Invitation selectDealerInvitation(String dealerId, String inviteKey)
+	{
+		Map<String, String> param = new HashMap<String, String>(2);
+		param.put("dealerId", dealerId);
+		param.put("inviteKey", inviteKey);
+		
+		return( Invitation) sqlMapClientTemplate.queryForObject("selectDealerInvitation", param);
 	}
 	
 	public List<Invitation> selectInvitationList(Map<String, Object> param)

@@ -54,7 +54,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			invitation = (Invitation) request.getSession().getAttribute("INVITATION");
 			if (invitation == null)
 				return new ModelAndView("dummy");			 
-			invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
+//			invitation = invitationDao.selectInvitation(invitation.getUserId(), invitation.getInviteKey());
 		}
 		
 		String mobile = command.getPhone1() + "-" + command.getPhone2() + "-" + command.getPhone3();
@@ -78,51 +78,54 @@ public class MemberController extends XwinController implements MessageSourceAwa
 								if (rx.getCode() == 0) {
 									rx = checkEmail(command.getEmail1(), command.getEmail2());
 									if (rx.getCode() == 0) {
-										rx = checkPin(command.getPin());
+										rx = checkExistBankBook(command.getBankName(), command.getBankNumber(), command.getBankOwner());
 										if (rx.getCode() == 0) {
-											rx = checkExistBankBook(command.getBankName(), command.getBankNumber(), command.getBankOwner());
-											if (rx.getCode() == 0) {
-												Member member = new Member();
-												member.setUserId(command.getUserId());
-												member.setPassword(XwinUtil.getUserPassword(command.getPassword1()));
-												member.setNickName(command.getNickName());
-												member.setMobile(mobile);
-												member.setEmail(command.getEmail1() + "@" + command.getEmail2());
-												member.setPin(command.getPin());
-												member.setStatus(Code.USER_STATUS_NORMAL);
+											Member member = new Member();
+											member.setUserId(command.getUserId());
+											member.setPassword(XwinUtil.getUserPassword(command.getPassword1()));
+											member.setNickName(command.getNickName());
+											member.setMobile(mobile);
+											member.setEmail(command.getEmail1() + "@" + command.getEmail2());
+											member.setStatus(Code.USER_STATUS_NORMAL);
+											if (invitation.getDealerId() != null)
+											{
+												member.setGrade(Code.USER_GRADE_OTHER);
+												member.setDealerId(invitation.getDealerId());
+											}
+											else
 												member.setGrade(SiteConfig.SITE_GRADE);
-												member.setJoinDate(new Date());
-												member.setBankName(command.getBankName());
-												member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
-												member.setBankOwner(XwinUtil.bankTrim(command.getBankOwner()));
-												member.setBankDate(new Date());
-												member.setGetSms(command.getSmsCheck());
-												member.setIntroducerId(introducerId);
-												
-												String WelcomeMsg = "환영합니다";
-												
+											member.setJoinDate(new Date());
+											member.setBankName(command.getBankName());
+											member.setBankNumber(XwinUtil.bankTrim(command.getBankNumber()));
+											member.setBankOwner(XwinUtil.bankTrim(command.getBankOwner()));
+											member.setBankDate(new Date());
+											member.setGetSms(command.getSmsCheck());
+											member.setIntroducerId(introducerId);
+											
+											String WelcomeMsg = "환영합니다";
+											
 //												Integer cnt = memberDao.confirmGetJoinEvent(member.getMobile());
 //												if (cnt == 0) {
-													//memberDao.loggingGetEvent(member.getMobile());
-													//member.setBalance(5000L);
-													//member.setJoinBonus(5000);
-													//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
-													member.setBalance(0L);
-													member.setJoinBonus(0);
-													
+												//memberDao.loggingGetEvent(member.getMobile());
+												//member.setBalance(5000L);
+												//member.setJoinBonus(5000);
+												//WelcomeMsg = "가입이벤트로 5,000캐쉬가 충전 되었습니다";
+												member.setBalance(0L);
+												member.setJoinBonus(0);
+												
 //												} else {
 //													member.setBalance(30000L);
 //													member.setJoinBonus(30000);
 //													WelcomeMsg = "가입이벤트로 30,000캐쉬가 충전 되었습니다";
 //												}
-												
-												memberDao.insertMember(member);
-												
-												if (invitation != null) {
-													invitation.setJoinId(member.getUserId());
-													invitationDao.updateInvitation(invitation);
-												}
-												
+											
+											memberDao.insertMember(member);
+											
+											if (invitation != null) {
+												invitation.setJoinId(member.getUserId());
+												invitationDao.updateInvitation(invitation);
+											}
+											
 //												if (introducer != null) {
 //													introducer.setIntroduceCount(introducer.getIntroduceCount() + 1);
 //													memberDao.updateMember(introducer);
@@ -141,9 +144,8 @@ public class MemberController extends XwinController implements MessageSourceAwa
 //													memberDao.plusMinusBalance(introducer.getUserId(), intro_bonus);
 //													memberDao.plusMinusJoinBonus(introducer.getUserId(), intro_bonus);
 //												}
-												
-												rx = new ResultXml(0, WelcomeMsg, null);
-											}
+											
+											rx = new ResultXml(0, WelcomeMsg, null);
 										}
 									}
 								}
@@ -382,6 +384,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 		}
 		else {
 			String phonePin = RandomStringUtils.randomNumeric(5);
+			System.out.println(phonePin);
 			request.getSession().setAttribute(phone, phonePin);	
 			
 			try {
@@ -431,6 +434,7 @@ public class MemberController extends XwinController implements MessageSourceAwa
 			
 			Point pointLog = new Point();
 			pointLog.setUserId(member.getUserId());
+			pointLog.setGrade(member.getGrade());
 			pointLog.setType(Code.POINT_TYPE_CASHCHARGE);
 			pointLog.setDate(new Date());
 			pointLog.setOldBalance(point);

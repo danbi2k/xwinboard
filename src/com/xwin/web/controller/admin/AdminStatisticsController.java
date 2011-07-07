@@ -32,12 +32,14 @@ public class AdminStatisticsController extends XwinController
 			return new ModelAndView("admin_dummy");
 		
 		String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		
 		int pIdx = 0;
 		if (pageIndex != null)
 			pIdx = Integer.parseInt(pageIndex);
 			
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("grade", grade);
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		
@@ -45,7 +47,7 @@ public class AdminStatisticsController extends XwinController
 		Integer betMoneyStatCount = bettingDao.selectDailyBettingMoneyStatCount(param);
 		
 		Date[] todayPair = XwinUtil.getDatePair(new Date());
-		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(grade, todayPair[0], todayPair[1]);
 		
 		Date[] monthPair = XwinUtil.getMonthPair(new Date());
 		Long betMoneyStatTotal = XwinUtil.ntz(bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1]));

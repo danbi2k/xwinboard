@@ -33,6 +33,9 @@
 			<isNotNull prepend="AND" property="userIdLike">
 				USERID LIKE #userIdLike#
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
 			<isNotNull prepend="AND" property="nickNameLike">
 				NICKNAME LIKE #nickNameLike#
 			</isNotNull>
@@ -97,6 +100,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="nickNameLike">
 				NICKNAME LIKE #nickNameLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="status">
 				STATUS = #status#

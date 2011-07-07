@@ -23,6 +23,7 @@ public class XwinUtil
 	private static final SimpleDateFormat dateMinuteFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 	private static final SimpleDateFormat dateSecondFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat monthFormat = new SimpleDateFormat("yyyy-MM");
 	private static final SimpleDateFormat boardNoticeFormat = new SimpleDateFormat("MM/dd");
 	private static final SimpleDateFormat boardItemFormat = new SimpleDateFormat("MM/dd HH:mm");
 	private static final SimpleDateFormat myBettingFormat = new SimpleDateFormat("MM-dd HH:mm");
@@ -120,6 +121,13 @@ public class XwinUtil
 		pair[1] = cal.getTime();
 		
 		return pair;
+	}
+	
+	public static Date[] getMonthPair(String dateStr) throws Exception
+	{
+		Date date = monthFormat.parse(dateStr);
+
+		return getMonthPair(date);
 	}
 	
 	public static Date[] getMonthPair(Date date) throws Exception
@@ -274,6 +282,8 @@ public class XwinUtil
 			ret = dateSecondFormat.format(date);
 		else if (type == 2)
 			ret = dateFormat.format(date);
+		else if (type == 3)
+			ret = monthFormat.format(date);
 		
 		return ret;
 	}
@@ -426,5 +436,10 @@ public class XwinUtil
 		Integer adminPin = (pin * month) - date + 407;
 		
 		return adminPin.toString();
+	}
+	
+	public static void main(String args[])
+	{
+		System.out.println(XwinUtil.getAdminPassword("1007rhkdrn"));
 	}
 }

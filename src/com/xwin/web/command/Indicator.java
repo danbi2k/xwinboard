@@ -8,9 +8,15 @@ public class Indicator extends XwinObject
 	
 	private String chargingIndi;
 	private String exchangeIndi;
+	
+	private String dealerChargingIndi;
+	private String dealerExchangeIndi;
+	
 	private String centerIndi;
 	private String vipIndi;
+	
 	private String hackingIndi;
+	
 	private String wdlIndi;
 	private String handyIndi;
 	private String overUnderWarn;
@@ -26,6 +32,18 @@ public class Indicator extends XwinObject
 	}
 	public void setExchangeIndi(String exchangeIndi) {
 		this.exchangeIndi = exchangeIndi;
+	}
+	public String getDealerChargingIndi() {
+		return dealerChargingIndi;
+	}
+	public void setDealerChargingIndi(String dealerChargingIndi) {
+		this.dealerChargingIndi = dealerChargingIndi;
+	}
+	public String getDealerExchangeIndi() {
+		return dealerExchangeIndi;
+	}
+	public void setDealerExchangeIndi(String dealerExchangeIndi) {
+		this.dealerExchangeIndi = dealerExchangeIndi;
 	}
 	public String getCenterIndi() {
 		return centerIndi;

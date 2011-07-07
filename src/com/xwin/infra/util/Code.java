@@ -21,11 +21,14 @@ public class Code
 	
 	public static final String USER_GRADE_NORMAL		= "1";
 	public static final String USER_GRADE_VIP			= "10";
+	public static final String USER_GRADE_OTHER			= "20";
 	public static final String USER_GRADE_ADMIN			= "100";
 	
 	public static final String USER_STATUS_NORMAL	 	= "US001";
 	public static final String USER_STATUS_SECEDE_REQ 	= "US002";
 	public static final String USER_STATUS_SECEDE		= "US003";
+	
+	public static final String DEALER_STATUS_NORMAL	 	= "DS001";
 	
 	public static final String BET_STATUS_RUN			= "BS001";
 	public static final String BET_STATUS_SUCCESS		= "BS002";
@@ -107,6 +110,7 @@ public class Code
 	public static final String ACCESS_ADMIN_LOGIN_DENY		= "ACC03";
 	public static final String ACCESS_ADMIN_LOGIN_FAILURE	= "ACC04";
 	public static final String ACCESS_USER_LOGIN_BY_ADMIN	= "ACC05";
+	public static final String ACCESS_DEALER_LOGIN			= "ACC06";
 	public static final String ACCESS_INSPECTION			= "ACC10";
 	
 	public static final String SOURCE_WEB	= "WEB";
@@ -192,12 +196,14 @@ public class Code
 
 		put(USER_GRADE_NORMAL, "일반");
 		put(USER_GRADE_VIP, "VIP");
+		put(USER_GRADE_OTHER, "총판");
 		put(USER_GRADE_ADMIN, "관리자");
-		
 		
 		put(USER_STATUS_NORMAL, "정상");
 		put(USER_STATUS_SECEDE_REQ, "탈퇴신청");
 		put(USER_STATUS_SECEDE, "탈퇴");
+		
+		put(DEALER_STATUS_NORMAL, "정상");
 		
 		put("W", "승");
 		put("D", "무");
@@ -214,6 +220,7 @@ public class Code
 		put(ACCESS_ADMIN_LOGIN_DENY, "관리자로그인차단");
 		put(ACCESS_ADMIN_LOGIN_FAILURE, "관리자로그인실패");
 		put(ACCESS_USER_LOGIN_BY_ADMIN, "사용자로그인(관리)");
+		put(ACCESS_DEALER_LOGIN, "총판로그인");
 		put(ACCESS_INSPECTION, "사용자조사");		
 	}
 	

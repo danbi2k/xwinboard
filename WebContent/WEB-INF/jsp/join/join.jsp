@@ -56,11 +56,6 @@
  <td><input type=text name=nickName maxlength=200 class=input2></td>
 </tr>
 <tr>
- <td align=right class=menubar height=40>모바일PIN번호</td>
- <td></td>
- <td><input type=text name=pin maxlength=200 class=input2 onfocusout='only123(this)' onkeyup='only123(this)'> <font color="<%=SiteConfig.SITE_COLOR%>">★ 원하시는 숫자 6자리를 입력해주세요.</font></td>
-</tr>
-<tr>
  <td align=right class=menubar height=40>핸드폰번호</td>
  <td></td>
  <td>

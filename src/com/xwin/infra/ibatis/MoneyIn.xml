@@ -14,6 +14,7 @@
 		<result property="nickName" column="NICKNAME"/>
 		<result property="money" column="MONEY"/>
 		<result property="status" column="STATUS"/>
+		<result property="grade" column="GRADE"/>
 		<result property="reqDate" column="REQ_DATE"/>
 		<result property="procDate" column="PROC_DATE"/>
 		<result property="name" column="NAME"/>
@@ -26,8 +27,8 @@
 	</resultMap>
 	
 	<insert id="insertMoneyIn" parameterClass="MoneyIn">
-		INSERT INTO tbl_money_out(USERID, MONEY, STATUS, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
-		VALUES(#userId#, #money#, #status#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#, 'in', #source#)
+		INSERT INTO tbl_money_out(USERID, MONEY, STATUS, GRADE, REQ_DATE, NAME, BANKBOOK_ID, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
+		VALUES(#userId#, #money#, #status#, #grade#, #reqDate#, #name#, #bankBookId#, #procDate#, #nickName#, #note#, 'in', #source#)
 	</insert>
 	
 	<update id="updateMoneyIn" parameterClass="MoneyIn">
@@ -91,6 +92,9 @@
 				<iterate prepend="" property="statusList" open=" (" close=") " conjunction="OR">
 				STATUS = #statusList[]#
 				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#
@@ -169,6 +173,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#
 			</isNotNull>
@@ -234,6 +241,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusLike">
 				STATUS like #statusLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="name">
 				NAME = #name#

@@ -37,7 +37,7 @@ if (admin == null) {
 }
 %>
 
-var chargingVal, exchangeVal, centerVal, vipVal, hackVal, wdlVal, handyVal, overUnderWarnVal;
+var chargingVal, exchangeVal, dealChargingVal, dealExchangeVal, centerVal, vipVal, hackVal, wdlVal, handyVal, overUnderWarnVal;
 var exchangePlay = <%=EX_PLAY.equals("on")?"true":"false"%>;
 
 function checkIndiCallBack(result)
@@ -51,6 +51,10 @@ function checkIndiCallBack(result)
 	
 		chargingVal = chargingIndi.innerHTML = (data.chargingIndi);
 		exchangeVal = exchangeIndi.innerHTML = (data.exchangeIndi);
+		
+		dealChargingVal = dealChargingIndi.innerHTML = (data.dealerChargingIndi);
+		dealExchangeVal = dealExchangeIndi.innerHTML = (data.dealerExchangeIndi);
+		
 		<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
 		centerVal = centerIndi.innerHTML = (data.centerIndi);
 		<%} else {%>
@@ -75,7 +79,7 @@ function playSound()
 {
 	//if (chargingVal > 0)
 	//	playIt(player1);
-	if (exchangePlay && exchangeVal > 0)
+	if (exchangePlay && (exchangeVal > 0 || dealExchangeVal > 0))
 		playIt(player2);
 	<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
 	if (centerVal > 0)
@@ -123,13 +127,11 @@ setInterval("playSound()", 3000);
 	<div id="pages">
 		<h2>Pages</h2>
 		<ul>
-			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">0</a></li>
-			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
-			<%if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {%>
-			<li>고객센터  <a id="centerIndi" href="adminQna.aspx?mode=viewQnaList&grade=1">0</a></li>
-			<%} else { %>
-			<li>VIP센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
-			<%} %>
+			<li class="active">충전 <a id="chargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001&grade=10">0</a></li>
+			<li>환전 <a id="exchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001&grade=10">0</a><span style='font-size:12;' id='exPlay' onclick='changeExPlay()'><%=EX_PLAY%></span></li>
+			<li>총판충전 <a id="dealChargingIndi" href="adminAccount.aspx?mode=viewMoneyInList&status=MC001&grade=20">0</a></li>
+			<li>총판환전 <a id="dealExchangeIndi" href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001&grade=20">0</a></li>
+			<li>고객센터  <a id="vipIndi" href="adminQna.aspx?mode=viewQnaList&grade=10">0</a></li>
 			<li>해킹  <a id="hackingIndi" href="adminLog.aspx?mode=viewHackingLog">0</a></li>
 			<li>오버언더  <a id="overUnderWarnIndi" href="adminBetting.aspx?mode=viewBettingMoneyList">0</a></li>
 			<!--li>승무패  <a id="wdlIndi" href="adminGame.aspx?mode=viewGameList&type=wdl&grade=<%=Code.USER_GRADE_NORMAL%>">0</a></li-->

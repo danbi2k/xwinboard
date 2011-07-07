@@ -115,7 +115,7 @@ document.onmousedown=click;
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
-                  <td valign="bottom" style="padding-top:4px;"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></td>
+                  <td valign="bottom" style="padding-top:4px;"><span class="top_login">VIP</span></td>
                 </tr>
               </table>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:20px;">

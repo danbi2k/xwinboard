@@ -13,6 +13,7 @@ import com.xwin.infra.dao.BetGameDao;
 import com.xwin.infra.dao.BetTotoDao;
 import com.xwin.infra.dao.BettingDao;
 import com.xwin.infra.dao.BoardDao;
+import com.xwin.infra.dao.DealerDao;
 import com.xwin.infra.dao.GameDao;
 import com.xwin.infra.dao.HackingLogDao;
 import com.xwin.infra.dao.InvitationDao;
@@ -42,6 +43,7 @@ public class XwinController extends MultiActionController
 	protected GameDao gameDao = null;
 	protected LeagueDao leagueDao = null;
 	protected MemberDao memberDao = null;
+	protected DealerDao dealerDao = null;
 	protected BetGameDao betGameDao = null;
 	protected BoardDao boardDao = null;
 	protected MoneyInDao moneyInDao = null;
@@ -88,6 +90,10 @@ public class XwinController extends MultiActionController
 	public void setMemberDao(MemberDao memberDao) {
 		this.memberDao = memberDao;
 	}
+	public void setDealerDao(DealerDao dealerDao) {
+		this.dealerDao = dealerDao;
+	}
+
 	public void setBetGameDao(BetGameDao betGameDao) {
 		this.betGameDao = betGameDao;
 	}

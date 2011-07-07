@@ -25,11 +25,6 @@ function FnMemReg(frm)
 		return;
 	}
 	
-	if (!frm.pin.value || frm.pin.value.length != 6) {
-		alert("모바일PIN번호를 입력해 주십시오");
-		return;
-	}
-	
 	if (!frm.email1.value || !frm.email2.value) {
 		alert("이메일을 입력해 주십시오");
 		return;
@@ -68,7 +63,6 @@ function FnMemReg(frm)
 	query += "&phone3=" + frm.phone3.value;
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
-	query += "&pin=" + frm.pin.value;
 	query += "&phonePin=" + frm.phonePin.value;
 	query += "&bankName=" + frm.bankName.value;
 	query += "&bankNumber=" + frm.bankNumber.value;
@@ -117,16 +111,10 @@ function FnMemModify(frm)
 		return;
 	}
 	
-	if (!frm.pin.value || frm.pin.value.length != 6) {
-		alert('모바일PIN번호는 숫자 6자리 입니다');
-		return;
-	}
-	
 	var query = "mode=modifyMember";
 	query += "&userId=" + frm.userId.value;
 	query += "&password1=" + frm.password1.value;
 	query += "&password2=" + frm.password2.value;
-	query += "&pin=" + frm.pin.value;
 	query += "&email1=" + frm.email1.value;
 	query += "&email2=" + frm.email2.value;
 	query += "&phone1=" + frm.phone1.value;

@@ -112,6 +112,7 @@ public class MoneyInController extends XwinController
 			else {			
 				MoneyIn moneyIn = new MoneyIn();
 				moneyIn.setUserId(member.getUserId());
+				moneyIn.setGrade(member.getGrade());
 				moneyIn.setMoney(money);
 				moneyIn.setName(_name);
 				moneyIn.setStatus(Code.MONEY_IN_REQUEST);

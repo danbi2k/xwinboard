@@ -15,6 +15,7 @@ public class Betting extends XwinObject
 	
 	private String id;
 	private String userId;
+	private String grade;
 	private Date date;
 	private String dateStr;
 	private Double rate;
@@ -31,6 +32,7 @@ public class Betting extends XwinObject
 	private Integer successCount;
 	private String gameGrade;
 	private Integer memberId;
+	private String dealerId;
 	private String signature;
 	private String source;
 	
@@ -47,6 +49,12 @@ public class Betting extends XwinObject
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	public Date getDate() {
 		return date;
@@ -152,6 +160,12 @@ public class Betting extends XwinObject
 	}
 	public void setMemberId(Integer memberId) {
 		this.memberId = memberId;
+	}
+	public String getDealerId() {
+		return dealerId;
+	}
+	public void setDealerId(String dealerId) {
+		this.dealerId = dealerId;
 	}
 	public String getSignature() {
 		return signature;

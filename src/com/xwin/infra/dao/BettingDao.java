@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.xwin.domain.game.Betting;
 import com.xwin.domain.statistics.BetMoneyStat;
+import com.xwin.domain.statistics.DealerSummary;
 import com.xwin.domain.statistics.MemMoneyStat;
 
 
@@ -115,17 +116,19 @@ public class BettingDao extends XwinDao
 		sqlMapClientTemplate.update("updateBettingByUserId", userId);
 	}
 	
-	public void insertDailyBettingMoneyStatistics(Date fromDate, Date toDate)
+	public void insertDailyBettingMoneyStatistics(String grade, Date fromDate, Date toDate)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("grade", grade);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		sqlMapClientTemplate.insert("insertDailyBettingMoneyStatistics", param);
 	}
 	
-	public BetMoneyStat selectTodayBettingMoneyStatistics(Date fromDate, Date toDate)
+	public BetMoneyStat selectTodayBettingMoneyStatistics(String grade, Date fromDate, Date toDate)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(2);
+		param.put("grade", grade);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
 		return (BetMoneyStat) sqlMapClientTemplate.queryForObject("selectTodayBettingMoneyStatistics", param);
@@ -163,4 +166,10 @@ public class BettingDao extends XwinDao
 	{
 		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyMemberMoneyStatCount", param);
 	}
+	
+	public List<DealerSummary> selectDealerSummary(Map<String, Object> param)
+	{
+		return (List<DealerSummary>) sqlMapClientTemplate.queryForList("selectDealerSummary", param);
+	}
+
 }

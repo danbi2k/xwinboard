@@ -110,6 +110,7 @@ public class MoneyOutController extends XwinController
 		}
 		else {
 			moneyOut.setUserId(member.getUserId());
+			moneyOut.setGrade(member.getGrade());
 			moneyOut.setStatus(Code.MONEY_OUT_REQUEST);
 			moneyOut.setReqDate(new Date());
 			moneyOut.setNickName(member.getNickName());
