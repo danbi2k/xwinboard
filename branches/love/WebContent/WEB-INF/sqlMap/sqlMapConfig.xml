@@ -10,6 +10,7 @@
 	<sqlMap resource="com/xwin/infra/ibatis/League.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Game.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Member.xml" />
+	<sqlMap resource="com/xwin/infra/ibatis/Dealer.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Betting.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/BetGame.xml" />
 	<sqlMap resource="com/xwin/infra/ibatis/Board.xml" />

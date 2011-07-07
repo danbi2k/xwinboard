@@ -11,6 +11,7 @@
 	<resultMap id="invitationResultMap" class="Invitation">
 		<result property="id" column="ID"/>		
 		<result property="userId" column="USERID"/>
+		<result property="dealerId" column="DEALERID"/>
 		<result property="inviteKey" column="INVITEKEY"/>
 		<result property="sendDate" column="SEND_DATE"/>
 		<result property="mobile" column="MOBILE"/>
@@ -19,8 +20,8 @@
 	</resultMap>
 	
 	<insert id="insertInvitation" parameterClass="Invitation">
-		INSERT INTO tbl_invitation(USERID, INVITEKEY, SEND_DATE, MOBILE, SOURCE)
-		VALUES(#userId#, #inviteKey#, #sendDate#, #mobile#, #source#)
+		INSERT INTO tbl_invitation(USERID, DEALERID, INVITEKEY, SEND_DATE, MOBILE, SOURCE)
+		VALUES(#userId#, #dealerId#, #inviteKey#, #sendDate#, #mobile#, #source#)
 	</insert>
 	
 	<update id="updateInvitation" parameterClass="Invitation">
@@ -33,10 +34,17 @@
 		WHERE ID = #id#
 	</update>
 	
-	<select id="selectInvitation" resultMap="invitationResultMap" parameterClass="map">
+	<select id="selectUserInvitation" resultMap="invitationResultMap" parameterClass="map">
 		SELECT * FROM tbl_invitation
 		WHERE
 			USERID = #userId# AND
+			INVITEKEY = #inviteKey#
+	</select>
+	
+	<select id="selectDealerInvitation" resultMap="invitationResultMap" parameterClass="map">
+		SELECT * FROM tbl_invitation
+		WHERE
+			DEALERID = #dealerId# AND
 			INVITEKEY = #inviteKey#
 	</select>
 	
@@ -45,6 +53,9 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerId">
+				DEALERID = #dealerId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="joinIdNotNull">
 				JOINID IS NOT NULL
@@ -69,6 +80,9 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="userId">
 				USERID = #userId#
+			</isNotNull>
+			<isNotNull prepend="AND" property="dealerId">
+				DEALERID = #dealerId#
 			</isNotNull>
 			<isNotNull prepend="AND" property="joinIdNotNull">
 				JOINID IS NOT NULL

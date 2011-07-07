@@ -29,6 +29,7 @@
 		<result property="getSms" column="GET_SMS"/>
 		<result property="denyrity" column="DENYRITY"/>
 		<result property="bettingDate" column="BETTING_DATE"/>
+		<result property="dealerId" column="DEALERID"/>
 		<result property="introducerId" column="INTRODUCER_ID"/>
 		<result property="introLetter" column="INTRO_LETTER"/>
 		<result property="introduceCount" column="INTRO_COUNT"/>
@@ -76,8 +77,8 @@
 	</resultMap>
 	
 	<insert id="insertMember" parameterClass="Member">
-		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, INTRODUCER_ID, JOIN_BONUS)
-			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #introducerId#, #joinBonus#)
+		INSERT INTO tbl_member(USERID, PASSWORD, NICKNAME, MOBILE, EMAIL, PIN, STATUS, GRADE, JOIN_DATE, BALANCE, BANKNAME, BANKNUMBER, BANKOWNER, BANKDATE, GET_SMS, DEALERID, INTRODUCER_ID, JOIN_BONUS)
+			VALUES(#userId#, #password#, #nickName#, #mobile#, #email#, #pin#, #status#, #grade#, #joinDate#, #balance#, #bankName#, #bankNumber#, #bankOwner#, #bankDate#, #getSms#, #dealerId#, #introducerId#, #joinBonus#)
 	</insert>
 	
 	<update id="updateMember" parameterClass="Member">
@@ -229,16 +230,34 @@
 			STATUS = #status#
 		</isNotNull>
 		<isNotNull prepend="AND" property="userId">
-			USERID LIKE #userId#
+			USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userIdLike">
+			USERID LIKE #userIdLike#
 		</isNotNull>
 		<isNotNull prepend="AND" property="nickName">
-			NICKNAME LIKE #nickName#
-		</isNotNull>			
+			NICKNAME = #nickName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickNameLike">
+			NICKNAME LIKE #nickNameLike#
+		</isNotNull>
 		<isNotNull prepend="AND" property="mobile">
-			MOBILE LIKE #mobile#
+			MOBILE = #mobile#
 		</isNotNull>			
+		<isNotNull prepend="AND" property="mobileLike">
+			MOBILE LIKE #mobileLike#
+		</isNotNull>
 		<isNotNull prepend="AND" property="email">
-			EMAIL LIKE #email#
+			EMAIL = #email#
+		</isNotNull>		
+		<isNotNull prepend="AND" property="emailLike">
+			EMAIL LIKE #emailLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="dealerId">
+			DEALERID = #dealerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="dealerIdLike">
+			DEALERID LIKE #dealerIdLike#
 		</isNotNull>
 		<isNotNull prepend="AND" property="introducerId">
 			INTRODUCER_ID = #introducerId#
@@ -280,16 +299,34 @@
 			STATUS = #status#
 		</isNotNull>
 		<isNotNull prepend="AND" property="userId">
-			USERID LIKE #userId#
+			USERID = #userId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="userIdLike">
+			USERID LIKE #userIdLike#
 		</isNotNull>
 		<isNotNull prepend="AND" property="nickName">
-			NICKNAME LIKE #nickName#
-		</isNotNull>			
+			NICKNAME = #nickName#
+		</isNotNull>
+		<isNotNull prepend="AND" property="nickNameLike">
+			NICKNAME LIKE #nickNameLike#
+		</isNotNull>
 		<isNotNull prepend="AND" property="mobile">
-			MOBILE LIKE #mobile#
+			MOBILE = #mobile#
 		</isNotNull>			
+		<isNotNull prepend="AND" property="mobileLike">
+			MOBILE LIKE #mobileLike#
+		</isNotNull>
 		<isNotNull prepend="AND" property="email">
-			EMAIL LIKE #email#
+			EMAIL = #email#
+		</isNotNull>		
+		<isNotNull prepend="AND" property="emailLike">
+			EMAIL LIKE #emailLike#
+		</isNotNull>
+		<isNotNull prepend="AND" property="dealerId">
+			DEALERID = #dealerId#
+		</isNotNull>
+		<isNotNull prepend="AND" property="dealerIdLike">
+			DEALERID LIKE #dealerIdLike#
 		</isNotNull>
 		<isNotNull prepend="AND" property="introducerId">
 			INTRODUCER_ID = #introducerId#
@@ -299,6 +336,9 @@
 		</isNotNull>
 		<isNotNull prepend="AND" property="passwordExpire">
 			PASSWORD_EXPIRE = #passwordExpire#
+		</isNotNull>
+		<isNotNull prepend="AND" property="memberId">
+			MEMBERID = #memberId#
 		</isNotNull>
 		<isNotNull prepend="AND" property="bankName">
 			BANKNAME = #bankName#

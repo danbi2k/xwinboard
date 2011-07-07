@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="dealerIndexController"
+		class="com.xwin.web.controller.dealer.DealerIndexController"/>
+		
+	<bean id="dealerLoginController"
+		class="com.xwin.web.controller.dealer.DealerLoginController"
+		p:dealerDao-ref="dealerDao"
+		p:accessDao-ref="accessDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="dealerMainController"
+		class="com.xwin.web.controller.dealer.DealerMainController"
+		p:dealerDao-ref="dealerDao"
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>
+	
+	<bean id="dealerController"
+		class="com.xwin.web.controller.dealer.DealerController"
+		p:dealerDao-ref="dealerDao"
+		p:memberDao-ref="memberDao"
+		p:invitationDao-ref="invitationDao"
+		p:bettingDao-ref="bettingDao"
+		p:sendSmsConnector-ref="munjaBadaConnector"
+		p:methodNameResolver-ref="controllerNameResolver"/>			
+</beans>

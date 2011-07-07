@@ -10,6 +10,7 @@ public class Invitation extends XwinObject
 	
 	private String id;
 	private String userId;
+	private String dealerId;
 	private String inviteKey;
 	private String mobile;
 	private Date sendDate;
@@ -27,6 +28,12 @@ public class Invitation extends XwinObject
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getDealerId() {
+		return dealerId;
+	}
+	public void setDealerId(String dealerId) {
+		this.dealerId = dealerId;
 	}
 	public String getInviteKey() {
 		return inviteKey;

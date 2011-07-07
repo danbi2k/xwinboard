@@ -29,7 +29,7 @@ public class BoardDao extends XwinDao
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("id", id);
 		param.put("boardName", boardName);
-		param.put("grade", grade);
+//		param.put("grade", grade);
 		
 		BoardItem boardItem = 
 			(BoardItem) sqlMapClientTemplate.queryForObject("selectBoardItem", param);

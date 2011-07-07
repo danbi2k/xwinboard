@@ -32,6 +32,7 @@
 				<prop key="/adminMain.aspx">adminMainController</prop>
 				<prop key="/adminInfo.aspx">adminInfoController</prop>
 				<prop key="/adminMember.aspx">adminMemberController</prop>
+				<prop key="/adminDealer.aspx">adminDealerController</prop>
 				<prop key="/adminAccount.aspx">adminAccountController</prop>
 				<prop key="/adminLeague.aspx">adminLeagueController</prop>
 				<prop key="/adminGame.aspx">adminGameController</prop>
@@ -45,16 +46,10 @@
 				<prop key="/adminLog.aspx">adminLogController</prop>
 				<prop key="/adminReuse.aspx">adminReuseController</prop>
 				
-				<prop key="/index.wap">wapIndexController</prop>
-				<prop key="/login.wap">wapLoginController</prop>
-				<prop key="/main.wap">wapMainController</prop>
-				<prop key="/betlog.wap">wapMyBettingController</prop>
-				<prop key="/earncache.wap">wapMoneyInController</prop>
-				<prop key="/sendcache.wap">wapMoneyOutController</prop>
-				<prop key="/play.wap">wapGameController</prop>
-								
-				<prop key="/admin.wap">wapAdminIndexController</prop>
-				<prop key="/adminCommon.wap">wapAdminController</prop>
+				<prop key="/chdvks.php">dealerIndexController</prop>
+				<prop key="/dealerLogin.aspx">dealerLoginController</prop>
+				<prop key="/dealerMain.aspx">dealerMainController</prop>
+				<prop key="/dealer.aspx">dealerController</prop>
 				
 				<prop key="/anne.php">guideController</prop>
 				<prop key="/yakwan.php">provisionController</prop>

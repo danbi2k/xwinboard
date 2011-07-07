@@ -80,6 +80,7 @@
 	<select name="grade">
 		<option value="<%=Code.USER_GRADE_NORMAL%>" selected>일반</option>
 		<option value="<%=Code.USER_GRADE_VIP%>">VIP</option>
+		<option value="<%=Code.USER_GRADE_OTHER%>">총판</option>
 	</select>
 	</td>
 </tr>

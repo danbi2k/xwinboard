@@ -73,8 +73,9 @@ public class AdminMemberController extends XwinController
 		param.put("orderCol", orderCol);
 		param.put("orderBy", orderBy);
 		
-		if (keyword != null)
-			param.put(search, "%" + keyword + "%");
+		if (keyword != null) {
+			param.put(search + "Like", "%" + keyword + "%");
+		}
 		param.put("fromRow", pIdx * ROWSIZE);
 		param.put("rowSize", ROWSIZE);
 		

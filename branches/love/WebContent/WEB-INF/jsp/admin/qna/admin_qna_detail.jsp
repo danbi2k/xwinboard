@@ -22,7 +22,7 @@
 <SCRIPT LANGUAGE="JavaScript">
 </SCRIPT>
 
-<div class="title"><%=grade.equals(Code.USER_GRADE_VIP)?"고객센터 (VIP)":"고객센터 (일반)" %></div>
+<div class="title">고객센터</div>
 <%
 if (betting != null) {
 %>

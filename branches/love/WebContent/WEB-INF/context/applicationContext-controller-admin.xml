@@ -69,6 +69,13 @@
 		p:smsWaitDao-ref="smsWaitDao"
 		p:bettingDao-ref="bettingDao"
 		p:methodNameResolver-ref="controllerNameResolver"/>
+		
+	<bean id="adminDealerController"
+		class="com.xwin.web.controller.admin.AdminDealerController"
+		p:dealerDao-ref="dealerDao"
+		p:memberDao-ref="memberDao"
+		p:bettingDao-ref="bettingDao"
+		p:methodNameResolver-ref="controllerNameResolver"/>	
 	
 	<bean id="adminAccountController"
 		class="com.xwin.web.controller.admin.AdminAccountController"

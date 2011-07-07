@@ -88,7 +88,7 @@ a:hover {
 .boxed {
 	float: left;
 	clear: left;
-	width: 130px;
+	width: 160px;
 	margin: 0 0 10px 0;
 	padding: 0;
 	background: #DEE2E8;
@@ -141,7 +141,7 @@ a:hover {
 
 #header {
 	float: left;
-	width: 130px;
+	width: 160px;
 	height: 50px;
 	background: #ffffff;
 }
@@ -172,7 +172,7 @@ a:hover {
 
 #pages {
 	float: right;
-	width: 840px;
+	width: 800px;
 	height: 50px;
 	background: #EEEEEE;
 }

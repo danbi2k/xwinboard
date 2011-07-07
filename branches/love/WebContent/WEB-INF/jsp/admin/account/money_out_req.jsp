@@ -14,13 +14,14 @@
 	Long totalSum = (Long) request.getAttribute("totalSum");
 	String pageIndex = XwinUtil.arcNvl(request.getParameter("pageIndex"));
 	String status = XwinUtil.nvl(request.getParameter("status"));	
+	String grade = XwinUtil.nvl(request.getParameter("grade"));
 	String keyword = XwinUtil.nvl(request.getParameter("keyword"));
 	String search = XwinUtil.nvl(request.getParameter("search"));
 	String fromDate = XwinUtil.nvl(request.getParameter("fromDate"));
 	String toDate = XwinUtil.nvl(request.getParameter("toDate"));
 %>
 
-<div class="title">환전요청</div>
+<div class="title">환전요청 (<%=Code.getValue(grade)%>)</div>
 <font size="5" color="red">총액 : <%=XwinUtil.comma3(new Long(totalSum))%></font>		 
 <SCRIPT LANGUAGE="JavaScript">
 	function acceptMoneyOutRequest(id) {

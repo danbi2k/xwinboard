@@ -98,13 +98,6 @@
 			<input type="button" value="변경" onclick="changePassword()"/>
 		</td>
  	</tr>
-    <tr align="center" bgcolor="#E4E4E4" height=20>
-		<td width=20%>모바일PIN번호</td>
-		<td width=80% bgcolor='#ffffff' align='left'>
-			<input name="pin" type="text" value="<%=member.getPin()%>"/>
-			<input type="button" value="변경" onclick="changePin()"/>
-		</td>
- 	</tr>
  	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>연락처</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
@@ -139,7 +132,6 @@
 		<td width=20%>상태</td>
 		<td width=80% bgcolor='#ffffff' align='left'><%=Code.getValue(member.getStatus())%></td>
  	</tr>
-	<%if (member.getGrade().equals(Code.USER_GRADE_VIP)) {%>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>미사용초대장</td>
 		<td width=80% bgcolor='#ffffff' align='left'>
@@ -165,6 +157,10 @@
 		%>
 		</table>
 		</td>
+ 	</tr>
+ 	<tr align="center" bgcolor="#E4E4E4" height=20>
+		<td width=20%>총판</td>
+		<td width=80% bgcolor='#ffffff' align='left'><%=XwinUtil.nvl(member.getDealerId())%></td>
  	</tr>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>초대해준회원</td>
@@ -199,7 +195,6 @@
 		</table>
 		</td>
  	</tr>
-	<%} %>
 	<tr align="center" bgcolor="#E4E4E4" height=20>
 		<td width=20%>환전계좌번호</td>
 		<td width=80% bgcolor='#ffffff' align='left'>

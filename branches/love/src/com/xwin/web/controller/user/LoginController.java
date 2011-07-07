@@ -46,8 +46,7 @@ public class LoginController extends XwinController
 			
 			if (member == null ||
 					member.getStatus().equals(Code.USER_STATUS_SECEDE_REQ) ||
-					member.getStatus().equals(Code.USER_STATUS_SECEDE) ||
-					SiteConfig.SITE_GRADE.equals(member.getGrade()) == false) {
+					member.getStatus().equals(Code.USER_STATUS_SECEDE)) {
 				rx.setCode(-1);
 				rx.setMessage("등록되지 않은 아이디 입니다.\n아이디를 확인해 주세요");
 			} else if (comparePassword(member.getPassword(), password) == false) {

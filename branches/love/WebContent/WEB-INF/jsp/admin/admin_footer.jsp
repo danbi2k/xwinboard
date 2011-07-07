@@ -14,8 +14,8 @@
 			<h2 class="heading">게시판관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=<%=SiteConfig.SITE_GRADE%>">고객센터 (<%=Code.getValue(SiteConfig.SITE_GRADE)%>)</a></li>
-					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=<%=SiteConfig.SITE_GRADE%>">게시판 (<%=Code.getValue(SiteConfig.SITE_GRADE)%>)</a></li>
+					<li class="first"><a href="adminQna.aspx?mode=viewQnaList&grade=10">고객센터</a></li>
+					<li><a href="adminBoard.aspx?mode=viewBoardList&grade=10">게시판</a></li>
 					<li><a href="admin.aspx?mode=viewPopup&grade=<%=SiteConfig.SITE_GRADE%>">긴급공지</a></li>
 					<li><a href="admin.aspx?mode=viewNotice">Notice</a></li>
 					<li><a href="adminReuse.aspx?mode=viewReuseCommentList&type=<%=Code.REUSE_COMMENT_QNA%>">댓글관리</a></li>
@@ -23,14 +23,26 @@
 			</div>
 		</div>
 		<div id="money" class="boxed">
-			<h2 class="heading">충환전관리</h2>
+			<h2 class="heading">VIP 충환전관리</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001">충전요청</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001">환전요청</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=002">충환전내역</a></li>
-					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=004">직충전차감내역</a></li>
+					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001&grade=<%=Code.USER_GRADE_VIP%>">충전요청 (VIP)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001&grade=<%=Code.USER_GRADE_VIP%>">환전요청 (VIP)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=002&grade=<%=Code.USER_GRADE_VIP%>">충환전내역 (VIP)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=004&grade=<%=Code.USER_GRADE_VIP%>">직충전차감내역 (VIP)</a></li>
 					<li><a href="adminTran.aspx?mode=viewTransactionList">입출금내역</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="money" class="boxed">
+			<h2 class="heading">총판 충환전관리</h2>
+			<div class="content">
+				<ul>
+					<li class="first"><a href="adminAccount.aspx?mode=viewMoneyInList&status=MC001&grade=<%=Code.USER_GRADE_OTHER%>">충전요청 (총판)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyOutList&status=ME001&grade=<%=Code.USER_GRADE_OTHER%>">환전요청 (총판)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=002&grade=<%=Code.USER_GRADE_OTHER%>">충환전내역 (총판)</a></li>
+					<li><a href="adminAccount.aspx?mode=viewMoneyInOutList&status=004&grade=<%=Code.USER_GRADE_OTHER%>">직충전차감내역 (총판)</a></li>
+					<!-- li><a href="adminTran.aspx?mode=viewTransactionList">입출금내역</a></-->
 				</ul>
 			</div>
 		</div>
@@ -63,6 +75,7 @@
 			<div class="content">
 				<ul>
 					<li class="first"><a href="adminMember.aspx?mode=viewAdminMember&status=US001">회원목록</a></li>
+					<li><a href="adminDealer.aspx?mode=viewAdminDealer">총판목록</a></li>
 					<li><a href="adminMember.aspx?mode=viewAccessList">접속기록</a></li>
 				</ul>
 			</div>
@@ -71,8 +84,10 @@
 			<h2 class="heading">통계보기</h2>
 			<div class="content">
 				<ul>
-					<li class="first"><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary">일일정산내역</a></li>
-					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary">일일유저보유액</a></li>
+					<li class="first"><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary&grade=<%=Code.USER_GRADE_VIP%>">일일정산내역 (VIP)</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary&grade=<%=Code.USER_GRADE_VIP%>">일일유저보유액 (VIP)</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyBettingMoneySummary&grade=<%=Code.USER_GRADE_OTHER%>">일일정산내역 (총판)</a></li>
+					<li><a href="adminStat.aspx?mode=viewDailyMemberMoneySummary&grade=<%=Code.USER_GRADE_OTHER%>">일일유저보유액 (총판)</a></li>
 					<li><a href="adminStat.aspx?mode=viewMoneyOutStat">환전계좌내역</a></li>
 					<li><a href="adminStat.aspx?mode=viewMemberStat">회원현황</a></li>
 					<li><a href="adminStat.aspx?mode=viewMemberLogin">로그인현황</a></li>

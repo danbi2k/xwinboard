@@ -139,46 +139,6 @@ public class GameController extends XwinController
 		return mv; 
 	}
 	
-	public ModelAndView getGameList(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
-	{
-		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
-			//return new ModelAndView("block");
-		Member member = (Member) request.getSession().getAttribute("Member");
-		if (member == null)
-			return new ModelAndView("dummy");
-		
-		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
-		String type = request.getParameter("type");
-		String grade = XwinUtil.nvl(request.getParameter("grade"));
-		
-		Calendar cal = Calendar.getInstance();
-		cal = XwinUtil.getOnlyDate(cal);
-		cal.add(Calendar.DATE, 3);
-		cal.add(Calendar.MILLISECOND, -1);
-		
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("type", type);
-		param.put("leagueId", leagueId);
-		param.put("status", Code.GAME_STATUS_RUN);
-		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
-		param.put("toDate", cal.getTime());
-		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
-			param.put("grade", Code.USER_GRADE_VIP);
-		else
-			param.put("grade", Code.USER_GRADE_NORMAL);
-		
-		List<Game> gameList = gameDao.selectGameList(param);
-		//Integer gameCount = gameDao.selectGameCount(param);
-		
-		ResultXml resultXml = new ResultXml(0, null, gameList);
-
-		ModelAndView mv = new ModelAndView("xmlFacade");
-		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
-		
-		return mv;
-	}
-	
 	public ModelAndView deleteFolder(HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
@@ -214,4 +174,44 @@ public class GameController extends XwinController
 		
 		return mv;
 	}
+	
+//	public ModelAndView getGameList(HttpServletRequest request,
+//			HttpServletResponse response) throws Exception
+//	{
+//		//if (accessDao.selectBlockIpCount(request.getRemoteAddr()) > 0)
+//			//return new ModelAndView("block");
+//		Member member = (Member) request.getSession().getAttribute("Member");
+//		if (member == null)
+//			return new ModelAndView("dummy");
+//		
+//		String leagueId = XwinUtil.arcNvl(request.getParameter("leagueId"));
+//		String type = request.getParameter("type");
+//		String grade = XwinUtil.nvl(request.getParameter("grade"));
+//		
+//		Calendar cal = Calendar.getInstance();
+//		cal = XwinUtil.getOnlyDate(cal);
+//		cal.add(Calendar.DATE, 3);
+//		cal.add(Calendar.MILLISECOND, -1);
+//		
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		param.put("type", type);
+//		param.put("leagueId", leagueId);
+//		param.put("status", Code.GAME_STATUS_RUN);
+//		param.put("displayStatus", Code.GAME_DISPLAY_OPEN);
+//		param.put("toDate", cal.getTime());
+//		if (grade.equals(Code.USER_GRADE_VIP) && member.getGrade().equals(Code.USER_GRADE_VIP))
+//			param.put("grade", Code.USER_GRADE_VIP);
+//		else
+//			param.put("grade", Code.USER_GRADE_NORMAL);
+//		
+//		List<Game> gameList = gameDao.selectGameList(param);
+//		//Integer gameCount = gameDao.selectGameCount(param);
+//		
+//		ResultXml resultXml = new ResultXml(0, null, gameList);
+//
+//		ModelAndView mv = new ModelAndView("xmlFacade");
+//		mv.addObject("resultXml", XmlUtil.toXml(resultXml));
+//		
+//		return mv;
+//	}
 }

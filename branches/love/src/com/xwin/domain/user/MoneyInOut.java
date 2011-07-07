@@ -15,6 +15,7 @@ public class MoneyInOut extends XwinObject
 	private String id;
 	private String userId;
 	private String nickName;
+	private String grade;
 	private Long money;
 	private String status;
 	private Date procDate;
@@ -74,6 +75,12 @@ public class MoneyInOut extends XwinObject
 	}
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	public String getIsChecked() {
 		return isChecked;

@@ -29,137 +29,145 @@ public class BettingService extends XwinService
 	
 	public void processBetting(GameFolder gameFolder, Member member, String source)
 	{
-		List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
-		String signature = makeBettingSignature(itemList);
-		
-		Betting betting = new Betting();
-		
-		betting.setUserId(member.getUserId());
-		betting.setMoney(gameFolder.getMoney());
-		betting.setRate(gameFolder.getRate());
-		betting.setExpect(gameFolder.getExpect());
-		betting.setStatus(Code.BET_STATUS_RUN);
-		betting.setDate(new Date());
-		betting.setGameType(gameFolder.getType());
-		betting.setNickName(member.getNickName());
-		betting.setIntroducerId(member.getIntroducerId());
-		betting.setMemberId(member.getMemberId());
-		betting.setSignature(signature);
-		betting.setSource(source);
-		
-		String bettingId = bettingDao.insertBetting(betting);
-		
-		for (GameFolderItem gfi : itemList) {
-			BetGame betGame = new BetGame();
-			betGame.setBettingId(bettingId);
-			betGame.setId(gfi.getId());
-			betGame.setGuess(gfi.getGuess());
-			betGame.setWinRate(gfi.getWinRate());
-			betGame.setDrawRate(gfi.getDrawRate());
-			betGame.setLoseRate(gfi.getLoseRate());
-			betGame.setSelRate(gfi.getSelRate());
-			betGame.setResultStatus(Code.RESULT_STATUS_RUN);
+		try {
+			List<GameFolderItem> itemList = gameFolder.getGameFolderItemList();
+			String signature = makeBettingSignature(itemList);
 			
-			betGameDao.insertBetGame(betGame);
-		}
-		
-		Account account = new Account();
-		account.setUserId(member.getUserId());
-		account.setType(Code.ACCOUNT_TYPE_BETTING);
-		account.setDate(new Date());
-		account.setOldBalance(member.getBalance());
-		account.setMoney(betting.getMoney() * -1);
-		account.setBalance(member.getBalance() - betting.getMoney());
-		account.setBettingId(betting.getId());
-		
-		accountDao.insertAccount(account);			
-		memberDao.plusMinusBalance(member.getUserId(), betting.getMoney() * -1);
-
-		if (logger.isInfoEnabled()) {
-			logger
-					.info("betting\n"
-							+ betting);
-		}
-		
-		
-		//포인트 지급
-		Double betting_point_rate = 0.01;
-		int size = itemList.size();
-		if (size >= 5)
-			betting_point_rate = 0.02;
-		if (size >= 9)
-			betting_point_rate = 0.03;
-		
-		Double point = betting.getMoney() * betting_point_rate;
-		memberDao.plusMinusPoint(member.getUserId(), point.longValue());
-		
-		Point pointLog = new Point();
-		pointLog.setUserId(member.getUserId());
-		pointLog.setType(Code.POINT_TYPE_BETTING);
-		pointLog.setDate(new Date());
-		pointLog.setOldBalance(member.getPoint());
-		pointLog.setMoney(point.longValue());
-		pointLog.setBalance(member.getPoint() + point.longValue());
-		pointLog.setBettingId(betting.getId());
-		pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 포인트");
-		pointLog.setBettingUserId(member.getUserId());
-		
-		pointDao.insertPoint(pointLog);
-		member.setPoint(pointLog.getBalance());
-		
-		//추천인 포인트지급
-		String introducerId = member.getIntroducerId();
-		if (introducerId != null) {
-			Member introducer = memberDao.selectMember(introducerId, null);
-			if (introducer.getStatus().equals(Code.USER_STATUS_NORMAL)) {				
-				Long differTime = new Date().getTime() - member.getJoinDate().getTime();
-				Double intro_point_rate = 0.02;
-				if (differTime > DAYS_90)
-					intro_point_rate = 0.002;				
-				else if (differTime > DAYS_60)
-					intro_point_rate = 0.005;				
-				else if (differTime > DAYS_30)
-					intro_point_rate = 0.01;
+			Betting betting = new Betting();
+			
+			betting.setUserId(member.getUserId());
+			betting.setGrade(member.getGrade());
+			betting.setMoney(gameFolder.getMoney());
+			betting.setRate(gameFolder.getRate());
+			betting.setExpect(gameFolder.getExpect());
+			betting.setStatus(Code.BET_STATUS_RUN);
+			betting.setDate(new Date());
+			betting.setGameType(gameFolder.getType());
+			betting.setNickName(member.getNickName());
+			betting.setIntroducerId(member.getIntroducerId());
+			betting.setDealerId(member.getDealerId());
+			betting.setMemberId(member.getMemberId());
+			betting.setSignature(signature);
+			betting.setSource(source);
+			
+			String bettingId = bettingDao.insertBetting(betting);
+			
+			for (GameFolderItem gfi : itemList) {
+				BetGame betGame = new BetGame();
+				betGame.setBettingId(bettingId);
+				betGame.setId(gfi.getId());
+				betGame.setGuess(gfi.getGuess());
+				betGame.setWinRate(gfi.getWinRate());
+				betGame.setDrawRate(gfi.getDrawRate());
+				betGame.setLoseRate(gfi.getLoseRate());
+				betGame.setSelRate(gfi.getSelRate());
+				betGame.setResultStatus(Code.RESULT_STATUS_RUN);
 				
-				Double intro_point = betting.getMoney() * intro_point_rate;
-				memberDao.plusMinusPoint(introducerId, intro_point.longValue());
-				
-				Point introPointLog = new Point();
-				introPointLog.setUserId(introducer.getUserId());
-				introPointLog.setType(Code.POINT_TYPE_BETTING);
-				introPointLog.setDate(new Date());
-				introPointLog.setOldBalance(introducer.getPoint());
-				introPointLog.setMoney(intro_point.longValue());
-				introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
-				introPointLog.setBettingId(betting.getId());
-				introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + pointFormat.format(intro_point_rate * 100) + "% 포인트");
-				introPointLog.setBettingUserId(member.getUserId());
-				
-				pointDao.insertPoint(introPointLog);
+				betGameDao.insertBetGame(betGame);
 			}
+			
+			Account account = new Account();
+			account.setUserId(member.getUserId());
+			account.setType(Code.ACCOUNT_TYPE_BETTING);
+			account.setDate(new Date());
+			account.setOldBalance(member.getBalance());
+			account.setMoney(betting.getMoney() * -1);
+			account.setBalance(member.getBalance() - betting.getMoney());
+			account.setBettingId(betting.getId());
+			
+			accountDao.insertAccount(account);			
+			memberDao.plusMinusBalance(member.getUserId(), betting.getMoney() * -1);
+	
+			if (logger.isInfoEnabled()) {
+				logger
+						.info("betting\n"
+								+ betting);
+			}
+			
+			
+			//포인트 지급
+			Double betting_point_rate = 0.01;
+			int size = itemList.size();
+			if (size >= 5)
+				betting_point_rate = 0.02;
+			if (size >= 9)
+				betting_point_rate = 0.03;
+			
+			Double point = betting.getMoney() * betting_point_rate;
+			memberDao.plusMinusPoint(member.getUserId(), point.longValue());
+			
+			Point pointLog = new Point();
+			pointLog.setUserId(member.getUserId());
+			pointLog.setGrade(member.getGrade());
+			pointLog.setType(Code.POINT_TYPE_BETTING);
+			pointLog.setDate(new Date());
+			pointLog.setOldBalance(member.getPoint());
+			pointLog.setMoney(point.longValue());
+			pointLog.setBalance(member.getPoint() + point.longValue());
+			pointLog.setBettingId(betting.getId());
+			pointLog.setNote(size + "폴더 배팅 " + (int)(betting_point_rate * 100) + "% 포인트");
+			pointLog.setBettingUserId(member.getUserId());
+			
+			pointDao.insertPoint(pointLog);
+			member.setPoint(pointLog.getBalance());
+			
+			//추천인 포인트지급
+			String introducerId = member.getIntroducerId();
+			if (introducerId != null) {
+				Member introducer = memberDao.selectMember(introducerId, null);
+				if (introducer.getStatus().equals(Code.USER_STATUS_NORMAL)) {				
+					Long differTime = new Date().getTime() - member.getJoinDate().getTime();
+					Double intro_point_rate = 0.02;
+					if (differTime > DAYS_90)
+						intro_point_rate = 0.002;				
+					else if (differTime > DAYS_60)
+						intro_point_rate = 0.005;				
+					else if (differTime > DAYS_30)
+						intro_point_rate = 0.01;
+					
+					Double intro_point = betting.getMoney() * intro_point_rate;
+					memberDao.plusMinusPoint(introducerId, intro_point.longValue());
+					
+					Point introPointLog = new Point();
+					introPointLog.setUserId(introducer.getUserId());
+					introPointLog.setGrade(introducer.getGrade());
+					introPointLog.setType(Code.POINT_TYPE_BETTING);
+					introPointLog.setDate(new Date());
+					introPointLog.setOldBalance(introducer.getPoint());
+					introPointLog.setMoney(intro_point.longValue());
+					introPointLog.setBalance(introducer.getPoint() + intro_point.longValue());
+					introPointLog.setBettingId(betting.getId());
+					introPointLog.setNote("프랜드(" + member.getUserId() + ") 배팅 " + pointFormat.format(intro_point_rate * 100) + "% 포인트");
+					introPointLog.setBettingUserId(member.getUserId());
+					
+					pointDao.insertPoint(introPointLog);
+				}
+			}
+			
+			// 모바일 포인트 지급
+	//		if (source.equals(Code.SOURCE_WAP)) {
+	//			Double mobile_point_rate = 0.01;
+	//			
+	//			Double mobile_point = betting.getMoney() * mobile_point_rate;
+	//			memberDao.plusMinusPoint(member.getUserId(), mobile_point.longValue());
+	//			
+	//			Point mobilePointLog = new Point();
+	//			mobilePointLog.setUserId(member.getUserId());
+	//			mobilePointLog.setType(Code.POINT_TYPE_BETTING);
+	//			mobilePointLog.setDate(new Date());
+	//			mobilePointLog.setOldBalance(member.getPoint());
+	//			mobilePointLog.setMoney(mobile_point.longValue());
+	//			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
+	//			mobilePointLog.setBettingId(betting.getId());
+	//			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 포인트");
+	//			mobilePointLog.setBettingUserId(member.getUserId());
+	//			
+	//			pointDao.insertPoint(mobilePointLog);
+	//			member.setPoint(mobilePointLog.getBalance());
+	//		}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		// 모바일 포인트 지급
-//		if (source.equals(Code.SOURCE_WAP)) {
-//			Double mobile_point_rate = 0.01;
-//			
-//			Double mobile_point = betting.getMoney() * mobile_point_rate;
-//			memberDao.plusMinusPoint(member.getUserId(), mobile_point.longValue());
-//			
-//			Point mobilePointLog = new Point();
-//			mobilePointLog.setUserId(member.getUserId());
-//			mobilePointLog.setType(Code.POINT_TYPE_BETTING);
-//			mobilePointLog.setDate(new Date());
-//			mobilePointLog.setOldBalance(member.getPoint());
-//			mobilePointLog.setMoney(mobile_point.longValue());
-//			mobilePointLog.setBalance(member.getPoint() + mobile_point.longValue());
-//			mobilePointLog.setBettingId(betting.getId());
-//			mobilePointLog.setNote("모바일 배팅 " + (int)(mobile_point_rate * 100) + "% 포인트");
-//			mobilePointLog.setBettingUserId(member.getUserId());
-//			
-//			pointDao.insertPoint(mobilePointLog);
-//			member.setPoint(mobilePointLog.getBalance());
-//		}
 	}
 
 	public boolean checkBettingAccept(GameFolder gameFolder)

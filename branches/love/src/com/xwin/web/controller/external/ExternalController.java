@@ -171,7 +171,7 @@ public class ExternalController extends XwinController
 		String inviteKey = request.getParameter("inviteKey");
 		String joinId = request.getParameter("joinId");
 		
-		Invitation invitation = invitationDao.selectInvitation(userId, inviteKey);
+		Invitation invitation = invitationDao.selectUserInvitation(userId, inviteKey);
 		
 		if (invitation != null) {
 			invitation.setJoinId(joinId);

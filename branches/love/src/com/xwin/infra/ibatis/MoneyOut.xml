@@ -17,6 +17,7 @@
 		<result property="number" column="NUMBER"/>
 		<result property="name" column="NAME"/>
 		<result property="status" column="STATUS"/>
+		<result property="grade" column="GRADE"/>
 		<result property="reqDate" column="REQ_DATE"/>
 		<result property="procDate" column="PROC_DATE"/>
 		<result property="isChecked" column="ISCHECKED"/>
@@ -25,8 +26,8 @@
 	</resultMap>
 	
 	<insert id="insertMoneyOut" parameterClass="MoneyOut">
-		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, REQ_DATE, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
-		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #reqDate#, #procDate#, #nickName#, #note#, 'out', #source#)
+		INSERT INTO tbl_money_out(USERID, MONEY, BANKNAME, NUMBER, NAME, STATUS, GRADE, REQ_DATE, PROC_DATE, NICKNAME, NOTE, TYPE, SOURCE)
+		VALUES(#userId#, #money#, #bankName#, #number#, #name#, #status#, #grade#, #reqDate#, #procDate#, #nickName#, #note#, 'out', #source#)
 	</insert>
 	
 	<update id="updateMoneyOut" parameterClass="MoneyOut">
@@ -97,6 +98,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
 			<isNotNull prepend="AND" property="number">
 				NUMBER = #number#
 			</isNotNull>
@@ -164,6 +168,9 @@
 				STATUS = #statusList[]#
 				</iterate>
 			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
+			</isNotNull>
 			<isNotNull prepend="AND" property="number">
 				NUMBER = #number#
 			</isNotNull>
@@ -226,6 +233,9 @@
 			</isNotNull>
 			<isNotNull prepend="AND" property="statusLike">
 				STATUS like #statusLike#
+			</isNotNull>
+			<isNotNull prepend="AND" property="grade">
+				GRADE = #grade#
 			</isNotNull>
 			<isNotNull prepend="AND" property="number">
 				NUMBER = #number#

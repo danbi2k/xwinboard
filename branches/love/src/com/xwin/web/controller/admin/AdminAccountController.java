@@ -42,6 +42,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		
 		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
@@ -65,6 +66,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 		} else {
 			param.put("status", status);
 		}
+		
+		param.put("grade", grade);
 		
 		if (dateType.equals("req")) {
 			param.put("fromReqDate", XwinUtil.toDate(fromDate));
@@ -112,6 +115,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		
 		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
@@ -125,7 +129,8 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
-		param.put("status", status);		
+		param.put("status", status);
+		param.put("grade", grade);
 		
 		if (dateType.equals("req")) {
 			param.put("fromReqDate", XwinUtil.toDate(fromDate));
@@ -172,6 +177,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 		String search = XwinUtil.arcNvl(request.getParameter("search"));
 		String keyword = XwinUtil.arcNvl(request.getParameter("keyword"));
 		String status = XwinUtil.arcNvl(request.getParameter("status"));
+		String grade = XwinUtil.arcNvl(request.getParameter("grade"));
 		
 		String dateType = XwinUtil.nvl(request.getParameter("dateType"));
 		String fromDate = XwinUtil.arcNvl(request.getParameter("fromDate"));
@@ -185,7 +191,9 @@ public class AdminAccountController extends XwinController implements MessageSou
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (keyword != null) param.put(search + "Like", "%" + keyword + "%");
-		param.put("statusLike", "%"+status);		
+		param.put("statusLike", "%"+status);
+		
+		param.put("grade", grade);
 		
 		if (dateType.equals("req")) {
 			param.put("fromReqDate", XwinUtil.toDate(fromDate));
@@ -375,6 +383,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 			moneyIn.setMoney(money);
 			moneyIn.setProcDate(new Date());
 			moneyIn.setStatus(Code.MONEY_IN_DIRECT);
+			moneyIn.setGrade(member.getGrade());
 			moneyIn.setUserId(userId);
 			moneyIn.setNickName(member.getNickName());
 			moneyIn.setNote(note);
@@ -435,6 +444,7 @@ public class AdminAccountController extends XwinController implements MessageSou
 				moneyOut.setMoney(money);
 				moneyOut.setProcDate(new Date());
 				moneyOut.setStatus(Code.MONEY_OUT_DIRECT);
+				moneyOut.setGrade(member.getGrade());
 				moneyOut.setUserId(userId);
 				moneyOut.setNickName(member.getNickName());
 				moneyOut.setNote(note);

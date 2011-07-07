@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xwin.domain.statistics.BetMoneyStat;
+import com.xwin.infra.util.Code;
 import com.xwin.infra.util.XwinUtil;
 import com.xwin.web.command.ResultWap;
 import com.xwin.web.controller.XwinController;
@@ -81,7 +82,7 @@ public class WapAdminController extends XwinController
 		today.add(Calendar.DATE, bias);
 		
 		Date[] todayPair = XwinUtil.getDatePair(today.getTime());
-		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(todayPair[0], todayPair[1]);
+		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(Code.USER_GRADE_VIP, todayPair[0], todayPair[1]);
 		
 		mv = new ModelAndView("wap/" + LANG_TYPE + "/today_money_stat");
 		mv.addObject("betMoneyStatToday", betMoneyStatToday);

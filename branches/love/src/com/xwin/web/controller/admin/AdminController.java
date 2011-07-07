@@ -37,12 +37,26 @@ public class AdminController extends XwinController
 		Map<String, Object> param = new HashMap<String, Object>(1);
 		param.put("status", Code.MONEY_IN_REQUEST);
 		param.put("isChecked", "N");
+		param.put("grade", Code.USER_GRADE_VIP);
 		indicator.setChargingIndi(moneyInDao.selectMoneyInCount(param).toString());
 		
 		param = new HashMap<String, Object>(1);
 		param.put("status", Code.MONEY_OUT_REQUEST);
 		param.put("isChecked", "N");
+		param.put("grade", Code.USER_GRADE_VIP);
 		indicator.setExchangeIndi(moneyOutDao.selectMoneyOutCount(param).toString());
+		
+		param = new HashMap<String, Object>(1);
+		param.put("status", Code.MONEY_IN_REQUEST);
+		param.put("isChecked", "N");
+		param.put("grade", Code.USER_GRADE_OTHER);
+		indicator.setDealerChargingIndi(moneyInDao.selectMoneyInCount(param).toString());
+		
+		param = new HashMap<String, Object>(1);
+		param.put("status", Code.MONEY_OUT_REQUEST);
+		param.put("isChecked", "N");
+		param.put("grade", Code.USER_GRADE_OTHER);
+		indicator.setDealerExchangeIndi(moneyOutDao.selectMoneyOutCount(param).toString());
 		
 		param = new HashMap<String, Object>(1);
 		param.put("isChecked", "N");

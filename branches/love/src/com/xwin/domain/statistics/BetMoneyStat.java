@@ -31,25 +31,25 @@ public class BetMoneyStat extends XwinObject
 		this.date = date;
 	}
 	public Long getInMoney() {
-		return inMoney;
+		return inMoney == null ? 0L : inMoney;
 	}
 	public void setInMoney(Long inMoney) {
 		this.inMoney = inMoney;
 	}
 	public Long getOutMoney() {
-		return outMoney;
+		return outMoney == null ? 0L : outMoney;
 	}
 	public void setOutMoney(Long outMoney) {
 		this.outMoney = outMoney;
 	}
 	public Long getBettingPoint() {
-		return bettingPoint;
+		return bettingPoint == null ? 0L : bettingPoint;
 	}
 	public void setBettingPoint(Long bettingPoint) {
 		this.bettingPoint = bettingPoint;
 	}
 	public Long getBonusPoint() {
-		return bonusPoint;
+		return bonusPoint == null ? 0L : bonusPoint;
 	}
 	public void setBonusPoint(Long bonusPoint) {
 		this.bonusPoint = bonusPoint;

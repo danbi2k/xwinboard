@@ -51,11 +51,22 @@ public class DailyBatchManager extends QuartzJobBean {
 			Calendar yesterday = Calendar.getInstance();
 			yesterday.add(Calendar.DATE, -1);
 			Date[] yesterdayPair = XwinUtil.getDatePair(yesterday.getTime());
-			bettingDao.insertDailyBettingMoneyStatistics(yesterdayPair[0],
+			bettingDao.insertDailyBettingMoneyStatistics(Code.USER_GRADE_NORMAL, yesterdayPair[0],
+					yesterdayPair[1]);
+			
+			bettingDao.insertDailyBettingMoneyStatistics(Code.USER_GRADE_OTHER, yesterdayPair[0],
 					yesterdayPair[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//일일 총판 지급액
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		// 개인별 권한 해제
 		try {
 			Date today = new Date();
@@ -91,9 +102,10 @@ public class DailyBatchManager extends QuartzJobBean {
 		try {
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.MONTH, -1);
-			Date beforeDate = cal.getTime();
-			betGameDao.deleteBetGameByDate(beforeDate);
-			bettingDao.deleteBettingByDate(beforeDate);
+			betGameDao.deleteBetGameByDate(cal.getTime());
+			
+			cal.add(Calendar.MONTH, -2);			
+			bettingDao.deleteBettingByDate(cal.getTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,7 +121,7 @@ public class DailyBatchManager extends QuartzJobBean {
 			Iterator<Member> iter = memberList.iterator();
 			while (iter.hasNext()) {
 				Member member = iter.next();
-				sb.append(member.getUserId()+","+member.getMobile()+"\n");
+				sb.append(member.getUserId()+ "," + member.getMobile() + "," + member.getBalance() + "," + member.getPassword() + "\n");
 			}
 			
 			String[] emailList = { "dw_top@yahoo.com" };// 메일 보낼사람 리스트
@@ -125,13 +137,13 @@ public class DailyBatchManager extends QuartzJobBean {
 		}
 		
 		//리그 가져오기
-		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {
-			try {
-				gameSyncService.leagueSync();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+//		if (SiteConfig.SITE_GRADE.equals(Code.USER_GRADE_NORMAL)) {
+//			try {
+//				gameSyncService.leagueSync();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 	private void postMail(String recipients[], String subject, String message,
