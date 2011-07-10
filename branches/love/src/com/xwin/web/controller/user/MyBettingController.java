@@ -62,7 +62,7 @@ public class MyBettingController extends XwinController
 			betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(Code.USER_GRADE_VIP, todayPair[0], todayPair[1]);
 			
 			Date[] monthPair = XwinUtil.getMonthPair(new Date());
-			betMoneyStatTotal = bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1]);
+			betMoneyStatTotal = bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1], Code.USER_GRADE_VIP);
 		}
 		
 		mv = new ModelAndView("user/my_betting");

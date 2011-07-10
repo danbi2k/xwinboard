@@ -89,6 +89,7 @@ public class Code
 	public static final String POINT_TYPE_BONUS			= "PNT03";
 	public static final String POINT_TYPE_CASHCHARGE	= "PNT10";
 	public static final String POINT_TYPE_BETTING_CANCEL = "PNT11";
+	public static final String POINT_TYPE_BETTING_FAILURE = "PNT12";
 	
 	public static final String BETTING_STATUS_ACCEPT	= "BTS01";
 	public static final String BETTING_STATUS_DENY		= "BTS02";
@@ -127,6 +128,7 @@ public class Code
 		put(POINT_TYPE_BONUS, "보너스포인트");
 		put(POINT_TYPE_CASHCHARGE, "캐쉬전환");
 		put(POINT_TYPE_BETTING_CANCEL, "배팅취소차감");
+		put(POINT_TYPE_BETTING_FAILURE, "낙첨포인트");
 		
 		put(BET_CALC_DISABLE, "정산불가");
 		put(BET_CALC_ENABLE, "정산가능");

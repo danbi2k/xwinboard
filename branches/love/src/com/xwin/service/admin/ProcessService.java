@@ -12,6 +12,7 @@ import org.springframework.context.MessageSourceAware;
 import com.xwin.domain.SiteConfig;
 import com.xwin.domain.admin.Account;
 import com.xwin.domain.admin.Admin;
+import com.xwin.domain.admin.Point;
 import com.xwin.domain.comm.SmsWait;
 import com.xwin.domain.game.BetGame;
 import com.xwin.domain.game.Betting;
@@ -154,6 +155,25 @@ public class ProcessService extends XwinService implements MessageSourceAware
 		// 1. 미적중의 경우
 		if (status.equals(Code.BET_STATUS_FAILURE)) {
 			afterProcess = true;
+			
+			if (member.getGrade().equals(Code.USER_GRADE_OTHER))
+			{
+				Long betting_dealer_point = XwinUtil.calcExpectMoney(0.03, betting.getMoney());
+				
+				Point pointLog = new Point();
+				pointLog.setUserId(userId);
+				pointLog.setGrade(member.getGrade());
+				pointLog.setType(Code.POINT_TYPE_BETTING_FAILURE);
+				pointLog.setDate(new Date());
+				pointLog.setOldBalance(member.getPoint());
+				pointLog.setMoney(betting_dealer_point);
+				pointLog.setBalance(member.getPoint() + betting_dealer_point);
+				pointLog.setBettingId(betting.getId());
+				pointLog.setNote("낙첨 포인트 " + "3%");
+				pointDao.insertPoint(pointLog);
+				
+				memberDao.plusMinusPoint(userId, betting_dealer_point);
+			}
 		}
 		
 		// 2. 환불의 경우

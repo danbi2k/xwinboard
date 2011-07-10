@@ -144,11 +144,12 @@ public class BettingDao extends XwinDao
 		return (Integer) sqlMapClientTemplate.queryForObject("selectDailyBettingMoneyStatCount", param);
 	}
 	
-	public Long selectDailyBettingMoneyStatSum(Date fromDate, Date toDate)
+	public Long selectDailyBettingMoneyStatSum(Date fromDate, Date toDate, String grade)
 	{
 		Map<String, Object> param = new HashMap<String, Object>(2);
 		param.put("fromDate", fromDate);
 		param.put("toDate", toDate);
+		param.put("grade", grade);
 		return (Long) sqlMapClientTemplate.queryForObject("selectDailyBettingMoneyStatSum", param);
 	}
 	

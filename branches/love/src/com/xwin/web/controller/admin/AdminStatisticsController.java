@@ -50,7 +50,7 @@ public class AdminStatisticsController extends XwinController
 		BetMoneyStat betMoneyStatToday = bettingDao.selectTodayBettingMoneyStatistics(grade, todayPair[0], todayPair[1]);
 		
 		Date[] monthPair = XwinUtil.getMonthPair(new Date());
-		Long betMoneyStatTotal = XwinUtil.ntz(bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1]));
+		Long betMoneyStatTotal = XwinUtil.ntz(bettingDao.selectDailyBettingMoneyStatSum(monthPair[0], monthPair[1], grade));
 		
 		ModelAndView mv = new ModelAndView("admin/statistics/admin_daily_betting_money");
 		mv.addObject("betMoneyStatList", betMoneyStatList);
