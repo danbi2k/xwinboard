@@ -183,7 +183,7 @@ allowScriptAccess="always"></embed>
             <td width="79">&nbsp;</td>
             <td width="99"><div align="center"><a href='javascript:exchangePoint(<%=member.getPoint()%>)'><span class="top_login"><%=XwinUtil.comma3(member.getPoint())%></span></a></div></td>
             <td width="72">&nbsp;</td>
-            <td width="56" padding-top:2px;"><div align="center"><span class="top_login"><%=Code.getValue(member.getGrade())%></span></div></td>
+            <td width="56" padding-top:2px;"><div align="center"><span class="top_login">VIP</span></div></td>
             <td width="30">&nbsp;</td>
             <td width="125"><a href="login.php?mode=processLogout"><img src="images/main/notice_top_bt.gif" border="0"></a></td>
             <td width="113" valign="top" style="padding-top:10px;">
