@@ -156,7 +156,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 		if (status.equals(Code.BET_STATUS_FAILURE)) {
 			afterProcess = true;
 			
-			if (member.getGrade().equals(Code.USER_GRADE_OTHER))
+			if (true)
 			{
 				Long betting_dealer_point = XwinUtil.calcExpectMoney(0.03, betting.getMoney());
 				
