@@ -38,7 +38,7 @@ public class JoinController extends XwinController
 			session.setAttribute("INVITATION", userInvitation);
 			
 			rx = ResultXml.SUCCESS;
-		} if (dealerInvitation != null && dealerInvitation.getJoinId() == null) {
+		} else if (dealerInvitation != null && dealerInvitation.getJoinId() == null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("INVITATION", dealerInvitation);
 			
