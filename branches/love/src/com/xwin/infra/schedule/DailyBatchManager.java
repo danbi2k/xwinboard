@@ -51,7 +51,7 @@ public class DailyBatchManager extends QuartzJobBean {
 			Calendar yesterday = Calendar.getInstance();
 			yesterday.add(Calendar.DATE, -1);
 			Date[] yesterdayPair = XwinUtil.getDatePair(yesterday.getTime());
-			bettingDao.insertDailyBettingMoneyStatistics(Code.USER_GRADE_NORMAL, yesterdayPair[0],
+			bettingDao.insertDailyBettingMoneyStatistics(Code.USER_GRADE_VIP, yesterdayPair[0],
 					yesterdayPair[1]);
 			
 			bettingDao.insertDailyBettingMoneyStatistics(Code.USER_GRADE_OTHER, yesterdayPair[0],
