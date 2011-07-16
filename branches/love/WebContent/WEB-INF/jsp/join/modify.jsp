@@ -99,14 +99,6 @@
 </tr>
 
 <tr>
- <td align=right class=menubar height=40>새 모바일PIN번호</td>
- <td></td>
- <td><input type=password name=pin maxlength=200 class=input2  onfocusout='only123(this)' onkeyup='only123(this)'><br>
- <font color="<%=SiteConfig.SITE_COLOR%>">★ 모바일PIN번호는 모바일서비스를 위한 숫자 6자리 번호 입니다. 원하시는 숫자 6자리를 입력해주세요.</font>
- </td>
-</tr>
-
-<tr>
  <td align=right class=menubar height=40>인증번호</td>
  <td></td>
  <td><input type="text" name=phonePin maxlength=200 class=input2>
