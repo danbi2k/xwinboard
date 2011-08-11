@@ -72,7 +72,7 @@ if (dealerSummaryList != null) {
 		<td width=10%>5%</td>
 		<td width=10%><%=XwinUtil.comma3(preMoney)%></td>
 		<td width=10%><%=XwinUtil.comma3(postMoney)%></td>
-		<td width=10%><%=XwinUtil.comma3(dealerMoneySum)%></td>
+		<td width=10%><%=XwinUtil.comma3(dealerMoney)%></td>
 	</tr>
 <%
 	}
