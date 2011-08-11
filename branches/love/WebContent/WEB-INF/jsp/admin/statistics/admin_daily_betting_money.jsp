@@ -27,6 +27,7 @@
 <form method="get" name="list" action="adminStat.aspx">
 <input type="hidden" name="mode" value="viewDailyBettingMoneySummary"/>
 <input type="hidden" name="pageIndex"/>
+<input type="hidden" name="grade" value="<%=grade%>"/>
 <table class="prettytable">
 	<tr align="center" bgcolor="#E4E4E4">
 		<th>날짜</th>
