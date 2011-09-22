@@ -158,7 +158,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 			
 			if (true)
 			{
-				Long betting_dealer_point = XwinUtil.calcExpectMoney(0.03, betting.getMoney());
+				Long betting_dealer_point = XwinUtil.calcExpectMoney(0.05, betting.getMoney());
 				
 				Point pointLog = new Point();
 				pointLog.setUserId(userId);
@@ -169,7 +169,7 @@ public class ProcessService extends XwinService implements MessageSourceAware
 				pointLog.setMoney(betting_dealer_point);
 				pointLog.setBalance(member.getPoint() + betting_dealer_point);
 				pointLog.setBettingId(betting.getId());
-				pointLog.setNote("낙첨 포인트 " + "3%");
+				pointLog.setNote("낙첨 포인트 " + "5%");
 				pointDao.insertPoint(pointLog);
 				
 				memberDao.plusMinusPoint(userId, betting_dealer_point);
