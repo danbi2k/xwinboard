@@ -109,12 +109,15 @@ public class TransactionManager extends QuartzJobBean
 	private Transaction shinhanBankProcess(KtfSmsMessage message) throws Exception {
 		Transaction transaction = new Transaction();
 		
+		//message.setMsg("신한10/25 22:18 110-343-719417 출금 600,000 잔액 15,460,211 081.김교진");
+		//message.setMsg("신한10/25 22:15 110-343-719417 입금 1,000,000 잔액 16,340,211 박시진 ");
+		
 		if (message.getMsg().indexOf("입금") > 0) {
 			String[] msg = message.getMsg().split("\\s+");
 			
 			Date theDate = null;
 			try {
-				String strDate = msg[1] + " " + msg[2].substring(0, 5);
+				String strDate = msg[0].replaceAll("신한", "") + " " + msg[1];
 				theDate = smsDateFormat.parse(strDate);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(theDate);
@@ -128,30 +131,14 @@ public class TransactionManager extends QuartzJobBean
 			}
 			
 			Long money = null;
-			if (msg[3].endsWith("잔액")) {
-				String moneyStr = msg[3].replaceAll(MONEY_REG_EXP, "").trim();					
-				money = Long.parseLong(moneyStr);
-			}
+			String moneyStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();					
+			money = Long.parseLong(moneyStr);
 			
 			Long balance = null;
-			String xtr = msg[4].replaceAll(MONEY_REG_EXP, "");
-			int x = 0;
-			char[] xchar = xtr.toCharArray();
-			for (x = 0 ; x < xchar.length ; x++) {
-				if (xchar[x] < '0' || xchar[x] > '9')
-					break;
-			}
-			String userName = xtr.substring(x).trim();
-			int colon = userName.indexOf(":");
-			if (colon >= 0) {
-				userName = userName.substring(colon+1);
-			}
-			if (msg.length > 5)
-				userName += msg[5];
+			String balanceStr = msg[6].replaceAll(MONEY_REG_EXP, "").trim();					
+			balance = Long.parseLong(balanceStr);
 			
-			String balanceStr = xtr.substring(0, x).trim();
-			
-			balance = Long.parseLong(balanceStr);						
+			String userName = msg[7].trim();				
 
 			transaction.setType(Code.TRAN_TYPE_MONEYIN);
 			transaction.setUserName(userName);
@@ -162,12 +149,12 @@ public class TransactionManager extends QuartzJobBean
 			transaction.setInDate(message.getInDate());
 			transaction.setIsCharge("N");
 			transaction.setBankName("SHINHAN");
-		} else if (message.getMsg().indexOf("지급") > 0) {
+		} else if (message.getMsg().indexOf("출금") > 0) {
 			String[] msg = message.getMsg().split("\\s+");
 			
 			Date theDate = null;
 			try {
-				String strDate = msg[1] + " " + msg[2].substring(0, 5);
+				String strDate = msg[0].replaceAll("신한", "") + " " + msg[1];
 				theDate = smsDateFormat.parse(strDate);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(theDate);
@@ -181,26 +168,14 @@ public class TransactionManager extends QuartzJobBean
 			}
 			
 			Long money = null;
-			if (msg[3].endsWith("잔액")) {
-				String moneyStr = msg[3].replaceAll(MONEY_REG_EXP, "").trim();					
-				money = Long.parseLong(moneyStr);
-			}
+			String moneyStr = msg[4].replaceAll(MONEY_REG_EXP, "").trim();					
+			money = Long.parseLong(moneyStr);
 			
 			Long balance = null;
-			String balanceStr = "0";
-			String userName = "-";
-			int pos = msg[4].lastIndexOf(",");
-			if (pos > 0) {
-				try {
-					balanceStr = msg[4].substring(0, pos+4);
-					userName = msg[4].substring(pos+4);
-				} catch (Exception e) {
-					System.out.println(message.getMsg());
-					e.printStackTrace();
-				}
-			}
-			balanceStr = balanceStr.replaceAll(MONEY_REG_EXP, "").trim();
-			balance = Long.parseLong(balanceStr);	
+			String balanceStr = msg[6].replaceAll(MONEY_REG_EXP, "").trim();					
+			balance = Long.parseLong(balanceStr);
+			
+			String userName = msg[7].trim();
 
 			transaction.setType(Code.TRAN_TYPE_MONEYOUT);
 			transaction.setUserName(userName);
@@ -789,8 +764,10 @@ public class TransactionManager extends QuartzJobBean
 		KtfSmsMessage message = new KtfSmsMessage();
 		TransactionManager tm = new TransactionManager();
 		Transaction transaction = null;
+//		message.setMsg("신한10/25 22:18 110-343-719417 출금 600,000 잔액 15,460,211 081.김교진");
+		message.setMsg("신한10/25 22:15 110-343-719417 입금 1,000,000 잔액 16,340,211 박시진 ");
 		//message.setMsg("[KB]03/02 16:36\n623102**064\n종흠\n인터넷입금이\n1,000,000\n잔액2,171,823");
-		message.setMsg("[KB]05/28 21:32 131502**188 김종구 전자금융입금 1,000,000 잔액25,018,110     ");
+		//message.setMsg("[KB]05/28 21:32 131502**188 김종구 전자금융입금 1,000,000 잔액25,018,110     ");
 		//message.setMsg("신한 12/23 16:32[110-257-306***]입금      19,000잔액   6,121,400안민강");
 		//message.setMsg("신한 12/23 16:31[110-257-306***]지급         100잔액   6,102,40002480104300750");
 		//message.setMsg("신한 12/23 18:22[110-257-306***]입금     100,000잔액  21,840,368 이훈희");
